@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Mtwara SDA Dispensary - Performance Appraisal System</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #e8ecf1;
+            padding: 16px;
+            color: #1a1a2e;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+            padding: 30px 35px 40px;
+        }
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .container { padding: 16px 18px 24px; border-radius: 10px; }
+        }
+        @media (max-width: 480px) {
+            .container { padding: 12px 12px 20px; }
+        }
+
+        /* ===== HEADER WITH SDA LOGO ===== */
+        .header {
+            text-align: center;
+            border-bottom: 4px solid #1a5276;
+            padding-bottom: 18px;
+            margin-bottom: 24px;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        .logo-placeholder {
+            width: 75px;
+            height: 75px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #1a5276;
+            background: #eaf2f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: #1a5276;
+            text-align: center;
+            line-height: 1.3;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .logo-placeholder .fallback {
+            font-size: 10px;
+            font-weight: 700;
+            color: #1a5276;
+            line-height: 1.3;
+        }
+        .header h1 {
+            font-size: 26px;
+            color: #1a5276;
+            letter-spacing: 0.5px;
+        }
+        .header h2 {
+            font-size: 16px;
+            color: #2c3e50;
+            font-weight: normal;
+            font-style: italic;
+            margin-top: 4px;
+        }
+        .header .mission {
+            margin-top: 10px;
+            padding: 10px 18px;
+            background: #eaf2f8;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #1a5276;
+            border-left: 4px solid #1a5276;
+        }
+        @media (max-width: 600px) {
+            .header h1 { font-size: 20px; }
+            .header h2 { font-size: 14px; }
+            .header .mission { font-size: 12px; padding: 8px 12px; }
+            .logo-placeholder { width: 55px; height: 55px; }
+        }
+        @media (max-width: 400px) {
+            .logo-container { gap: 10px; }
+            .header h1 { font-size: 17px; }
+        }
+
+        /* ===== TABS ===== */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin: 20px 0 18px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #ecf0f1;
+            color: #2c3e50;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+            flex: 1 1 auto;
+            min-width: 70px;
+            text-align: center;
+        }
+        .tab-btn:hover { background: #d5dbdb; }
+        .tab-btn.active { background: #1a5276; color: #ffffff; }
+        @media (max-width: 480px) {
+            .tab-btn { font-size: 12px; padding: 8px 12px; min-width: 55px; }
+        }
+
+        .tab-content { display: none; animation: fadeIn 0.35s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            padding: 18px 20px;
+            margin-bottom: 16px;
+            border: 1px solid #f0f2f5;
+        }
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a5276;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ===== TABLES ===== */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 10px 0 16px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 580px;
+        }
+        th {
+            background: #1a5276;
+            color: #ffffff;
+            padding: 9px 10px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        td {
+            padding: 7px 10px;
+            border-bottom: 1px solid #e8ecf1;
+            vertical-align: middle;
+        }
+        tr:hover { background: #f7f9fa; }
+        @media (max-width: 600px) {
+            table { font-size: 12px; min-width: 450px; }
+            th, td { padding: 5px 6px; }
+        }
+
+        /* ===== CHECKLIST ===== */
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+            border-bottom: 1px solid #f0f2f5;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        .checklist-item:last-child { border-bottom: none; }
+        .checklist-item .num {
+            width: 24px;
+            height: 24px;
+            background: #ecf0f1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: #7f8c8d;
+            flex-shrink: 0;
+        }
+        .checklist-item .text { flex: 1; }
+        .checklist-item .toggle {
+            position: relative;
+            width: 42px;
+            height: 24px;
+            flex-shrink: 0;
+            background: #d5d8dc;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .checklist-item .toggle.active { background: #27ae60; }
+        .checklist-item .toggle .thumb {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            transition: 0.3s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+        }
+        .checklist-item .toggle.active .thumb { left: 20px; }
+        .checklist-item .initials-input {
+            width: 70px;
+            padding: 3px 6px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        @media (max-width: 480px) {
+            .checklist-item { font-size: 12px; gap: 6px; flex-wrap: wrap; }
+            .checklist-item .text { min-width: 120px; }
+            .checklist-item .initials-input { width: 55px; }
+        }
+
+        /* ===== SLIDERS ===== */
+        .slider-group { margin: 10px 0; }
+        .slider-group label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+        .slider-group input[type="range"] {
+            width: 100%;
+            height: 6px;
+            -webkit-appearance: none;
+            background: #d5d8dc;
+            border-radius: 3px;
+            outline: none;
+        }
+        .slider-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #1a5276;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(26,82,118,0.25);
+        }
+        .slider-group input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: #1a5276;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        .slider-group .value-display {
+            font-weight: 700;
+            color: #1a5276;
+            min-width: 30px;
+            display: inline-block;
+            text-align: right;
+        }
+
+        /* ===== SCORE BOX ===== */
+        .score-box {
+            background: #eaf2f8;
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin: 14px 0;
+            border-left: 5px solid #1a5276;
+        }
+        .score-box h3 {
+            color: #1a5276;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .score-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .score-item {
+            background: #ffffff;
+            padding: 10px 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            min-width: 100px;
+            text-align: center;
+            flex: 1;
+        }
+        .score-item .number {
+            font-size: 26px;
+            font-weight: 800;
+            color: #1a5276;
+            display: block;
+            line-height: 1.2;
+        }
+        .score-item .label {
+            font-size: 11px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-top: 2px;
+        }
+        .score-item .number.green { color: #27ae60; }
+        .score-item .number.orange { color: #f39c12; }
+        .score-item .number.red { color: #e74c3c; }
+        .score-item .number.purple { color: #8e44ad; }
+        .score-item .number.teal { color: #1abc9c; }
+        @media (max-width: 500px) {
+            .score-item .number { font-size: 20px; }
+            .score-item { padding: 8px 10px; min-width: 70px; }
+            .score-row { gap: 10px; }
+        }
+
+        /* ===== PROGRESS BAR ===== */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e8ecf1;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 6px 0 2px;
+        }
+        .progress-bar .fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+            background: linear-gradient(90deg, #27ae60, #1a5276);
+        }
+
+        /* ===== BADGES ===== */
+        .badge {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        .badge-excellent { background: #d5f5e3; color: #1a7a3a; }
+        .badge-good { background: #d6eaf8; color: #1a5276; }
+        .badge-satisfactory { background: #fdebd0; color: #a04000; }
+        .badge-needs { background: #fadbd8; color: #922b21; }
+        .badge-unsatisfactory { background: #f5b7b1; color: #7b241c; }
+        .badge-distinguished { background: #e8daef; color: #6c3483; }
+        .badge-outstanding { background: #d1f2eb; color: #0e6655; }
+        .badge-proficient { background: #d6eaf8; color: #1a5276; }
+
+        /* ===== BUTTONS ===== */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 16px 0 6px;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+            flex: 1 1 auto;
+            min-width: 90px;
+        }
+        .btn:active { transform: scale(0.97); }
+        .btn-primary { background: #1a5276; color: #fff; }
+        .btn-primary:hover { background: #154360; }
+        .btn-success { background: #27ae60; color: #fff; }
+        .btn-success:hover { background: #1e8449; }
+        .btn-danger { background: #e74c3c; color: #fff; }
+        .btn-danger:hover { background: #c0392b; }
+        .btn-warning { background: #f39c12; color: #fff; }
+        .btn-warning:hover { background: #d68910; }
+        .btn-outline { background: transparent; color: #1a5276; border: 2px solid #1a5276; }
+        .btn-outline:hover { background: #1a5276; color: #fff; }
+        @media (max-width: 480px) {
+            .btn { font-size: 12px; padding: 8px 14px; min-width: 70px; }
+        }
+
+        /* ===== PRINT NOTE ===== */
+        .print-note {
+            background: #fef9e7;
+            border: 1px solid #f1c40f;
+            border-radius: 8px;
+            padding: 10px 16px;
+            margin: 12px 0 16px;
+            font-size: 13px;
+            color: #7d6608;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .print-note .icon { font-size: 22px; }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 18px;
+            border-top: 2px solid #ecf0f1;
+            font-size: 13px;
+            color: #7f8c8d;
+        }
+        .footer .verse {
+            font-style: italic;
+            color: #1a5276;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        .footer .copyright {
+            font-size: 11px;
+            color: #bdc3c7;
+            margin-top: 4px;
+        }
+        .footer .logo-small {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        .footer .logo-small .icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            overflow: hidden;
+            background: #eaf2f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            font-weight: 700;
+            color: #1a5276;
+            border: 1px solid #d5d8dc;
+            flex-shrink: 0;
+        }
+        .footer .logo-small .icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            max-width: 420px;
+            width: 90%;
+            background: #1a1a2e;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            text-align: center;
+            z-index: 999;
+            opacity: 0;
+            transition: all 0.4s ease;
+            pointer-events: none;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.20);
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .toast.success { background: #27ae60; }
+        .toast.warning { background: #f39c12; color: #1a1a2e; }
+        .toast.error { background: #e74c3c; }
+
+        /* ===== PRINT ===== */
+        @media print {
+            body { background: #fff; padding: 0; }
+            .container { box-shadow: none; padding: 16px 20px; border-radius: 0; max-width: 100%; }
+            .btn-group, .tabs, .print-note { display: none !important; }
+            .tab-content { display: block !important; }
+            .tab-btn { display: none; }
+            .score-box { break-inside: avoid; }
+            table { break-inside: auto; }
+            tr { break-inside: avoid; }
+            .card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+            .header { border-bottom-width: 2px; }
+        }
+
+        .text-muted { color: #7f8c8d; }
+        .mt-10 { margin-top: 10px; }
+        .mb-10 { margin-bottom: 10px; }
+        .text-center { text-align: center; }
+        .flex { display: flex; }
+        .flex-wrap { flex-wrap: wrap; }
+        .gap-10 { gap: 10px; }
+        .items-center { align-items: center; }
+        .w-full { width: 100%; }
+    </style>
+</head>
+<body>
+
+<div class="container" id="app">
+
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+        <div class="logo-container">
+            <div class="logo-placeholder">
+                <img src="SDA_CHURCH_LOGO.webp" alt="SDA Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=fallback>Adventist<br>Health<br>Ministries</span>';">
+            </div>
+            <div>
+                <h1>MTWARA SDA DISPENSARY</h1>
+                <h2>Staff Performance Assessment System (SPAS)</h2>
+            </div>
+        </div>
+        <div class="mission">
+            <strong>Mission:</strong> "Excellence in Service, Faith in Action — Holistic, Compassionate, Christ-Centered Healthcare"
+        </div>
+    </div>
+
+    <!-- ===== PRINT NOTE ===== -->
+    <div class="print-note">
+        <span class="icon">🖨️</span>
+        <div>
+            <strong>Print to PDF:</strong>
+            Click <strong>"Print / Save as PDF"</strong> below, or press
+            <strong>Ctrl+P</strong> / <strong>Cmd+P</strong> and select <strong>"Save as PDF"</strong>.
+        </div>
+    </div>
+
+    <!-- ===== TABS ===== -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('daily')">📋 Daily</button>
+        <button class="tab-btn" onclick="switchTab('monthly')">📊 Monthly</button>
+        <button class="tab-btn" onclick="switchTab('annual')">🏆 Annual</button>
+        <button class="tab-btn" onclick="switchTab('dashboard')">📈 Dashboard</button>
+        <button class="tab-btn" onclick="window.print()" style="background:#1a5276; color:#fff;">🖨️ PDF</button>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- ===== TAB: DAILY ===== -->
+    <!-- ================================================================ -->
+    <div id="daily" class="tab-content active">
+
+        <h2 style="color:#1a5276; font-size:20px; margin-bottom:4px;">📋 Daily Performance Tracker</h2>
+        <div class="form-row" style="margin-bottom:14px;">
+            <div class="form-group" style="margin-bottom:0;">
+                <label>Staff Name</label>
+                <input type="text" id="dailyStaff" value="John Doe" placeholder="Enter staff name">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+                <label>Date</label>
+                <input type="date" id="dailyDate">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+                <label>Shift</label>
+                <select id="dailyShift">
+                    <option>Day</option>
+                    <option>Night</option>
+                    <option>On-Call</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                <span>✅ 24-Point Checklist</span>
+                <span style="margin-left:auto; font-size:14px; font-weight:400; color:#7f8c8d;" id="dailyProgressText">0 / 24</span>
+            </div>
+            <div class="progress-bar">
+                <div class="fill" id="dailyProgressFill" style="width:0%;"></div>
+            </div>
+            <div class="table-wrap" id="dailyChecklistContainer">
+                <!-- Rendered by JavaScript -->
+            </div>
+        </div>
+
+        <div class="score-box" id="dailyScoreBox">
+            <h3>📊 Daily Score Summary</h3>
+            <div class="score-row">
+                <div class="score-item"><span class="number" id="dailyTotal">0</span><span class="label">Score</span></div>
+                <div class="score-item"><span class="number green" id="dailyPercent">0%</span><span class="label">Percentage</span></div>
+                <div class="score-item"><span class="number" id="dailyRatingDisplay" style="font-size:20px;">—</span><span class="label">Rating</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">📝 Supervisor's Comments</div>
+            <textarea class="form-group" id="dailySuperComments" style="width:100%; min-height:70px;" placeholder="Enter supervisor comments..."></textarea>
+        </div>
+
+        <div class="card">
+            <div class="card-title">📝 Employee's Self-Reflection</div>
+            <textarea class="form-group" id="dailySelfReflection" style="width:100%; min-height:70px;" placeholder="What went well? What could be improved?"></textarea>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-success" onclick="saveDaily()">💾 Save Daily</button>
+            <button class="btn btn-warning" onclick="resetDaily()">🔄 Reset</button>
+        </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- ===== TAB: MONTHLY ===== -->
+    <!-- ================================================================ -->
+    <div id="monthly" class="tab-content">
+
+        <h2 style="color:#1a5276; font-size:20px; margin-bottom:4px;">📊 Monthly Performance Assessment</h2>
+        <div class="form-row" style="margin-bottom:14px;">
+            <div class="form-group" style="margin-bottom:0;">
+                <label>Month</label>
+                <input type="month" id="monthSelect" value="2026-06">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+                <label>Staff Name</label>
+                <input type="text" id="monthStaff" value="John Doe" placeholder="Staff name">
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">📈 Performance Dimensions</div>
+
+            <div class="slider-group">
+                <label>Punctuality & Attendance <span class="value-display" id="monthPunctVal">20</span></label>
+                <input type="range" min="0" max="25" value="20" id="monthPunct" oninput="updateMonthly()">
+            </div>
+
+            <div class="slider-group">
+                <label>Productivity & Work Output <span class="value-display" id="monthProdVal">18</span></label>
+                <input type="range" min="0" max="25" value="18" id="monthProd" oninput="updateMonthly()">
+            </div>
+
+            <div class="slider-group">
+                <label>Role-Specific Metrics <span class="value-display" id="monthRoleVal">19</span></label>
+                <input type="range" min="0" max="25" value="19" id="monthRole" oninput="updateMonthly()">
+            </div>
+
+            <div class="slider-group">
+                <label>Quality & Compliance <span class="value-display" id="monthQualVal">20</span></label>
+                <input type="range" min="0" max="25" value="20" id="monthQual" oninput="updateMonthly()">
+            </div>
+
+            <div class="slider-group">
+                <label>Behavioral & Cultural <span class="value-display" id="monthBehavVal">21</span></label>
+                <input type="range" min="0" max="25" value="21" id="monthBehav" oninput="updateMonthly()">
+            </div>
+        </div>
+
+        <div class="score-box">
+            <h3>📊 Monthly Summary</h3>
+            <div class="score-row">
+                <div class="score-item"><span class="number" id="monthTotal">0</span><span class="label">Total (max 125)</span></div>
+                <div class="score-item"><span class="number green" id="monthPercent">0%</span><span class="label">Percentage</span></div>
+                <div class="score-item"><span class="number" id="monthRatingDisplay" style="font-size:20px;">—</span><span class="label">Rating</span></div>
+            </div>
+            <div class="progress-bar"><div class="fill" id="monthProgressFill" style="width:0%;"></div></div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">📝 Supervisor's Monthly Comments</div>
+            <textarea class="form-group" id="monthSuperComments" style="width:100%; min-height:70px;" placeholder="Commendations, concerns, recommendations..."></textarea>
+        </div>
+
+        <div class="card">
+            <div class="card-title">📝 Employee's Monthly Reflection</div>
+            <textarea class="form-group" id="monthSelfReflection" style="width:100%; min-height:70px;" placeholder="Achievements, challenges, next month's goals..."></textarea>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-success" onclick="saveMonthly()">💾 Save Monthly</button>
+            <button class="btn btn-warning" onclick="resetMonthly()">🔄 Reset</button>
+        </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- ===== TAB: ANNUAL ===== -->
+    <!-- ================================================================ -->
+    <div id="annual" class="tab-content">
+
+        <h2 style="color:#1a5276; font-size:20px; margin-bottom:4px;">🏆 Annual Performance Appraisal</h2>
+        <div class="form-row" style="margin-bottom:14px;">
+            <div class="form-group" style="margin-bottom:0;">
+                <label>Year</label>
+                <input type="number" id="annualYear" value="2026" style="width:120px;">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+                <label>Staff Name</label>
+                <input type="text" id="annualStaff" value="John Doe" placeholder="Staff name">
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">🎯 Annual Dimensions</div>
+
+            <div class="slider-group">
+                <label>Monthly Score Average <span class="value-display" id="annAvgVal">82</span></label>
+                <input type="range" min="0" max="100" value="82" id="annAvg" oninput="updateAnnual()">
+            </div>
+
+            <div class="slider-group">
+                <label>SMART Competency <span class="value-display" id="annSmartVal">80</span></label>
+                <input type="range" min="0" max="100" value="80" id="annSmart" oninput="updateAnnual()">
+            </div>
+
+            <div class="slider-group">
+                <label>Role-Specific Technical <span class="value-display" id="annTechVal">78</span></label>
+                <input type="range" min="0" max="100" value="78" id="annTech" oninput="updateAnnual()">
+            </div>
+
+            <div class="slider-group">
+                <label>Quality, Safety & Outcomes <span class="value-display" id="annQualVal">85</span></label>
+                <input type="range" min="0" max="100" value="85" id="annQual" oninput="updateAnnual()">
+            </div>
+
+            <div class="slider-group">
+                <label>Spiritual & Cultural Alignment <span class="value-display" id="annSpiritVal">88</span></label>
+                <input type="range" min="0" max="100" value="88" id="annSpirit" oninput="updateAnnual()">
+            </div>
+
+            <div class="slider-group">
+                <label>Innovation & Professional Growth <span class="value-display" id="annInnovVal">75</span></label>
+                <input type="range" min="0" max="100" value="75" id="annInnov" oninput="updateAnnual()">
+            </div>
+        </div>
+
+        <div class="score-box" style="border-left-color:#8e44ad;">
+            <h3>🏆 Annual Composite Performance Index (ACPI)</h3>
+            <div class="score-row">
+                <div class="score-item"><span class="number purple" id="annACPI" style="font-size:34px;">0%</span><span class="label">ACPI Score</span></div>
+                <div class="score-item"><span class="number" id="annRatingDisplay" style="font-size:20px;">—</span><span class="label">Annual Rating</span></div>
+                <div class="score-item"><span class="number teal" id="annReward" style="font-size:16px;">—</span><span class="label">Recommended Reward</span></div>
+            </div>
+            <div class="progress-bar"><div class="fill" id="annProgressFill" style="width:0%; background:linear-gradient(90deg, #8e44ad, #1abc9c);"></div></div>
+            <div id="annBreakdown" style="margin-top:8px; font-size:13px; color:#7f8c8d;"></div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">📝 Development Plan</div>
+            <div style="margin-bottom:8px;">
+                <label style="font-size:12px; font-weight:600; color:#7f8c8d;">Goal 1</label>
+                <input class="form-group" id="devGoal1" style="width:100%; padding:8px 12px; border:1px solid #d5d8dc; border-radius:6px;" placeholder="SMART Goal 1">
+            </div>
+            <div style="margin-bottom:8px;">
+                <label style="font-size:12px; font-weight:600; color:#7f8c8d;">Goal 2</label>
+                <input class="form-group" id="devGoal2" style="width:100%; padding:8px 12px; border:1px solid #d5d8dc; border-radius:6px;" placeholder="SMART Goal 2">
+            </div>
+            <div style="margin-bottom:8px;">
+                <label style="font-size:12px; font-weight:600; color:#7f8c8d;">Goal 3</label>
+                <input class="form-group" id="devGoal3" style="width:100%; padding:8px 12px; border:1px solid #d5d8dc; border-radius:6px;" placeholder="SMART Goal 3">
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">📝 Supervisor's Annual Summary</div>
+            <textarea class="form-group" id="annSuperComments" style="width:100%; min-height:70px;" placeholder="Strengths, areas for growth, final recommendations..."></textarea>
+        </div>
+
+        <div class="card">
+            <div class="card-title">📝 Employee's Annual Reflection</div>
+            <textarea class="form-group" id="annSelfReflection" style="width:100%; min-height:70px;" placeholder="What am I proud of? Challenges overcome? What support do I need?"></textarea>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-success" onclick="saveAnnual()">💾 Save Annual</button>
+            <button class="btn btn-warning" onclick="resetAnnual()">🔄 Reset</button>
+        </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- ===== TAB: DASHBOARD ===== -->
+    <!-- ================================================================ -->
+    <div id="dashboard" class="tab-content">
+
+        <h2 style="color:#1a5276; font-size:20px; margin-bottom:4px;">📈 Performance Dashboard</h2>
+        <p style="color:#7f8c8d; margin-bottom:18px;">Summary of all assessment levels for a complete performance picture.</p>
+
+        <div style="background:#eaf2f8; border-radius:12px; padding:18px; margin-bottom:20px;">
+            <h3 style="color:#1a5276; margin-bottom:8px;">👤 Staff Summary</h3>
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
+                <div><strong>Name:</strong> <span id="dashName">John Doe</span></div>
+                <div><strong>Job Title:</strong> <span id="dashJob">Clinical Officer</span></div>
+                <div><strong>Department:</strong> <span id="dashDept">Clinical</span></div>
+            </div>
+        </div>
+
+        <h3 style="color:#1a5276; margin-top:15px;">📊 Key Performance Indicators</h3>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:12px; margin:10px 0 20px;">
+            <div style="background:#fff; border-radius:10px; padding:14px; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,0.06);">
+                <div style="font-size:28px; font-weight:700; color:#1a5276;" id="kpiPunctuality">92%</div>
+                <div style="font-size:11px; color:#7f8c8d;">Punctuality</div>
+            </div>
+            <div style="background:#fff; border-radius:10px; padding:14px; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,0.06);">
+                <div style="font-size:28px; font-weight:700; color:#27ae60;" id="kpiProductivity">88%</div>
+                <div style="font-size:11px; color:#7f8c8d;">Productivity</div>
+            </div>
+            <div style="background:#fff; border-radius:10px; padding:14px; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,0.06);">
+                <div style="font-size:28px; font-weight:700; color:#2e86c1;" id="kpiQuality">94%</div>
+                <div style="font-size:11px; color:#7f8c8d;">Quality</div>
+            </div>
+            <div style="background:#fff; border-radius:10px; padding:14px; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,0.06);">
+                <div style="font-size:28px; font-weight:700; color:#8e44ad;" id="kpiSatisfaction">91%</div>
+                <div style="font-size:11px; color:#7f8c8d;">Patient Satisfaction</div>
+            </div>
+        </div>
+
+        <h3 style="color:#1a5276; margin-top:20px;">🏆 Annual Rating Scale</h3>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr><th>Rating</th><th>ACPI Score</th><th>Salary Increment</th><th>Bonus</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="badge badge-distinguished">Distinguished</span></td><td>95-100%</td><td>10-15%</td><td>✓✓✓ High</td></tr>
+                    <tr><td><span class="badge badge-outstanding">Outstanding</span></td><td>85-94%</td><td>8-11%</td><td>✓✓ Medium</td></tr>
+                    <tr><td><span class="badge badge-proficient">Proficient</span></td><td>70-84%</td><td>4-7%</td><td>✓ Small</td></tr>
+                    <tr><td><span class="badge badge-needs">Developing</span></td><td>50-69%</td><td>0-3%</td><td>✗</td></tr>
+                    <tr><td><span class="badge badge-unsatisfactory">Unsatisfactory</span></td><td>&lt;50%</td><td>0%</td><td>✗</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- ===== BUTTONS ===== -->
+    <!-- ================================================================ -->
+    <div class="btn-group">
+        <button class="btn btn-primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+        <button class="btn btn-success" onclick="resetAll()">🔄 Reset All</button>
+        <button class="btn btn-warning" onclick="exportData()">📤 Export Data</button>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- ===== FOOTER ===== -->
+    <!-- ================================================================ -->
+    <div class="footer">
+        <div class="logo-small">
+            <div class="icon">
+                <img src="SDA_CHURCH_LOGO.webp" alt="SDA" onerror="this.style.display='none'; this.parentElement.textContent='✝';">
+            </div>
+            <span style="font-weight:600; color:#1a5276;">Mtwara SDA Dispensary</span>
+        </div>
+        <div class="verse">"Whatever you do, work at it with all your heart, as working for the Lord, not for human masters." — Colossians 3:23</div>
+        <div class="copyright">P.O. Box ____, Mtwara, Tanzania | Version 3.0 (2026) | Excellence in Service, Faith in Action</div>
+    </div>
+
+</div>
+
+<!-- ================================================================ -->
+<!-- ===== JAVASCRIPT ===== -->
+<!-- ================================================================ -->
+<script>
+    // ===== CHECKLIST ITEMS =====
+    const CHECKLIST_ITEMS = [
+        'Arrived at least 10 minutes before shift start',
+        'Signed in/out correctly on attendance register',
+        'Properly dressed in clean uniform with visible ID badge',
+        'Attended morning devotion/prayer meeting',
+        'Took breaks at scheduled times; returned on time',
+        'Workstation/area properly set up before start',
+        'Equipment checked and found functional',
+        'Supplies/inventory checked and restocked as needed',
+        'Greeted every patient/visitor with courtesy and warmth',
+        'Demonstrated compassion and active listening',
+        'Responded to patient needs within reasonable time',
+        'Completed all assigned clinical tasks for the shift',
+        'Accurate and timely documentation completed',
+        'Followed infection prevention protocols consistently',
+        'Medication/drugs administered safely and correctly',
+        'Reported any safety hazards or incidents promptly',
+        'Maintained cleanliness and order in work area',
+        'Proper waste segregation and disposal followed',
+        'Communicated effectively with colleagues and supervisors',
+        'Handed over shift thoroughly and clearly',
+        'Used resources wisely; avoided waste',
+        'Completed end-of-shift reconciliation/closure',
+        'Maintained positive and respectful attitude throughout',
+        'Handled challenges without frustration or complaining'
+    ];
+
+    // ===== STATE =====
+    let dailyState = new Array(24).fill(false);
+    let historyRecords = [];
+
+    // ===== SET DATE =====
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('dailyDate').value = today;
+        renderDailyChecklist();
+        updateDaily();
+        updateMonthly();
+        updateAnnual();
+        loadSavedData();
+    });
+
+    // ===== RENDER DAILY CHECKLIST =====
+    function renderDailyChecklist() {
+        const container = document.getElementById('dailyChecklistContainer');
+        let html = '<table><thead><tr><th>#</th><th>Checklist Item</th><th style="text-align:center;">✓</th><th style="text-align:center;">✗</th><th>Initials</th></tr></thead><tbody>';
+        CHECKLIST_ITEMS.forEach((item, index) => {
+            const checked = dailyState[index] ? 'checked' : '';
+            const unchecked = dailyState[index] ? '' : 'checked';
+            html += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${item}</td>
+                    <td style="text-align:center;"><input type="radio" name="daily_${index}" value="yes" ${checked} onchange="setDaily(${index}, true)"></td>
+                    <td style="text-align:center;"><input type="radio" name="daily_${index}" value="no" ${unchecked} onchange="setDaily(${index}, false)"></td>
+                    <td><input type="text" class="initials-input" placeholder="Initials"></td>
+                </tr>
+            `;
+        });
+        html += '</tbody></table>';
+        container.innerHTML = html;
+    }
+
+    // ===== SET DAILY =====
+    function setDaily(index, value) {
+        dailyState[index] = value;
+        updateDaily();
+        saveToStorage();
+    }
+
+    // ===== UPDATE DAILY =====
+    function updateDaily() {
+        const checked = dailyState.filter(Boolean).length;
+        const percent = Math.round((checked / 24) * 100);
+        document.getElementById('dailyTotal').textContent = checked;
+        document.getElementById('dailyPercent').textContent = percent + '%';
+        document.getElementById('dailyProgressFill').style.width = percent + '%';
+        document.getElementById('dailyProgressText').textContent = checked + ' / 24';
+
+        let rating = '', badgeClass = '';
+        if (checked >= 22) { rating = '⭐ Excellent'; badgeClass = 'badge-excellent'; }
+        else if (checked >= 18) { rating = '✓ Good'; badgeClass = 'badge-good'; }
+        else if (checked >= 15) { rating = '⚠️ Satisfactory'; badgeClass = 'badge-satisfactory'; }
+        else { rating = '❌ Needs Improvement'; badgeClass = 'badge-needs'; }
+
+        document.getElementById('dailyRatingDisplay').innerHTML = `<span class="badge ${badgeClass}">${rating}</span>`;
+    }
+
+    // ===== RESET DAILY =====
+    function resetDaily() {
+        dailyState = new Array(24).fill(false);
+        document.getElementById('dailySuperComments').value = '';
+        document.getElementById('dailySelfReflection').value = '';
+        renderDailyChecklist();
+        updateDaily();
+        saveToStorage();
+        showToast('🔄 Daily reset successfully', 'warning');
+    }
+
+    // ===== SAVE DAILY =====
+    function saveDaily() {
+        const record = {
+            type: 'daily',
+            date: document.getElementById('dailyDate').value,
+            staff: document.getElementById('dailyStaff').value || 'John Doe',
+            shift: document.getElementById('dailyShift').value,
+            score: dailyState.filter(Boolean).length,
+            maxScore: 24,
+            percent: Math.round((dailyState.filter(Boolean).length / 24) * 100),
+            rating: document.getElementById('dailyRatingDisplay').textContent.trim(),
+            comments: document.getElementById('dailySuperComments').value,
+            selfReflection: document.getElementById('dailySelfReflection').value
+        };
+        historyRecords.unshift(record);
+        if (historyRecords.length > 50) historyRecords.pop();
+        saveToStorage();
+        showToast('✅ Daily saved successfully!', 'success');
+    }
+
+    // ================================================================
+    // MONTHLY
+    // ================================================================
+    function updateMonthly() {
+        const p = parseInt(document.getElementById('monthPunct').value);
+        const pr = parseInt(document.getElementById('monthProd').value);
+        const r = parseInt(document.getElementById('monthRole').value);
+        const q = parseInt(document.getElementById('monthQual').value);
+        const b = parseInt(document.getElementById('monthBehav').value);
+
+        document.getElementById('monthPunctVal').textContent = p;
+        document.getElementById('monthProdVal').textContent = pr;
+        document.getElementById('monthRoleVal').textContent = r;
+        document.getElementById('monthQualVal').textContent = q;
+        document.getElementById('monthBehavVal').textContent = b;
+
+        const total = p + pr + r + q + b;
+        const percent = Math.round((total / 125) * 100);
+        document.getElementById('monthTotal').textContent = total;
+        document.getElementById('monthPercent').textContent = percent + '%';
+        document.getElementById('monthProgressFill').style.width = percent + '%';
+
+        let rating = '', badgeClass = '';
+        if (percent >= 90) { rating = '⭐ Excellent'; badgeClass = 'badge-excellent'; }
+        else if (percent >= 80) { rating = '✓ Good'; badgeClass = 'badge-good'; }
+        else if (percent >= 70) { rating = '⚠️ Satisfactory'; badgeClass = 'badge-satisfactory'; }
+        else if (percent >= 50) { rating = '🔶 Needs Improvement'; badgeClass = 'badge-needs'; }
+        else { rating = '❌ Unsatisfactory'; badgeClass = 'badge-unsatisfactory'; }
+
+        document.getElementById('monthRatingDisplay').innerHTML = `<span class="badge ${badgeClass}">${rating}</span>`;
+    }
+
+    function resetMonthly() {
+        document.getElementById('monthPunct').value = 20;
+        document.getElementById('monthProd').value = 18;
+        document.getElementById('monthRole').value = 19;
+        document.getElementById('monthQual').value = 20;
+        document.getElementById('monthBehav').value = 21;
+        document.getElementById('monthSuperComments').value = '';
+        document.getElementById('monthSelfReflection').value = '';
+        updateMonthly();
+        saveToStorage();
+        showToast('🔄 Monthly reset successfully', 'warning');
+    }
+
+    function saveMonthly() {
+        const p = parseInt(document.getElementById('monthPunct').value);
+        const pr = parseInt(document.getElementById('monthProd').value);
+        const r = parseInt(document.getElementById('monthRole').value);
+        const q = parseInt(document.getElementById('monthQual').value);
+        const b = parseInt(document.getElementById('monthBehav').value);
+        const total = p + pr + r + q + b;
+        const percent = Math.round((total / 125) * 100);
+
+        let rating = '';
+        if (percent >= 90) rating = 'Excellent';
+        else if (percent >= 80) rating = 'Good';
+        else if (percent >= 70) rating = 'Satisfactory';
+        else if (percent >= 50) rating = 'Needs Improvement';
+        else rating = 'Unsatisfactory';
+
+        const record = {
+            type: 'monthly',
+            month: document.getElementById('monthSelect').value,
+            staff: document.getElementById('monthStaff').value || 'John Doe',
+            score: total,
+            maxScore: 125,
+            percent: percent,
+            rating: rating,
+            details: { punctuality: p, productivity: pr, roleSpecific: r, quality: q, behavioral: b },
+            comments: document.getElementById('monthSuperComments').value,
+            selfReflection: document.getElementById('monthSelfReflection').value
+        };
+        historyRecords.unshift(record);
+        if (historyRecords.length > 50) historyRecords.pop();
+        saveToStorage();
+        showToast('✅ Monthly saved successfully!', 'success');
+    }
+
+    // ================================================================
+    // ANNUAL
+    // ================================================================
+    function updateAnnual() {
+        const avg = parseInt(document.getElementById('annAvg').value);
+        const smart = parseInt(document.getElementById('annSmart').value);
+        const tech = parseInt(document.getElementById('annTech').value);
+        const qual = parseInt(document.getElementById('annQual').value);
+        const spirit = parseInt(document.getElementById('annSpirit').value);
+        const innov = parseInt(document.getElementById('annInnov').value);
+
+        document.getElementById('annAvgVal').textContent = avg;
+        document.getElementById('annSmartVal').textContent = smart;
+        document.getElementById('annTechVal').textContent = tech;
+        document.getElementById('annQualVal').textContent = qual;
+        document.getElementById('annSpiritVal').textContent = spirit;
+        document.getElementById('annInnovVal').textContent = innov;
+
+        const acpi = Math.round((avg * 0.30) + (smart * 0.25) + (tech * 0.20) + (qual * 0.10) + (spirit * 0.10) + (innov * 0.05));
+
+        document.getElementById('annACPI').textContent = acpi + '%';
+        document.getElementById('annProgressFill').style.width = acpi + '%';
+
+        let rating = '', badgeClass = '', reward = '';
+        if (acpi >= 95) { rating = '⭐⭐⭐⭐⭐ Distinguished'; badgeClass = 'badge-distinguished'; reward = '12-15% + Award'; }
+        else if (acpi >= 85) { rating = '⭐⭐⭐⭐ Outstanding'; badgeClass = 'badge-outstanding'; reward = '8-11% + Bonus'; }
+        else if (acpi >= 70) { rating = '⭐⭐⭐ Proficient'; badgeClass = 'badge-proficient'; reward = '4-7%'; }
+        else if (acpi >= 50) { rating = '⭐⭐ Developing'; badgeClass = 'badge-needs'; reward = '0-3% + PIP'; }
+        else { rating = '⭐ Unsatisfactory'; badgeClass = 'badge-unsatisfactory'; reward = 'No Increment'; }
+
+        document.getElementById('annRatingDisplay').innerHTML = `<span class="badge ${badgeClass}">${rating}</span>`;
+        document.getElementById('annReward').textContent = reward;
+
+        document.getElementById('annBreakdown').innerHTML = `
+            <strong>Formula:</strong> (Avg × 0.30) + (SMART × 0.25) + (Tech × 0.20) + (Quality × 0.10) + (Spiritual × 0.10) + (Innovation × 0.05) = <strong>${acpi}%</strong>
+        `;
+    }
+
+    function resetAnnual() {
+        document.getElementById('annAvg').value = 82;
+        document.getElementById('annSmart').value = 80;
+        document.getElementById('annTech').value = 78;
+        document.getElementById('annQual').value = 85;
+        document.getElementById('annSpirit').value = 88;
+        document.getElementById('annInnov').value = 75;
+        document.getElementById('annSuperComments').value = '';
+        document.getElementById('annSelfReflection').value = '';
+        document.getElementById('devGoal1').value = '';
+        document.getElementById('devGoal2').value = '';
+        document.getElementById('devGoal3').value = '';
+        updateAnnual();
+        saveToStorage();
+        showToast('🔄 Annual reset successfully', 'warning');
+    }
+
+    function saveAnnual() {
+        const avg = parseInt(document.getElementById('annAvg').value);
+        const smart = parseInt(document.getElementById('annSmart').value);
+        const tech = parseInt(document.getElementById('annTech').value);
+        const qual = parseInt(document.getElementById('annQual').value);
+        const spirit = parseInt(document.getElementById('annSpirit').value);
+        const innov = parseInt(document.getElementById('annInnov').value);
+        const acpi = Math.round((avg * 0.30) + (smart * 0.25) + (tech * 0.20) + (qual * 0.10) + (spirit * 0.10) + (innov * 0.05));
+
+        let rating = '';
+        if (acpi >= 95) rating = 'Distinguished';
+        else if (acpi >= 85) rating = 'Outstanding';
+        else if (acpi >= 70) rating = 'Proficient';
+        else if (acpi >= 50) rating = 'Developing';
+        else rating = 'Unsatisfactory';
+
+        const record = {
+            type: 'annual',
+            year: document.getElementById('annualYear').value,
+            staff: document.getElementById('annualStaff').value || 'John Doe',
+            acpi: acpi,
+            rating: rating,
+            details: { monthlyAvg: avg, smart: smart, technical: tech, quality: qual, spiritual: spirit, innovation: innov },
+            goals: [
+                document.getElementById('devGoal1').value || '',
+                document.getElementById('devGoal2').value || '',
+                document.getElementById('devGoal3').value || ''
+            ],
+            comments: document.getElementById('annSuperComments').value,
+            selfReflection: document.getElementById('annSelfReflection').value
+        };
+        historyRecords.unshift(record);
+        if (historyRecords.length > 50) historyRecords.pop();
+        saveToStorage();
+        showToast('✅ Annual saved successfully!', 'success');
+    }
+
+    // ================================================================
+    // NAVIGATION
+    // ================================================================
+    function switchTab(tabName) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabName).classList.add('active');
+        document.querySelector(`.tab-btn[onclick="switchTab('${tabName}')"]`).classList.add('active');
+    }
+
+    // ================================================================
+    // RESET ALL
+    // ================================================================
+    function resetAll() {
+        if (confirm('Reset all inputs and scores?')) {
+            resetDaily();
+            resetMonthly();
+            resetAnnual();
+            showToast('🔄 All data reset', 'warning');
+        }
+    }
+
+    // ================================================================
+    // EXPORT DATA
+    // ================================================================
+    function exportData() {
+        const data = {
+            exportedAt: new Date().toISOString(),
+            version: '3.0',
+            records: historyRecords,
+            staff: {
+                name: document.getElementById('dailyStaff').value || 'John Doe'
+            }
+        };
+        const json = JSON.stringify(data, null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `mtwara_appraisal_${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('📤 Data exported successfully!', 'success');
+    }
+
+    // ================================================================
+    // STORAGE
+    // ================================================================
+    function saveToStorage() {
+        try {
+            localStorage.setItem('mtwara_appraisal_data', JSON.stringify({ history: historyRecords, dailyState: dailyState }));
+        } catch (e) { console.warn('Storage error:', e); }
+    }
+
+    function loadSavedData() {
+        try {
+            const stored = localStorage.getItem('mtwara_appraisal_data');
+            if (stored) {
+                const data = JSON.parse(stored);
+                if (data.history) historyRecords = data.history;
+                if (data.dailyState) {
+                    dailyState = data.dailyState;
+                    renderDailyChecklist();
+                    updateDaily();
+                }
+            }
+        } catch (e) { console.warn('Load error:', e); }
+    }
+
+    // ================================================================
+    // TOAST
+    // ================================================================
+    let toastTimeout;
+
+    function showToast(message, type = 'success') {
+        let toast = document.getElementById('toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'toast';
+            toast.className = 'toast';
+            document.body.appendChild(toast);
+        }
+        toast.textContent = message;
+        toast.className = 'toast ' + type;
+        clearTimeout(toastTimeout);
+        void toast.offsetWidth;
+        toast.classList.add('show');
+        toastTimeout = setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    // ===== INITIALIZE =====
+    updateMonthly();
+    updateAnnual();
+</script>
+
+</body>
+</html>
