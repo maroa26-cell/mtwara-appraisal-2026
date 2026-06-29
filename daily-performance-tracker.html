@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -172,6 +173,7 @@
         .section-divider.info { background: #fdebd0; color: #a04000; border-left: 4px solid #f39c12; }
         .section-divider.general { background: #e8daef; color: #6c3483; border-left: 4px solid #8e44ad; }
         .section-divider.specific { background: #d1f2eb; color: #0e6655; border-left: 4px solid #1abc9c; }
+        .section-divider.faith { background: #fef9e7; color: #7d6608; border-left: 4px solid #f1c40f; }
         .section-divider .badge-section {
             padding: 2px 12px;
             border-radius: 20px;
@@ -521,6 +523,50 @@
             margin-top: 4px;
         }
         .checklist-stats span { background: #ecf0f1; padding: 2px 10px; border-radius: 12px; }
+
+        /* ===== SUMMARY TABLE ===== */
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .summary-table th {
+            background: #1a5276;
+            color: #fff;
+            padding: 8px 10px;
+            text-align: left;
+            font-size: 12px;
+        }
+        .summary-table td {
+            padding: 7px 10px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        .summary-table tr:hover { background: #f7f9fa; }
+        .table-wrap { overflow-x: auto; margin: 10px 0; }
+
+        /* ===== CHART CANVAS ===== */
+        .chart-container {
+            background: #fff;
+            border-radius: 10px;
+            padding: 14px;
+            margin: 10px 0;
+            border: 1px solid #ecf0f1;
+        }
+        .chart-container canvas {
+            width: 100%;
+            height: 200px;
+        }
+
+        /* ===== ALERT ===== */
+        .alert-box {
+            padding: 8px 14px;
+            border-radius: 6px;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+        .alert-box.warning { background: #fadbd8; color: #922b21; border-left: 4px solid #e74c3c; }
+        .alert-box.success { background: #d5f5e3; color: #1a7a3a; border-left: 4px solid #27ae60; }
+        .alert-box.info { background: #d6eaf8; color: #1a5276; border-left: 4px solid #2e86c1; }
     </style>
 </head>
 <body>
@@ -552,6 +598,7 @@
     <!-- ===== TABS ===== -->
     <div class="tabs">
         <button class="tab-btn active" onclick="switchTab('assessment')">📝 Assessment</button>
+        <button class="tab-btn" onclick="switchTab('summary')">📈 Summary</button>
         <button class="tab-btn" onclick="switchTab('history')">📂 History</button>
         <button class="tab-btn" onclick="window.print()" style="background:#1a5276; color:#fff;">🖨️ PDF</button>
     </div>
@@ -646,7 +693,31 @@
             <!-- Rendered by JavaScript -->
         </div>
 
-        <!-- ===== SECTION 3: WORKER SELF-ASSESSMENT (Ratings) ===== -->
+        <!-- ===== SECTION 3: FAITH & DEVOTIONAL ===== -->
+        <div class="section-divider faith">
+            🙏 Faith & Devotional
+            <span class="badge-section">SDA values in daily work</span>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>✅ Attended Morning Devotion</label>
+                <select id="faithDevotion">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>📖 Bible Verse Reflected On</label>
+                <input type="text" id="faithVerse" placeholder="e.g., Colossians 3:23">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>💭 Prayer Request or Reflection</label>
+            <textarea id="faithReflection" placeholder="Any prayer requests or reflections for today..."></textarea>
+        </div>
+
+        <!-- ===== SECTION 4: WORKER SELF-ASSESSMENT (Ratings) ===== -->
         <div class="section-divider self">
             ✍️ Worker Self-Assessment — Overall Ratings
             <span class="badge-section">Worker rates their performance</span>
@@ -720,7 +791,7 @@
             <textarea id="selfComments" placeholder="Share your reflections on today's work..."></textarea>
         </div>
 
-        <!-- ===== SECTION 4: SUPERVISOR ASSESSMENT (Ratings) ===== -->
+        <!-- ===== SECTION 5: SUPERVISOR ASSESSMENT (Ratings) ===== -->
         <div class="section-divider supervisor">
             👔 Supervisor Assessment — Overall Ratings
             <span class="badge-section">Supervisor rates the worker</span>
@@ -818,6 +889,7 @@
             <div style="text-align:center; font-size:12px; margin-top:4px; color:#7f8c8d;">
                 Combined Score: <strong id="combinedScoreText">0%</strong> &nbsp;|&nbsp; Gap: <strong id="gapText">0</strong> points
             </div>
+            <div id="alertsContainer" style="margin-top:8px;"></div>
         </div>
 
         <!-- ===== CHECKLIST SUMMARY ===== -->
@@ -831,12 +903,63 @@
             <div class="progress-bar"><div class="fill" id="checklistProgress" style="width:0%;"></div></div>
         </div>
 
+        <!-- ===== WORKER PROFILE ===== -->
+        <div class="section-divider info" style="margin-top:10px;">
+            📂 Worker Profile
+            <span class="badge-section">View worker's performance history</span>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="viewWorkerProfile()" style="flex:none;">👤 View Profile</button>
+        <div id="workerProfileContainer" style="margin-top:8px;"></div>
+
         <div class="btn-group">
             <button class="btn btn-success" onclick="saveReport()">💾 Save Report</button>
             <button class="btn btn-warning" onclick="resetForm()">🔄 Reset</button>
             <button class="btn btn-primary" onclick="calculateScores()">📊 Calculate</button>
+            <button class="btn btn-outline" onclick="exportToCSV()">📊 Export CSV</button>
         </div>
 
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- ===== TAB: SUMMARY ===== -->
+    <!-- ================================================================ -->
+    <div id="summary" class="tab-content">
+
+        <h2 style="color:#1a5276; font-size:18px; margin-bottom:4px;">📊 Performance Summary</h2>
+        <p style="color:#7f8c8d; margin-bottom:12px;">View performance trends over time with charts and analytics.</p>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Select Worker</label>
+                <select id="summaryWorker" onchange="renderSummary()">
+                    <option value="all">All Workers</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Period</label>
+                <select id="summaryPeriod" onchange="renderSummary()">
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                    <option value="quarter">This Quarter</option>
+                    <option value="all">All Time</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Chart -->
+        <div class="chart-container">
+            <h4 style="color:#1a5276; font-size:14px; margin-bottom:6px;">📈 Performance Trend</h4>
+            <canvas id="performanceChart" height="200" style="width:100%;"></canvas>
+        </div>
+
+        <div id="summaryContainer">
+            <div class="history-empty">Select filters to view summary.</div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="window.print()">🖨️ Print Summary</button>
+            <button class="btn btn-warning" onclick="exportSummaryCSV()">📊 Export Summary CSV</button>
+        </div>
     </div>
 
     <!-- ================================================================ -->
@@ -853,7 +976,8 @@
 
         <div class="btn-group">
             <button class="btn btn-danger" onclick="clearAllHistory()">🗑️ Clear All</button>
-            <button class="btn btn-warning" onclick="exportAllHistory()">📤 Export All</button>
+            <button class="btn btn-warning" onclick="exportAllHistory()">📤 Export All JSON</button>
+            <button class="btn btn-primary" onclick="exportToCSV()">📊 Export CSV</button>
         </div>
     </div>
 
@@ -862,7 +986,7 @@
     <!-- ================================================================ -->
     <div class="footer">
         <div class="verse">"Whatever you do, work at it with all your heart, as working for the Lord, not for human masters." — Colossians 3:23</div>
-        <div>Mtwara SDA Dispensary | Daily Performance Tracker | Version 1.0 (2026)</div>
+        <div>Mtwara SDA Dispensary | Daily Performance Tracker | Version 2.0 (2026)</div>
     </div>
 
 </div>
@@ -1072,7 +1196,6 @@
         const label = document.getElementById('roleSpecificLabel');
         label.textContent = role;
 
-        // Reset specific state if length changed
         if (specificState.length !== items.length) {
             specificState = new Array(items.length).fill(false);
         }
@@ -1131,7 +1254,6 @@
         document.getElementById('totalAll').textContent = totalAll;
         document.getElementById('checklistProgress').style.width = percent + '%';
 
-        // Color the progress based on completion
         const fill = document.getElementById('checklistProgress');
         if (percent >= 80) fill.style.background = 'linear-gradient(90deg, #27ae60, #1a5276)';
         else if (percent >= 50) fill.style.background = 'linear-gradient(90deg, #f39c12, #e67e22)';
@@ -1169,10 +1291,9 @@
     }
 
     // ================================================================
-    // CALCULATE SCORES
+    // CALCULATE SCORES & ALERTS
     // ================================================================
     function calculateScores() {
-        // Self scores
         const selfScores = [
             getRatingValue('selfPunctuality'),
             getRatingValue('selfQuality'),
@@ -1189,7 +1310,6 @@
         document.getElementById('selfPercent').textContent = selfPercent + '%';
         document.getElementById('selfRatingDisplay').innerHTML = getRatingBadge(selfPercent);
 
-        // Supervisor scores
         const supScores = [
             getRatingValue('supPunctuality'),
             getRatingValue('supQuality'),
@@ -1206,23 +1326,38 @@
         document.getElementById('supPercent').textContent = supPercent + '%';
         document.getElementById('supRatingDisplay').innerHTML = getRatingBadge(supPercent);
 
-        // Combined
         const combined = Math.round((selfPercent + supPercent) / 2);
         document.getElementById('workerCombined').textContent = combined + '%';
         document.getElementById('combinedScoreText').textContent = combined + '%';
         document.getElementById('combinedProgress').style.width = combined + '%';
 
-        // Gap
         const gap = Math.abs(selfPercent - supPercent);
         document.getElementById('gapScore').textContent = gap;
         document.getElementById('gapText').textContent = gap + ' points';
 
-        // Status
         let status = '', statusClass = '';
         if (gap <= 5) { status = '✅ Aligned'; statusClass = 'green'; }
         else if (gap <= 15) { status = '⚠️ Slight Gap'; statusClass = 'orange'; }
         else { status = '❌ Significant Gap'; statusClass = 'red'; }
         document.getElementById('statusIndicator').innerHTML = `<span class="status-dot ${statusClass}"></span> ${status}`;
+
+        // ===== PERFORMANCE ALERTS =====
+        const alertContainer = document.getElementById('alertsContainer');
+        let alerts = [];
+        if (selfPercent < 50) alerts.push({ msg: '⚠️ Self-assessment is low (<50%)', type: 'warning' });
+        if (supPercent < 50) alerts.push({ msg: '⚠️ Supervisor assessment is low (<50%)', type: 'warning' });
+        if (combined < 50) alerts.push({ msg: '⚠️ Combined score is low (<50%)', type: 'warning' });
+        if (gap > 20) alerts.push({ msg: '⚠️ Large gap between self and supervisor (>20%)', type: 'warning' });
+
+        if (alerts.length > 0) {
+            alertContainer.innerHTML = alerts.map(a =>
+                `<div class="alert-box ${a.type}">${a.msg}</div>`
+            ).join('');
+            alertContainer.style.display = 'block';
+        } else {
+            alertContainer.innerHTML = `<div class="alert-box success">✅ All performance indicators are healthy</div>`;
+            alertContainer.style.display = 'block';
+        }
     }
 
     function getRatingBadge(percent) {
@@ -1230,6 +1365,52 @@
         if (percent >= 75) return `<span class="badge badge-good">👍 Good</span>`;
         if (percent >= 55) return `<span class="badge badge-average">👌 Average</span>`;
         return `<span class="badge badge-poor">⚠️ Poor</span>`;
+    }
+
+    // ================================================================
+    // WORKER PROFILE
+    // ================================================================
+    function viewWorkerProfile() {
+        const worker = document.getElementById('workerName').value || 'Unknown';
+        const workerReports = allReports.filter(r => r.worker === worker);
+        const container = document.getElementById('workerProfileContainer');
+
+        if (workerReports.length === 0) {
+            container.innerHTML = `<div class="history-empty">No reports found for ${worker}.</div>`;
+            return;
+        }
+
+        const avgSelf = Math.round(workerReports.reduce((a, b) => a + b.self.percent, 0) / workerReports.length);
+        const avgSup = Math.round(workerReports.reduce((a, b) => a + b.supervisorAssessment.percent, 0) / workerReports.length);
+        const avgCombined = Math.round((avgSelf + avgSup) / 2);
+        const best = Math.max(...workerReports.map(r => r.combined));
+        const latest = workerReports[0]?.combined || 0;
+
+        // Calculate trend
+        let trend = '🔄 Insufficient data';
+        if (workerReports.length >= 3) {
+            const first = workerReports[workerReports.length - 1].combined;
+            const last = workerReports[0].combined;
+            trend = last > first ? '📈 Improving' : last < first ? '📉 Declining' : '➡️ Stable';
+        }
+
+        container.innerHTML = `
+            <div style="background:#eaf2f8; border-radius:10px; padding:14px 18px; margin-top:10px;">
+                <h4 style="color:#1a5276;">👤 ${worker}</h4>
+                <div class="score-row">
+                    <div class="score-item"><span class="number">${workerReports.length}</span><span class="label">Reports</span></div>
+                    <div class="score-item"><span class="number green">${avgSelf}%</span><span class="label">Avg Self</span></div>
+                    <div class="score-item"><span class="number purple">${avgSup}%</span><span class="label">Avg Supervisor</span></div>
+                    <div class="score-item"><span class="number teal">${avgCombined}%</span><span class="label">Avg Combined</span></div>
+                </div>
+                <div style="font-size:13px; color:#7f8c8d; margin-top:6px;">
+                    <strong>Trend:</strong> ${trend} &nbsp;|&nbsp;
+                    <strong>Best Score:</strong> ${best}% &nbsp;|&nbsp;
+                    <strong>Latest:</strong> ${latest}%
+                </div>
+                <div class="progress-bar" style="margin-top:6px;"><div class="fill" style="width:${avgCombined}%;"></div></div>
+            </div>
+        `;
     }
 
     // ================================================================
@@ -1243,7 +1424,6 @@
         const supervisor = document.getElementById('supervisorName').value || 'Not Assigned';
         const supervisorTitle = document.getElementById('supervisorTitle').value;
 
-        // Self scores
         const selfScores = [
             getRatingValue('selfPunctuality'),
             getRatingValue('selfQuality'),
@@ -1255,7 +1435,6 @@
         const selfTotal = selfScores.reduce((a, b) => a + b, 0);
         const selfPercent = Math.round((selfTotal / 30) * 100);
 
-        // Supervisor scores
         const supScores = [
             getRatingValue('supPunctuality'),
             getRatingValue('supQuality'),
@@ -1277,6 +1456,11 @@
             shift: shift,
             supervisor: supervisor,
             supervisorTitle: supervisorTitle,
+            faith: {
+                devotion: document.getElementById('faithDevotion').value,
+                verse: document.getElementById('faithVerse').value,
+                reflection: document.getElementById('faithReflection').value
+            },
             generalChecklist: generalState.slice(),
             specificChecklist: specificState.slice(),
             specificItems: specificItems,
@@ -1325,6 +1509,8 @@
         if (allReports.length > 200) allReports.pop();
         saveToStorage();
         renderHistory();
+        populateWorkerDropdown();
+        renderSummary();
         showToast('✅ Report saved successfully!', 'success');
     }
 
@@ -1354,6 +1540,7 @@
                         <span style="margin-left:6px; font-weight:600; color:#1a5276;">Combined: ${r.combined}%</span>
                         <span style="margin-left:4px; font-size:11px; color:${r.gap <= 5 ? '#27ae60' : r.gap <= 15 ? '#f39c12' : '#e74c3c'};">Gap: ${r.gap}%</span>
                         <span style="margin-left:6px; font-size:11px; color:#7f8c8d;">📋 ${checklistPercent}%</span>
+                        ${r.faith && r.faith.devotion === 'yes' ? '🙏' : ''}
                     </div>
                     <div>
                         <button onclick="viewReport(${index})" class="btn btn-primary btn-sm">View</button>
@@ -1397,6 +1584,11 @@
             `🎯 ROLE-SPECIFIC CHECKLIST (${r.checklistStats ? r.checklistStats.specificDone + '/' + r.checklistStats.specificTotal : '0/0'})\n` +
             specificChecklist +
             `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+            `🙏 FAITH & DEVOTIONAL\n` +
+            `Devotion: ${r.faith && r.faith.devotion === 'yes' ? '✅ Attended' : '❌ Not Attended'}\n` +
+            `Verse: ${r.faith && r.faith.verse ? r.faith.verse : 'None'}\n` +
+            `Reflection: ${r.faith && r.faith.reflection ? r.faith.reflection : 'None'}\n` +
+            `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
             `📝 WORKER SELF-ASSESSMENT\n` +
             `Punctuality: ${r.self.labels[0]}\n` +
             `Quality: ${r.self.labels[1]}\n` +
@@ -1430,6 +1622,8 @@
             allReports.splice(index, 1);
             saveToStorage();
             renderHistory();
+            populateWorkerDropdown();
+            renderSummary();
             showToast('🗑️ Report deleted', 'warning');
         }
     }
@@ -1437,6 +1631,31 @@
     // ================================================================
     // EXPORT FUNCTIONS
     // ================================================================
+    function exportToCSV() {
+        if (allReports.length === 0) {
+            showToast('No data to export', 'warning');
+            return;
+        }
+
+        let csv = 'Date,Worker,Role,Shift,Supervisor,Self Score,Self %,Supervisor Score,Supervisor %,Combined %,Gap,Checklist %,Devotion\n';
+        allReports.forEach(r => {
+            const checklistPct = r.checklistStats ? Math.round((r.checklistStats.totalDone / r.checklistStats.totalAll) * 100) : 0;
+            const devotion = r.faith && r.faith.devotion === 'yes' ? 'Yes' : 'No';
+            csv += `${r.date},${r.worker},${r.role},${r.shift},${r.supervisor},${r.self.total}/30,${r.self.percent}%,${r.supervisorAssessment.total}/30,${r.supervisorAssessment.percent}%,${r.combined}%,${r.gap}%,${checklistPct}%,${devotion}\n`;
+        });
+
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `performance_report_${new Date().toISOString().split('T')[0]}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('📊 CSV exported successfully!', 'success');
+    }
+
     function exportAllHistory() {
         if (allReports.length === 0) {
             showToast('No data to export', 'warning');
@@ -1444,12 +1663,56 @@
         }
         const data = {
             exportedAt: new Date().toISOString(),
-            version: '1.0',
+            version: '2.0',
             totalReports: allReports.length,
             reports: allReports
         };
         downloadJSON(data, `performance_reports_${new Date().toISOString().split('T')[0]}.json`);
         showToast('📤 Data exported successfully!', 'success');
+    }
+
+    function exportSummaryCSV() {
+        const worker = document.getElementById('summaryWorker').value;
+        const period = document.getElementById('summaryPeriod').value;
+        let filtered = allReports;
+        if (worker !== 'all') filtered = filtered.filter(r => r.worker === worker);
+
+        const now = new Date();
+        if (period === 'week') {
+            const weekAgo = new Date(now);
+            weekAgo.setDate(weekAgo.getDate() - 7);
+            filtered = filtered.filter(r => new Date(r.date) >= weekAgo);
+        } else if (period === 'month') {
+            const monthAgo = new Date(now);
+            monthAgo.setMonth(monthAgo.getMonth() - 1);
+            filtered = filtered.filter(r => new Date(r.date) >= monthAgo);
+        } else if (period === 'quarter') {
+            const quarterAgo = new Date(now);
+            quarterAgo.setMonth(quarterAgo.getMonth() - 3);
+            filtered = filtered.filter(r => new Date(r.date) >= quarterAgo);
+        }
+
+        if (filtered.length === 0) {
+            showToast('No data for selected filters', 'warning');
+            return;
+        }
+
+        let csv = 'Date,Worker,Role,Shift,Supervisor,Self %,Supervisor %,Combined %,Gap,Checklist %\n';
+        filtered.forEach(r => {
+            const checklistPct = r.checklistStats ? Math.round((r.checklistStats.totalDone / r.checklistStats.totalAll) * 100) : 0;
+            csv += `${r.date},${r.worker},${r.role},${r.shift},${r.supervisor},${r.self.percent}%,${r.supervisorAssessment.percent}%,${r.combined}%,${r.gap}%,${checklistPct}%\n`;
+        });
+
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `summary_${new Date().toISOString().split('T')[0]}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('📊 Summary CSV exported!', 'success');
     }
 
     function downloadJSON(data, filename) {
@@ -1473,8 +1736,168 @@
             allReports = [];
             saveToStorage();
             renderHistory();
+            populateWorkerDropdown();
+            renderSummary();
             showToast('🗑️ All reports cleared', 'warning');
         }
+    }
+
+    // ================================================================
+    // SUMMARY TAB
+    // ================================================================
+    function renderSummary() {
+        const workerFilter = document.getElementById('summaryWorker').value;
+        const period = document.getElementById('summaryPeriod').value;
+        const container = document.getElementById('summaryContainer');
+
+        let filtered = allReports;
+        if (workerFilter !== 'all') {
+            filtered = filtered.filter(r => r.worker === workerFilter);
+        }
+
+        const now = new Date();
+        if (period === 'week') {
+            const weekAgo = new Date(now);
+            weekAgo.setDate(weekAgo.getDate() - 7);
+            filtered = filtered.filter(r => new Date(r.date) >= weekAgo);
+        } else if (period === 'month') {
+            const monthAgo = new Date(now);
+            monthAgo.setMonth(monthAgo.getMonth() - 1);
+            filtered = filtered.filter(r => new Date(r.date) >= monthAgo);
+        } else if (period === 'quarter') {
+            const quarterAgo = new Date(now);
+            quarterAgo.setMonth(quarterAgo.getMonth() - 3);
+            filtered = filtered.filter(r => new Date(r.date) >= quarterAgo);
+        }
+
+        if (filtered.length === 0) {
+            container.innerHTML = '<div class="history-empty">No reports found for the selected filters.</div>';
+            renderChart([]);
+            return;
+        }
+
+        const avgSelf = Math.round(filtered.reduce((a, b) => a + b.self.percent, 0) / filtered.length);
+        const avgSup = Math.round(filtered.reduce((a, b) => a + b.supervisorAssessment.percent, 0) / filtered.length);
+        const avgCombined = Math.round((avgSelf + avgSup) / 2);
+        const avgGap = Math.round(filtered.reduce((a, b) => a + b.gap, 0) / filtered.length);
+
+        let html = `
+            <div style="background:#eaf2f8; border-radius:10px; padding:14px 18px; margin-bottom:16px;">
+                <h3 style="color:#1a5276; margin-bottom:6px;">📊 Summary</h3>
+                <div class="score-row">
+                    <div class="score-item"><span class="number">${filtered.length}</span><span class="label">Reports</span></div>
+                    <div class="score-item"><span class="number green">${avgSelf}%</span><span class="label">Avg Self</span></div>
+                    <div class="score-item"><span class="number purple">${avgSup}%</span><span class="label">Avg Supervisor</span></div>
+                    <div class="score-item"><span class="number teal">${avgCombined}%</span><span class="label">Avg Combined</span></div>
+                    <div class="score-item"><span class="number ${avgGap <= 5 ? 'green' : avgGap <= 15 ? 'orange' : 'red'}">${avgGap}%</span><span class="label">Avg Gap</span></div>
+                </div>
+                <div class="progress-bar"><div class="fill" style="width:${avgCombined}%;"></div></div>
+                <div style="text-align:center; font-size:12px; color:#7f8c8d; margin-top:4px;">Overall Performance: ${avgCombined}%</div>
+            </div>
+            <div class="table-wrap">
+                <table class="summary-table">
+                    <thead><tr><th>Date</th><th>Worker</th><th>Role</th><th>Self</th><th>Supervisor</th><th>Combined</th><th>Gap</th><th>Checklist</th></tr></thead>
+                    <tbody>
+        `;
+
+        filtered.slice(0, 30).forEach(r => {
+            const color = r.gap <= 5 ? 'green' : r.gap <= 15 ? 'orange' : 'red';
+            const checklistPct = r.checklistStats ? Math.round((r.checklistStats.totalDone / r.checklistStats.totalAll) * 100) : 0;
+            html += `
+                <tr>
+                    <td>${r.date}</td>
+                    <td><strong>${r.worker}</strong></td>
+                    <td><span class="role-badge">${r.role}</span></td>
+                    <td>${r.self.percent}%</td>
+                    <td>${r.supervisorAssessment.percent}%</td>
+                    <td><strong>${r.combined}%</strong></td>
+                    <td style="color:${color};">${r.gap}%</td>
+                    <td>${checklistPct}%</td>
+                </tr>
+            `;
+        });
+
+        html += `</tbody></table></div>`;
+        container.innerHTML = html;
+
+        // Render chart
+        renderChart(filtered);
+    }
+
+    // ================================================================
+    // CHART
+    // ================================================================
+    function renderChart(reports) {
+        const canvas = document.getElementById('performanceChart');
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        const rect = canvas.parentElement.getBoundingClientRect();
+        const width = rect.width || 600;
+        const height = 200;
+
+        canvas.width = width;
+        canvas.height = height;
+
+        const data = reports || allReports.slice(0, 20).reverse();
+        if (data.length < 2) {
+            ctx.fillStyle = '#7f8c8d';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Need at least 2 reports to show chart.', width / 2, height / 2);
+            return;
+        }
+
+        ctx.clearRect(0, 0, width, height);
+
+        const barWidth = Math.min((width - 40) / data.length - 4, 30);
+        const maxScore = 100;
+
+        data.forEach((r, i) => {
+            const x = 20 + i * (barWidth + 4);
+            const selfHeight = (r.self.percent / maxScore) * (height - 20);
+            const supHeight = (r.supervisorAssessment.percent / maxScore) * (height - 20);
+
+            // Self bar (blue)
+            ctx.fillStyle = '#2e86c1';
+            ctx.fillRect(x, height - 10 - selfHeight, barWidth / 2 - 2, selfHeight);
+
+            // Supervisor bar (green)
+            ctx.fillStyle = '#27ae60';
+            ctx.fillRect(x + barWidth / 2 + 2, height - 10 - supHeight, barWidth / 2 - 2, supHeight);
+
+            // Date label
+            ctx.fillStyle = '#7f8c8d';
+            ctx.font = '8px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(r.date.slice(5), x + barWidth / 2, height - 2);
+        });
+
+        // Legend
+        const legendX = width - 140;
+        ctx.fillStyle = '#2e86c1';
+        ctx.fillRect(legendX, 10, 12, 12);
+        ctx.fillStyle = '#1a1a2e';
+        ctx.font = '10px Arial';
+        ctx.textAlign = 'left';
+        ctx.fillText('Self', legendX + 16, 20);
+
+        ctx.fillStyle = '#27ae60';
+        ctx.fillRect(legendX + 70, 10, 12, 12);
+        ctx.fillStyle = '#1a1a2e';
+        ctx.fillText('Supervisor', legendX + 86, 20);
+    }
+
+    // ================================================================
+    // POPULATE WORKER DROPDOWN
+    // ================================================================
+    function populateWorkerDropdown() {
+        const select = document.getElementById('summaryWorker');
+        const workers = [...new Set(allReports.map(r => r.worker))];
+        select.innerHTML = '<option value="all">All Workers</option>';
+        workers.forEach(w => {
+            select.innerHTML += `<option value="${w}">${w}</option>`;
+        });
     }
 
     // ================================================================
@@ -1492,6 +1915,8 @@
             if (stored) {
                 allReports = JSON.parse(stored);
                 renderHistory();
+                populateWorkerDropdown();
+                renderSummary();
             }
         } catch (e) { console.warn('Load error:', e); }
     }
@@ -1508,6 +1933,9 @@
         document.getElementById('supComments').value = '';
         document.getElementById('workerName').value = 'John Doe';
         document.getElementById('supervisorName').value = 'Dr. Smith';
+        document.getElementById('faithDevotion').value = 'yes';
+        document.getElementById('faithVerse').value = '';
+        document.getElementById('faithReflection').value = '';
         generalState = new Array(GENERAL_CHECKLIST.length).fill(false);
         const role = document.getElementById('workerRole').value;
         const items = ROLE_CHECKLISTS[role] || ROLE_CHECKLISTS['Doctor'];
@@ -1515,6 +1943,7 @@
         renderGeneralChecklist();
         renderSpecificChecklist();
         calculateScores();
+        document.getElementById('workerProfileContainer').innerHTML = '';
         showToast('🔄 Form reset', 'warning');
     }
 
@@ -1527,6 +1956,7 @@
         document.getElementById(tabName).classList.add('active');
         document.querySelector(`.tab-btn[onclick="switchTab('${tabName}')"]`).classList.add('active');
         if (tabName === 'history') renderHistory();
+        if (tabName === 'summary') { populateWorkerDropdown(); renderSummary(); }
     }
 
     // ================================================================
