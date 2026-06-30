@@ -170,6 +170,7 @@
         }
         .section-divider.self { background: #d6eaf8; color: #1a5276; border-left: 4px solid #1a5276; }
         .section-divider.supervisor { background: #d5f5e3; color: #1a7a3a; border-left: 4px solid #27ae60; }
+        .section-divider.incharge { background: #2c3e50; color: #fff; border-left: 4px solid #1a5276; }
         .section-divider.info { background: #fdebd0; color: #a04000; border-left: 4px solid #f39c12; }
         .section-divider.general { background: #e8daef; color: #6c3483; border-left: 4px solid #8e44ad; }
         .section-divider.specific { background: #d1f2eb; color: #0e6655; border-left: 4px solid #1abc9c; }
@@ -179,8 +180,9 @@
             border-radius: 20px;
             font-size: 11px;
             font-weight: 400;
-            background: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.2);
         }
+        .section-divider.incharge .badge-section { background: rgba(255,255,255,0.15); }
 
         /* ===== CHECKLIST ===== */
         .checklist-item {
@@ -287,6 +289,7 @@
         .rating-group .rating-btn.selected-good { border-color: #2e86c1; background: #2e86c1; color: #fff; }
         .rating-group .rating-btn.selected-average { border-color: #f39c12; background: #f39c12; color: #fff; }
         .rating-group .rating-btn.selected-poor { border-color: #e74c3c; background: #e74c3c; color: #fff; }
+        .rating-group .rating-btn.selected-unsatisfactory { border-color: #7b241c; background: #7b241c; color: #fff; }
 
         /* ===== SCORE BOX ===== */
         .score-box {
@@ -330,6 +333,7 @@
         .score-item .number.red { color: #e74c3c; }
         .score-item .number.purple { color: #8e44ad; }
         .score-item .number.teal { color: #1abc9c; }
+        .score-item .number.dark { color: #2c3e50; }
 
         /* ===== PROGRESS BAR ===== */
         .progress-bar {
@@ -360,6 +364,7 @@
         .badge-good { background: #d6eaf8; color: #1a5276; }
         .badge-average { background: #fdebd0; color: #a04000; }
         .badge-poor { background: #fadbd8; color: #922b21; }
+        .badge-unsatisfactory { background: #f5b7b1; color: #7b241c; }
 
         /* ===== BUTTONS ===== */
         .btn-group {
@@ -492,6 +497,7 @@
         }
         .tag-self { background: #d6eaf8; color: #1a5276; }
         .tag-supervisor { background: #d5f5e3; color: #1a7a3a; }
+        .tag-incharge { background: #2c3e50; color: #fff; }
         .role-badge {
             display: inline-block;
             padding: 2px 10px;
@@ -513,6 +519,7 @@
         .status-dot.green { background: #27ae60; }
         .status-dot.orange { background: #f39c12; }
         .status-dot.red { background: #e74c3c; }
+        .status-dot.blue { background: #2c3e50; }
 
         .checklist-stats {
             display: flex;
@@ -567,6 +574,18 @@
         .alert-box.warning { background: #fadbd8; color: #922b21; border-left: 4px solid #e74c3c; }
         .alert-box.success { background: #d5f5e3; color: #1a7a3a; border-left: 4px solid #27ae60; }
         .alert-box.info { background: #d6eaf8; color: #1a5276; border-left: 4px solid #2e86c1; }
+
+        /* ===== SIGN-OFF BADGE ===== */
+        .signoff-badge {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        .signoff-approved { background: #d5f5e3; color: #1a7a3a; }
+        .signoff-conditional { background: #fdebd0; color: #a04000; }
+        .signoff-rejected { background: #fadbd8; color: #922b21; }
     </style>
 </head>
 <body>
@@ -658,7 +677,7 @@
 
         <div class="form-row">
             <div class="form-group">
-                <label>👔 Supervisor/Officer Name</label>
+                <label>👔 Immediate Supervisor Name</label>
                 <input type="text" id="supervisorName" placeholder="Enter supervisor name" value="Dr. Smith">
             </div>
             <div class="form-group">
@@ -791,9 +810,9 @@
             <textarea id="selfComments" placeholder="Share your reflections on today's work..."></textarea>
         </div>
 
-        <!-- ===== SECTION 5: SUPERVISOR ASSESSMENT (Ratings) ===== -->
+        <!-- ===== SECTION 5: IMMEDIATE SUPERVISOR ASSESSMENT (Ratings) ===== -->
         <div class="section-divider supervisor">
-            👔 Supervisor Assessment — Overall Ratings
+            👔 Immediate Supervisor Assessment — Overall Ratings
             <span class="badge-section">Supervisor rates the worker</span>
         </div>
 
@@ -865,6 +884,91 @@
             <textarea id="supComments" placeholder="Observations, feedback, and recommendations..."></textarea>
         </div>
 
+        <!-- ===== SECTION 6: FACILITY IN-CHARGE FOLLOW-UP & RECOMMENDATIONS ===== -->
+        <div class="section-divider incharge">
+            🏢 Facility In-Charge Follow-Up & Recommendations
+            <span class="badge-section">Final Review & Sign-Off</span>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>🏢 Facility In-Charge Name</label>
+                <input type="text" id="inchargeName" placeholder="Enter Facility In-Charge name" value="Dr. M. Mwakyusa">
+            </div>
+            <div class="form-group">
+                <label>📋 In-Charge Title</label>
+                <select id="inchargeTitle">
+                    <option>Medical Officer In-Charge</option>
+                    <option>Facility Administrator</option>
+                    <option>Senior Medical Officer</option>
+                    <option>District Health Officer</option>
+                    <option>Head of Clinical Services</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>📊 Overall Performance Rating (In-Charge)</label>
+                <div class="rating-group" id="inchargeRating">
+                    <button class="rating-btn" data-value="5" onclick="selectRating('inchargeRating', this)">⭐ Excellent</button>
+                    <button class="rating-btn" data-value="4" onclick="selectRating('inchargeRating', this)">👍 Good</button>
+                    <button class="rating-btn" data-value="3" onclick="selectRating('inchargeRating', this)">👌 Satisfactory</button>
+                    <button class="rating-btn" data-value="2" onclick="selectRating('inchargeRating', this)">⚠️ Needs Improvement</button>
+                    <button class="rating-btn" data-value="1" onclick="selectRating('inchargeRating', this)">❌ Unsatisfactory</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>✅ Recommendation for Next Steps</label>
+                <select id="inchargeRecommendation">
+                    <option value="continue">Continue as Usual</option>
+                    <option value="coaching">Coaching & Mentoring</option>
+                    <option value="training">Additional Training Required</option>
+                    <option value="supervision">Increased Supervision</option>
+                    <option value="performance-improvement">Performance Improvement Plan (PIP)</option>
+                    <option value="disciplinary">Disciplinary Action</option>
+                    <option value="promotion">Consider for Promotion</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>📝 In-Charge Comments & Recommendations</label>
+            <textarea id="inchargeComments" placeholder="Provide final assessment, observations, and clear recommendations for the worker's development..."></textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>📅 Follow-Up Date</label>
+                <input type="date" id="inchargeFollowupDate">
+            </div>
+            <div class="form-group">
+                <label>⏳ Follow-Up Period</label>
+                <select id="inchargeFollowupPeriod">
+                    <option value="1-week">1 Week</option>
+                    <option value="2-weeks">2 Weeks</option>
+                    <option value="1-month" selected>1 Month</option>
+                    <option value="2-months">2 Months</option>
+                    <option value="3-months">3 Months</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>✅ In-Charge Sign-Off</label>
+            <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center; padding:8px 0;">
+                <label style="display:flex; align-items:center; gap:6px; font-weight:400; font-size:14px;">
+                    <input type="radio" name="inchargeSignoff" value="approved" checked> ✔️ Approved
+                </label>
+                <label style="display:flex; align-items:center; gap:6px; font-weight:400; font-size:14px;">
+                    <input type="radio" name="inchargeSignoff" value="conditional"> ⚠️ Conditional Approval
+                </label>
+                <label style="display:flex; align-items:center; gap:6px; font-weight:400; font-size:14px;">
+                    <input type="radio" name="inchargeSignoff" value="rejected"> ❌ Returned for Review
+                </label>
+            </div>
+        </div>
+
         <!-- ===== SCORE SUMMARY ===== -->
         <div class="score-box" id="scoreBox">
             <h3>📊 Daily Worker Assessment Summary</h3>
@@ -879,9 +983,19 @@
                 <div class="score-item"><span class="number" id="supRatingDisplay" style="font-size:16px;">—</span><span class="label">Supervisor Rating</span></div>
             </div>
             <div class="score-row" style="margin-top:6px;">
+                <div class="score-item" style="background:#2c3e50; color:#fff;"><span class="number" style="color:#fff;" id="inchargeRatingDisplay">—</span><span class="label" style="color:#bdc3c7;">In-Charge Rating</span></div>
                 <div class="score-item" style="background:#e8daef;"><span class="number teal" id="workerCombined">0%</span><span class="label">Combined Score</span></div>
                 <div class="score-item" style="background:#e8daef;"><span class="number" id="gapScore">0</span><span class="label">Self-Supervisor Gap</span></div>
-                <div class="score-item" style="background:#e8daef;"><span class="number" id="statusIndicator">—</span><span class="label">Status</span></div>
+            </div>
+            <div class="score-row" style="margin-top:6px;">
+                <div class="score-item" style="background:#2c3e50; color:#fff;">
+                    <span class="number" style="color:#fff; font-size:16px;" id="inchargeSignoffDisplay">—</span>
+                    <span class="label" style="color:#bdc3c7;">Sign-Off Status</span>
+                </div>
+                <div class="score-item" style="background:#e8daef;">
+                    <span class="number" id="statusIndicator" style="font-size:16px;">—</span>
+                    <span class="label">Self-Supervisor Status</span>
+                </div>
             </div>
             <div class="progress-bar" style="margin-top:6px;">
                 <div class="fill purple" id="combinedProgress" style="width:0%;"></div>
@@ -986,7 +1100,7 @@
     <!-- ================================================================ -->
     <div class="footer">
         <div class="verse">"Whatever you do, work at it with all your heart, as working for the Lord, not for human masters." — Colossians 3:23</div>
-        <div>Mtwara SDA Dispensary | Daily Performance Tracker | Version 2.0 (2026)</div>
+        <div>Mtwara SDA Dispensary | Daily Performance Tracker | Version 3.0 (2026)</div>
     </div>
 
 </div>
@@ -1266,14 +1380,15 @@
     function selectRating(groupId, btn) {
         const group = document.getElementById(groupId);
         group.querySelectorAll('.rating-btn').forEach(b => {
-            b.classList.remove('selected', 'selected-excellent', 'selected-good', 'selected-average', 'selected-poor');
+            b.classList.remove('selected', 'selected-excellent', 'selected-good', 'selected-average', 'selected-poor', 'selected-unsatisfactory');
         });
         btn.classList.add('selected');
         const val = parseInt(btn.dataset.value);
         if (val >= 5) btn.classList.add('selected-excellent');
         else if (val >= 4) btn.classList.add('selected-good');
         else if (val >= 3) btn.classList.add('selected-average');
-        else btn.classList.add('selected-poor');
+        else if (val >= 2) btn.classList.add('selected-poor');
+        else btn.classList.add('selected-unsatisfactory');
         calculateScores();
     }
 
@@ -1326,6 +1441,25 @@
         document.getElementById('supPercent').textContent = supPercent + '%';
         document.getElementById('supRatingDisplay').innerHTML = getRatingBadge(supPercent);
 
+        // In-Charge Rating
+        const inchargeRating = getRatingValue('inchargeRating');
+        const inchargeLabel = getRatingLabel('inchargeRating');
+        document.getElementById('inchargeRatingDisplay').textContent = inchargeLabel || 'Not Rated';
+
+        // Sign-Off
+        const signoff = document.querySelector('input[name="inchargeSignoff"]:checked')?.value || 'approved';
+        const signoffLabels = {
+            'approved': '✔️ Approved',
+            'conditional': '⚠️ Conditional',
+            'rejected': '❌ Returned'
+        };
+        const signoffClass = {
+            'approved': 'signoff-approved',
+            'conditional': 'signoff-conditional',
+            'rejected': 'signoff-rejected'
+        };
+        document.getElementById('inchargeSignoffDisplay').innerHTML = `<span class="signoff-badge ${signoffClass[signoff]}">${signoffLabels[signoff]}</span>`;
+
         const combined = Math.round((selfPercent + supPercent) / 2);
         document.getElementById('workerCombined').textContent = combined + '%';
         document.getElementById('combinedScoreText').textContent = combined + '%';
@@ -1348,6 +1482,7 @@
         if (supPercent < 50) alerts.push({ msg: '⚠️ Supervisor assessment is low (<50%)', type: 'warning' });
         if (combined < 50) alerts.push({ msg: '⚠️ Combined score is low (<50%)', type: 'warning' });
         if (gap > 20) alerts.push({ msg: '⚠️ Large gap between self and supervisor (>20%)', type: 'warning' });
+        if (inchargeRating <= 2) alerts.push({ msg: '⚠️ In-Charge rating is low (Needs Improvement or Unsatisfactory)', type: 'warning' });
 
         if (alerts.length > 0) {
             alertContainer.innerHTML = alerts.map(a =>
@@ -1386,7 +1521,6 @@
         const best = Math.max(...workerReports.map(r => r.combined));
         const latest = workerReports[0]?.combined || 0;
 
-        // Calculate trend
         let trend = '🔄 Insufficient data';
         if (workerReports.length >= 3) {
             const first = workerReports[workerReports.length - 1].combined;
@@ -1492,6 +1626,17 @@
                 ],
                 comments: document.getElementById('supComments').value
             },
+            incharge: {
+                name: document.getElementById('inchargeName').value || 'Not Assigned',
+                title: document.getElementById('inchargeTitle').value,
+                rating: getRatingValue('inchargeRating'),
+                ratingLabel: getRatingLabel('inchargeRating'),
+                recommendation: document.getElementById('inchargeRecommendation').value,
+                comments: document.getElementById('inchargeComments').value,
+                followupDate: document.getElementById('inchargeFollowupDate').value || '',
+                followupPeriod: document.getElementById('inchargeFollowupPeriod').value,
+                signoff: document.querySelector('input[name="inchargeSignoff"]:checked')?.value || 'approved'
+            },
             combined: Math.round((selfPercent + supPercent) / 2),
             gap: Math.abs(selfPercent - supPercent),
             checklistStats: {
@@ -1529,6 +1674,12 @@
             const selfRating = r.self.percent >= 90 ? 'Excellent' : r.self.percent >= 75 ? 'Good' : r.self.percent >= 55 ? 'Average' : 'Poor';
             const supRating = r.supervisorAssessment.percent >= 90 ? 'Excellent' : r.supervisorAssessment.percent >= 75 ? 'Good' : r.supervisorAssessment.percent >= 55 ? 'Average' : 'Poor';
             const checklistPercent = r.checklistStats ? Math.round((r.checklistStats.totalDone / r.checklistStats.totalAll) * 100) : 0;
+            const signoffLabels = {
+                'approved': '✅ Approved',
+                'conditional': '⚠️ Conditional',
+                'rejected': '❌ Returned'
+            };
+            const signoffDisplay = r.incharge?.signoff ? signoffLabels[r.incharge.signoff] || '—' : '—';
             html += `
                 <div class="history-item">
                     <div class="info">
@@ -1541,6 +1692,7 @@
                         <span style="margin-left:4px; font-size:11px; color:${r.gap <= 5 ? '#27ae60' : r.gap <= 15 ? '#f39c12' : '#e74c3c'};">Gap: ${r.gap}%</span>
                         <span style="margin-left:6px; font-size:11px; color:#7f8c8d;">📋 ${checklistPercent}%</span>
                         ${r.faith && r.faith.devotion === 'yes' ? '🙏' : ''}
+                        <span style="margin-left:6px; font-size:11px;"><span class="tag tag-incharge">${signoffDisplay}</span></span>
                     </div>
                     <div>
                         <button onclick="viewReport(${index})" class="btn btn-primary btn-sm">View</button>
@@ -1569,6 +1721,13 @@
         specItems.forEach((item, i) => {
             specificChecklist += `  ${i+1}. ${item}: ${r.specificChecklist && r.specificChecklist[i] ? '✅' : '❌'}\n`;
         });
+
+        const signoffLabels = {
+            'approved': '✔️ Approved',
+            'conditional': '⚠️ Conditional Approval',
+            'rejected': '❌ Returned for Review'
+        };
+        const signoffDisplay = r.incharge?.signoff ? signoffLabels[r.incharge.signoff] || '—' : '—';
 
         alert(
             `📋 DAILY PERFORMANCE REPORT\n` +
@@ -1609,6 +1768,14 @@
             `Total: ${r.supervisorAssessment.total}/30 (${r.supervisorAssessment.percent}%)\n` +
             `Comments: ${r.supervisorAssessment.comments || 'None'}\n` +
             `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+            `🏢 FACILITY IN-CHARGE FOLLOW-UP\n` +
+            `In-Charge: ${r.incharge?.name || 'Not Assigned'} (${r.incharge?.title || ''})\n` +
+            `Rating: ${r.incharge?.ratingLabel || r.incharge?.rating + '/5' || 'Not Rated'}\n` +
+            `Recommendation: ${r.incharge?.recommendation || 'None'}\n` +
+            `Comments: ${r.incharge?.comments || 'None'}\n` +
+            `Follow-Up: ${r.incharge?.followupDate || 'Not Set'} (${r.incharge?.followupPeriod || ''})\n` +
+            `Sign-Off: ${signoffDisplay}\n` +
+            `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
             `🏆 Combined Score: ${r.combined}%\n` +
             `📊 Gap: ${r.gap}%\n` +
             `✅ Status: ${r.gap <= 5 ? 'Aligned' : r.gap <= 15 ? 'Slight Gap' : 'Significant Gap'}\n` +
@@ -1637,11 +1804,14 @@
             return;
         }
 
-        let csv = 'Date,Worker,Role,Shift,Supervisor,Self Score,Self %,Supervisor Score,Supervisor %,Combined %,Gap,Checklist %,Devotion\n';
+        let csv = 'Date,Worker,Role,Shift,Supervisor,Self Score,Self %,Supervisor Score,Supervisor %,Combined %,Gap,Checklist %,Devotion,In-Charge Rating,In-Charge Recommendation,Sign-Off\n';
         allReports.forEach(r => {
             const checklistPct = r.checklistStats ? Math.round((r.checklistStats.totalDone / r.checklistStats.totalAll) * 100) : 0;
             const devotion = r.faith && r.faith.devotion === 'yes' ? 'Yes' : 'No';
-            csv += `${r.date},${r.worker},${r.role},${r.shift},${r.supervisor},${r.self.total}/30,${r.self.percent}%,${r.supervisorAssessment.total}/30,${r.supervisorAssessment.percent}%,${r.combined}%,${r.gap}%,${checklistPct}%,${devotion}\n`;
+            const inchargeRating = r.incharge?.ratingLabel || r.incharge?.rating + '/5' || 'Not Rated';
+            const inchargeRec = r.incharge?.recommendation || 'None';
+            const signoff = r.incharge?.signoff || 'Not Signed';
+            csv += `${r.date},${r.worker},${r.role},${r.shift},${r.supervisor},${r.self.total}/30,${r.self.percent}%,${r.supervisorAssessment.total}/30,${r.supervisorAssessment.percent}%,${r.combined}%,${r.gap}%,${checklistPct}%,${devotion},${inchargeRating},${inchargeRec},${signoff}\n`;
         });
 
         const blob = new Blob([csv], { type: 'text/csv' });
@@ -1663,7 +1833,7 @@
         }
         const data = {
             exportedAt: new Date().toISOString(),
-            version: '2.0',
+            version: '3.0',
             totalReports: allReports.length,
             reports: allReports
         };
@@ -1697,10 +1867,12 @@
             return;
         }
 
-        let csv = 'Date,Worker,Role,Shift,Supervisor,Self %,Supervisor %,Combined %,Gap,Checklist %\n';
+        let csv = 'Date,Worker,Role,Shift,Supervisor,Self %,Supervisor %,Combined %,Gap,Checklist %,In-Charge Rating,Sign-Off\n';
         filtered.forEach(r => {
             const checklistPct = r.checklistStats ? Math.round((r.checklistStats.totalDone / r.checklistStats.totalAll) * 100) : 0;
-            csv += `${r.date},${r.worker},${r.role},${r.shift},${r.supervisor},${r.self.percent}%,${r.supervisorAssessment.percent}%,${r.combined}%,${r.gap}%,${checklistPct}%\n`;
+            const inchargeRating = r.incharge?.ratingLabel || r.incharge?.rating + '/5' || 'Not Rated';
+            const signoff = r.incharge?.signoff || 'Not Signed';
+            csv += `${r.date},${r.worker},${r.role},${r.shift},${r.supervisor},${r.self.percent}%,${r.supervisorAssessment.percent}%,${r.combined}%,${r.gap}%,${checklistPct}%,${inchargeRating},${signoff}\n`;
         });
 
         const blob = new Blob([csv], { type: 'text/csv' });
@@ -1796,13 +1968,14 @@
             </div>
             <div class="table-wrap">
                 <table class="summary-table">
-                    <thead><tr><th>Date</th><th>Worker</th><th>Role</th><th>Self</th><th>Supervisor</th><th>Combined</th><th>Gap</th><th>Checklist</th></tr></thead>
+                    <thead><tr><th>Date</th><th>Worker</th><th>Role</th><th>Self</th><th>Supervisor</th><th>Combined</th><th>Gap</th><th>Checklist</th><th>In-Charge</th></tr></thead>
                     <tbody>
         `;
 
         filtered.slice(0, 30).forEach(r => {
             const color = r.gap <= 5 ? 'green' : r.gap <= 15 ? 'orange' : 'red';
             const checklistPct = r.checklistStats ? Math.round((r.checklistStats.totalDone / r.checklistStats.totalAll) * 100) : 0;
+            const inchargeRating = r.incharge?.ratingLabel || r.incharge?.rating + '/5' || '—';
             html += `
                 <tr>
                     <td>${r.date}</td>
@@ -1813,6 +1986,7 @@
                     <td><strong>${r.combined}%</strong></td>
                     <td style="color:${color};">${r.gap}%</td>
                     <td>${checklistPct}%</td>
+                    <td>${inchargeRating}</td>
                 </tr>
             `;
         });
@@ -1820,7 +1994,6 @@
         html += `</tbody></table></div>`;
         container.innerHTML = html;
 
-        // Render chart
         renderChart(filtered);
     }
 
@@ -1927,15 +2100,19 @@
     function resetForm() {
         if (!confirm('Reset all form fields?')) return;
         document.querySelectorAll('.rating-btn').forEach(b => {
-            b.classList.remove('selected', 'selected-excellent', 'selected-good', 'selected-average', 'selected-poor');
+            b.classList.remove('selected', 'selected-excellent', 'selected-good', 'selected-average', 'selected-poor', 'selected-unsatisfactory');
         });
         document.getElementById('selfComments').value = '';
         document.getElementById('supComments').value = '';
+        document.getElementById('inchargeComments').value = '';
         document.getElementById('workerName').value = 'John Doe';
         document.getElementById('supervisorName').value = 'Dr. Smith';
+        document.getElementById('inchargeName').value = 'Dr. M. Mwakyusa';
         document.getElementById('faithDevotion').value = 'yes';
         document.getElementById('faithVerse').value = '';
         document.getElementById('faithReflection').value = '';
+        document.getElementById('inchargeRecommendation').value = 'continue';
+        document.querySelector('input[name="inchargeSignoff"][value="approved"]').checked = true;
         generalState = new Array(GENERAL_CHECKLIST.length).fill(false);
         const role = document.getElementById('workerRole').value;
         const items = ROLE_CHECKLISTS[role] || ROLE_CHECKLISTS['Doctor'];
@@ -1982,6 +2159,9 @@
     document.addEventListener('DOMContentLoaded', function() {
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('reportDate').value = today;
+        const followupDate = new Date();
+        followupDate.setMonth(followupDate.getMonth() + 1);
+        document.getElementById('inchargeFollowupDate').value = followupDate.toISOString().split('T')[0];
         renderGeneralChecklist();
         renderSpecificChecklist();
         loadFromStorage();
