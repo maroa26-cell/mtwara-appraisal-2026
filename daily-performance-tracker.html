@@ -27,7 +27,6 @@
             .container { padding: 14px 14px 20px; }
         }
 
-        /* ===== KICHWA ===== */
         .header {
             text-align: center;
             border-bottom: 4px solid #1a5276;
@@ -87,7 +86,6 @@
             .logo-placeholder { width: 45px; height: 45px; }
         }
 
-        /* ===== VITENDO ===== */
         .tabs {
             display: flex;
             gap: 6px;
@@ -121,7 +119,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== FOMU ===== */
         .form-group { margin-bottom: 12px; }
         .form-group label {
             display: block;
@@ -156,7 +153,6 @@
         }
         @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
 
-        /* ===== MGAWANYO WA SEHEMU ===== */
         .section-divider {
             padding: 7px 14px;
             border-radius: 6px;
@@ -175,6 +171,8 @@
         .section-divider.general { background: #e8daef; color: #6c3483; border-left: 4px solid #8e44ad; }
         .section-divider.specific { background: #d1f2eb; color: #0e6655; border-left: 4px solid #1abc9c; }
         .section-divider.faith { background: #fef9e7; color: #7d6608; border-left: 4px solid #f1c40f; }
+        .section-divider.verification { background: #1a5276; color: #fff; border-left: 4px solid #0e2f44; }
+        .section-divider.share { background: #8e44ad; color: #fff; border-left: 4px solid #6c3483; }
         .section-divider .badge-section {
             padding: 2px 12px;
             border-radius: 20px;
@@ -182,9 +180,7 @@
             font-weight: 400;
             background: rgba(255,255,255,0.2);
         }
-        .section-divider.incharge .badge-section { background: rgba(255,255,255,0.15); }
 
-        /* ===== ORODHA YA KUANGALIA ===== */
         .checklist-item {
             display: flex;
             align-items: center;
@@ -232,22 +228,6 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.12);
         }
         .checklist-item .toggle.active .thumb { left: 20px; }
-        .checklist-item .initials-input {
-            width: 60px;
-            padding: 3px 6px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 11px;
-            flex-shrink: 0;
-        }
-        @media (max-width: 480px) {
-            .checklist-item { font-size: 12px; gap: 6px; flex-wrap: wrap; }
-            .checklist-item .text { min-width: 120px; }
-            .checklist-item .initials-input { width: 50px; }
-            .checklist-item .toggle { width: 36px; height: 20px; }
-            .checklist-item .toggle .thumb { width: 16px; height: 16px; top: 2px; left: 2px; }
-            .checklist-item .toggle.active .thumb { left: 18px; }
-        }
 
         .checklist-grid {
             display: grid;
@@ -258,7 +238,6 @@
         .checklist-grid .checklist-item { border-bottom: none; padding: 4px 0; }
         @media (max-width: 600px) { .checklist-grid { grid-template-columns: 1fr; } }
 
-        /* ===== VIPIMO VYA KUKAGUA ===== */
         .rating-group {
             display: flex;
             gap: 5px;
@@ -291,7 +270,6 @@
         .rating-group .rating-btn.selected-poor { border-color: #e74c3c; background: #e74c3c; color: #fff; }
         .rating-group .rating-btn.selected-unsatisfactory { border-color: #7b241c; background: #7b241c; color: #fff; }
 
-        /* ===== ALAMA ===== */
         .score-box {
             background: #eaf2f8;
             border-radius: 10px;
@@ -335,7 +313,6 @@
         .score-item .number.teal { color: #1abc9c; }
         .score-item .number.dark { color: #2c3e50; }
 
-        /* ===== MWENENDO WA ALAMA ===== */
         .progress-bar {
             width: 100%;
             height: 8px;
@@ -352,7 +329,6 @@
         }
         .progress-bar .fill.purple { background: linear-gradient(90deg, #8e44ad, #1abc9c); }
 
-        /* ===== BEJI ===== */
         .badge {
             display: inline-block;
             padding: 2px 10px;
@@ -366,7 +342,6 @@
         .badge-poor { background: #fadbd8; color: #922b21; }
         .badge-unsatisfactory { background: #f5b7b1; color: #7b241c; }
 
-        /* ===== VIFUNGO ===== */
         .btn-group {
             display: flex;
             gap: 8px;
@@ -398,11 +373,37 @@
         .btn-outline { background: transparent; color: #1a5276; border: 2px solid #1a5276; }
         .btn-outline:hover { background: #1a5276; color: #fff; }
         .btn-sm { padding: 4px 12px; font-size: 11px; min-width: 50px; flex: none; }
+        .btn-purple { background: #8e44ad; color: #fff; }
+        .btn-purple:hover { background: #6c3483; }
         @media (max-width: 480px) {
             .btn { font-size: 11px; padding: 7px 12px; min-width: 60px; }
         }
 
-        /* ===== CHAPA ===== */
+        .signature-pad {
+            border: 2px dashed #1a5276;
+            border-radius: 10px;
+            background: #fafbfc;
+            touch-action: none;
+            width: 100%;
+            max-width: 400px;
+            height: 150px;
+            cursor: crosshair;
+            margin: 6px 0;
+        }
+        .signature-pad canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            touch-action: none;
+        }
+        .signature-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 6px 0;
+        }
+        .signature-actions .btn { flex: 0 1 auto; min-width: 80px; }
+
         .print-note {
             background: #fef9e7;
             border: 1px solid #f1c40f;
@@ -417,7 +418,6 @@
             flex-wrap: wrap;
         }
 
-        /* ===== CHINI ===== */
         .footer {
             text-align: center;
             margin-top: 22px;
@@ -433,7 +433,6 @@
             margin-bottom: 4px;
         }
 
-        /* ===== ARIFA ===== */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -458,7 +457,6 @@
         .toast.warning { background: #f39c12; color: #1a1a2e; }
         .toast.error { background: #e74c3c; }
 
-        /* ===== CHAPA KARATA ===== */
         @media print {
             body { background: #fff; padding: 0; }
             .container { box-shadow: none; padding: 14px; max-width: 100%; border-radius: 0; }
@@ -467,9 +465,9 @@
             .score-box { break-inside: avoid; }
             .header { border-bottom-width: 2px; }
             .section-divider { break-inside: avoid; }
+            .signature-pad { border: 1px solid #000; }
         }
 
-        /* ===== HISTORIA ===== */
         .history-item {
             padding: 10px 12px;
             border-bottom: 1px solid #ecf0f1;
@@ -498,6 +496,7 @@
         .tag-self { background: #d6eaf8; color: #1a5276; }
         .tag-supervisor { background: #d5f5e3; color: #1a7a3a; }
         .tag-incharge { background: #2c3e50; color: #fff; }
+        .tag-verified { background: #d5f5e3; color: #1a7a3a; }
         .role-badge {
             display: inline-block;
             padding: 2px 10px;
@@ -508,7 +507,6 @@
             color: #1a5276;
         }
 
-        /* ===== VIASHIRIA ===== */
         .status-dot {
             display: inline-block;
             width: 10px;
@@ -520,6 +518,7 @@
         .status-dot.orange { background: #f39c12; }
         .status-dot.red { background: #e74c3c; }
         .status-dot.blue { background: #2c3e50; }
+        .status-dot.purple { background: #8e44ad; }
 
         .checklist-stats {
             display: flex;
@@ -531,7 +530,6 @@
         }
         .checklist-stats span { background: #ecf0f1; padding: 2px 10px; border-radius: 12px; }
 
-        /* ===== JEDWALI LA MUHTASARI ===== */
         .summary-table {
             width: 100%;
             border-collapse: collapse;
@@ -551,7 +549,6 @@
         .summary-table tr:hover { background: #f7f9fa; }
         .table-wrap { overflow-x: auto; margin: 10px 0; }
 
-        /* ===== CHATI ===== */
         .chart-container {
             background: #fff;
             border-radius: 10px;
@@ -564,7 +561,6 @@
             height: 200px;
         }
 
-        /* ===== TAHADHARI ===== */
         .alert-box {
             padding: 8px 14px;
             border-radius: 6px;
@@ -575,7 +571,6 @@
         .alert-box.success { background: #d5f5e3; color: #1a7a3a; border-left: 4px solid #27ae60; }
         .alert-box.info { background: #d6eaf8; color: #1a5276; border-left: 4px solid #2e86c1; }
 
-        /* ===== BEJI YA SAHIHI ===== */
         .signoff-badge {
             display: inline-block;
             padding: 2px 12px;
@@ -586,13 +581,73 @@
         .signoff-approved { background: #d5f5e3; color: #1a7a3a; }
         .signoff-conditional { background: #fdebd0; color: #a04000; }
         .signoff-rejected { background: #fadbd8; color: #922b21; }
+
+        .warning-box {
+            background: #fef9e7;
+            border-left: 4px solid #e74c3c;
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin: 8px 0;
+            font-size: 13px;
+            color: #7d6608;
+        }
+        .warning-box strong { color: #922b21; }
+        .verification-box {
+            background: #d5f5e3;
+            border-left: 4px solid #27ae60;
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin: 8px 0;
+            font-size: 13px;
+        }
+        .verification-box label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            cursor: pointer;
+        }
+        .verification-box input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            accent-color: #1a5276;
+            flex-shrink: 0;
+        }
+
+        .share-section {
+            background: #e8daef;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 14px 0;
+            border-left: 5px solid #8e44ad;
+        }
+        .share-section h4 {
+            color: #6c3483;
+            margin-bottom: 8px;
+        }
+        .share-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .share-options .btn { flex: 1 1 auto; min-width: 100px; }
+        .share-status {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #7f8c8d;
+            padding: 6px 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 3px solid #8e44ad;
+        }
+        .share-status.success { border-left-color: #27ae60; color: #1a7a3a; }
+        .share-status.error { border-left-color: #e74c3c; color: #922b21; }
     </style>
 </head>
 <body>
 
 <div class="container">
 
-    <!-- ===== KICHWA ===== -->
     <div class="header">
         <div class="logo-container">
             <div class="logo-placeholder">
@@ -608,13 +663,11 @@
         </div>
     </div>
 
-    <!-- ===== CHAPA PDF ===== -->
     <div class="print-note">
         <span>🖨️</span>
         <div><strong>Chapisha kama PDF:</strong> Bonyeza <strong>"Chapisha / Hifadhi kama PDF"</strong> hapa chini au bonyeza <strong>Ctrl+P</strong> / <strong>Cmd+P</strong>.</div>
     </div>
 
-    <!-- ===== VITENDO ===== -->
     <div class="tabs">
         <button class="tab-btn active" onclick="switchTab('assessment')">📝 Tathmini</button>
         <button class="tab-btn" onclick="switchTab('summary')">📈 Muhtasari</button>
@@ -622,12 +675,8 @@
         <button class="tab-btn" onclick="window.print()" style="background:#1a5276; color:#fff;">🖨️ PDF</button>
     </div>
 
-    <!-- ================================================================ -->
-    <!-- ===== SEHEMU: TATHMINI ===== -->
-    <!-- ================================================================ -->
     <div id="assessment" class="tab-content active">
 
-        <!-- ===== MAELEZO YA MFANYAKAZI ===== -->
         <div class="section-divider info">
             👤 Maelezo ya Mfanyakazi
             <span class="badge-section">Jaza maelezo yako</span>
@@ -642,9 +691,9 @@
                 <label>📋 Kazi / Wajibu</label>
                 <select id="workerRole" onchange="updateSpecificChecklist()">
                     <option value="Doctor">🩺 Daktari</option>
+                    <option value="Clinical Officer">🩺 Afisa Tabibu</option>
                     <option value="Nurse">💉 Muuguzi</option>
                     <option value="Midwife">🤱 Mkunga</option>
-                    <option value="Clinical Officer">🩺 Afisa Kliniki</option>
                     <option value="Laboratory Technician">🔬 Mtaalamu wa Maabara</option>
                     <option value="Pharmacist">💊 Mfamasia</option>
                     <option value="Accountant">💰 Mhasibu</option>
@@ -693,27 +742,20 @@
             </div>
         </div>
 
-        <!-- ===== SEHEMU 1: ORODHA YA JUMLA ===== -->
         <div class="section-divider general">
             📋 Orodha ya Jumla — Wafanyakazi Wote
             <span class="badge-section">Inahusu kila mfanyakazi</span>
         </div>
 
-        <div id="generalChecklistContainer">
-            <!-- Inaonyeshwa na JavaScript -->
-        </div>
+        <div id="generalChecklistContainer"></div>
 
-        <!-- ===== SEHEMU 2: ORODHA MAALUM ===== -->
         <div class="section-divider specific">
             🎯 Orodha Maalum — Kazi Yako
             <span class="badge-section" id="roleSpecificLabel">Daktari</span>
         </div>
 
-        <div id="specificChecklistContainer">
-            <!-- Inaonyeshwa na JavaScript -->
-        </div>
+        <div id="specificChecklistContainer"></div>
 
-        <!-- ===== SEHEMU 3: IMANI NA MAOMBI ===== -->
         <div class="section-divider faith">
             🙏 Imani na Maombi
             <span class="badge-section">Thamani za SDA katika kazi</span>
@@ -737,7 +779,6 @@
             <textarea id="faithReflection" placeholder="Andika maombi au mawazo yako..."></textarea>
         </div>
 
-        <!-- ===== SEHEMU 4: TATHMINI YA MFANYAKAZI ===== -->
         <div class="section-divider self">
             ✍️ Tathmini ya Mfanyakazi — Viwango vya Jumla
             <span class="badge-section">Mfanyakazi anajikagua</span>
@@ -811,7 +852,6 @@
             <textarea id="selfComments" placeholder="Shiriki mawazo yako kuhusu kazi ya leo..."></textarea>
         </div>
 
-        <!-- ===== SEHEMU 5: TATHMINI YA MSIMAMIZI ===== -->
         <div class="section-divider supervisor">
             👔 Tathmini ya Msimamizi — Viwango vya Jumla
             <span class="badge-section">Msimamizi anakagua mfanyakazi</span>
@@ -885,7 +925,6 @@
             <textarea id="supComments" placeholder="Andika Uchunguzi wako, maoni na mapendekezo..."></textarea>
         </div>
 
-        <!-- ===== SEHEMU 6: TATHMINI YA MGANGA MFAWIDHI ===== -->
         <div class="section-divider incharge">
             🏢 Tathmini ya Mganga Mfawidhi
             <span class="badge-section">Kagua Mwisho na Sahihi</span>
@@ -970,7 +1009,55 @@
             </div>
         </div>
 
-        <!-- ===== MUHTASARI WA ALAMA ===== -->
+        <div class="section-divider verification">
+            🔐 Uhalisia wa Taarifa na Sahihi ya Kidijitali
+            <span class="badge-section">Thibitisha taarifa zako</span>
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ ONYO:</strong> Ikibainika kwamba taarifa ulizojaza ni za uongo, hatua za kinidhamu zitachukuliwa dhidi yako kwa mujibu wa sheria na taratibu za kituo.
+        </div>
+
+        <div class="verification-box">
+            <label>
+                <input type="checkbox" id="verificationCheck">
+                <div>
+                    <strong>Nathibitisha ya kwamba taarifa nilizozijaza katika fomu hii ni za kweli na hakika.</strong>
+                    <br>
+                    <span style="font-size:12px; color:#1a7a3a;">Ninaelewa kuwa kutoa taarifa za uongo ni kosa la kinidhamu.</span>
+                </div>
+            </label>
+        </div>
+
+        <div class="form-group">
+            <label>✍️ Sahihi ya Kidijitali (Chora kidole chako kwenye eneo hapa chini)</label>
+            <div class="signature-pad" id="signaturePad">
+                <canvas id="signatureCanvas"></canvas>
+            </div>
+            <div class="signature-actions">
+                <button class="btn btn-warning btn-sm" onclick="clearSignature()">🔄 Futa Sahihi</button>
+                <button class="btn btn-primary btn-sm" onclick="saveSignature()">💾 Hifadhi Sahihi</button>
+                <span id="signatureStatus" style="font-size:12px; color:#7f8c8d; align-self:center;">Hakuna sahihi</span>
+            </div>
+        </div>
+
+        <div class="section-divider share">
+            📤 Shirikisha na Mganga Mfawidhi
+            <span class="badge-section">Tuma taarifa kwa mganga mfawidhi</span>
+        </div>
+
+        <div class="share-section">
+            <h4>📤 Shirikisha na Mganga Mfawidhi</h4>
+            <p style="font-size:13px; color:#4a235a; margin-bottom:10px;">Baada ya kujaza taarifa zote na kuthibitisha uhalisia, unaweza kushirikisha na Mganga Mfawidhi kwa njia zifuatazo:</p>
+            <div class="share-options">
+                <button class="btn btn-purple" onclick="shareWhatsApp()">💬 WhatsApp</button>
+                <button class="btn btn-primary" onclick="shareEmail()">📧 Barua Pepe</button>
+                <button class="btn btn-success" onclick="shareCopyLink()">📋 Nakili Kiungo</button>
+                <button class="btn btn-warning" onclick="sharePrint()">🖨️ Chapisha</button>
+            </div>
+            <div id="shareStatus" class="share-status">💡 Bonyeza kitufe cha kushirikisha</div>
+        </div>
+
         <div class="score-box" id="scoreBox">
             <h3>📊 Muhtasari wa Tathmini ya Mfanyakazi</h3>
             <div class="score-row">
@@ -997,6 +1084,10 @@
                     <span class="number" id="statusIndicator" style="font-size:16px;">—</span>
                     <span class="label">Hali ya Pengo</span>
                 </div>
+                <div class="score-item" style="background:#d5f5e3;">
+                    <span class="number" id="verificationStatus" style="font-size:16px; color:#1a7a3a;">❌</span>
+                    <span class="label">Uhalisia</span>
+                </div>
             </div>
             <div class="progress-bar" style="margin-top:6px;">
                 <div class="fill purple" id="combinedProgress" style="width:0%;"></div>
@@ -1007,7 +1098,6 @@
             <div id="alertsContainer" style="margin-top:8px;"></div>
         </div>
 
-        <!-- ===== MUHTASARI WA ORODHA ===== -->
         <div class="card" style="background:#f8f9fa; border-radius:10px; padding:14px 18px; margin:14px 0; border:1px solid #ecf0f1;">
             <h4 style="color:#1a5276; font-size:14px; margin-bottom:6px;">📋 Kukamilisha Orodha</h4>
             <div class="checklist-stats">
@@ -1018,7 +1108,6 @@
             <div class="progress-bar"><div class="fill" id="checklistProgress" style="width:0%;"></div></div>
         </div>
 
-        <!-- ===== WASIFU WA MFANYAKAZI ===== -->
         <div class="section-divider info" style="margin-top:10px;">
             📂 Wasifu wa Mfanyakazi
             <span class="badge-section">Angalia historia ya utendaji</span>
@@ -1035,9 +1124,6 @@
 
     </div>
 
-    <!-- ================================================================ -->
-    <!-- ===== SEHEMU: MUHTASARI ===== -->
-    <!-- ================================================================ -->
     <div id="summary" class="tab-content">
 
         <h2 style="color:#1a5276; font-size:18px; margin-bottom:4px;">📊 Muhtasari wa Utendaji</h2>
@@ -1061,7 +1147,6 @@
             </div>
         </div>
 
-        <!-- Chati -->
         <div class="chart-container">
             <h4 style="color:#1a5276; font-size:14px; margin-bottom:6px;">📈 Mwenendo wa Utendaji</h4>
             <canvas id="performanceChart" height="200" style="width:100%;"></canvas>
@@ -1077,9 +1162,6 @@
         </div>
     </div>
 
-    <!-- ================================================================ -->
-    <!-- ===== SEHEMU: HISTORIA ===== -->
-    <!-- ================================================================ -->
     <div id="history" class="tab-content">
 
         <h2 style="color:#1a5276; font-size:18px; margin-bottom:4px;">📂 Historia ya Tathmini</h2>
@@ -1096,28 +1178,20 @@
         </div>
     </div>
 
-    <!-- ================================================================ -->
-    <!-- ===== CHINI ===== -->
-    <!-- ================================================================ -->
     <div class="footer">
         <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana, wala si kwa wanadamu." — Wakolosai 3:23</div>
-        <div>Mtwara SDA Dispensary | Kikaguzi cha Utendaji Kazi | Toleo 2.0 (2026)</div>
+        <div>Mtwara SDA Dispensary | Kikaguzi cha Utendaji Kazi | Toleo 4.0 (2026)</div>
     </div>
 
 </div>
 
-<!-- ===== ARIFA ===== -->
 <div class="toast" id="toast"></div>
 
-<!-- ================================================================ -->
-<!-- ===== JAVASCRIPT ===== -->
-<!-- ================================================================ -->
 <script>
     // ================================================================
     // DATA YA ORODHA
     // ================================================================
 
-    // ===== ORODHA YA JUMLA (Wafanyakazi Wote) =====
     const GENERAL_CHECKLIST = [
         'Nimewasili kazini walau dakika 10 kabla ya saa ya kuanza',
         'Nimevaa sare safi na kitambulisho kinachoonekana',
@@ -1136,7 +1210,6 @@
         'Nimekamilisha ripoti ya mwisho wa zamu'
     ];
 
-    // ===== ORODHA MAALUM (Kwa Kila Kazi) =====
     const ROLE_CHECKLISTS = {
         'Doctor': [
             'Nimefanya uchunguzi wa kina wa wagonjwa na mitihani',
@@ -1146,6 +1219,15 @@
             'Nimekamilisha nyaraka zote za wagonjwa kwa usahihi',
             'Nimejibu dharura kwa haraka na ufanisi',
             'Nimetoa elimu kwa wagonjwa na maelekezo ya kutolewa'
+        ],
+        'Clinical Officer': [
+            'Nimefanya uchunguzi wa kina wa wagonjwa na mitihani',
+            'Nimeagiza na kufasiri uchunguzi wa maabara / radiolojia',
+            'Nimeandaa mipango ya matibabu kulingana na ushahidi',
+            'Nimefanya taratibu za kliniki kwa usalama na uwezo',
+            'Nimekamilisha nyaraka za wagonjwa kwa usahihi na kwa wakati',
+            'Nimewasiliana vizuri na wagonjwa na familia',
+            'Nimeshirikiana na timu ya matibabu kwenye kesi ngumu'
         ],
         'Nurse': [
             'Nimefanya tathmini kamili ya wagonjwa wote waliopangiwa',
@@ -1164,15 +1246,6 @@
             'Nimehifadhi nyaraka zote za mama na mtoto kwa usahihi',
             'Nimetambua na kudhibiti dharura za uzazi kwa haraka',
             'Nimetoa huduma baada ya kujifungua na ushauri wa uzazi'
-        ],
-        'Clinical Officer': [
-            'Nimefanya uchunguzi wa kina wa wagonjwa na mitihani',
-            'Nimeagiza na kufasiri uchunguzi wa maabara / radiolojia',
-            'Nimeandaa mipango ya matibabu kulingana na ushahidi',
-            'Nimefanya taratibu za kliniki kwa usalama na uwezo',
-            'Nimekamilisha nyaraka za wagonjwa kwa usahihi na kwa wakati',
-            'Nimewasiliana vizuri na wagonjwa na familia',
-            'Nimeshirikiana na timu ya matibabu kwenye kesi ngumu'
         ],
         'Laboratory Technician': [
             'Nimekusanya na kusindika sampuli kwa usahihi na usalama',
@@ -1196,13 +1269,13 @@
             'Nimekamilisha maingizo yote ya fedha kwa usahihi na kwa wakati',
             'Nimesawazisha akaunti na miamala kila siku',
             'Nimeandaa ripoti za fedha bila makosa',
-            'Nimesindika malipo na risiti kwa usahihi',
+            'Nimechakata malipo na risiti kwa usahihi',
             'Nimehifadhi nyaraka sahihi za miamala yote ya fedha',
             'Nimezingatia sera na taratibu za fedha',
             'Nimekutana na makataa yote ya malipo ya kisheria'
         ],
         'Cashier': [
-            'Nimesindika malipo ya wagonjwa kwa usahihi na ufanisi',
+            'Nimechakata malipo ya wagonjwa kwa usahihi na ufanisi',
             'Nimeweka hakuna tofauti za fedha wakati wa zamu',
             'Nimetoa risiti sahihi kwa miamala yote',
             'Nimesawazisha fedha mwishoni mwa zamu kwa usahihi',
@@ -1258,14 +1331,14 @@
         'Administrator': [
             'Nimekamilisha kazi zote za kiutawala kwa usahihi na kwa wakati',
             'Nimesimamia shughuli za ofisi vizuri bila kuchelewa',
-            'Nimesindika nyaraka na mawasiliano kwa ufanisi',
+            'Nimechakata nyaraka na mawasiliano kwa ufanisi',
             'Nimehifadhi kumbukumbu na rekodi zilizopangwa',
             'Nimejibu maswali ya wafanyakazi na washikadau kwa haraka',
             'Nimezingatia sera na taratibu za kituo',
             'Nimesaidia timu kwa uratibu mzuri'
         ],
         'HR Officer': [
-            'Nimesindika rekodi za mahudhurio na likizo kwa usahihi',
+            'Nimechakata rekodi za mahudhurio na likizo kwa usahihi',
             'Nimejibu maswali na wasiwasi wa wafanyakazi kwa haraka',
             'Nimehifadhi rekodi za wafanyakazi zilizosasishwa',
             'Nimesaidia katika kuajiri na kuwasilisha wafanyakazi wapya',
@@ -1273,7 +1346,6 @@
             'Nimesaidia shughuli za maendeleo ya wafanyakazi na mafunzo',
             'Nimeshughulikia habari za siri kwa uangalifu mkubwa'
         ],
-        // ===== MPYA: MHUDUMU WA BIMA =====
         'Insurance Data Clerk': [
             'Nimechakata madai ya NHIF kwa usahihi na kuwasilisha kwa wakati',
             'Nimechakata madai ya Jubilee kwa usahihi na haraka',
@@ -1292,6 +1364,219 @@
     let allReports = [];
     let generalState = new Array(GENERAL_CHECKLIST.length).fill(false);
     let specificState = new Array(ROLE_CHECKLISTS['Doctor'].length).fill(false);
+    let signatureData = null;
+
+    // ================================================================
+    // SAHIHI YA KIDIJITALI
+    // ================================================================
+    let isDrawing = false;
+    let lastX = 0, lastY = 0;
+
+    function initSignaturePad() {
+        const canvas = document.getElementById('signatureCanvas');
+        const pad = document.getElementById('signaturePad');
+        const rect = pad.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+
+        canvas.width = pad.clientWidth * dpr;
+        canvas.height = pad.clientHeight * dpr;
+        canvas.style.width = pad.clientWidth + 'px';
+        canvas.style.height = pad.clientHeight + 'px';
+
+        const ctx = canvas.getContext('2d');
+        ctx.scale(dpr, dpr);
+        ctx.strokeStyle = '#1a5276';
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        canvas.addEventListener('mousedown', startDraw);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', endDraw);
+        canvas.addEventListener('mouseleave', endDraw);
+
+        canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+        canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+        canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
+
+        loadSignature();
+    }
+
+    function getCanvasCoords(e) {
+        const canvas = document.getElementById('signatureCanvas');
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.clientX || e.touches?.[0]?.clientX || 0;
+        const clientY = e.clientY || e.touches?.[0]?.clientY || 0;
+        return { x: clientX - rect.left, y: clientY - rect.top };
+    }
+
+    function startDraw(e) {
+        e.preventDefault();
+        isDrawing = true;
+        const pos = getCanvasCoords(e);
+        lastX = pos.x;
+        lastY = pos.y;
+    }
+
+    function draw(e) {
+        e.preventDefault();
+        if (!isDrawing) return;
+        const pos = getCanvasCoords(e);
+        const canvas = document.getElementById('signatureCanvas');
+        const ctx = canvas.getContext('2d');
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+        lastX = pos.x;
+        lastY = pos.y;
+    }
+
+    function endDraw(e) {
+        e?.preventDefault();
+        if (isDrawing) {
+            isDrawing = false;
+            signatureData = document.getElementById('signatureCanvas').toDataURL();
+            document.getElementById('signatureStatus').textContent = '✅ Sahihi imehifadhiwa';
+            document.getElementById('signatureStatus').style.color = '#27ae60';
+        }
+    }
+
+    function handleTouchStart(e) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const mouseEvent = new MouseEvent('mousedown', { clientX: touch.clientX, clientY: touch.clientY });
+        startDraw(mouseEvent);
+    }
+
+    function handleTouchMove(e) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const mouseEvent = new MouseEvent('mousemove', { clientX: touch.clientX, clientY: touch.clientY });
+        draw(mouseEvent);
+    }
+
+    function handleTouchEnd(e) {
+        e.preventDefault();
+        endDraw(e);
+    }
+
+    function clearSignature() {
+        const canvas = document.getElementById('signatureCanvas');
+        const ctx = canvas.getContext('2d');
+        const dpr = window.devicePixelRatio || 1;
+        ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+        signatureData = null;
+        document.getElementById('signatureStatus').textContent = '🔄 Sahihi imefutwa';
+        document.getElementById('signatureStatus').style.color = '#e74c3c';
+    }
+
+    function saveSignature() {
+        if (signatureData) {
+            localStorage.setItem('mtwara_signature', signatureData);
+            document.getElementById('signatureStatus').textContent = '✅ Sahihi imehifadhiwa kwenye kivumba';
+            document.getElementById('signatureStatus').style.color = '#27ae60';
+            showToast('✅ Sahihi imehifadhiwa!', 'success');
+        } else {
+            showToast('⚠️ Tafadhali chora sahihi yako kwanza', 'warning');
+        }
+    }
+
+    function loadSignature() {
+        const saved = localStorage.getItem('mtwara_signature');
+        if (saved) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.getElementById('signatureCanvas');
+                const ctx = canvas.getContext('2d');
+                const dpr = window.devicePixelRatio || 1;
+                ctx.drawImage(img, 0, 0, canvas.width / dpr, canvas.height / dpr);
+                signatureData = saved;
+                document.getElementById('signatureStatus').textContent = '✅ Sahihi imepakiwa';
+                document.getElementById('signatureStatus').style.color = '#27ae60';
+            };
+            img.src = saved;
+        }
+    }
+
+    // ================================================================
+    // SHIRIKISHA
+    // ================================================================
+    function getReportData() {
+        const worker = document.getElementById('workerName').value || 'Unknown';
+        const date = document.getElementById('reportDate').value || new Date().toISOString().split('T')[0];
+        const selfPercent = document.getElementById('selfPercent').textContent || '0%';
+        const supPercent = document.getElementById('supPercent').textContent || '0%';
+        const combined = document.getElementById('workerCombined').textContent || '0%';
+        const verified = document.getElementById('verificationCheck').checked ? '✅ Imethibitishwa' : '❌ Haijathibitishwa';
+        const signature = signatureData ? '✅ Imechorwa' : '❌ Hakuna';
+        const url = window.location.href;
+
+        return { worker, date, selfPercent, supPercent, combined, verified, signature, url };
+    }
+
+    function updateShareStatus(message, type = '') {
+        const status = document.getElementById('shareStatus');
+        status.textContent = message;
+        status.className = 'share-status ' + type;
+    }
+
+    function shareWhatsApp() {
+        const data = getReportData();
+        const msg = `📋 *RIPOTI YA TATHMINI YA MFANYAKAZI*\n\n` +
+            `👤 Mfanyakazi: ${data.worker}\n` +
+            `📅 Tarehe: ${data.date}\n` +
+            `📊 Alama ya Mfanyakazi: ${data.selfPercent}\n` +
+            `📊 Alama ya Msimamizi: ${data.supPercent}\n` +
+            `🏆 Alama ya Pamoja: ${data.combined}\n` +
+            `🔐 Uhalisia: ${data.verified}\n` +
+            `✍️ Sahihi: ${data.signature}\n\n` +
+            `🔗 Kiungo: ${data.url}`;
+        const encoded = encodeURIComponent(msg);
+        window.open(`https://wa.me/?text=${encoded}`, '_blank');
+        updateShareStatus('✅ Imefunguliwa WhatsApp', 'success');
+    }
+
+    function shareEmail() {
+        const data = getReportData();
+        const subject = `Ripoti ya Tathmini - ${data.worker}`;
+        const body =
+            `RIPOTI YA TATHMINI YA MFANYAKAZI\n\n` +
+            `Mfanyakazi: ${data.worker}\n` +
+            `Tarehe: ${data.date}\n` +
+            `Alama ya Mfanyakazi: ${data.selfPercent}\n` +
+            `Alama ya Msimamizi: ${data.supPercent}\n` +
+            `Alama ya Pamoja: ${data.combined}\n` +
+            `Uhalisia: ${data.verified}\n` +
+            `Sahihi: ${data.signature}\n\n` +
+            `Kiungo: ${data.url}`;
+        window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        updateShareStatus('✅ Imefunguliwa Barua Pepe', 'success');
+    }
+
+    function shareCopyLink() {
+        const url = window.location.href;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(url).then(() => {
+                updateShareStatus('✅ Kiungo kimenakiliwa!', 'success');
+                showToast('✅ Kiungo kimenakiliwa!', 'success');
+            });
+        } else {
+            const textarea = document.createElement('textarea');
+            textarea.value = url;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            updateShareStatus('✅ Kiungo kimenakiliwa!', 'success');
+            showToast('✅ Kiungo kimenakiliwa!', 'success');
+        }
+    }
+
+    function sharePrint() {
+        window.print();
+        updateShareStatus('🖨️ Imefunguliwa Chapisha', '');
+    }
 
     // ================================================================
     // ONYESHA ORODHA
@@ -1343,13 +1628,8 @@
         updateChecklistStats();
     }
 
-    function updateSpecificChecklist() {
-        renderSpecificChecklist();
-    }
+    function updateSpecificChecklist() { renderSpecificChecklist(); }
 
-    // ================================================================
-    // BADILISHA ORODHA
-    // ================================================================
     function toggleGeneral(index) {
         generalState[index] = !generalState[index];
         renderGeneralChecklist();
@@ -1404,9 +1684,6 @@
         calculateScores();
     }
 
-    // ================================================================
-    // PATA THAMANI YA KIWANGO
-    // ================================================================
     function getRatingValue(groupId) {
         const selected = document.querySelector(`#${groupId} .rating-btn.selected`);
         return selected ? parseInt(selected.dataset.value) : 0;
@@ -1485,7 +1762,9 @@
         else { status = '❌ Pengo Kubwa'; statusClass = 'red'; }
         document.getElementById('statusIndicator').innerHTML = `<span class="status-dot ${statusClass}"></span> ${status}`;
 
-        // ===== TAHADHARI =====
+        const verified = document.getElementById('verificationCheck').checked;
+        document.getElementById('verificationStatus').innerHTML = verified ? '✅' : '❌';
+
         const alertContainer = document.getElementById('alertsContainer');
         let alerts = [];
         if (selfPercent < 50) alerts.push({ msg: '⚠️ Tathmini ya mfanyakazi ni ya chini (<50%)', type: 'warning' });
@@ -1493,6 +1772,7 @@
         if (combined < 50) alerts.push({ msg: '⚠️ Alama ya pamoja ni ya chini (<50%)', type: 'warning' });
         if (gap > 20) alerts.push({ msg: '⚠️ Pengo kubwa kati ya mfanyakazi na msimamizi (>20%)', type: 'warning' });
         if (inchargeRating <= 2) alerts.push({ msg: '⚠️ Kiwango cha Mganga Mfawidhi ni cha chini', type: 'warning' });
+        if (!verified) alerts.push({ msg: '⚠️ Tafadhali thibitisha uhalisia wa taarifa', type: 'warning' });
 
         if (alerts.length > 0) {
             alertContainer.innerHTML = alerts.map(a =>
@@ -1567,6 +1847,17 @@
         const shift = document.getElementById('workerShift').value;
         const supervisor = document.getElementById('supervisorName').value || 'Not Assigned';
         const supervisorTitle = document.getElementById('supervisorTitle').value;
+
+        const verified = document.getElementById('verificationCheck').checked;
+        if (!verified) {
+            showToast('⚠️ Tafadhali thibitisha uhalisia wa taarifa zako', 'warning');
+            return;
+        }
+
+        if (!signatureData) {
+            showToast('⚠️ Tafadhali chora sahihi yako ya kidijitali', 'warning');
+            return;
+        }
 
         const selfScores = [
             getRatingValue('selfPunctuality'),
@@ -1647,6 +1938,11 @@
                 followupPeriod: document.getElementById('inchargeFollowupPeriod').value,
                 signoff: document.querySelector('input[name="inchargeSignoff"]:checked')?.value || 'approved'
             },
+            verification: {
+                confirmed: verified,
+                signature: signatureData,
+                timestamp: new Date().toISOString()
+            },
             combined: Math.round((selfPercent + supPercent) / 2),
             gap: Math.abs(selfPercent - supPercent),
             checklistStats: {
@@ -1690,6 +1986,7 @@
                 'rejected': '❌ Imerejeshwa'
             };
             const signoffDisplay = r.incharge?.signoff ? signoffLabels[r.incharge.signoff] || '—' : '—';
+            const verified = r.verification?.confirmed ? '✅' : '❌';
             html += `
                 <div class="history-item">
                     <div class="info">
@@ -1703,6 +2000,7 @@
                         <span style="margin-left:6px; font-size:11px; color:#7f8c8d;">📋 ${checklistPercent}%</span>
                         ${r.faith && r.faith.devotion === 'yes' ? '🙏' : ''}
                         <span style="margin-left:6px; font-size:11px;"><span class="tag tag-incharge">${signoffDisplay}</span></span>
+                        <span style="margin-left:4px; font-size:11px; background:#d5f5e3; padding:2px 8px; border-radius:10px;">${verified}</span>
                     </div>
                     <div>
                         <button onclick="viewReport(${index})" class="btn btn-primary btn-sm">Angalia</button>
@@ -1786,6 +2084,11 @@
             `Ufuatiliaji: ${r.incharge?.followupDate || 'Hakuna'} (${r.incharge?.followupPeriod || ''})\n` +
             `Sahihi: ${signoffDisplay}\n` +
             `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+            `🔐 UHALISIA NA SAHIHI\n` +
+            `Uhalisia: ${r.verification?.confirmed ? '✅ Imethibitishwa' : '❌ Haijathibitishwa'}\n` +
+            `Sahihi: ${r.verification?.signature ? '✅ Imechorwa' : '❌ Hakuna'}\n` +
+            `Muda: ${r.verification?.timestamp ? new Date(r.verification.timestamp).toLocaleString() : 'Hakuna'}\n` +
+            `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
             `🏆 Alama ya Pamoja: ${r.combined}%\n` +
             `📊 Pengo: ${r.gap}%\n` +
             `✅ Hali: ${r.gap <= 5 ? 'Imesawazishwa' : r.gap <= 15 ? 'Pengo Ndogo' : 'Pengo Kubwa'}\n` +
@@ -1814,14 +2117,15 @@
             return;
         }
 
-        let csv = 'Tarehe,Mfanyakazi,Kazi,Zamu,Msimamizi,Alama ya Mfanyakazi,Asilimia ya Mfanyakazi,Alama ya Msimamizi,Asilimia ya Msimamizi,Alama ya Pamoja,Pengo,Orodha %,Ibada,Kiwango cha Mganga Mfawidhi,Mapendekezo,Sahihi\n';
+        let csv = 'Tarehe,Mfanyakazi,Kazi,Zamu,Msimamizi,Alama ya Mfanyakazi,Asilimia ya Mfanyakazi,Alama ya Msimamizi,Asilimia ya Msimamizi,Alama ya Pamoja,Pengo,Orodha %,Ibada,Kiwango cha Mganga Mfawidhi,Mapendekezo,Sahihi,Uhalisia\n';
         allReports.forEach(r => {
             const checklistPct = r.checklistStats ? Math.round((r.checklistStats.totalDone / r.checklistStats.totalAll) * 100) : 0;
             const devotion = r.faith && r.faith.devotion === 'yes' ? 'Ndiyo' : 'Hapana';
             const inchargeRating = r.incharge?.ratingLabel || r.incharge?.rating + '/5' || 'Haijakadiriwa';
             const inchargeRec = r.incharge?.recommendation || 'Hakuna';
             const signoff = r.incharge?.signoff || 'Hakuna';
-            csv += `${r.date},${r.worker},${r.role},${r.shift},${r.supervisor},${r.self.total}/30,${r.self.percent}%,${r.supervisorAssessment.total}/30,${r.supervisorAssessment.percent}%,${r.combined}%,${r.gap}%,${checklistPct}%,${devotion},${inchargeRating},${inchargeRec},${signoff}\n`;
+            const verified = r.verification?.confirmed ? 'Ndiyo' : 'Hapana';
+            csv += `${r.date},${r.worker},${r.role},${r.shift},${r.supervisor},${r.self.total}/30,${r.self.percent}%,${r.supervisorAssessment.total}/30,${r.supervisorAssessment.percent}%,${r.combined}%,${r.gap}%,${checklistPct}%,${devotion},${inchargeRating},${inchargeRec},${signoff},${verified}\n`;
         });
 
         const blob = new Blob([csv], { type: 'text/csv' });
@@ -1843,7 +2147,7 @@
         }
         const data = {
             exportedAt: new Date().toISOString(),
-            version: '2.0',
+            version: '4.0',
             totalReports: allReports.length,
             reports: allReports
         };
@@ -1877,12 +2181,13 @@
             return;
         }
 
-        let csv = 'Tarehe,Mfanyakazi,Kazi,Zamu,Msimamizi,Asilimia ya Mfanyakazi,Asilimia ya Msimamizi,Alama ya Pamoja,Pengo,Orodha %,Kiwango cha Mganga Mfawidhi,Sahihi\n';
+        let csv = 'Tarehe,Mfanyakazi,Kazi,Zamu,Msimamizi,Asilimia ya Mfanyakazi,Asilimia ya Msimamizi,Alama ya Pamoja,Pengo,Orodha %,Kiwango cha Mganga Mfawidhi,Sahihi,Uhalisia\n';
         filtered.forEach(r => {
             const checklistPct = r.checklistStats ? Math.round((r.checklistStats.totalDone / r.checklistStats.totalAll) * 100) : 0;
             const inchargeRating = r.incharge?.ratingLabel || r.incharge?.rating + '/5' || 'Haijakadiriwa';
             const signoff = r.incharge?.signoff || 'Hakuna';
-            csv += `${r.date},${r.worker},${r.role},${r.shift},${r.supervisor},${r.self.percent}%,${r.supervisorAssessment.percent}%,${r.combined}%,${r.gap}%,${checklistPct}%,${inchargeRating},${signoff}\n`;
+            const verified = r.verification?.confirmed ? 'Ndiyo' : 'Hapana';
+            csv += `${r.date},${r.worker},${r.role},${r.shift},${r.supervisor},${r.self.percent}%,${r.supervisorAssessment.percent}%,${r.combined}%,${r.gap}%,${checklistPct}%,${inchargeRating},${signoff},${verified}\n`;
         });
 
         const blob = new Blob([csv], { type: 'text/csv' });
@@ -1910,9 +2215,6 @@
         URL.revokeObjectURL(url);
     }
 
-    // ================================================================
-    // FUTA HISTORIA YOTE
-    // ================================================================
     function clearAllHistory() {
         if (confirm('Futa RIPOTI ZOTE? Hii haiwezi kurejeshwa.')) {
             allReports = [];
@@ -1924,9 +2226,6 @@
         }
     }
 
-    // ================================================================
-    // MUHTASARI
-    // ================================================================
     function renderSummary() {
         const workerFilter = document.getElementById('summaryWorker').value;
         const period = document.getElementById('summaryPeriod').value;
@@ -1978,7 +2277,7 @@
             </div>
             <div class="table-wrap">
                 <table class="summary-table">
-                    <thead><tr><th>Tarehe</th><th>Mfanyakazi</th><th>Kazi</th><th>Mfanyakazi</th><th>Msimamizi</th><th>Pamoja</th><th>Pengo</th><th>Orodha</th><th>Mganga Mfawidhi</th></tr></thead>
+                    <thead><tr><th>Tarehe</th><th>Mfanyakazi</th><th>Kazi</th><th>Mfanyakazi</th><th>Msimamizi</th><th>Pamoja</th><th>Pengo</th><th>Orodha</th><th>Mganga Mfawidhi</th><th>Uhalisia</th></tr></thead>
                     <tbody>
         `;
 
@@ -1986,6 +2285,7 @@
             const color = r.gap <= 5 ? 'green' : r.gap <= 15 ? 'orange' : 'red';
             const checklistPct = r.checklistStats ? Math.round((r.checklistStats.totalDone / r.checklistStats.totalAll) * 100) : 0;
             const inchargeRating = r.incharge?.ratingLabel || r.incharge?.rating + '/5' || '—';
+            const verified = r.verification?.confirmed ? '✅' : '❌';
             html += `
                 <tr>
                     <td>${r.date}</td>
@@ -1997,6 +2297,7 @@
                     <td style="color:${color};">${r.gap}%</td>
                     <td>${checklistPct}%</td>
                     <td>${inchargeRating}</td>
+                    <td>${verified}</td>
                 </tr>
             `;
         });
@@ -2007,9 +2308,6 @@
         renderChart(filtered);
     }
 
-    // ================================================================
-    // CHATI
-    // ================================================================
     function renderChart(reports) {
         const canvas = document.getElementById('performanceChart');
         if (!canvas) return;
@@ -2066,9 +2364,6 @@
         ctx.fillText('Msimamizi', legendX + 86, 20);
     }
 
-    // ================================================================
-    // JAZA ORODHA YA WAFANYAKAZI
-    // ================================================================
     function populateWorkerDropdown() {
         const select = document.getElementById('summaryWorker');
         const workers = [...new Set(allReports.map(r => r.worker))];
@@ -2078,9 +2373,6 @@
         });
     }
 
-    // ================================================================
-    // HIFADHI KWENYE KIVUMBA
-    // ================================================================
     function saveToStorage() {
         try {
             localStorage.setItem('mtwara_performance_reports', JSON.stringify(allReports));
@@ -2099,9 +2391,6 @@
         } catch (e) { console.warn('Load error:', e); }
     }
 
-    // ================================================================
-    // WEKA UPYA FOMU
-    // ================================================================
     function resetForm() {
         if (!confirm('Weka upya fomu zote?')) return;
         document.querySelectorAll('.rating-btn').forEach(b => {
@@ -2118,6 +2407,8 @@
         document.getElementById('faithReflection').value = '';
         document.getElementById('inchargeRecommendation').value = 'continue';
         document.querySelector('input[name="inchargeSignoff"][value="approved"]').checked = true;
+        document.getElementById('verificationCheck').checked = false;
+        clearSignature();
         generalState = new Array(GENERAL_CHECKLIST.length).fill(false);
         const role = document.getElementById('workerRole').value;
         const items = ROLE_CHECKLISTS[role] || ROLE_CHECKLISTS['Doctor'];
@@ -2126,12 +2417,10 @@
         renderSpecificChecklist();
         calculateScores();
         document.getElementById('workerProfileContainer').innerHTML = '';
+        updateShareStatus('💡 Bonyeza kitufe cha kushirikisha', '');
         showToast('🔄 Fomu zimewekwa upya', 'warning');
     }
 
-    // ================================================================
-    // BADILISHA VITENDO
-    // ================================================================
     function switchTab(tabName) {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -2139,11 +2428,9 @@
         document.querySelector(`.tab-btn[onclick="switchTab('${tabName}')"]`).classList.add('active');
         if (tabName === 'history') renderHistory();
         if (tabName === 'summary') { populateWorkerDropdown(); renderSummary(); }
+        if (tabName === 'assessment') { initSignaturePad(); }
     }
 
-    // ================================================================
-    // ARIFA
-    // ================================================================
     let toastTimeout;
 
     function showToast(message, type = 'success') {
@@ -2158,9 +2445,6 @@
         }, 3000);
     }
 
-    // ================================================================
-    // ANZA
-    // ================================================================
     document.addEventListener('DOMContentLoaded', function() {
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('reportDate').value = today;
@@ -2171,6 +2455,11 @@
         renderSpecificChecklist();
         loadFromStorage();
         calculateScores();
+        initSignaturePad();
+
+        document.getElementById('verificationCheck').addEventListener('change', function() {
+            calculateScores();
+        });
     });
 </script>
 
