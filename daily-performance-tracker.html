@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sw">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Mtwara SDA - Daily Performance Tracker</title>
+    <title>Mtwara SDA - Kikaguzi cha Utendaji Kazi</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -27,7 +27,7 @@
             .container { padding: 14px 14px 20px; }
         }
 
-        /* ===== HEADER ===== */
+        /* ===== KICHWA ===== */
         .header {
             text-align: center;
             border-bottom: 4px solid #1a5276;
@@ -87,7 +87,7 @@
             .logo-placeholder { width: 45px; height: 45px; }
         }
 
-        /* ===== TABS ===== */
+        /* ===== VITENDO ===== */
         .tabs {
             display: flex;
             gap: 6px;
@@ -121,7 +121,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== FORM STYLES ===== */
+        /* ===== FOMU ===== */
         .form-group { margin-bottom: 12px; }
         .form-group label {
             display: block;
@@ -156,7 +156,7 @@
         }
         @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
 
-        /* ===== SECTION DIVIDERS ===== */
+        /* ===== MGAWANYO WA SEHEMU ===== */
         .section-divider {
             padding: 7px 14px;
             border-radius: 6px;
@@ -184,7 +184,7 @@
         }
         .section-divider.incharge .badge-section { background: rgba(255,255,255,0.15); }
 
-        /* ===== CHECKLIST ===== */
+        /* ===== ORODHA YA KUANGALIA ===== */
         .checklist-item {
             display: flex;
             align-items: center;
@@ -258,7 +258,7 @@
         .checklist-grid .checklist-item { border-bottom: none; padding: 4px 0; }
         @media (max-width: 600px) { .checklist-grid { grid-template-columns: 1fr; } }
 
-        /* ===== RATING BUTTONS ===== */
+        /* ===== VIPIMO VYA KUKAGUA ===== */
         .rating-group {
             display: flex;
             gap: 5px;
@@ -291,7 +291,7 @@
         .rating-group .rating-btn.selected-poor { border-color: #e74c3c; background: #e74c3c; color: #fff; }
         .rating-group .rating-btn.selected-unsatisfactory { border-color: #7b241c; background: #7b241c; color: #fff; }
 
-        /* ===== SCORE BOX ===== */
+        /* ===== ALAMA ===== */
         .score-box {
             background: #eaf2f8;
             border-radius: 10px;
@@ -335,7 +335,7 @@
         .score-item .number.teal { color: #1abc9c; }
         .score-item .number.dark { color: #2c3e50; }
 
-        /* ===== PROGRESS BAR ===== */
+        /* ===== MWENENDO WA ALAMA ===== */
         .progress-bar {
             width: 100%;
             height: 8px;
@@ -352,7 +352,7 @@
         }
         .progress-bar .fill.purple { background: linear-gradient(90deg, #8e44ad, #1abc9c); }
 
-        /* ===== BADGES ===== */
+        /* ===== BEJI ===== */
         .badge {
             display: inline-block;
             padding: 2px 10px;
@@ -366,7 +366,7 @@
         .badge-poor { background: #fadbd8; color: #922b21; }
         .badge-unsatisfactory { background: #f5b7b1; color: #7b241c; }
 
-        /* ===== BUTTONS ===== */
+        /* ===== VIFUNGO ===== */
         .btn-group {
             display: flex;
             gap: 8px;
@@ -402,7 +402,7 @@
             .btn { font-size: 11px; padding: 7px 12px; min-width: 60px; }
         }
 
-        /* ===== PRINT NOTE ===== */
+        /* ===== CHAPA ===== */
         .print-note {
             background: #fef9e7;
             border: 1px solid #f1c40f;
@@ -417,7 +417,7 @@
             flex-wrap: wrap;
         }
 
-        /* ===== FOOTER ===== */
+        /* ===== CHINI ===== */
         .footer {
             text-align: center;
             margin-top: 22px;
@@ -433,7 +433,7 @@
             margin-bottom: 4px;
         }
 
-        /* ===== TOAST ===== */
+        /* ===== ARIFA ===== */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -458,7 +458,7 @@
         .toast.warning { background: #f39c12; color: #1a1a2e; }
         .toast.error { background: #e74c3c; }
 
-        /* ===== PRINT ===== */
+        /* ===== CHAPA KARATA ===== */
         @media print {
             body { background: #fff; padding: 0; }
             .container { box-shadow: none; padding: 14px; max-width: 100%; border-radius: 0; }
@@ -469,7 +469,7 @@
             .section-divider { break-inside: avoid; }
         }
 
-        /* ===== HISTORY ===== */
+        /* ===== HISTORIA ===== */
         .history-item {
             padding: 10px 12px;
             border-bottom: 1px solid #ecf0f1;
@@ -508,7 +508,7 @@
             color: #1a5276;
         }
 
-        /* ===== STATUS INDICATORS ===== */
+        /* ===== VIASHIRIA ===== */
         .status-dot {
             display: inline-block;
             width: 10px;
@@ -531,7 +531,7 @@
         }
         .checklist-stats span { background: #ecf0f1; padding: 2px 10px; border-radius: 12px; }
 
-        /* ===== SUMMARY TABLE ===== */
+        /* ===== JEDWALI LA MUHTASARI ===== */
         .summary-table {
             width: 100%;
             border-collapse: collapse;
@@ -551,7 +551,7 @@
         .summary-table tr:hover { background: #f7f9fa; }
         .table-wrap { overflow-x: auto; margin: 10px 0; }
 
-        /* ===== CHART CANVAS ===== */
+        /* ===== CHATI ===== */
         .chart-container {
             background: #fff;
             border-radius: 10px;
@@ -564,7 +564,7 @@
             height: 200px;
         }
 
-        /* ===== ALERT ===== */
+        /* ===== TAHADHARI ===== */
         .alert-box {
             padding: 8px 14px;
             border-radius: 6px;
@@ -575,7 +575,7 @@
         .alert-box.success { background: #d5f5e3; color: #1a7a3a; border-left: 4px solid #27ae60; }
         .alert-box.info { background: #d6eaf8; color: #1a5276; border-left: 4px solid #2e86c1; }
 
-        /* ===== SIGN-OFF BADGE ===== */
+        /* ===== BEJI YA SAHIHI ===== */
         .signoff-badge {
             display: inline-block;
             padding: 2px 12px;
@@ -592,7 +592,7 @@
 
 <div class="container">
 
-    <!-- ===== HEADER ===== -->
+    <!-- ===== KICHWA ===== -->
     <div class="header">
         <div class="logo-container">
             <div class="logo-placeholder">
@@ -600,512 +600,513 @@
             </div>
             <div>
                 <h1>MTWARA SDA DISPENSARY</h1>
-                <h2>Daily Performance Tracker — Worker Checklists</h2>
+                <h2>Kikaguzi cha Utendaji Kazi Kila Siku</h2>
             </div>
         </div>
         <div class="mission">
-            <strong>Mission:</strong> "Excellence in Service, Faith in Action — Holistic, Compassionate, Christ-Centered Healthcare"
+            <strong>Dhamira:</strong> "Ubora katika Huduma, Imani katika Vitendo — Huduma Kamili ya Afya, Huruma, na Imani katika Kristo"
         </div>
     </div>
 
-    <!-- ===== PRINT NOTE ===== -->
+    <!-- ===== CHAPA PDF ===== -->
     <div class="print-note">
         <span>🖨️</span>
-        <div><strong>Print to PDF:</strong> Click <strong>"Print / Save as PDF"</strong> below or press <strong>Ctrl+P</strong> / <strong>Cmd+P</strong>.</div>
+        <div><strong>Chapisha kama PDF:</strong> Bonyeza <strong>"Chapisha / Hifadhi kama PDF"</strong> hapa chini au bonyeza <strong>Ctrl+P</strong> / <strong>Cmd+P</strong>.</div>
     </div>
 
-    <!-- ===== TABS ===== -->
+    <!-- ===== VITENDO ===== -->
     <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('assessment')">📝 Assessment</button>
-        <button class="tab-btn" onclick="switchTab('summary')">📈 Summary</button>
-        <button class="tab-btn" onclick="switchTab('history')">📂 History</button>
+        <button class="tab-btn active" onclick="switchTab('assessment')">📝 Tathmini</button>
+        <button class="tab-btn" onclick="switchTab('summary')">📈 Muhtasari</button>
+        <button class="tab-btn" onclick="switchTab('history')">📂 Historia</button>
         <button class="tab-btn" onclick="window.print()" style="background:#1a5276; color:#fff;">🖨️ PDF</button>
     </div>
 
     <!-- ================================================================ -->
-    <!-- ===== TAB: ASSESSMENT ===== -->
+    <!-- ===== SEHEMU: TATHMINI ===== -->
     <!-- ================================================================ -->
     <div id="assessment" class="tab-content active">
 
-        <!-- ===== WORKER INFORMATION ===== -->
+        <!-- ===== MAELEZO YA MFANYAKAZI ===== -->
         <div class="section-divider info">
-            👤 Worker Information
-            <span class="badge-section">Fill in worker details</span>
+            👤 Maelezo ya Mfanyakazi
+            <span class="badge-section">Jaza maelezo yako</span>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label>👤 Worker Name</label>
-                <input type="text" id="workerName" placeholder="Enter full name" value="John Doe">
+                <label>👤 Jina la Mfanyakazi</label>
+                <input type="text" id="workerName" placeholder="Andika jina lako kamili" value="John Doe">
             </div>
             <div class="form-group">
-                <label>📋 Job Category / Role</label>
+                <label>📋 Kazi / Wajibu</label>
                 <select id="workerRole" onchange="updateSpecificChecklist()">
-                    <option value="Doctor">🩺 Doctor</option>
-                    <option value="Nurse">💉 Nurse</option>
-                    <option value="Midwife">🤱 Midwife</option>
-                    <option value="Clinical Officer">🩺 Clinical Officer</option>
-                    <option value="Laboratory Technician">🔬 Laboratory Technician</option>
-                    <option value="Pharmacist">💊 Pharmacist</option>
-                    <option value="Accountant">💰 Accountant</option>
-                    <option value="Cashier">🧾 Cashier</option>
-                    <option value="Receptionist">📞 Receptionist</option>
-                    <option value="Janitor">🧹 Janitor</option>
-                    <option value="Cook">🍳 Cook</option>
-                    <option value="Porter">🚪 Porter</option>
-                    <option value="Driver">🚗 Driver</option>
-                    <option value="Administrator">📋 Administrator</option>
-                    <option value="HR Officer">👔 HR Officer</option>
+                    <option value="Doctor">🩺 Daktari</option>
+                    <option value="Nurse">💉 Muuguzi</option>
+                    <option value="Midwife">🤱 Mkunga</option>
+                    <option value="Clinical Officer">🩺 Afisa Kliniki</option>
+                    <option value="Laboratory Technician">🔬 Mtaalamu wa Maabara</option>
+                    <option value="Pharmacist">💊 Mfamasia</option>
+                    <option value="Accountant">💰 Mhasibu</option>
+                    <option value="Cashier">🧾 Mhudumu wa Keshia</option>
+                    <option value="Receptionist">📞 Mhudumu wa Mapokezi</option>
+                    <option value="Janitor">🧹 Mhudumu wa Usafi</option>
+                    <option value="Cook">🍳 Mpishi</option>
+                    <option value="Porter">🚪 Mhudumu wa Usafirishaji</option>
+                    <option value="Driver">🚗 Dereva</option>
+                    <option value="Administrator">📋 Msimamizi</option>
+                    <option value="HR Officer">👔 Afisa HR</option>
+                    <option value="Insurance Data Clerk">📋 Mhudumu wa Bima</option>
                 </select>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label>📅 Date</label>
+                <label>📅 Tarehe</label>
                 <input type="date" id="reportDate">
             </div>
             <div class="form-group">
-                <label>🕐 Shift</label>
+                <label>🕐 Zamu ya Kazi</label>
                 <select id="workerShift">
-                    <option>Day</option>
-                    <option>Night</option>
-                    <option>On-Call</option>
+                    <option>Mchana</option>
+                    <option>Usiku</option>
+                    <option>Simu ya Dharura</option>
                 </select>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label>👔 Immediate Supervisor Name</label>
-                <input type="text" id="supervisorName" placeholder="Enter supervisor name" value="Dr. Smith">
+                <label>👔 Jina la Msimamizi</label>
+                <input type="text" id="supervisorName" placeholder="Andika jina la msimamizi" value="Dr. Smith">
             </div>
             <div class="form-group">
-                <label>📋 Supervisor Title</label>
+                <label>📋 Wadhifa wa Msimamizi</label>
                 <select id="supervisorTitle">
-                    <option>Department Head</option>
-                    <option>Senior Officer</option>
-                    <option>Supervisor</option>
-                    <option>Manager</option>
-                    <option>Team Leader</option>
+                    <option>Mkuu wa Idara</option>
+                    <option>Afisa Mwandamizi</option>
+                    <option>Msimamizi</option>
+                    <option>Meneja</option>
+                    <option>Kiongozi wa Timu</option>
                 </select>
             </div>
         </div>
 
-        <!-- ===== SECTION 1: GENERAL CHECKLIST (All Workers) ===== -->
+        <!-- ===== SEHEMU 1: ORODHA YA JUMLA ===== -->
         <div class="section-divider general">
-            📋 General Checklist — All Workers
-            <span class="badge-section">Applies to every worker</span>
+            📋 Orodha ya Jumla — Wafanyakazi Wote
+            <span class="badge-section">Inahusu kila mfanyakazi</span>
         </div>
 
         <div id="generalChecklistContainer">
-            <!-- Rendered by JavaScript -->
+            <!-- Inaonyeshwa na JavaScript -->
         </div>
 
-        <!-- ===== SECTION 2: ROLE-SPECIFIC CHECKLIST ===== -->
+        <!-- ===== SEHEMU 2: ORODHA MAALUM ===== -->
         <div class="section-divider specific">
-            🎯 Role-Specific Checklist
-            <span class="badge-section" id="roleSpecificLabel">Doctor</span>
+            🎯 Orodha Maalum — Kazi Yako
+            <span class="badge-section" id="roleSpecificLabel">Daktari</span>
         </div>
 
         <div id="specificChecklistContainer">
-            <!-- Rendered by JavaScript -->
+            <!-- Inaonyeshwa na JavaScript -->
         </div>
 
-        <!-- ===== SECTION 3: FAITH & DEVOTIONAL ===== -->
+        <!-- ===== SEHEMU 3: IMANI NA MAOMBI ===== -->
         <div class="section-divider faith">
-            🙏 Faith & Devotional
-            <span class="badge-section">SDA values in daily work</span>
+            🙏 Imani na Maombi
+            <span class="badge-section">Thamani za SDA katika kazi</span>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label>✅ Attended Morning Devotion</label>
+                <label>✅ Umehudhuria Ibada ya Asubuhi</label>
                 <select id="faithDevotion">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+                    <option value="yes">Ndiyo</option>
+                    <option value="no">Hapana</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>📖 Bible Verse Reflected On</label>
-                <input type="text" id="faithVerse" placeholder="e.g., Colossians 3:23">
+                <label>📖 Aya ya Biblia Uliyotafakari</label>
+                <input type="text" id="faithVerse" placeholder="Mfano: Wakolosai 3:23">
             </div>
         </div>
         <div class="form-group">
-            <label>💭 Prayer Request or Reflection</label>
-            <textarea id="faithReflection" placeholder="Any prayer requests or reflections for today..."></textarea>
+            <label>💭 Maombi au Tafakari</label>
+            <textarea id="faithReflection" placeholder="Andika maombi au mawazo yako..."></textarea>
         </div>
 
-        <!-- ===== SECTION 4: WORKER SELF-ASSESSMENT (Ratings) ===== -->
+        <!-- ===== SEHEMU 4: TATHMINI YA MFANYAKAZI ===== -->
         <div class="section-divider self">
-            ✍️ Worker Self-Assessment — Overall Ratings
-            <span class="badge-section">Worker rates their performance</span>
+            ✍️ Tathmini ya Mfanyakazi — Viwango vya Jumla
+            <span class="badge-section">Mfanyakazi anajikagua</span>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label>1. Punctuality & Attendance</label>
+                <label>1. Kuwasili kazini na Mahudhurio</label>
                 <div class="rating-group" id="selfPunctuality">
-                    <button class="rating-btn" data-value="5" onclick="selectRating('selfPunctuality', this)">⭐ Excellent</button>
-                    <button class="rating-btn" data-value="4" onclick="selectRating('selfPunctuality', this)">👍 Good</button>
-                    <button class="rating-btn" data-value="3" onclick="selectRating('selfPunctuality', this)">👌 Average</button>
-                    <button class="rating-btn" data-value="2" onclick="selectRating('selfPunctuality', this)">⚠️ Poor</button>
+                    <button class="rating-btn" data-value="5" onclick="selectRating('selfPunctuality', this)">⭐ Bora Sana</button>
+                    <button class="rating-btn" data-value="4" onclick="selectRating('selfPunctuality', this)">👍 Nzuri</button>
+                    <button class="rating-btn" data-value="3" onclick="selectRating('selfPunctuality', this)">👌 Wastani</button>
+                    <button class="rating-btn" data-value="2" onclick="selectRating('selfPunctuality', this)">⚠️ Dhaifu</button>
                 </div>
             </div>
             <div class="form-group">
-                <label>2. Quality of Work</label>
+                <label>2. Ubora wa Kazi</label>
                 <div class="rating-group" id="selfQuality">
-                    <button class="rating-btn" data-value="5" onclick="selectRating('selfQuality', this)">⭐ Excellent</button>
-                    <button class="rating-btn" data-value="4" onclick="selectRating('selfQuality', this)">👍 Good</button>
-                    <button class="rating-btn" data-value="3" onclick="selectRating('selfQuality', this)">👌 Average</button>
-                    <button class="rating-btn" data-value="2" onclick="selectRating('selfQuality', this)">⚠️ Poor</button>
+                    <button class="rating-btn" data-value="5" onclick="selectRating('selfQuality', this)">⭐ Bora Sana</button>
+                    <button class="rating-btn" data-value="4" onclick="selectRating('selfQuality', this)">👍 Nzuri</button>
+                    <button class="rating-btn" data-value="3" onclick="selectRating('selfQuality', this)">👌 Wastani</button>
+                    <button class="rating-btn" data-value="2" onclick="selectRating('selfQuality', this)">⚠️ Dhaifu</button>
                 </div>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label>3. Patient/Client Care & Compassion</label>
+                <label>3. Huduma kwa Wagonjwa / Wateja na Huruma</label>
                 <div class="rating-group" id="selfCompassion">
-                    <button class="rating-btn" data-value="5" onclick="selectRating('selfCompassion', this)">⭐ Excellent</button>
-                    <button class="rating-btn" data-value="4" onclick="selectRating('selfCompassion', this)">👍 Good</button>
-                    <button class="rating-btn" data-value="3" onclick="selectRating('selfCompassion', this)">👌 Average</button>
-                    <button class="rating-btn" data-value="2" onclick="selectRating('selfCompassion', this)">⚠️ Poor</button>
+                    <button class="rating-btn" data-value="5" onclick="selectRating('selfCompassion', this)">⭐ Bora Sana</button>
+                    <button class="rating-btn" data-value="4" onclick="selectRating('selfCompassion', this)">👍 Nzuri</button>
+                    <button class="rating-btn" data-value="3" onclick="selectRating('selfCompassion', this)">👌 Wastani</button>
+                    <button class="rating-btn" data-value="2" onclick="selectRating('selfCompassion', this)">⚠️ Dhaifu</button>
                 </div>
             </div>
             <div class="form-group">
-                <label>4. Teamwork & Communication</label>
+                <label>4. Ushirikiano na Mawasiliano</label>
                 <div class="rating-group" id="selfTeamwork">
-                    <button class="rating-btn" data-value="5" onclick="selectRating('selfTeamwork', this)">⭐ Excellent</button>
-                    <button class="rating-btn" data-value="4" onclick="selectRating('selfTeamwork', this)">👍 Good</button>
-                    <button class="rating-btn" data-value="3" onclick="selectRating('selfTeamwork', this)">👌 Average</button>
-                    <button class="rating-btn" data-value="2" onclick="selectRating('selfTeamwork', this)">⚠️ Poor</button>
+                    <button class="rating-btn" data-value="5" onclick="selectRating('selfTeamwork', this)">⭐ Bora Sana</button>
+                    <button class="rating-btn" data-value="4" onclick="selectRating('selfTeamwork', this)">👍 Nzuri</button>
+                    <button class="rating-btn" data-value="3" onclick="selectRating('selfTeamwork', this)">👌 Wastani</button>
+                    <button class="rating-btn" data-value="2" onclick="selectRating('selfTeamwork', this)">⚠️ Dhaifu</button>
                 </div>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label>5. Initiative & Problem-Solving</label>
+                <label>5. Kuchukua Hatua na Kutatua Matatizo</label>
                 <div class="rating-group" id="selfInitiative">
-                    <button class="rating-btn" data-value="5" onclick="selectRating('selfInitiative', this)">⭐ Excellent</button>
-                    <button class="rating-btn" data-value="4" onclick="selectRating('selfInitiative', this)">👍 Good</button>
-                    <button class="rating-btn" data-value="3" onclick="selectRating('selfInitiative', this)">👌 Average</button>
-                    <button class="rating-btn" data-value="2" onclick="selectRating('selfInitiative', this)">⚠️ Poor</button>
+                    <button class="rating-btn" data-value="5" onclick="selectRating('selfInitiative', this)">⭐ Bora Sana</button>
+                    <button class="rating-btn" data-value="4" onclick="selectRating('selfInitiative', this)">👍 Nzuri</button>
+                    <button class="rating-btn" data-value="3" onclick="selectRating('selfInitiative', this)">👌 Wastani</button>
+                    <button class="rating-btn" data-value="2" onclick="selectRating('selfInitiative', this)">⚠️ Dhaifu</button>
                 </div>
             </div>
             <div class="form-group">
-                <label>6. Adherence to Safety & Infection Control</label>
+                <label>6. Kuzingatia Usalama na Kinga dhidi ya Maambukizi</label>
                 <div class="rating-group" id="selfSafety">
-                    <button class="rating-btn" data-value="5" onclick="selectRating('selfSafety', this)">⭐ Excellent</button>
-                    <button class="rating-btn" data-value="4" onclick="selectRating('selfSafety', this)">👍 Good</button>
-                    <button class="rating-btn" data-value="3" onclick="selectRating('selfSafety', this)">👌 Average</button>
-                    <button class="rating-btn" data-value="2" onclick="selectRating('selfSafety', this)">⚠️ Poor</button>
+                    <button class="rating-btn" data-value="5" onclick="selectRating('selfSafety', this)">⭐ Bora Sana</button>
+                    <button class="rating-btn" data-value="4" onclick="selectRating('selfSafety', this)">👍 Nzuri</button>
+                    <button class="rating-btn" data-value="3" onclick="selectRating('selfSafety', this)">👌 Wastani</button>
+                    <button class="rating-btn" data-value="2" onclick="selectRating('selfSafety', this)">⚠️ Dhaifu</button>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            <label>📝 Worker's Comments (What went well? Challenges? Specific achievements?)</label>
-            <textarea id="selfComments" placeholder="Share your reflections on today's work..."></textarea>
+            <label>📝 Maoni ya Mfanyakazi (Mafanikio, Changamoto, Mafanikio Maalum)</label>
+            <textarea id="selfComments" placeholder="Shiriki mawazo yako kuhusu kazi ya leo..."></textarea>
         </div>
 
-        <!-- ===== SECTION 5: IMMEDIATE SUPERVISOR ASSESSMENT (Ratings) ===== -->
+        <!-- ===== SEHEMU 5: TATHMINI YA MSIMAMIZI ===== -->
         <div class="section-divider supervisor">
-            👔 Immediate Supervisor Assessment — Overall Ratings
-            <span class="badge-section">Supervisor rates the worker</span>
+            👔 Tathmini ya Msimamizi — Viwango vya Jumla
+            <span class="badge-section">Msimamizi anakagua mfanyakazi</span>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label>1. Punctuality & Attendance</label>
+                <label>1. Kuwasili kazini na Mahudhurio</label>
                 <div class="rating-group" id="supPunctuality">
-                    <button class="rating-btn" data-value="5" onclick="selectRating('supPunctuality', this)">⭐ Excellent</button>
-                    <button class="rating-btn" data-value="4" onclick="selectRating('supPunctuality', this)">👍 Good</button>
-                    <button class="rating-btn" data-value="3" onclick="selectRating('supPunctuality', this)">👌 Average</button>
-                    <button class="rating-btn" data-value="2" onclick="selectRating('supPunctuality', this)">⚠️ Poor</button>
+                    <button class="rating-btn" data-value="5" onclick="selectRating('supPunctuality', this)">⭐ Bora Sana</button>
+                    <button class="rating-btn" data-value="4" onclick="selectRating('supPunctuality', this)">👍 Nzuri</button>
+                    <button class="rating-btn" data-value="3" onclick="selectRating('supPunctuality', this)">👌 Wastani</button>
+                    <button class="rating-btn" data-value="2" onclick="selectRating('supPunctuality', this)">⚠️ Dhaifu</button>
                 </div>
             </div>
             <div class="form-group">
-                <label>2. Quality of Work</label>
+                <label>2. Ubora wa Kazi</label>
                 <div class="rating-group" id="supQuality">
-                    <button class="rating-btn" data-value="5" onclick="selectRating('supQuality', this)">⭐ Excellent</button>
-                    <button class="rating-btn" data-value="4" onclick="selectRating('supQuality', this)">👍 Good</button>
-                    <button class="rating-btn" data-value="3" onclick="selectRating('supQuality', this)">👌 Average</button>
-                    <button class="rating-btn" data-value="2" onclick="selectRating('supQuality', this)">⚠️ Poor</button>
+                    <button class="rating-btn" data-value="5" onclick="selectRating('supQuality', this)">⭐ Bora Sana</button>
+                    <button class="rating-btn" data-value="4" onclick="selectRating('supQuality', this)">👍 Nzuri</button>
+                    <button class="rating-btn" data-value="3" onclick="selectRating('supQuality', this)">👌 Wastani</button>
+                    <button class="rating-btn" data-value="2" onclick="selectRating('supQuality', this)">⚠️ Dhaifu</button>
                 </div>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label>3. Patient/Client Care & Compassion</label>
+                <label>3. Huduma kwa Wagonjwa / Wateja na Huruma</label>
                 <div class="rating-group" id="supCompassion">
-                    <button class="rating-btn" data-value="5" onclick="selectRating('supCompassion', this)">⭐ Excellent</button>
-                    <button class="rating-btn" data-value="4" onclick="selectRating('supCompassion', this)">👍 Good</button>
-                    <button class="rating-btn" data-value="3" onclick="selectRating('supCompassion', this)">👌 Average</button>
-                    <button class="rating-btn" data-value="2" onclick="selectRating('supCompassion', this)">⚠️ Poor</button>
+                    <button class="rating-btn" data-value="5" onclick="selectRating('supCompassion', this)">⭐ Bora Sana</button>
+                    <button class="rating-btn" data-value="4" onclick="selectRating('supCompassion', this)">👍 Nzuri</button>
+                    <button class="rating-btn" data-value="3" onclick="selectRating('supCompassion', this)">👌 Wastani</button>
+                    <button class="rating-btn" data-value="2" onclick="selectRating('supCompassion', this)">⚠️ Dhaifu</button>
                 </div>
             </div>
             <div class="form-group">
-                <label>4. Teamwork & Communication</label>
+                <label>4. Ushirikiano na Mawasiliano</label>
                 <div class="rating-group" id="supTeamwork">
-                    <button class="rating-btn" data-value="5" onclick="selectRating('supTeamwork', this)">⭐ Excellent</button>
-                    <button class="rating-btn" data-value="4" onclick="selectRating('supTeamwork', this)">👍 Good</button>
-                    <button class="rating-btn" data-value="3" onclick="selectRating('supTeamwork', this)">👌 Average</button>
-                    <button class="rating-btn" data-value="2" onclick="selectRating('supTeamwork', this)">⚠️ Poor</button>
+                    <button class="rating-btn" data-value="5" onclick="selectRating('supTeamwork', this)">⭐ Bora Sana</button>
+                    <button class="rating-btn" data-value="4" onclick="selectRating('supTeamwork', this)">👍 Nzuri</button>
+                    <button class="rating-btn" data-value="3" onclick="selectRating('supTeamwork', this)">👌 Wastani</button>
+                    <button class="rating-btn" data-value="2" onclick="selectRating('supTeamwork', this)">⚠️ Dhaifu</button>
                 </div>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label>5. Initiative & Problem-Solving</label>
+                <label>5. Kuchukua Hatua na Kutatua Matatizo</label>
                 <div class="rating-group" id="supInitiative">
-                    <button class="rating-btn" data-value="5" onclick="selectRating('supInitiative', this)">⭐ Excellent</button>
-                    <button class="rating-btn" data-value="4" onclick="selectRating('supInitiative', this)">👍 Good</button>
-                    <button class="rating-btn" data-value="3" onclick="selectRating('supInitiative', this)">👌 Average</button>
-                    <button class="rating-btn" data-value="2" onclick="selectRating('supInitiative', this)">⚠️ Poor</button>
+                    <button class="rating-btn" data-value="5" onclick="selectRating('supInitiative', this)">⭐ Bora Sana</button>
+                    <button class="rating-btn" data-value="4" onclick="selectRating('supInitiative', this)">👍 Nzuri</button>
+                    <button class="rating-btn" data-value="3" onclick="selectRating('supInitiative', this)">👌 Wastani</button>
+                    <button class="rating-btn" data-value="2" onclick="selectRating('supInitiative', this)">⚠️ Dhaifu</button>
                 </div>
             </div>
             <div class="form-group">
-                <label>6. Adherence to Safety & Infection Control</label>
+                <label>6. Kuzingatia Usalama na Kinga dhidi ya Maambukizi</label>
                 <div class="rating-group" id="supSafety">
-                    <button class="rating-btn" data-value="5" onclick="selectRating('supSafety', this)">⭐ Excellent</button>
-                    <button class="rating-btn" data-value="4" onclick="selectRating('supSafety', this)">👍 Good</button>
-                    <button class="rating-btn" data-value="3" onclick="selectRating('supSafety', this)">👌 Average</button>
-                    <button class="rating-btn" data-value="2" onclick="selectRating('supSafety', this)">⚠️ Poor</button>
+                    <button class="rating-btn" data-value="5" onclick="selectRating('supSafety', this)">⭐ Bora Sana</button>
+                    <button class="rating-btn" data-value="4" onclick="selectRating('supSafety', this)">👍 Nzuri</button>
+                    <button class="rating-btn" data-value="3" onclick="selectRating('supSafety', this)">👌 Wastani</button>
+                    <button class="rating-btn" data-value="2" onclick="selectRating('supSafety', this)">⚠️ Dhaifu</button>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            <label>📝 Supervisor's Comments (Strengths observed, areas for improvement, recommendations)</label>
-            <textarea id="supComments" placeholder="Observations, feedback, and recommendations..."></textarea>
+            <label>📝 Maoni ya Msimamizi (Uchunguzi, nguvu, maeneo ya kuboresha)</label>
+            <textarea id="supComments" placeholder="Andika Uchunguzi wako, maoni na mapendekezo..."></textarea>
         </div>
 
-        <!-- ===== SECTION 6: FACILITY IN-CHARGE FOLLOW-UP & RECOMMENDATIONS ===== -->
+        <!-- ===== SEHEMU 6: TATHMINI YA MGANGA MFAWIDHI ===== -->
         <div class="section-divider incharge">
-            🏢 Facility In-Charge Follow-Up & Recommendations
-            <span class="badge-section">Final Review & Sign-Off</span>
+            🏢 Tathmini ya Mganga Mfawidhi
+            <span class="badge-section">Kagua Mwisho na Sahihi</span>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label>🏢 Facility In-Charge Name</label>
-                <input type="text" id="inchargeName" placeholder="Enter Facility In-Charge name" value="Dr. M. Mwakyusa">
+                <label>🏢 Jina la Mganga Mfawidhi</label>
+                <input type="text" id="inchargeName" placeholder="Andika jina la Mganga Mfawidhi" value="Dr. M. Mwakyusa">
             </div>
             <div class="form-group">
-                <label>📋 In-Charge Title</label>
+                <label>📋 Wadhifa wa Mganga Mfawidhi</label>
                 <select id="inchargeTitle">
-                    <option>Medical Officer In-Charge</option>
-                    <option>Facility Administrator</option>
-                    <option>Senior Medical Officer</option>
-                    <option>District Health Officer</option>
-                    <option>Head of Clinical Services</option>
+                    <option>Mganga Mfawidhi</option>
+                    <option>Msimamizi wa Kituo</option>
+                    <option>Mganga Mkuu</option>
+                    <option>Afisa Afya wa Wilaya</option>
+                    <option>Mkuu wa Huduma za Kliniki</option>
                 </select>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label>📊 Overall Performance Rating (In-Charge)</label>
+                <label>📊 Kiwango cha Jumla (Mganga Mfawidhi)</label>
                 <div class="rating-group" id="inchargeRating">
-                    <button class="rating-btn" data-value="5" onclick="selectRating('inchargeRating', this)">⭐ Excellent</button>
-                    <button class="rating-btn" data-value="4" onclick="selectRating('inchargeRating', this)">👍 Good</button>
-                    <button class="rating-btn" data-value="3" onclick="selectRating('inchargeRating', this)">👌 Satisfactory</button>
-                    <button class="rating-btn" data-value="2" onclick="selectRating('inchargeRating', this)">⚠️ Needs Improvement</button>
-                    <button class="rating-btn" data-value="1" onclick="selectRating('inchargeRating', this)">❌ Unsatisfactory</button>
+                    <button class="rating-btn" data-value="5" onclick="selectRating('inchargeRating', this)">⭐ Bora Sana</button>
+                    <button class="rating-btn" data-value="4" onclick="selectRating('inchargeRating', this)">👍 Nzuri</button>
+                    <button class="rating-btn" data-value="3" onclick="selectRating('inchargeRating', this)">👌 Wastani</button>
+                    <button class="rating-btn" data-value="2" onclick="selectRating('inchargeRating', this)">⚠️ Inahitaji Kuboresha</button>
+                    <button class="rating-btn" data-value="1" onclick="selectRating('inchargeRating', this)">❌ Haikubaliki</button>
                 </div>
             </div>
             <div class="form-group">
-                <label>✅ Recommendation for Next Steps</label>
+                <label>✅ Mapendekezo ya Hatua Inayofuata</label>
                 <select id="inchargeRecommendation">
-                    <option value="continue">Continue as Usual</option>
-                    <option value="coaching">Coaching & Mentoring</option>
-                    <option value="training">Additional Training Required</option>
-                    <option value="supervision">Increased Supervision</option>
-                    <option value="performance-improvement">Performance Improvement Plan (PIP)</option>
-                    <option value="disciplinary">Disciplinary Action</option>
-                    <option value="promotion">Consider for Promotion</option>
+                    <option value="continue">Endelea kama Kawaida</option>
+                    <option value="coaching">Ushauri na Mafunzo</option>
+                    <option value="training">Mafunzo ya Ziada</option>
+                    <option value="supervision">Uangalizi wa Ziada</option>
+                    <option value="performance-improvement">Mpango wa Kuboresha Utendaji (PIP)</option>
+                    <option value="disciplinary">Hatua za Kinidhamu</option>
+                    <option value="promotion">Fikiria kwa Kupandishwa Cheo</option>
                 </select>
             </div>
         </div>
 
         <div class="form-group">
-            <label>📝 In-Charge Comments & Recommendations</label>
-            <textarea id="inchargeComments" placeholder="Provide final assessment, observations, and clear recommendations for the worker's development..."></textarea>
+            <label>📝 Maoni ya Mganga Mfawidhi</label>
+            <textarea id="inchargeComments" placeholder="Toa tathmini ya mwisho, uchunguzi, na mapendekezo wazi kwa mfanyakazi..."></textarea>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label>📅 Follow-Up Date</label>
+                <label>📅 Tarehe ya Ufuatiliaji</label>
                 <input type="date" id="inchargeFollowupDate">
             </div>
             <div class="form-group">
-                <label>⏳ Follow-Up Period</label>
+                <label>⏳ Muda wa Ufuatiliaji</label>
                 <select id="inchargeFollowupPeriod">
-                    <option value="1-week">1 Week</option>
-                    <option value="2-weeks">2 Weeks</option>
-                    <option value="1-month" selected>1 Month</option>
-                    <option value="2-months">2 Months</option>
-                    <option value="3-months">3 Months</option>
+                    <option value="1-week">Wiki 1</option>
+                    <option value="2-weeks">Wiki 2</option>
+                    <option value="1-month" selected>Mwezi 1</option>
+                    <option value="2-months">Miezi 2</option>
+                    <option value="3-months">Miezi 3</option>
                 </select>
             </div>
         </div>
 
         <div class="form-group">
-            <label>✅ In-Charge Sign-Off</label>
+            <label>✅ Sahihi ya Mganga Mfawidhi</label>
             <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center; padding:8px 0;">
                 <label style="display:flex; align-items:center; gap:6px; font-weight:400; font-size:14px;">
-                    <input type="radio" name="inchargeSignoff" value="approved" checked> ✔️ Approved
+                    <input type="radio" name="inchargeSignoff" value="approved" checked> ✔️ Imekubaliwa
                 </label>
                 <label style="display:flex; align-items:center; gap:6px; font-weight:400; font-size:14px;">
-                    <input type="radio" name="inchargeSignoff" value="conditional"> ⚠️ Conditional Approval
+                    <input type="radio" name="inchargeSignoff" value="conditional"> ⚠️ Ina Masharti
                 </label>
                 <label style="display:flex; align-items:center; gap:6px; font-weight:400; font-size:14px;">
-                    <input type="radio" name="inchargeSignoff" value="rejected"> ❌ Returned for Review
+                    <input type="radio" name="inchargeSignoff" value="rejected"> ❌ Imerejeshwa
                 </label>
             </div>
         </div>
 
-        <!-- ===== SCORE SUMMARY ===== -->
+        <!-- ===== MUHTASARI WA ALAMA ===== -->
         <div class="score-box" id="scoreBox">
-            <h3>📊 Daily Worker Assessment Summary</h3>
+            <h3>📊 Muhtasari wa Tathmini ya Mfanyakazi</h3>
             <div class="score-row">
-                <div class="score-item"><span class="number" id="selfTotal">0</span><span class="label">Self Score</span></div>
-                <div class="score-item"><span class="number green" id="selfPercent">0%</span><span class="label">Self %</span></div>
-                <div class="score-item"><span class="number" id="selfRatingDisplay" style="font-size:16px;">—</span><span class="label">Self Rating</span></div>
+                <div class="score-item"><span class="number" id="selfTotal">0</span><span class="label">Alama ya Mfanyakazi</span></div>
+                <div class="score-item"><span class="number green" id="selfPercent">0%</span><span class="label">Asilimia ya Mfanyakazi</span></div>
+                <div class="score-item"><span class="number" id="selfRatingDisplay" style="font-size:16px;">—</span><span class="label">Kiwango cha Mfanyakazi</span></div>
             </div>
             <div class="score-row" style="margin-top:6px;">
-                <div class="score-item"><span class="number purple" id="supTotal">0</span><span class="label">Supervisor Score</span></div>
-                <div class="score-item"><span class="number orange" id="supPercent">0%</span><span class="label">Supervisor %</span></div>
-                <div class="score-item"><span class="number" id="supRatingDisplay" style="font-size:16px;">—</span><span class="label">Supervisor Rating</span></div>
+                <div class="score-item"><span class="number purple" id="supTotal">0</span><span class="label">Alama ya Msimamizi</span></div>
+                <div class="score-item"><span class="number orange" id="supPercent">0%</span><span class="label">Asilimia ya Msimamizi</span></div>
+                <div class="score-item"><span class="number" id="supRatingDisplay" style="font-size:16px;">—</span><span class="label">Kiwango cha Msimamizi</span></div>
             </div>
             <div class="score-row" style="margin-top:6px;">
-                <div class="score-item" style="background:#2c3e50; color:#fff;"><span class="number" style="color:#fff;" id="inchargeRatingDisplay">—</span><span class="label" style="color:#bdc3c7;">In-Charge Rating</span></div>
-                <div class="score-item" style="background:#e8daef;"><span class="number teal" id="workerCombined">0%</span><span class="label">Combined Score</span></div>
-                <div class="score-item" style="background:#e8daef;"><span class="number" id="gapScore">0</span><span class="label">Self-Supervisor Gap</span></div>
+                <div class="score-item" style="background:#2c3e50; color:#fff;"><span class="number" style="color:#fff;" id="inchargeRatingDisplay">—</span><span class="label" style="color:#bdc3c7;">Kiwango cha Mganga Mfawidhi</span></div>
+                <div class="score-item" style="background:#e8daef;"><span class="number teal" id="workerCombined">0%</span><span class="label">Alama ya Pamoja</span></div>
+                <div class="score-item" style="background:#e8daef;"><span class="number" id="gapScore">0</span><span class="label">Pengo</span></div>
             </div>
             <div class="score-row" style="margin-top:6px;">
                 <div class="score-item" style="background:#2c3e50; color:#fff;">
                     <span class="number" style="color:#fff; font-size:16px;" id="inchargeSignoffDisplay">—</span>
-                    <span class="label" style="color:#bdc3c7;">Sign-Off Status</span>
+                    <span class="label" style="color:#bdc3c7;">Hali ya Sahihi</span>
                 </div>
                 <div class="score-item" style="background:#e8daef;">
                     <span class="number" id="statusIndicator" style="font-size:16px;">—</span>
-                    <span class="label">Self-Supervisor Status</span>
+                    <span class="label">Hali ya Pengo</span>
                 </div>
             </div>
             <div class="progress-bar" style="margin-top:6px;">
                 <div class="fill purple" id="combinedProgress" style="width:0%;"></div>
             </div>
             <div style="text-align:center; font-size:12px; margin-top:4px; color:#7f8c8d;">
-                Combined Score: <strong id="combinedScoreText">0%</strong> &nbsp;|&nbsp; Gap: <strong id="gapText">0</strong> points
+                Alama ya Pamoja: <strong id="combinedScoreText">0%</strong> &nbsp;|&nbsp; Pengo: <strong id="gapText">0</strong>
             </div>
             <div id="alertsContainer" style="margin-top:8px;"></div>
         </div>
 
-        <!-- ===== CHECKLIST SUMMARY ===== -->
+        <!-- ===== MUHTASARI WA ORODHA ===== -->
         <div class="card" style="background:#f8f9fa; border-radius:10px; padding:14px 18px; margin:14px 0; border:1px solid #ecf0f1;">
-            <h4 style="color:#1a5276; font-size:14px; margin-bottom:6px;">📋 Checklist Completion</h4>
+            <h4 style="color:#1a5276; font-size:14px; margin-bottom:6px;">📋 Kukamilisha Orodha</h4>
             <div class="checklist-stats">
-                <span>✅ General: <strong id="generalDone">0</strong>/<span id="generalTotal">0</span></span>
-                <span>🎯 Role-Specific: <strong id="specificDone">0</strong>/<span id="specificTotal">0</span></span>
-                <span>📊 Total: <strong id="totalDone">0</strong>/<span id="totalAll">0</span></span>
+                <span>✅ Jumla: <strong id="generalDone">0</strong>/<span id="generalTotal">0</span></span>
+                <span>🎯 Maalum: <strong id="specificDone">0</strong>/<span id="specificTotal">0</span></span>
+                <span>📊 Jumla: <strong id="totalDone">0</strong>/<span id="totalAll">0</span></span>
             </div>
             <div class="progress-bar"><div class="fill" id="checklistProgress" style="width:0%;"></div></div>
         </div>
 
-        <!-- ===== WORKER PROFILE ===== -->
+        <!-- ===== WASIFU WA MFANYAKAZI ===== -->
         <div class="section-divider info" style="margin-top:10px;">
-            📂 Worker Profile
-            <span class="badge-section">View worker's performance history</span>
+            📂 Wasifu wa Mfanyakazi
+            <span class="badge-section">Angalia historia ya utendaji</span>
         </div>
-        <button class="btn btn-primary btn-sm" onclick="viewWorkerProfile()" style="flex:none;">👤 View Profile</button>
+        <button class="btn btn-primary btn-sm" onclick="viewWorkerProfile()" style="flex:none;">👤 Tazama Wasifu</button>
         <div id="workerProfileContainer" style="margin-top:8px;"></div>
 
         <div class="btn-group">
-            <button class="btn btn-success" onclick="saveReport()">💾 Save Report</button>
-            <button class="btn btn-warning" onclick="resetForm()">🔄 Reset</button>
-            <button class="btn btn-primary" onclick="calculateScores()">📊 Calculate</button>
-            <button class="btn btn-outline" onclick="exportToCSV()">📊 Export CSV</button>
+            <button class="btn btn-success" onclick="saveReport()">💾 Hifadhi</button>
+            <button class="btn btn-warning" onclick="resetForm()">🔄 Weka Upya</button>
+            <button class="btn btn-primary" onclick="calculateScores()">📊 Hesabu</button>
+            <button class="btn btn-outline" onclick="exportToCSV()">📊 Hamisha CSV</button>
         </div>
 
     </div>
 
     <!-- ================================================================ -->
-    <!-- ===== TAB: SUMMARY ===== -->
+    <!-- ===== SEHEMU: MUHTASARI ===== -->
     <!-- ================================================================ -->
     <div id="summary" class="tab-content">
 
-        <h2 style="color:#1a5276; font-size:18px; margin-bottom:4px;">📊 Performance Summary</h2>
-        <p style="color:#7f8c8d; margin-bottom:12px;">View performance trends over time with charts and analytics.</p>
+        <h2 style="color:#1a5276; font-size:18px; margin-bottom:4px;">📊 Muhtasari wa Utendaji</h2>
+        <p style="color:#7f8c8d; margin-bottom:12px;">Angalia mwenendo wa utendaji kwa muda na chati.</p>
 
         <div class="form-row">
             <div class="form-group">
-                <label>Select Worker</label>
+                <label>Chagua Mfanyakazi</label>
                 <select id="summaryWorker" onchange="renderSummary()">
-                    <option value="all">All Workers</option>
+                    <option value="all">Wafanyakazi Wote</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Period</label>
+                <label>Kipindi</label>
                 <select id="summaryPeriod" onchange="renderSummary()">
-                    <option value="week">This Week</option>
-                    <option value="month">This Month</option>
-                    <option value="quarter">This Quarter</option>
-                    <option value="all">All Time</option>
+                    <option value="week">Wiki Hii</option>
+                    <option value="month">Mwezi Huu</option>
+                    <option value="quarter">Robo Mwaka</option>
+                    <option value="all">Muda Wote</option>
                 </select>
             </div>
         </div>
 
-        <!-- Chart -->
+        <!-- Chati -->
         <div class="chart-container">
-            <h4 style="color:#1a5276; font-size:14px; margin-bottom:6px;">📈 Performance Trend</h4>
+            <h4 style="color:#1a5276; font-size:14px; margin-bottom:6px;">📈 Mwenendo wa Utendaji</h4>
             <canvas id="performanceChart" height="200" style="width:100%;"></canvas>
         </div>
 
         <div id="summaryContainer">
-            <div class="history-empty">Select filters to view summary.</div>
+            <div class="history-empty">Chagua vichujio ili kuona muhtasari.</div>
         </div>
 
         <div class="btn-group">
-            <button class="btn btn-primary" onclick="window.print()">🖨️ Print Summary</button>
-            <button class="btn btn-warning" onclick="exportSummaryCSV()">📊 Export Summary CSV</button>
+            <button class="btn btn-primary" onclick="window.print()">🖨️ Chapisha Muhtasari</button>
+            <button class="btn btn-warning" onclick="exportSummaryCSV()">📊 Hamisha Muhtasari CSV</button>
         </div>
     </div>
 
     <!-- ================================================================ -->
-    <!-- ===== TAB: HISTORY ===== -->
+    <!-- ===== SEHEMU: HISTORIA ===== -->
     <!-- ================================================================ -->
     <div id="history" class="tab-content">
 
-        <h2 style="color:#1a5276; font-size:18px; margin-bottom:4px;">📂 Worker Assessment History</h2>
-        <p style="color:#7f8c8d; margin-bottom:12px;">All saved daily worker assessments.</p>
+        <h2 style="color:#1a5276; font-size:18px; margin-bottom:4px;">📂 Historia ya Tathmini</h2>
+        <p style="color:#7f8c8d; margin-bottom:12px;">Tathmini zote zilizohifadhiwa.</p>
 
         <div id="historyList">
-            <div class="history-empty">No reports saved yet. Complete an assessment and click "Save Report".</div>
+            <div class="history-empty">Hakuna ripoti zilizohifadhiwa. Kamilisha tathmini na ubonyeze "Hifadhi".</div>
         </div>
 
         <div class="btn-group">
-            <button class="btn btn-danger" onclick="clearAllHistory()">🗑️ Clear All</button>
-            <button class="btn btn-warning" onclick="exportAllHistory()">📤 Export All JSON</button>
-            <button class="btn btn-primary" onclick="exportToCSV()">📊 Export CSV</button>
+            <button class="btn btn-danger" onclick="clearAllHistory()">🗑️ Futa Zote</button>
+            <button class="btn btn-warning" onclick="exportAllHistory()">📤 Hamisha JSON Zote</button>
+            <button class="btn btn-primary" onclick="exportToCSV()">📊 Hamisha CSV</button>
         </div>
     </div>
 
     <!-- ================================================================ -->
-    <!-- ===== FOOTER ===== -->
+    <!-- ===== CHINI ===== -->
     <!-- ================================================================ -->
     <div class="footer">
-        <div class="verse">"Whatever you do, work at it with all your heart, as working for the Lord, not for human masters." — Colossians 3:23</div>
-        <div>Mtwara SDA Dispensary | Daily Performance Tracker | Version 3.0 (2026)</div>
+        <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana, wala si kwa wanadamu." — Wakolosai 3:23</div>
+        <div>Mtwara SDA Dispensary | Kikaguzi cha Utendaji Kazi | Toleo 2.0 (2026)</div>
     </div>
 
 </div>
 
-<!-- ===== TOAST ===== -->
+<!-- ===== ARIFA ===== -->
 <div class="toast" id="toast"></div>
 
 <!-- ================================================================ -->
@@ -1113,176 +1114,187 @@
 <!-- ================================================================ -->
 <script>
     // ================================================================
-    // CHECKLIST DATA
+    // DATA YA ORODHA
     // ================================================================
 
-    // ===== GENERAL CHECKLIST (All Workers) =====
+    // ===== ORODHA YA JUMLA (Wafanyakazi Wote) =====
     const GENERAL_CHECKLIST = [
-        'Arrived at least 10 minutes before shift start',
-        'Properly dressed in clean uniform with visible ID badge',
-        'Signed in/out correctly on attendance register',
-        'Attended morning devotion/prayer meeting',
-        'Took breaks at scheduled times; returned on time',
-        'Workstation/area properly set up before start',
-        'Equipment/tools checked and found functional',
-        'Demonstrated compassion and respect to patients/clients',
-        'Communicated effectively with colleagues and supervisors',
-        'Maintained cleanliness and order in work area',
-        'Proper waste segregation and disposal followed',
-        'Used resources wisely; avoided waste',
-        'Maintained positive and respectful attitude throughout',
-        'Handled challenges without frustration or complaining',
-        'Completed end-of-shift reporting/reconciliation'
+        'Nimewasili kazini walau dakika 10 kabla ya saa ya kuanza',
+        'Nimevaa sare safi na kitambulisho kinachoonekana',
+        'Nimejisajili kwa usahihi kwenye daftari la mahudhurio',
+        'Nimehudhuria ibada ya asubuhi / maombi',
+        'Nimepumzika kwa wakati na kurudi kwa wakati',
+        'Nimeandaa eneo langu la kazi kabla ya kuanza',
+        'Nimekagua vifaa na zana na zinafanya kazi vizuri',
+        'Nimewaonyesha huruma na heshima wagonjwa / wateja',
+        'Nimewasiliana vizuri na wafanyakazi wenzangu na msimamizi',
+        'Nimeweka eneo langu la kazi safi na vyema',
+        'Nimetenganisha na kutupa taka kwa usahihi',
+        'Nimetumia rasilimali kwa busara na kuepuka upotevu',
+        'Nimekuwa na tabia njema na heshima siku nzima',
+        'Nimeshughulikia changamoto bila kukasirika au kulalamika',
+        'Nimekamilisha ripoti ya mwisho wa zamu'
     ];
 
-    // ===== ROLE-SPECIFIC CHECKLISTS =====
+    // ===== ORODHA MAALUM (Kwa Kila Kazi) =====
     const ROLE_CHECKLISTS = {
         'Doctor': [
-            'Conducted thorough patient consultations and examinations',
-            'Made accurate diagnoses based on clinical findings',
-            'Developed appropriate treatment plans for patients',
-            'Prescribed medications safely and correctly',
-            'Completed all patient documentation accurately',
-            'Responded to emergencies promptly and effectively',
-            'Provided clear patient education and discharge instructions'
+            'Nimefanya uchunguzi wa kina wa wagonjwa na mitihani',
+            'Nimetambua ugonjwa kwa usahihi kulingana na matokeo',
+            'Nimeandaa mipango sahihi ya matibabu kwa wagonjwa',
+            'Nimeagiza dawa kwa usalama na usahihi',
+            'Nimekamilisha nyaraka zote za wagonjwa kwa usahihi',
+            'Nimejibu dharura kwa haraka na ufanisi',
+            'Nimetoa elimu kwa wagonjwa na maelekezo ya kutolewa'
         ],
         'Nurse': [
-            'Performed comprehensive patient assessments on all assigned patients',
-            'Administered medications safely (right patient, drug, dose, route, time)',
-            'Monitored vital signs and documented changes',
-            'Provided compassionate bedside care and patient education',
-            'Maintained accurate nursing documentation and care plans',
-            'Responded to call bells and patient needs promptly',
-            'Collaborated effectively with doctors and other team members'
+            'Nimefanya tathmini kamili ya wagonjwa wote waliopangiwa',
+            'Nimetoa dawa kwa usalama (mgonjwa sahihi, dawa sahihi, kipimo sahihi, njia sahihi, muda sahihi)',
+            'Nimeangalia ishara za maisha na kubadilisha nyaraka',
+            'Nimetoa huduma ya huruma kitandani na elimu kwa wagonjwa',
+            'Nimehifadhi nyaraka sahihi za uuguzi na mipango ya huduma',
+            'Nimejibu kengele na mahitaji ya wagonjwa kwa haraka',
+            'Nimeshirikiana vizuri na madaktari na timu nyingine'
         ],
         'Midwife': [
-            'Provided antenatal care and health education to expectant mothers',
-            'Monitored labour and delivery with appropriate interventions',
-            'Conducted safe deliveries following standard protocols',
-            'Provided immediate newborn care and breastfeeding support',
-            'Documented all maternal and neonatal care accurately',
-            'Identified and managed obstetric emergencies promptly',
-            'Provided postnatal care and family planning counselling'
+            'Nimetoa huduma ya ujauzito na elimu ya afya kwa wazazi',
+            'Nimefuatilia leba na kujifungua kwa hatua zinazofaa',
+            'Nimefanya uzazi salama kufuatia itifaki',
+            'Nimetotoa huduma ya mtoto mchanga na msaada wa kunyonyesha',
+            'Nimehifadhi nyaraka zote za mama na mtoto kwa usahihi',
+            'Nimetambua na kudhibiti dharura za uzazi kwa haraka',
+            'Nimetoa huduma baada ya kujifungua na ushauri wa uzazi'
         ],
         'Clinical Officer': [
-            'Conducted thorough patient assessments and examinations',
-            'Ordered and interpreted appropriate laboratory/radiology investigations',
-            'Developed evidence-based treatment and management plans',
-            'Performed clinical procedures safely and competently',
-            'Completed patient documentation accurately and timely',
-            'Communicated effectively with patients and families',
-            'Collaborated with medical team on complex cases'
+            'Nimefanya uchunguzi wa kina wa wagonjwa na mitihani',
+            'Nimeagiza na kufasiri uchunguzi wa maabara / radiolojia',
+            'Nimeandaa mipango ya matibabu kulingana na ushahidi',
+            'Nimefanya taratibu za kliniki kwa usalama na uwezo',
+            'Nimekamilisha nyaraka za wagonjwa kwa usahihi na kwa wakati',
+            'Nimewasiliana vizuri na wagonjwa na familia',
+            'Nimeshirikiana na timu ya matibabu kwenye kesi ngumu'
         ],
         'Laboratory Technician': [
-            'Collected and processed specimens properly and safely',
-            'Performed diagnostic tests accurately following SOPs',
-            'Conducted daily quality control checks on equipment',
-            'Reported test results promptly with accurate documentation',
-            'Maintained laboratory equipment and reagents properly',
-            'Followed biohazard safety and infection control protocols',
-            'Managed laboratory inventory and consumables efficiently'
+            'Nimekusanya na kusindika sampuli kwa usahihi na usalama',
+            'Nimefanya vipimo vya uchunguzi kwa usahihi kufuatia SOP',
+            'Nimefanya ukaguzi wa ubora wa vifaa kila siku',
+            'Nimeripoti matokeo ya vipimo kwa haraka na kumbukumbu sahihi',
+            'Nimetunza vifaa na kemikali za maabara vizuri',
+            'Nimefuata usalama wa biohatari na itifaki za kinga dhidi ya maambukizi',
+            'Nimesimamia hesabu ya maabara kwa ufanisi'
         ],
         'Pharmacist': [
-            'Dispensed medications accurately with correct labeling and packaging',
-            'Provided patient counseling on medication use and side effects',
-            'Verified prescriptions for safety and appropriateness',
-            'Managed pharmacy inventory and prevented stockouts',
-            'Maintained proper storage conditions for all medications',
-            'Recorded controlled substances with perfect accountability',
-            'Reported and managed adverse drug reactions appropriately'
+            'Nimetoa dawa kwa usahihi na uwekaji lebo sahihi',
+            'Nimetoa ushauri kwa wagonjwa kuhusu matumizi ya dawa na madhara',
+            'Nimehakikisha maagizo ya dawa ni salama na yanafaa',
+            'Nimesimamia hesabu ya dawa na kuepuka upungufu',
+            'Nimehifadhi dawa katika hali sahihi',
+            'Nimehifadhi kumbukumbu za dawa zilizodhibitiwa kwa uwajibikaji kamili',
+            'Nimeripoti na kudhibiti athari mbaya za dawa'
         ],
         'Accountant': [
-            'Completed all financial entries accurately and on time',
-            'Reconciled accounts and balanced transactions daily',
-            'Prepared financial reports with zero errors',
-            'Processed payments and receipts correctly',
-            'Maintained proper documentation for all financial transactions',
-            'Ensured compliance with financial policies and procedures',
-            'Met all statutory remittance deadlines'
+            'Nimekamilisha maingizo yote ya fedha kwa usahihi na kwa wakati',
+            'Nimesawazisha akaunti na miamala kila siku',
+            'Nimeandaa ripoti za fedha bila makosa',
+            'Nimesindika malipo na risiti kwa usahihi',
+            'Nimehifadhi nyaraka sahihi za miamala yote ya fedha',
+            'Nimezingatia sera na taratibu za fedha',
+            'Nimekutana na makataa yote ya malipo ya kisheria'
         ],
         'Cashier': [
-            'Processed patient payments accurately and efficiently',
-            'Maintained zero cash discrepancies throughout the shift',
-            'Issued correct receipts for all transactions',
-            'Reconciled cash at end of shift perfectly',
-            'Provided excellent customer service to all patients',
-            'Handled patient inquiries about bills with patience',
-            'Maintained confidentiality of all financial information'
+            'Nimesindika malipo ya wagonjwa kwa usahihi na ufanisi',
+            'Nimeweka hakuna tofauti za fedha wakati wa zamu',
+            'Nimetoa risiti sahihi kwa miamala yote',
+            'Nimesawazisha fedha mwishoni mwa zamu kwa usahihi',
+            'Nimetoa huduma bora kwa wagonjwa wote',
+            'Nimeshughulikia maswali ya wagonjwa kuhusu bili kwa uvumilivu',
+            'Nimehifadhi usiri wa habari zote za fedha'
         ],
         'Receptionist': [
-            'Registered patients quickly and accurately (≤3 minutes)',
-            'Managed multiple phone calls and walk-in patients efficiently',
-            'Provided clear directions and information to patients/visitors',
-            'Maintained accurate patient records and appointment schedules',
-            'Handled patient inquiries and complaints with empathy',
-            'Maintained a neat and welcoming reception area',
-            'Protected patient confidentiality at all times'
+            'Nimesajili wagonjwa haraka na kwa usahihi (≤ dakika 3)',
+            'Nimesimamia simu nyingi na wagonjwa wanaoingia kwa ufanisi',
+            'Nimetotoa maelekezo sahihi kwa wagonjwa / wageni',
+            'Nimehifadhi kumbukumbu sahihi za wagonjwa na ratiba',
+            'Nimeshughulikia maswali na malalamiko ya wagonjwa kwa huruma',
+            'Nimeweka eneo la mapokezi safi na la kukaribisha',
+            'Nimehifadhi usiri wa wagonjwa wakati wote'
         ],
         'Janitor': [
-            'Cleaned all assigned areas to high hygiene standards',
-            'Disposed of waste properly following segregation rules',
-            'Cleaned and sanitized high-touch surfaces regularly',
-            'Reported maintenance issues promptly',
-            'Maintained cleaning supplies inventory adequately',
-            'Followed infection prevention protocols consistently',
-            'Completed cleaning schedules on time without reminders'
+            'Nimesafisha maeneo yote yaliyopangiwa kwa viwango vya juu vya usafi',
+            'Nimetupa taka kwa usahihi kufuatia sheria za kutenganisha',
+            'Nimesafisha na kuua viini kwenye nyuso zinazoguswa mara kwa mara',
+            'Nimeripoti matatizo ya matengenezo kwa haraka',
+            'Nimehifadhi hesabu ya vifaa vya kusafisha vya kutosha',
+            'Nimefuata itifaki za kinga dhidi ya maambukizi mara kwa mara',
+            'Nimekamilisha ratiba za usafi kwa wakati bila kukumbushwa'
         ],
         'Cook': [
-            'Prepared nutritious and appetizing meals on schedule',
-            'Followed food safety and hygiene standards strictly',
-            'Minimized food waste through proper planning',
-            'Maintained kitchen cleanliness and order throughout',
-            'Checked and recorded food temperatures regularly',
-            'Accommodated special dietary needs when required',
-            'Stored food properly to maintain quality and safety'
+            'Nimeandaa milo yenye lishe na ya kuvutia kwa ratiba',
+            'Nimefuata viwango vya usalama wa chakula na usafi',
+            'Nimepunguza upotevu wa chakula kupitia mipango sahihi',
+            'Nimeweka jikoni safi na vyema wakati wote',
+            'Nimeangalia na kurekodi joto la chakula mara kwa mara',
+            'Nimezingatia mahitaji maalum ya lishe inapohitajika',
+            'Nimehifadhi chakula vizuri ili kudumisha ubora na usalama'
         ],
         'Porter': [
-            'Transported patients safely and with dignity',
-            'Assisted with patient transfers and positioning',
-            'Delivered supplies and specimens promptly',
-            'Maintained a clean and orderly work area',
-            'Responded promptly to assistance requests',
-            'Followed safety protocols for patient handling',
-            'Communicated effectively with clinical staff'
+            'Nimesafirisha wagonjwa kwa usalama na heshima',
+            'Nimesaidia kuhamisha na kuweka wagonjwa vizuri',
+            'Nimewasilisha vifaa na sampuli kwa haraka',
+            'Nimeweka eneo la kazi safi na vyema',
+            'Nimejibu maombi ya msaada kwa haraka',
+            'Nimefuata itifaki za usalama kwa kushughulikia wagonjwa',
+            'Nimewasiliana vizuri na wafanyakazi wa kliniki'
         ],
         'Driver': [
-            'Drove safely and defensively at all times',
-            'Maintained vehicle cleanliness and performed daily checks',
-            'Recorded vehicle log and mileage accurately',
-            'Responded to transport requests promptly',
-            'Adhered to traffic laws and facility driving policies',
-            'Reported vehicle issues immediately for maintenance',
-            'Treated patients and clients with respect and care'
+            'Nimeendesha kwa usalama na tahadhari wakati wote',
+            'Nimetunza usafi wa gari na kufanya ukaguzi wa kila siku',
+            'Nimehifadhi kumbukumbu za gari na mileage kwa usahihi',
+            'Nimejibu maombi ya usafirishaji kwa haraka',
+            'Nimezingatia sheria za trafiki na sera za uendeshaji',
+            'Nimeripoti matatizo ya gari mara moja kwa matengenezo',
+            'Nimewatumia wagonjwa na wateja kwa heshima na huduma'
         ],
         'Administrator': [
-            'Completed all administrative tasks accurately and timely',
-            'Managed office operations smoothly without delays',
-            'Processed documents and correspondence efficiently',
-            'Maintained organized filing and record keeping',
-            'Responded to staff and stakeholder inquiries promptly',
-            'Ensured compliance with facility policies and procedures',
-            'Supported team with effective coordination'
+            'Nimekamilisha kazi zote za kiutawala kwa usahihi na kwa wakati',
+            'Nimesimamia shughuli za ofisi vizuri bila kuchelewa',
+            'Nimesindika nyaraka na mawasiliano kwa ufanisi',
+            'Nimehifadhi kumbukumbu na rekodi zilizopangwa',
+            'Nimejibu maswali ya wafanyakazi na washikadau kwa haraka',
+            'Nimezingatia sera na taratibu za kituo',
+            'Nimesaidia timu kwa uratibu mzuri'
         ],
         'HR Officer': [
-            'Processed staff attendance and leave records accurately',
-            'Responded to staff inquiries and concerns promptly',
-            'Maintained up-to-date personnel records and files',
-            'Assisted with recruitment and onboarding processes',
-            'Ensured staff compliance with HR policies',
-            'Supported staff development and training activities',
-            'Handled confidential information with utmost discretion'
+            'Nimesindika rekodi za mahudhurio na likizo kwa usahihi',
+            'Nimejibu maswali na wasiwasi wa wafanyakazi kwa haraka',
+            'Nimehifadhi rekodi za wafanyakazi zilizosasishwa',
+            'Nimesaidia katika kuajiri na kuwasilisha wafanyakazi wapya',
+            'Nimehakikisha wafanyakazi wanazingatia sera za HR',
+            'Nimesaidia shughuli za maendeleo ya wafanyakazi na mafunzo',
+            'Nimeshughulikia habari za siri kwa uangalifu mkubwa'
+        ],
+        // ===== MPYA: MHUDUMU WA BIMA =====
+        'Insurance Data Clerk': [
+            'Nimechakata madai ya NHIF kwa usahihi na kuwasilisha kwa wakati',
+            'Nimechakata madai ya Jubilee kwa usahihi na haraka',
+            'Nimehakikisha wagonjwa wana bima kabla ya kuchakata',
+            'Nimetambua na kusahihisha makosa kwenye fomu za bima',
+            'Nimekusanya na kupanga fomu za NSSF kwa usahihi',
+            'Nimehifadhi kumbukumbu sahihi za miamala yote ya bima',
+            'Nimewasiliana vizuri na makampuni ya bima na wagonjwa',
+            'Nimezingatia sheria na ratiba za bima'
         ]
     };
 
     // ================================================================
-    // STATE
+    // HALI
     // ================================================================
     let allReports = [];
     let generalState = new Array(GENERAL_CHECKLIST.length).fill(false);
     let specificState = new Array(ROLE_CHECKLISTS['Doctor'].length).fill(false);
 
     // ================================================================
-    // RENDER CHECKLISTS
+    // ONYESHA ORODHA
     // ================================================================
     function renderGeneralChecklist() {
         const container = document.getElementById('generalChecklistContainer');
@@ -1336,7 +1348,7 @@
     }
 
     // ================================================================
-    // TOGGLE CHECKLIST ITEMS
+    // BADILISHA ORODHA
     // ================================================================
     function toggleGeneral(index) {
         generalState[index] = !generalState[index];
@@ -1375,7 +1387,7 @@
     }
 
     // ================================================================
-    // RATING SELECTION
+    // CHAGUA KIWANGO
     // ================================================================
     function selectRating(groupId, btn) {
         const group = document.getElementById(groupId);
@@ -1393,7 +1405,7 @@
     }
 
     // ================================================================
-    // GET RATING VALUE
+    // PATA THAMANI YA KIWANGO
     // ================================================================
     function getRatingValue(groupId) {
         const selected = document.querySelector(`#${groupId} .rating-btn.selected`);
@@ -1402,11 +1414,11 @@
 
     function getRatingLabel(groupId) {
         const selected = document.querySelector(`#${groupId} .rating-btn.selected`);
-        return selected ? selected.textContent.trim() : 'Not Rated';
+        return selected ? selected.textContent.trim() : 'Haijakadiriwa';
     }
 
     // ================================================================
-    // CALCULATE SCORES & ALERTS
+    // HESABU ALAMA
     // ================================================================
     function calculateScores() {
         const selfScores = [
@@ -1441,17 +1453,15 @@
         document.getElementById('supPercent').textContent = supPercent + '%';
         document.getElementById('supRatingDisplay').innerHTML = getRatingBadge(supPercent);
 
-        // In-Charge Rating
         const inchargeRating = getRatingValue('inchargeRating');
         const inchargeLabel = getRatingLabel('inchargeRating');
-        document.getElementById('inchargeRatingDisplay').textContent = inchargeLabel || 'Not Rated';
+        document.getElementById('inchargeRatingDisplay').textContent = inchargeLabel || 'Haijakadiriwa';
 
-        // Sign-Off
         const signoff = document.querySelector('input[name="inchargeSignoff"]:checked')?.value || 'approved';
         const signoffLabels = {
-            'approved': '✔️ Approved',
-            'conditional': '⚠️ Conditional',
-            'rejected': '❌ Returned'
+            'approved': '✔️ Imekubaliwa',
+            'conditional': '⚠️ Ina Masharti',
+            'rejected': '❌ Imerejeshwa'
         };
         const signoffClass = {
             'approved': 'signoff-approved',
@@ -1467,22 +1477,22 @@
 
         const gap = Math.abs(selfPercent - supPercent);
         document.getElementById('gapScore').textContent = gap;
-        document.getElementById('gapText').textContent = gap + ' points';
+        document.getElementById('gapText').textContent = gap;
 
         let status = '', statusClass = '';
-        if (gap <= 5) { status = '✅ Aligned'; statusClass = 'green'; }
-        else if (gap <= 15) { status = '⚠️ Slight Gap'; statusClass = 'orange'; }
-        else { status = '❌ Significant Gap'; statusClass = 'red'; }
+        if (gap <= 5) { status = '✅ Imesawazishwa'; statusClass = 'green'; }
+        else if (gap <= 15) { status = '⚠️ Pengo Ndogo'; statusClass = 'orange'; }
+        else { status = '❌ Pengo Kubwa'; statusClass = 'red'; }
         document.getElementById('statusIndicator').innerHTML = `<span class="status-dot ${statusClass}"></span> ${status}`;
 
-        // ===== PERFORMANCE ALERTS =====
+        // ===== TAHADHARI =====
         const alertContainer = document.getElementById('alertsContainer');
         let alerts = [];
-        if (selfPercent < 50) alerts.push({ msg: '⚠️ Self-assessment is low (<50%)', type: 'warning' });
-        if (supPercent < 50) alerts.push({ msg: '⚠️ Supervisor assessment is low (<50%)', type: 'warning' });
-        if (combined < 50) alerts.push({ msg: '⚠️ Combined score is low (<50%)', type: 'warning' });
-        if (gap > 20) alerts.push({ msg: '⚠️ Large gap between self and supervisor (>20%)', type: 'warning' });
-        if (inchargeRating <= 2) alerts.push({ msg: '⚠️ In-Charge rating is low (Needs Improvement or Unsatisfactory)', type: 'warning' });
+        if (selfPercent < 50) alerts.push({ msg: '⚠️ Tathmini ya mfanyakazi ni ya chini (<50%)', type: 'warning' });
+        if (supPercent < 50) alerts.push({ msg: '⚠️ Tathmini ya msimamizi ni ya chini (<50%)', type: 'warning' });
+        if (combined < 50) alerts.push({ msg: '⚠️ Alama ya pamoja ni ya chini (<50%)', type: 'warning' });
+        if (gap > 20) alerts.push({ msg: '⚠️ Pengo kubwa kati ya mfanyakazi na msimamizi (>20%)', type: 'warning' });
+        if (inchargeRating <= 2) alerts.push({ msg: '⚠️ Kiwango cha Mganga Mfawidhi ni cha chini', type: 'warning' });
 
         if (alerts.length > 0) {
             alertContainer.innerHTML = alerts.map(a =>
@@ -1490,20 +1500,20 @@
             ).join('');
             alertContainer.style.display = 'block';
         } else {
-            alertContainer.innerHTML = `<div class="alert-box success">✅ All performance indicators are healthy</div>`;
+            alertContainer.innerHTML = `<div class="alert-box success">✅ Viashiria vyote vya utendaji ni vizuri</div>`;
             alertContainer.style.display = 'block';
         }
     }
 
     function getRatingBadge(percent) {
-        if (percent >= 90) return `<span class="badge badge-excellent">⭐ Excellent</span>`;
-        if (percent >= 75) return `<span class="badge badge-good">👍 Good</span>`;
-        if (percent >= 55) return `<span class="badge badge-average">👌 Average</span>`;
-        return `<span class="badge badge-poor">⚠️ Poor</span>`;
+        if (percent >= 90) return `<span class="badge badge-excellent">⭐ Bora Sana</span>`;
+        if (percent >= 75) return `<span class="badge badge-good">👍 Nzuri</span>`;
+        if (percent >= 55) return `<span class="badge badge-average">👌 Wastani</span>`;
+        return `<span class="badge badge-poor">⚠️ Dhaifu</span>`;
     }
 
     // ================================================================
-    // WORKER PROFILE
+    // WASIFU WA MFANYAKAZI
     // ================================================================
     function viewWorkerProfile() {
         const worker = document.getElementById('workerName').value || 'Unknown';
@@ -1511,7 +1521,7 @@
         const container = document.getElementById('workerProfileContainer');
 
         if (workerReports.length === 0) {
-            container.innerHTML = `<div class="history-empty">No reports found for ${worker}.</div>`;
+            container.innerHTML = `<div class="history-empty">Hakuna ripoti zilizopatikana kwa ${worker}.</div>`;
             return;
         }
 
@@ -1521,26 +1531,26 @@
         const best = Math.max(...workerReports.map(r => r.combined));
         const latest = workerReports[0]?.combined || 0;
 
-        let trend = '🔄 Insufficient data';
+        let trend = '🔄 Habari haitoshi';
         if (workerReports.length >= 3) {
             const first = workerReports[workerReports.length - 1].combined;
             const last = workerReports[0].combined;
-            trend = last > first ? '📈 Improving' : last < first ? '📉 Declining' : '➡️ Stable';
+            trend = last > first ? '📈 Inaboreka' : last < first ? '📉 Inazorota' : '➡️ Imara';
         }
 
         container.innerHTML = `
             <div style="background:#eaf2f8; border-radius:10px; padding:14px 18px; margin-top:10px;">
                 <h4 style="color:#1a5276;">👤 ${worker}</h4>
                 <div class="score-row">
-                    <div class="score-item"><span class="number">${workerReports.length}</span><span class="label">Reports</span></div>
-                    <div class="score-item"><span class="number green">${avgSelf}%</span><span class="label">Avg Self</span></div>
-                    <div class="score-item"><span class="number purple">${avgSup}%</span><span class="label">Avg Supervisor</span></div>
-                    <div class="score-item"><span class="number teal">${avgCombined}%</span><span class="label">Avg Combined</span></div>
+                    <div class="score-item"><span class="number">${workerReports.length}</span><span class="label">Ripoti</span></div>
+                    <div class="score-item"><span class="number green">${avgSelf}%</span><span class="label">Wastani wa Mfanyakazi</span></div>
+                    <div class="score-item"><span class="number purple">${avgSup}%</span><span class="label">Wastani wa Msimamizi</span></div>
+                    <div class="score-item"><span class="number teal">${avgCombined}%</span><span class="label">Wastani wa Pamoja</span></div>
                 </div>
                 <div style="font-size:13px; color:#7f8c8d; margin-top:6px;">
-                    <strong>Trend:</strong> ${trend} &nbsp;|&nbsp;
-                    <strong>Best Score:</strong> ${best}% &nbsp;|&nbsp;
-                    <strong>Latest:</strong> ${latest}%
+                    <strong>Mwenendo:</strong> ${trend} &nbsp;|&nbsp;
+                    <strong>Alama Bora:</strong> ${best}% &nbsp;|&nbsp;
+                    <strong>Ya Mwisho:</strong> ${latest}%
                 </div>
                 <div class="progress-bar" style="margin-top:6px;"><div class="fill" style="width:${avgCombined}%;"></div></div>
             </div>
@@ -1548,7 +1558,7 @@
     }
 
     // ================================================================
-    // SAVE REPORT
+    // HIFADHI RIPOTI
     // ================================================================
     function saveReport() {
         const worker = document.getElementById('workerName').value || 'Unknown';
@@ -1656,28 +1666,28 @@
         renderHistory();
         populateWorkerDropdown();
         renderSummary();
-        showToast('✅ Report saved successfully!', 'success');
+        showToast('✅ Ripoti imehifadhiwa!', 'success');
     }
 
     // ================================================================
-    // RENDER HISTORY
+    // ONYESHA HISTORIA
     // ================================================================
     function renderHistory() {
         const container = document.getElementById('historyList');
         if (allReports.length === 0) {
-            container.innerHTML = '<div class="history-empty">No reports saved yet. Complete an assessment and click "Save Report".</div>';
+            container.innerHTML = '<div class="history-empty">Hakuna ripoti zilizohifadhiwa. Kamilisha tathmini na ubonyeze "Hifadhi".</div>';
             return;
         }
 
         let html = '';
         allReports.slice(0, 30).forEach((r, index) => {
-            const selfRating = r.self.percent >= 90 ? 'Excellent' : r.self.percent >= 75 ? 'Good' : r.self.percent >= 55 ? 'Average' : 'Poor';
-            const supRating = r.supervisorAssessment.percent >= 90 ? 'Excellent' : r.supervisorAssessment.percent >= 75 ? 'Good' : r.supervisorAssessment.percent >= 55 ? 'Average' : 'Poor';
+            const selfRating = r.self.percent >= 90 ? 'Bora Sana' : r.self.percent >= 75 ? 'Nzuri' : r.self.percent >= 55 ? 'Wastani' : 'Dhaifu';
+            const supRating = r.supervisorAssessment.percent >= 90 ? 'Bora Sana' : r.supervisorAssessment.percent >= 75 ? 'Nzuri' : r.supervisorAssessment.percent >= 55 ? 'Wastani' : 'Dhaifu';
             const checklistPercent = r.checklistStats ? Math.round((r.checklistStats.totalDone / r.checklistStats.totalAll) * 100) : 0;
             const signoffLabels = {
-                'approved': '✅ Approved',
-                'conditional': '⚠️ Conditional',
-                'rejected': '❌ Returned'
+                'approved': '✅ Imekubaliwa',
+                'conditional': '⚠️ Ina Masharti',
+                'rejected': '❌ Imerejeshwa'
             };
             const signoffDisplay = r.incharge?.signoff ? signoffLabels[r.incharge.signoff] || '—' : '—';
             html += `
@@ -1685,17 +1695,17 @@
                     <div class="info">
                         <strong>${r.worker}</strong>
                         <span class="role-badge">${r.role}</span><br>
-                        <span class="date">${r.date} · ${r.shift} · Supervisor: ${r.supervisor}</span>
-                        <span style="margin-left:6px;"><span class="tag tag-self">Self: ${r.self.percent}% (${selfRating})</span></span>
-                        <span style="margin-left:4px;"><span class="tag tag-supervisor">Sup: ${r.supervisorAssessment.percent}% (${supRating})</span></span>
-                        <span style="margin-left:6px; font-weight:600; color:#1a5276;">Combined: ${r.combined}%</span>
-                        <span style="margin-left:4px; font-size:11px; color:${r.gap <= 5 ? '#27ae60' : r.gap <= 15 ? '#f39c12' : '#e74c3c'};">Gap: ${r.gap}%</span>
+                        <span class="date">${r.date} · ${r.shift} · Msimamizi: ${r.supervisor}</span>
+                        <span style="margin-left:6px;"><span class="tag tag-self">Mfanyakazi: ${r.self.percent}% (${selfRating})</span></span>
+                        <span style="margin-left:4px;"><span class="tag tag-supervisor">Msimamizi: ${r.supervisorAssessment.percent}% (${supRating})</span></span>
+                        <span style="margin-left:6px; font-weight:600; color:#1a5276;">Pamoja: ${r.combined}%</span>
+                        <span style="margin-left:4px; font-size:11px; color:${r.gap <= 5 ? '#27ae60' : r.gap <= 15 ? '#f39c12' : '#e74c3c'};">Pengo: ${r.gap}%</span>
                         <span style="margin-left:6px; font-size:11px; color:#7f8c8d;">📋 ${checklistPercent}%</span>
                         ${r.faith && r.faith.devotion === 'yes' ? '🙏' : ''}
                         <span style="margin-left:6px; font-size:11px;"><span class="tag tag-incharge">${signoffDisplay}</span></span>
                     </div>
                     <div>
-                        <button onclick="viewReport(${index})" class="btn btn-primary btn-sm">View</button>
+                        <button onclick="viewReport(${index})" class="btn btn-primary btn-sm">Angalia</button>
                         <button onclick="deleteReport(${index})" class="btn btn-danger btn-sm">✕</button>
                     </div>
                 </div>
@@ -1705,7 +1715,7 @@
     }
 
     // ================================================================
-    // VIEW & DELETE REPORT
+    // ANGAZIA RIPOTI
     // ================================================================
     function viewReport(index) {
         const r = allReports[index];
@@ -1723,94 +1733,94 @@
         });
 
         const signoffLabels = {
-            'approved': '✔️ Approved',
-            'conditional': '⚠️ Conditional Approval',
-            'rejected': '❌ Returned for Review'
+            'approved': '✔️ Imekubaliwa',
+            'conditional': '⚠️ Ina Masharti',
+            'rejected': '❌ Imerejeshwa'
         };
         const signoffDisplay = r.incharge?.signoff ? signoffLabels[r.incharge.signoff] || '—' : '—';
 
         alert(
-            `📋 DAILY PERFORMANCE REPORT\n` +
+            `📋 RIPOTI YA TATHMINI\n` +
             `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-            `Worker: ${r.worker}\n` +
-            `Role: ${r.role}\n` +
-            `Date: ${r.date} | Shift: ${r.shift}\n` +
-            `Supervisor: ${r.supervisor} (${r.supervisorTitle})\n` +
+            `Mfanyakazi: ${r.worker}\n` +
+            `Kazi: ${r.role}\n` +
+            `Tarehe: ${r.date} | Zamu: ${r.shift}\n` +
+            `Msimamizi: ${r.supervisor} (${r.supervisorTitle})\n` +
             `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-            `📋 GENERAL CHECKLIST (${r.checklistStats ? r.checklistStats.generalDone + '/' + r.checklistStats.generalTotal : '0/0'})\n` +
+            `📋 ORODHA YA JUMLA (${r.checklistStats ? r.checklistStats.generalDone + '/' + r.checklistStats.generalTotal : '0/0'})\n` +
             selfChecklist +
             `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-            `🎯 ROLE-SPECIFIC CHECKLIST (${r.checklistStats ? r.checklistStats.specificDone + '/' + r.checklistStats.specificTotal : '0/0'})\n` +
+            `🎯 ORODHA MAALUM (${r.checklistStats ? r.checklistStats.specificDone + '/' + r.checklistStats.specificTotal : '0/0'})\n` +
             specificChecklist +
             `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-            `🙏 FAITH & DEVOTIONAL\n` +
-            `Devotion: ${r.faith && r.faith.devotion === 'yes' ? '✅ Attended' : '❌ Not Attended'}\n` +
-            `Verse: ${r.faith && r.faith.verse ? r.faith.verse : 'None'}\n` +
-            `Reflection: ${r.faith && r.faith.reflection ? r.faith.reflection : 'None'}\n` +
+            `🙏 IMANI NA MAOMBI\n` +
+            `Ibada: ${r.faith && r.faith.devotion === 'yes' ? '✅ Alihudhuria' : '❌ Hakuhudhuria'}\n` +
+            `Aya: ${r.faith && r.faith.verse ? r.faith.verse : 'Hakuna'}\n` +
+            `Tafakari: ${r.faith && r.faith.reflection ? r.faith.reflection : 'Hakuna'}\n` +
             `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-            `📝 WORKER SELF-ASSESSMENT\n` +
-            `Punctuality: ${r.self.labels[0]}\n` +
-            `Quality: ${r.self.labels[1]}\n` +
-            `Compassion: ${r.self.labels[2]}\n` +
-            `Teamwork: ${r.self.labels[3]}\n` +
-            `Initiative: ${r.self.labels[4]}\n` +
-            `Safety: ${r.self.labels[5]}\n` +
-            `Total: ${r.self.total}/30 (${r.self.percent}%)\n` +
-            `Comments: ${r.self.comments || 'None'}\n` +
+            `📝 TATHMINI YA MFANYAKAZI\n` +
+            `Kuwasili: ${r.self.labels[0]}\n` +
+            `Ubora: ${r.self.labels[1]}\n` +
+            `Huruma: ${r.self.labels[2]}\n` +
+            `Ushirikiano: ${r.self.labels[3]}\n` +
+            `Hatua: ${r.self.labels[4]}\n` +
+            `Usalama: ${r.self.labels[5]}\n` +
+            `Jumla: ${r.self.total}/30 (${r.self.percent}%)\n` +
+            `Maoni: ${r.self.comments || 'Hakuna'}\n` +
             `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-            `👔 SUPERVISOR ASSESSMENT\n` +
-            `Punctuality: ${r.supervisorAssessment.labels[0]}\n` +
-            `Quality: ${r.supervisorAssessment.labels[1]}\n` +
-            `Compassion: ${r.supervisorAssessment.labels[2]}\n` +
-            `Teamwork: ${r.supervisorAssessment.labels[3]}\n` +
-            `Initiative: ${r.supervisorAssessment.labels[4]}\n` +
-            `Safety: ${r.supervisorAssessment.labels[5]}\n` +
-            `Total: ${r.supervisorAssessment.total}/30 (${r.supervisorAssessment.percent}%)\n` +
-            `Comments: ${r.supervisorAssessment.comments || 'None'}\n` +
+            `👔 TATHMINI YA MSIMAMIZI\n` +
+            `Kuwasili: ${r.supervisorAssessment.labels[0]}\n` +
+            `Ubora: ${r.supervisorAssessment.labels[1]}\n` +
+            `Huruma: ${r.supervisorAssessment.labels[2]}\n` +
+            `Ushirikiano: ${r.supervisorAssessment.labels[3]}\n` +
+            `Hatua: ${r.supervisorAssessment.labels[4]}\n` +
+            `Usalama: ${r.supervisorAssessment.labels[5]}\n` +
+            `Jumla: ${r.supervisorAssessment.total}/30 (${r.supervisorAssessment.percent}%)\n` +
+            `Maoni: ${r.supervisorAssessment.comments || 'Hakuna'}\n` +
             `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-            `🏢 FACILITY IN-CHARGE FOLLOW-UP\n` +
-            `In-Charge: ${r.incharge?.name || 'Not Assigned'} (${r.incharge?.title || ''})\n` +
-            `Rating: ${r.incharge?.ratingLabel || r.incharge?.rating + '/5' || 'Not Rated'}\n` +
-            `Recommendation: ${r.incharge?.recommendation || 'None'}\n` +
-            `Comments: ${r.incharge?.comments || 'None'}\n` +
-            `Follow-Up: ${r.incharge?.followupDate || 'Not Set'} (${r.incharge?.followupPeriod || ''})\n` +
-            `Sign-Off: ${signoffDisplay}\n` +
+            `🏢 TATHMINI YA MGANGA MFAWIDHI\n` +
+            `Mganga Mfawidhi: ${r.incharge?.name || 'Not Assigned'} (${r.incharge?.title || ''})\n` +
+            `Kiwango: ${r.incharge?.ratingLabel || r.incharge?.rating + '/5' || 'Haijakadiriwa'}\n` +
+            `Mapendekezo: ${r.incharge?.recommendation || 'Hakuna'}\n` +
+            `Maoni: ${r.incharge?.comments || 'Hakuna'}\n` +
+            `Ufuatiliaji: ${r.incharge?.followupDate || 'Hakuna'} (${r.incharge?.followupPeriod || ''})\n` +
+            `Sahihi: ${signoffDisplay}\n` +
             `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-            `🏆 Combined Score: ${r.combined}%\n` +
-            `📊 Gap: ${r.gap}%\n` +
-            `✅ Status: ${r.gap <= 5 ? 'Aligned' : r.gap <= 15 ? 'Slight Gap' : 'Significant Gap'}\n` +
-            `📋 Checklist: ${r.checklistStats ? Math.round((r.checklistStats.totalDone / r.checklistStats.totalAll) * 100) + '%' : '0%'}\n` +
-            `Saved: ${new Date(r.savedAt).toLocaleString()}`
+            `🏆 Alama ya Pamoja: ${r.combined}%\n` +
+            `📊 Pengo: ${r.gap}%\n` +
+            `✅ Hali: ${r.gap <= 5 ? 'Imesawazishwa' : r.gap <= 15 ? 'Pengo Ndogo' : 'Pengo Kubwa'}\n` +
+            `📋 Orodha: ${r.checklistStats ? Math.round((r.checklistStats.totalDone / r.checklistStats.totalAll) * 100) + '%' : '0%'}\n` +
+            `Ilihifadhiwa: ${new Date(r.savedAt).toLocaleString()}`
         );
     }
 
     function deleteReport(index) {
-        if (confirm('Delete this report?')) {
+        if (confirm('Futa ripoti hii?')) {
             allReports.splice(index, 1);
             saveToStorage();
             renderHistory();
             populateWorkerDropdown();
             renderSummary();
-            showToast('🗑️ Report deleted', 'warning');
+            showToast('🗑️ Ripoti imefutwa', 'warning');
         }
     }
 
     // ================================================================
-    // EXPORT FUNCTIONS
+    // HAMISHA DATA
     // ================================================================
     function exportToCSV() {
         if (allReports.length === 0) {
-            showToast('No data to export', 'warning');
+            showToast('Hakuna data ya kuhamisha', 'warning');
             return;
         }
 
-        let csv = 'Date,Worker,Role,Shift,Supervisor,Self Score,Self %,Supervisor Score,Supervisor %,Combined %,Gap,Checklist %,Devotion,In-Charge Rating,In-Charge Recommendation,Sign-Off\n';
+        let csv = 'Tarehe,Mfanyakazi,Kazi,Zamu,Msimamizi,Alama ya Mfanyakazi,Asilimia ya Mfanyakazi,Alama ya Msimamizi,Asilimia ya Msimamizi,Alama ya Pamoja,Pengo,Orodha %,Ibada,Kiwango cha Mganga Mfawidhi,Mapendekezo,Sahihi\n';
         allReports.forEach(r => {
             const checklistPct = r.checklistStats ? Math.round((r.checklistStats.totalDone / r.checklistStats.totalAll) * 100) : 0;
-            const devotion = r.faith && r.faith.devotion === 'yes' ? 'Yes' : 'No';
-            const inchargeRating = r.incharge?.ratingLabel || r.incharge?.rating + '/5' || 'Not Rated';
-            const inchargeRec = r.incharge?.recommendation || 'None';
-            const signoff = r.incharge?.signoff || 'Not Signed';
+            const devotion = r.faith && r.faith.devotion === 'yes' ? 'Ndiyo' : 'Hapana';
+            const inchargeRating = r.incharge?.ratingLabel || r.incharge?.rating + '/5' || 'Haijakadiriwa';
+            const inchargeRec = r.incharge?.recommendation || 'Hakuna';
+            const signoff = r.incharge?.signoff || 'Hakuna';
             csv += `${r.date},${r.worker},${r.role},${r.shift},${r.supervisor},${r.self.total}/30,${r.self.percent}%,${r.supervisorAssessment.total}/30,${r.supervisorAssessment.percent}%,${r.combined}%,${r.gap}%,${checklistPct}%,${devotion},${inchargeRating},${inchargeRec},${signoff}\n`;
         });
 
@@ -1818,27 +1828,27 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `performance_report_${new Date().toISOString().split('T')[0]}.csv`;
+        a.download = `ripoti_za_utendaji_${new Date().toISOString().split('T')[0]}.csv`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        showToast('📊 CSV exported successfully!', 'success');
+        showToast('📊 CSV imehamishwa!', 'success');
     }
 
     function exportAllHistory() {
         if (allReports.length === 0) {
-            showToast('No data to export', 'warning');
+            showToast('Hakuna data ya kuhamisha', 'warning');
             return;
         }
         const data = {
             exportedAt: new Date().toISOString(),
-            version: '3.0',
+            version: '2.0',
             totalReports: allReports.length,
             reports: allReports
         };
-        downloadJSON(data, `performance_reports_${new Date().toISOString().split('T')[0]}.json`);
-        showToast('📤 Data exported successfully!', 'success');
+        downloadJSON(data, `ripoti_za_utendaji_${new Date().toISOString().split('T')[0]}.json`);
+        showToast('📤 Data imehamishwa!', 'success');
     }
 
     function exportSummaryCSV() {
@@ -1863,15 +1873,15 @@
         }
 
         if (filtered.length === 0) {
-            showToast('No data for selected filters', 'warning');
+            showToast('Hakuna data kwa vichujio vilivyochaguliwa', 'warning');
             return;
         }
 
-        let csv = 'Date,Worker,Role,Shift,Supervisor,Self %,Supervisor %,Combined %,Gap,Checklist %,In-Charge Rating,Sign-Off\n';
+        let csv = 'Tarehe,Mfanyakazi,Kazi,Zamu,Msimamizi,Asilimia ya Mfanyakazi,Asilimia ya Msimamizi,Alama ya Pamoja,Pengo,Orodha %,Kiwango cha Mganga Mfawidhi,Sahihi\n';
         filtered.forEach(r => {
             const checklistPct = r.checklistStats ? Math.round((r.checklistStats.totalDone / r.checklistStats.totalAll) * 100) : 0;
-            const inchargeRating = r.incharge?.ratingLabel || r.incharge?.rating + '/5' || 'Not Rated';
-            const signoff = r.incharge?.signoff || 'Not Signed';
+            const inchargeRating = r.incharge?.ratingLabel || r.incharge?.rating + '/5' || 'Haijakadiriwa';
+            const signoff = r.incharge?.signoff || 'Hakuna';
             csv += `${r.date},${r.worker},${r.role},${r.shift},${r.supervisor},${r.self.percent}%,${r.supervisorAssessment.percent}%,${r.combined}%,${r.gap}%,${checklistPct}%,${inchargeRating},${signoff}\n`;
         });
 
@@ -1879,12 +1889,12 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `summary_${new Date().toISOString().split('T')[0]}.csv`;
+        a.download = `muhtasari_${new Date().toISOString().split('T')[0]}.csv`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        showToast('📊 Summary CSV exported!', 'success');
+        showToast('📊 Muhtasari CSV umehamishwa!', 'success');
     }
 
     function downloadJSON(data, filename) {
@@ -1901,21 +1911,21 @@
     }
 
     // ================================================================
-    // CLEAR HISTORY
+    // FUTA HISTORIA YOTE
     // ================================================================
     function clearAllHistory() {
-        if (confirm('Delete ALL reports? This cannot be undone.')) {
+        if (confirm('Futa RIPOTI ZOTE? Hii haiwezi kurejeshwa.')) {
             allReports = [];
             saveToStorage();
             renderHistory();
             populateWorkerDropdown();
             renderSummary();
-            showToast('🗑️ All reports cleared', 'warning');
+            showToast('🗑️ Ripoti zote zimefutwa', 'warning');
         }
     }
 
     // ================================================================
-    // SUMMARY TAB
+    // MUHTASARI
     // ================================================================
     function renderSummary() {
         const workerFilter = document.getElementById('summaryWorker').value;
@@ -1943,7 +1953,7 @@
         }
 
         if (filtered.length === 0) {
-            container.innerHTML = '<div class="history-empty">No reports found for the selected filters.</div>';
+            container.innerHTML = '<div class="history-empty">Hakuna ripoti zilizopatikana kwa vichujio vilivyochaguliwa.</div>';
             renderChart([]);
             return;
         }
@@ -1955,20 +1965,20 @@
 
         let html = `
             <div style="background:#eaf2f8; border-radius:10px; padding:14px 18px; margin-bottom:16px;">
-                <h3 style="color:#1a5276; margin-bottom:6px;">📊 Summary</h3>
+                <h3 style="color:#1a5276; margin-bottom:6px;">📊 Muhtasari</h3>
                 <div class="score-row">
-                    <div class="score-item"><span class="number">${filtered.length}</span><span class="label">Reports</span></div>
-                    <div class="score-item"><span class="number green">${avgSelf}%</span><span class="label">Avg Self</span></div>
-                    <div class="score-item"><span class="number purple">${avgSup}%</span><span class="label">Avg Supervisor</span></div>
-                    <div class="score-item"><span class="number teal">${avgCombined}%</span><span class="label">Avg Combined</span></div>
-                    <div class="score-item"><span class="number ${avgGap <= 5 ? 'green' : avgGap <= 15 ? 'orange' : 'red'}">${avgGap}%</span><span class="label">Avg Gap</span></div>
+                    <div class="score-item"><span class="number">${filtered.length}</span><span class="label">Ripoti</span></div>
+                    <div class="score-item"><span class="number green">${avgSelf}%</span><span class="label">Wastani wa Mfanyakazi</span></div>
+                    <div class="score-item"><span class="number purple">${avgSup}%</span><span class="label">Wastani wa Msimamizi</span></div>
+                    <div class="score-item"><span class="number teal">${avgCombined}%</span><span class="label">Wastani wa Pamoja</span></div>
+                    <div class="score-item"><span class="number ${avgGap <= 5 ? 'green' : avgGap <= 15 ? 'orange' : 'red'}">${avgGap}%</span><span class="label">Wastani wa Pengo</span></div>
                 </div>
                 <div class="progress-bar"><div class="fill" style="width:${avgCombined}%;"></div></div>
-                <div style="text-align:center; font-size:12px; color:#7f8c8d; margin-top:4px;">Overall Performance: ${avgCombined}%</div>
+                <div style="text-align:center; font-size:12px; color:#7f8c8d; margin-top:4px;">Utendaji wa Jumla: ${avgCombined}%</div>
             </div>
             <div class="table-wrap">
                 <table class="summary-table">
-                    <thead><tr><th>Date</th><th>Worker</th><th>Role</th><th>Self</th><th>Supervisor</th><th>Combined</th><th>Gap</th><th>Checklist</th><th>In-Charge</th></tr></thead>
+                    <thead><tr><th>Tarehe</th><th>Mfanyakazi</th><th>Kazi</th><th>Mfanyakazi</th><th>Msimamizi</th><th>Pamoja</th><th>Pengo</th><th>Orodha</th><th>Mganga Mfawidhi</th></tr></thead>
                     <tbody>
         `;
 
@@ -1998,7 +2008,7 @@
     }
 
     // ================================================================
-    // CHART
+    // CHATI
     // ================================================================
     function renderChart(reports) {
         const canvas = document.getElementById('performanceChart');
@@ -2017,7 +2027,7 @@
             ctx.fillStyle = '#7f8c8d';
             ctx.font = '14px Arial';
             ctx.textAlign = 'center';
-            ctx.fillText('Need at least 2 reports to show chart.', width / 2, height / 2);
+            ctx.fillText('Inahitaji angalau ripoti 2 kuonyesha chati.', width / 2, height / 2);
             return;
         }
 
@@ -2031,50 +2041,45 @@
             const selfHeight = (r.self.percent / maxScore) * (height - 20);
             const supHeight = (r.supervisorAssessment.percent / maxScore) * (height - 20);
 
-            // Self bar (blue)
             ctx.fillStyle = '#2e86c1';
             ctx.fillRect(x, height - 10 - selfHeight, barWidth / 2 - 2, selfHeight);
 
-            // Supervisor bar (green)
             ctx.fillStyle = '#27ae60';
             ctx.fillRect(x + barWidth / 2 + 2, height - 10 - supHeight, barWidth / 2 - 2, supHeight);
 
-            // Date label
             ctx.fillStyle = '#7f8c8d';
             ctx.font = '8px Arial';
             ctx.textAlign = 'center';
             ctx.fillText(r.date.slice(5), x + barWidth / 2, height - 2);
         });
 
-        // Legend
         const legendX = width - 140;
         ctx.fillStyle = '#2e86c1';
         ctx.fillRect(legendX, 10, 12, 12);
         ctx.fillStyle = '#1a1a2e';
         ctx.font = '10px Arial';
         ctx.textAlign = 'left';
-        ctx.fillText('Self', legendX + 16, 20);
+        ctx.fillText('Mfanyakazi', legendX + 16, 20);
 
         ctx.fillStyle = '#27ae60';
         ctx.fillRect(legendX + 70, 10, 12, 12);
-        ctx.fillStyle = '#1a1a2e';
-        ctx.fillText('Supervisor', legendX + 86, 20);
+        ctx.fillText('Msimamizi', legendX + 86, 20);
     }
 
     // ================================================================
-    // POPULATE WORKER DROPDOWN
+    // JAZA ORODHA YA WAFANYAKAZI
     // ================================================================
     function populateWorkerDropdown() {
         const select = document.getElementById('summaryWorker');
         const workers = [...new Set(allReports.map(r => r.worker))];
-        select.innerHTML = '<option value="all">All Workers</option>';
+        select.innerHTML = '<option value="all">Wafanyakazi Wote</option>';
         workers.forEach(w => {
             select.innerHTML += `<option value="${w}">${w}</option>`;
         });
     }
 
     // ================================================================
-    // STORAGE
+    // HIFADHI KWENYE KIVUMBA
     // ================================================================
     function saveToStorage() {
         try {
@@ -2095,10 +2100,10 @@
     }
 
     // ================================================================
-    // RESET FORM
+    // WEKA UPYA FOMU
     // ================================================================
     function resetForm() {
-        if (!confirm('Reset all form fields?')) return;
+        if (!confirm('Weka upya fomu zote?')) return;
         document.querySelectorAll('.rating-btn').forEach(b => {
             b.classList.remove('selected', 'selected-excellent', 'selected-good', 'selected-average', 'selected-poor', 'selected-unsatisfactory');
         });
@@ -2121,11 +2126,11 @@
         renderSpecificChecklist();
         calculateScores();
         document.getElementById('workerProfileContainer').innerHTML = '';
-        showToast('🔄 Form reset', 'warning');
+        showToast('🔄 Fomu zimewekwa upya', 'warning');
     }
 
     // ================================================================
-    // TABS
+    // BADILISHA VITENDO
     // ================================================================
     function switchTab(tabName) {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
@@ -2137,7 +2142,7 @@
     }
 
     // ================================================================
-    // TOAST
+    // ARIFA
     // ================================================================
     let toastTimeout;
 
@@ -2154,7 +2159,7 @@
     }
 
     // ================================================================
-    // INIT
+    // ANZA
     // ================================================================
     document.addEventListener('DOMContentLoaded', function() {
         const today = new Date().toISOString().split('T')[0];
