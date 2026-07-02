@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -762,6 +763,31 @@
             font-size: 13px;
             color: #7d6608;
         }
+
+        .signature-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 10px 0;
+        }
+        .signature-container .signature-box {
+            flex: 1;
+            min-width: 250px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 14px;
+            border: 1px solid #ecf0f1;
+        }
+        .signature-container .signature-box h4 {
+            color: #1a5276;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .signature-container .signature-box .status {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
@@ -1091,8 +1117,8 @@
                 <canvas id="workerSignatureCanvas"></canvas>
             </div>
             <div class="signature-actions">
-                <button class="btn btn-warning btn-sm" onclick="clearWorkerSignature()">🔄 Futa</button>
-                <button class="btn btn-primary btn-sm" onclick="saveWorkerSignature()">💾 Hifadhi Sahihi</button>
+                <button class="btn btn-warning btn-sm" onclick="clearSignature('worker')">🔄 Futa</button>
+                <button class="btn btn-primary btn-sm" onclick="saveSignature('worker')">💾 Hifadhi Sahihi</button>
                 <button class="btn btn-teal btn-sm" onclick="readSignatureInstructions()">🔊 Soma Maelekezo</button>
                 <span id="workerSignatureStatus" style="font-size:12px; color:#7f8c8d; align-self:center;">Hakuna sahihi</span>
             </div>
@@ -1206,6 +1232,8 @@
                 <input type="checkbox" id="supervisorVerification">
                 <div>
                     <strong>Nathibitisha ya kwamba tathmini niliyotoa katika sehemu yangu ni sahihi na ya kweli.</strong>
+                    <br>
+                    <span style="font-size:12px; color:#1a7a3a;">Nimekagua tathmini ya mtendakazi na natoa tathmini yangu.</span>
                 </div>
             </label>
         </div>
@@ -1216,8 +1244,8 @@
                 <canvas id="supervisorSignatureCanvas"></canvas>
             </div>
             <div class="signature-actions">
-                <button class="btn btn-warning btn-sm" onclick="clearSupervisorSignature()">🔄 Futa</button>
-                <button class="btn btn-primary btn-sm" onclick="saveSupervisorSignature()">💾 Hifadhi Sahihi</button>
+                <button class="btn btn-warning btn-sm" onclick="clearSignature('supervisor')">🔄 Futa</button>
+                <button class="btn btn-primary btn-sm" onclick="saveSignature('supervisor')">💾 Hifadhi Sahihi</button>
                 <button class="btn btn-teal btn-sm" onclick="readSignatureInstructions()">🔊 Soma Maelekezo</button>
                 <span id="supervisorSignatureStatus" style="font-size:12px; color:#7f8c8d; align-self:center;">Hakuna sahihi</span>
             </div>
@@ -1325,6 +1353,8 @@
                 <input type="checkbox" id="inchargeVerification">
                 <div>
                     <strong>Nathibitisha ya kwamba tathmini niliyotoa katika sehemu yangu ni sahihi na ya kweli.</strong>
+                    <br>
+                    <span style="font-size:12px; color:#1a7a3a;">Nimekagua tathmini zote na natoa maamuzi yangu.</span>
                 </div>
             </label>
         </div>
@@ -1335,8 +1365,8 @@
                 <canvas id="inchargeSignatureCanvas"></canvas>
             </div>
             <div class="signature-actions">
-                <button class="btn btn-warning btn-sm" onclick="clearInchargeSignature()">🔄 Futa</button>
-                <button class="btn btn-primary btn-sm" onclick="saveInchargeSignature()">💾 Hifadhi Sahihi</button>
+                <button class="btn btn-warning btn-sm" onclick="clearSignature('incharge')">🔄 Futa</button>
+                <button class="btn btn-primary btn-sm" onclick="saveSignature('incharge')">💾 Hifadhi Sahihi</button>
                 <button class="btn btn-teal btn-sm" onclick="readSignatureInstructions()">🔊 Soma Maelekezo</button>
                 <span id="inchargeSignatureStatus" style="font-size:12px; color:#7f8c8d; align-self:center;">Hakuna sahihi</span>
             </div>
@@ -1693,7 +1723,7 @@
 
 <script>
     // ================================================================
-    // DATA YA ORODHA (ZILIZOSASISHWA)
+    // DATA YA ORODHA
     // ================================================================
 
     const GENERAL_CHECKLIST = [
@@ -1869,16 +1899,14 @@
     let generalState = new Array(GENERAL_CHECKLIST.length).fill(false);
     let specificState = new Array(ROLE_CHECKLISTS['Doctor'].length).fill(false);
 
-    let workerSignatureData = null;
-    let supervisorSignatureData = null;
-    let inchargeSignatureData = null;
+    let signatureData = { worker: null, supervisor: null, incharge: null };
 
     let workerSectionDone = false;
     let supervisorSectionDone = false;
     let inchargeSectionDone = false;
 
     // ================================================================
-    // FUNCTIONS ZA KUCHORA SAHIHI
+    // SAHIHI ZA WATU WOTE
     // ================================================================
     function initSignaturePad(canvasId, padId, statusId) {
         const canvas = document.getElementById(canvasId);
@@ -1976,49 +2004,50 @@
         }};
     }
 
-    let workerPad, supervisorPad, inchargePad;
+    let pads = {
+        worker: null,
+        supervisor: null,
+        incharge: null
+    };
 
     function initAllPads() {
-        workerPad = initSignaturePad('workerSignatureCanvas', 'workerSignaturePad', 'workerSignatureStatus');
-        supervisorPad = initSignaturePad('supervisorSignatureCanvas', 'supervisorSignaturePad', 'supervisorSignatureStatus');
-        inchargePad = initSignaturePad('inchargeSignatureCanvas', 'inchargeSignaturePad', 'inchargeSignatureStatus');
+        pads.worker = initSignaturePad('workerSignatureCanvas', 'workerSignaturePad', 'workerSignatureStatus');
+        pads.supervisor = initSignaturePad('supervisorSignatureCanvas', 'supervisorSignaturePad', 'supervisorSignatureStatus');
+        pads.incharge = initSignaturePad('inchargeSignatureCanvas', 'inchargeSignaturePad', 'inchargeSignatureStatus');
     }
 
-    function clearWorkerSignature() { if (workerPad) { workerPad.clear(); workerSignatureData = null; } }
-    function clearSupervisorSignature() { if (supervisorPad) { supervisorPad.clear(); supervisorSignatureData = null; } }
-    function clearInchargeSignature() { if (inchargePad) { inchargePad.clear(); inchargeSignatureData = null; } }
-
-    function saveWorkerSignature() {
-        const canvas = document.getElementById('workerSignatureCanvas');
-        if (canvas) {
-            workerSignatureData = canvas.toDataURL();
-            document.getElementById('workerSignatureStatus').textContent = '✅ Sahihi imehifadhiwa';
-            document.getElementById('workerSignatureStatus').style.color = '#27ae60';
-            showToast('✅ Sahihi ya mtendakazi imehifadhiwa!', 'success');
-        } else {
-            showToast('⚠️ Tafadhali chora sahihi yako kwanza', 'warning');
+    function clearSignature(who) {
+        if (pads[who]) {
+            pads[who].clear();
+            signatureData[who] = null;
+            const statusMap = {
+                worker: 'workerSignatureStatus',
+                supervisor: 'supervisorSignatureStatus',
+                incharge: 'inchargeSignatureStatus'
+            };
+            document.getElementById(statusMap[who]).textContent = '🔄 Sahihi imefutwa';
+            document.getElementById(statusMap[who]).style.color = '#e74c3c';
         }
     }
 
-    function saveSupervisorSignature() {
-        const canvas = document.getElementById('supervisorSignatureCanvas');
+    function saveSignature(who) {
+        const canvasMap = {
+            worker: 'workerSignatureCanvas',
+            supervisor: 'supervisorSignatureCanvas',
+            incharge: 'inchargeSignatureCanvas'
+        };
+        const statusMap = {
+            worker: 'workerSignatureStatus',
+            supervisor: 'supervisorSignatureStatus',
+            incharge: 'inchargeSignatureStatus'
+        };
+        const canvas = document.getElementById(canvasMap[who]);
         if (canvas) {
-            supervisorSignatureData = canvas.toDataURL();
-            document.getElementById('supervisorSignatureStatus').textContent = '✅ Sahihi imehifadhiwa';
-            document.getElementById('supervisorSignatureStatus').style.color = '#27ae60';
-            showToast('✅ Sahihi ya msimamizi imehifadhiwa!', 'success');
-        } else {
-            showToast('⚠️ Tafadhali chora sahihi yako kwanza', 'warning');
-        }
-    }
-
-    function saveInchargeSignature() {
-        const canvas = document.getElementById('inchargeSignatureCanvas');
-        if (canvas) {
-            inchargeSignatureData = canvas.toDataURL();
-            document.getElementById('inchargeSignatureStatus').textContent = '✅ Sahihi imehifadhiwa';
-            document.getElementById('inchargeSignatureStatus').style.color = '#27ae60';
-            showToast('✅ Sahihi ya mganga mfawidhi imehifadhiwa!', 'success');
+            signatureData[who] = canvas.toDataURL();
+            document.getElementById(statusMap[who]).textContent = '✅ Sahihi imehifadhiwa';
+            document.getElementById(statusMap[who]).style.color = '#27ae60';
+            const names = { worker: 'mtendakazi', supervisor: 'msimamizi', incharge: 'mganga mfawidhi' };
+            showToast('✅ Sahihi ya ' + names[who] + ' imehifadhiwa!', 'success');
         } else {
             showToast('⚠️ Tafadhali chora sahihi yako kwanza', 'warning');
         }
@@ -2046,7 +2075,7 @@
             showToast('⚠️ Tafadhali thibitisha uhalisia wa taarifa zako', 'warning');
             return;
         }
-        if (!workerSignatureData) {
+        if (!signatureData.worker) {
             showToast('⚠️ Tafadhali chora sahihi yako', 'warning');
             return;
         }
@@ -2063,7 +2092,7 @@
             showToast('⚠️ Tafadhali thibitisha uhalisia wa tathmini yako', 'warning');
             return;
         }
-        if (!supervisorSignatureData) {
+        if (!signatureData.supervisor) {
             showToast('⚠️ Tafadhali chora sahihi yako', 'warning');
             return;
         }
@@ -2080,7 +2109,7 @@
             showToast('⚠️ Tafadhali thibitisha uhalisia wa tathmini yako', 'warning');
             return;
         }
-        if (!inchargeSignatureData) {
+        if (!signatureData.incharge) {
             showToast('⚠️ Tafadhali chora sahihi yako', 'warning');
             return;
         }
@@ -3081,7 +3110,7 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
                 ],
                 comments: document.getElementById('selfComments').value,
                 verified: document.getElementById('workerVerification').checked,
-                signature: workerSignatureData
+                signature: signatureData.worker
             },
             supervisorAssessment: {
                 scores: supScores,
@@ -3097,7 +3126,7 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
                 ],
                 comments: document.getElementById('supComments').value,
                 verified: document.getElementById('supervisorVerification').checked,
-                signature: supervisorSignatureData
+                signature: signatureData.supervisor
             },
             incharge: {
                 name: document.getElementById('inchargeName').value || 'Not Assigned',
@@ -3110,7 +3139,7 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
                 followupPeriod: document.getElementById('inchargeFollowupPeriod').value,
                 signoff: document.querySelector('input[name="inchargeSignoff"]:checked')?.value || 'approved',
                 verified: document.getElementById('inchargeVerification').checked,
-                signature: inchargeSignatureData
+                signature: signatureData.incharge
             },
             combined: Math.round((selfPercent + supPercent) / 2),
             gap: Math.abs(selfPercent - supPercent),
@@ -3610,9 +3639,7 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
         document.getElementById('workerVerification').checked = false;
         document.getElementById('supervisorVerification').checked = false;
         document.getElementById('inchargeVerification').checked = false;
-        clearWorkerSignature();
-        clearSupervisorSignature();
-        clearInchargeSignature();
+        Object.keys(pads).forEach(key => { clearSignature(key); });
         workerSectionDone = false;
         supervisorSectionDone = false;
         inchargeSectionDone = false;
