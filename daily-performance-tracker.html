@@ -86,6 +86,32 @@
             .logo-placeholder { width: 45px; height: 45px; }
         }
 
+        .progress-header {
+            background: #eaf2f8;
+            border-radius: 8px;
+            padding: 10px 16px;
+            margin-bottom: 14px;
+            border-left: 4px solid #1a5276;
+        }
+        .progress-header .progress-text {
+            font-size: 13px;
+            color: #1a5276;
+            font-weight: 600;
+        }
+        .progress-header .progress-bar {
+            height: 8px;
+            background: #d5d8dc;
+            border-radius: 4px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+        .progress-header .progress-bar .fill {
+            height: 100%;
+            background: linear-gradient(90deg, #27ae60, #1a5276);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
         .tabs {
             display: flex;
             gap: 6px;
@@ -347,22 +373,6 @@
         .badge-average { background: #fdebd0; color: #a04000; }
         .badge-poor { background: #fadbd8; color: #922b21; }
         .badge-unsatisfactory { background: #f5b7b1; color: #7b241c; }
-        .badge-status { padding: 2px 12px; border-radius: 12px; font-size: 10px; font-weight: 600; }
-        .badge-pending { background: #fdebd0; color: #a04000; }
-        .badge-done { background: #d5f5e3; color: #1a7a3a; }
-
-        .achievement-badge {
-            display: inline-block;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            margin: 4px;
-        }
-        .badge-gold { background: #f1c40f; color: #1a1a2e; }
-        .badge-silver { background: #bdc3c7; color: #1a1a2e; }
-        .badge-bronze { background: #e67e22; color: #fff; }
-        .badge-platinum { background: #8e44ad; color: #fff; }
 
         .btn-group {
             display: flex;
@@ -764,6 +774,50 @@
             color: #7d6608;
         }
 
+        .role-stats {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 10px 0;
+            border: 1px solid #ecf0f1;
+        }
+        .role-stats h4 {
+            color: #1a5276;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .role-stats .stat-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .role-stats .stat-row .stat-item {
+            background: #fff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #ecf0f1;
+        }
+        .role-stats .stat-row .stat-item label {
+            font-size: 11px;
+            color: #7f8c8d;
+            display: block;
+        }
+        .role-stats .stat-row .stat-item input {
+            width: 100%;
+            border: none;
+            padding: 4px 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a5276;
+            background: transparent;
+        }
+        .role-stats .stat-row .stat-item input:focus {
+            outline: none;
+        }
+        @media (max-width: 500px) {
+            .role-stats .stat-row { grid-template-columns: 1fr; }
+        }
+
         .signature-container {
             display: flex;
             flex-wrap: wrap;
@@ -788,6 +842,77 @@
             color: #7f8c8d;
             margin-top: 4px;
         }
+
+        .backup-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 8px 0;
+            border: 1px dashed #8e44ad;
+        }
+        .backup-section input[type="file"] {
+            display: none;
+        }
+        .backup-section .file-label {
+            display: inline-block;
+            padding: 6px 16px;
+            background: #8e44ad;
+            color: #fff;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .backup-section .file-label:hover {
+            background: #6c3483;
+        }
+        .achievement-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            margin: 3px 4px;
+        }
+        .badge-platinum { background: #e8daef; color: #6c3483; border: 2px solid #8e44ad; }
+        .badge-gold { background: #fef9e7; color: #7d6608; border: 2px solid #f1c40f; }
+        .badge-silver { background: #ecf0f1; color: #2c3e50; border: 2px solid #bdc3c7; }
+        .badge-bronze { background: #fdebd0; color: #a04000; border: 2px solid #e67e22; }
+
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        .summary-table th {
+            background: #1a5276;
+            color: #fff;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        .summary-table td {
+            padding: 5px 8px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        .summary-table tr:hover {
+            background: #f8f9fa;
+        }
+        .table-wrap {
+            overflow-x: auto;
+        }
+        .edit-btn {
+            background: #f39c12;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 2px 10px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+        .edit-btn:hover {
+            background: #d68910;
+        }
     </style>
 </head>
 <body>
@@ -809,6 +934,13 @@
         </div>
         <div class="mission">
             <strong>Dhamira:</strong> "Ubora katika Huduma, Imani katika Vitendo — Huduma Kamili ya Afya, Huruma, na Imani katika Kristo"
+        </div>
+    </div>
+
+    <div class="progress-header">
+        <div class="progress-text">📊 Maendeleo ya Tathmini: <span id="progressPercent">0%</span></div>
+        <div class="progress-bar">
+            <div class="fill" id="mainProgressBar" style="width:0%;"></div>
         </div>
     </div>
 
@@ -876,9 +1008,8 @@
             </div>
             <div class="form-group">
                 <label>📋 Kazi / Wajibu</label>
-                <select id="workerRole" onchange="updateSpecificChecklist()">
+                <select id="workerRole" onchange="updateSpecificChecklist(); updateRoleStats(); toggleDoctorLevel()">
                     <option value="Doctor">🩺 Daktari</option>
-                    <option value="Clinical Officer">🩺 Afisa Tabibu</option>
                     <option value="Nurse">💉 Muuguzi</option>
                     <option value="Midwife">🤱 Mkunga</option>
                     <option value="Laboratory Technician">🔬 Mtaalamu wa Maabara</option>
@@ -898,10 +1029,21 @@
         </div>
 
         <div class="form-row">
+            <div class="form-group" id="doctorLevelGroup" style="display:none;">
+                <label>🏷️ Daraja la Daktari</label>
+                <select id="doctorLevel">
+                    <option value="Medical Officer">Medical Officer</option>
+                    <option value="Specialist">Specialist</option>
+                    <option value="Clinical Officer">Clinical Officer</option>
+                </select>
+            </div>
             <div class="form-group">
                 <label>📅 Tarehe</label>
                 <input type="date" id="reportDate">
             </div>
+        </div>
+
+        <div class="form-row">
             <div class="form-group">
                 <label>🕐 Zamu ya Kazi</label>
                 <select id="workerShift">
@@ -910,13 +1052,13 @@
                     <option>Simu ya Dharura</option>
                 </select>
             </div>
-        </div>
-
-        <div class="form-row">
             <div class="form-group">
                 <label>📅 Tarehe ya Mwisho ya Kuwasilisha</label>
                 <input type="date" id="deadlineDate">
             </div>
+        </div>
+
+        <div class="form-row">
             <div class="form-group">
                 <label>🏢 Idara / Sekta</label>
                 <select id="workerDepartment">
@@ -931,34 +1073,20 @@
                     <option>Support</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label>📋 Daraja la Daktari (Ikiwa ni Daktari)</label>
+                <input type="text" id="doctorLevelDisplay" placeholder="Medical Officer / Specialist / Clinical Officer" readonly style="background:#f0f2f5;">
+            </div>
         </div>
 
-        <!-- ===== WATU WALIOWAHUDUMIA ===== -->
+        <!-- ===== TAKWIMU MAALUM KWA KILA KAZI ===== -->
         <div class="section-divider stats">
-            📊 Watu Niliowahudumia
-            <span class="badge-section">Idadi ya wagonjwa / wateja</span>
+            📊 Takwimu Maalum za Kazi Yako
+            <span class="badge-section" id="roleStatsLabel">Daktari</span>
         </div>
 
-        <div class="form-row">
-            <div class="form-group">
-                <label>👥 Idadi ya Wagonjwa / Wateja Niliohudumia</label>
-                <input type="number" id="patientsServed" min="0" value="0" placeholder="Idadi ya wagonjwa">
-            </div>
-            <div class="form-group">
-                <label>👤 Idadi ya Wagonjwa Wapya</label>
-                <input type="number" id="newPatients" min="0" value="0" placeholder="Idadi ya wagonjwa wapya">
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group">
-                <label>🔄 Idadi ya Wagonjwa Waliorudi (Follow-up)</label>
-                <input type="number" id="followupPatients" min="0" value="0" placeholder="Idadi ya wagonjwa waliorudi">
-            </div>
-            <div class="form-group">
-                <label>🚨 Idadi ya Dharura Zilizoshughulikiwa</label>
-                <input type="number" id="emergencies" min="0" value="0" placeholder="Idadi ya dharura">
-            </div>
+        <div id="roleStatsContainer">
+            <!-- Inaonyeshwa na JavaScript kulingana na kazi iliyochaguliwa -->
         </div>
 
         <!-- ===== ORODHA YA JUMLA ===== -->
@@ -1484,12 +1612,27 @@
             <div id="shareStatus" class="share-status">💡 Bonyeza kitufe cha kushirikisha</div>
         </div>
 
+        <!-- ===== BACKUP ===== -->
+        <div class="section-divider info" style="background:#8e44ad; color:#fff; border-left-color:#6c3483;">
+            ☁️ Hifadhi na Kurejesha Data
+            <span class="badge-section">Hifadhi nje au pakia backup</span>
+        </div>
+
+        <div class="backup-section">
+            <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+                <button class="btn btn-purple" onclick="backupToCloud()">💾 Hifadhi Backup</button>
+                <label class="file-label" for="backupFileInput">📂 Pakia Backup</label>
+                <input type="file" id="backupFileInput" accept=".json" onchange="restoreBackup(event)">
+                <span style="font-size:12px; color:#7f8c8d;">Pakia faili ya JSON uliyohifadhi awali</span>
+            </div>
+            <div id="backupStatus" style="margin-top:6px; font-size:12px; color:#7f8c8d;"></div>
+        </div>
+
         <div class="btn-group">
             <button class="btn btn-success" onclick="saveFullReport()">💾 Hifadhi Ripoti Kamili</button>
             <button class="btn btn-warning" onclick="resetForm()">🔄 Weka Upya</button>
             <button class="btn btn-primary" onclick="calculateScores()">📊 Hesabu</button>
             <button class="btn btn-outline" onclick="exportToCSV()">📊 Hamisha CSV</button>
-            <button class="btn btn-teal" onclick="backupToCloud()">☁️ Hifadhi Nje</button>
         </div>
 
     </div>
@@ -1714,7 +1857,7 @@
 
     <div class="footer">
         <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana, wala si kwa wanadamu." — Wakolosai 3:23</div>
-        <div>Mtwara SDA Dispensary | Nyenzo ya Tathmini ya Utendaji Kazi wa Siku | Toleo 8.0 (2026)</div>
+        <div>Mtwara SDA Dispensary | Nyenzo ya Tathmini ya Utendaji Kazi wa Siku | Toleo 10.0 (2026)</div>
     </div>
 
 </div>
@@ -1752,14 +1895,8 @@
             'Nimeagiza dawa kwa usalama na usahihi',
             'Nimekamilisha nyaraka zote za wagonjwa kwa usahihi',
             'Nimejibu dharura kwa haraka na ufanisi',
-            'Nimetoa maelekezo kwa wagonjwa na maelekezo ya kutolewa'
-        ],
-        'Clinical Officer': [
-            'Nimefanya uchunguzi wa mwili wa kitabibu kwa wagonjwa',
-            'Nimeagiza na kufasiri uchunguzi wa maabara / radiolojia',
-            'Nimeandaa mipango ya matibabu kulingana na ushahidi',
+            'Nimetoa maelekezo kwa wagonjwa na maelekezo ya kutolewa',
             'Nimefanya taratibu za kliniki kwa usalama na uwezo',
-            'Nimekamilisha nyaraka za wagonjwa kwa usahihi na kwa wakati',
             'Nimewasiliana vizuri na wagonjwa na familia',
             'Nimeshirikiana na timu ya matibabu kwenye kesi ngumu'
         ],
@@ -1893,6 +2030,123 @@
     };
 
     // ================================================================
+    // DATA YA TAKWIMU MAALUM
+    // ================================================================
+
+    function getRoleStatsHTML(role) {
+        const stats = {
+            'Doctor': `
+                <div class="role-stats">
+                    <h4>🩺 Takwimu za Daktari</h4>
+                    <div class="stat-row">
+                        <div class="stat-item"><label>👥 Idadi ya Wagonjwa Niliohudumia</label><input type="number" id="statPatients" min="0" value="0"></div>
+                        <div class="stat-item"><label>📊 Idadi ya Ultrasound Nimefanya</label><input type="number" id="statUltrasound" min="0" value="0"></div>
+                        <div class="stat-item"><label>📋 Idadi ya Referral Nimetoa</label><input type="number" id="statReferral" min="0" value="0"></div>
+                        <div class="stat-item"><label>🔄 Idadi ya Wagonjwa Waliorudi</label><input type="number" id="statFollowup" min="0" value="0"></div>
+                        <div class="stat-item"><label>📋 Idadi ya Dawa Zilizoagizwa</label><input type="number" id="statPrescriptions" min="0" value="0"></div>
+                        <div class="stat-item"><label>🏥 Idadi ya Wagonjwa wa OPD</label><input type="number" id="statOPD" min="0" value="0"></div>
+                    </div>
+                </div>
+            `,
+            'Pharmacist': `
+                <div class="role-stats">
+                    <h4>💊 Takwimu za Mfamasia</h4>
+                    <div class="stat-row">
+                        <div class="stat-item"><label>👥 Idadi ya Wagonjwa Niliohudumia</label><input type="number" id="statPatients" min="0" value="0"></div>
+                        <div class="stat-item"><label>✅ Wagonjwa Waliopata Dawa</label><input type="number" id="statGotDrugs" min="0" value="0"></div>
+                        <div class="stat-item"><label>❌ Wagonjwa Waliokosa Dawa</label><input type="number" id="statMissedDrugs" min="0" value="0"></div>
+                        <div class="stat-item"><label>📋 Dawa Zilizoisha (Stockout)</label><input type="number" id="statStockout" min="0" value="0"></div>
+                    </div>
+                </div>
+            `,
+            'Receptionist': `
+                <div class="role-stats">
+                    <h4>📞 Takwimu za Mhudumu wa Mapokezi</h4>
+                    <div class="stat-row">
+                        <div class="stat-item"><label>👥 Idadi ya Wagonjwa / Wateja Niliohudumia</label><input type="number" id="statPatients" min="0" value="0"></div>
+                        <div class="stat-item"><label>📞 Simu Zilizojibiwa</label><input type="number" id="statCalls" min="0" value="0"></div>
+                        <div class="stat-item"><label>📋 Malalamiko Yaliyoshughulikiwa</label><input type="number" id="statComplaints" min="0" value="0"></div>
+                    </div>
+                </div>
+            `,
+            'Cashier': `
+                <div class="role-stats">
+                    <h4>🧾 Takwimu za Mhudumu wa Keshia</h4>
+                    <div class="stat-row">
+                        <div class="stat-item"><label>👥 Idadi ya Wagonjwa / Wateja Niliohudumia</label><input type="number" id="statPatients" min="0" value="0"></div>
+                        <div class="stat-item"><label>💰 Pesa Zilizokusanywa (TSh)</label><input type="number" id="statMoney" min="0" value="0"></div>
+                        <div class="stat-item"><label>🧾 Risiti Zilizotolewa</label><input type="number" id="statReceipts" min="0" value="0"></div>
+                    </div>
+                </div>
+            `,
+            'Laboratory Technician': `
+                <div class="role-stats">
+                    <h4>🔬 Takwimu za Mtaalamu wa Maabara</h4>
+                    <div class="stat-row">
+                        <div class="stat-item"><label>👥 Idadi ya Wagonjwa Niliohudumia</label><input type="number" id="statPatients" min="0" value="0"></div>
+                        <div class="stat-item"><label>💰 Wagonjwa wa Pesa Taslimu</label><input type="number" id="statCash" min="0" value="0"></div>
+                        <div class="stat-item"><label>📋 Wagonjwa wa Bima</label><input type="number" id="statInsurance" min="0" value="0"></div>
+                        <div class="stat-item"><label>🏥 Wagonjwa kutoka OPD</label><input type="number" id="statOPD" min="0" value="0"></div>
+                        <div class="stat-item"><label>🤱 Wagonjwa kutoka RCH</label><input type="number" id="statRCH" min="0" value="0"></div>
+                        <div class="stat-item"><label>💊 Wagonjwa kutoka CTC</label><input type="number" id="statCTC" min="0" value="0"></div>
+                        <div class="stat-item"><label>🔬 Wagonjwa kutoka Labor</label><input type="number" id="statLabor" min="0" value="0"></div>
+                    </div>
+                </div>
+            `,
+            'Accountant': `
+                <div class="role-stats">
+                    <h4>💰 Takwimu za Mhasibu</h4>
+                    <div class="stat-row">
+                        <div class="stat-item"><label>💰 Mapato Yaliyokusanywa (TSh)</label><input type="number" id="statIncome" min="0" value="0"></div>
+                        <div class="stat-item"><label>📊 Matumizi ya Siku (TSh)</label><input type="number" id="statExpenses" min="0" value="0"></div>
+                        <div class="stat-item"><label>📋 Idadi ya Miamala</label><input type="number" id="statTransactions" min="0" value="0"></div>
+                        <div class="stat-item"><label>✅ Bilanzi Iliyosawazishwa</label>
+                            <select id="statBalanced" style="width:100%; padding:4px 8px; border:1px solid #d5d8dc; border-radius:4px;">
+                                <option value="yes">Ndiyo</option>
+                                <option value="no">Hapana</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            `,
+            'Nurse': `
+                <div class="role-stats">
+                    <h4>💉 Takwimu za Muuguzi</h4>
+                    <div class="stat-row">
+                        <div class="stat-item"><label>👥 Idadi ya Wagonjwa Niliohudumia</label><input type="number" id="statPatients" min="0" value="0"></div>
+                        <div class="stat-item"><label>📋 Idadi ya Dawa Zilizotolewa</label><input type="number" id="statMedications" min="0" value="0"></div>
+                        <div class="stat-item"><label>🚨 Idadi ya Dharura Zilizoshughulikiwa</label><input type="number" id="statEmergencies" min="0" value="0"></div>
+                    </div>
+                </div>
+            `,
+            'Midwife': `
+                <div class="role-stats">
+                    <h4>🤱 Takwimu za Mkunga</h4>
+                    <div class="stat-row">
+                        <div class="stat-item"><label>👥 Idadi ya Wajawazito Niliohudumia</label><input type="number" id="statPatients" min="0" value="0"></div>
+                        <div class="stat-item"><label>🤱 Idadi ya Kuzaliwa Salama</label><input type="number" id="statDeliveries" min="0" value="0"></div>
+                        <div class="stat-item"><label>👶 Idadi ya Watoto Waliozaliwa</label><input type="number" id="statBabies" min="0" value="0"></div>
+                    </div>
+                </div>
+            `
+        };
+
+        if (!stats[role]) {
+            return `
+                <div class="role-stats">
+                    <h4>📊 Takwimu za Kazi Yako</h4>
+                    <div class="stat-row">
+                        <div class="stat-item"><label>👥 Idadi ya Wagonjwa / Wateja Niliohudumia</label><input type="number" id="statPatients" min="0" value="0"></div>
+                        <div class="stat-item"><label>📋 Idadi ya Kazi Zilizokamilishwa</label><input type="number" id="statTasks" min="0" value="0"></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        return stats[role];
+    }
+
+    // ================================================================
     // HALI
     // ================================================================
     let allReports = [];
@@ -1904,6 +2158,8 @@
     let workerSectionDone = false;
     let supervisorSectionDone = false;
     let inchargeSectionDone = false;
+
+    let editingIndex = -1;
 
     // ================================================================
     // SAHIHI ZA WATU WOTE
@@ -2067,6 +2323,23 @@
     }
 
     // ================================================================
+    // KUONYESHA / KUFICHA DARAJA LA DOKTARI
+    // ================================================================
+    function toggleDoctorLevel() {
+        const role = document.getElementById('workerRole').value;
+        const group = document.getElementById('doctorLevelGroup');
+        const display = document.getElementById('doctorLevelDisplay');
+        if (role === 'Doctor') {
+            group.style.display = 'block';
+            const level = document.getElementById('doctorLevel').value;
+            display.value = level;
+        } else {
+            group.style.display = 'none';
+            display.value = 'N/A';
+        }
+    }
+
+    // ================================================================
     // HIFADHI SEHEMU
     // ================================================================
     function saveWorkerSection() {
@@ -2081,6 +2354,7 @@
         }
         workerSectionDone = true;
         updateStatusDisplay();
+        updateProgress();
         showNotification('✅ Sehemu ya mtendakazi imekamilisha! Msimamizi sasa anaweza kujaza sehemu yake.', 'success');
         showToast('✅ Sehemu ya mtendakazi imehifadhiwa!', 'success');
         checkReminders();
@@ -2098,6 +2372,7 @@
         }
         supervisorSectionDone = true;
         updateStatusDisplay();
+        updateProgress();
         showNotification('✅ Sehemu ya msimamizi imekamilisha! Mganga Mfawidhi sasa anaweza kujaza sehemu yake.', 'success');
         showToast('✅ Sehemu ya msimamizi imehifadhiwa!', 'success');
         checkReminders();
@@ -2115,6 +2390,7 @@
         }
         inchargeSectionDone = true;
         updateStatusDisplay();
+        updateProgress();
         showNotification('✅ Tathmini imekamilishwa! Ripoti kamili inapatikana.', 'success');
         showToast('✅ Sehemu ya mganga mfawidhi imehifadhiwa!', 'success');
         checkReminders();
@@ -2157,6 +2433,15 @@
             document.getElementById('assessmentStatus').style.background = '#e74c3c';
             document.getElementById('assessmentStatus').style.color = '#fff';
         }
+    }
+
+    function updateProgress() {
+        let progress = 0;
+        if (workerSectionDone) progress += 33;
+        if (supervisorSectionDone) progress += 33;
+        if (inchargeSectionDone) progress += 34;
+        document.getElementById('progressPercent').textContent = progress + '%';
+        document.getElementById('mainProgressBar').style.width = progress + '%';
     }
 
     // ================================================================
@@ -2404,7 +2689,7 @@
         else { status = '❌ Pengo Kubwa'; statusClass = 'red'; }
         document.getElementById('statusIndicator').innerHTML = `<span class="status-dot ${statusClass}"></span> ${status}`;
 
-        const patients = parseInt(document.getElementById('patientsServed').value) || 0;
+        const patients = parseInt(document.getElementById('statPatients')?.value) || 0;
         document.getElementById('patientsDisplay').textContent = patients;
         document.getElementById('selfTotalDisplay').textContent = selfTotal;
         document.getElementById('supTotalDisplay').textContent = supTotal;
@@ -2506,7 +2791,7 @@
         const selfPercent = parseInt(document.getElementById('selfPercent').textContent) || 0;
         const supPercent = parseInt(document.getElementById('supPercent').textContent) || 0;
         const combined = Math.round((selfPercent + supPercent) / 2);
-        const patients = parseInt(document.getElementById('patientsServed').value) || 0;
+        const patients = parseInt(document.getElementById('statPatients')?.value) || 0;
 
         let html = '<div class="section-divider badges">🏅 Beji za Mafanikio</div><div style="margin:6px 0;">';
 
@@ -2626,7 +2911,7 @@
         const selfPercent = document.getElementById('selfPercent').textContent || '0%';
         const supPercent = document.getElementById('supPercent').textContent || '0%';
         const combined = document.getElementById('workerCombined').textContent || '0%';
-        const patients = document.getElementById('patientsServed').value || 0;
+        const patients = document.getElementById('statPatients')?.value || 0;
         const verified = document.getElementById('workerVerification').checked ? '✅' : '❌';
         const supervisorVerified = document.getElementById('supervisorVerification').checked ? '✅' : '❌';
         const inchargeVerified = document.getElementById('inchargeVerification').checked ? '✅' : '❌';
@@ -2863,167 +3148,6 @@
     }
 
     // ================================================================
-    // RIPOTI YA MWEZI
-    // ================================================================
-    function generateMonthlyReport() {
-        const now = new Date();
-        const month = now.getMonth() + 1;
-        const year = now.getFullYear();
-        const monthStr = month.toString().padStart(2, '0');
-
-        const monthlyReports = allReports.filter(r => {
-            const rDate = new Date(r.date);
-            return rDate.getMonth() + 1 === month && rDate.getFullYear() === year;
-        });
-
-        if (monthlyReports.length === 0) {
-            showToast('⚠️ Hakuna ripoti za mwezi huu', 'warning');
-            return;
-        }
-
-        const avgScore = Math.round(monthlyReports.reduce((a, b) => a + b.combined, 0) / monthlyReports.length);
-        const totalPatients = monthlyReports.reduce((a, b) => a + (b.patientsServed || 0), 0);
-        const total = monthlyReports.length;
-        const completed = monthlyReports.filter(r => r.self?.verified && r.supervisorAssessment?.verified && r.incharge?.verified).length;
-
-        const report = `
-📊 *RIPOTI YA MWISHO WA MWEZI - ${month}/${year}*
-━━━━━━━━━━━━━━━━━━━━━━━━━━
-📅 Mwezi: ${month}/${year}
-📋 Jumla ya Ripoti: ${total}
-✅ Imekamilika: ${completed}
-⏳ Inasubiri: ${total - completed}
-🏆 Wastani wa Alama: ${avgScore}%
-👥 Jumla ya Wagonjwa: ${totalPatients}
-
-📈 *WAFANYAKAZI BORA*
-${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) => `${i+1}. ${r.worker} - ${r.combined}%`).join('\n')}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━
-*Mtwara SDA Dispensary*
-"Ubora katika Huduma, Imani katika Vitendo"
-        `;
-
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(report).then(() => {
-                showToast('📋 Ripoti ya mwezi imenakiliwa!', 'success');
-                document.getElementById('shareStatus').textContent = '✅ Ripoti ya mwezi imenakiliwa!';
-                document.getElementById('shareStatus').className = 'share-status success';
-            });
-        } else {
-            const textarea = document.createElement('textarea');
-            textarea.value = report;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            showToast('📋 Ripoti ya mwezi imenakiliwa!', 'success');
-            document.getElementById('shareStatus').textContent = '✅ Ripoti ya mwezi imenakiliwa!';
-            document.getElementById('shareStatus').className = 'share-status success';
-        }
-    }
-
-    // ================================================================
-    // HIFADHI NYE
-    // ================================================================
-    function backupToCloud() {
-        if (allReports.length === 0) {
-            showToast('⚠️ Hakuna data ya kuhifadhi', 'warning');
-            return;
-        }
-
-        const data = {
-            exportedAt: new Date().toISOString(),
-            version: '8.0',
-            totalReports: allReports.length,
-            reports: allReports
-        };
-
-        const json = JSON.stringify(data, null, 2);
-        const blob = new Blob([json], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `backup_tathmini_${new Date().toISOString().split('T')[0]}.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-
-        showToast('☁️ Data imehifadhiwa nje kama faili!', 'success');
-    }
-
-    // ================================================================
-    // SHIRIKISHA
-    // ================================================================
-    function getReportData() {
-        const worker = document.getElementById('workerName').value || 'Unknown';
-        const date = document.getElementById('reportDate').value || new Date().toISOString().split('T')[0];
-        const selfPercent = document.getElementById('selfPercent').textContent || '0%';
-        const supPercent = document.getElementById('supPercent').textContent || '0%';
-        const combined = document.getElementById('workerCombined').textContent || '0%';
-        const patients = document.getElementById('patientsServed').value || 0;
-        const url = window.location.href;
-
-        return { worker, date, selfPercent, supPercent, combined, patients, url };
-    }
-
-    function shareWhatsApp() {
-        const data = getReportData();
-        const msg = `📋 *RIPOTI YA TATHMINI YA MTENDAKAZI*\n\n` +
-            `👤 Mtendakazi: ${data.worker}\n` +
-            `📅 Tarehe: ${data.date}\n` +
-            `👥 Wagonjwa: ${data.patients}\n` +
-            `📊 Alama ya Mtendakazi: ${data.selfPercent}\n` +
-            `📊 Alama ya Msimamizi: ${data.supPercent}\n` +
-            `🏆 Alama ya Pamoja: ${data.combined}\n\n` +
-            `🔗 Kiungo: ${data.url}`;
-        const encoded = encodeURIComponent(msg);
-        window.open(`https://wa.me/?text=${encoded}`, '_blank');
-        document.getElementById('shareStatus').textContent = '✅ Imefunguliwa WhatsApp';
-        document.getElementById('shareStatus').className = 'share-status success';
-    }
-
-    function shareEmail() {
-        const data = getReportData();
-        const subject = `Ripoti ya Tathmini - ${data.worker}`;
-        const body = `RIPOTI YA TATHMINI YA MTENDAKAZI\n\n` +
-            `Mtendakazi: ${data.worker}\nTarehe: ${data.date}\nWagonjwa: ${data.patients}\n` +
-            `Alama ya Mtendakazi: ${data.selfPercent}\nAlama ya Msimamizi: ${data.supPercent}\nAlama ya Pamoja: ${data.combined}\n\nKiungo: ${data.url}`;
-        window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        document.getElementById('shareStatus').textContent = '✅ Imefunguliwa Barua Pepe';
-        document.getElementById('shareStatus').className = 'share-status success';
-    }
-
-    function shareCopyLink() {
-        const url = window.location.href;
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(url).then(() => {
-                document.getElementById('shareStatus').textContent = '✅ Kiungo kimenakiliwa!';
-                document.getElementById('shareStatus').className = 'share-status success';
-                showToast('✅ Kiungo kimenakiliwa!', 'success');
-            });
-        } else {
-            const textarea = document.createElement('textarea');
-            textarea.value = url;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            document.getElementById('shareStatus').textContent = '✅ Kiungo kimenakiliwa!';
-            document.getElementById('shareStatus').className = 'share-status success';
-            showToast('✅ Kiungo kimenakiliwa!', 'success');
-        }
-    }
-
-    function sharePrint() {
-        window.print();
-        document.getElementById('shareStatus').textContent = '🖨️ Imefunguliwa Chapisha';
-        document.getElementById('shareStatus').className = 'share-status';
-    }
-
-    // ================================================================
     // HIFADHI RIPOTI KAMILI
     // ================================================================
     function saveFullReport() {
@@ -3040,11 +3164,23 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
         const supervisorTitle = document.getElementById('supervisorTitle').value;
         const department = document.getElementById('workerDepartment').value;
         const deadline = document.getElementById('deadlineDate').value || '';
+        const doctorLevel = document.getElementById('doctorLevel').value || '';
 
-        const patientsServed = parseInt(document.getElementById('patientsServed').value) || 0;
-        const newPatients = parseInt(document.getElementById('newPatients').value) || 0;
-        const followupPatients = parseInt(document.getElementById('followupPatients').value) || 0;
-        const emergencies = parseInt(document.getElementById('emergencies').value) || 0;
+        const patientsServed = parseInt(document.getElementById('statPatients')?.value) || 0;
+        const stats = { patientsServed };
+
+        const roleStats = {};
+        const statIds = ['statPatients', 'statUltrasound', 'statReferral', 'statFollowup', 'statGotDrugs', 'statMissedDrugs',
+            'statStockout', 'statCalls', 'statComplaints', 'statMoney', 'statReceipts', 'statCash', 'statInsurance',
+            'statOPD', 'statRCH', 'statCTC', 'statLabor', 'statIncome', 'statExpenses', 'statTransactions', 'statBalanced',
+            'statMedications', 'statEmergencies', 'statDeliveries', 'statBabies', 'statTasks', 'statPrescriptions'
+        ];
+        statIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                roleStats[id] = el.type === 'select-one' ? el.value : parseInt(el.value) || 0;
+            }
+        });
 
         const selfScores = [
             getRatingValue('selfPunctuality'),
@@ -3075,15 +3211,14 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
             date: date,
             worker: worker,
             role: role,
+            doctorLevel: doctorLevel,
             shift: shift,
             supervisor: supervisor,
             supervisorTitle: supervisorTitle,
             department: department,
             deadline: deadline,
             patientsServed: patientsServed,
-            newPatients: newPatients,
-            followupPatients: followupPatients,
-            emergencies: emergencies,
+            roleStats: roleStats,
             faith: {
                 devotion: document.getElementById('faithDevotion').value,
                 verse: document.getElementById('faithVerse').value,
@@ -3092,7 +3227,7 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
             achievements: document.getElementById('achievements').value,
             challenges: document.getElementById('challenges').value,
             improvements: document.getElementById('improvements').value,
-            additionalComments: document.getElementById('additionalComments').value,
+            additionalComments: document.getElementById('selfComments').value,
             generalChecklist: generalState.slice(),
             specificChecklist: specificState.slice(),
             specificItems: specificItems,
@@ -3154,15 +3289,334 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
             savedAt: new Date().toISOString()
         };
 
-        allReports.unshift(record);
-        if (allReports.length > 200) allReports.pop();
+        if (editingIndex >= 0) {
+            allReports[editingIndex] = record;
+            editingIndex = -1;
+            showToast('✅ Ripoti imerekebishwa!', 'success');
+        } else {
+            allReports.unshift(record);
+            if (allReports.length > 200) allReports.pop();
+            showToast('✅ Ripoti kamili imehifadhiwa!', 'success');
+        }
+
         saveToStorage();
         renderHistory();
         populateWorkerDropdown();
         populateCompareDropdowns();
         renderSummary();
         updateDashboard();
-        showToast('✅ Ripoti kamili imehifadhiwa!', 'success');
+        switchTab('history');
+    }
+
+    // ================================================================
+    // KUHARIRI RIPOTI
+    // ================================================================
+    function editReport(index) {
+        const r = allReports[index];
+        if (!r) return;
+
+        editingIndex = index;
+
+        // Jaza fomu na data kutoka kwenye ripoti
+        document.getElementById('workerName').value = r.worker || '';
+        document.getElementById('workerRole').value = r.role || 'Doctor';
+        document.getElementById('reportDate').value = r.date || '';
+        document.getElementById('workerShift').value = r.shift || 'Mchana';
+        document.getElementById('supervisorName').value = r.supervisor || '';
+        document.getElementById('supervisorTitle').value = r.supervisorTitle || 'Mkuu wa Idara';
+        document.getElementById('workerDepartment').value = r.department || 'Clinical';
+        document.getElementById('deadlineDate').value = r.deadline || '';
+        if (r.doctorLevel) {
+            document.getElementById('doctorLevel').value = r.doctorLevel;
+        }
+
+        if (r.roleStats) {
+            Object.keys(r.roleStats).forEach(key => {
+                const el = document.getElementById(key);
+                if (el) {
+                    if (el.type === 'select-one') {
+                        el.value = r.roleStats[key] || 'yes';
+                    } else {
+                        el.value = r.roleStats[key] || 0;
+                    }
+                }
+            });
+        }
+
+        // Orodha
+        if (r.generalChecklist) {
+            generalState = r.generalChecklist.slice();
+            renderGeneralChecklist();
+        }
+        if (r.specificChecklist) {
+            specificState = r.specificChecklist.slice();
+            renderSpecificChecklist();
+        }
+
+        // Imani
+        document.getElementById('faithDevotion').value = r.faith?.devotion || 'yes';
+        document.getElementById('faithVerse').value = r.faith?.verse || '';
+        document.getElementById('faithReflection').value = r.faith?.reflection || '';
+
+        // Mafanikio na Changamoto
+        document.getElementById('achievements').value = r.achievements || '';
+        document.getElementById('challenges').value = r.challenges || '';
+        document.getElementById('improvements').value = r.improvements || '';
+
+        // Maoni
+        document.getElementById('selfComments').value = r.self?.comments || '';
+        document.getElementById('supComments').value = r.supervisorAssessment?.comments || '';
+        document.getElementById('inchargeComments').value = r.incharge?.comments || '';
+
+        // Uthibitisho
+        document.getElementById('workerVerification').checked = r.self?.verified || false;
+        document.getElementById('supervisorVerification').checked = r.supervisorAssessment?.verified || false;
+        document.getElementById('inchargeVerification').checked = r.incharge?.verified || false;
+
+        // Hali za sehemu
+        workerSectionDone = r.self?.verified || false;
+        supervisorSectionDone = r.supervisorAssessment?.verified || false;
+        inchargeSectionDone = r.incharge?.verified || false;
+
+        // Mganga Mfawidhi
+        document.getElementById('inchargeName').value = r.incharge?.name || '';
+        document.getElementById('inchargeTitle').value = r.incharge?.title || 'Mganga Mfawidhi';
+        document.getElementById('inchargeRecommendation').value = r.incharge?.recommendation || 'continue';
+        document.getElementById('inchargeFollowupDate').value = r.incharge?.followupDate || '';
+        document.getElementById('inchargeFollowupPeriod').value = r.incharge?.followupPeriod || '1-month';
+
+        if (r.incharge?.signoff) {
+            document.querySelector(`input[name="inchargeSignoff"][value="${r.incharge.signoff}"]`).checked = true;
+        }
+
+        // Sahihi (hatuwezi kuweka tena, lakini tunaweza kuonyesha hali)
+        if (r.self?.signature) {
+            signatureData.worker = r.self.signature;
+            document.getElementById('workerSignatureStatus').textContent = '✅ Sahihi imehifadhiwa';
+            document.getElementById('workerSignatureStatus').style.color = '#27ae60';
+        }
+        if (r.supervisorAssessment?.signature) {
+            signatureData.supervisor = r.supervisorAssessment.signature;
+            document.getElementById('supervisorSignatureStatus').textContent = '✅ Sahihi imehifadhiwa';
+            document.getElementById('supervisorSignatureStatus').style.color = '#27ae60';
+        }
+        if (r.incharge?.signature) {
+            signatureData.incharge = r.incharge.signature;
+            document.getElementById('inchargeSignatureStatus').textContent = '✅ Sahihi imehifadhiwa';
+            document.getElementById('inchargeSignatureStatus').style.color = '#27ae60';
+        }
+
+        toggleDoctorLevel();
+        updateRoleStats();
+        updateStatusDisplay();
+        updateProgress();
+        calculateScores();
+
+        showToast('✏️ Unahariri ripoti ya ' + r.worker, 'info');
+        switchTab('assessment');
+    }
+
+    // ================================================================
+    // HIFADHI / KUREJESHA BACKUP
+    // ================================================================
+    function backupToCloud() {
+        if (allReports.length === 0) {
+            showToast('⚠️ Hakuna data ya kuhifadhi', 'warning');
+            return;
+        }
+
+        const data = {
+            exportedAt: new Date().toISOString(),
+            version: '10.0',
+            totalReports: allReports.length,
+            reports: allReports
+        };
+
+        const json = JSON.stringify(data, null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `backup_tathmini_${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        document.getElementById('backupStatus').textContent = '✅ Backup imehifadhiwa: ' + new Date().toLocaleString();
+        document.getElementById('backupStatus').style.color = '#27ae60';
+        showToast('☁️ Data imehifadhiwa nje kama faili!', 'success');
+    }
+
+    function restoreBackup(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const data = JSON.parse(e.target.result);
+                if (!data.reports || !Array.isArray(data.reports)) {
+                    showToast('⚠️ Faili si sahihi. Hakikisha ni faili ya backup.', 'warning');
+                    return;
+                }
+                if (data.reports.length === 0) {
+                    showToast('⚠️ Faili haina ripoti zozote.', 'warning');
+                    return;
+                }
+                if (!confirm('Unataka kurejesha ' + data.reports.length + ' ripoti? Hii itaongeza kwenye data iliyopo.')) {
+                    return;
+                }
+                allReports = allReports.concat(data.reports);
+                if (allReports.length > 200) allReports = allReports.slice(0, 200);
+                saveToStorage();
+                renderHistory();
+                populateWorkerDropdown();
+                populateCompareDropdowns();
+                renderSummary();
+                updateDashboard();
+                document.getElementById('backupStatus').textContent = '✅ Backup imerejeshwa: ' + data.reports.length + ' ripoti';
+                document.getElementById('backupStatus').style.color = '#27ae60';
+                showToast('✅ Backup imerejeshwa kikamilifu!', 'success');
+            } catch (error) {
+                showToast('❌ Hitilafu katika kusoma faili. Hakikisha ni faili ya JSON.', 'error');
+                document.getElementById('backupStatus').textContent = '❌ Hitilafu: Faili si sahihi';
+                document.getElementById('backupStatus').style.color = '#e74c3c';
+            }
+        };
+        reader.readAsText(file);
+        event.target.value = '';
+    }
+
+    // ================================================================
+    // RIPOTI YA MWEZI
+    // ================================================================
+    function generateMonthlyReport() {
+        const now = new Date();
+        const month = now.getMonth() + 1;
+        const year = now.getFullYear();
+        const monthStr = month.toString().padStart(2, '0');
+
+        const monthlyReports = allReports.filter(r => {
+            const rDate = new Date(r.date);
+            return rDate.getMonth() + 1 === month && rDate.getFullYear() === year;
+        });
+
+        if (monthlyReports.length === 0) {
+            showToast('⚠️ Hakuna ripoti za mwezi huu', 'warning');
+            return;
+        }
+
+        const avgScore = Math.round(monthlyReports.reduce((a, b) => a + b.combined, 0) / monthlyReports.length);
+        const totalPatients = monthlyReports.reduce((a, b) => a + (b.patientsServed || 0), 0);
+        const total = monthlyReports.length;
+        const completed = monthlyReports.filter(r => r.self?.verified && r.supervisorAssessment?.verified && r.incharge?.verified).length;
+
+        const report = `
+📊 *RIPOTI YA MWISHO WA MWEZI - ${month}/${year}*
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+📅 Mwezi: ${month}/${year}
+📋 Jumla ya Ripoti: ${total}
+✅ Imekamilika: ${completed}
+⏳ Inasubiri: ${total - completed}
+🏆 Wastani wa Alama: ${avgScore}%
+👥 Jumla ya Wagonjwa: ${totalPatients}
+
+📈 *WAFANYAKAZI BORA*
+${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) => `${i+1}. ${r.worker} - ${r.combined}%`).join('\n')}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+*Mtwara SDA Dispensary*
+"Ubora katika Huduma, Imani katika Vitendo"
+        `;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(report).then(() => {
+                showToast('📋 Ripoti ya mwezi imenakiliwa!', 'success');
+                document.getElementById('shareStatus').textContent = '✅ Ripoti ya mwezi imenakiliwa!';
+                document.getElementById('shareStatus').className = 'share-status success';
+            });
+        } else {
+            const textarea = document.createElement('textarea');
+            textarea.value = report;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showToast('📋 Ripoti ya mwezi imenakiliwa!', 'success');
+            document.getElementById('shareStatus').textContent = '✅ Ripoti ya mwezi imenakiliwa!';
+            document.getElementById('shareStatus').className = 'share-status success';
+        }
+    }
+
+    // ================================================================
+    // SHIRIKISHA
+    // ================================================================
+    function getReportData() {
+        const worker = document.getElementById('workerName').value || 'Unknown';
+        const date = document.getElementById('reportDate').value || new Date().toISOString().split('T')[0];
+        const selfPercent = document.getElementById('selfPercent').textContent || '0%';
+        const supPercent = document.getElementById('supPercent').textContent || '0%';
+        const combined = document.getElementById('workerCombined').textContent || '0%';
+        const patients = document.getElementById('statPatients')?.value || 0;
+        const url = window.location.href;
+
+        return { worker, date, selfPercent, supPercent, combined, patients, url };
+    }
+
+    function shareWhatsApp() {
+        const data = getReportData();
+        const msg = `📋 *RIPOTI YA TATHMINI YA MTENDAKAZI*\n\n` +
+            `👤 Mtendakazi: ${data.worker}\n` +
+            `📅 Tarehe: ${data.date}\n` +
+            `👥 Wagonjwa: ${data.patients}\n` +
+            `📊 Alama ya Mtendakazi: ${data.selfPercent}\n` +
+            `📊 Alama ya Msimamizi: ${data.supPercent}\n` +
+            `🏆 Alama ya Pamoja: ${data.combined}\n\n` +
+            `🔗 Kiungo: ${data.url}`;
+        const encoded = encodeURIComponent(msg);
+        window.open(`https://wa.me/?text=${encoded}`, '_blank');
+        document.getElementById('shareStatus').textContent = '✅ Imefunguliwa WhatsApp';
+        document.getElementById('shareStatus').className = 'share-status success';
+    }
+
+    function shareEmail() {
+        const data = getReportData();
+        const subject = `Ripoti ya Tathmini - ${data.worker}`;
+        const body = `RIPOTI YA TATHMINI YA MTENDAKAZI\n\n` +
+            `Mtendakazi: ${data.worker}\nTarehe: ${data.date}\nWagonjwa: ${data.patients}\n` +
+            `Alama ya Mtendakazi: ${data.selfPercent}\nAlama ya Msimamizi: ${data.supPercent}\nAlama ya Pamoja: ${data.combined}\n\nKiungo: ${data.url}`;
+        window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        document.getElementById('shareStatus').textContent = '✅ Imefunguliwa Barua Pepe';
+        document.getElementById('shareStatus').className = 'share-status success';
+    }
+
+    function shareCopyLink() {
+        const url = window.location.href;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(url).then(() => {
+                document.getElementById('shareStatus').textContent = '✅ Kiungo kimenakiliwa!';
+                document.getElementById('shareStatus').className = 'share-status success';
+                showToast('✅ Kiungo kimenakiliwa!', 'success');
+            });
+        } else {
+            const textarea = document.createElement('textarea');
+            textarea.value = url;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            document.getElementById('shareStatus').textContent = '✅ Kiungo kimenakiliwa!';
+            document.getElementById('shareStatus').className = 'share-status success';
+            showToast('✅ Kiungo kimenakiliwa!', 'success');
+        }
+    }
+
+    function sharePrint() {
+        window.print();
+        document.getElementById('shareStatus').textContent = '🖨️ Imefunguliwa Chapisha';
+        document.getElementById('shareStatus').className = 'share-status';
     }
 
     // ================================================================
@@ -3188,11 +3642,13 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
             const signoffDisplay = r.incharge?.signoff ? signoffLabels[r.incharge.signoff] || '—' : '—';
             const verified = r.self?.verified && r.supervisorAssessment?.verified && r.incharge?.verified ? '✅' : '⚠️';
             const isQuick = r.isQuick ? '⚡' : '';
+            const doctorLevel = r.doctorLevel ? ' 🏷️' + r.doctorLevel : '';
             html += `
                 <div class="history-item">
                     <div class="info">
                         <strong>${r.worker}</strong>
                         <span class="role-badge">${r.role}</span>
+                        ${doctorLevel}
                         ${isQuick ? '<span class="role-badge" style="background:#fef9e7; color:#7d6608;">Haraka</span>' : ''}
                         <span style="margin-left:4px; font-size:11px; color:#7f8c8d;">👥 ${r.patientsServed || 0}</span><br>
                         <span class="date">${r.date} · ${r.shift} · Msimamizi: ${r.supervisor}</span>
@@ -3207,6 +3663,7 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
                     </div>
                     <div>
                         <button onclick="viewReport(${index})" class="btn btn-primary btn-sm">Angalia</button>
+                        <button onclick="editReport(${index})" class="btn btn-warning btn-sm" style="background:#f39c12; color:#fff; border:none; padding:2px 10px; border-radius:4px; font-size:11px; cursor:pointer;">✏️</button>
                         <button onclick="deleteReport(${index})" class="btn btn-danger btn-sm">✕</button>
                     </div>
                 </div>
@@ -3240,17 +3697,59 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
         };
         const signoffDisplay = r.incharge?.signoff ? signoffLabels[r.incharge.signoff] || '—' : '—';
 
+        let roleStatsDisplay = '';
+        if (r.roleStats) {
+            roleStatsDisplay = '\n📊 TAKWIMU ZA KAZI\n';
+            const labels = {
+                'statPatients': 'Wagonjwa',
+                'statUltrasound': 'Ultrasound',
+                'statReferral': 'Referral',
+                'statFollowup': 'Waliorudi',
+                'statGotDrugs': 'Waliopata Dawa',
+                'statMissedDrugs': 'Waliokosa Dawa',
+                'statStockout': 'Dawa Zilizoisha',
+                'statCalls': 'Simu',
+                'statComplaints': 'Malalamiko',
+                'statMoney': 'Pesa (TSh)',
+                'statReceipts': 'Risiti',
+                'statCash': 'Pesa Taslimu',
+                'statInsurance': 'Bima',
+                'statOPD': 'OPD',
+                'statRCH': 'RCH',
+                'statCTC': 'CTC',
+                'statLabor': 'Labor',
+                'statIncome': 'Mapato',
+                'statExpenses': 'Matumizi',
+                'statTransactions': 'Miamala',
+                'statBalanced': 'Bilanzi',
+                'statMedications': 'Dawa Zilizotolewa',
+                'statEmergencies': 'Dharura',
+                'statDeliveries': 'Kuzaliwa',
+                'statBabies': 'Watoto',
+                'statTasks': 'Kazi',
+                'statPrescriptions': 'Dawa Zilizoagizwa'
+            };
+            Object.keys(r.roleStats).forEach(key => {
+                if (r.roleStats[key] && r.roleStats[key] !== '') {
+                    const label = labels[key] || key;
+                    const value = r.roleStats[key];
+                    roleStatsDisplay += `  ${label}: ${value}\n`;
+                }
+            });
+        }
+
         alert(
             `📋 RIPOTI YA TATHMINI YA MTENDAKAZI\n` +
             `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
             `Kitambulisho: ${r.id || 'N/A'}\n` +
             `Mtendakazi: ${r.worker}\n` +
-            `Kazi: ${r.role}\n` +
+            `Kazi: ${r.role}${r.doctorLevel ? ' (' + r.doctorLevel + ')' : ''}\n` +
             `Tarehe: ${r.date} | Zamu: ${r.shift}\n` +
             `Msimamizi: ${r.supervisor} (${r.supervisorTitle})\n` +
             `Idara: ${r.department || 'N/A'}\n` +
             `Tarehe ya Mwisho: ${r.deadline || 'N/A'}\n` +
-            `👥 Wagonjwa: ${r.patientsServed || 0} | Wapya: ${r.newPatients || 0} | Waliorudi: ${r.followupPatients || 0} | Dharura: ${r.emergencies || 0}\n` +
+            `👥 Wagonjwa: ${r.patientsServed || 0}\n` +
+            roleStatsDisplay +
             `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
             `📋 ORODHA YA JUMLA (${r.checklistStats ? r.checklistStats.generalDone + '/' + r.checklistStats.generalTotal : '0/0'})\n` +
             selfChecklist +
@@ -3333,7 +3832,7 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
             return;
         }
 
-        let csv = 'Kitambulisho,Tarehe,Mtendakazi,Kazi,Zamu,Msimamizi,Idara,Wagonjwa,Wapya,Waliorudi,Dharura,Alama ya Mtendakazi,Asilimia ya Mtendakazi,Alama ya Msimamizi,Asilimia ya Msimamizi,Alama ya Pamoja,Pengo,Orodha %,Ibada,Kiwango cha Mganga Mfawidhi,Mapendekezo,Sahihi,Uhalisia\n';
+        let csv = 'Kitambulisho,Tarehe,Mtendakazi,Kazi,Daraja la Daktari,Zamu,Msimamizi,Idara,Wagonjwa,Alama ya Mtendakazi,Asilimia ya Mtendakazi,Alama ya Msimamizi,Asilimia ya Msimamizi,Alama ya Pamoja,Pengo,Orodha %,Ibada,Kiwango cha Mganga Mfawidhi,Mapendekezo,Sahihi,Uhalisia\n';
         allReports.forEach(r => {
             const checklistPct = r.checklistStats ? Math.round((r.checklistStats.totalDone / r.checklistStats.totalAll) * 100) : 0;
             const devotion = r.faith && r.faith.devotion === 'yes' ? 'Ndiyo' : 'Hapana';
@@ -3341,7 +3840,8 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
             const inchargeRec = r.incharge?.recommendation || 'Hakuna';
             const signoff = r.incharge?.signoff || 'Hakuna';
             const verified = r.self?.verified && r.supervisorAssessment?.verified && r.incharge?.verified ? 'Ndiyo' : 'Hapana';
-            csv += `${r.id || 'N/A'},${r.date},${r.worker},${r.role},${r.shift},${r.supervisor},${r.department || 'N/A'},${r.patientsServed || 0},${r.newPatients || 0},${r.followupPatients || 0},${r.emergencies || 0},${r.self.total}/30,${r.self.percent}%,${r.supervisorAssessment.total}/30,${r.supervisorAssessment.percent}%,${r.combined}%,${r.gap}%,${checklistPct}%,${devotion},${inchargeRating},${inchargeRec},${signoff},${verified}\n`;
+            const doctorLevel = r.doctorLevel || '';
+            csv += `${r.id || 'N/A'},${r.date},${r.worker},${r.role},${doctorLevel},${r.shift},${r.supervisor},${r.department || 'N/A'},${r.patientsServed || 0},${r.self.total}/30,${r.self.percent}%,${r.supervisorAssessment.total}/30,${r.supervisorAssessment.percent}%,${r.combined}%,${r.gap}%,${checklistPct}%,${devotion},${inchargeRating},${inchargeRec},${signoff},${verified}\n`;
         });
 
         const blob = new Blob([csv], { type: 'text/csv' });
@@ -3363,7 +3863,7 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
         }
         const data = {
             exportedAt: new Date().toISOString(),
-            version: '8.0',
+            version: '10.0',
             totalReports: allReports.length,
             reports: allReports
         };
@@ -3392,13 +3892,14 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
             return;
         }
 
-        let csv = 'Tarehe,Mtendakazi,Kazi,Zamu,Msimamizi,Wagonjwa,Asilimia ya Mtendakazi,Asilimia ya Msimamizi,Alama ya Pamoja,Pengo,Orodha %,Kiwango cha Mganga Mfawidhi,Sahihi,Uhalisia\n';
+        let csv = 'Tarehe,Mtendakazi,Kazi,Daraja la Daktari,Zamu,Msimamizi,Wagonjwa,Asilimia ya Mtendakazi,Asilimia ya Msimamizi,Alama ya Pamoja,Pengo,Orodha %,Kiwango cha Mganga Mfawidhi,Sahihi,Uhalisia\n';
         filtered.forEach(r => {
             const checklistPct = r.checklistStats ? Math.round((r.checklistStats.totalDone / r.checklistStats.totalAll) * 100) : 0;
             const inchargeRating = r.incharge?.ratingLabel || r.incharge?.rating + '/5' || 'Haijakadiriwa';
             const signoff = r.incharge?.signoff || 'Hakuna';
             const verified = r.self?.verified && r.supervisorAssessment?.verified && r.incharge?.verified ? 'Ndiyo' : 'Hapana';
-            csv += `${r.date},${r.worker},${r.role},${r.shift},${r.supervisor},${r.patientsServed || 0},${r.self.percent}%,${r.supervisorAssessment.percent}%,${r.combined}%,${r.gap}%,${checklistPct}%,${inchargeRating},${signoff},${verified}\n`;
+            const doctorLevel = r.doctorLevel || '';
+            csv += `${r.date},${r.worker},${r.role},${doctorLevel},${r.shift},${r.supervisor},${r.patientsServed || 0},${r.self.percent}%,${r.supervisorAssessment.percent}%,${r.combined}%,${r.gap}%,${checklistPct}%,${inchargeRating},${signoff},${verified}\n`;
         });
 
         const blob = new Blob([csv], { type: 'text/csv' });
@@ -3488,7 +3989,7 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
             </div>
             <div class="table-wrap">
                 <table class="summary-table">
-                    <thead><tr><th>Kitambulisho</th><th>Tarehe</th><th>Mtendakazi</th><th>Kazi</th><th>Wagonjwa</th><th>Mtendakazi</th><th>Msimamizi</th><th>Pamoja</th><th>Pengo</th><th>Orodha</th><th>Mganga Mfawidhi</th><th>Uhalisia</th></tr></thead>
+                    <thead><tr><th>Kitambulisho</th><th>Tarehe</th><th>Mtendakazi</th><th>Kazi</th><th>Daraja</th><th>Wagonjwa</th><th>Mtendakazi</th><th>Msimamizi</th><th>Pamoja</th><th>Pengo</th><th>Orodha</th><th>Mganga Mfawidhi</th><th>Uhalisia</th></tr></thead>
                     <tbody>
         `;
 
@@ -3497,12 +3998,14 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
             const checklistPct = r.checklistStats ? Math.round((r.checklistStats.totalDone / r.checklistStats.totalAll) * 100) : 0;
             const inchargeRating = r.incharge?.ratingLabel || r.incharge?.rating + '/5' || '—';
             const verified = r.self?.verified && r.supervisorAssessment?.verified && r.incharge?.verified ? '✅' : '⚠️';
+            const doctorLevel = r.doctorLevel || '—';
             html += `
                 <tr>
                     <td>${r.id || 'N/A'}</td>
                     <td>${r.date}</td>
                     <td><strong>${r.worker}</strong></td>
                     <td><span class="role-badge">${r.role}</span></td>
+                    <td>${doctorLevel}</td>
                     <td>${r.patientsServed || 0}</td>
                     <td>${r.self.percent}%</td>
                     <td>${r.supervisorAssessment.percent}%</td>
@@ -3623,7 +4126,6 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
         document.getElementById('achievements').value = '';
         document.getElementById('challenges').value = '';
         document.getElementById('improvements').value = '';
-        document.getElementById('additionalComments').value = '';
         document.getElementById('workerName').value = 'John Doe';
         document.getElementById('supervisorName').value = 'Dr. Smith';
         document.getElementById('inchargeName').value = 'Dr. M. Mwakyusa';
@@ -3631,10 +4133,8 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
         document.getElementById('faithVerse').value = '';
         document.getElementById('faithReflection').value = '';
         document.getElementById('inchargeRecommendation').value = 'continue';
-        document.getElementById('patientsServed').value = 0;
-        document.getElementById('newPatients').value = 0;
-        document.getElementById('followupPatients').value = 0;
-        document.getElementById('emergencies').value = 0;
+        document.querySelectorAll('#roleStatsContainer input').forEach(el => el.value = 0);
+        document.querySelectorAll('#roleStatsContainer select').forEach(el => el.value = 'yes');
         document.querySelector('input[name="inchargeSignoff"][value="approved"]').checked = true;
         document.getElementById('workerVerification').checked = false;
         document.getElementById('supervisorVerification').checked = false;
@@ -3643,6 +4143,7 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
         workerSectionDone = false;
         supervisorSectionDone = false;
         inchargeSectionDone = false;
+        editingIndex = -1;
         generalState = new Array(GENERAL_CHECKLIST.length).fill(false);
         const role = document.getElementById('workerRole').value;
         const items = ROLE_CHECKLISTS[role] || ROLE_CHECKLISTS['Doctor'];
@@ -3651,10 +4152,12 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
         renderSpecificChecklist();
         calculateScores();
         updateStatusDisplay();
+        updateProgress();
         document.getElementById('fullProfileContainer').innerHTML = '';
         document.getElementById('quickReviewContainer').innerHTML = '';
         document.getElementById('shareStatus').textContent = '💡 Bonyeza kitufe cha kushirikisha';
         document.getElementById('shareStatus').className = 'share-status';
+        toggleDoctorLevel();
         showToast('🔄 Fomu zimewekwa upya', 'warning');
     }
 
@@ -3668,7 +4171,7 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
         document.querySelector(`.tab-btn[onclick="switchTab('${tabName}')"]`).classList.add('active');
         if (tabName === 'history') renderHistory();
         if (tabName === 'summary') { populateWorkerDropdown(); renderSummary(); }
-        if (tabName === 'assessment') { initAllPads(); checkReminders(); }
+        if (tabName === 'assessment') { initAllPads(); checkReminders(); updateRoleStats(); toggleDoctorLevel(); }
         if (tabName === 'dashboard') { updateDashboard(); }
         if (tabName === 'compare') { populateCompareDropdowns(); compareWorkers(); }
         if (tabName === 'quick') {
@@ -3725,17 +4228,19 @@ ${monthlyReports.sort((a, b) => b.combined - a.combined).slice(0, 5).map((r, i) 
         calculateScores();
         initAllPads();
         updateStatusDisplay();
+        updateProgress();
         updateDashboard();
         checkReminders();
+        updateRoleStats();
+        toggleDoctorLevel();
 
         document.getElementById('deadlineDate').addEventListener('change', function() {
             document.getElementById('deadlineDisplay').textContent = this.value || 'Hajaja';
         });
 
-        document.getElementById('patientsServed').addEventListener('input', calculateScores);
-        document.getElementById('newPatients').addEventListener('input', calculateScores);
-        document.getElementById('followupPatients').addEventListener('input', calculateScores);
-        document.getElementById('emergencies').addEventListener('input', calculateScores);
+        document.getElementById('doctorLevel').addEventListener('change', function() {
+            document.getElementById('doctorLevelDisplay').value = this.value;
+        });
     });
 </script>
 
