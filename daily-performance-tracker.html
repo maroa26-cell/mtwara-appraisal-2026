@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Mtwara SDA - Tathmini ya Utendaji Kamili</title>
+    <title>Mtwara SDA - Tathmini ya Utendaji Kamili Sana</title>
     
     <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     
     <style>
         /* ===== ALL STYLES ===== */
@@ -20,7 +21,68 @@
             padding: 12px;
             color: #1a1a2e;
             min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
         }
+        body.dark-mode {
+            background: #1a1a2e;
+            color: #ecf0f1;
+        }
+        body.dark-mode .container {
+            background: #2c3e50;
+            color: #ecf0f1;
+        }
+        body.dark-mode .header h1,
+        body.dark-mode .header h2,
+        body.dark-mode .section-divider,
+        body.dark-mode .form-group label,
+        body.dark-mode .score-box h3,
+        body.dark-mode .score-item .number,
+        body.dark-mode .dashboard-card .number {
+            color: #ecf0f1;
+        }
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group select,
+        body.dark-mode .form-group textarea,
+        body.dark-mode .signature-pad {
+            background: #34495e;
+            color: #ecf0f1;
+            border-color: #5d6d7e;
+        }
+        body.dark-mode .score-box,
+        body.dark-mode .progress-header,
+        body.dark-mode .share-section {
+            background: #34495e;
+        }
+        body.dark-mode .quick-stat,
+        body.dark-mode .dashboard-card,
+        body.dark-mode .score-item,
+        body.dark-mode .role-stats,
+        body.dark-mode .role-stats .stat-item,
+        body.dark-mode .history-item {
+            background: #2c3e50;
+            border-color: #5d6d7e;
+            color: #ecf0f1;
+        }
+        body.dark-mode .modal-content {
+            background: #2c3e50;
+            color: #ecf0f1;
+        }
+        body.dark-mode .tab-btn {
+            background: #34495e;
+            color: #ecf0f1;
+        }
+        body.dark-mode .tab-btn.active {
+            background: #1a5276;
+        }
+        body.dark-mode .report-snapshot {
+            background: #2c3e50;
+            color: #ecf0f1;
+        }
+        body.dark-mode .report-snapshot .header-snap h2,
+        body.dark-mode .report-snapshot .footer-snap {
+            color: #ecf0f1;
+        }
+        
         .container {
             max-width: 1100px;
             margin: 0 auto;
@@ -28,6 +90,7 @@
             border-radius: 14px;
             box-shadow: 0 8px 40px rgba(0,0,0,0.10);
             padding: 25px 30px 35px;
+            transition: background 0.3s, color 0.3s;
         }
         @media (max-width: 600px) {
             body { padding: 8px; }
@@ -39,6 +102,9 @@
             border-bottom: 4px solid #1a5276;
             padding-bottom: 14px;
             margin-bottom: 18px;
+        }
+        body.dark-mode .header {
+            border-bottom-color: #5d6d7e;
         }
         .logo-container {
             display: flex;
@@ -68,6 +134,11 @@
             height: 100%;
             object-fit: contain;
         }
+        body.dark-mode .logo-placeholder {
+            border-color: #5d6d7e;
+            background: #34495e;
+            color: #ecf0f1;
+        }
         .header h1 {
             font-size: 22px;
             color: #1a5276;
@@ -87,10 +158,36 @@
             color: #1a5276;
             border-left: 4px solid #1a5276;
         }
+        body.dark-mode .header .mission {
+            background: #34495e;
+            color: #ecf0f1;
+            border-left-color: #5d6d7e;
+        }
         @media (max-width: 500px) {
             .header h1 { font-size: 17px; }
             .header h2 { font-size: 12px; }
             .logo-placeholder { width: 45px; height: 45px; }
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 480px) {
+            .container { padding: 10px; }
+            .form-row { grid-template-columns: 1fr; }
+            .dashboard-grid { grid-template-columns: 1fr 1fr; }
+            .tabs .tab-btn { font-size: 10px; padding: 4px 8px; min-width: 40px; }
+            .score-row { flex-direction: column; }
+            .score-item { min-width: auto; }
+            .checklist-grid { grid-template-columns: 1fr; }
+            .share-options .btn { font-size: 11px; padding: 6px 10px; min-width: 60px; }
+            .btn { font-size: 11px; padding: 6px 12px; min-width: 60px; }
+            .modal-content { padding: 20px; }
+            .benchmark-grid { grid-template-columns: 1fr 1fr; }
+            .compare-container { grid-template-columns: 1fr; }
+            .quick-stats { grid-template-columns: 1fr 1fr; }
+            .stat-row { grid-template-columns: 1fr; }
+            .signature-pad { max-width: 100%; height: 80px; }
+            .history-item { flex-direction: column; align-items: flex-start; }
+            .history-item .info { width: 100%; }
         }
 
         /* Login Modal */
@@ -114,11 +211,15 @@
             max-width: 400px;
             width: 90%;
             box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            transition: background 0.3s;
         }
         .modal-content h3 {
             color: #1a5276;
             margin-bottom: 16px;
             text-align: center;
+        }
+        body.dark-mode .modal-content h3 {
+            color: #ecf0f1;
         }
         .modal-content .form-group {
             margin-bottom: 14px;
@@ -136,6 +237,10 @@
             background: #d5f5e3;
             color: #1a7a3a;
         }
+        body.dark-mode .user-badge {
+            background: #27ae60;
+            color: #fff;
+        }
 
         .progress-header {
             background: #eaf2f8;
@@ -143,11 +248,19 @@
             padding: 10px 16px;
             margin-bottom: 14px;
             border-left: 4px solid #1a5276;
+            transition: background 0.3s;
+        }
+        body.dark-mode .progress-header {
+            background: #34495e;
+            border-left-color: #5d6d7e;
         }
         .progress-header .progress-text {
             font-size: 13px;
             color: #1a5276;
             font-weight: 600;
+        }
+        body.dark-mode .progress-header .progress-text {
+            color: #ecf0f1;
         }
         .progress-header .progress-bar {
             height: 8px;
@@ -155,6 +268,9 @@
             border-radius: 4px;
             margin-top: 4px;
             overflow: hidden;
+        }
+        body.dark-mode .progress-header .progress-bar {
+            background: #5d6d7e;
         }
         .progress-header .progress-bar .fill {
             height: 100%;
@@ -185,8 +301,14 @@
         }
         .tab-btn:hover { background: #d5dbdb; }
         .tab-btn.active { background: #1a5276; color: #fff; }
+        body.dark-mode .tab-btn {
+            background: #34495e;
+            color: #ecf0f1;
+        }
+        body.dark-mode .tab-btn:hover { background: #5d6d7e; }
+        body.dark-mode .tab-btn.active { background: #1a5276; color: #fff; }
         @media (max-width: 480px) {
-            .tab-btn { font-size: 11px; padding: 6px 10px; min-width: 50px; }
+            .tab-btn { font-size: 10px; padding: 4px 8px; min-width: 40px; }
         }
 
         .tab-content { display: none; animation: fadeIn 0.35s ease; }
@@ -204,6 +326,9 @@
             margin-bottom: 3px;
             font-size: 13px;
         }
+        body.dark-mode .form-group label {
+            color: #ecf0f1;
+        }
         .form-group input,
         .form-group select,
         .form-group textarea {
@@ -214,6 +339,14 @@
             font-size: 14px;
             font-family: inherit;
             background: #fafbfc;
+            transition: background 0.3s, color 0.3s, border-color 0.3s;
+        }
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group select,
+        body.dark-mode .form-group textarea {
+            background: #34495e;
+            color: #ecf0f1;
+            border-color: #5d6d7e;
         }
         .form-group textarea { min-height: 55px; resize: vertical; }
         .form-group input:focus,
@@ -222,6 +355,12 @@
             border-color: #1a5276;
             outline: none;
             box-shadow: 0 0 0 3px rgba(26,82,118,0.10);
+        }
+        body.dark-mode .form-group input:focus,
+        body.dark-mode .form-group select:focus,
+        body.dark-mode .form-group textarea:focus {
+            border-color: #5d6d7e;
+            box-shadow: 0 0 0 3px rgba(93,109,126,0.3);
         }
         .form-row {
             display: grid;
@@ -256,6 +395,7 @@
         .section-divider.goals { background: #2ecc71; color: #fff; border-left: 4px solid #1a7a3a; }
         .section-divider.feedback { background: #e67e22; color: #fff; border-left: 4px solid #d35400; }
         .section-divider.benchmark { background: #3498db; color: #fff; border-left: 4px solid #2c3e50; }
+        .section-divider.leaderboard { background: #f1c40f; color: #1a1a2e; border-left: 4px solid #d4a017; }
         .section-divider .badge-section {
             padding: 2px 12px;
             border-radius: 20px;
@@ -263,6 +403,22 @@
             font-weight: 400;
             background: rgba(255,255,255,0.2);
         }
+        body.dark-mode .section-divider.self { background: #1a5276; color: #ecf0f1; }
+        body.dark-mode .section-divider.supervisor { background: #1a7a3a; color: #ecf0f1; }
+        body.dark-mode .section-divider.incharge { background: #2c3e50; color: #ecf0f1; }
+        body.dark-mode .section-divider.info { background: #935e38; color: #ecf0f1; }
+        body.dark-mode .section-divider.general { background: #6c3483; color: #ecf0f1; }
+        body.dark-mode .section-divider.specific { background: #0e6655; color: #ecf0f1; }
+        body.dark-mode .section-divider.faith { background: #7d6608; color: #ecf0f1; }
+        body.dark-mode .section-divider.stats { background: #0e6655; color: #ecf0f1; }
+        body.dark-mode .section-divider.status { background: #2c3e50; color: #ecf0f1; }
+        body.dark-mode .section-divider.dashboard { background: #6c3483; color: #ecf0f1; }
+        body.dark-mode .section-divider.share { background: #d68910; color: #ecf0f1; }
+        body.dark-mode .section-divider.badges { background: #d4a017; color: #1a1a2e; }
+        body.dark-mode .section-divider.goals { background: #1a7a3a; color: #ecf0f1; }
+        body.dark-mode .section-divider.feedback { background: #d35400; color: #ecf0f1; }
+        body.dark-mode .section-divider.benchmark { background: #2c3e50; color: #ecf0f1; }
+        body.dark-mode .section-divider.leaderboard { background: #d4a017; color: #1a1a2e; }
 
         .checklist-item {
             display: flex;
@@ -272,6 +428,9 @@
             border-bottom: 1px solid #f0f2f5;
             font-size: 13px;
             line-height: 1.4;
+        }
+        body.dark-mode .checklist-item {
+            border-bottom-color: #5d6d7e;
         }
         .checklist-item:last-child { border-bottom: none; }
         .checklist-item .num {
@@ -287,6 +446,10 @@
             color: #7f8c8d;
             flex-shrink: 0;
         }
+        body.dark-mode .checklist-item .num {
+            background: #5d6d7e;
+            color: #ecf0f1;
+        }
         .checklist-item .text { flex: 1; }
         .checklist-item .toggle {
             position: relative;
@@ -298,7 +461,11 @@
             cursor: pointer;
             transition: 0.3s;
         }
+        body.dark-mode .checklist-item .toggle {
+            background: #5d6d7e;
+        }
         .checklist-item .toggle.active { background: #27ae60; }
+        body.dark-mode .checklist-item .toggle.active { background: #27ae60; }
         .checklist-item .toggle .thumb {
             position: absolute;
             top: 2px;
@@ -341,7 +508,13 @@
             min-width: 45px;
             text-align: center;
         }
+        body.dark-mode .rating-group .rating-btn {
+            background: #34495e;
+            color: #ecf0f1;
+            border-color: #5d6d7e;
+        }
         .rating-group .rating-btn:hover { background: #eaf2f8; }
+        body.dark-mode .rating-group .rating-btn:hover { background: #5d6d7e; }
         .rating-group .rating-btn.selected {
             border-color: #1a5276;
             background: #1a5276;
@@ -358,11 +531,19 @@
             padding: 14px 18px;
             margin: 14px 0;
             border-left: 5px solid #1a5276;
+            transition: background 0.3s;
+        }
+        body.dark-mode .score-box {
+            background: #34495e;
+            border-left-color: #5d6d7e;
         }
         .score-box h3 {
             color: #1a5276;
             margin-bottom: 6px;
             font-size: 15px;
+        }
+        body.dark-mode .score-box h3 {
+            color: #ecf0f1;
         }
         .score-row {
             display: flex;
@@ -376,6 +557,10 @@
             min-width: 80px;
             text-align: center;
             flex: 1;
+            transition: background 0.3s;
+        }
+        body.dark-mode .score-item {
+            background: #2c3e50;
         }
         .score-item .number {
             font-size: 22px;
@@ -383,10 +568,16 @@
             color: #1a5276;
             display: block;
         }
+        body.dark-mode .score-item .number {
+            color: #ecf0f1;
+        }
         .score-item .label {
             font-size: 10px;
             color: #7f8c8d;
             text-transform: uppercase;
+        }
+        body.dark-mode .score-item .label {
+            color: #bdc3c7;
         }
         .score-item .number.green { color: #27ae60; }
         .score-item .number.orange { color: #f39c12; }
@@ -432,6 +623,13 @@
         .btn-teal:hover { background: #0e6655; }
         .btn-gold { background: #f1c40f; color: #1a1a2e; }
         .btn-gold:hover { background: #d4a017; }
+        .btn-dark { background: #2c3e50; color: #fff; }
+        .btn-dark:hover { background: #1a1a2e; }
+        body.dark-mode .btn-dark { background: #ecf0f1; color: #1a1a2e; }
+        body.dark-mode .btn-dark:hover { background: #bdc3c7; }
+        @media (max-width: 480px) {
+            .btn { font-size: 11px; padding: 6px 12px; min-width: 60px; }
+        }
 
         .signature-pad {
             border: 2px dashed #1a5276;
@@ -443,6 +641,11 @@
             height: 120px;
             cursor: crosshair;
             margin: 6px 0;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        body.dark-mode .signature-pad {
+            background: #34495e;
+            border-color: #5d6d7e;
         }
         .signature-pad canvas {
             width: 100%;
@@ -471,6 +674,11 @@
             gap: 10px;
             flex-wrap: wrap;
         }
+        body.dark-mode .print-note {
+            background: #34495e;
+            border-color: #5d6d7e;
+            color: #ecf0f1;
+        }
 
         .footer {
             text-align: center;
@@ -480,11 +688,18 @@
             font-size: 12px;
             color: #7f8c8d;
         }
+        body.dark-mode .footer {
+            border-top-color: #5d6d7e;
+            color: #bdc3c7;
+        }
         .footer .verse {
             font-style: italic;
             color: #1a5276;
             font-size: 13px;
             margin-bottom: 4px;
+        }
+        body.dark-mode .footer .verse {
+            color: #ecf0f1;
         }
 
         .toast {
@@ -514,12 +729,14 @@
         @media print {
             body { background: #fff; padding: 0; }
             .container { box-shadow: none; padding: 14px; max-width: 100%; border-radius: 0; }
-            .btn-group, .print-note, .tabs, .modal { display: none !important; }
+            .btn-group, .print-note, .tabs, .modal, .dark-mode-toggle { display: none !important; }
             .tab-content { display: block !important; }
             .score-box { break-inside: avoid; }
             .header { border-bottom-width: 2px; }
             .section-divider { break-inside: avoid; }
             .signature-pad { border: 1px solid #000; }
+            body.dark-mode { background: #fff; color: #1a1a2e; }
+            body.dark-mode .container { background: #fff; color: #1a1a2e; }
         }
 
         .history-item {
@@ -530,11 +747,17 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 6px;
+            transition: border-color 0.3s;
+        }
+        body.dark-mode .history-item {
+            border-bottom-color: #5d6d7e;
         }
         .history-item:last-child { border-bottom: none; }
         .history-item .info { font-size: 13px; }
         .history-item .info strong { color: #1a5276; }
+        body.dark-mode .history-item .info strong { color: #ecf0f1; }
         .history-item .date { font-size: 11px; color: #7f8c8d; }
+        body.dark-mode .history-item .date { color: #bdc3c7; }
         .history-empty {
             text-align: center;
             color: #7f8c8d;
@@ -550,6 +773,8 @@
         .tag-self { background: #d6eaf8; color: #1a5276; }
         .tag-supervisor { background: #d5f5e3; color: #1a7a3a; }
         .tag-incharge { background: #2c3e50; color: #fff; }
+        body.dark-mode .tag-self { background: #1a5276; color: #ecf0f1; }
+        body.dark-mode .tag-supervisor { background: #1a7a3a; color: #ecf0f1; }
         .role-badge {
             display: inline-block;
             padding: 2px 10px;
@@ -559,6 +784,10 @@
             background: #eaf2f8;
             color: #1a5276;
         }
+        body.dark-mode .role-badge {
+            background: #34495e;
+            color: #ecf0f1;
+        }
 
         .role-stats {
             background: #f8f9fa;
@@ -566,11 +795,19 @@
             padding: 14px 18px;
             margin: 10px 0;
             border: 1px solid #ecf0f1;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        body.dark-mode .role-stats {
+            background: #34495e;
+            border-color: #5d6d7e;
         }
         .role-stats h4 {
             color: #1a5276;
             margin-bottom: 10px;
             font-size: 14px;
+        }
+        body.dark-mode .role-stats h4 {
+            color: #ecf0f1;
         }
         .role-stats .stat-row {
             display: grid;
@@ -582,11 +819,19 @@
             padding: 8px 12px;
             border-radius: 6px;
             border: 1px solid #ecf0f1;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        body.dark-mode .role-stats .stat-row .stat-item {
+            background: #2c3e50;
+            border-color: #5d6d7e;
         }
         .role-stats .stat-row .stat-item label {
             font-size: 11px;
             color: #7f8c8d;
             display: block;
+        }
+        body.dark-mode .role-stats .stat-row .stat-item label {
+            color: #bdc3c7;
         }
         .role-stats .stat-row .stat-item input {
             width: 100%;
@@ -596,6 +841,9 @@
             font-weight: 600;
             color: #1a5276;
             background: transparent;
+        }
+        body.dark-mode .role-stats .stat-row .stat-item input {
+            color: #ecf0f1;
         }
         .role-stats .stat-row .stat-item input:focus {
             outline: none;
@@ -610,10 +858,18 @@
             padding: 14px 18px;
             margin: 14px 0;
             border-left: 5px solid #8e44ad;
+            transition: background 0.3s;
+        }
+        body.dark-mode .share-section {
+            background: #34495e;
+            border-left-color: #8e44ad;
         }
         .share-section h4 {
             color: #6c3483;
             margin-bottom: 8px;
+        }
+        body.dark-mode .share-section h4 {
+            color: #ecf0f1;
         }
         .share-options {
             display: flex;
@@ -629,9 +885,17 @@
             background: #f8f9fa;
             border-radius: 6px;
             border-left: 3px solid #8e44ad;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode .share-status {
+            background: #2c3e50;
+            color: #ecf0f1;
+            border-left-color: #8e44ad;
         }
         .share-status.success { border-left-color: #27ae60; color: #1a7a3a; }
+        body.dark-mode .share-status.success { color: #27ae60; }
         .share-status.error { border-left-color: #e74c3c; color: #922b21; }
+        body.dark-mode .share-status.error { color: #e74c3c; }
 
         .report-snapshot {
             background: #ffffff;
@@ -643,36 +907,58 @@
             font-size: 12px;
             border: 2px solid #1a5276;
             display: none;
+            transition: background 0.3s, color 0.3s, border-color 0.3s;
         }
-        .report-snapshot.show {
-            display: block;
+        body.dark-mode .report-snapshot {
+            background: #2c3e50;
+            color: #ecf0f1;
+            border-color: #5d6d7e;
         }
+        .report-snapshot.show { display: block; }
         .report-snapshot .header-snap {
             text-align: center;
             border-bottom: 3px double #1a5276;
             padding-bottom: 10px;
             margin-bottom: 10px;
         }
+        body.dark-mode .report-snapshot .header-snap {
+            border-bottom-color: #5d6d7e;
+        }
         .report-snapshot .header-snap h2 {
             color: #1a5276;
             font-size: 16px;
             margin: 0;
         }
+        body.dark-mode .report-snapshot .header-snap h2 {
+            color: #ecf0f1;
+        }
         .report-snapshot .header-snap .subtitle {
             color: #7f8c8d;
             font-size: 11px;
+        }
+        body.dark-mode .report-snapshot .header-snap .subtitle {
+            color: #bdc3c7;
         }
         .report-snapshot .section-snap {
             margin: 8px 0;
             padding: 6px 0;
             border-bottom: 1px dashed #ecf0f1;
         }
+        body.dark-mode .report-snapshot .section-snap {
+            border-bottom-color: #5d6d7e;
+        }
         .report-snapshot .section-snap .label {
             font-weight: 600;
             color: #2c3e50;
         }
+        body.dark-mode .report-snapshot .section-snap .label {
+            color: #ecf0f1;
+        }
         .report-snapshot .section-snap .value {
             color: #1a5276;
+        }
+        body.dark-mode .report-snapshot .section-snap .value {
+            color: #ecf0f1;
         }
         .report-snapshot .score-highlight {
             background: #eaf2f8;
@@ -681,10 +967,16 @@
             margin: 8px 0;
             text-align: center;
         }
+        body.dark-mode .report-snapshot .score-highlight {
+            background: #34495e;
+        }
         .report-snapshot .score-highlight .big-score {
             font-size: 28px;
             font-weight: 800;
             color: #1a5276;
+        }
+        body.dark-mode .report-snapshot .score-highlight .big-score {
+            color: #ecf0f1;
         }
         .report-snapshot .footer-snap {
             text-align: center;
@@ -695,6 +987,10 @@
             color: #1a5276;
             font-size: 10px;
         }
+        body.dark-mode .report-snapshot .footer-snap {
+            border-top-color: #5d6d7e;
+            color: #ecf0f1;
+        }
         .report-snapshot .link-snap {
             background: #f8f9fa;
             padding: 8px;
@@ -703,6 +999,10 @@
             font-size: 10px;
             word-break: break-all;
             color: #2e86c1;
+        }
+        body.dark-mode .report-snapshot .link-snap {
+            background: #34495e;
+            color: #ecf0f1;
         }
         
         .quick-stats {
@@ -718,6 +1018,12 @@
             text-align: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             border: 1px solid #ecf0f1;
+            transition: background 0.3s, border-color 0.3s, color 0.3s;
+        }
+        body.dark-mode .quick-stat {
+            background: #2c3e50;
+            border-color: #5d6d7e;
+            color: #ecf0f1;
         }
         .quick-stat .value {
             font-size: 24px;
@@ -725,10 +1031,16 @@
             color: #1a5276;
             display: block;
         }
+        body.dark-mode .quick-stat .value {
+            color: #ecf0f1;
+        }
         .quick-stat .label {
             font-size: 10px;
             color: #7f8c8d;
             text-transform: uppercase;
+        }
+        body.dark-mode .quick-stat .label {
+            color: #bdc3c7;
         }
         .quick-stat .value.green { color: #27ae60; }
         .quick-stat .value.orange { color: #f39c12; }
@@ -742,6 +1054,10 @@
             padding: 12px 16px;
             border-left: 4px solid #27ae60;
             margin: 6px 0;
+            transition: background 0.3s;
+        }
+        body.dark-mode .achievement-box {
+            background: #34495e;
         }
         .challenge-box {
             background: #f8f9fa;
@@ -749,6 +1065,10 @@
             padding: 12px 16px;
             border-left: 4px solid #e74c3c;
             margin: 6px 0;
+            transition: background 0.3s;
+        }
+        body.dark-mode .challenge-box {
+            background: #34495e;
         }
         .reminder-box {
             background: #fef9e7;
@@ -759,6 +1079,12 @@
             font-size: 13px;
             color: #7d6608;
             display: none;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode .reminder-box {
+            background: #34495e;
+            color: #ecf0f1;
+            border-left-color: #d4a017;
         }
         .achievement-badge {
             display: inline-block;
@@ -774,6 +1100,12 @@
         .badge-bronze { background: #fdebd0; color: #a04000; border: 2px solid #e67e22; }
         .badge-green { background: #d5f5e3; color: #1a7a3a; border: 2px solid #27ae60; }
         .badge-red { background: #fadbd8; color: #922b21; border: 2px solid #e74c3c; }
+        body.dark-mode .badge-platinum { background: #6c3483; color: #ecf0f1; }
+        body.dark-mode .badge-gold { background: #7d6608; color: #ecf0f1; }
+        body.dark-mode .badge-silver { background: #2c3e50; color: #ecf0f1; }
+        body.dark-mode .badge-bronze { background: #a04000; color: #ecf0f1; }
+        body.dark-mode .badge-green { background: #1a7a3a; color: #ecf0f1; }
+        body.dark-mode .badge-red { background: #922b21; color: #ecf0f1; }
 
         .dashboard-grid {
             display: grid;
@@ -788,15 +1120,26 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             border: 1px solid #ecf0f1;
             text-align: center;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        body.dark-mode .dashboard-card {
+            background: #2c3e50;
+            border-color: #5d6d7e;
         }
         .dashboard-card .number {
             font-size: 28px;
             font-weight: 800;
             color: #1a5276;
         }
+        body.dark-mode .dashboard-card .number {
+            color: #ecf0f1;
+        }
         .dashboard-card .label {
             font-size: 11px;
             color: #7f8c8d;
+        }
+        body.dark-mode .dashboard-card .label {
+            color: #bdc3c7;
         }
         .dashboard-card .number.green { color: #27ae60; }
         .dashboard-card .number.orange { color: #f39c12; }
@@ -813,6 +1156,12 @@
             font-size: 13px;
             color: #1a5276;
             display: none;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode .notification-banner {
+            background: #34495e;
+            color: #ecf0f1;
+            border-left-color: #5d6d7e;
         }
         .notification-banner.show { display: block; }
         .alert-box {
@@ -824,6 +1173,9 @@
         .alert-box.warning { background: #fadbd8; color: #922b21; border-left: 4px solid #e74c3c; }
         .alert-box.success { background: #d5f5e3; color: #1a7a3a; border-left: 4px solid #27ae60; }
         .alert-box.info { background: #d6eaf8; color: #1a5276; border-left: 4px solid #2e86c1; }
+        body.dark-mode .alert-box.warning { background: #922b21; color: #ecf0f1; }
+        body.dark-mode .alert-box.success { background: #1a7a3a; color: #ecf0f1; }
+        body.dark-mode .alert-box.info { background: #1a5276; color: #ecf0f1; }
         .signoff-badge {
             display: inline-block;
             padding: 2px 12px;
@@ -834,6 +1186,9 @@
         .signoff-approved { background: #d5f5e3; color: #1a7a3a; }
         .signoff-conditional { background: #fdebd0; color: #a04000; }
         .signoff-rejected { background: #fadbd8; color: #922b21; }
+        body.dark-mode .signoff-approved { background: #1a7a3a; color: #ecf0f1; }
+        body.dark-mode .signoff-conditional { background: #a04000; color: #ecf0f1; }
+        body.dark-mode .signoff-rejected { background: #922b21; color: #ecf0f1; }
         .training-recommendation {
             background: #d5f5e3;
             border-left: 4px solid #27ae60;
@@ -841,13 +1196,24 @@
             border-radius: 6px;
             margin: 6px 0;
             font-size: 13px;
+            transition: background 0.3s;
+        }
+        body.dark-mode .training-recommendation {
+            background: #34495e;
+            border-left-color: #27ae60;
         }
         .training-recommendation .title {
             font-weight: 600;
             color: #1a7a3a;
         }
+        body.dark-mode .training-recommendation .title {
+            color: #ecf0f1;
+        }
         .training-recommendation .desc {
             color: #1a5276;
+        }
+        body.dark-mode .training-recommendation .desc {
+            color: #ecf0f1;
         }
         .badge {
             display: inline-block;
@@ -860,6 +1226,10 @@
         .badge-good { background: #d6eaf8; color: #1a5276; }
         .badge-average { background: #fdebd0; color: #a04000; }
         .badge-poor { background: #fadbd8; color: #922b21; }
+        body.dark-mode .badge-excellent { background: #1a7a3a; color: #ecf0f1; }
+        body.dark-mode .badge-good { background: #1a5276; color: #ecf0f1; }
+        body.dark-mode .badge-average { background: #a04000; color: #ecf0f1; }
+        body.dark-mode .badge-poor { background: #922b21; color: #ecf0f1; }
         .progress-bar {
             width: 100%;
             height: 8px;
@@ -867,6 +1237,10 @@
             border-radius: 4px;
             overflow: hidden;
             margin: 4px 0 2px;
+            transition: background 0.3s;
+        }
+        body.dark-mode .progress-bar {
+            background: #5d6d7e;
         }
         .progress-bar .fill {
             height: 100%;
@@ -893,6 +1267,10 @@
             border-radius: 10px;
             padding: 14px 18px;
             margin: 10px 0;
+            transition: background 0.3s;
+        }
+        body.dark-mode .profile-section {
+            background: #34495e;
         }
         .profile-section .profile-row {
             display: flex;
@@ -907,30 +1285,42 @@
             font-size: 11px;
             color: #7f8c8d;
         }
+        body.dark-mode .profile-section .profile-item .label {
+            color: #bdc3c7;
+        }
         .profile-section .profile-item .value {
             font-weight: 600;
             color: #1a5276;
         }
+        body.dark-mode .profile-section .profile-item .value {
+            color: #ecf0f1;
+        }
 
-        /* Chart Container */
         .chart-container {
             background: #f8f9fa;
             border-radius: 10px;
             padding: 14px;
             margin: 10px 0;
             border: 1px solid #ecf0f1;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        body.dark-mode .chart-container {
+            background: #34495e;
+            border-color: #5d6d7e;
         }
         .chart-container h4 {
             color: #1a5276;
             margin-bottom: 8px;
             font-size: 14px;
         }
+        body.dark-mode .chart-container h4 {
+            color: #ecf0f1;
+        }
         #trendChart {
             width: 100% !important;
             max-height: 250px;
         }
 
-        /* Range Slider */
         input[type="range"] {
             width: 100%;
             margin: 6px 0;
@@ -939,8 +1329,10 @@
             font-weight: 700;
             color: #1a5276;
         }
+        body.dark-mode .range-display {
+            color: #ecf0f1;
+        }
 
-        /* Benchmark Cards */
         .benchmark-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -953,10 +1345,18 @@
             padding: 12px;
             border: 1px solid #ecf0f1;
             text-align: center;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        body.dark-mode .benchmark-card {
+            background: #34495e;
+            border-color: #5d6d7e;
         }
         .benchmark-card .role-name {
             font-weight: 600;
             color: #1a5276;
+        }
+        body.dark-mode .benchmark-card .role-name {
+            color: #ecf0f1;
         }
         .benchmark-card .bench-value {
             font-size: 20px;
@@ -977,9 +1377,155 @@
         .notification-item.success { background: #d5f5e3; border-color: #27ae60; }
         .notification-item.warning { background: #fdebd0; border-color: #f39c12; }
         .notification-item.error { background: #fadbd8; border-color: #e74c3c; }
+        body.dark-mode .notification-item.info { background: #1a5276; color: #ecf0f1; }
+        body.dark-mode .notification-item.success { background: #1a7a3a; color: #ecf0f1; }
+        body.dark-mode .notification-item.warning { background: #a04000; color: #ecf0f1; }
+        body.dark-mode .notification-item.error { background: #922b21; color: #ecf0f1; }
+
+        /* Leaderboard Styles */
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+        .leaderboard-table th {
+            background: #1a5276;
+            color: #fff;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        body.dark-mode .leaderboard-table th {
+            background: #2c3e50;
+            color: #ecf0f1;
+        }
+        .leaderboard-table td {
+            padding: 6px 12px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        body.dark-mode .leaderboard-table td {
+            border-bottom-color: #5d6d7e;
+        }
+        .leaderboard-table tr:hover {
+            background: #f8f9fa;
+        }
+        body.dark-mode .leaderboard-table tr:hover {
+            background: #2c3e50;
+        }
+        .leaderboard-rank {
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .rank-1 { color: #f1c40f; }
+        .rank-2 { color: #bdc3c7; }
+        .rank-3 { color: #e67e22; }
+        body.dark-mode .rank-1 { color: #f1c40f; }
+        body.dark-mode .rank-2 { color: #bdc3c7; }
+        body.dark-mode .rank-3 { color: #e67e22; }
+
+        /* Search Results */
+        .search-results {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 8px;
+        }
+        .search-result-item {
+            padding: 6px 12px;
+            border-bottom: 1px solid #ecf0f1;
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+        body.dark-mode .search-result-item {
+            border-bottom-color: #5d6d7e;
+        }
+        .search-result-item:hover {
+            background: #f8f9fa;
+        }
+        body.dark-mode .search-result-item:hover {
+            background: #2c3e50;
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            background: #1a5276;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+        body.dark-mode .dark-mode-toggle {
+            background: #ecf0f1;
+            color: #1a1a2e;
+        }
+        @media (max-width: 480px) {
+            .dark-mode-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+
+        /* National Benchmarks */
+        .national-benchmark-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 8px;
+            margin: 10px 0;
+        }
+        .national-benchmark-item {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ecf0f1;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        body.dark-mode .national-benchmark-item {
+            background: #34495e;
+            border-color: #5d6d7e;
+        }
+        .national-benchmark-item .role {
+            font-weight: 600;
+            font-size: 12px;
+            color: #1a5276;
+        }
+        body.dark-mode .national-benchmark-item .role {
+            color: #ecf0f1;
+        }
+        .national-benchmark-item .score {
+            font-size: 18px;
+            font-weight: 800;
+        }
+        .national-benchmark-item .score.target { color: #27ae60; }
+        .national-benchmark-item .score.min { color: #f39c12; }
+        .national-benchmark-item .your-score {
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+        .national-benchmark-item .your-score.above { color: #27ae60; }
+        .national-benchmark-item .your-score.below { color: #e74c3c; }
+        .national-benchmark-item .your-score.equal { color: #f39c12; }
     </style>
 </head>
 <body>
+
+<!-- Dark Mode Toggle -->
+<button class="dark-mode-toggle" onclick="toggleDarkMode()" title="Badilisha Rangi">🌙</button>
 
 <!-- ============================================================ -->
 <!-- LOGIN MODAL -->
@@ -1014,7 +1560,7 @@
             </div>
             <div>
                 <h1>MTWARA SDA DISPENSARY</h1>
-                <h2>Nyenzo ya Tathmini ya Utendaji Kazi - Toleo Kamili</h2>
+                <h2>Nyenzo ya Tathmini ya Utendaji Kazi - Toleo Kamili Sana</h2>
                 <div style="font-size:12px; color:#7f8c8d; margin-top:4px;">
                     Kitambulisho: <span id="assessmentId" style="font-weight:700; color:#1a5276;"></span>
                     <span id="userBadge" class="user-badge" style="margin-left:10px;">👤 Imetoka nje</span>
@@ -1051,6 +1597,8 @@
         <button class="tab-btn" onclick="switchTab('dashboard')">📊 Dashibodi</button>
         <button class="tab-btn" onclick="switchTab('history')">📂 Historia</button>
         <button class="tab-btn" onclick="switchTab('reports')">📋 Ripoti</button>
+        <button class="tab-btn" onclick="switchTab('leaderboard')">🏆 Bora</button>
+        <button class="tab-btn" onclick="switchTab('search')">🔍 Tafuta</button>
         <button class="tab-btn" onclick="window.print()" style="background:#1a5276; color:#fff;">🖨️ PDF</button>
     </div>
 
@@ -1064,7 +1612,7 @@
             <span class="badge-section" id="assessmentStatus">⏳ Inasubiri Mtendakazi</span>
         </div>
 
-        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; padding:10px; background:#f8f9fa; border-radius:8px;">
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; padding:10px; background:#f8f9fa; border-radius:8px; transition:background 0.3s;">
             <div><span class="status-dot red" id="workerStatusDot"></span>Mtendakazi: <span id="workerStatusText">⏳ Hajajaza</span></div>
             <div><span class="status-dot orange" id="supervisorStatusDot"></span>Msimamizi: <span id="supervisorStatusText">⏳ Hajajaza</span></div>
             <div><span class="status-dot purple" id="inchargeStatusDot"></span>Mganga Mfawidhi: <span id="inchargeStatusText">⏳ Hajajaza</span></div>
@@ -1149,9 +1697,7 @@
         <div class="section-divider specific">🎯 Orodha Maalum - <span id="roleSpecificLabel">Daktari</span></div>
         <div id="specificChecklistContainer"></div>
 
-        <!-- ========================================================== -->
-        <!-- VIPENGELE VIPYA: MALENGO NA MAENDELEO -->
-        <!-- ========================================================== -->
+        <!-- GOALS -->
         <div class="section-divider goals">🎯 Malengo na Maendeleo</div>
         <div class="form-group">
             <label>Malengo ya Mwezi Ujao</label>
@@ -1163,9 +1709,7 @@
             <span id="goalProgressDisplay" class="range-display">0%</span>
         </div>
 
-        <!-- ========================================================== -->
-        <!-- VIPENGELE VIPYA: MAONI YA WAGONJWA -->
-        <!-- ========================================================== -->
+        <!-- FEEDBACK -->
         <div class="section-divider feedback">⭐ Maoni ya Wagonjwa</div>
         <div class="form-row">
             <div class="form-group">
@@ -1206,7 +1750,7 @@
             <textarea id="faithReflection" placeholder="Maombi au mawazo yako..."></textarea>
         </div>
 
-        <!-- TATHMINI YA MTENDAKAZI -->
+        <!-- SELF ASSESSMENT -->
         <div class="section-divider self">✍️ Tathmini ya Mtendakazi</div>
         <div class="form-row">
             <div class="form-group">
@@ -1286,7 +1830,7 @@
             <textarea id="selfComments" placeholder="Mawazo yako..."></textarea>
         </div>
 
-        <!-- SAHIHI YA MTENDAKAZI -->
+        <!-- SIGNATURE -->
         <div class="section-divider self">✍️ Sahihi ya Mtendakazi</div>
         <div style="background:#fef9e7; border-left:4px solid #e74c3c; padding:10px 14px; border-radius:6px; margin:8px 0; font-size:13px; color:#7d6608;">
             <strong>⚠️ ONYO:</strong> Taarifa za uongo ni kosa la kinidhamu.
@@ -1307,9 +1851,7 @@
         </div>
         <button class="btn btn-success" onclick="saveWorkerSection()">💾 Hifadhi Sehemu ya Mtendakazi</button>
 
-        <!-- ========================================================== -->
-        <!-- SEHEMU YA MSIMAMIZI -->
-        <!-- ========================================================== -->
+        <!-- SUPERVISOR -->
         <div class="section-divider supervisor" id="supervisorSection">
             👔 Tathmini ya Msimamizi
             <span class="badge-section">Msimamizi anakagua mtendakazi</span>
@@ -1428,9 +1970,7 @@
             ✅ Sehemu ya Msimamizi imehifadhiwa. Bonyeza "Tuma kwa Mganga Mfawidhi" kuishirikisha.
         </div>
 
-        <!-- ========================================================== -->
-        <!-- SEHEMU YA MGANGA MFAWIDHI -->
-        <!-- ========================================================== -->
+        <!-- INCHARGE -->
         <div class="section-divider incharge" id="inchargeSection">
             🏢 Tathmini ya Mganga Mfawidhi
             <span class="badge-section">Kagua Mwisho na Sahihi</span>
@@ -1528,9 +2068,7 @@
 
         <button class="btn btn-success" onclick="saveInchargeSection()" style="margin:10px 0;">💾 Hifadhi Sehemu ya Mganga Mfawidhi</button>
 
-        <!-- ========================================================== -->
-        <!-- MUHTASARI WA ALAMA -->
-        <!-- ========================================================== -->
+        <!-- SCORES -->
         <div class="score-box" id="scoreBox">
             <h3>📊 Muhtasari wa Tathmini</h3>
             <div class="quick-stats">
@@ -1561,23 +2099,26 @@
             <div id="alertsContainer" style="margin-top:8px;"></div>
         </div>
 
-        <!-- ========================================================== -->
-        <!-- VIPENGELE VIPYA: BENCHMARK COMPARISON -->
-        <!-- ========================================================== -->
+        <!-- BENCHMARK -->
         <div class="section-divider benchmark">📊 Linganisha na Viwango vya Sekta</div>
         <div id="benchmarkComparison" style="margin:10px 0;">
             <p style="color:#7f8c8d; font-size:13px;">Kamilisha tathmini ili kuona ulinganisho wako na viwango vya sekta.</p>
         </div>
         <button class="btn btn-primary btn-sm" onclick="compareWithBenchmark()">📊 Linganisha Sasa</button>
 
+        <!-- NATIONAL BENCHMARKS -->
+        <div class="section-divider benchmark" style="margin-top:14px;">📊 Viwango vya Kitaifa</div>
+        <div id="nationalBenchmarksContainer" style="margin:10px 0;"></div>
+        <button class="btn btn-teal btn-sm" onclick="showNationalBenchmarks()">📊 Onyesha Viwango vya Kitaifa</button>
+
         <!-- TIERED ACHIEVEMENTS -->
         <div id="tieredAchievements" style="margin:10px 0;"></div>
 
-        <!-- MAFUNZO & BEJI -->
+        <!-- TRAINING -->
         <div id="trainingRecommendations" style="margin:10px 0;"></div>
         <div id="achievementBadges" style="margin:10px 0;"></div>
 
-        <!-- SHIRIKISHA -->
+        <!-- SHARE -->
         <div class="section-divider share">📤 Shirikisha</div>
         <div class="share-section">
             <h4>📤 Shirikisha Ripoti</h4>
@@ -1591,6 +2132,7 @@
                 <button class="btn btn-success" onclick="shareCopyLink()">📋 Nakili Kiungo</button>
                 <button class="btn btn-teal" onclick="downloadReportImage()">📸 Pakua Picha</button>
                 <button class="btn btn-gold" onclick="generatePDFReport()">📄 Pakua PDF</button>
+                <button class="btn btn-primary" onclick="shareTelegram()">✈️ Telegram</button>
             </div>
             <div style="margin-top:8px;">
                 <button class="btn btn-sm btn-primary" onclick="toggleReportPreview()" style="background:#2e86c1; color:#fff; border:none; padding:6px 16px; border-radius:6px; cursor:pointer;">
@@ -1598,6 +2140,9 @@
                 </button>
                 <button class="btn btn-sm btn-warning" onclick="sendSMSNotification()" style="background:#e67e22; color:#fff; border:none; padding:6px 16px; border-radius:6px; cursor:pointer; margin-left:6px;">
                     📱 Tuma SMS
+                </button>
+                <button class="btn btn-sm btn-success" onclick="exportToExcel()" style="background:#217346; color:#fff; border:none; padding:6px 16px; border-radius:6px; cursor:pointer; margin-left:6px;">
+                    📊 Excel
                 </button>
             </div>
             <div id="shareStatus" class="share-status">💡 Bonyeza kitufe cha kushirikisha</div>
@@ -1622,6 +2167,7 @@
             <div class="dashboard-card"><div class="number orange" id="dashPending">0</div><div class="label">Inasubiri</div></div>
             <div class="dashboard-card"><div class="number teal" id="dashCompleted">0</div><div class="label">Imekamilika</div></div>
             <div class="dashboard-card"><div class="number gold" id="dashSatisfaction">0%</div><div class="label">Ridhisho</div></div>
+            <div class="dashboard-card"><div class="number" id="dashTopWorker">—</div><div class="label">Bora</div></div>
         </div>
         
         <!-- TREND CHART -->
@@ -1630,8 +2176,11 @@
             <canvas id="trendChart"></canvas>
         </div>
         
-        <button class="btn btn-primary" onclick="updateDashboard()">🔄 Sasisha</button>
-        <button class="btn btn-teal" onclick="renderTrendChart()">📈 Onyesha Chati</button>
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="updateDashboard()">🔄 Sasisha</button>
+            <button class="btn btn-teal" onclick="renderTrendChart()">📈 Onyesha Chati</button>
+            <button class="btn btn-gold" onclick="generateAnnualReport()">📅 Ripoti ya Mwaka</button>
+        </div>
     </div>
 
     <!-- ============================================================ -->
@@ -1645,6 +2194,7 @@
         <div class="btn-group">
             <button class="btn btn-danger" onclick="clearAllHistory()">🗑️ Futa Zote</button>
             <button class="btn btn-primary" onclick="exportToCSV()">📊 Hamisha CSV</button>
+            <button class="btn btn-success" onclick="exportToExcel()">📊 Excel</button>
             <button class="btn btn-teal" onclick="backupToCloud()">☁️ Hifadhi Nje</button>
         </div>
     </div>
@@ -1694,20 +2244,79 @@
             </select>
         </div>
         
-        <button class="btn btn-primary" onclick="generateDepartmentReport()">📊 Jaza Ripoti</button>
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="generateDepartmentReport()">📊 Jaza Ripoti</button>
+            <button class="btn btn-success" onclick="exportDepartmentReport()">📤 Hamisha</button>
+            <button class="btn btn-warning" onclick="printDepartmentReport()">🖨️ Chapisha</button>
+            <button class="btn btn-gold" onclick="exportToExcel()">📊 Excel</button>
+        </div>
         
         <div id="departmentReportResult" style="margin:14px 0;"></div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TAB: LEADERBOARD -->
+    <!-- ============================================================ -->
+    <div id="leaderboard" class="tab-content">
+        <div class="section-divider leaderboard">🏆 Wafanyakazi Bora</div>
+        <p style="font-size:13px; color:#7f8c8d; margin-bottom:10px;">Orodha ya wafanyakazi walio na alama za juu zaidi.</p>
+        
+        <div class="form-group">
+            <label>📋 Chagua Kipindi</label>
+            <select id="leaderboardPeriod" onchange="showLeaderboard()">
+                <option value="all">Zote</option>
+                <option value="month">Mwezi Huu</option>
+                <option value="quarter">Robo Mwaka</option>
+                <option value="year">Mwaka Huu</option>
+            </select>
+        </div>
+        
+        <div id="leaderboardContainer" style="margin:14px 0;">
+            <div class="history-empty">Bonyeza "Onyesha" kuona orodha.</div>
+        </div>
+        
+        <button class="btn btn-primary" onclick="showLeaderboard()">🏆 Onyesha Wafanyakazi Bora</button>
+        <button class="btn btn-success" onclick="exportLeaderboardExcel()" style="margin-left:6px;">📊 Hamisha Excel</button>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TAB: SEARCH -->
+    <!-- ============================================================ -->
+    <div id="search" class="tab-content">
+        <div class="section-divider dashboard">🔍 Tafuta Ripoti</div>
+        <p style="font-size:13px; color:#7f8c8d; margin-bottom:10px;">Tafuta ripoti kwa jina, kazi, tarehe, au idara.</p>
+        
+        <div class="form-group">
+            <label>🔍 Neno la Kutafuta</label>
+            <input type="text" id="searchInput" placeholder="Tafuta kwa jina, kazi, tarehe, idara..." oninput="searchReports()">
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>📅 Kuanzia</label>
+                <input type="date" id="searchDateFrom" onchange="searchReports()">
+            </div>
+            <div class="form-group">
+                <label>📅 Mpaka</label>
+                <input type="date" id="searchDateTo" onchange="searchReports()">
+            </div>
+        </div>
+        
+        <div id="searchResults" style="margin:14px 0;">
+            <div class="history-empty">Andika neno la kutafuta.</div>
+        </div>
         
         <div class="btn-group">
-            <button class="btn btn-success" onclick="exportDepartmentReport()">📤 Hamisha Ripoti</button>
-            <button class="btn btn-warning" onclick="printDepartmentReport()">🖨️ Chapisha</button>
+            <button class="btn btn-primary" onclick="searchReports()">🔍 Tafuta</button>
+            <button class="btn btn-warning" onclick="clearSearch()">🔄 Futa</button>
+            <button class="btn btn-success" onclick="exportSearchResults()">📊 Hamisha Matokeo</button>
         </div>
     </div>
 
     <!-- FOOTER -->
     <div class="footer">
         <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
-        <div>Mtwara SDA Dispensary | Toleo 12.0 (2026) | Vipengele vyote vimeongezwa</div>
+        <div>Mtwara SDA Dispensary | Toleo 13.0 (2026) | Vipengele vyote 9 vimeongezwa!</div>
     </div>
 </div>
 
@@ -1740,6 +2349,27 @@ function loginUser() {
     } else {
         showToast('❌ Jina au nenosiri si sahihi', 'error');
     }
+}
+
+// ================================================================
+// DARK MODE
+// ================================================================
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const btn = document.querySelector('.dark-mode-toggle');
+    if (document.body.classList.contains('dark-mode')) {
+        btn.textContent = '☀️';
+        localStorage.setItem('darkMode', 'enabled');
+    } else {
+        btn.textContent = '🌙';
+        localStorage.setItem('darkMode', 'disabled');
+    }
+}
+
+// Load dark mode preference
+if (localStorage.getItem('darkMode') === 'enabled') {
+    document.body.classList.add('dark-mode');
+    document.querySelector('.dark-mode-toggle').textContent = '☀️';
 }
 
 // ================================================================
@@ -1847,7 +2477,6 @@ const ROLE_CHECKLISTS = {
     ]
 };
 
-// Default checklist for other roles
 const DEFAULT_CHECKLIST = [
     'Nimekamilisha kazi zangu kwa wakati',
     'Nimefuata taratibu zote',
@@ -1876,6 +2505,26 @@ const BENCHMARKS = {
     'Administrator': 75,
     'HR Officer': 75,
     'Insurance Data Clerk': 75
+};
+
+// NATIONAL BENCHMARKS
+const NATIONAL_BENCHMARKS = {
+    'Doctor': { min: 80, target: 90 },
+    'Clinical Officer': { min: 75, target: 85 },
+    'Nurse': { min: 75, target: 85 },
+    'Midwife': { min: 70, target: 85 },
+    'Laboratory Technician': { min: 70, target: 80 },
+    'Pharmacist': { min: 70, target: 80 },
+    'Accountant': { min: 65, target: 75 },
+    'Cashier': { min: 60, target: 70 },
+    'Receptionist': { min: 65, target: 75 },
+    'Janitor': { min: 60, target: 70 },
+    'Cook': { min: 60, target: 70 },
+    'Porter': { min: 60, target: 70 },
+    'Driver': { min: 60, target: 70 },
+    'Administrator': { min: 65, target: 75 },
+    'HR Officer': { min: 65, target: 75 },
+    'Insurance Data Clerk': { min: 65, target: 75 }
 };
 
 function getChecklist(role) {
@@ -2006,7 +2655,6 @@ function getRoleStatsHTML(role) {
             </div>
         `;
     }
-    // Default
     return `
         <div class="role-stats">
             <h4>📊 Takwimu za Kazi Yako</h4>
@@ -2206,7 +2854,6 @@ function calculateScores() {
     document.getElementById('selfTotalDisplay').textContent = selfTotal;
     document.getElementById('supTotalDisplay').textContent = supTotal;
     
-    // Patient satisfaction
     const satisfaction = parseInt(document.getElementById('patientSatisfaction').value) || 0;
     document.getElementById('dashSatisfaction').textContent = satisfaction + '%';
     
@@ -2229,6 +2876,7 @@ function calculateScores() {
     updateTieredAchievements();
     renderTrendChart();
     checkReminders();
+    showNationalBenchmarks();
 }
 
 function getBadge(pct) {
@@ -2236,6 +2884,44 @@ function getBadge(pct) {
     if (pct >= 75) return '<span class="badge badge-good">👍 Nzuri</span>';
     if (pct >= 55) return '<span class="badge badge-average">👌 Wastani</span>';
     return '<span class="badge badge-poor">⚠️ Dhaifu</span>';
+}
+
+// ================================================================
+// NATIONAL BENCHMARKS
+// ================================================================
+function showNationalBenchmarks() {
+    const role = document.getElementById('workerRole').value;
+    const current = parseInt(document.getElementById('selfPercent').textContent) || 0;
+    const container = document.getElementById('nationalBenchmarksContainer');
+    
+    let html = '<div class="national-benchmark-grid">';
+    
+    // Show all benchmarks
+    Object.keys(NATIONAL_BENCHMARKS).forEach(key => {
+        const bench = NATIONAL_BENCHMARKS[key];
+        const isCurrent = key === role;
+        const yourScore = isCurrent ? current : null;
+        
+        let scoreClass = '';
+        if (yourScore !== null) {
+            if (yourScore >= bench.target) scoreClass = 'above';
+            else if (yourScore >= bench.min) scoreClass = 'equal';
+            else scoreClass = 'below';
+        }
+        
+        html += `
+            <div class="national-benchmark-item" style="${isCurrent ? 'border:2px solid #1a5276;' : ''}">
+                <div class="role">${isCurrent ? '⭐ ' : ''}${key}</div>
+                <div class="score target">🎯 ${bench.target}%</div>
+                <div class="score min">📊 ${bench.min}%</div>
+                ${yourScore !== null ? `<div class="your-score ${scoreClass}">Yako: ${yourScore}%</div>` : ''}
+                ${isCurrent ? '<div style="font-size:10px; color:#1a5276; margin-top:4px;">✅ Kazi yako</div>' : ''}
+            </div>
+        `;
+    });
+    
+    html += '</div>';
+    container.innerHTML = html;
 }
 
 // ================================================================
@@ -2559,6 +3245,23 @@ function checkReminders() {
 }
 
 // ================================================================
+// AUTO-REMINDER
+// ================================================================
+function checkAutoReminders() {
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    const oldReports = allReports.filter(r => {
+        const reportDate = new Date(r.date);
+        return reportDate < sevenDaysAgo && !r.incharge?.verified;
+    });
+    if (oldReports.length > 0) {
+        showInAppNotification(`⏰ Kuna ${oldReports.length} ripoti za zamani zinazosubiri kukamilishwa!`, 'warning');
+        document.getElementById('reminderBox').style.display = 'block';
+        document.getElementById('reminderMessage').textContent = `⏰ Kuna ${oldReports.length} ripoti za zamani (> siku 7) zinazosubiri kukamilishwa. Tafadhali kagua!`;
+    }
+}
+
+// ================================================================
 // SHARE FUNCTIONS - SUPERVISOR TO IN-CHARGE
 // ================================================================
 function shareSupervisorToInCharge() {
@@ -2675,6 +3378,19 @@ function shareSupervisorDownloadPDF() {
 }
 
 // ================================================================
+// TELEGRAM SHARING
+// ================================================================
+function shareTelegram() {
+    const data = collectFullReportData();
+    if (!data) return;
+    const text = generateReportText(data);
+    const url = window.location.href.split('?')[0] + '?report=' + document.getElementById('assessmentId').textContent;
+    const fullText = text + '\n\n🔗 ' + url;
+    window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(fullText)}`, '_blank');
+    showToast('✈️ Telegram imefunguliwa!', 'success');
+}
+
+// ================================================================
 // SMS NOTIFICATION
 // ================================================================
 function sendSMSNotification() {
@@ -2689,32 +3405,8 @@ function sendSMSNotification() {
     
     const message = `RIPOTI YA TATHMINI: ${reportData.worker} - ${reportData.role}. Pamoja: ${reportData.combined}%. Tazama: ${window.location.href}`;
     
-    // Simulate SMS sending (in production, use Africa's Talking or Twilio API)
     showToast(`📱 SMS imetumwa kwa ${phone} - (Simulizi)`, 'success');
     showInAppNotification(`📱 SMS imetumwa kwa ${phone}`, 'info');
-    
-    // In production, uncomment this:
-    /*
-    fetch('https://api.africastalking.com/version1/messaging', {
-        method: 'POST',
-        headers: {
-            'Api-Key': 'YOUR_API_KEY',
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: `username=sandbox&to=${phone}&message=${encodeURIComponent(message)}`
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.SMSMessageData.Recipients[0].status === 'Success') {
-            showToast('✅ SMS imetumwa!', 'success');
-        } else {
-            showToast('❌ SMS imeshindwa kutuma', 'error');
-        }
-    })
-    .catch(error => {
-        showToast('❌ Error: ' + error.message, 'error');
-    });
-    */
 }
 
 // ================================================================
@@ -3083,7 +3775,6 @@ function generatePDFReport() {
     const margin = 20;
     let y = margin;
     
-    // Title
     doc.setFontSize(18);
     doc.setTextColor('#1a5276');
     doc.text('MTWARA SDA DISPENSARY', pageWidth/2, y, { align: 'center' });
@@ -3097,12 +3788,10 @@ function generatePDFReport() {
     doc.text(`Kitambulisho: ${document.getElementById('assessmentId').textContent}`, pageWidth/2, y, { align: 'center' });
     y += 12;
     
-    // Line
     doc.setDrawColor('#1a5276');
     doc.line(margin, y, pageWidth - margin, y);
     y += 8;
     
-    // Worker Info
     doc.setFontSize(11);
     doc.setTextColor('#1a5276');
     doc.setFont('helvetica', 'bold');
@@ -3121,12 +3810,10 @@ function generatePDFReport() {
     doc.text(`Msimamizi: ${data.supervisor} (${data.supervisorTitle})`, margin + 5, y);
     y += 8;
     
-    // Line
     doc.setDrawColor('#ecf0f1');
     doc.line(margin, y, pageWidth - margin, y);
     y += 6;
     
-    // Stats
     doc.setFontSize(11);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor('#1abc9c');
@@ -3163,7 +3850,6 @@ function generatePDFReport() {
     }
     y += 4;
     
-    // Scores
     doc.setDrawColor('#ecf0f1');
     doc.line(margin, y, pageWidth - margin, y);
     y += 6;
@@ -3190,7 +3876,6 @@ function generatePDFReport() {
     doc.text(`Kiwango: ${getTier(data.combined)}`, margin + 5, y);
     y += 8;
     
-    // Goals & Feedback
     if (data.goals) {
         doc.setDrawColor('#ecf0f1');
         doc.line(margin, y, pageWidth - margin, y);
@@ -3230,7 +3915,6 @@ function generatePDFReport() {
         y += 4;
     }
     
-    // Footer
     doc.setDrawColor('#1a5276');
     doc.line(margin, y, pageWidth - margin, y);
     y += 6;
@@ -3239,9 +3923,254 @@ function generatePDFReport() {
     doc.text('Mtwara SDA Dispensary | "Ubora katika Huduma, Imani katika Vitendo"', pageWidth/2, y + 10, { align: 'center' });
     doc.text(`Ilihifadhiwa: ${new Date().toLocaleString()}`, pageWidth/2, y + 16, { align: 'center' });
     
-    // Save
     doc.save(`ripoti_tathmini_${data.worker}_${data.date}.pdf`);
     showToast('📄 PDF imepakuliwa!', 'success');
+}
+
+// ================================================================
+// EXCEL EXPORT
+// ================================================================
+function exportToExcel() {
+    if (allReports.length === 0) {
+        showToast('⚠️ Hakuna data ya kuhamisha', 'warning');
+        return;
+    }
+    
+    const data = allReports.map(r => ({
+        'Kitambulisho': r.reportId || r.id,
+        'Tarehe': r.date,
+        'Mtendakazi': r.worker,
+        'Kazi': r.role,
+        'Idara': r.department || 'N/A',
+        'Wagonjwa': r.patientsServed || 0,
+        'Ridhisho': r.patientSatisfaction || 0,
+        'Maendeleo': r.goalProgress || 0,
+        'Alama Mtendakazi': r.self.percent,
+        'Alama Msimamizi': r.supervisorAssessment.percent,
+        'Alama Pamoja': r.combined,
+        'Pengo': r.gap,
+        'Kiwango': getTier(r.combined),
+        'Sahihi': r.incharge?.signoff || '—'
+    }));
+    
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(data);
+    XLSX.utils.book_append_sheet(wb, ws, 'Ripoti');
+    XLSX.writeFile(wb, `ripoti_tathmini_${new Date().toISOString().split('T')[0]}.xlsx`);
+    showToast('📊 Faili ya Excel imepakuliwa!', 'success');
+}
+
+// ================================================================
+// LEADERBOARD
+// ================================================================
+function showLeaderboard() {
+    const period = document.getElementById('leaderboardPeriod').value;
+    const container = document.getElementById('leaderboardContainer');
+    const now = new Date();
+    let filtered = [...allReports];
+    
+    if (period === 'month') {
+        filtered = filtered.filter(r => {
+            const d = new Date(r.date);
+            return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+        });
+    } else if (period === 'quarter') {
+        const quarterStart = new Date(now.getFullYear(), now.getMonth() - 3, 1);
+        filtered = filtered.filter(r => new Date(r.date) >= quarterStart);
+    } else if (period === 'year') {
+        filtered = filtered.filter(r => new Date(r.date).getFullYear() === now.getFullYear());
+    }
+    
+    if (filtered.length === 0) {
+        container.innerHTML = '<div class="history-empty">Hakuna ripoti za kipindi hiki.</div>';
+        return;
+    }
+    
+    // Group by worker and calculate average
+    const workerStats = {};
+    filtered.forEach(r => {
+        if (!workerStats[r.worker]) {
+            workerStats[r.worker] = { total: 0, count: 0, reports: [] };
+        }
+        workerStats[r.worker].total += r.combined;
+        workerStats[r.worker].count++;
+        workerStats[r.worker].reports.push(r);
+    });
+    
+    // Calculate averages and sort
+    const sorted = Object.keys(workerStats).map(name => ({
+        name: name,
+        avg: Math.round(workerStats[name].total / workerStats[name].count),
+        count: workerStats[name].count,
+        reports: workerStats[name].reports,
+        role: workerStats[name].reports[0]?.role || 'N/A',
+        department: workerStats[name].reports[0]?.department || 'N/A'
+    })).sort((a, b) => b.avg - a.avg);
+    
+    let html = `
+        <div style="overflow-x:auto;">
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>👤 Mtendakazi</th>
+                        <th>📋 Kazi</th>
+                        <th>🏢 Idara</th>
+                        <th>📊 Wastani</th>
+                        <th>📋 Ripoti</th>
+                        <th>🏅 Kiwango</th>
+                    </tr>
+                </thead>
+                <tbody>
+    `;
+    
+    sorted.slice(0, 20).forEach((item, index) => {
+        const rank = index + 1;
+        let rankClass = '';
+        if (rank === 1) rankClass = 'rank-1';
+        else if (rank === 2) rankClass = 'rank-2';
+        else if (rank === 3) rankClass = 'rank-3';
+        
+        const tier = getTier(item.avg);
+        const color = item.avg >= 85 ? '#27ae60' : item.avg >= 70 ? '#f39c12' : '#e74c3c';
+        
+        html += `
+            <tr>
+                <td><span class="leaderboard-rank ${rankClass}">${rank}</span></td>
+                <td><strong>${item.name}</strong></td>
+                <td>${item.role}</td>
+                <td>${item.department}</td>
+                <td style="font-weight:700; color:${color};">${item.avg}%</td>
+                <td>${item.count}</td>
+                <td>${tier}</td>
+            </tr>
+        `;
+    });
+    
+    html += `
+                </tbody>
+            </table>
+        </div>
+        <div style="font-size:11px; color:#7f8c8d; margin-top:8px; text-align:center;">
+            📊 Jumla ya Wafanyakazi: ${sorted.length} | 📋 Jumla ya Ripoti: ${filtered.length}
+        </div>
+    `;
+    
+    container.innerHTML = html;
+}
+
+function exportLeaderboardExcel() {
+    const container = document.getElementById('leaderboardContainer');
+    const table = container.querySelector('table');
+    if (!table) {
+        showToast('⚠️ Hakuna data ya kuhamisha. Onyesha orodha kwanza.', 'warning');
+        return;
+    }
+    
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.table_to_sheet(table);
+    XLSX.utils.book_append_sheet(wb, ws, 'Wafanyakazi Bora');
+    XLSX.writeFile(wb, `wafanyakazi_bora_${new Date().toISOString().split('T')[0]}.xlsx`);
+    showToast('📊 Orodha ya wafanyakazi bora imehamishwa!', 'success');
+}
+
+// ================================================================
+// SEARCH
+// ================================================================
+function searchReports() {
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    const dateFrom = document.getElementById('searchDateFrom').value;
+    const dateTo = document.getElementById('searchDateTo').value;
+    const container = document.getElementById('searchResults');
+    
+    if (!query && !dateFrom && !dateTo) {
+        container.innerHTML = '<div class="history-empty">Andika neno la kutafuta au chagua tarehe.</div>';
+        return;
+    }
+    
+    let results = allReports.filter(r => {
+        let match = true;
+        
+        if (query) {
+            const searchable = `${r.worker} ${r.role} ${r.department || ''} ${r.date}`.toLowerCase();
+            match = match && searchable.includes(query);
+        }
+        
+        if (dateFrom) {
+            match = match && r.date >= dateFrom;
+        }
+        
+        if (dateTo) {
+            match = match && r.date <= dateTo;
+        }
+        
+        return match;
+    });
+    
+    if (results.length === 0) {
+        container.innerHTML = '<div class="history-empty">🔍 Hakuna ripoti zilizopatikana.</div>';
+        return;
+    }
+    
+    let html = `<div style="font-size:13px; color:#7f8c8d; margin-bottom:8px;">🔍 Matokeo: ${results.length} ripoti</div>
+                <div class="search-results">`;
+    
+    results.slice(0, 50).forEach(r => {
+        const tier = getTier(r.combined);
+        html += `
+            <div class="search-result-item">
+                <div>
+                    <strong>${r.worker}</strong> - ${r.role}
+                    <span style="font-size:11px; color:#7f8c8d;">${r.date}</span>
+                    <span style="margin-left:6px; font-size:10px;">${tier}</span>
+                </div>
+                <div>
+                    <span style="font-weight:600; color:#1a5276;">${r.combined}%</span>
+                    <button class="btn btn-sm btn-primary" onclick="viewReport(${allReports.indexOf(r)})" style="margin-left:6px;">👁️</button>
+                </div>
+            </div>
+        `;
+    });
+    
+    if (results.length > 50) {
+        html += `<div style="text-align:center; font-size:12px; color:#7f8c8d; padding:8px;">+${results.length - 50} zaidi...</div>`;
+    }
+    
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+function clearSearch() {
+    document.getElementById('searchInput').value = '';
+    document.getElementById('searchDateFrom').value = '';
+    document.getElementById('searchDateTo').value = '';
+    document.getElementById('searchResults').innerHTML = '<div class="history-empty">Andika neno la kutafuta.</div>';
+}
+
+function exportSearchResults() {
+    const container = document.getElementById('searchResults');
+    const items = container.querySelectorAll('.search-result-item');
+    if (items.length === 0) {
+        showToast('⚠️ Hakuna matokeo ya kuhamisha', 'warning');
+        return;
+    }
+    
+    let text = 'MATOKEO YA UTAFUTAJI\n';
+    text += '========================\n';
+    items.forEach(item => {
+        text += item.textContent.trim() + '\n';
+    });
+    
+    const blob = new Blob([text], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `matokeo_utafutaji_${new Date().toISOString().split('T')[0]}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('📤 Matokeo yamehamishwa!', 'success');
 }
 
 // ================================================================
@@ -3351,15 +4280,83 @@ function printDepartmentReport() {
 }
 
 // ================================================================
+// ANNUAL REPORT
+// ================================================================
+function generateAnnualReport() {
+    const year = new Date().getFullYear();
+    const monthlyData = {};
+    
+    for (let m = 0; m < 12; m++) {
+        const monthReports = allReports.filter(r => {
+            const d = new Date(r.date);
+            return d.getMonth() === m && d.getFullYear() === year;
+        });
+        monthlyData[m] = {
+            count: monthReports.length,
+            avg: monthReports.length > 0 ? Math.round(monthReports.reduce((a,b) => a + b.combined, 0) / monthReports.length) : 0,
+            patients: monthReports.reduce((a,b) => a + (b.patientsServed || 0), 0)
+        };
+    }
+    
+    const totalReports = allReports.filter(r => new Date(r.date).getFullYear() === year).length;
+    const totalAvg = totalReports > 0 ? Math.round(allReports.filter(r => new Date(r.date).getFullYear() === year).reduce((a,b) => a + b.combined, 0) / totalReports) : 0;
+    const totalPatients = allReports.filter(r => new Date(r.date).getFullYear() === year).reduce((a,b) => a + (b.patientsServed || 0), 0);
+    
+    const monthNames = ['Jan', 'Feb', 'Mac', 'Apr', 'Mei', 'Jun', 'Jul', 'Ago', 'Sep', 'Okt', 'Nov', 'Des'];
+    
+    let html = `
+        <div style="background:#f8f9fa; border-radius:10px; padding:16px; margin-top:10px; border:2px solid #8e44ad;">
+            <h3 style="color:#8e44ad; margin-bottom:10px;">📅 RIPOTI YA MWAKA ${year}</h3>
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap:10px; margin-bottom:12px;">
+                <div style="background:#fff; padding:10px; border-radius:6px; text-align:center; border:1px solid #ecf0f1;">
+                    <div style="font-size:24px; font-weight:800; color:#1a5276;">${totalReports}</div>
+                    <div style="font-size:11px; color:#7f8c8d;">Jumla ya Ripoti</div>
+                </div>
+                <div style="background:#fff; padding:10px; border-radius:6px; text-align:center; border:1px solid #ecf0f1;">
+                    <div style="font-size:24px; font-weight:800; color:${totalAvg >= 70 ? '#27ae60' : '#e74c3c'};">${totalAvg}%</div>
+                    <div style="font-size:11px; color:#7f8c8d;">Wastani wa Mwaka</div>
+                </div>
+                <div style="background:#fff; padding:10px; border-radius:6px; text-align:center; border:1px solid #ecf0f1;">
+                    <div style="font-size:24px; font-weight:800; color:#8e44ad;">${totalPatients}</div>
+                    <div style="font-size:11px; color:#7f8c8d;">Jumla ya Wagonjwa</div>
+                </div>
+            </div>
+            <div style="display:grid; grid-template-columns: repeat(6, 1fr); gap:6px;">
+    `;
+    
+    Object.keys(monthlyData).forEach(m => {
+        const data = monthlyData[m];
+        const color = data.avg >= 70 ? '#27ae60' : data.avg >= 50 ? '#f39c12' : '#e74c3c';
+        html += `
+            <div style="background:#fff; padding:6px; border-radius:4px; text-align:center; border:1px solid #ecf0f1;">
+                <div style="font-size:10px; color:#7f8c8d;">${monthNames[m]}</div>
+                <div style="font-size:14px; font-weight:700; color:${color};">${data.avg}%</div>
+                <div style="font-size:9px; color:#7f8c8d;">(${data.count})</div>
+            </div>
+        `;
+    });
+    
+    html += `
+            </div>
+            <div style="margin-top:12px; font-size:11px; color:#7f8c8d; text-align:center;">
+                📊 Mwaka ${year} | Ripoti za Kila Mwezi
+            </div>
+        </div>
+    `;
+    
+    const container = document.getElementById('departmentReportResult');
+    container.innerHTML = html;
+    showToast('📅 Ripoti ya mwaka imeonyeshwa!', 'success');
+}
+
+// ================================================================
 // TREND CHART
 // ================================================================
 function renderTrendChart() {
     const ctx = document.getElementById('trendChart').getContext('2d');
     
-    // Get last 10 reports or all reports
     const reports = allReports.slice(0, 10).reverse();
     if (reports.length === 0) {
-        // Show sample data
         const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'];
         const data = [65, 70, 75, 80, 85, 90];
         if (trendChartInstance) trendChartInstance.destroy();
@@ -3481,6 +4478,7 @@ function saveFullReport() {
     renderTrendChart();
     showToast('✅ Ripoti kamili imehifadhiwa!', 'success');
     showInAppNotification('📋 Ripoti imehifadhiwa kwenye historia!', 'success');
+    checkAutoReminders();
 }
 
 // ================================================================
@@ -3581,17 +4579,26 @@ function updateDashboard() {
     document.getElementById('dashPending').textContent = total - completed;
     document.getElementById('dashCompleted').textContent = completed;
     document.getElementById('dashSatisfaction').textContent = satisfaction + '%';
+    
+    // Top worker
+    if (total > 0) {
+        const sorted = [...allReports].sort((a,b) => b.combined - a.combined);
+        const topWorker = sorted[0]?.worker || '—';
+        document.getElementById('dashTopWorker').textContent = topWorker;
+    } else {
+        document.getElementById('dashTopWorker').textContent = '—';
+    }
 }
 
 // ================================================================
 // STORAGE
 // ================================================================
 function saveToStorage() {
-    try { localStorage.setItem('mtwara_performance_v12', JSON.stringify(allReports)); } catch(e) {}
+    try { localStorage.setItem('mtwara_performance_v13', JSON.stringify(allReports)); } catch(e) {}
 }
 function loadFromStorage() {
     try {
-        const stored = localStorage.getItem('mtwara_performance_v12');
+        const stored = localStorage.getItem('mtwara_performance_v13');
         if (stored) { allReports = JSON.parse(stored); renderHistory(); updateDashboard(); renderTrendChart(); }
     } catch(e) {}
 }
@@ -3600,10 +4607,10 @@ function backupToCloud() {
     if (allReports.length === 0) { showToast('⚠️ Hakuna data', 'warning'); return; }
     const data = { 
         exportedAt: new Date().toISOString(), 
-        version: '12.0', 
+        version: '13.0', 
         totalReports: allReports.length, 
         reports: allReports,
-        features: ['Login', 'Trend Chart', 'Benchmarks', 'Tiers', 'Goals', 'Feedback', 'SMS', 'Email', 'PDF']
+        features: ['Login', 'Trend Chart', 'Benchmarks', 'Tiers', 'Goals', 'Feedback', 'SMS', 'Email', 'PDF', 'Excel', 'Leaderboard', 'Search', 'Annual Report', 'Dark Mode', 'Telegram', 'Auto-Reminder', 'Mobile Optimization', 'National Benchmarks', 'Individual Reports']
     };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -3657,6 +4664,8 @@ function switchTab(tab) {
         document.getElementById('reportMonth').value = now.getMonth();
         document.getElementById('reportYear').value = now.getFullYear();
     }
+    if (tab === 'leaderboard') showLeaderboard();
+    if (tab === 'search') clearSearch();
 }
 
 function showToast(msg, type = 'success') {
@@ -3685,7 +4694,6 @@ document.addEventListener('DOMContentLoaded', function() {
     followup.setMonth(followup.getMonth() + 1);
     document.getElementById('inchargeFollowupDate').value = followup.toISOString().split('T')[0];
     
-    // Set current month for reports
     const now = new Date();
     document.getElementById('reportMonth').value = now.getMonth();
     document.getElementById('reportYear').value = now.getFullYear();
@@ -3698,8 +4706,9 @@ document.addEventListener('DOMContentLoaded', function() {
     calculateScores();
     updateStatusDisplay();
     checkReminders();
+    checkAutoReminders();
+    showNationalBenchmarks();
     
-    // Show login modal
     document.getElementById('loginModal').classList.remove('hidden');
 });
 </script>
