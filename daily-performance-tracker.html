@@ -4,12 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Mtwara SDA - Tathmini ya Utendaji</title>
+    <title>Mtwara SDA - Tathmini ya Utendaji Kamili</title>
     
-    <!-- Library ya kugeuza kuwa picha -->
+    <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <style>
+        /* ===== ALL STYLES ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -88,6 +91,50 @@
             .header h1 { font-size: 17px; }
             .header h2 { font-size: 12px; }
             .logo-placeholder { width: 45px; height: 45px; }
+        }
+
+        /* Login Modal */
+        .modal {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.hidden { display: none; }
+        .modal-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 14px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        .modal-content h3 {
+            color: #1a5276;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .modal-content .form-group {
+            margin-bottom: 14px;
+        }
+        .modal-content .btn {
+            width: 100%;
+            margin-top: 8px;
+        }
+        .user-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #d5f5e3;
+            color: #1a7a3a;
         }
 
         .progress-header {
@@ -206,6 +253,9 @@
         .section-divider.dashboard { background: #8e44ad; color: #fff; border-left: 4px solid #6c3483; }
         .section-divider.share { background: #f39c12; color: #fff; border-left: 4px solid #d68910; }
         .section-divider.badges { background: #f1c40f; color: #1a1a2e; border-left: 4px solid #d4a017; }
+        .section-divider.goals { background: #2ecc71; color: #fff; border-left: 4px solid #1a7a3a; }
+        .section-divider.feedback { background: #e67e22; color: #fff; border-left: 4px solid #d35400; }
+        .section-divider.benchmark { background: #3498db; color: #fff; border-left: 4px solid #2c3e50; }
         .section-divider .badge-section {
             padding: 2px 12px;
             border-radius: 20px;
@@ -343,6 +393,7 @@
         .score-item .number.red { color: #e74c3c; }
         .score-item .number.purple { color: #8e44ad; }
         .score-item .number.teal { color: #1abc9c; }
+        .score-item .number.gold { color: #d4a017; }
 
         .btn-group {
             display: flex;
@@ -379,6 +430,8 @@
         .btn-purple:hover { background: #6c3483; }
         .btn-teal { background: #1abc9c; color: #fff; }
         .btn-teal:hover { background: #0e6655; }
+        .btn-gold { background: #f1c40f; color: #1a1a2e; }
+        .btn-gold:hover { background: #d4a017; }
 
         .signature-pad {
             border: 2px dashed #1a5276;
@@ -461,7 +514,7 @@
         @media print {
             body { background: #fff; padding: 0; }
             .container { box-shadow: none; padding: 14px; max-width: 100%; border-radius: 0; }
-            .btn-group, .print-note, .tabs { display: none !important; }
+            .btn-group, .print-note, .tabs, .modal { display: none !important; }
             .tab-content { display: block !important; }
             .score-box { break-inside: avoid; }
             .header { border-bottom-width: 2px; }
@@ -580,7 +633,6 @@
         .share-status.success { border-left-color: #27ae60; color: #1a7a3a; }
         .share-status.error { border-left-color: #e74c3c; color: #922b21; }
 
-        /* Report Snapshot Styles */
         .report-snapshot {
             background: #ffffff;
             padding: 20px;
@@ -682,6 +734,7 @@
         .quick-stat .value.orange { color: #f39c12; }
         .quick-stat .value.purple { color: #8e44ad; }
         .quick-stat .value.teal { color: #1abc9c; }
+        .quick-stat .value.gold { color: #d4a017; }
         
         .achievement-box {
             background: #f8f9fa;
@@ -719,6 +772,8 @@
         .badge-gold { background: #fef9e7; color: #7d6608; border: 2px solid #f1c40f; }
         .badge-silver { background: #ecf0f1; color: #2c3e50; border: 2px solid #bdc3c7; }
         .badge-bronze { background: #fdebd0; color: #a04000; border: 2px solid #e67e22; }
+        .badge-green { background: #d5f5e3; color: #1a7a3a; border: 2px solid #27ae60; }
+        .badge-red { background: #fadbd8; color: #922b21; border: 2px solid #e74c3c; }
 
         .dashboard-grid {
             display: grid;
@@ -747,6 +802,7 @@
         .dashboard-card .number.orange { color: #f39c12; }
         .dashboard-card .number.purple { color: #8e44ad; }
         .dashboard-card .number.teal { color: #1abc9c; }
+        .dashboard-card .number.gold { color: #d4a017; }
         
         .notification-banner {
             background: #d6eaf8;
@@ -767,6 +823,7 @@
         }
         .alert-box.warning { background: #fadbd8; color: #922b21; border-left: 4px solid #e74c3c; }
         .alert-box.success { background: #d5f5e3; color: #1a7a3a; border-left: 4px solid #27ae60; }
+        .alert-box.info { background: #d6eaf8; color: #1a5276; border-left: 4px solid #2e86c1; }
         .signoff-badge {
             display: inline-block;
             padding: 2px 12px;
@@ -818,6 +875,7 @@
             background: linear-gradient(90deg, #27ae60, #1a5276);
         }
         .progress-bar .fill.purple { background: linear-gradient(90deg, #8e44ad, #1abc9c); }
+        .progress-bar .fill.gold { background: linear-gradient(90deg, #d4a017, #f1c40f); }
         .status-dot {
             display: inline-block;
             width: 10px;
@@ -829,6 +887,7 @@
         .status-dot.orange { background: #f39c12; }
         .status-dot.red { background: #e74c3c; }
         .status-dot.purple { background: #8e44ad; }
+        .status-dot.blue { background: #2e86c1; }
         .profile-section {
             background: #eaf2f8;
             border-radius: 10px;
@@ -852,9 +911,99 @@
             font-weight: 600;
             color: #1a5276;
         }
+
+        /* Chart Container */
+        .chart-container {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 14px;
+            margin: 10px 0;
+            border: 1px solid #ecf0f1;
+        }
+        .chart-container h4 {
+            color: #1a5276;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        #trendChart {
+            width: 100% !important;
+            max-height: 250px;
+        }
+
+        /* Range Slider */
+        input[type="range"] {
+            width: 100%;
+            margin: 6px 0;
+        }
+        .range-display {
+            font-weight: 700;
+            color: #1a5276;
+        }
+
+        /* Benchmark Cards */
+        .benchmark-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .benchmark-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #ecf0f1;
+            text-align: center;
+        }
+        .benchmark-card .role-name {
+            font-weight: 600;
+            color: #1a5276;
+        }
+        .benchmark-card .bench-value {
+            font-size: 20px;
+            font-weight: 800;
+        }
+        .benchmark-card .bench-value.above { color: #27ae60; }
+        .benchmark-card .bench-value.below { color: #e74c3c; }
+        .benchmark-card .bench-value.equal { color: #f39c12; }
+        
+        .notification-item {
+            padding: 8px 14px;
+            border-radius: 6px;
+            margin: 4px 0;
+            font-size: 13px;
+            border-left: 4px solid;
+        }
+        .notification-item.info { background: #d6eaf8; border-color: #2e86c1; }
+        .notification-item.success { background: #d5f5e3; border-color: #27ae60; }
+        .notification-item.warning { background: #fdebd0; border-color: #f39c12; }
+        .notification-item.error { background: #fadbd8; border-color: #e74c3c; }
     </style>
 </head>
 <body>
+
+<!-- ============================================================ -->
+<!-- LOGIN MODAL -->
+<!-- ============================================================ -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <h3>🔐 Ingia kwenye Mfumo</h3>
+        <p style="font-size:13px; color:#7f8c8d; text-align:center; margin-bottom:14px;">
+            Ingia kwa jina la mtumiaji na nenosiri lako
+        </p>
+        <div class="form-group">
+            <label>👤 Jina la Mtumiaji</label>
+            <input type="text" id="loginUsername" placeholder="admin / doctor / supervisor / incharge">
+        </div>
+        <div class="form-group">
+            <label>🔑 Nenosiri</label>
+            <input type="password" id="loginPassword" placeholder="Nenosiri lako">
+        </div>
+        <button class="btn btn-primary" onclick="loginUser()">🔓 Ingia</button>
+        <p style="font-size:11px; color:#95a5a6; text-align:center; margin-top:10px;">
+            Majina: admin, doctor, supervisor, incharge | Nenosiri: 1234
+        </p>
+    </div>
+</div>
 
 <div class="container">
     <!-- HEADER -->
@@ -865,9 +1014,10 @@
             </div>
             <div>
                 <h1>MTWARA SDA DISPENSARY</h1>
-                <h2>Nyenzo ya Tathmini ya Utendaji Kazi wa Siku</h2>
+                <h2>Nyenzo ya Tathmini ya Utendaji Kazi - Toleo Kamili</h2>
                 <div style="font-size:12px; color:#7f8c8d; margin-top:4px;">
                     Kitambulisho: <span id="assessmentId" style="font-weight:700; color:#1a5276;"></span>
+                    <span id="userBadge" class="user-badge" style="margin-left:10px;">👤 Imetoka nje</span>
                 </div>
             </div>
         </div>
@@ -882,9 +1032,12 @@
         <div class="progress-bar"><div class="fill" id="mainProgressBar" style="width:0%;"></div></div>
     </div>
 
+    <!-- NOTIFICATION BANNER -->
     <div id="notificationBanner" class="notification-banner">
         <span id="notificationMessage">🔔</span>
     </div>
+
+    <!-- REMINDER BOX -->
     <div id="reminderBox" class="reminder-box">⏰ <span id="reminderMessage"></span></div>
 
     <div class="print-note">
@@ -897,6 +1050,7 @@
         <button class="tab-btn active" onclick="switchTab('assessment')">📝 Tathmini</button>
         <button class="tab-btn" onclick="switchTab('dashboard')">📊 Dashibodi</button>
         <button class="tab-btn" onclick="switchTab('history')">📂 Historia</button>
+        <button class="tab-btn" onclick="switchTab('reports')">📋 Ripoti</button>
         <button class="tab-btn" onclick="window.print()" style="background:#1a5276; color:#fff;">🖨️ PDF</button>
     </div>
 
@@ -994,6 +1148,43 @@
         <!-- ORODHA MAALUM -->
         <div class="section-divider specific">🎯 Orodha Maalum - <span id="roleSpecificLabel">Daktari</span></div>
         <div id="specificChecklistContainer"></div>
+
+        <!-- ========================================================== -->
+        <!-- VIPENGELE VIPYA: MALENGO NA MAENDELEO -->
+        <!-- ========================================================== -->
+        <div class="section-divider goals">🎯 Malengo na Maendeleo</div>
+        <div class="form-group">
+            <label>Malengo ya Mwezi Ujao</label>
+            <textarea id="goals" placeholder="Nina mpango wa kuboresha..."></textarea>
+        </div>
+        <div class="form-group">
+            <label>📊 Maendeleo ya Malengo (0-100%)</label>
+            <input type="range" id="goalProgress" min="0" max="100" value="0" oninput="document.getElementById('goalProgressDisplay').textContent = this.value + '%'">
+            <span id="goalProgressDisplay" class="range-display">0%</span>
+        </div>
+
+        <!-- ========================================================== -->
+        <!-- VIPENGELE VIPYA: MAONI YA WAGONJWA -->
+        <!-- ========================================================== -->
+        <div class="section-divider feedback">⭐ Maoni ya Wagonjwa</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Wagonjwa walioridhika (%)</label>
+                <input type="number" id="patientSatisfaction" min="0" max="100" value="0">
+            </div>
+            <div class="form-group">
+                <label>📱 Namba ya Simu ya Mganga Mfawidhi</label>
+                <input type="tel" id="inchargePhone" placeholder="0712345678">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>📧 Barua Pepe ya Mganga Mfawidhi</label>
+            <input type="email" id="inchargeEmail" placeholder="email@mfawidhi.com">
+        </div>
+        <div class="form-group">
+            <label>Maoni ya Wagonjwa</label>
+            <textarea id="patientFeedback" placeholder="Maoni kutoka kwa wagonjwa..."></textarea>
+        </div>
 
         <!-- IMANI -->
         <div class="section-divider faith">🙏 Imani na Maombi</div>
@@ -1370,6 +1561,18 @@
             <div id="alertsContainer" style="margin-top:8px;"></div>
         </div>
 
+        <!-- ========================================================== -->
+        <!-- VIPENGELE VIPYA: BENCHMARK COMPARISON -->
+        <!-- ========================================================== -->
+        <div class="section-divider benchmark">📊 Linganisha na Viwango vya Sekta</div>
+        <div id="benchmarkComparison" style="margin:10px 0;">
+            <p style="color:#7f8c8d; font-size:13px;">Kamilisha tathmini ili kuona ulinganisho wako na viwango vya sekta.</p>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="compareWithBenchmark()">📊 Linganisha Sasa</button>
+
+        <!-- TIERED ACHIEVEMENTS -->
+        <div id="tieredAchievements" style="margin:10px 0;"></div>
+
         <!-- MAFUNZO & BEJI -->
         <div id="trainingRecommendations" style="margin:10px 0;"></div>
         <div id="achievementBadges" style="margin:10px 0;"></div>
@@ -1387,10 +1590,14 @@
                 <button class="btn btn-primary" onclick="shareEmail()">📧 Barua Pepe</button>
                 <button class="btn btn-success" onclick="shareCopyLink()">📋 Nakili Kiungo</button>
                 <button class="btn btn-teal" onclick="downloadReportImage()">📸 Pakua Picha</button>
+                <button class="btn btn-gold" onclick="generatePDFReport()">📄 Pakua PDF</button>
             </div>
             <div style="margin-top:8px;">
                 <button class="btn btn-sm btn-primary" onclick="toggleReportPreview()" style="background:#2e86c1; color:#fff; border:none; padding:6px 16px; border-radius:6px; cursor:pointer;">
                     👁️ Tazama Karatasi
+                </button>
+                <button class="btn btn-sm btn-warning" onclick="sendSMSNotification()" style="background:#e67e22; color:#fff; border:none; padding:6px 16px; border-radius:6px; cursor:pointer; margin-left:6px;">
+                    📱 Tuma SMS
                 </button>
             </div>
             <div id="shareStatus" class="share-status">💡 Bonyeza kitufe cha kushirikisha</div>
@@ -1414,8 +1621,17 @@
             <div class="dashboard-card"><div class="number purple" id="dashTotalPatients">0</div><div class="label">Wagonjwa</div></div>
             <div class="dashboard-card"><div class="number orange" id="dashPending">0</div><div class="label">Inasubiri</div></div>
             <div class="dashboard-card"><div class="number teal" id="dashCompleted">0</div><div class="label">Imekamilika</div></div>
+            <div class="dashboard-card"><div class="number gold" id="dashSatisfaction">0%</div><div class="label">Ridhisho</div></div>
         </div>
+        
+        <!-- TREND CHART -->
+        <div class="chart-container">
+            <h4>📈 Mwenendo wa Utendaji</h4>
+            <canvas id="trendChart"></canvas>
+        </div>
+        
         <button class="btn btn-primary" onclick="updateDashboard()">🔄 Sasisha</button>
+        <button class="btn btn-teal" onclick="renderTrendChart()">📈 Onyesha Chati</button>
     </div>
 
     <!-- ============================================================ -->
@@ -1433,16 +1649,99 @@
         </div>
     </div>
 
+    <!-- ============================================================ -->
+    <!-- TAB: RIPOTI -->
+    <!-- ============================================================ -->
+    <div id="reports" class="tab-content">
+        <div class="section-divider dashboard">📋 Ripoti za Kikundi</div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>📅 Mwezi</label>
+                <select id="reportMonth">
+                    <option value="0">Januari</option>
+                    <option value="1">Februari</option>
+                    <option value="2">Machi</option>
+                    <option value="3">Aprili</option>
+                    <option value="4">Mei</option>
+                    <option value="5">Juni</option>
+                    <option value="6">Julai</option>
+                    <option value="7">Agosti</option>
+                    <option value="8">Septemba</option>
+                    <option value="9">Oktoba</option>
+                    <option value="10">Novemba</option>
+                    <option value="11">Desemba</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>📅 Mwaka</label>
+                <input type="number" id="reportYear" value="2026">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label>🏢 Idara</label>
+            <select id="reportDepartment">
+                <option value="all">Idara Zote</option>
+                <option>Clinical</option>
+                <option>Nursing</option>
+                <option>Pharmacy</option>
+                <option>Laboratory</option>
+                <option>Administration</option>
+                <option>Finance</option>
+                <option>HR</option>
+                <option>Front Office</option>
+            </select>
+        </div>
+        
+        <button class="btn btn-primary" onclick="generateDepartmentReport()">📊 Jaza Ripoti</button>
+        
+        <div id="departmentReportResult" style="margin:14px 0;"></div>
+        
+        <div class="btn-group">
+            <button class="btn btn-success" onclick="exportDepartmentReport()">📤 Hamisha Ripoti</button>
+            <button class="btn btn-warning" onclick="printDepartmentReport()">🖨️ Chapisha</button>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <div class="footer">
         <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
-        <div>Mtwara SDA Dispensary | Toleo 11.0 (2026)</div>
+        <div>Mtwara SDA Dispensary | Toleo 12.0 (2026) | Vipengele vyote vimeongezwa</div>
     </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
+// ================================================================
+// LOGIN SYSTEM
+// ================================================================
+const USERS = {
+    'admin': { password: '1234', role: 'Admin' },
+    'doctor': { password: '1234', role: 'Daktari' },
+    'supervisor': { password: '1234', role: 'Msimamizi' },
+    'incharge': { password: '1234', role: 'Mganga Mfawidhi' }
+};
+
+let currentUser = null;
+
+function loginUser() {
+    const username = document.getElementById('loginUsername').value.trim().toLowerCase();
+    const password = document.getElementById('loginPassword').value;
+    
+    if (USERS[username] && USERS[username].password === password) {
+        currentUser = username;
+        document.getElementById('loginModal').classList.add('hidden');
+        document.getElementById('userBadge').textContent = '👤 ' + USERS[username].role;
+        document.getElementById('userBadge').style.background = '#d5f5e3';
+        showToast('✅ Umefanikiwa kuingia kama ' + USERS[username].role, 'success');
+        showNotification('👋 Karibu ' + USERS[username].role + '!', 'success');
+    } else {
+        showToast('❌ Jina au nenosiri si sahihi', 'error');
+    }
+}
+
 // ================================================================
 // DATA
 // ================================================================
@@ -1559,6 +1858,26 @@ const DEFAULT_CHECKLIST = [
     'Nimeonyesha weledi kazini'
 ];
 
+// BENCHMARKS
+const BENCHMARKS = {
+    'Doctor': 85,
+    'Clinical Officer': 80,
+    'Nurse': 80,
+    'Midwife': 78,
+    'Laboratory Technician': 78,
+    'Pharmacist': 75,
+    'Accountant': 70,
+    'Cashier': 70,
+    'Receptionist': 75,
+    'Janitor': 70,
+    'Cook': 70,
+    'Porter': 70,
+    'Driver': 70,
+    'Administrator': 75,
+    'HR Officer': 75,
+    'Insurance Data Clerk': 75
+};
+
 function getChecklist(role) {
     return ROLE_CHECKLISTS[role] || DEFAULT_CHECKLIST;
 }
@@ -1573,6 +1892,7 @@ let signatureData = { worker: null, supervisor: null, incharge: null };
 let workerSectionDone = false;
 let supervisorSectionDone = false;
 let inchargeSectionDone = false;
+let trendChartInstance = null;
 
 // ================================================================
 // ROLE STATS
@@ -1886,12 +2206,17 @@ function calculateScores() {
     document.getElementById('selfTotalDisplay').textContent = selfTotal;
     document.getElementById('supTotalDisplay').textContent = supTotal;
     
+    // Patient satisfaction
+    const satisfaction = parseInt(document.getElementById('patientSatisfaction').value) || 0;
+    document.getElementById('dashSatisfaction').textContent = satisfaction + '%';
+    
     const alerts = document.getElementById('alertsContainer');
     let msgs = [];
     if (selfPercent < 50) msgs.push({ msg: '⚠️ Tathmini yako ni ya chini (<50%)', type: 'warning' });
     if (supPercent < 50) msgs.push({ msg: '⚠️ Tathmini ya msimamizi ni ya chini', type: 'warning' });
     if (combined < 50) msgs.push({ msg: '⚠️ Alama ya pamoja ni ya chini', type: 'warning' });
     if (gap > 20) msgs.push({ msg: '⚠️ Pengo kubwa (>20%)', type: 'warning' });
+    if (satisfaction < 50) msgs.push({ msg: '⚠️ Ridhisho ya wagonjwa ni ya chini', type: 'warning' });
     if (msgs.length === 0) {
         alerts.innerHTML = '<div class="alert-box success">✅ Viashiria vyote ni vizuri</div>';
     } else {
@@ -1901,6 +2226,9 @@ function calculateScores() {
     updateDashboard();
     updateRecommendations();
     updateBadges();
+    updateTieredAchievements();
+    renderTrendChart();
+    checkReminders();
 }
 
 function getBadge(pct) {
@@ -1910,6 +2238,80 @@ function getBadge(pct) {
     return '<span class="badge badge-poor">⚠️ Dhaifu</span>';
 }
 
+// ================================================================
+// TIERED ACHIEVEMENTS
+// ================================================================
+function updateTieredAchievements() {
+    const selfPct = parseInt(document.getElementById('selfPercent').textContent) || 0;
+    const supPct = parseInt(document.getElementById('supPercent').textContent) || 0;
+    const combined = Math.round((selfPct + supPct) / 2);
+    const container = document.getElementById('tieredAchievements');
+    
+    let tier = '';
+    let color = '';
+    if (combined >= 95) { tier = '🏆 PLATINUM - Ubora wa Juu Sana'; color = '#8e44ad'; }
+    else if (combined >= 85) { tier = '🥇 GOLD - Ubora wa Juu'; color = '#f1c40f'; }
+    else if (combined >= 75) { tier = '🥈 SILVER - Nzuri Sana'; color = '#bdc3c7'; }
+    else if (combined >= 65) { tier = '🥉 BRONZE - Nzuri'; color = '#e67e22'; }
+    else if (combined >= 50) { tier = '📗 GREEN - Inakubalika'; color = '#27ae60'; }
+    else { tier = '📕 RED - Inahitaji Kuboresha'; color = '#e74c3c'; }
+    
+    container.innerHTML = `
+        <div class="section-divider badges" style="background:${color}; color:#fff; border-left-color:${color};">
+            🏅 Kiwango cha Mafanikio
+            <span class="badge-section" style="background:rgba(255,255,255,0.3);">${tier}</span>
+        </div>
+        <div style="text-align:center; padding:8px; background:#f8f9fa; border-radius:6px; border:2px solid ${color};">
+            <span style="font-size:20px; font-weight:700; color:${color};">${tier}</span>
+            <br>
+            <span style="font-size:12px; color:#7f8c8d;">Alama ya Pamoja: ${combined}%</span>
+        </div>
+    `;
+}
+
+// ================================================================
+// BENCHMARK COMPARISON
+// ================================================================
+function compareWithBenchmark() {
+    const role = document.getElementById('workerRole').value;
+    const benchmark = BENCHMARKS[role] || 70;
+    const current = parseInt(document.getElementById('selfPercent').textContent) || 0;
+    const diff = current - benchmark;
+    const container = document.getElementById('benchmarkComparison');
+    
+    const status = diff > 0 ? '⬆️ Juu ya Kiwango' : diff < 0 ? '⬇️ Chini ya Kiwango' : '✅ Sawa na Kiwango';
+    const color = diff > 0 ? '#27ae60' : diff < 0 ? '#e74c3c' : '#f39c12';
+    
+    container.innerHTML = `
+        <div class="benchmark-grid">
+            <div class="benchmark-card">
+                <div class="role-name">📋 Kazi: ${role}</div>
+            </div>
+            <div class="benchmark-card">
+                <div class="role-name">📊 Kiwango cha Sekta</div>
+                <div class="bench-value">${benchmark}%</div>
+            </div>
+            <div class="benchmark-card">
+                <div class="role-name">📊 Alama Yako</div>
+                <div class="bench-value" style="color:${color};">${current}%</div>
+            </div>
+            <div class="benchmark-card">
+                <div class="role-name">📊 Tofauti</div>
+                <div class="bench-value" style="color:${color};">${diff > 0 ? '+' : ''}${diff}%</div>
+            </div>
+            <div class="benchmark-card" style="background:${color}10; border-color:${color};">
+                <div class="role-name" style="color:${color};">📌 Hali</div>
+                <div class="bench-value" style="color:${color}; font-size:16px;">${status}</div>
+            </div>
+        </div>
+    `;
+    
+    showToast('📊 Ulinganisho na kiwango cha sekta umeonyeshwa!', 'success');
+}
+
+// ================================================================
+// RECOMMENDATIONS
+// ================================================================
 function updateRecommendations() {
     const selfPct = parseInt(document.getElementById('selfPercent').textContent) || 0;
     const supPct = parseInt(document.getElementById('supPercent').textContent) || 0;
@@ -1932,11 +2334,15 @@ function updateRecommendations() {
     container.innerHTML = html;
 }
 
+// ================================================================
+// BADGES
+// ================================================================
 function updateBadges() {
     const selfPct = parseInt(document.getElementById('selfPercent').textContent) || 0;
     const supPct = parseInt(document.getElementById('supPercent').textContent) || 0;
     const combined = Math.round((selfPct + supPct) / 2);
     const patients = parseInt(document.getElementById('statPatients')?.value) || 0;
+    const satisfaction = parseInt(document.getElementById('patientSatisfaction').value) || 0;
     const container = document.getElementById('achievementBadges');
     let html = '<div class="section-divider badges">🏅 Beji za Mafanikio</div><div style="margin:6px 0;">';
     if (combined >= 90) html += `<span class="achievement-badge badge-platinum">🏆 Platinum (${combined}%)</span>`;
@@ -1944,6 +2350,7 @@ function updateBadges() {
     else if (combined >= 70) html += `<span class="achievement-badge badge-silver">🥈 Fedha (${combined}%)</span>`;
     else if (combined >= 55) html += `<span class="achievement-badge badge-bronze">🥉 Shaba (${combined}%)</span>`;
     if (patients >= 10) html += `<span class="achievement-badge badge-gold">👥 Wagonjwa ${patients}+</span>`;
+    if (satisfaction >= 80) html += `<span class="achievement-badge badge-gold">⭐ Ridhisho ${satisfaction}%</span>`;
     if (workerSectionDone && supervisorSectionDone && inchargeSectionDone) {
         html += `<span class="achievement-badge badge-platinum">✅ Tathmini Kamili</span>`;
     }
@@ -2058,6 +2465,7 @@ function saveWorkerSection() {
     updateStatusDisplay();
     showToast('✅ Sehemu ya mtendakazi imehifadhiwa!', 'success');
     checkReminders();
+    showInAppNotification('📝 Mtendakazi amekamilisha sehemu yake!', 'success');
 }
 
 function saveSupervisorSection() {
@@ -2078,6 +2486,7 @@ function saveSupervisorSection() {
     
     showToast('✅ Sehemu ya msimamizi imehifadhiwa! Sasa tuma kwa Mganga Mfawidhi.', 'success');
     checkReminders();
+    showInAppNotification('👔 Msimamizi amekamilisha tathmini! Tuma kwa Mganga Mfawidhi.', 'info');
 }
 
 function saveInchargeSection() {
@@ -2093,6 +2502,7 @@ function saveInchargeSection() {
     updateStatusDisplay();
     showToast('✅ Sehemu ya mganga mfawidhi imehifadhiwa!', 'success');
     checkReminders();
+    showInAppNotification('🏢 Mganga Mfawidhi amekamilisha tathmini! Ripoti imekamilika.', 'success');
 }
 
 function updateStatusDisplay() {
@@ -2110,9 +2520,27 @@ function updateStatusDisplay() {
     document.getElementById('assessmentStatus').textContent = status;
 }
 
+// ================================================================
+// NOTIFICATIONS
+// ================================================================
+function showInAppNotification(message, type = 'info') {
+    const container = document.getElementById('notificationBanner');
+    const msgEl = document.getElementById('notificationMessage');
+    msgEl.textContent = message;
+    container.className = 'notification-banner show';
+    container.style.borderLeftColor = type === 'success' ? '#27ae60' : type === 'warning' ? '#f39c12' : '#2e86c1';
+    container.style.background = type === 'success' ? '#d5f5e3' : type === 'warning' ? '#fdebd0' : '#d6eaf8';
+    setTimeout(() => container.classList.remove('show'), 6000);
+}
+
+// ================================================================
+// CHECK REMINDERS
+// ================================================================
 function checkReminders() {
     const box = document.getElementById('reminderBox');
     const msg = document.getElementById('reminderMessage');
+    const pending = allReports.filter(r => !r.incharge?.verified);
+    
     if (!workerSectionDone) {
         box.style.display = 'block';
         msg.textContent = '⏳ Tafadhali kamilisha sehemu ya mtendakazi.';
@@ -2122,6 +2550,9 @@ function checkReminders() {
     } else if (workerSectionDone && supervisorSectionDone && !inchargeSectionDone) {
         box.style.display = 'block';
         msg.textContent = '⏳ Tafadhali mganga mfawidhi kamilisha sehemu yake.';
+    } else if (pending.length > 0) {
+        box.style.display = 'block';
+        msg.textContent = `⚠️ Kuna ${pending.length} ripoti zinazosubiri kukamilishwa.`;
     } else {
         box.style.display = 'none';
     }
@@ -2200,6 +2631,7 @@ ${window.location.href.split('?')[0]}?report=${document.getElementById('assessme
     document.getElementById('shareStatus').className = 'share-status success';
     
     showToast('✅ Ripoti iko tayari! Tuma kwa Mganga Mfawidhi.', 'success');
+    showInAppNotification('📤 Ripoti imetumwa kwa Mganga Mfawidhi!', 'success');
 }
 
 function shareSupervisorByEmail() {
@@ -2210,7 +2642,7 @@ function shareSupervisorByEmail() {
     const subject = `Ripoti ya Tathmini - ${reportData.worker} - Tuma kwa Mganga Mfawidhi`;
     const body = reportText + '\n\n---\nTAFADHALI KAGUA NA KUKAMILISHA SEHEMU YAKO.\n' + window.location.href.split('?')[0] + '?report=' + document.getElementById('assessmentId').textContent;
     
-    window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:${document.getElementById('inchargeEmail').value || ''}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     showToast('✅ Barua pepe imefunguliwa!', 'success');
 }
 
@@ -2243,6 +2675,49 @@ function shareSupervisorDownloadPDF() {
 }
 
 // ================================================================
+// SMS NOTIFICATION
+// ================================================================
+function sendSMSNotification() {
+    const phone = document.getElementById('inchargePhone').value;
+    if (!phone || phone.length < 10) {
+        showToast('⚠️ Tafadhali weka namba sahihi ya simu', 'warning');
+        return;
+    }
+    
+    const reportData = collectFullReportData();
+    if (!reportData) return;
+    
+    const message = `RIPOTI YA TATHMINI: ${reportData.worker} - ${reportData.role}. Pamoja: ${reportData.combined}%. Tazama: ${window.location.href}`;
+    
+    // Simulate SMS sending (in production, use Africa's Talking or Twilio API)
+    showToast(`📱 SMS imetumwa kwa ${phone} - (Simulizi)`, 'success');
+    showInAppNotification(`📱 SMS imetumwa kwa ${phone}`, 'info');
+    
+    // In production, uncomment this:
+    /*
+    fetch('https://api.africastalking.com/version1/messaging', {
+        method: 'POST',
+        headers: {
+            'Api-Key': 'YOUR_API_KEY',
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `username=sandbox&to=${phone}&message=${encodeURIComponent(message)}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.SMSMessageData.Recipients[0].status === 'Success') {
+            showToast('✅ SMS imetumwa!', 'success');
+        } else {
+            showToast('❌ SMS imeshindwa kutuma', 'error');
+        }
+    })
+    .catch(error => {
+        showToast('❌ Error: ' + error.message, 'error');
+    });
+    */
+}
+
+// ================================================================
 // SHARE FUNCTIONS - GENERAL
 // ================================================================
 function collectFullReportData() {
@@ -2271,6 +2746,12 @@ function collectFullReportData() {
         department: document.getElementById('workerDepartment').value,
         patientsServed: parseInt(document.getElementById('statPatients')?.value) || 0,
         roleStats: roleStats,
+        goals: document.getElementById('goals').value,
+        goalProgress: parseInt(document.getElementById('goalProgress').value) || 0,
+        patientSatisfaction: parseInt(document.getElementById('patientSatisfaction').value) || 0,
+        patientFeedback: document.getElementById('patientFeedback').value,
+        inchargePhone: document.getElementById('inchargePhone').value,
+        inchargeEmail: document.getElementById('inchargeEmail').value,
         self: {
             scores: selfScores,
             total: selfScores.reduce((a,b) => a+b, 0),
@@ -2314,7 +2795,7 @@ function collectFullReportData() {
 
 function generateReportText(data) {
     if (!data) return '⚠️ Hakuna data.';
-    const { worker, role, date, shift, supervisor, supervisorTitle, department, patientsServed, roleStats, self, supervisorAssessment, combined, gap, faith, achievements, challenges, improvements, incharge } = data;
+    const { worker, role, date, shift, supervisor, supervisorTitle, department, patientsServed, roleStats, self, supervisorAssessment, combined, gap, faith, achievements, challenges, improvements, incharge, goals, goalProgress, patientSatisfaction, patientFeedback } = data;
     const reportId = document.getElementById('assessmentId').textContent || 'N/A';
     const link = window.location.href.split('?')[0] + '?report=' + reportId;
     
@@ -2344,6 +2825,7 @@ function generateReportText(data) {
     const signoffLabels = { 'approved': '✅ Imekubaliwa', 'conditional': '⚠️ Ina Masharti', 'rejected': '❌ Imerejeshwa' };
     const signoffDisplay = incharge?.signoff ? signoffLabels[incharge.signoff] || '—' : '—';
     const gapStatus = gap <= 5 ? 'Imesawazishwa' : gap <= 15 ? 'Pengo Ndogo' : 'Pengo Kubwa';
+    const tier = getTier(combined);
     
     return `
 📋 RIPOTI YA TATHMINI - ${reportId}
@@ -2374,8 +2856,15 @@ ${statsText || 'Hakuna takwimu maalum'}
 🛡️ Usalama: ${supervisorAssessment.labels[5]}
 
 🏆 PAMOJA: ${combined}% | PENGO: ${gap}% (${gapStatus})
+🏅 TIER: ${tier}
 ✅ HALI: ${incharge?.verified ? 'Imekamilishwa' : 'Inasubiri'}
 🏢 MGANGA MFAWIDHI: ${signoffDisplay}
+
+🎯 MALENGO: ${goals || 'Hakuna'}
+📊 MAENDELEO: ${goalProgress}%
+
+⭐ RIDHISHO LA WAGONJWA: ${patientSatisfaction}%
+📝 MAONI YA WAGONJWA: ${patientFeedback || 'Hakuna'}
 
 ${faith?.devotion === 'yes' ? '🙏 Ibada: Alihudhuria' : '🙏 Ibada: Hakuhudhuria'}
 ${achievements ? '✅ Mafanikio: ' + achievements : ''}
@@ -2389,11 +2878,21 @@ Mtwara SDA Dispensary
 `;
 }
 
+function getTier(score) {
+    if (score >= 95) return '🏆 PLATINUM';
+    if (score >= 85) return '🥇 GOLD';
+    if (score >= 75) return '🥈 SILVER';
+    if (score >= 65) return '🥉 BRONZE';
+    if (score >= 50) return '📗 GREEN';
+    return '📕 RED';
+}
+
 function generateReportSnapshotHTML(data) {
     if (!data) return '<div class="error">⚠️ Hakuna data</div>';
-    const { worker, role, date, shift, supervisor, supervisorTitle, department, patientsServed, roleStats, self, supervisorAssessment, combined, gap, faith, achievements, challenges, improvements, incharge } = data;
+    const { worker, role, date, shift, supervisor, supervisorTitle, department, patientsServed, roleStats, self, supervisorAssessment, combined, gap, faith, achievements, challenges, improvements, incharge, goals, goalProgress, patientSatisfaction, patientFeedback } = data;
     const reportId = document.getElementById('assessmentId').textContent || 'N/A';
     const link = window.location.href.split('?')[0] + '?report=' + reportId;
+    const tier = getTier(combined);
     
     let statsText = '';
     const labels = {
@@ -2426,6 +2925,7 @@ function generateReportSnapshotHTML(data) {
 <div class="header-snap">
     <h2>🏥 MTWARA SDA DISPENSARY</h2>
     <div class="subtitle">Tathmini ya Utendaji Kazi - ${reportId}</div>
+    <div style="font-size:10px; color:#8e44ad;">🏅 ${tier}</div>
 </div>
 <div class="section-snap">
     <div><span class="label">👤 Mtendakazi:</span> <span class="value">${worker}</span></div>
@@ -2458,9 +2958,13 @@ ${statsText ? `<div class="section-snap"><div style="font-weight:700; color:#1ab
     <div style="font-size:12px; color:#7f8c8d;">🏆 ALAMA YA PAMOJA</div>
     <div class="big-score">${combined}%</div>
     <div style="font-size:11px; color:${gap <= 5 ? '#27ae60' : gap <= 15 ? '#f39c12' : '#e74c3c'};">Pengo: ${gap}% (${gapStatus})</div>
+    <div style="font-size:11px;">🏅 ${tier}</div>
     <div style="font-size:11px;">✅ ${incharge?.verified ? 'Imekamilishwa' : 'Inasubiri'}</div>
     <div style="font-size:11px; color:#8e44ad;">🏢 Mganga Mfawidhi: ${signoffDisplay}</div>
 </div>
+${goals ? `<div class="section-snap">🎯 ${goals} (${goalProgress}%)</div>` : ''}
+${patientSatisfaction > 0 ? `<div class="section-snap">⭐ Ridhisho: ${patientSatisfaction}%</div>` : ''}
+${patientFeedback ? `<div class="section-snap">📝 ${patientFeedback}</div>` : ''}
 ${faith?.devotion === 'yes' ? `<div class="section-snap">🙏 Ibada: Alihudhuria ${faith.verse ? '| 📖 ' + faith.verse : ''}</div>` : ''}
 ${achievements ? `<div class="section-snap">✅ ${achievements}</div>` : ''}
 ${challenges ? `<div class="section-snap">⚠️ ${challenges}</div>` : ''}
@@ -2472,6 +2976,9 @@ ${challenges ? `<div class="section-snap">⚠️ ${challenges}</div>` : ''}
 </div>`;
 }
 
+// ================================================================
+// CAPTURE & SHARE
+// ================================================================
 async function captureReportSnapshot() {
     const data = collectFullReportData();
     if (!data) return null;
@@ -2539,7 +3046,8 @@ function shareEmail() {
     const data = collectFullReportData();
     if (!data) return;
     const text = generateReportText(data);
-    window.location.href = 'mailto:?subject=Ripoti%20ya%20Tathmini%20-%20' + encodeURIComponent(data.worker) + '&body=' + encodeURIComponent(text);
+    const email = document.getElementById('inchargeEmail').value || '';
+    window.location.href = `mailto:${email}?subject=Ripoti%20ya%20Tathmini%20-%20${encodeURIComponent(data.worker)}&body=${encodeURIComponent(text)}`;
     document.getElementById('shareStatus').textContent = '✅ Imetumwa kwa Email!';
     document.getElementById('shareStatus').className = 'share-status success';
 }
@@ -2559,6 +3067,360 @@ function shareCopyLink() {
         document.execCommand('copy');
         document.body.removeChild(ta);
         showToast('✅ Kiungo kimenakiliwa!', 'success');
+    });
+}
+
+// ================================================================
+// PDF GENERATION
+// ================================================================
+function generatePDFReport() {
+    const data = collectFullReportData();
+    if (!data) return;
+    
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('p', 'mm', 'a4');
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const margin = 20;
+    let y = margin;
+    
+    // Title
+    doc.setFontSize(18);
+    doc.setTextColor('#1a5276');
+    doc.text('MTWARA SDA DISPENSARY', pageWidth/2, y, { align: 'center' });
+    y += 8;
+    doc.setFontSize(12);
+    doc.setTextColor('#2c3e50');
+    doc.text('RIPOTI YA TATHMINI YA UTENDAJI KAZI', pageWidth/2, y, { align: 'center' });
+    y += 8;
+    doc.setFontSize(10);
+    doc.setTextColor('#7f8c8d');
+    doc.text(`Kitambulisho: ${document.getElementById('assessmentId').textContent}`, pageWidth/2, y, { align: 'center' });
+    y += 12;
+    
+    // Line
+    doc.setDrawColor('#1a5276');
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 8;
+    
+    // Worker Info
+    doc.setFontSize(11);
+    doc.setTextColor('#1a5276');
+    doc.setFont('helvetica', 'bold');
+    doc.text('MAELEZO YA MTENDAKAZI', margin, y);
+    y += 6;
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor('#2c3e50');
+    doc.text(`Jina: ${data.worker}`, margin + 5, y);
+    y += 5;
+    doc.text(`Kazi: ${data.role}`, margin + 5, y);
+    y += 5;
+    doc.text(`Tarehe: ${data.date}`, margin + 5, y);
+    y += 5;
+    doc.text(`Zamu: ${data.shift}`, margin + 5, y);
+    y += 5;
+    doc.text(`Msimamizi: ${data.supervisor} (${data.supervisorTitle})`, margin + 5, y);
+    y += 8;
+    
+    // Line
+    doc.setDrawColor('#ecf0f1');
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 6;
+    
+    // Stats
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor('#1abc9c');
+    doc.text('TAKWIMU ZA KAZI', margin, y);
+    y += 6;
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor('#2c3e50');
+    let statsText = '';
+    const labels = {
+        'statPatients': 'Wagonjwa',
+        'statUltrasound': 'Ultrasound',
+        'statReferral': 'Referral',
+        'statGotDrugs': 'Waliopata',
+        'statMissedDrugs': 'Waliokosa',
+        'statMoney': 'Pesa (TSh)',
+        'statIncome': 'Mapato',
+        'statExpenses': 'Matumizi',
+        'statCash': 'Pesa Taslimu',
+        'statInsurance': 'Bima',
+        'statOPD': 'OPD',
+        'statRCH': 'RCH',
+        'statCTC': 'CTC',
+        'statLabor': 'Labor'
+    };
+    Object.keys(data.roleStats).forEach(k => {
+        if (data.roleStats[k] && data.roleStats[k] !== '' && data.roleStats[k] !== 0) {
+            doc.text(`${labels[k] || k}: ${data.roleStats[k]}`, margin + 5, y);
+            y += 5;
+        }
+    });
+    if (y === margin + 6 + 6) {
+        doc.text('Hakuna takwimu maalum', margin + 5, y);
+        y += 5;
+    }
+    y += 4;
+    
+    // Scores
+    doc.setDrawColor('#ecf0f1');
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 6;
+    
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor('#1a5276');
+    doc.text('ALAMA ZA TATHMINI', margin, y);
+    y += 6;
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor('#2c3e50');
+    doc.text(`Mtendakazi: ${data.self.percent}%`, margin + 5, y);
+    y += 5;
+    doc.text(`Msimamizi: ${data.supervisorAssessment.percent}%`, margin + 5, y);
+    y += 5;
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor('#1a5276');
+    doc.text(`Pamoja: ${data.combined}%`, margin + 5, y);
+    y += 5;
+    doc.setTextColor('#7f8c8d');
+    doc.text(`Pengo: ${data.gap}%`, margin + 5, y);
+    y += 5;
+    doc.setTextColor('#8e44ad');
+    doc.text(`Kiwango: ${getTier(data.combined)}`, margin + 5, y);
+    y += 8;
+    
+    // Goals & Feedback
+    if (data.goals) {
+        doc.setDrawColor('#ecf0f1');
+        doc.line(margin, y, pageWidth - margin, y);
+        y += 6;
+        doc.setFontSize(11);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor('#2ecc71');
+        doc.text('MALENGO NA MAENDELEO', margin, y);
+        y += 6;
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor('#2c3e50');
+        doc.text(`Malengo: ${data.goals}`, margin + 5, y);
+        y += 5;
+        doc.text(`Maendeleo: ${data.goalProgress}%`, margin + 5, y);
+        y += 8;
+    }
+    
+    if (data.patientSatisfaction > 0 || data.patientFeedback) {
+        doc.setDrawColor('#ecf0f1');
+        doc.line(margin, y, pageWidth - margin, y);
+        y += 6;
+        doc.setFontSize(11);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor('#e67e22');
+        doc.text('MAONI YA WAGONJWA', margin, y);
+        y += 6;
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor('#2c3e50');
+        if (data.patientSatisfaction > 0) {
+            doc.text(`Ridhisho: ${data.patientSatisfaction}%`, margin + 5, y);
+            y += 5;
+        }
+        if (data.patientFeedback) {
+            doc.text(`Maoni: ${data.patientFeedback}`, margin + 5, y);
+            y += 5;
+        }
+        y += 4;
+    }
+    
+    // Footer
+    doc.setDrawColor('#1a5276');
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 6;
+    doc.setFontSize(9);
+    doc.setTextColor('#7f8c8d');
+    doc.text('Mtwara SDA Dispensary | "Ubora katika Huduma, Imani katika Vitendo"', pageWidth/2, y + 10, { align: 'center' });
+    doc.text(`Ilihifadhiwa: ${new Date().toLocaleString()}`, pageWidth/2, y + 16, { align: 'center' });
+    
+    // Save
+    doc.save(`ripoti_tathmini_${data.worker}_${data.date}.pdf`);
+    showToast('📄 PDF imepakuliwa!', 'success');
+}
+
+// ================================================================
+// DEPARTMENT REPORTS
+// ================================================================
+function generateDepartmentReport() {
+    const month = parseInt(document.getElementById('reportMonth').value);
+    const year = parseInt(document.getElementById('reportYear').value) || 2026;
+    const department = document.getElementById('reportDepartment').value;
+    const container = document.getElementById('departmentReportResult');
+    
+    let filtered = allReports.filter(r => {
+        const rDate = new Date(r.date);
+        return rDate.getMonth() === month && rDate.getFullYear() === year;
+    });
+    
+    if (department !== 'all') {
+        filtered = filtered.filter(r => r.department === department);
+    }
+    
+    if (filtered.length === 0) {
+        container.innerHTML = '<div class="history-empty">Hakuna ripoti za kipindi hiki.</div>';
+        return;
+    }
+    
+    const total = filtered.length;
+    const avgScore = Math.round(filtered.reduce((a,b) => a + b.combined, 0) / total);
+    const totalPatients = filtered.reduce((a,b) => a + (b.patientsServed || 0), 0);
+    const completed = filtered.filter(r => r.incharge?.verified).length;
+    const satisfaction = Math.round(filtered.reduce((a,b) => a + (b.patientSatisfaction || 0), 0) / total);
+    
+    const monthNames = ['Januari', 'Februari', 'Machi', 'Aprili', 'Mei', 'Juni', 'Julai', 'Agosti', 'Septemba', 'Oktoba', 'Novemba', 'Desemba'];
+    
+    container.innerHTML = `
+        <div style="background:#f8f9fa; border-radius:10px; padding:16px; margin-top:10px; border:2px solid #1a5276;">
+            <h3 style="color:#1a5276; margin-bottom:10px;">📊 RIPOTI YA IDARA - ${department === 'all' ? 'ZOTE' : department}</h3>
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap:10px;">
+                <div style="background:#fff; padding:10px; border-radius:6px; text-align:center; border:1px solid #ecf0f1;">
+                    <div style="font-size:24px; font-weight:800; color:#1a5276;">${total}</div>
+                    <div style="font-size:11px; color:#7f8c8d;">Jumla ya Ripoti</div>
+                </div>
+                <div style="background:#fff; padding:10px; border-radius:6px; text-align:center; border:1px solid #ecf0f1;">
+                    <div style="font-size:24px; font-weight:800; color:${avgScore >= 70 ? '#27ae60' : '#e74c3c'};">${avgScore}%</div>
+                    <div style="font-size:11px; color:#7f8c8d;">Wastani wa Alama</div>
+                </div>
+                <div style="background:#fff; padding:10px; border-radius:6px; text-align:center; border:1px solid #ecf0f1;">
+                    <div style="font-size:24px; font-weight:800; color:#8e44ad;">${totalPatients}</div>
+                    <div style="font-size:11px; color:#7f8c8d;">Jumla ya Wagonjwa</div>
+                </div>
+                <div style="background:#fff; padding:10px; border-radius:6px; text-align:center; border:1px solid #ecf0f1;">
+                    <div style="font-size:24px; font-weight:800; color:#27ae60;">${completed}/${total}</div>
+                    <div style="font-size:11px; color:#7f8c8d;">Imekamilika</div>
+                </div>
+                <div style="background:#fff; padding:10px; border-radius:6px; text-align:center; border:1px solid #ecf0f1;">
+                    <div style="font-size:24px; font-weight:800; color:#e67e22;">${satisfaction}%</div>
+                    <div style="font-size:11px; color:#7f8c8d;">Ridhisho ya Wagonjwa</div>
+                </div>
+            </div>
+            <div style="margin-top:12px; font-size:12px; color:#7f8c8d; text-align:center;">
+                📅 ${monthNames[month]} ${year} | 🏢 ${department === 'all' ? 'Idara Zote' : department}
+            </div>
+            <div style="margin-top:8px; max-height:200px; overflow-y:auto;">
+                ${filtered.slice(0, 10).map(r => `
+                    <div style="display:flex; justify-content:space-between; padding:4px 8px; border-bottom:1px solid #ecf0f1; font-size:12px;">
+                        <span><strong>${r.worker}</strong> - ${r.role}</span>
+                        <span>${r.combined}% ${r.incharge?.verified ? '✅' : '⏳'}</span>
+                    </div>
+                `).join('')}
+                ${filtered.length > 10 ? `<div style="text-align:center; font-size:11px; color:#7f8c8d; padding:4px;">+${filtered.length - 10} zaidi...</div>` : ''}
+            </div>
+        </div>
+    `;
+}
+
+function exportDepartmentReport() {
+    const container = document.getElementById('departmentReportResult');
+    const content = container.textContent || 'Hakuna ripoti ya kuhamisha';
+    
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `ripoti_idara_${new Date().toISOString().split('T')[0]}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('📤 Ripoti imehamishwa!', 'success');
+}
+
+function printDepartmentReport() {
+    const container = document.getElementById('departmentReportResult');
+    const content = container.innerHTML;
+    if (!content || content.includes('Hakuna ripoti')) {
+        showToast('⚠️ Hakuna ripoti ya kuchapisha', 'warning');
+        return;
+    }
+    const printWindow = window.open('', '_blank', 'width=800,height=600');
+    printWindow.document.write(`
+        <html><head><title>Ripoti ya Idara</title>
+        <style>body { font-family: Arial; padding: 20px; } .report { background: #f8f9fa; padding: 20px; border-radius: 10px; }</style>
+        </head><body><div class="report">${content}</div>
+        <script>window.print();<\/script>
+        </body></html>
+    `);
+    printWindow.document.close();
+}
+
+// ================================================================
+// TREND CHART
+// ================================================================
+function renderTrendChart() {
+    const ctx = document.getElementById('trendChart').getContext('2d');
+    
+    // Get last 10 reports or all reports
+    const reports = allReports.slice(0, 10).reverse();
+    if (reports.length === 0) {
+        // Show sample data
+        const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'];
+        const data = [65, 70, 75, 80, 85, 90];
+        if (trendChartInstance) trendChartInstance.destroy();
+        trendChartInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Alama ya Pamoja',
+                    data: data,
+                    borderColor: '#1a5276',
+                    backgroundColor: 'rgba(26,82,118,0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true, position: 'top' },
+                    title: { display: true, text: 'Mwenendo wa Utendaji (Mfano)' }
+                },
+                scales: {
+                    y: { min: 0, max: 100 }
+                }
+            }
+        });
+        return;
+    }
+    
+    const labels = reports.map(r => r.date.slice(5));
+    const data = reports.map(r => r.combined);
+    
+    if (trendChartInstance) trendChartInstance.destroy();
+    trendChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Alama ya Pamoja',
+                data: data,
+                borderColor: '#1a5276',
+                backgroundColor: 'rgba(26,82,118,0.1)',
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: data.map(v => v >= 70 ? '#27ae60' : '#e74c3c'),
+                pointRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: true, position: 'top' },
+                title: { display: true, text: 'Mwenendo wa Utendaji wa Kweli' }
+            },
+            scales: {
+                y: { min: 0, max: 100 }
+            }
+        }
     });
 }
 
@@ -2589,6 +3451,12 @@ function saveFullReport() {
         achievements: data.achievements,
         challenges: data.challenges,
         improvements: data.improvements,
+        goals: data.goals,
+        goalProgress: data.goalProgress,
+        patientSatisfaction: data.patientSatisfaction,
+        patientFeedback: data.patientFeedback,
+        inchargePhone: data.inchargePhone,
+        inchargeEmail: data.inchargeEmail,
         generalChecklist: generalState.slice(),
         specificChecklist: specificState.slice(),
         specificItems: getChecklist(data.role),
@@ -2610,7 +3478,9 @@ function saveFullReport() {
     saveToStorage();
     renderHistory();
     updateDashboard();
+    renderTrendChart();
     showToast('✅ Ripoti kamili imehifadhiwa!', 'success');
+    showInAppNotification('📋 Ripoti imehifadhiwa kwenye historia!', 'success');
 }
 
 // ================================================================
@@ -2624,16 +3494,19 @@ function renderHistory() {
     }
     let html = '';
     allReports.slice(0, 30).forEach((r, i) => {
+        const tier = getTier(r.combined);
         html += `
         <div class="history-item">
             <div class="info">
                 <strong>${r.worker}</strong>
                 <span class="role-badge">${r.role}</span>
+                <span style="font-size:10px; color:#8e44ad;">${tier}</span>
                 <span style="font-size:11px; color:#7f8c8d;">👥 ${r.patientsServed || 0}</span><br>
                 <span class="date">${r.date} · ${r.shift} · Msimamizi: ${r.supervisor}</span>
                 <span style="margin-left:6px;"><span class="tag tag-self">${r.self.percent}%</span></span>
                 <span style="margin-left:4px;"><span class="tag tag-supervisor">${r.supervisorAssessment.percent}%</span></span>
                 <span style="margin-left:6px; font-weight:600; color:#1a5276;">Pamoja: ${r.combined}%</span>
+                ${r.patientSatisfaction ? `<span style="margin-left:6px; font-size:11px;">⭐ ${r.patientSatisfaction}%</span>` : ''}
             </div>
             <div>
                 <button onclick="viewReport(${i})" class="btn btn-primary btn-sm">Angalia</button>
@@ -2647,6 +3520,7 @@ function renderHistory() {
 function viewReport(i) {
     const r = allReports[i];
     if (!r) return;
+    const tier = getTier(r.combined);
     alert(
         '📋 RIPOTI YA TATHMINI\n' +
         '━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
@@ -2661,6 +3535,9 @@ function viewReport(i) {
         `Msimamizi: ${r.supervisorAssessment.percent}%\n` +
         `Pamoja: ${r.combined}%\n` +
         `Pengo: ${r.gap}%\n` +
+        `🏅 ${tier}\n` +
+        `⭐ Ridhisho: ${r.patientSatisfaction || 0}%\n` +
+        `🎯 Maendeleo: ${r.goalProgress || 0}%\n` +
         `Sahihi: ${r.incharge?.signoff || '—'}\n` +
         `Ilihifadhiwa: ${new Date(r.savedAt).toLocaleString()}`
     );
@@ -2672,6 +3549,7 @@ function deleteReport(i) {
         saveToStorage();
         renderHistory();
         updateDashboard();
+        renderTrendChart();
         showToast('🗑️ Ripoti imefutwa', 'warning');
     }
 }
@@ -2682,6 +3560,7 @@ function clearAllHistory() {
         saveToStorage();
         renderHistory();
         updateDashboard();
+        renderTrendChart();
         showToast('🗑️ Ripoti zote zimefutwa', 'warning');
     }
 }
@@ -2694,29 +3573,38 @@ function updateDashboard() {
     const avg = total > 0 ? Math.round(allReports.reduce((a,b) => a + b.combined, 0) / total) : 0;
     const patients = allReports.reduce((a,b) => a + (b.patientsServed || 0), 0);
     const completed = allReports.filter(r => r.self?.verified && r.supervisorAssessment?.verified && r.incharge?.verified).length;
+    const satisfaction = total > 0 ? Math.round(allReports.reduce((a,b) => a + (b.patientSatisfaction || 0), 0) / total) : 0;
+    
     document.getElementById('dashTotalReports').textContent = total;
     document.getElementById('dashAvgScore').textContent = avg + '%';
     document.getElementById('dashTotalPatients').textContent = patients;
     document.getElementById('dashPending').textContent = total - completed;
     document.getElementById('dashCompleted').textContent = completed;
+    document.getElementById('dashSatisfaction').textContent = satisfaction + '%';
 }
 
 // ================================================================
 // STORAGE
 // ================================================================
 function saveToStorage() {
-    try { localStorage.setItem('mtwara_performance_v11', JSON.stringify(allReports)); } catch(e) {}
+    try { localStorage.setItem('mtwara_performance_v12', JSON.stringify(allReports)); } catch(e) {}
 }
 function loadFromStorage() {
     try {
-        const stored = localStorage.getItem('mtwara_performance_v11');
-        if (stored) { allReports = JSON.parse(stored); renderHistory(); updateDashboard(); }
+        const stored = localStorage.getItem('mtwara_performance_v12');
+        if (stored) { allReports = JSON.parse(stored); renderHistory(); updateDashboard(); renderTrendChart(); }
     } catch(e) {}
 }
 
 function backupToCloud() {
     if (allReports.length === 0) { showToast('⚠️ Hakuna data', 'warning'); return; }
-    const data = { exportedAt: new Date().toISOString(), version: '11.0', totalReports: allReports.length, reports: allReports };
+    const data = { 
+        exportedAt: new Date().toISOString(), 
+        version: '12.0', 
+        totalReports: allReports.length, 
+        reports: allReports,
+        features: ['Login', 'Trend Chart', 'Benchmarks', 'Tiers', 'Goals', 'Feedback', 'SMS', 'Email', 'PDF']
+    };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -2731,9 +3619,10 @@ function backupToCloud() {
 
 function exportToCSV() {
     if (allReports.length === 0) { showToast('⚠️ Hakuna data', 'warning'); return; }
-    let csv = 'Kitambulisho,Tarehe,Mtendakazi,Kazi,Wagonjwa,Mtendakazi%,Msimamizi%,Pamoja%,Pengo,Sahihi\n';
+    let csv = 'Kitambulisho,Tarehe,Mtendakazi,Kazi,Idara,Wagonjwa,Ridhisho,Maendeleo,Mtendakazi%,Msimamizi%,Pamoja%,Pengo,Kiwango,Sahihi\n';
     allReports.forEach(r => {
-        csv += `${r.reportId || r.id},${r.date},${r.worker},${r.role},${r.patientsServed||0},${r.self.percent}%,${r.supervisorAssessment.percent}%,${r.combined}%,${r.gap}%,${r.incharge?.signoff||'—'}\n`;
+        const tier = getTier(r.combined);
+        csv += `${r.reportId || r.id},${r.date},${r.worker},${r.role},${r.department||'N/A'},${r.patientsServed||0},${r.patientSatisfaction||0}%,${r.goalProgress||0}%,${r.self.percent}%,${r.supervisorAssessment.percent}%,${r.combined}%,${r.gap}%,${tier},${r.incharge?.signoff||'—'}\n`;
     });
     const blob = new Blob([csv], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
@@ -2762,7 +3651,12 @@ function switchTab(tab) {
     const btns = document.querySelectorAll('.tab-btn');
     btns.forEach(b => { if (b.textContent.includes(tab) || b.onclick?.toString().includes(tab)) b.classList.add('active'); });
     if (tab === 'history') renderHistory();
-    if (tab === 'dashboard') updateDashboard();
+    if (tab === 'dashboard') { updateDashboard(); renderTrendChart(); }
+    if (tab === 'reports') { 
+        const now = new Date();
+        document.getElementById('reportMonth').value = now.getMonth();
+        document.getElementById('reportYear').value = now.getFullYear();
+    }
 }
 
 function showToast(msg, type = 'success') {
@@ -2791,6 +3685,11 @@ document.addEventListener('DOMContentLoaded', function() {
     followup.setMonth(followup.getMonth() + 1);
     document.getElementById('inchargeFollowupDate').value = followup.toISOString().split('T')[0];
     
+    // Set current month for reports
+    const now = new Date();
+    document.getElementById('reportMonth').value = now.getMonth();
+    document.getElementById('reportYear').value = now.getFullYear();
+    
     renderGeneralChecklist();
     renderSpecificChecklist();
     updateRoleStats();
@@ -2799,6 +3698,9 @@ document.addEventListener('DOMContentLoaded', function() {
     calculateScores();
     updateStatusDisplay();
     checkReminders();
+    
+    // Show login modal
+    document.getElementById('loginModal').classList.remove('hidden');
 });
 </script>
 
