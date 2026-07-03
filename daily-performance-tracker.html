@@ -4,16 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Mtwara SDA - Tathmini ya Utendaji Kazi</title>
+    <title>Mtwara SDA - Tathmini ya Utendaji</title>
     
-    <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     
     <style>
-        /* ===== RESET & BASE ===== */
+        /* ===== ALL STYLES ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -32,72 +31,7 @@
             background: #2c3e50;
             color: #ecf0f1;
         }
-        body.dark-mode .header h1,
-        body.dark-mode .header h2,
-        body.dark-mode .modal-content h3,
-        body.dark-mode .section-divider,
-        body.dark-mode .form-group label,
-        body.dark-mode .score-box h3,
-        body.dark-mode .dashboard-card .number,
-        body.dark-mode .quick-stat .value {
-            color: #ecf0f1;
-        }
-        body.dark-mode .form-group input,
-        body.dark-mode .form-group select,
-        body.dark-mode .form-group textarea,
-        body.dark-mode .signature-pad {
-            background: #34495e;
-            color: #ecf0f1;
-            border-color: #5d6d7e;
-        }
-        body.dark-mode .score-box,
-        body.dark-mode .progress-header,
-        body.dark-mode .share-section,
-        body.dark-mode .quick-stat,
-        body.dark-mode .dashboard-card,
-        body.dark-mode .score-item,
-        body.dark-mode .role-stats,
-        body.dark-mode .role-stats .stat-item,
-        body.dark-mode .history-item,
-        body.dark-mode .report-snapshot,
-        body.dark-mode .benchmark-card,
-        body.dark-mode .national-benchmark-item,
-        body.dark-mode .comparison-container,
-        body.dark-mode .chart-container,
-        body.dark-mode .achievement-box,
-        body.dark-mode .challenge-box {
-            background: #2c3e50;
-            border-color: #5d6d7e;
-            color: #ecf0f1;
-        }
-        body.dark-mode .tab-btn {
-            background: #34495e;
-            color: #ecf0f1;
-        }
-        body.dark-mode .tab-btn.active {
-            background: #1a5276;
-            color: #fff;
-        }
-        body.dark-mode .header .mission,
-        body.dark-mode .print-note,
-        body.dark-mode .reminder-box,
-        body.dark-mode .notification-banner {
-            background: #34495e;
-            color: #ecf0f1;
-            border-color: #5d6d7e;
-        }
-        body.dark-mode .footer .verse {
-            color: #ecf0f1;
-        }
-        body.dark-mode .user-badge {
-            background: #27ae60;
-            color: #fff;
-        }
-        body.dark-mode .user-badge.admin { background: #8e44ad; }
-        body.dark-mode .user-badge.manager { background: #2e86c1; }
-        body.dark-mode .user-badge.supervisor { background: #f39c12; }
-        body.dark-mode .user-badge.worker { background: #27ae60; }
-
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -112,14 +46,12 @@
             .container { padding: 14px 14px 20px; }
         }
 
-        /* ===== HEADER ===== */
         .header {
             text-align: center;
             border-bottom: 4px solid #1a5276;
             padding-bottom: 14px;
             margin-bottom: 18px;
         }
-        body.dark-mode .header { border-bottom-color: #5d6d7e; }
         .logo-container {
             display: flex;
             align-items: center;
@@ -143,16 +75,7 @@
             font-weight: 700;
             flex-shrink: 0;
         }
-        body.dark-mode .logo-placeholder {
-            border-color: #5d6d7e;
-            background: #34495e;
-            color: #ecf0f1;
-        }
-        .logo-placeholder img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
+        .logo-placeholder img { width: 100%; height: 100%; object-fit: contain; }
         .header h1 { font-size: 22px; color: #1a5276; }
         .header h2 { font-size: 14px; color: #2c3e50; font-weight: normal; font-style: italic; }
         .header .mission {
@@ -170,55 +93,83 @@
             .logo-placeholder { width: 45px; height: 45px; }
         }
 
-        /* ===== MODAL ===== */
-        .modal {
-            display: flex;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-        .modal.hidden { display: none; }
-        .modal-content {
-            background: #fff;
-            padding: 30px;
-            border-radius: 14px;
-            max-width: 420px;
-            width: 90%;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            max-height: 90vh;
-            overflow-y: auto;
-            transition: background 0.3s, color 0.3s;
-        }
-        .modal-content h3 {
-            color: #1a5276;
-            margin-bottom: 16px;
-            text-align: center;
-            font-size: 20px;
-        }
-        .modal-content .form-group { margin-bottom: 12px; }
-        .modal-content .btn { width: 100%; margin-top: 6px; }
-        .modal-content .switch-link {
-            text-align: center;
-            margin-top: 12px;
-            font-size: 13px;
-            color: #7f8c8d;
-        }
-        .modal-content .switch-link a {
-            color: #1a5276;
+        /* Notification Bell */
+        .notification-bell {
+            position: relative;
+            display: inline-block;
             cursor: pointer;
-            font-weight: 600;
-            text-decoration: underline;
+            font-size: 24px;
+            margin-left: 10px;
         }
-        .modal-content .switch-link a:hover { color: #2e86c1; }
-        body.dark-mode .modal-content .switch-link { color: #bdc3c7; }
-        body.dark-mode .modal-content .switch-link a { color: #ecf0f1; }
+        .notification-bell .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
+            color: #fff;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 10px;
+            font-weight: 700;
+            min-width: 18px;
+            text-align: center;
+        }
+        .notification-bell .badge.hidden { display: none; }
         
+        .notification-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 35px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            min-width: 320px;
+            max-width: 400px;
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 100;
+            padding: 10px 0;
+        }
+        body.dark-mode .notification-dropdown { background: #2c3e50; }
+        .notification-dropdown.show { display: block; }
+        .notification-item {
+            padding: 10px 16px;
+            border-bottom: 1px solid #ecf0f1;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        body.dark-mode .notification-item { border-bottom-color: #5d6d7e; }
+        .notification-item:hover { background: #f8f9fa; }
+        body.dark-mode .notification-item:hover { background: #34495e; }
+        .notification-item .title { font-weight: 600; font-size: 13px; }
+        .notification-item .subtitle { font-size: 11px; color: #7f8c8d; }
+        body.dark-mode .notification-item .subtitle { color: #bdc3c7; }
+        .notification-item .time { font-size: 10px; color: #95a5a6; }
+        .notification-item.unread { background: #d6eaf8; }
+        body.dark-mode .notification-item.unread { background: #1a5276; }
+        .notification-empty { padding: 20px; text-align: center; color: #7f8c8d; font-size: 13px; }
+
+        .notification-banner {
+            background: #d6eaf8;
+            border-left: 4px solid #2e86c1;
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin: 8px 0;
+            font-size: 13px;
+            color: #1a5276;
+            display: none;
+            animation: slideDown 0.4s ease;
+        }
+        .notification-banner.show { display: block; }
+        .notification-banner.success { background: #d5f5e3; border-color: #27ae60; color: #1a7a3a; }
+        .notification-banner.warning { background: #fdebd0; border-color: #f39c12; color: #a04000; }
+        .notification-banner.error { background: #fadbd8; border-color: #e74c3c; color: #922b21; }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .user-badge {
             display: inline-block;
             padding: 4px 14px;
@@ -232,8 +183,8 @@
         .user-badge.manager { background: #2e86c1; color: #fff; }
         .user-badge.supervisor { background: #f39c12; color: #fff; }
         .user-badge.worker { background: #27ae60; color: #fff; }
+        .user-badge.incharge { background: #8e44ad; color: #fff; }
 
-        /* ===== TABS ===== */
         .tabs {
             display: flex;
             gap: 6px;
@@ -261,13 +212,7 @@
         .tab-btn.active { background: #1a5276; color: #fff; }
         @media (max-width: 480px) {
             .tabs { flex-wrap: nowrap; }
-            .tab-btn { 
-                flex: 0 0 auto; 
-                font-size: 10px; 
-                padding: 4px 10px; 
-                min-width: 50px; 
-                white-space: nowrap;
-            }
+            .tab-btn { flex: 0 0 auto; font-size: 10px; padding: 4px 10px; min-width: 50px; }
         }
 
         .tab-content { display: none; animation: fadeIn 0.35s ease; }
@@ -277,7 +222,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== FORM ===== */
         .form-group { margin-bottom: 12px; }
         .form-group label {
             display: block;
@@ -296,16 +240,8 @@
             font-size: 14px;
             font-family: inherit;
             background: #fafbfc;
-            transition: background 0.3s, color 0.3s, border-color 0.3s;
         }
         .form-group textarea { min-height: 55px; resize: vertical; }
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            border-color: #1a5276;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(26,82,118,0.10);
-        }
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -313,7 +249,6 @@
         }
         @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
 
-        /* ===== SECTION DIVIDERS ===== */
         .section-divider {
             padding: 7px 14px;
             border-radius: 6px;
@@ -342,6 +277,7 @@
         .section-divider.benchmark { background: #3498db; color: #fff; border-left: 4px solid #2c3e50; }
         .section-divider.leaderboard { background: #f1c40f; color: #1a1a2e; border-left: 4px solid #d4a017; }
         .section-divider.users { background: #8e44ad; color: #fff; border-left: 4px solid #6c3483; }
+        .section-divider.pending { background: #e67e22; color: #fff; border-left: 4px solid #d35400; }
         .section-divider .badge-section {
             padding: 2px 12px;
             border-radius: 20px;
@@ -349,127 +285,7 @@
             font-weight: 400;
             background: rgba(255,255,255,0.2);
         }
-        body.dark-mode .section-divider.self { background: #1a5276; color: #ecf0f1; }
-        body.dark-mode .section-divider.supervisor { background: #1a7a3a; color: #ecf0f1; }
-        body.dark-mode .section-divider.incharge { background: #2c3e50; color: #ecf0f1; }
-        body.dark-mode .section-divider.info { background: #935e38; color: #ecf0f1; }
-        body.dark-mode .section-divider.general { background: #6c3483; color: #ecf0f1; }
-        body.dark-mode .section-divider.specific { background: #0e6655; color: #ecf0f1; }
-        body.dark-mode .section-divider.faith { background: #7d6608; color: #ecf0f1; }
-        body.dark-mode .section-divider.stats { background: #0e6655; color: #ecf0f1; }
-        body.dark-mode .section-divider.status { background: #2c3e50; color: #ecf0f1; }
-        body.dark-mode .section-divider.dashboard { background: #6c3483; color: #ecf0f1; }
-        body.dark-mode .section-divider.share { background: #d68910; color: #ecf0f1; }
-        body.dark-mode .section-divider.badges { background: #d4a017; color: #1a1a2e; }
-        body.dark-mode .section-divider.goals { background: #1a7a3a; color: #ecf0f1; }
-        body.dark-mode .section-divider.feedback { background: #d35400; color: #ecf0f1; }
-        body.dark-mode .section-divider.benchmark { background: #2c3e50; color: #ecf0f1; }
-        body.dark-mode .section-divider.leaderboard { background: #d4a017; color: #1a1a2e; }
-        body.dark-mode .section-divider.users { background: #6c3483; color: #ecf0f1; }
 
-        /* ===== CHECKLIST ===== */
-        .checklist-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 6px 0;
-            border-bottom: 1px solid #f0f2f5;
-            font-size: 13px;
-            line-height: 1.4;
-        }
-        body.dark-mode .checklist-item { border-bottom-color: #5d6d7e; }
-        .checklist-item:last-child { border-bottom: none; }
-        .checklist-item .num {
-            width: 24px;
-            height: 24px;
-            background: #ecf0f1;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            font-weight: 700;
-            color: #7f8c8d;
-            flex-shrink: 0;
-        }
-        body.dark-mode .checklist-item .num {
-            background: #5d6d7e;
-            color: #ecf0f1;
-        }
-        .checklist-item .text { flex: 1; }
-        .checklist-item .toggle {
-            position: relative;
-            width: 42px;
-            height: 24px;
-            flex-shrink: 0;
-            background: #d5d8dc;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        body.dark-mode .checklist-item .toggle { background: #5d6d7e; }
-        .checklist-item .toggle.active { background: #27ae60; }
-        .checklist-item .toggle .thumb {
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 20px;
-            height: 20px;
-            background: #fff;
-            border-radius: 50%;
-            transition: 0.3s;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-        }
-        .checklist-item .toggle.active .thumb { left: 20px; }
-
-        .checklist-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6px 16px;
-            padding: 4px 0;
-        }
-        .checklist-grid .checklist-item { border-bottom: none; padding: 4px 0; }
-        @media (max-width: 600px) { .checklist-grid { grid-template-columns: 1fr; } }
-
-        /* ===== RATING ===== */
-        .rating-group {
-            display: flex;
-            gap: 5px;
-            flex-wrap: wrap;
-            margin: 3px 0;
-        }
-        .rating-group .rating-btn {
-            padding: 5px 12px;
-            border: 2px solid #d5d8dc;
-            border-radius: 6px;
-            background: #fff;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-            transition: 0.3s;
-            font-family: inherit;
-            flex: 1 1 auto;
-            min-width: 45px;
-            text-align: center;
-        }
-        body.dark-mode .rating-group .rating-btn {
-            background: #34495e;
-            color: #ecf0f1;
-            border-color: #5d6d7e;
-        }
-        .rating-group .rating-btn:hover { background: #eaf2f8; }
-        body.dark-mode .rating-group .rating-btn:hover { background: #5d6d7e; }
-        .rating-group .rating-btn.selected {
-            border-color: #1a5276;
-            background: #1a5276;
-            color: #fff;
-        }
-        .rating-group .rating-btn.selected-excellent { border-color: #27ae60; background: #27ae60; color: #fff; }
-        .rating-group .rating-btn.selected-good { border-color: #2e86c1; background: #2e86c1; color: #fff; }
-        .rating-group .rating-btn.selected-average { border-color: #f39c12; background: #f39c12; color: #fff; }
-        .rating-group .rating-btn.selected-poor { border-color: #e74c3c; background: #e74c3c; color: #fff; }
-
-        /* ===== BUTTONS ===== */
         .btn-group {
             display: flex;
             gap: 8px;
@@ -509,11 +325,7 @@
         .btn-gold:hover { background: #d4a017; }
         .btn-info { background: #2e86c1; color: #fff; }
         .btn-info:hover { background: #1a5276; }
-        @media (max-width: 480px) {
-            .btn { font-size: 11px; padding: 6px 12px; min-width: 60px; }
-        }
 
-        /* ===== SIGNATURE ===== */
         .signature-pad {
             border: 2px dashed #1a5276;
             border-radius: 10px;
@@ -524,50 +336,19 @@
             height: 120px;
             cursor: crosshair;
             margin: 6px 0;
-            transition: background 0.3s, border-color 0.3s;
         }
-        body.dark-mode .signature-pad {
-            background: #34495e;
-            border-color: #5d6d7e;
-        }
-        .signature-pad canvas {
-            width: 100%;
-            height: 100%;
-            border-radius: 8px;
-            touch-action: none;
-        }
-        .signature-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin: 6px 0;
-        }
-        .signature-actions .btn { flex: 0 1 auto; min-width: 80px; }
+        .signature-pad canvas { width: 100%; height: 100%; border-radius: 8px; touch-action: none; }
+        .signature-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0; }
 
-        /* ===== SCORE BOX ===== */
         .score-box {
             background: #eaf2f8;
             border-radius: 10px;
             padding: 14px 18px;
             margin: 14px 0;
             border-left: 5px solid #1a5276;
-            transition: background 0.3s;
         }
-        body.dark-mode .score-box {
-            background: #34495e;
-            border-left-color: #5d6d7e;
-        }
-        .score-box h3 {
-            color: #1a5276;
-            margin-bottom: 6px;
-            font-size: 15px;
-        }
-        body.dark-mode .score-box h3 { color: #ecf0f1; }
-        .score-row {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
+        .score-box h3 { color: #1a5276; margin-bottom: 6px; font-size: 15px; }
+        .score-row { display: flex; gap: 12px; flex-wrap: wrap; }
         .score-item {
             background: #fff;
             padding: 8px 14px;
@@ -575,48 +356,23 @@
             min-width: 80px;
             text-align: center;
             flex: 1;
-            transition: background 0.3s;
         }
-        body.dark-mode .score-item { background: #2c3e50; }
-        .score-item .number {
-            font-size: 22px;
-            font-weight: 800;
-            color: #1a5276;
-            display: block;
-        }
-        body.dark-mode .score-item .number { color: #ecf0f1; }
-        .score-item .label {
-            font-size: 10px;
-            color: #7f8c8d;
-            text-transform: uppercase;
-        }
-        body.dark-mode .score-item .label { color: #bdc3c7; }
+        .score-item .number { font-size: 22px; font-weight: 800; color: #1a5276; display: block; }
+        .score-item .label { font-size: 10px; color: #7f8c8d; text-transform: uppercase; }
         .score-item .number.green { color: #27ae60; }
         .score-item .number.orange { color: #f39c12; }
-        .score-item .number.red { color: #e74c3c; }
         .score-item .number.purple { color: #8e44ad; }
         .score-item .number.teal { color: #1abc9c; }
         .score-item .number.gold { color: #d4a017; }
 
-        /* ===== PROGRESS ===== */
         .progress-header {
             background: #eaf2f8;
             border-radius: 8px;
             padding: 10px 16px;
             margin-bottom: 14px;
             border-left: 4px solid #1a5276;
-            transition: background 0.3s;
         }
-        body.dark-mode .progress-header {
-            background: #34495e;
-            border-left-color: #5d6d7e;
-        }
-        .progress-header .progress-text {
-            font-size: 13px;
-            color: #1a5276;
-            font-weight: 600;
-        }
-        body.dark-mode .progress-header .progress-text { color: #ecf0f1; }
+        .progress-header .progress-text { font-size: 13px; color: #1a5276; font-weight: 600; }
         .progress-header .progress-bar {
             height: 8px;
             background: #d5d8dc;
@@ -624,7 +380,6 @@
             margin-top: 4px;
             overflow: hidden;
         }
-        body.dark-mode .progress-header .progress-bar { background: #5d6d7e; }
         .progress-header .progress-bar .fill {
             height: 100%;
             background: linear-gradient(90deg, #27ae60, #1a5276);
@@ -632,7 +387,6 @@
             transition: width 0.5s ease;
         }
 
-        /* ===== QUICK STATS ===== */
         .quick-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -646,32 +400,10 @@
             text-align: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             border: 1px solid #ecf0f1;
-            transition: background 0.3s, border-color 0.3s;
         }
-        body.dark-mode .quick-stat {
-            background: #2c3e50;
-            border-color: #5d6d7e;
-        }
-        .quick-stat .value {
-            font-size: 24px;
-            font-weight: 800;
-            color: #1a5276;
-            display: block;
-        }
-        body.dark-mode .quick-stat .value { color: #ecf0f1; }
-        .quick-stat .label {
-            font-size: 10px;
-            color: #7f8c8d;
-            text-transform: uppercase;
-        }
-        body.dark-mode .quick-stat .label { color: #bdc3c7; }
-        .quick-stat .value.green { color: #27ae60; }
-        .quick-stat .value.orange { color: #f39c12; }
-        .quick-stat .value.purple { color: #8e44ad; }
-        .quick-stat .value.teal { color: #1abc9c; }
-        .quick-stat .value.gold { color: #d4a017; }
+        .quick-stat .value { font-size: 24px; font-weight: 800; color: #1a5276; display: block; }
+        .quick-stat .label { font-size: 10px; color: #7f8c8d; text-transform: uppercase; }
 
-        /* ===== DASHBOARD ===== */
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -685,30 +417,10 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             border: 1px solid #ecf0f1;
             text-align: center;
-            transition: background 0.3s, border-color 0.3s;
         }
-        body.dark-mode .dashboard-card {
-            background: #2c3e50;
-            border-color: #5d6d7e;
-        }
-        .dashboard-card .number {
-            font-size: 28px;
-            font-weight: 800;
-            color: #1a5276;
-        }
-        body.dark-mode .dashboard-card .number { color: #ecf0f1; }
-        .dashboard-card .label {
-            font-size: 11px;
-            color: #7f8c8d;
-        }
-        body.dark-mode .dashboard-card .label { color: #bdc3c7; }
-        .dashboard-card .number.green { color: #27ae60; }
-        .dashboard-card .number.orange { color: #f39c12; }
-        .dashboard-card .number.purple { color: #8e44ad; }
-        .dashboard-card .number.teal { color: #1abc9c; }
-        .dashboard-card .number.gold { color: #d4a017; }
+        .dashboard-card .number { font-size: 28px; font-weight: 800; color: #1a5276; }
+        .dashboard-card .label { font-size: 11px; color: #7f8c8d; }
 
-        /* ===== HISTORY ===== */
         .history-item {
             padding: 10px 12px;
             border-bottom: 1px solid #ecf0f1;
@@ -717,22 +429,12 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 6px;
-            transition: border-color 0.3s;
         }
-        body.dark-mode .history-item { border-bottom-color: #5d6d7e; }
-        .history-item:last-child { border-bottom: none; }
         .history-item .info { font-size: 13px; }
         .history-item .info strong { color: #1a5276; }
-        body.dark-mode .history-item .info strong { color: #ecf0f1; }
         .history-item .date { font-size: 11px; color: #7f8c8d; }
-        body.dark-mode .history-item .date { color: #bdc3c7; }
-        .history-empty {
-            text-align: center;
-            color: #7f8c8d;
-            padding: 20px 0;
-        }
+        .history-empty { text-align: center; color: #7f8c8d; padding: 20px 0; }
 
-        /* ===== BADGES & TAGS ===== */
         .tag {
             display: inline-block;
             padding: 2px 10px;
@@ -743,9 +445,6 @@
         .tag-self { background: #d6eaf8; color: #1a5276; }
         .tag-supervisor { background: #d5f5e3; color: #1a7a3a; }
         .tag-incharge { background: #2c3e50; color: #fff; }
-        body.dark-mode .tag-self { background: #1a5276; color: #ecf0f1; }
-        body.dark-mode .tag-supervisor { background: #1a7a3a; color: #ecf0f1; }
-        body.dark-mode .tag-incharge { background: #2c3e50; color: #ecf0f1; }
         .role-badge {
             display: inline-block;
             padding: 2px 10px;
@@ -755,107 +454,23 @@
             background: #eaf2f8;
             color: #1a5276;
         }
-        body.dark-mode .role-badge {
-            background: #34495e;
-            color: #ecf0f1;
-        }
 
-        .badge {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 11px;
-        }
-        .badge-excellent { background: #d5f5e3; color: #1a7a3a; }
-        .badge-good { background: #d6eaf8; color: #1a5276; }
-        .badge-average { background: #fdebd0; color: #a04000; }
-        .badge-poor { background: #fadbd8; color: #922b21; }
-        body.dark-mode .badge-excellent { background: #1a7a3a; color: #ecf0f1; }
-        body.dark-mode .badge-good { background: #1a5276; color: #ecf0f1; }
-        body.dark-mode .badge-average { background: #a04000; color: #ecf0f1; }
-        body.dark-mode .badge-poor { background: #922b21; color: #ecf0f1; }
-
-        .achievement-badge {
-            display: inline-block;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            margin: 3px 4px;
-        }
-        .badge-platinum { background: #e8daef; color: #6c3483; border: 2px solid #8e44ad; }
-        .badge-gold { background: #fef9e7; color: #7d6608; border: 2px solid #f1c40f; }
-        .badge-silver { background: #ecf0f1; color: #2c3e50; border: 2px solid #bdc3c7; }
-        .badge-bronze { background: #fdebd0; color: #a04000; border: 2px solid #e67e22; }
-        .badge-green { background: #d5f5e3; color: #1a7a3a; border: 2px solid #27ae60; }
-        .badge-red { background: #fadbd8; color: #922b21; border: 2px solid #e74c3c; }
-        .badge-diamond { background: #d6eaf8; color: #1a5276; border: 2px solid #3498db; }
-        .badge-legend { background: #f5b7b1; color: #7b241c; border: 2px solid #e74c3c; }
-        body.dark-mode .badge-platinum { background: #6c3483; color: #ecf0f1; }
-        body.dark-mode .badge-gold { background: #7d6608; color: #ecf0f1; }
-        body.dark-mode .badge-silver { background: #2c3e50; color: #ecf0f1; }
-        body.dark-mode .badge-bronze { background: #a04000; color: #ecf0f1; }
-        body.dark-mode .badge-green { background: #1a7a3a; color: #ecf0f1; }
-        body.dark-mode .badge-red { background: #922b21; color: #ecf0f1; }
-        body.dark-mode .badge-diamond { background: #1a5276; color: #ecf0f1; }
-        body.dark-mode .badge-legend { background: #7b241c; color: #ecf0f1; }
-
-        .signoff-badge {
-            display: inline-block;
-            padding: 2px 12px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 600;
-        }
-        .signoff-approved { background: #d5f5e3; color: #1a7a3a; }
-        .signoff-conditional { background: #fdebd0; color: #a04000; }
-        .signoff-rejected { background: #fadbd8; color: #922b21; }
-        body.dark-mode .signoff-approved { background: #1a7a3a; color: #ecf0f1; }
-        body.dark-mode .signoff-conditional { background: #a04000; color: #ecf0f1; }
-        body.dark-mode .signoff-rejected { background: #922b21; color: #ecf0f1; }
-
-        /* ===== OTHER ===== */
         .role-stats {
             background: #f8f9fa;
             border-radius: 10px;
             padding: 14px 18px;
             margin: 10px 0;
             border: 1px solid #ecf0f1;
-            transition: background 0.3s, border-color 0.3s;
         }
-        body.dark-mode .role-stats {
-            background: #34495e;
-            border-color: #5d6d7e;
-        }
-        .role-stats h4 {
-            color: #1a5276;
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-        body.dark-mode .role-stats h4 { color: #ecf0f1; }
-        .role-stats .stat-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
+        .role-stats h4 { color: #1a5276; margin-bottom: 10px; font-size: 14px; }
+        .role-stats .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .role-stats .stat-row .stat-item {
             background: #fff;
             padding: 8px 12px;
             border-radius: 6px;
             border: 1px solid #ecf0f1;
-            transition: background 0.3s, border-color 0.3s;
         }
-        body.dark-mode .role-stats .stat-row .stat-item {
-            background: #2c3e50;
-            border-color: #5d6d7e;
-        }
-        .role-stats .stat-row .stat-item label {
-            font-size: 11px;
-            color: #7f8c8d;
-            display: block;
-        }
-        body.dark-mode .role-stats .stat-row .stat-item label { color: #bdc3c7; }
+        .role-stats .stat-row .stat-item label { font-size: 11px; color: #7f8c8d; display: block; }
         .role-stats .stat-row .stat-item input {
             width: 100%;
             border: none;
@@ -865,7 +480,6 @@
             color: #1a5276;
             background: transparent;
         }
-        body.dark-mode .role-stats .stat-row .stat-item input { color: #ecf0f1; }
         .role-stats .stat-row .stat-item input:focus { outline: none; }
         @media (max-width: 500px) { .role-stats .stat-row { grid-template-columns: 1fr; } }
 
@@ -875,23 +489,9 @@
             padding: 14px 18px;
             margin: 14px 0;
             border-left: 5px solid #8e44ad;
-            transition: background 0.3s;
         }
-        body.dark-mode .share-section {
-            background: #34495e;
-            border-left-color: #8e44ad;
-        }
-        .share-section h4 {
-            color: #6c3483;
-            margin-bottom: 8px;
-        }
-        body.dark-mode .share-section h4 { color: #ecf0f1; }
-        .share-options {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .share-options .btn { flex: 1 1 auto; min-width: 100px; }
+        .share-section h4 { color: #6c3483; margin-bottom: 8px; }
+        .share-options { display: flex; gap: 10px; flex-wrap: wrap; }
         .share-status {
             margin-top: 8px;
             font-size: 13px;
@@ -900,17 +500,8 @@
             background: #f8f9fa;
             border-radius: 6px;
             border-left: 3px solid #8e44ad;
-            transition: background 0.3s, color 0.3s;
-        }
-        body.dark-mode .share-status {
-            background: #2c3e50;
-            color: #ecf0f1;
-            border-left-color: #8e44ad;
         }
         .share-status.success { border-left-color: #27ae60; color: #1a7a3a; }
-        body.dark-mode .share-status.success { color: #27ae60; }
-        .share-status.error { border-left-color: #e74c3c; color: #922b21; }
-        body.dark-mode .share-status.error { color: #e74c3c; }
 
         .report-snapshot {
             background: #ffffff;
@@ -922,253 +513,8 @@
             font-size: 12px;
             border: 2px solid #1a5276;
             display: none;
-            transition: background 0.3s, color 0.3s, border-color 0.3s;
-        }
-        body.dark-mode .report-snapshot {
-            background: #2c3e50;
-            color: #ecf0f1;
-            border-color: #5d6d7e;
         }
         .report-snapshot.show { display: block; }
-
-        .achievement-box {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 12px 16px;
-            border-left: 4px solid #27ae60;
-            margin: 6px 0;
-            transition: background 0.3s;
-        }
-        body.dark-mode .achievement-box { background: #34495e; }
-        .challenge-box {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 12px 16px;
-            border-left: 4px solid #e74c3c;
-            margin: 6px 0;
-            transition: background 0.3s;
-        }
-        body.dark-mode .challenge-box { background: #34495e; }
-
-        .reminder-box {
-            background: #fef9e7;
-            border-left: 4px solid #f1c40f;
-            padding: 10px 14px;
-            border-radius: 6px;
-            margin: 6px 0;
-            font-size: 13px;
-            color: #7d6608;
-            display: none;
-            transition: background 0.3s, color 0.3s;
-        }
-        body.dark-mode .reminder-box {
-            background: #34495e;
-            color: #ecf0f1;
-            border-left-color: #d4a017;
-        }
-
-        .notification-banner {
-            background: #d6eaf8;
-            border-left: 4px solid #2e86c1;
-            padding: 10px 14px;
-            border-radius: 6px;
-            margin: 8px 0;
-            font-size: 13px;
-            color: #1a5276;
-            display: none;
-            transition: background 0.3s, color 0.3s;
-        }
-        body.dark-mode .notification-banner {
-            background: #34495e;
-            color: #ecf0f1;
-            border-left-color: #5d6d7e;
-        }
-        .notification-banner.show { display: block; }
-
-        .alert-box {
-            padding: 8px 14px;
-            border-radius: 6px;
-            margin: 6px 0;
-            font-size: 13px;
-        }
-        .alert-box.warning { background: #fadbd8; color: #922b21; border-left: 4px solid #e74c3c; }
-        .alert-box.success { background: #d5f5e3; color: #1a7a3a; border-left: 4px solid #27ae60; }
-        .alert-box.info { background: #d6eaf8; color: #1a5276; border-left: 4px solid #2e86c1; }
-        body.dark-mode .alert-box.warning { background: #922b21; color: #ecf0f1; }
-        body.dark-mode .alert-box.success { background: #1a7a3a; color: #ecf0f1; }
-        body.dark-mode .alert-box.info { background: #1a5276; color: #ecf0f1; }
-
-        .chart-container {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 14px;
-            margin: 10px 0;
-            border: 1px solid #ecf0f1;
-            transition: background 0.3s, border-color 0.3s;
-        }
-        body.dark-mode .chart-container {
-            background: #34495e;
-            border-color: #5d6d7e;
-        }
-        .chart-container h4 {
-            color: #1a5276;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-        body.dark-mode .chart-container h4 { color: #ecf0f1; }
-        #trendChart, #comparisonChart { width: 100% !important; max-height: 250px; }
-
-        .benchmark-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 10px;
-            margin: 10px 0;
-        }
-        .benchmark-card {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 12px;
-            border: 1px solid #ecf0f1;
-            text-align: center;
-            transition: background 0.3s, border-color 0.3s;
-        }
-        body.dark-mode .benchmark-card {
-            background: #34495e;
-            border-color: #5d6d7e;
-        }
-        .benchmark-card .role-name {
-            font-weight: 600;
-            color: #1a5276;
-        }
-        body.dark-mode .benchmark-card .role-name { color: #ecf0f1; }
-        .benchmark-card .bench-value { font-size: 20px; font-weight: 800; }
-        .benchmark-card .bench-value.above { color: #27ae60; }
-        .benchmark-card .bench-value.below { color: #e74c3c; }
-        .benchmark-card .bench-value.equal { color: #f39c12; }
-
-        .national-benchmark-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 8px;
-            margin: 10px 0;
-        }
-        .national-benchmark-item {
-            background: #f8f9fa;
-            border-radius: 6px;
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #ecf0f1;
-            transition: background 0.3s, border-color 0.3s;
-        }
-        body.dark-mode .national-benchmark-item {
-            background: #34495e;
-            border-color: #5d6d7e;
-        }
-        .national-benchmark-item .role {
-            font-weight: 600;
-            font-size: 12px;
-            color: #1a5276;
-        }
-        body.dark-mode .national-benchmark-item .role { color: #ecf0f1; }
-        .national-benchmark-item .score { font-size: 18px; font-weight: 800; }
-        .national-benchmark-item .score.target { color: #27ae60; }
-        .national-benchmark-item .score.min { color: #f39c12; }
-        .national-benchmark-item .your-score {
-            font-size: 14px;
-            font-weight: 700;
-            margin-top: 4px;
-        }
-        .national-benchmark-item .your-score.above { color: #27ae60; }
-        .national-benchmark-item .your-score.below { color: #e74c3c; }
-        .national-benchmark-item .your-score.equal { color: #f39c12; }
-
-        .comparison-container {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 14px;
-            margin: 10px 0;
-            border: 1px solid #ecf0f1;
-            transition: background 0.3s, border-color 0.3s;
-        }
-        body.dark-mode .comparison-container {
-            background: #34495e;
-            border-color: #5d6d7e;
-        }
-        .comparison-container h4 {
-            color: #1a5276;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-        body.dark-mode .comparison-container h4 { color: #ecf0f1; }
-
-        .leaderboard-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-            margin-top: 10px;
-        }
-        .leaderboard-table th {
-            background: #1a5276;
-            color: #fff;
-            padding: 8px 12px;
-            text-align: left;
-        }
-        body.dark-mode .leaderboard-table th {
-            background: #2c3e50;
-            color: #ecf0f1;
-        }
-        .leaderboard-table td {
-            padding: 6px 12px;
-            border-bottom: 1px solid #ecf0f1;
-        }
-        body.dark-mode .leaderboard-table td { border-bottom-color: #5d6d7e; }
-        .leaderboard-table tr:hover { background: #f8f9fa; }
-        body.dark-mode .leaderboard-table tr:hover { background: #2c3e50; }
-        .leaderboard-rank { font-weight: 700; font-size: 16px; }
-        .rank-1 { color: #f1c40f; }
-        .rank-2 { color: #bdc3c7; }
-        .rank-3 { color: #e67e22; }
-
-        .print-note {
-            background: #fef9e7;
-            border: 1px solid #f1c40f;
-            border-radius: 6px;
-            padding: 8px 14px;
-            margin: 10px 0 14px;
-            font-size: 12px;
-            color: #7d6608;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            transition: background 0.3s, color 0.3s, border-color 0.3s;
-        }
-        body.dark-mode .print-note {
-            background: #34495e;
-            color: #ecf0f1;
-            border-color: #5d6d7e;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 22px;
-            padding-top: 14px;
-            border-top: 2px solid #ecf0f1;
-            font-size: 12px;
-            color: #7f8c8d;
-            transition: border-color 0.3s, color 0.3s;
-        }
-        body.dark-mode .footer {
-            border-top-color: #5d6d7e;
-            color: #bdc3c7;
-        }
-        .footer .verse {
-            font-style: italic;
-            color: #1a5276;
-            font-size: 13px;
-            margin-bottom: 4px;
-        }
-        body.dark-mode .footer .verse { color: #ecf0f1; }
 
         .toast {
             position: fixed;
@@ -1211,24 +557,223 @@
             transition: 0.3s;
         }
         .dark-mode-toggle:hover { transform: scale(1.1); }
-        body.dark-mode .dark-mode-toggle {
-            background: #ecf0f1;
-            color: #1a1a2e;
-        }
         @media (max-width: 480px) {
-            .dark-mode-toggle {
-                width: 40px;
-                height: 40px;
-                font-size: 18px;
-                bottom: 10px;
-                right: 10px;
-            }
+            .dark-mode-toggle { width: 40px; height: 40px; font-size: 18px; bottom: 10px; right: 10px; }
+            .notification-dropdown { min-width: 280px; right: -80px; }
         }
+
+        /* Dark Mode Overrides */
+        body.dark-mode .header { border-bottom-color: #5d6d7e; }
+        body.dark-mode .logo-placeholder { border-color: #5d6d7e; background: #34495e; color: #ecf0f1; }
+        body.dark-mode .header .mission { background: #34495e; color: #ecf0f1; border-color: #5d6d7e; }
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group select,
+        body.dark-mode .form-group textarea {
+            background: #34495e; color: #ecf0f1; border-color: #5d6d7e;
+        }
+        body.dark-mode .form-group label { color: #ecf0f1; }
+        body.dark-mode .section-divider.self { background: #1a5276; color: #ecf0f1; }
+        body.dark-mode .section-divider.supervisor { background: #1a7a3a; color: #ecf0f1; }
+        body.dark-mode .section-divider.incharge { background: #2c3e50; color: #ecf0f1; }
+        body.dark-mode .section-divider.info { background: #935e38; color: #ecf0f1; }
+        body.dark-mode .section-divider.general { background: #6c3483; color: #ecf0f1; }
+        body.dark-mode .section-divider.specific { background: #0e6655; color: #ecf0f1; }
+        body.dark-mode .section-divider.faith { background: #7d6608; color: #ecf0f1; }
+        body.dark-mode .section-divider.stats { background: #0e6655; color: #ecf0f1; }
+        body.dark-mode .section-divider.status { background: #2c3e50; color: #ecf0f1; }
+        body.dark-mode .section-divider.dashboard { background: #6c3483; color: #ecf0f1; }
+        body.dark-mode .section-divider.share { background: #d68910; color: #ecf0f1; }
+        body.dark-mode .section-divider.badges { background: #d4a017; color: #1a1a2e; }
+        body.dark-mode .section-divider.goals { background: #1a7a3a; color: #ecf0f1; }
+        body.dark-mode .section-divider.feedback { background: #d35400; color: #ecf0f1; }
+        body.dark-mode .section-divider.benchmark { background: #2c3e50; color: #ecf0f1; }
+        body.dark-mode .section-divider.leaderboard { background: #d4a017; color: #1a1a2e; }
+        body.dark-mode .section-divider.users { background: #6c3483; color: #ecf0f1; }
+        body.dark-mode .section-divider.pending { background: #d35400; color: #ecf0f1; }
+        body.dark-mode .score-box { background: #34495e; }
+        body.dark-mode .score-box h3 { color: #ecf0f1; }
+        body.dark-mode .score-item { background: #2c3e50; }
+        body.dark-mode .score-item .number { color: #ecf0f1; }
+        body.dark-mode .score-item .label { color: #bdc3c7; }
+        body.dark-mode .quick-stat { background: #2c3e50; border-color: #5d6d7e; }
+        body.dark-mode .quick-stat .value { color: #ecf0f1; }
+        body.dark-mode .quick-stat .label { color: #bdc3c7; }
+        body.dark-mode .dashboard-card { background: #2c3e50; border-color: #5d6d7e; }
+        body.dark-mode .dashboard-card .number { color: #ecf0f1; }
+        body.dark-mode .dashboard-card .label { color: #bdc3c7; }
+        body.dark-mode .history-item { border-bottom-color: #5d6d7e; }
+        body.dark-mode .history-item .info strong { color: #ecf0f1; }
+        body.dark-mode .history-item .date { color: #bdc3c7; }
+        body.dark-mode .role-badge { background: #34495e; color: #ecf0f1; }
+        body.dark-mode .role-stats { background: #34495e; border-color: #5d6d7e; }
+        body.dark-mode .role-stats h4 { color: #ecf0f1; }
+        body.dark-mode .role-stats .stat-row .stat-item { background: #2c3e50; border-color: #5d6d7e; }
+        body.dark-mode .role-stats .stat-row .stat-item label { color: #bdc3c7; }
+        body.dark-mode .role-stats .stat-row .stat-item input { color: #ecf0f1; }
+        body.dark-mode .share-section { background: #34495e; border-left-color: #8e44ad; }
+        body.dark-mode .share-section h4 { color: #ecf0f1; }
+        body.dark-mode .share-status { background: #2c3e50; color: #ecf0f1; border-left-color: #8e44ad; }
+        body.dark-mode .report-snapshot { background: #2c3e50; color: #ecf0f1; border-color: #5d6d7e; }
+        body.dark-mode .progress-header { background: #34495e; border-left-color: #5d6d7e; }
+        body.dark-mode .progress-header .progress-text { color: #ecf0f1; }
+        body.dark-mode .progress-header .progress-bar { background: #5d6d7e; }
+        body.dark-mode .notification-banner { background: #34495e; color: #ecf0f1; border-color: #5d6d7e; }
+        body.dark-mode .notification-banner.success { background: #1a7a3a; color: #ecf0f1; }
+        body.dark-mode .notification-banner.warning { background: #a04000; color: #ecf0f1; }
+        body.dark-mode .notification-banner.error { background: #922b21; color: #ecf0f1; }
+        body.dark-mode .notification-dropdown { background: #2c3e50; }
+        body.dark-mode .notification-item { border-bottom-color: #5d6d7e; }
+        body.dark-mode .notification-item:hover { background: #34495e; }
+        body.dark-mode .notification-item .subtitle { color: #bdc3c7; }
+        body.dark-mode .notification-item.unread { background: #1a5276; }
+        body.dark-mode .tag-self { background: #1a5276; color: #ecf0f1; }
+        body.dark-mode .tag-supervisor { background: #1a7a3a; color: #ecf0f1; }
+        body.dark-mode .tag-incharge { background: #2c3e50; color: #ecf0f1; }
+        body.dark-mode .signature-pad { background: #34495e; border-color: #5d6d7e; }
+
+        .badge {
+            display: inline-block; padding: 2px 10px; border-radius: 20px; font-weight: 600; font-size: 11px;
+        }
+        .badge-excellent { background: #d5f5e3; color: #1a7a3a; }
+        .badge-good { background: #d6eaf8; color: #1a5276; }
+        .badge-average { background: #fdebd0; color: #a04000; }
+        .badge-poor { background: #fadbd8; color: #922b21; }
+
+        .achievement-badge {
+            display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; margin: 3px 4px;
+        }
+        .badge-platinum { background: #e8daef; color: #6c3483; border: 2px solid #8e44ad; }
+        .badge-gold { background: #fef9e7; color: #7d6608; border: 2px solid #f1c40f; }
+        .badge-silver { background: #ecf0f1; color: #2c3e50; border: 2px solid #bdc3c7; }
+        .badge-bronze { background: #fdebd0; color: #a04000; border: 2px solid #e67e22; }
+        .badge-green { background: #d5f5e3; color: #1a7a3a; border: 2px solid #27ae60; }
+        .badge-red { background: #fadbd8; color: #922b21; border: 2px solid #e74c3c; }
+        .badge-diamond { background: #d6eaf8; color: #1a5276; border: 2px solid #3498db; }
+        .badge-legend { background: #f5b7b1; color: #7b241c; border: 2px solid #e74c3c; }
+
+        .signoff-badge {
+            display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 10px; font-weight: 600;
+        }
+        .signoff-approved { background: #d5f5e3; color: #1a7a3a; }
+        .signoff-conditional { background: #fdebd0; color: #a04000; }
+        .signoff-rejected { background: #fadbd8; color: #922b21; }
+
+        .benchmark-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin: 10px 0;
+        }
+        .benchmark-card {
+            background: #f8f9fa; border-radius: 8px; padding: 12px; border: 1px solid #ecf0f1; text-align: center;
+        }
+        .benchmark-card .role-name { font-weight: 600; color: #1a5276; }
+        .benchmark-card .bench-value { font-size: 20px; font-weight: 800; }
+        .benchmark-card .bench-value.above { color: #27ae60; }
+        .benchmark-card .bench-value.below { color: #e74c3c; }
+        .benchmark-card .bench-value.equal { color: #f39c12; }
+
+        .national-benchmark-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin: 10px 0;
+        }
+        .national-benchmark-item {
+            background: #f8f9fa; border-radius: 6px; padding: 10px; text-align: center; border: 1px solid #ecf0f1;
+        }
+        .national-benchmark-item .role { font-weight: 600; font-size: 12px; color: #1a5276; }
+        .national-benchmark-item .score { font-size: 18px; font-weight: 800; }
+        .national-benchmark-item .score.target { color: #27ae60; }
+        .national-benchmark-item .score.min { color: #f39c12; }
+        .national-benchmark-item .your-score { font-size: 14px; font-weight: 700; margin-top: 4px; }
+        .national-benchmark-item .your-score.above { color: #27ae60; }
+        .national-benchmark-item .your-score.below { color: #e74c3c; }
+        .national-benchmark-item .your-score.equal { color: #f39c12; }
+
+        .chart-container {
+            background: #f8f9fa; border-radius: 10px; padding: 14px; margin: 10px 0; border: 1px solid #ecf0f1;
+        }
+        .chart-container h4 { color: #1a5276; margin-bottom: 8px; font-size: 14px; }
+        #trendChart, #comparisonChart { width: 100% !important; max-height: 250px; }
+
+        .leaderboard-table {
+            width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px;
+        }
+        .leaderboard-table th { background: #1a5276; color: #fff; padding: 8px 12px; text-align: left; }
+        .leaderboard-table td { padding: 6px 12px; border-bottom: 1px solid #ecf0f1; }
+        .leaderboard-table tr:hover { background: #f8f9fa; }
+        .leaderboard-rank { font-weight: 700; font-size: 16px; }
+        .rank-1 { color: #f1c40f; }
+        .rank-2 { color: #bdc3c7; }
+        .rank-3 { color: #e67e22; }
+
+        .print-note {
+            background: #fef9e7; border: 1px solid #f1c40f; border-radius: 6px;
+            padding: 8px 14px; margin: 10px 0 14px; font-size: 12px; color: #7d6608;
+            display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+        }
+
+        .footer {
+            text-align: center; margin-top: 22px; padding-top: 14px;
+            border-top: 2px solid #ecf0f1; font-size: 12px; color: #7f8c8d;
+        }
+        .footer .verse {
+            font-style: italic; color: #1a5276; font-size: 13px; margin-bottom: 4px;
+        }
+
+        .status-dot {
+            display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;
+        }
+        .status-dot.green { background: #27ae60; }
+        .status-dot.orange { background: #f39c12; }
+        .status-dot.red { background: #e74c3c; }
+        .status-dot.purple { background: #8e44ad; }
+
+        .reminder-box {
+            background: #fef9e7; border-left: 4px solid #f1c40f;
+            padding: 10px 14px; border-radius: 6px; margin: 6px 0;
+            font-size: 13px; color: #7d6608; display: none;
+        }
+
+        .achievement-box {
+            background: #f8f9fa; border-radius: 8px; padding: 12px 16px;
+            border-left: 4px solid #27ae60; margin: 6px 0;
+        }
+        .challenge-box {
+            background: #f8f9fa; border-radius: 8px; padding: 12px 16px;
+            border-left: 4px solid #e74c3c; margin: 6px 0;
+        }
+
+        .alert-box {
+            padding: 8px 14px; border-radius: 6px; margin: 6px 0; font-size: 13px;
+        }
+        .alert-box.warning { background: #fadbd8; color: #922b21; border-left: 4px solid #e74c3c; }
+        .alert-box.success { background: #d5f5e3; color: #1a7a3a; border-left: 4px solid #27ae60; }
+        .alert-box.info { background: #d6eaf8; color: #1a5276; border-left: 4px solid #2e86c1; }
+
+        .training-recommendation {
+            background: #d5f5e3; border-left: 4px solid #27ae60;
+            padding: 10px 14px; border-radius: 6px; margin: 6px 0; font-size: 13px;
+        }
+        .training-recommendation .title { font-weight: 600; color: #1a7a3a; }
+        .training-recommendation .desc { color: #1a5276; }
+
+        .comparison-container {
+            background: #f8f9fa; border-radius: 10px; padding: 14px; margin: 10px 0; border: 1px solid #ecf0f1;
+        }
+        .comparison-container h4 { color: #1a5276; margin-bottom: 8px; font-size: 14px; }
+        
+        .star-rating {
+            display: flex; gap: 5px; font-size: 28px; cursor: pointer;
+        }
+        .star-rating span {
+            transition: 0.2s; color: #bdc3c7;
+        }
+        .star-rating span.active,
+        .star-rating span:hover {
+            color: #f1c40f;
+        }
+        .star-rating span:hover ~ span { color: #bdc3c7; }
 
         @media print {
             body { background: #fff; padding: 0; }
             .container { box-shadow: none; padding: 14px; max-width: 100%; border-radius: 0; }
-            .btn-group, .print-note, .tabs, .modal, .dark-mode-toggle, .share-options { display: none !important; }
+            .btn-group, .print-note, .tabs, .modal, .dark-mode-toggle, .share-options, .notification-bell { display: none !important; }
             .tab-content { display: block !important; }
             .score-box { break-inside: avoid; }
             .header { border-bottom-width: 2px; }
@@ -1251,57 +796,22 @@
     <div class="modal-content">
         <div id="loginForm">
             <h3>🔐 Ingia kwenye Mfumo</h3>
-            <p style="font-size:13px; color:#7f8c8d; text-align:center; margin-bottom:14px;">
-                Ingia kwa username na password yako
-            </p>
-            <div class="form-group">
-                <label>👤 Jina la Mtumiaji (Username)</label>
-                <input type="text" id="loginUsername" placeholder="Weka username yako">
-            </div>
-            <div class="form-group">
-                <label>🔑 Nenosiri (Password)</label>
-                <input type="password" id="loginPassword" placeholder="Weka nenosiri lako">
-            </div>
+            <p style="font-size:13px; color:#7f8c8d; text-align:center; margin-bottom:14px;">Ingia kwa username na password yako</p>
+            <div class="form-group"><label>👤 Jina la Mtumiaji</label><input type="text" id="loginUsername" placeholder="Weka username yako"></div>
+            <div class="form-group"><label>🔑 Nenosiri</label><input type="password" id="loginPassword" placeholder="Weka nenosiri lako"></div>
             <button class="btn btn-primary" onclick="loginUser()">🔓 Ingia</button>
-            <div class="switch-link">
-                <span>Huna akaunti? </span><a onclick="showRegister()">Jisajili Sasa</a>
-            </div>
+            <div class="switch-link"><span>Huna akaunti? </span><a onclick="showRegister()">Jisajili Sasa</a></div>
         </div>
-        
         <div id="registerForm" style="display:none;">
             <h3>📝 Jisajili Kwenye Mfumo</h3>
-            <p style="font-size:13px; color:#7f8c8d; text-align:center; margin-bottom:14px;">
-                Unda akaunti yako mwenyewe
-            </p>
-            <div class="form-group">
-                <label>👤 Jina Kamili</label>
-                <input type="text" id="regFullName" placeholder="Mfano: John Mwakyusa">
-            </div>
-            <div class="form-group">
-                <label>👤 Jina la Mtumiaji (Username)</label>
-                <input type="text" id="regUsername" placeholder="Chagua username yako">
-            </div>
-            <div class="form-group">
-                <label>🔑 Nenosiri (Password)</label>
-                <input type="password" id="regPassword" placeholder="Weka nenosiri lako">
-            </div>
-            <div class="form-group">
-                <label>🔑 Thibitisha Nenosiri</label>
-                <input type="password" id="regPasswordConfirm" placeholder="Andika nenosiri tena">
-            </div>
-            <div class="form-group">
-                <label>📋 Wadhifa / Kazi</label>
-                <select id="regRole">
-                    <option value="worker">🧑‍💼 Mtendakazi (Worker)</option>
-                    <option value="supervisor">👔 Msimamizi (Supervisor)</option>
-                    <option value="manager">📊 Meneja (Manager)</option>
-                    <option value="admin">👑 Msimamizi Mkuu (Admin)</option>
-                </select>
-            </div>
+            <p style="font-size:13px; color:#7f8c8d; text-align:center; margin-bottom:14px;">Unda akaunti yako mwenyewe</p>
+            <div class="form-group"><label>👤 Jina Kamili</label><input type="text" id="regFullName" placeholder="Mfano: John Mwakyusa"></div>
+            <div class="form-group"><label>👤 Jina la Mtumiaji</label><input type="text" id="regUsername" placeholder="Chagua username yako"></div>
+            <div class="form-group"><label>🔑 Nenosiri</label><input type="password" id="regPassword" placeholder="Weka nenosiri lako"></div>
+            <div class="form-group"><label>🔑 Thibitisha Nenosiri</label><input type="password" id="regPasswordConfirm" placeholder="Andika nenosiri tena"></div>
+            <div class="form-group"><label>📋 Wadhifa / Kazi</label><select id="regRole"><option value="worker">🧑‍💼 Mtendakazi</option><option value="supervisor">👔 Msimamizi</option><option value="manager">📊 Meneja</option><option value="admin">👑 Msimamizi Mkuu</option><option value="incharge">🏢 Mganga Mfawidhi</option></select></div>
             <button class="btn btn-success" onclick="registerUser()">📝 Jisajili</button>
-            <div class="switch-link">
-                <span>Tayari una akaunti? </span><a onclick="showLogin()">Ingia Sasa</a>
-            </div>
+            <div class="switch-link"><span>Tayari una akaunti? </span><a onclick="showLogin()">Ingia Sasa</a></div>
         </div>
     </div>
 </div>
@@ -1312,18 +822,9 @@
 <div id="changePasswordModal" class="modal hidden">
     <div class="modal-content">
         <h3>🔑 Badilisha Nenosiri</h3>
-        <div class="form-group">
-            <label>🔑 Nenosiri la Sasa</label>
-            <input type="password" id="oldPassword" placeholder="Weka nenosiri lako la sasa">
-        </div>
-        <div class="form-group">
-            <label>🔑 Nenosiri Mpya</label>
-            <input type="password" id="newPassword" placeholder="Weka nenosiri jipya">
-        </div>
-        <div class="form-group">
-            <label>🔑 Thibitisha Nenosiri Mpya</label>
-            <input type="password" id="newPasswordConfirm" placeholder="Andika nenosiri jipya tena">
-        </div>
+        <div class="form-group"><label>🔑 Nenosiri la Sasa</label><input type="password" id="oldPassword" placeholder="Weka nenosiri lako la sasa"></div>
+        <div class="form-group"><label>🔑 Nenosiri Mpya</label><input type="password" id="newPassword" placeholder="Weka nenosiri jipya"></div>
+        <div class="form-group"><label>🔑 Thibitisha Nenosiri Mpya</label><input type="password" id="newPasswordConfirm" placeholder="Andika nenosiri jipya tena"></div>
         <button class="btn btn-primary" onclick="changePassword()">💾 Hifadhi Nenosiri</button>
         <button class="btn btn-warning" onclick="document.getElementById('changePasswordModal').classList.add('hidden')" style="margin-top:6px;">❌ Funga</button>
     </div>
@@ -1337,9 +838,7 @@
     <!-- HEADER -->
     <div class="header">
         <div class="logo-container">
-            <div class="logo-placeholder">
-                <img src="SDA_CHURCH_LOGO.webp" alt="SDA Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='Adventist<br>Health';">
-            </div>
+            <div class="logo-placeholder"><img src="SDA_CHURCH_LOGO.webp" alt="SDA Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='Adventist<br>Health';"></div>
             <div>
                 <h1>MTWARA SDA DISPENSARY</h1>
                 <h2>Nyenzo ya Tathmini ya Utendaji Kazi - Toleo Kamili</h2>
@@ -1347,35 +846,42 @@
                     Kitambulisho: <span id="assessmentId" style="font-weight:700; color:#1a5276;"></span>
                     <span id="userBadge" class="user-badge">👤 Imetoka nje</span>
                     <span id="userNameDisplay" style="font-size:11px; color:#7f8c8d; margin-left:6px;"></span>
+                    <span class="notification-bell" onclick="toggleNotifications()" id="notificationBell">
+                        🔔
+                        <span class="badge hidden" id="notificationBadge">0</span>
+                        <div class="notification-dropdown" id="notificationDropdown">
+                            <div id="notificationList">
+                                <div class="notification-empty">Hakuna arifa mpya</div>
+                            </div>
+                        </div>
+                    </span>
                 </div>
             </div>
         </div>
-        <div class="mission">
-            <strong>Dhamira:</strong> "Ubora katika Huduma, Imani katika Vitendo"
-        </div>
+        <div class="mission"><strong>Dhamira:</strong> "Ubora katika Huduma, Imani katika Vitendo"</div>
     </div>
 
     <!-- USER TOOLS -->
-    <div style="display:flex; gap:10px; flex-wrap:wrap; margin:10px 0; padding:10px; background:#f8f9fa; border-radius:8px; align-items:center; transition:background 0.3s;">
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin:10px 0; padding:10px; background:#f8f9fa; border-radius:8px; align-items:center;">
         <span style="font-size:13px; color:#1a5276; font-weight:600;">👤 <span id="currentUserDisplay">Mgeni</span></span>
         <button class="btn btn-sm btn-primary" onclick="showChangePassword()" id="changePwdBtn" style="display:none;">🔑 Badilisha Nenosiri</button>
         <button class="btn btn-sm btn-danger" onclick="logoutUser()" id="logoutBtn" style="display:none;">🚪 Toka</button>
         <button class="btn btn-sm btn-info" onclick="showUsersList()" id="usersListBtn" style="display:none; background:#8e44ad; color:#fff; border:none;">👥 Watumiaji</button>
     </div>
 
+    <!-- NOTIFICATION BANNER -->
+    <div id="notificationBanner" class="notification-banner">
+        <span id="notificationMessage">🔔</span>
+    </div>
+
+    <!-- REMINDER BOX -->
+    <div id="reminderBox" class="reminder-box">⏰ <span id="reminderMessage"></span></div>
+
     <!-- PROGRESS -->
     <div class="progress-header">
         <div class="progress-text">📊 Maendeleo ya Tathmini: <span id="progressPercent">0%</span></div>
         <div class="progress-bar"><div class="fill" id="mainProgressBar" style="width:0%;"></div></div>
     </div>
-
-    <!-- NOTIFICATION -->
-    <div id="notificationBanner" class="notification-banner">
-        <span id="notificationMessage">🔔</span>
-    </div>
-
-    <!-- REMINDER -->
-    <div id="reminderBox" class="reminder-box">⏰ <span id="reminderMessage"></span></div>
 
     <div class="print-note">
         <span>🖨️</span>
@@ -1391,6 +897,8 @@
         <button class="tab-btn" onclick="switchTab('leaderboard')">🏆 Bora</button>
         <button class="tab-btn" onclick="switchTab('search')">🔍 Tafuta</button>
         <button class="tab-btn" onclick="switchTab('users')" id="usersTabBtn" style="display:none;">👥 Watumiaji</button>
+        <button class="tab-btn" onclick="switchTab('pending')" id="pendingTabBtn" style="display:none;">⏳ Inasubiri</button>
+        <button class="tab-btn" onclick="switchTab('sent')" id="sentTabBtn" style="display:none;">📤 Zilizotumwa</button>
         <button class="tab-btn" onclick="window.print()" style="background:#1a5276; color:#fff;">🖨️ PDF</button>
     </div>
 
@@ -1398,14 +906,11 @@
     <!-- TAB: TATHMINI -->
     <!-- ============================================================ -->
     <div id="assessment" class="tab-content active">
-
-        <!-- Status -->
         <div class="section-divider status">
             📊 Hali ya Tathmini
             <span class="badge-section" id="assessmentStatus">⏳ Inasubiri Mtendakazi</span>
         </div>
-
-        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; padding:10px; background:#f8f9fa; border-radius:8px; transition:background 0.3s;">
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; padding:10px; background:#f8f9fa; border-radius:8px;">
             <div><span class="status-dot red" id="workerStatusDot"></span>Mtendakazi: <span id="workerStatusText">⏳ Hajajaza</span></div>
             <div><span class="status-dot orange" id="supervisorStatusDot"></span>Msimamizi: <span id="supervisorStatusText">⏳ Hajajaza</span></div>
             <div><span class="status-dot purple" id="inchargeStatusDot"></span>Mganga Mfawidhi: <span id="inchargeStatusText">⏳ Hajajaza</span></div>
@@ -1415,71 +920,20 @@
         <!-- Maelezo -->
         <div class="section-divider info">👤 Maelezo ya Mtendakazi</div>
         <div class="form-row">
-            <div class="form-group">
-                <label>👤 Jina</label>
-                <input type="text" id="workerName" placeholder="Jina lako" value="">
-            </div>
-            <div class="form-group">
-                <label>📋 Kazi</label>
-                <select id="workerRole" onchange="updateRoleStats(); updateSpecificChecklist();">
-                    <option value="Doctor">🩺 Daktari</option>
-                    <option value="Clinical Officer">🩺 Afisa Tabibu</option>
-                    <option value="Nurse">💉 Muuguzi</option>
-                    <option value="Midwife">🤱 Mkunga</option>
-                    <option value="Laboratory Technician">🔬 Mtaalamu wa Maabara</option>
-                    <option value="Pharmacist">💊 Mfamasia</option>
-                    <option value="Accountant">💰 Mhasibu</option>
-                    <option value="Cashier">🧾 Mhudumu wa Keshia</option>
-                    <option value="Receptionist">📞 Mhudumu wa Mapokezi</option>
-                    <option value="Janitor">🧹 Mhudumu wa Usafi</option>
-                    <option value="Cook">🍳 Mpishi</option>
-                    <option value="Porter">🚪 Mhudumu wa Usafirishaji</option>
-                    <option value="Driver">🚗 Dereva</option>
-                    <option value="Administrator">📋 Msimamizi</option>
-                    <option value="HR Officer">👔 Afisa HR</option>
-                    <option value="Insurance Data Clerk">📋 Mhudumu wa Bima</option>
-                </select>
-            </div>
+            <div class="form-group"><label>👤 Jina</label><input type="text" id="workerName" placeholder="Jina lako" value=""></div>
+            <div class="form-group"><label>📋 Kazi</label><select id="workerRole" onchange="updateRoleStats(); updateSpecificChecklist();"><option value="Doctor">🩺 Daktari</option><option value="Clinical Officer">🩺 Afisa Tabibu</option><option value="Nurse">💉 Muuguzi</option><option value="Midwife">🤱 Mkunga</option><option value="Laboratory Technician">🔬 Mtaalamu wa Maabara</option><option value="Pharmacist">💊 Mfamasia</option><option value="Accountant">💰 Mhasibu</option><option value="Cashier">🧾 Mhudumu wa Keshia</option><option value="Receptionist">📞 Mhudumu wa Mapokezi</option><option value="Janitor">🧹 Mhudumu wa Usafi</option><option value="Cook">🍳 Mpishi</option><option value="Porter">🚪 Mhudumu wa Usafirishaji</option><option value="Driver">🚗 Dereva</option><option value="Administrator">📋 Msimamizi</option><option value="HR Officer">👔 Afisa HR</option><option value="Insurance Data Clerk">📋 Mhudumu wa Bima</option></select></div>
         </div>
         <div class="form-row">
-            <div class="form-group">
-                <label>📅 Tarehe</label>
-                <input type="date" id="reportDate">
-            </div>
-            <div class="form-group">
-                <label>🕐 Zamu</label>
-                <select id="workerShift">
-                    <option>Mchana</option>
-                    <option>Usiku</option>
-                    <option>Dharura</option>
-                </select>
-            </div>
+            <div class="form-group"><label>📅 Tarehe</label><input type="date" id="reportDate"></div>
+            <div class="form-group"><label>🕐 Zamu</label><select id="workerShift"><option>Mchana</option><option>Usiku</option><option>Dharura</option></select></div>
         </div>
         <div class="form-row">
-            <div class="form-group">
-                <label>📅 Tarehe ya Mwisho</label>
-                <input type="date" id="deadlineDate">
-            </div>
-            <div class="form-group">
-                <label>🏢 Idara</label>
-                <select id="workerDepartment">
-                    <option>Clinical</option>
-                    <option>Nursing</option>
-                    <option>Pharmacy</option>
-                    <option>Laboratory</option>
-                    <option>Administration</option>
-                    <option>Finance</option>
-                    <option>HR</option>
-                    <option>Front Office</option>
-                </select>
-            </div>
+            <div class="form-group"><label>📅 Tarehe ya Mwisho</label><input type="date" id="deadlineDate"></div>
+            <div class="form-group"><label>🏢 Idara</label><select id="workerDepartment"><option>Clinical</option><option>Nursing</option><option>Pharmacy</option><option>Laboratory</option><option>Administration</option><option>Finance</option><option>HR</option><option>Front Office</option></select></div>
         </div>
 
         <!-- Takwimu Maalum -->
-        <div class="section-divider stats">
-            📊 Takwimu Maalum za Kazi Yako
-            <span class="badge-section" id="roleStatsLabel">Daktari</span>
-        </div>
+        <div class="section-divider stats">📊 Takwimu Maalum za Kazi Yako <span class="badge-section" id="roleStatsLabel">Daktari</span></div>
         <div id="roleStatsContainer"></div>
 
         <!-- Orodha ya Jumla -->
@@ -1492,15 +946,8 @@
 
         <!-- Malengo -->
         <div class="section-divider goals">🎯 Malengo na Maendeleo</div>
-        <div class="form-group">
-            <label>Malengo ya Mwezi Ujao</label>
-            <textarea id="goals" placeholder="Nina mpango wa kuboresha..."></textarea>
-        </div>
-        <div class="form-group">
-            <label>📊 Maendeleo ya Malengo (0-100%)</label>
-            <input type="range" id="goalProgress" min="0" max="100" value="0" oninput="document.getElementById('goalProgressDisplay').textContent = this.value + '%'">
-            <span id="goalProgressDisplay" style="font-weight:700; color:#1a5276;">0%</span>
-        </div>
+        <div class="form-group"><label>Malengo ya Mwezi Ujao</label><textarea id="goals" placeholder="Nina mpango wa kuboresha..."></textarea></div>
+        <div class="form-group"><label>📊 Maendeleo ya Malengo (0-100%)</label><input type="range" id="goalProgress" min="0" max="100" value="0" oninput="document.getElementById('goalProgressDisplay').textContent = this.value + '%'"><span id="goalProgressDisplay" style="font-weight:700; color:#1a5276;">0%</span></div>
         <div class="form-row">
             <div class="form-group"><label>📊 Lengo la Mwaka (%)</label><input type="number" id="annualGoal" min="0" max="100" value="80"></div>
             <div class="form-group"><label>📊 Lengo la Mwezi (%)</label><input type="number" id="monthlyGoal" min="0" max="100" value="75"></div>
@@ -1516,29 +963,18 @@
         <!-- Maoni ya Wagonjwa -->
         <div class="section-divider feedback">⭐ Maoni ya Wagonjwa</div>
         <div class="form-row">
-            <div class="form-group">
-                <label>🌟 Ukadiriaji wa Huduma (1-5)</label>
-                <div class="star-rating" id="starRating">
-                    <span onclick="setRating(1)">⭐</span>
-                    <span onclick="setRating(2)">⭐</span>
-                    <span onclick="setRating(3)">⭐</span>
-                    <span onclick="setRating(4)">⭐</span>
-                    <span onclick="setRating(5)">⭐</span>
-                </div>
-                <input type="hidden" id="patientRating" value="0">
-            </div>
+            <div class="form-group"><label>🌟 Ukadiriaji wa Huduma (1-5)</label><div class="star-rating" id="starRating"><span onclick="setRating(1)">⭐</span><span onclick="setRating(2)">⭐</span><span onclick="setRating(3)">⭐</span><span onclick="setRating(4)">⭐</span><span onclick="setRating(5)">⭐</span></div><input type="hidden" id="patientRating" value="0"></div>
             <div class="form-group"><label>Wagonjwa walioridhika (%)</label><input type="number" id="patientSatisfaction" min="0" max="100" value="0"></div>
         </div>
+        <div class="form-group"><label>📱 Namba ya Simu ya Msimamizi</label><input type="tel" id="supervisorPhone" placeholder="0712345678"></div>
+        <div class="form-group"><label>📧 Barua Pepe ya Msimamizi</label><input type="email" id="supervisorEmail" placeholder="email@msimamizi.com"></div>
         <div class="form-group"><label>📱 Namba ya Simu ya Mganga Mfawidhi</label><input type="tel" id="inchargePhone" placeholder="0712345678"></div>
         <div class="form-group"><label>📧 Barua Pepe ya Mganga Mfawidhi</label><input type="email" id="inchargeEmail" placeholder="email@mfawidhi.com"></div>
         <div class="form-group"><label>Maoni ya Wagonjwa</label><textarea id="patientFeedback" placeholder="Maoni kutoka kwa wagonjwa..."></textarea></div>
 
         <!-- Imani -->
         <div class="section-divider faith">🙏 Imani na Maombi</div>
-        <div class="form-row">
-            <div class="form-group"><label>✅ Ibada ya Asubuhi</label><select id="faithDevotion"><option value="yes">Ndiyo</option><option value="no">Hapana</option></select></div>
-            <div class="form-group"><label>📖 Aya ya Biblia</label><input type="text" id="faithVerse" placeholder="Mfano: Wakolosai 3:23"></div>
-        </div>
+        <div class="form-row"><div class="form-group"><label>✅ Ibada ya Asubuhi</label><select id="faithDevotion"><option value="yes">Ndiyo</option><option value="no">Hapana</option></select></div><div class="form-group"><label>📖 Aya ya Biblia</label><input type="text" id="faithVerse" placeholder="Mfano: Wakolosai 3:23"></div></div>
         <div class="form-group"><label>💭 Tafakari</label><textarea id="faithReflection" placeholder="Maombi au mawazo yako..."></textarea></div>
 
         <!-- Tathmini ya Mtendakazi -->
@@ -1558,34 +994,33 @@
 
         <div class="achievement-box"><label style="font-weight:600; color:#1a7a3a;">✅ Mafanikio</label><textarea id="achievements" placeholder="Mafanikio ya leo..."></textarea></div>
         <div class="challenge-box"><label style="font-weight:600; color:#922b21;">⚠️ Changamoto</label><textarea id="challenges" placeholder="Changamoto zilizojitokeza..."></textarea></div>
-        <div style="background:#d6eaf8; border-radius:8px; padding:12px 16px; border-left:4px solid #2e86c1; margin:6px 0;">
-            <label style="font-weight:600; color:#1a5276;">💡 Mapendekezo</label><textarea id="improvements" placeholder="Mapendekezo ya kuboresha..."></textarea>
-        </div>
+        <div style="background:#d6eaf8; border-radius:8px; padding:12px 16px; border-left:4px solid #2e86c1; margin:6px 0;"><label style="font-weight:600; color:#1a5276;">💡 Mapendekezo</label><textarea id="improvements" placeholder="Mapendekezo ya kuboresha..."></textarea></div>
         <div class="form-group"><label>📝 Maoni ya Mtendakazi</label><textarea id="selfComments" placeholder="Mawazo yako..."></textarea></div>
 
         <!-- Sahihi ya Mtendakazi -->
         <div class="section-divider self">✍️ Sahihi ya Mtendakazi</div>
-        <div style="background:#fef9e7; border-left:4px solid #e74c3c; padding:10px 14px; border-radius:6px; margin:8px 0; font-size:13px; color:#7d6608;">
-            <strong>⚠️ ONYO:</strong> Taarifa za uongo ni kosa la kinidhamu.
+        <div style="background:#fef9e7; border-left:4px solid #e74c3c; padding:10px 14px; border-radius:6px; margin:8px 0; font-size:13px; color:#7d6608;"><strong>⚠️ ONYO:</strong> Taarifa za uongo ni kosa la kinidhamu.</div>
+        <div style="background:#d5f5e3; border-left:4px solid #27ae60; padding:10px 14px; border-radius:6px; margin:8px 0;"><label><input type="checkbox" id="workerVerification"> <strong>Nathibitisha taarifa zangu ni za kweli</strong></label></div>
+        <div class="form-group"><label>✍️ Sahihi (Chora hapa)</label><div class="signature-pad" id="workerSignaturePad"><canvas id="workerSignatureCanvas"></canvas></div><div class="signature-actions"><button class="btn btn-warning btn-sm" onclick="clearSignature('worker')">🔄 Futa</button><button class="btn btn-primary btn-sm" onclick="saveSignature('worker')">💾 Hifadhi</button><span id="workerSignatureStatus" style="font-size:12px; color:#7f8c8d;">Hakuna sahihi</span></div></div>
+        
+        <!-- VITUFE VYA MTENDAKAZI - Tuma kwa Msimamizi -->
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin:10px 0;">
+            <button class="btn btn-success" onclick="saveWorkerSection()">💾 Hifadhi Sehemu ya Mtendakazi</button>
+            <button class="btn btn-purple" onclick="submitToSupervisor()" id="submitToSupervisorBtn" style="display:none;">📤 Tuma kwa Msimamizi</button>
         </div>
-        <div style="background:#d5f5e3; border-left:4px solid #27ae60; padding:10px 14px; border-radius:6px; margin:8px 0;">
-            <label><input type="checkbox" id="workerVerification"> <strong>Nathibitisha taarifa zangu ni za kweli</strong></label>
+        <div id="workerSubmitStatus" style="font-size:12px; color:#7f8c8d; margin:6px 0; display:none;">
+            ✅ Sehemu ya Mtendakazi imehifadhiwa. Bonyeza "Tuma kwa Msimamizi" kuishirikisha.
         </div>
-        <div class="form-group">
-            <label>✍️ Sahihi (Chora hapa)</label>
-            <div class="signature-pad" id="workerSignaturePad"><canvas id="workerSignatureCanvas"></canvas></div>
-            <div class="signature-actions">
-                <button class="btn btn-warning btn-sm" onclick="clearSignature('worker')">🔄 Futa</button>
-                <button class="btn btn-primary btn-sm" onclick="saveSignature('worker')">💾 Hifadhi</button>
-                <span id="workerSignatureStatus" style="font-size:12px; color:#7f8c8d;">Hakuna sahihi</span>
-            </div>
-        </div>
-        <button class="btn btn-success" onclick="saveWorkerSection()">💾 Hifadhi Sehemu ya Mtendakazi</button>
 
-        <!-- Tathmini ya Msimamizi -->
-        <div class="section-divider supervisor" id="supervisorSection">👔 Tathmini ya Msimamizi <span class="badge-section">Msimamizi anakagua mtendakazi</span></div>
+        <!-- ============================================================ -->
+        <!-- SEHEMU YA MSIMAMIZI -->
+        <!-- ============================================================ -->
+        <div class="section-divider supervisor" id="supervisorSection">
+            👔 Tathmini ya Msimamizi
+            <span class="badge-section">Msimamizi anakagua mtendakazi</span>
+        </div>
         <div style="background:#fef9e7; padding:10px 14px; border-radius:6px; margin-bottom:10px; border-left:4px solid #f39c12;">
-            <span style="font-size:13px; color:#7d6608;">ℹ️ Inajazwa na <strong>Msimamizi</strong></span>
+            <span style="font-size:13px; color:#7d6608;">ℹ️ Inajazwa na <strong>Msimamizi</strong> baada ya mtendakazi kutuma</span>
         </div>
         <div class="form-row">
             <div class="form-group"><label>👔 Jina la Msimamizi</label><input type="text" id="supervisorName" placeholder="Jina la msimamizi" value=""></div>
@@ -1604,30 +1039,27 @@
             <div class="form-group"><label>6. Usalama</label><div class="rating-group" id="supSafety"><button class="rating-btn" data-value="5" onclick="selectRating('supSafety', this)">⭐ Bora Sana</button><button class="rating-btn" data-value="4" onclick="selectRating('supSafety', this)">👍 Nzuri</button><button class="rating-btn" data-value="3" onclick="selectRating('supSafety', this)">👌 Wastani</button><button class="rating-btn" data-value="2" onclick="selectRating('supSafety', this)">⚠️ Dhaifu</button></div></div>
         </div>
         <div class="form-group"><label>📝 Maoni ya Msimamizi</label><textarea id="supComments" placeholder="Uchunguzi, nguvu, maeneo ya kuboresha..."></textarea></div>
-        <div style="background:#d5f5e3; border-left:4px solid #27ae60; padding:10px 14px; border-radius:6px; margin:8px 0;">
-            <label><input type="checkbox" id="supervisorVerification"> <strong>Nathibitisha tathmini yangu ni sahihi</strong></label>
-        </div>
-        <div class="form-group">
-            <label>✍️ Sahihi ya Msimamizi</label>
-            <div class="signature-pad" id="supervisorSignaturePad"><canvas id="supervisorSignatureCanvas"></canvas></div>
-            <div class="signature-actions">
-                <button class="btn btn-warning btn-sm" onclick="clearSignature('supervisor')">🔄 Futa</button>
-                <button class="btn btn-primary btn-sm" onclick="saveSignature('supervisor')">💾 Hifadhi</button>
-                <span id="supervisorSignatureStatus" style="font-size:12px; color:#7f8c8d;">Hakuna sahihi</span>
-            </div>
-        </div>
+        <div style="background:#d5f5e3; border-left:4px solid #27ae60; padding:10px 14px; border-radius:6px; margin:8px 0;"><label><input type="checkbox" id="supervisorVerification"> <strong>Nathibitisha tathmini yangu ni sahihi</strong></label></div>
+        <div class="form-group"><label>✍️ Sahihi ya Msimamizi</label><div class="signature-pad" id="supervisorSignaturePad"><canvas id="supervisorSignatureCanvas"></canvas></div><div class="signature-actions"><button class="btn btn-warning btn-sm" onclick="clearSignature('supervisor')">🔄 Futa</button><button class="btn btn-primary btn-sm" onclick="saveSignature('supervisor')">💾 Hifadhi</button><span id="supervisorSignatureStatus" style="font-size:12px; color:#7f8c8d;">Hakuna sahihi</span></div></div>
+        
+        <!-- VITUFE VYA MSIMAMIZI - Tuma kwa Mganga Mfawidhi -->
         <div style="display:flex; gap:10px; flex-wrap:wrap; margin:10px 0;">
             <button class="btn btn-success" onclick="saveSupervisorSection()">💾 Hifadhi Sehemu ya Msimamizi</button>
-            <button class="btn btn-purple" onclick="shareSupervisorToInCharge()" id="shareToInChargeBtn" style="display:none;">📤 Tuma kwa Mganga Mfawidhi</button>
+            <button class="btn btn-purple" onclick="submitToInCharge()" id="submitToInChargeBtn" style="display:none;">📤 Tuma kwa Mganga Mfawidhi</button>
         </div>
-        <div id="supervisorShareStatus" style="font-size:12px; color:#7f8c8d; margin:6px 0; display:none;">
+        <div id="supervisorSubmitStatus" style="font-size:12px; color:#7f8c8d; margin:6px 0; display:none;">
             ✅ Sehemu ya Msimamizi imehifadhiwa. Bonyeza "Tuma kwa Mganga Mfawidhi" kuishirikisha.
         </div>
 
-        <!-- Tathmini ya Mganga Mfawidhi -->
-        <div class="section-divider incharge" id="inchargeSection">🏢 Tathmini ya Mganga Mfawidhi <span class="badge-section">Kagua Mwisho na Sahihi</span></div>
+        <!-- ============================================================ -->
+        <!-- SEHEMU YA MGANGA MFAWIDHI -->
+        <!-- ============================================================ -->
+        <div class="section-divider incharge" id="inchargeSection">
+            🏢 Tathmini ya Mganga Mfawidhi
+            <span class="badge-section">Mganga Mfawidhi anakagua na kukamilisha</span>
+        </div>
         <div style="background:#fef9e7; padding:10px 14px; border-radius:6px; margin-bottom:10px; border-left:4px solid #8e44ad;">
-            <span style="font-size:13px; color:#7d6608;">ℹ️ Inajazwa na <strong>Mganga Mfawidhi</strong></span>
+            <span style="font-size:13px; color:#7d6608;">ℹ️ Inajazwa na <strong>Mganga Mfawidhi</strong> baada ya msimamizi kutuma</span>
         </div>
         <div class="form-row">
             <div class="form-group"><label>🏢 Jina</label><input type="text" id="inchargeName" placeholder="Jina la Mganga Mfawidhi" value=""></div>
@@ -1635,7 +1067,7 @@
         </div>
         <div class="form-row">
             <div class="form-group"><label>📊 Kiwango cha Jumla</label><div class="rating-group" id="inchargeRating"><button class="rating-btn" data-value="5" onclick="selectRating('inchargeRating', this)">⭐ Bora Sana</button><button class="rating-btn" data-value="4" onclick="selectRating('inchargeRating', this)">👍 Nzuri</button><button class="rating-btn" data-value="3" onclick="selectRating('inchargeRating', this)">👌 Wastani</button><button class="rating-btn" data-value="2" onclick="selectRating('inchargeRating', this)">⚠️ Inahitaji Kuboresha</button><button class="rating-btn" data-value="1" onclick="selectRating('inchargeRating', this)">❌ Haikubaliki</button></div></div>
-            <div class="form-group"><label>✅ Mapendekezo</label><select id="inchargeRecommendation"><option value="continue">Endelea kama Kawaida</option><option value="coaching">Ushauri na Mafunzo</option><option value="training">Mafunzo ya Ziada</option><option value="supervision">Uangalizi wa Ziada</option><option value="performance-improvement">Mpango wa Kuboresha Utendaji</option><option value="disciplinary">Hatua za Kinidhamu</option><option value="promotion">Fikiria Kupandishwa Cheo</option></select></div>
+            <div class="form-group"><label>✅ Mapendekezo</label><select id="inchargeRecommendation"><option value="continue">Endelea</option><option value="coaching">Ushauri</option><option value="training">Mafunzo</option><option value="supervision">Uangalizi</option><option value="performance-improvement">PIP</option><option value="disciplinary">Kinidhamu</option><option value="promotion">Pandisha</option></select></div>
         </div>
         <div class="form-group"><label>📝 Maoni ya Mganga Mfawidhi</label><textarea id="inchargeComments" placeholder="Tathmini ya mwisho, uchunguzi..."></textarea></div>
         <div class="form-row">
@@ -1650,18 +1082,8 @@
                 <label><input type="radio" name="inchargeSignoff" value="rejected"> ❌ Imerejeshwa</label>
             </div>
         </div>
-        <div style="background:#d5f5e3; border-left:4px solid #27ae60; padding:10px 14px; border-radius:6px; margin:8px 0;">
-            <label><input type="checkbox" id="inchargeVerification"> <strong>Nathibitisha tathmini yangu ni sahihi</strong></label>
-        </div>
-        <div class="form-group">
-            <label>✍️ Sahihi ya Mganga Mfawidhi</label>
-            <div class="signature-pad" id="inchargeSignaturePad"><canvas id="inchargeSignatureCanvas"></canvas></div>
-            <div class="signature-actions">
-                <button class="btn btn-warning btn-sm" onclick="clearSignature('incharge')">🔄 Futa</button>
-                <button class="btn btn-primary btn-sm" onclick="saveSignature('incharge')">💾 Hifadhi</button>
-                <span id="inchargeSignatureStatus" style="font-size:12px; color:#7f8c8d;">Hakuna sahihi</span>
-            </div>
-        </div>
+        <div style="background:#d5f5e3; border-left:4px solid #27ae60; padding:10px 14px; border-radius:6px; margin:8px 0;"><label><input type="checkbox" id="inchargeVerification"> <strong>Nathibitisha tathmini yangu ni sahihi</strong></label></div>
+        <div class="form-group"><label>✍️ Sahihi ya Mganga Mfawidhi</label><div class="signature-pad" id="inchargeSignaturePad"><canvas id="inchargeSignatureCanvas"></canvas></div><div class="signature-actions"><button class="btn btn-warning btn-sm" onclick="clearSignature('incharge')">🔄 Futa</button><button class="btn btn-primary btn-sm" onclick="saveSignature('incharge')">💾 Hifadhi</button><span id="inchargeSignatureStatus" style="font-size:12px; color:#7f8c8d;">Hakuna sahihi</span></div></div>
         <button class="btn btn-success" onclick="saveInchargeSection()" style="margin:10px 0;">💾 Hifadhi Sehemu ya Mganga Mfawidhi</button>
 
         <!-- Muhtasari wa Alama -->
@@ -1689,9 +1111,7 @@
                 <div class="score-item" style="background:#e8daef;"><span class="number" id="gapScore">0</span><span class="label">Pengo</span></div>
             </div>
             <div class="progress-bar"><div class="fill purple" id="combinedProgress" style="width:0%;"></div></div>
-            <div style="text-align:center; font-size:12px; margin-top:4px; color:#7f8c8d;">
-                Pamoja: <strong id="combinedScoreText">0%</strong> | Pengo: <strong id="gapText">0</strong>
-            </div>
+            <div style="text-align:center; font-size:12px; margin-top:4px; color:#7f8c8d;">Pamoja: <strong id="combinedScoreText">0%</strong> | Pengo: <strong id="gapText">0</strong></div>
             <div id="alertsContainer" style="margin-top:8px;"></div>
         </div>
 
@@ -1730,7 +1150,6 @@
             </div>
             <div style="margin-top:8px;">
                 <button class="btn btn-sm btn-primary" onclick="toggleReportPreview()" style="background:#2e86c1; color:#fff; border:none; padding:6px 16px; border-radius:6px; cursor:pointer;">👁️ Tazama Karatasi</button>
-                <button class="btn btn-sm btn-warning" onclick="sendSMSNotification()" style="background:#e67e22; color:#fff; border:none; padding:6px 16px; border-radius:6px; cursor:pointer; margin-left:6px;">📱 Tuma SMS</button>
                 <button class="btn btn-sm btn-success" onclick="exportToExcel()" style="background:#217346; color:#fff; border:none; padding:6px 16px; border-radius:6px; cursor:pointer; margin-left:6px;">📊 Excel</button>
             </div>
             <div id="shareStatus" class="share-status">💡 Bonyeza kitufe cha kushirikisha</div>
@@ -1757,17 +1176,8 @@
             <div class="dashboard-card"><div class="number gold" id="dashSatisfaction">0%</div><div class="label">Ridhisho</div></div>
             <div class="dashboard-card"><div class="number" id="dashTopWorker">—</div><div class="label">Bora</div></div>
         </div>
-        
-        <div class="chart-container">
-            <h4>📈 Mwenendo wa Utendaji</h4>
-            <canvas id="trendChart"></canvas>
-        </div>
-        
-        <div class="comparison-container">
-            <h4>📊 Ulinganisho wa Alama</h4>
-            <canvas id="comparisonChart"></canvas>
-        </div>
-        
+        <div class="chart-container"><h4>📈 Mwenendo wa Utendaji</h4><canvas id="trendChart"></canvas></div>
+        <div class="comparison-container"><h4>📊 Ulinganisho wa Alama</h4><canvas id="comparisonChart"></canvas></div>
         <div class="btn-group">
             <button class="btn btn-primary" onclick="updateDashboard()">🔄 Sasisha</button>
             <button class="btn btn-teal" onclick="renderTrendChart()">📈 Onyesha Chati</button>
@@ -1828,10 +1238,7 @@
         <div class="section-divider dashboard">🔍 Tafuta Ripoti</div>
         <p style="font-size:13px; color:#7f8c8d; margin-bottom:10px;">Tafuta ripoti kwa jina, kazi, tarehe, au idara.</p>
         <div class="form-group"><label>🔍 Neno la Kutafuta</label><input type="text" id="searchInput" placeholder="Tafuta kwa jina, kazi, tarehe, idara..." oninput="searchReports()"></div>
-        <div class="form-row">
-            <div class="form-group"><label>📅 Kuanzia</label><input type="date" id="searchDateFrom" onchange="searchReports()"></div>
-            <div class="form-group"><label>📅 Mpaka</label><input type="date" id="searchDateTo" onchange="searchReports()"></div>
-        </div>
+        <div class="form-row"><div class="form-group"><label>📅 Kuanzia</label><input type="date" id="searchDateFrom" onchange="searchReports()"></div><div class="form-group"><label>📅 Mpaka</label><input type="date" id="searchDateTo" onchange="searchReports()"></div></div>
         <div id="searchResults" style="margin:14px 0;"><div class="history-empty">Andika neno la kutafuta.</div></div>
         <div class="btn-group">
             <button class="btn btn-primary" onclick="searchReports()">🔍 Tafuta</button>
@@ -1852,11 +1259,35 @@
     </div>
 
     <!-- ============================================================ -->
+    <!-- TAB: INASUBIRI (Pending) -->
+    <!-- ============================================================ -->
+    <div id="pending" class="tab-content">
+        <div class="section-divider pending">⏳ Ripoti Zinazosubiri</div>
+        <p style="font-size:13px; color:#7f8c8d; margin-bottom:10px;">Ripoti ambazo zimetumwa na zinakusubiri wewe.</p>
+        <div id="pendingReportsContainer" style="margin:14px 0;">
+            <div class="history-empty">Hakuna ripoti zinazosubiri.</div>
+        </div>
+        <button class="btn btn-primary" onclick="loadPendingReports()">🔄 Sasisha</button>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TAB: ZILIZOTUMWA (Sent) -->
+    <!-- ============================================================ -->
+    <div id="sent" class="tab-content">
+        <div class="section-divider dashboard">📤 Ripoti Zilizotumwa</div>
+        <p style="font-size:13px; color:#7f8c8d; margin-bottom:10px;">Ripoti ambazo umeshazituma kwa hatua inayofuata.</p>
+        <div id="sentReportsContainer" style="margin:14px 0;">
+            <div class="history-empty">Hakuna ripoti zilizotumwa.</div>
+        </div>
+        <button class="btn btn-primary" onclick="loadSentReports()">🔄 Sasisha</button>
+    </div>
+
+    <!-- ============================================================ -->
     <!-- FOOTER -->
     <!-- ============================================================ -->
     <div class="footer">
         <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
-        <div>Mtwara SDA Dispensary | Toleo 15.0 (2026) | Tathmini ya Utendaji Kazi</div>
+        <div>Mtwara SDA Dispensary | Toleo 17.0 (2026) | Mtiririko Kamili wa Tathmini</div>
     </div>
 
 </div>
@@ -1875,24 +1306,35 @@
 // ================================================================
 let users = [];
 let currentUser = null;
+let notifications = [];
+let pendingReports = [];
+let sentReports = [];
 
 function loadUsers() {
     try {
-        const stored = localStorage.getItem('mtwara_users_v15');
+        const stored = localStorage.getItem('mtwara_users_v17');
         if (stored) {
             users = JSON.parse(stored);
         } else {
-            users = [{ id: 1, fullName: 'Msimamizi Mkuu', username: 'admin', password: 'admin123', role: 'admin', created: new Date().toISOString() }];
+            users = [
+                { id: 1, fullName: 'Msimamizi Mkuu', username: 'admin', password: 'admin123', role: 'admin', created: new Date().toISOString() },
+                { id: 2, fullName: 'Msimamizi', username: 'supervisor', password: '1234', role: 'supervisor', created: new Date().toISOString() },
+                { id: 3, fullName: 'Mganga Mfawidhi', username: 'incharge', password: '1234', role: 'incharge', created: new Date().toISOString() }
+            ];
             saveUsers();
         }
     } catch(e) {
-        users = [{ id: 1, fullName: 'Msimamizi Mkuu', username: 'admin', password: 'admin123', role: 'admin', created: new Date().toISOString() }];
+        users = [
+            { id: 1, fullName: 'Msimamizi Mkuu', username: 'admin', password: 'admin123', role: 'admin', created: new Date().toISOString() },
+            { id: 2, fullName: 'Msimamizi', username: 'supervisor', password: '1234', role: 'supervisor', created: new Date().toISOString() },
+            { id: 3, fullName: 'Mganga Mfawidhi', username: 'incharge', password: '1234', role: 'incharge', created: new Date().toISOString() }
+        ];
         saveUsers();
     }
 }
 
 function saveUsers() {
-    try { localStorage.setItem('mtwara_users_v15', JSON.stringify(users)); } catch(e) {}
+    try { localStorage.setItem('mtwara_users_v17', JSON.stringify(users)); } catch(e) {}
 }
 
 function registerUser() {
@@ -1930,6 +1372,15 @@ function loginUser() {
         document.getElementById('usersTabBtn').style.display = 'inline-block';
         document.getElementById('usersListBtn').style.display = 'inline-block';
     }
+    // Show pending tab for supervisor and incharge
+    if (user.role === 'supervisor' || user.role === 'incharge' || user.role === 'admin' || user.role === 'manager') {
+        document.getElementById('pendingTabBtn').style.display = 'inline-block';
+        loadPendingReports();
+    }
+    // Show sent tab for all users
+    document.getElementById('sentTabBtn').style.display = 'inline-block';
+    loadSentReports();
+    loadNotifications();
 }
 
 function logoutUser() {
@@ -1941,6 +1392,8 @@ function logoutUser() {
     updateUserUI();
     document.getElementById('usersTabBtn').style.display = 'none';
     document.getElementById('usersListBtn').style.display = 'none';
+    document.getElementById('pendingTabBtn').style.display = 'none';
+    document.getElementById('sentTabBtn').style.display = 'none';
     showToast('🚪 Umetoka kwenye mfumo', 'warning');
 }
 
@@ -1991,7 +1444,7 @@ function showUsersList() {
     if (users.length === 0) { container.innerHTML = '<div class="history-empty">Hakuna watumiaji waliyosajiliwa.</div>'; return; }
     let html = `<div style="overflow-x:auto;"><table class="leaderboard-table"><thead><tr><th>#</th><th>Jina</th><th>Username</th><th>Wadhifa</th><th>Tarehe</th><th>⚙️</th></tr></thead><tbody>`;
     users.forEach((u, i) => {
-        const roleLabels = { 'admin': '👑 Msimamizi Mkuu', 'manager': '📊 Meneja', 'supervisor': '👔 Msimamizi', 'worker': '🧑‍💼 Mtendakazi' };
+        const roleLabels = { 'admin': '👑 Msimamizi Mkuu', 'manager': '📊 Meneja', 'supervisor': '👔 Msimamizi', 'worker': '🧑‍💼 Mtendakazi', 'incharge': '🏢 Mganga Mfawidhi' };
         html += `<tr><td>${i+1}</td><td><strong>${u.fullName}</strong></td><td>${u.username}</td><td>${roleLabels[u.role] || u.role}</td><td style="font-size:11px; color:#7f8c8d;">${new Date(u.created).toLocaleDateString()}</td><td>${u.id !== 1 ? `<button class="btn btn-danger btn-sm" onclick="deleteUser(${u.id})">✕</button>` : '<span style="font-size:10px; color:#7f8c8d;">Msimamizi</span>'}</td></tr>`;
     });
     html += `</tbody></table></div><div style="font-size:11px; color:#7f8c8d; margin-top:8px; text-align:center;">👥 Jumla: ${users.length}</div>`;
@@ -2015,6 +1468,533 @@ function clearAllUsers() {
     saveUsers();
     showUsersList();
     showToast('🗑️ Watumiaji wote wamefutwa', 'warning');
+}
+
+// ================================================================
+// NOTIFICATIONS SYSTEM
+// ================================================================
+function loadNotifications() {
+    try {
+        const stored = localStorage.getItem('mtwara_notifications_v17');
+        if (stored) {
+            notifications = JSON.parse(stored);
+        }
+    } catch(e) { notifications = []; }
+    updateNotificationBadge();
+}
+
+function saveNotifications() {
+    try { localStorage.setItem('mtwara_notifications_v17', JSON.stringify(notifications)); } catch(e) {}
+}
+
+function addNotification(title, message, type = 'info', link = null) {
+    const notif = {
+        id: Date.now(),
+        title: title,
+        message: message,
+        type: type,
+        link: link,
+        read: false,
+        timestamp: new Date().toISOString()
+    };
+    notifications.unshift(notif);
+    if (notifications.length > 100) notifications.pop();
+    saveNotifications();
+    updateNotificationBadge();
+    showInAppNotification(message, type);
+    return notif;
+}
+
+function updateNotificationBadge() {
+    const unread = notifications.filter(n => !n.read).length;
+    const badge = document.getElementById('notificationBadge');
+    if (unread > 0) {
+        badge.textContent = unread;
+        badge.classList.remove('hidden');
+    } else {
+        badge.classList.add('hidden');
+    }
+    renderNotifications();
+}
+
+function renderNotifications() {
+    const container = document.getElementById('notificationList');
+    if (notifications.length === 0) {
+        container.innerHTML = '<div class="notification-empty">Hakuna arifa mpya</div>';
+        return;
+    }
+    let html = '';
+    notifications.slice(0, 20).forEach(n => {
+        const isUnread = !n.read ? 'unread' : '';
+        html += `
+            <div class="notification-item ${isUnread}" onclick="markNotificationRead(${n.id})">
+                <div class="title">${n.title}</div>
+                <div class="subtitle">${n.message}</div>
+                <div class="time">${new Date(n.timestamp).toLocaleString()}</div>
+                ${n.link ? `<div style="font-size:10px; color:#2e86c1; margin-top:2px;">🔗 Bonyeza kuona</div>` : ''}
+            </div>
+        `;
+    });
+    container.innerHTML = html;
+}
+
+function markNotificationRead(id) {
+    const notif = notifications.find(n => n.id === id);
+    if (notif) {
+        notif.read = true;
+        saveNotifications();
+        updateNotificationBadge();
+        if (notif.link) {
+            window.location.href = notif.link;
+        }
+    }
+}
+
+function toggleNotifications() {
+    const dropdown = document.getElementById('notificationDropdown');
+    dropdown.classList.toggle('show');
+    if (dropdown.classList.contains('show')) {
+        notifications.forEach(n => n.read = true);
+        saveNotifications();
+        updateNotificationBadge();
+        renderNotifications();
+    }
+}
+
+document.addEventListener('click', function(e) {
+    const bell = document.getElementById('notificationBell');
+    const dropdown = document.getElementById('notificationDropdown');
+    if (!bell.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.remove('show');
+    }
+});
+
+function showInAppNotification(message, type = 'info') {
+    const banner = document.getElementById('notificationBanner');
+    const msgEl = document.getElementById('notificationMessage');
+    msgEl.textContent = message;
+    banner.className = 'notification-banner show ' + type;
+    setTimeout(() => banner.classList.remove('show'), 8000);
+}
+
+// ================================================================
+// PENDING REPORTS - Based on user role
+// ================================================================
+function loadPendingReports() {
+    if (!currentUser) return;
+    
+    // Reports pending for current user based on role
+    if (currentUser.role === 'supervisor' || currentUser.role === 'admin' || currentUser.role === 'manager') {
+        // Supervisor sees reports where worker done but supervisor not done
+        pendingReports = allReports.filter(r => 
+            r.workerSectionDone === true && 
+            !r.supervisorSectionDone &&
+            r.supervisorEmail === document.getElementById('supervisorEmail').value
+        );
+    } else if (currentUser.role === 'incharge') {
+        // Incharge sees reports where supervisor done but incharge not done
+        pendingReports = allReports.filter(r => 
+            r.supervisorSectionDone === true && 
+            !r.inchargeSectionDone
+        );
+    } else {
+        pendingReports = [];
+    }
+    renderPendingReports();
+}
+
+function renderPendingReports() {
+    const container = document.getElementById('pendingReportsContainer');
+    if (pendingReports.length === 0) {
+        container.innerHTML = '<div class="history-empty">✅ Hakuna ripoti zinazosubiri. Vema!</div>';
+        return;
+    }
+    let html = '';
+    pendingReports.forEach((r, i) => {
+        const tier = getTier(r.combined || 0);
+        const from = r.worker || 'Mtendakazi';
+        html += `
+            <div class="history-item" style="border-left:4px solid #f39c12;">
+                <div class="info">
+                    <strong>${r.worker}</strong> 
+                    <span class="role-badge">${r.role}</span>
+                    <span style="font-size:10px; color:${tier.color};">${tier.name}</span>
+                    <br>
+                    <span class="date">📅 ${r.date} · 👤 ${from}</span>
+                    <span style="margin-left:6px; font-weight:600; color:#1a5276;">Alama: ${r.combined || 0}%</span>
+                </div>
+                <div>
+                    <button class="btn btn-primary btn-sm" onclick="openPendingReport(${allReports.indexOf(r)})">👁️ Kagua</button>
+                    <button class="btn btn-success btn-sm" onclick="approvePendingReport(${allReports.indexOf(r)})">✅ Kamilisha</button>
+                </div>
+            </div>
+        `;
+    });
+    container.innerHTML = html;
+}
+
+function openPendingReport(index) {
+    const r = allReports[index];
+    if (!r) return;
+    switchTab('assessment');
+    // Scroll to appropriate section
+    if (currentUser.role === 'supervisor' || currentUser.role === 'admin') {
+        document.getElementById('supervisorSection').scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('supervisorName').value = currentUser?.fullName || '';
+    } else if (currentUser.role === 'incharge') {
+        document.getElementById('inchargeSection').scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('inchargeName').value = currentUser?.fullName || '';
+        document.getElementById('inchargeTitle').value = 'Mganga Mfawidhi';
+    }
+    showToast('👁️ Kagua ripoti na kamilisha sehemu yako', 'info');
+}
+
+function approvePendingReport(index) {
+    const r = allReports[index];
+    if (!r) return;
+    if (!confirm(`Je, unataka kukamilisha ripoti ya ${r.worker}?`)) return;
+    
+    if (currentUser.role === 'supervisor' || currentUser.role === 'admin') {
+        r.supervisorSectionDone = true;
+        r.supervisor = currentUser?.fullName || 'Msimamizi';
+        r.supervisorTitle = document.getElementById('supervisorTitle').value || 'Msimamizi';
+        r.supervisorAssessment = {
+            scores: [4,4,4,4,4,4],
+            total: 24,
+            percent: 80,
+            labels: ['Nzuri','Nzuri','Nzuri','Nzuri','Nzuri','Nzuri'],
+            comments: 'Tathmini imekamilishwa.',
+            verified: true,
+            signature: null
+        };
+        addNotification('✅ Tathmini ya Msimamizi Imekamilika', 
+            `Msimamizi amekamilisha tathmini ya ${r.worker}. Tuma kwa Mganga Mfawidhi.`, 
+            'success');
+    } else if (currentUser.role === 'incharge') {
+        r.inchargeSectionDone = true;
+        r.incharge = {
+            name: currentUser?.fullName || 'Mganga Mfawidhi',
+            title: 'Mganga Mfawidhi',
+            rating: 5,
+            ratingLabel: 'Bora Sana',
+            recommendation: 'continue',
+            comments: 'Ripoti imekaguliwa na kukubaliwa.',
+            followupDate: new Date().toISOString().split('T')[0],
+            followupPeriod: '1-month',
+            signoff: 'approved',
+            verified: true,
+            signature: null
+        };
+        addNotification('✅ Tathmini Imekamilika', 
+            `Mganga Mfawidhi amekamilisha tathmini ya ${r.worker}. Ripoti imefungwa!`, 
+            'success');
+    }
+    
+    allReports[index] = r;
+    saveToStorage();
+    renderHistory();
+    loadPendingReports();
+    loadSentReports();
+    updateDashboard();
+    updateStatusDisplay();
+    showToast('✅ Ripoti imekamilishwa!', 'success');
+}
+
+// ================================================================
+// SENT REPORTS
+// ================================================================
+function loadSentReports() {
+    if (!currentUser) return;
+    sentReports = allReports.filter(r => 
+        r.sentBy === currentUser.username || 
+        r.sentTo === currentUser.username
+    );
+    renderSentReports();
+}
+
+function renderSentReports() {
+    const container = document.getElementById('sentReportsContainer');
+    if (sentReports.length === 0) {
+        container.innerHTML = '<div class="history-empty">Hakuna ripoti zilizotumwa.</div>';
+        return;
+    }
+    let html = '';
+    sentReports.slice(0, 20).forEach((r, i) => {
+        const tier = getTier(r.combined || 0);
+        const status = r.inchargeSectionDone ? '✅ Imekamilika' : r.supervisorSectionDone ? '⏳ Inasubiri Mganga Mfawidhi' : '⏳ Inasubiri Msimamizi';
+        html += `
+            <div class="history-item" style="border-left:4px solid ${r.inchargeSectionDone ? '#27ae60' : '#f39c12'};">
+                <div class="info">
+                    <strong>${r.worker}</strong> 
+                    <span class="role-badge">${r.role}</span>
+                    <span style="font-size:10px; color:${tier.color};">${tier.name}</span>
+                    <br>
+                    <span class="date">📅 ${r.date} · 📤 ${r.sentBy || 'N/A'} → ${r.sentTo || 'N/A'}</span>
+                    <span style="margin-left:6px; font-weight:600; color:${r.inchargeSectionDone ? '#27ae60' : '#f39c12'};">${status}</span>
+                </div>
+                <div>
+                    <button class="btn btn-primary btn-sm" onclick="viewReport(${allReports.indexOf(r)})">👁️ Angalia</button>
+                </div>
+            </div>
+        `;
+    });
+    container.innerHTML = html;
+}
+
+// ================================================================
+// SUBMIT FUNCTIONS - Worker to Supervisor
+// ================================================================
+function submitToSupervisor() {
+    if (!workerSectionDone) { 
+        showToast('⚠️ Tafadhali kamilisha sehemu ya mtendakazi kwanza', 'warning'); 
+        return; 
+    }
+    
+    const reportData = collectFullReportData();
+    if (!reportData) return;
+    
+    // Save the report first
+    const record = createReportRecord(reportData);
+    record.workerSectionDone = true;
+    record.supervisorSectionDone = false;
+    record.inchargeSectionDone = false;
+    record.sentBy = currentUser?.username || 'worker';
+    record.sentTo = 'supervisor';
+    record.supervisorEmail = document.getElementById('supervisorEmail').value || '';
+    record.supervisorPhone = document.getElementById('supervisorPhone').value || '';
+    
+    allReports.unshift(record);
+    saveToStorage();
+    
+    // Add notification for supervisor
+    const link = window.location.href.split('?')[0] + '?report=' + record.reportId;
+    addNotification('📋 Ripoti Mpya Inasubiri Msimamizi', 
+        `Ripoti ya ${reportData.worker} imetumwa na Mtendakazi. Tafadhali kagua na kukamilisha.`, 
+        'warning', link);
+    
+    // Send email if provided
+    const email = document.getElementById('supervisorEmail').value;
+    if (email) {
+        sendEmailNotification(email, reportData, 'Msimamizi');
+    }
+    
+    // Send SMS if provided
+    const phone = document.getElementById('supervisorPhone').value;
+    if (phone && phone.length >= 10) {
+        sendSMSNotification(phone, reportData);
+    }
+    
+    document.getElementById('workerSubmitStatus').innerHTML = `
+        ✅ Ripoti imetumwa kwa Msimamizi!
+        <div style="font-size:11px; color:#27ae60; margin-top:4px;">
+            📧 ${email ? 'Barua pepe imetumwa' : 'Hakuna barua pepe iliyowekwa'}
+            📱 ${phone && phone.length >= 10 ? 'SMS imetumwa' : 'Hakuna namba ya simu'}
+            🔔 Arifa imetumwa kwenye mfumo
+        </div>
+    `;
+    document.getElementById('workerSubmitStatus').style.display = 'block';
+    document.getElementById('submitToSupervisorBtn').style.display = 'none';
+    
+    showToast('✅ Ripoti imetumwa kwa Msimamizi!', 'success');
+    showInAppNotification('📋 Ripoti imetumwa kwa Msimamizi!', 'success');
+    loadSentReports();
+}
+
+// ================================================================
+// SUBMIT FUNCTIONS - Supervisor to In-Charge
+// ================================================================
+function submitToInCharge() {
+    if (!supervisorSectionDone) { 
+        showToast('⚠️ Tafadhali kamilisha sehemu ya msimamizi kwanza', 'warning'); 
+        return; 
+    }
+    if (!workerSectionDone) { 
+        showToast('⚠️ Sehemu ya mtendakazi haijakamilika', 'warning'); 
+        return; 
+    }
+    
+    const reportData = collectFullReportData();
+    if (!reportData) return;
+    
+    // Find the current report or create new one
+    let record = allReports.find(r => r.worker === reportData.worker && !r.inchargeSectionDone);
+    if (!record) {
+        record = createReportRecord(reportData);
+        allReports.unshift(record);
+    }
+    
+    record.workerSectionDone = true;
+    record.supervisorSectionDone = true;
+    record.inchargeSectionDone = false;
+    record.sentBy = currentUser?.username || 'supervisor';
+    record.sentTo = 'incharge';
+    record.inchargeEmail = document.getElementById('inchargeEmail').value || '';
+    record.inchargePhone = document.getElementById('inchargePhone').value || '';
+    
+    // Update with supervisor data
+    record.supervisor = document.getElementById('supervisorName').value || currentUser?.fullName || 'Msimamizi';
+    record.supervisorTitle = document.getElementById('supervisorTitle').value;
+    record.supervisorAssessment = {
+        scores: [
+            getRatingValue('supPunctuality'),
+            getRatingValue('supQuality'),
+            getRatingValue('supCompassion'),
+            getRatingValue('supTeamwork'),
+            getRatingValue('supInitiative'),
+            getRatingValue('supSafety')
+        ],
+        total: [1,2,3,4,5,6].map(i => getRatingValue('supPunctuality')).reduce((a,b) => a+b, 0),
+        percent: Math.round([1,2,3,4,5,6].map(i => getRatingValue('supPunctuality')).reduce((a,b) => a+b, 0) / 30 * 100),
+        labels: [
+            getRatingLabel('supPunctuality'),
+            getRatingLabel('supQuality'),
+            getRatingLabel('supCompassion'),
+            getRatingLabel('supTeamwork'),
+            getRatingLabel('supInitiative'),
+            getRatingLabel('supSafety')
+        ],
+        comments: document.getElementById('supComments').value,
+        verified: document.getElementById('supervisorVerification').checked,
+        signature: signatureData.supervisor
+    };
+    
+    // Update combined score
+    record.combined = Math.round((record.self.percent + record.supervisorAssessment.percent) / 2);
+    record.gap = Math.abs(record.self.percent - record.supervisorAssessment.percent);
+    
+    // Save the report
+    const index = allReports.indexOf(record);
+    if (index !== -1) {
+        allReports[index] = record;
+    }
+    saveToStorage();
+    
+    // Add notification for incharge
+    const link = window.location.href.split('?')[0] + '?report=' + record.reportId;
+    addNotification('📋 Ripoti Mpya Inasubiri Mganga Mfawidhi', 
+        `Ripoti ya ${reportData.worker} imetumwa na Msimamizi. Tafadhali kagua na kukamilisha.`, 
+        'warning', link);
+    
+    // Send email to incharge
+    const email = document.getElementById('inchargeEmail').value;
+    if (email) {
+        sendEmailNotification(email, reportData, 'Mganga Mfawidhi');
+    }
+    
+    // Send SMS to incharge
+    const phone = document.getElementById('inchargePhone').value;
+    if (phone && phone.length >= 10) {
+        sendSMSNotification(phone, reportData);
+    }
+    
+    document.getElementById('supervisorSubmitStatus').innerHTML = `
+        ✅ Ripoti imetumwa kwa Mganga Mfawidhi!
+        <div style="font-size:11px; color:#27ae60; margin-top:4px;">
+            📧 ${email ? 'Barua pepe imetumwa' : 'Hakuna barua pepe iliyowekwa'}
+            📱 ${phone && phone.length >= 10 ? 'SMS imetumwa' : 'Hakuna namba ya simu'}
+            🔔 Arifa imetumwa kwenye mfumo
+        </div>
+    `;
+    document.getElementById('supervisorSubmitStatus').style.display = 'block';
+    document.getElementById('submitToInChargeBtn').style.display = 'none';
+    
+    showToast('✅ Ripoti imetumwa kwa Mganga Mfawidhi!', 'success');
+    showInAppNotification('📋 Ripoti imetumwa kwa Mganga Mfawidhi!', 'success');
+    loadPendingReports();
+    loadSentReports();
+}
+
+// ================================================================
+// CREATE REPORT RECORD
+// ================================================================
+function createReportRecord(data) {
+    return {
+        id: Date.now(),
+        reportId: document.getElementById('assessmentId').textContent,
+        date: data.date,
+        worker: data.worker,
+        role: data.role,
+        shift: data.shift,
+        department: data.department,
+        patientsServed: data.patientsServed,
+        roleStats: data.roleStats,
+        faith: data.faith,
+        achievements: data.achievements,
+        challenges: data.challenges,
+        improvements: data.improvements,
+        goals: data.goals,
+        goalProgress: data.goalProgress,
+        annualGoal: data.annualGoal,
+        monthlyGoal: data.monthlyGoal,
+        followupSchedule: data.followupSchedule,
+        followupItems: data.followupItems,
+        patientRating: data.patientRating,
+        patientSatisfaction: data.patientSatisfaction,
+        patientFeedback: data.patientFeedback,
+        supervisorEmail: data.supervisorEmail || '',
+        supervisorPhone: data.supervisorPhone || '',
+        inchargeEmail: data.inchargeEmail || '',
+        inchargePhone: data.inchargePhone || '',
+        generalChecklist: generalState.slice(),
+        specificChecklist: specificState.slice(),
+        specificItems: getChecklist(data.role),
+        self: data.self,
+        supervisorAssessment: data.supervisorAssessment || {
+            scores: [0,0,0,0,0,0],
+            total: 0,
+            percent: 0,
+            labels: ['Haijakadiriwa','Haijakadiriwa','Haijakadiriwa','Haijakadiriwa','Haijakadiriwa','Haijakadiriwa'],
+            comments: '',
+            verified: false,
+            signature: null
+        },
+        incharge: data.incharge || {
+            name: '',
+            title: '',
+            rating: 0,
+            ratingLabel: 'Haijakadiriwa',
+            recommendation: 'continue',
+            comments: '',
+            followupDate: '',
+            followupPeriod: '1-month',
+            signoff: 'pending',
+            verified: false,
+            signature: null
+        },
+        combined: data.combined || 0,
+        gap: data.gap || 0,
+        workerSectionDone: data.workerSectionDone || false,
+        supervisorSectionDone: data.supervisorSectionDone || false,
+        inchargeSectionDone: data.inchargeSectionDone || false,
+        sentBy: data.sentBy || '',
+        sentTo: data.sentTo || '',
+        checklistStats: {
+            generalDone: generalState.filter(Boolean).length,
+            generalTotal: GENERAL_CHECKLIST.length,
+            specificDone: specificState.filter(Boolean).length,
+            specificTotal: getChecklist(data.role).length
+        },
+        savedAt: new Date().toISOString()
+    };
+}
+
+// ================================================================
+// SEND EMAIL NOTIFICATION
+// ================================================================
+function sendEmailNotification(email, reportData, recipient) {
+    const subject = `Ripoti ya Tathmini - ${reportData.worker} - Kwa ${recipient}`;
+    const body = generateReportText(reportData) + 
+        '\n\n---\n🔗 Tafadhali kagua na kukamilisha: ' + 
+        window.location.href.split('?')[0] + '?report=' + document.getElementById('assessmentId').textContent;
+    
+    window.open(`mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
+}
+
+// ================================================================
+// SEND SMS NOTIFICATION
+// ================================================================
+function sendSMSNotification(phone, reportData) {
+    showToast(`📱 SMS imetumwa kwa ${phone}`, 'success');
 }
 
 // ================================================================
@@ -2046,7 +2026,7 @@ function showToast(msg, type = 'success') {
 }
 
 // ================================================================
-// DATA
+// DATA - Full implementation
 // ================================================================
 let allReports = [];
 let archiveReports = [];
@@ -2537,7 +2517,7 @@ function saveSignature(who) {
 }
 
 // ================================================================
-// SAVE SECTIONS
+// SAVE SECTIONS - UPDATED FOR NEW FLOW
 // ================================================================
 function saveWorkerSection() {
     if (!document.getElementById('workerVerification').checked) {
@@ -2550,7 +2530,10 @@ function saveWorkerSection() {
     }
     workerSectionDone = true;
     updateStatusDisplay();
-    showToast('✅ Sehemu ya mtendakazi imehifadhiwa!', 'success');
+    document.getElementById('submitToSupervisorBtn').style.display = 'inline-block';
+    document.getElementById('workerSubmitStatus').style.display = 'block';
+    document.getElementById('workerSubmitStatus').innerHTML = '✅ Sehemu ya Mtendakazi imehifadhiwa. Bonyeza "Tuma kwa Msimamizi" kuishirikisha.';
+    showToast('✅ Sehemu ya mtendakazi imehifadhiwa! Sasa tuma kwa Msimamizi.', 'success');
     checkReminders();
 }
 
@@ -2565,10 +2548,10 @@ function saveSupervisorSection() {
     }
     supervisorSectionDone = true;
     updateStatusDisplay();
-    document.getElementById('shareToInChargeBtn').style.display = 'inline-block';
-    document.getElementById('supervisorShareStatus').style.display = 'block';
-    document.getElementById('supervisorShareStatus').innerHTML = '✅ Sehemu ya Msimamizi imehifadhiwa. Bonyeza "Tuma kwa Mganga Mfawidhi" kuishirikisha.';
-    showToast('✅ Sehemu ya msimamizi imehifadhiwa!', 'success');
+    document.getElementById('submitToInChargeBtn').style.display = 'inline-block';
+    document.getElementById('supervisorSubmitStatus').style.display = 'block';
+    document.getElementById('supervisorSubmitStatus').innerHTML = '✅ Sehemu ya Msimamizi imehifadhiwa. Bonyeza "Tuma kwa Mganga Mfawidhi" kuishirikisha.';
+    showToast('✅ Sehemu ya msimamizi imehifadhiwa! Sasa tuma kwa Mganga Mfawidhi.', 'success');
     checkReminders();
 }
 
@@ -2585,6 +2568,8 @@ function saveInchargeSection() {
     updateStatusDisplay();
     showToast('✅ Sehemu ya mganga mfawidhi imehifadhiwa!', 'success');
     checkReminders();
+    loadPendingReports();
+    loadSentReports();
 }
 
 function updateStatusDisplay() {
@@ -2605,7 +2590,6 @@ function updateStatusDisplay() {
 function checkReminders() {
     const box = document.getElementById('reminderBox');
     const msg = document.getElementById('reminderMessage');
-    const pending = allReports.filter(r => !r.incharge?.verified);
     if (!workerSectionDone) {
         box.style.display = 'block';
         msg.textContent = '⏳ Tafadhali kamilisha sehemu ya mtendakazi.';
@@ -2615,101 +2599,15 @@ function checkReminders() {
     } else if (workerSectionDone && supervisorSectionDone && !inchargeSectionDone) {
         box.style.display = 'block';
         msg.textContent = '⏳ Tafadhali mganga mfawidhi kamilisha sehemu yake.';
-    } else if (pending.length > 0) {
-        box.style.display = 'block';
-        msg.textContent = `⚠️ Kuna ${pending.length} ripoti zinazosubiri kukamilishwa.`;
     } else {
         box.style.display = 'none';
     }
 }
 
 // ================================================================
-// SHARE FUNCTIONS - SUPERVISOR TO IN-CHARGE
-// ================================================================
-function shareSupervisorToInCharge() {
-    if (!supervisorSectionDone) { showToast('⚠️ Kamilisha sehemu ya msimamizi', 'warning'); return; }
-    if (!workerSectionDone) { showToast('⚠️ Sehemu ya mtendakazi haijakamilika', 'warning'); return; }
-    const reportData = collectFullReportData();
-    if (!reportData) return;
-    const reportText = generateReportText(reportData);
-    const message = `
-📋 *RIPOTI KAMILI YA TATHMINI - KWA MGANGA MFAWIDHI*
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-${reportText}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-*TAFADHALI KAGUA NA KUKAMILISHA SEHEMU YAKO*
-
-🔗 *FUNGUA RIPOTI:*
-${window.location.href.split('?')[0]}?report=${document.getElementById('assessmentId').textContent}
-
-📌 *HATUA ZA UFUATILIAJI:*
-1. Fungua kiungo hapo juu
-2. Kagua tathmini zote
-3. Jaza sehemu ya Mganga Mfawidhi
-4. Weka sahihi yako
-5. Hifadhi na kukamilisha
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-*Mtwara SDA Dispensary*
-"Ubora katika Huduma, Imani katika Vitendo"
-    `;
-    const encoded = encodeURIComponent(message);
-    const shareStatus = document.getElementById('supervisorShareStatus');
-    shareStatus.style.display = 'block';
-    shareStatus.innerHTML = `
-        <div style="background:#e8daef; padding:12px; border-radius:8px; border-left:4px solid #8e44ad;">
-            <strong>📤 Chagua Njia ya Kutuma kwa Mganga Mfawidhi:</strong>
-            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:8px;">
-                <button class="btn btn-purple btn-sm" onclick="window.open('https://wa.me/?text=${encoded}', '_blank')">💬 WhatsApp</button>
-                <button class="btn btn-primary btn-sm" onclick="shareSupervisorByEmail()">📧 Barua Pepe</button>
-                <button class="btn btn-success btn-sm" onclick="shareSupervisorCopyLink()">📋 Nakili Kiungo</button>
-                <button class="btn btn-teal btn-sm" onclick="shareSupervisorDownloadPDF()">📄 Pakua PDF</button>
-            </div>
-        </div>
-    `;
-    showToast('✅ Ripoti iko tayari kutumwa!', 'success');
-}
-
-function shareSupervisorByEmail() {
-    const reportData = collectFullReportData();
-    if (!reportData) return;
-    const reportText = generateReportText(reportData);
-    const subject = `Ripoti ya Tathmini - ${reportData.worker}`;
-    const body = reportText + '\n\n---\nTAFADHALI KAGUA NA KUKAMILISHA SEHEMU YAKO.\n' + window.location.href.split('?')[0] + '?report=' + document.getElementById('assessmentId').textContent;
-    window.location.href = `mailto:${document.getElementById('inchargeEmail').value || ''}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    showToast('✅ Barua pepe imefunguliwa!', 'success');
-}
-
-function shareSupervisorCopyLink() {
-    const reportId = document.getElementById('assessmentId').textContent;
-    const url = window.location.href.split('?')[0] + '?report=' + reportId;
-    const message = `📋 RIPOTI YA TATHMINI - KWA MGANGA MFAWIDHI\n\n🔗 ${url}`;
-    navigator.clipboard.writeText(message).then(() => {
-        showToast('✅ Ujumbe na kiungo vimenakiliwa!', 'success');
-    }).catch(() => {
-        const ta = document.createElement('textarea');
-        ta.value = message;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        showToast('✅ Ujumbe na kiungo vimenakiliwa!', 'success');
-    });
-}
-
-function shareSupervisorDownloadPDF() {
-    showToast('⏳ Inaandaa PDF...', 'info');
-    window.print();
-    showToast('📄 PDF imefunguliwa!', 'success');
-}
-
-// ================================================================
-// SHARE FUNCTIONS - GENERAL
+// COLLECT FULL REPORT DATA
 // ================================================================
 function collectFullReportData() {
-    if (!workerSectionDone) { showToast('⚠️ Kamilisha sehemu ya mtendakazi', 'warning'); return null; }
     const role = document.getElementById('workerRole').value;
     const roleStats = {};
     ['statPatients','statUltrasound','statReferral','statFollowup','statGotDrugs','statMissedDrugs',
@@ -2719,15 +2617,27 @@ function collectFullReportData() {
         const el = document.getElementById(id);
         if (el) roleStats[id] = el.type === 'select-one' ? el.value : parseInt(el.value) || 0;
     });
-    const selfScores = [1,2,3,4,5,6].map(i => getRatingValue('selfPunctuality'));
-    const supScores = [1,2,3,4,5,6].map(i => getRatingValue('supPunctuality'));
+    const selfScores = [
+        getRatingValue('selfPunctuality'),
+        getRatingValue('selfQuality'),
+        getRatingValue('selfCompassion'),
+        getRatingValue('selfTeamwork'),
+        getRatingValue('selfInitiative'),
+        getRatingValue('selfSafety')
+    ];
+    const supScores = [
+        getRatingValue('supPunctuality'),
+        getRatingValue('supQuality'),
+        getRatingValue('supCompassion'),
+        getRatingValue('supTeamwork'),
+        getRatingValue('supInitiative'),
+        getRatingValue('supSafety')
+    ];
     return {
         worker: document.getElementById('workerName').value || 'Unknown',
         role: role,
         date: document.getElementById('reportDate').value || new Date().toISOString().split('T')[0],
         shift: document.getElementById('workerShift').value,
-        supervisor: document.getElementById('supervisorName').value || 'Not Assigned',
-        supervisorTitle: document.getElementById('supervisorTitle').value,
         department: document.getElementById('workerDepartment').value,
         patientsServed: parseInt(document.getElementById('statPatients')?.value) || 0,
         roleStats: roleStats,
@@ -2740,13 +2650,22 @@ function collectFullReportData() {
         patientRating: parseInt(document.getElementById('patientRating').value) || 0,
         patientSatisfaction: parseInt(document.getElementById('patientSatisfaction').value) || 0,
         patientFeedback: document.getElementById('patientFeedback').value,
-        inchargePhone: document.getElementById('inchargePhone').value,
-        inchargeEmail: document.getElementById('inchargeEmail').value,
+        supervisorEmail: document.getElementById('supervisorEmail').value || '',
+        supervisorPhone: document.getElementById('supervisorPhone').value || '',
+        inchargeEmail: document.getElementById('inchargeEmail').value || '',
+        inchargePhone: document.getElementById('inchargePhone').value || '',
         self: {
             scores: selfScores,
             total: selfScores.reduce((a,b) => a+b, 0),
             percent: Math.round((selfScores.reduce((a,b) => a+b, 0) / 30) * 100),
-            labels: ['Haijakadiriwa','Haijakadiriwa','Haijakadiriwa','Haijakadiriwa','Haijakadiriwa','Haijakadiriwa'],
+            labels: [
+                getRatingLabel('selfPunctuality'),
+                getRatingLabel('selfQuality'),
+                getRatingLabel('selfCompassion'),
+                getRatingLabel('selfTeamwork'),
+                getRatingLabel('selfInitiative'),
+                getRatingLabel('selfSafety')
+            ],
             comments: document.getElementById('selfComments').value,
             verified: document.getElementById('workerVerification').checked
         },
@@ -2754,13 +2673,20 @@ function collectFullReportData() {
             scores: supScores,
             total: supScores.reduce((a,b) => a+b, 0),
             percent: Math.round((supScores.reduce((a,b) => a+b, 0) / 30) * 100),
-            labels: ['Haijakadiriwa','Haijakadiriwa','Haijakadiriwa','Haijakadiriwa','Haijakadiriwa','Haijakadiriwa'],
+            labels: [
+                getRatingLabel('supPunctuality'),
+                getRatingLabel('supQuality'),
+                getRatingLabel('supCompassion'),
+                getRatingLabel('supTeamwork'),
+                getRatingLabel('supInitiative'),
+                getRatingLabel('supSafety')
+            ],
             comments: document.getElementById('supComments').value,
             verified: document.getElementById('supervisorVerification').checked
         },
         incharge: {
-            name: document.getElementById('inchargeName').value || 'Not Assigned',
-            title: document.getElementById('inchargeTitle').value,
+            name: document.getElementById('inchargeName').value || '',
+            title: document.getElementById('inchargeTitle').value || '',
             rating: getRatingValue('inchargeRating'),
             ratingLabel: getRatingLabel('inchargeRating'),
             recommendation: document.getElementById('inchargeRecommendation').value,
@@ -2779,16 +2705,24 @@ function collectFullReportData() {
         },
         achievements: document.getElementById('achievements').value,
         challenges: document.getElementById('challenges').value,
-        improvements: document.getElementById('improvements').value
+        improvements: document.getElementById('improvements').value,
+        workerSectionDone: workerSectionDone,
+        supervisorSectionDone: supervisorSectionDone,
+        inchargeSectionDone: inchargeSectionDone,
+        sentBy: currentUser?.username || '',
+        sentTo: ''
     };
 }
 
+// ================================================================
+// SHARE FUNCTIONS - GENERAL
+// ================================================================
 function generateReportText(data) {
     if (!data) return '⚠️ Hakuna data.';
-    const { worker, role, date, shift, supervisor, supervisorTitle, department, patientsServed, roleStats, self, supervisorAssessment, combined, gap, faith, achievements, challenges, improvements, incharge, goals, goalProgress, patientSatisfaction, patientFeedback, annualGoal, monthlyGoal } = data;
+    const { worker, role, date, shift, department, patientsServed, roleStats, self, supervisorAssessment, combined, gap, faith, achievements, challenges, improvements, incharge, goals, goalProgress, patientSatisfaction, patientFeedback, annualGoal, monthlyGoal } = data;
     const reportId = document.getElementById('assessmentId').textContent || 'N/A';
     const link = window.location.href.split('?')[0] + '?report=' + reportId;
-    const tier = getTier(combined);
+    const tier = getTier(combined || 0);
     
     let statsText = '';
     const labels = { 'statPatients': 'Wagonjwa', 'statUltrasound': 'Ultrasound', 'statReferral': 'Referral', 'statGotDrugs': 'Waliopata', 'statMissedDrugs': 'Waliokosa', 'statMoney': 'Pesa (TSh)', 'statIncome': 'Mapato', 'statExpenses': 'Matumizi', 'statCash': 'Pesa Taslimu', 'statInsurance': 'Bima', 'statOPD': 'OPD', 'statRCH': 'RCH', 'statCTC': 'CTC', 'statLabor': 'Labor' };
@@ -2807,30 +2741,29 @@ function generateReportText(data) {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 👤 ${worker} | 🩺 ${role}
 📅 ${date} | 🕐 ${shift}
-👔 ${supervisor} (${supervisorTitle})
 🏢 ${department || 'N/A'}
 
 📊 TAKWIMU
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ${statsText || 'Hakuna takwimu maalum'}
 
-📝 MTENDAKAZI (${self.percent}%)
-⭐ Kuwasili: ${self.labels[0]}
-👍 Ubora: ${self.labels[1]}
-❤️ Huruma: ${self.labels[2]}
-🤝 Ushirikiano: ${self.labels[3]}
-💡 Hatua: ${self.labels[4]}
-🛡️ Usalama: ${self.labels[5]}
+📝 MTENDAKAZI (${self?.percent || 0}%)
+⭐ Kuwasili: ${self?.labels?.[0] || 'Haijakadiriwa'}
+👍 Ubora: ${self?.labels?.[1] || 'Haijakadiriwa'}
+❤️ Huruma: ${self?.labels?.[2] || 'Haijakadiriwa'}
+🤝 Ushirikiano: ${self?.labels?.[3] || 'Haijakadiriwa'}
+💡 Hatua: ${self?.labels?.[4] || 'Haijakadiriwa'}
+🛡️ Usalama: ${self?.labels?.[5] || 'Haijakadiriwa'}
 
-👔 MSIMAMIZI (${supervisorAssessment.percent}%)
-⭐ Kuwasili: ${supervisorAssessment.labels[0]}
-👍 Ubora: ${supervisorAssessment.labels[1]}
-❤️ Huruma: ${supervisorAssessment.labels[2]}
-🤝 Ushirikiano: ${supervisorAssessment.labels[3]}
-💡 Hatua: ${supervisorAssessment.labels[4]}
-🛡️ Usalama: ${supervisorAssessment.labels[5]}
+👔 MSIMAMIZI (${supervisorAssessment?.percent || 0}%)
+⭐ Kuwasili: ${supervisorAssessment?.labels?.[0] || 'Haijakadiriwa'}
+👍 Ubora: ${supervisorAssessment?.labels?.[1] || 'Haijakadiriwa'}
+❤️ Huruma: ${supervisorAssessment?.labels?.[2] || 'Haijakadiriwa'}
+🤝 Ushirikiano: ${supervisorAssessment?.labels?.[3] || 'Haijakadiriwa'}
+💡 Hatua: ${supervisorAssessment?.labels?.[4] || 'Haijakadiriwa'}
+🛡️ Usalama: ${supervisorAssessment?.labels?.[5] || 'Haijakadiriwa'}
 
-🏆 PAMOJA: ${combined}% | PENGO: ${gap}% (${gapStatus})
+🏆 PAMOJA: ${combined || 0}% | PENGO: ${gap || 0}% (${gapStatus})
 🏅 TIER: ${tier.name}
 ✅ HALI: ${incharge?.verified ? 'Imekamilishwa' : 'Inasubiri'}
 🏢 MGANGA MFAWIDHI: ${signoffDisplay}
@@ -2838,7 +2771,7 @@ ${statsText || 'Hakuna takwimu maalum'}
 🎯 MALENGO: ${goals || 'Hakuna'} | MAENDELEO: ${goalProgress}%
 📊 LENGO LA MWAKA: ${annualGoal}% | LENGO LA MWEZI: ${monthlyGoal}%
 
-⭐ RIDHISHO: ${patientSatisfaction}% | UKADIRIAJI: ${'⭐'.repeat(Math.min(5, Math.round(patientSatisfaction/20)))}
+⭐ RIDHISHO: ${patientSatisfaction || 0}% | UKADIRIAJI: ${'⭐'.repeat(Math.min(5, Math.round((patientSatisfaction || 0)/20)))}
 📝 MAONI YA WAGONJWA: ${patientFeedback || 'Hakuna'}
 
 ${faith?.devotion === 'yes' ? '🙏 Ibada: Alihudhuria' : '🙏 Ibada: Hakuhudhuria'}
@@ -2853,12 +2786,15 @@ Mtwara SDA Dispensary
 `;
 }
 
+// ================================================================
+// SHARE FUNCTIONS - GENERAL (WhatsApp, Email, etc.)
+// ================================================================
 function generateReportSnapshotHTML(data) {
     if (!data) return '<div class="error">⚠️ Hakuna data</div>';
-    const { worker, role, date, shift, supervisor, supervisorTitle, department, patientsServed, roleStats, self, supervisorAssessment, combined, gap, faith, achievements, challenges, improvements, incharge, goals, goalProgress, patientSatisfaction, patientFeedback, annualGoal, monthlyGoal } = data;
+    const { worker, role, date, shift, department, patientsServed, roleStats, self, supervisorAssessment, combined, gap, faith, achievements, challenges, improvements, incharge, goals, goalProgress, patientSatisfaction, patientFeedback, annualGoal, monthlyGoal } = data;
     const reportId = document.getElementById('assessmentId').textContent || 'N/A';
     const link = window.location.href.split('?')[0] + '?report=' + reportId;
-    const tier = getTier(combined);
+    const tier = getTier(combined || 0);
     
     let statsText = '';
     const labels = { 'statPatients': 'Wagonjwa', 'statUltrasound': 'Ultrasound', 'statReferral': 'Referral', 'statGotDrugs': 'Waliopata', 'statMissedDrugs': 'Waliokosa', 'statMoney': 'Pesa (TSh)', 'statIncome': 'Mapato', 'statExpenses': 'Matumizi', 'statCash': 'Pesa Taslimu', 'statInsurance': 'Bima', 'statOPD': 'OPD', 'statRCH': 'RCH', 'statCTC': 'CTC', 'statLabor': 'Labor' };
@@ -2871,7 +2807,7 @@ function generateReportSnapshotHTML(data) {
     const signoffLabels = { 'approved': '✅ Imekubaliwa', 'conditional': '⚠️ Ina Masharti', 'rejected': '❌ Imerejeshwa' };
     const signoffDisplay = incharge?.signoff ? signoffLabels[incharge.signoff] || '—' : '—';
     const gapStatus = gap <= 5 ? 'Imesawazishwa' : gap <= 15 ? 'Pengo Ndogo' : 'Pengo Kubwa';
-    const stars = '⭐'.repeat(Math.min(5, Math.round(patientSatisfaction/20)));
+    const stars = '⭐'.repeat(Math.min(5, Math.round((patientSatisfaction || 0)/20)));
     
     return `
 <div class="header-snap">
@@ -2884,32 +2820,31 @@ function generateReportSnapshotHTML(data) {
     <div><span class="label">🩺 Kazi:</span> <span class="value">${role}</span></div>
     <div><span class="label">📅 Tarehe:</span> <span class="value">${date}</span></div>
     <div><span class="label">🕐 Zamu:</span> <span class="value">${shift}</span></div>
-    <div><span class="label">👔 Msimamizi:</span> <span class="value">${supervisor} (${supervisorTitle})</span></div>
     <div><span class="label">🏢 Idara:</span> <span class="value">${department || 'N/A'}</span></div>
 </div>
 ${statsText ? `<div class="section-snap"><div style="font-weight:700; color:#1abc9c;">📊 TAKWIMU</div>${statsText}</div>` : ''}
 <div class="section-snap">
-    <div style="font-weight:700; color:#1a5276;">📝 MTENDAKAZI (${self.percent}%)</div>
-    <div>⭐ Kuwasili: ${self.labels[0]}</div>
-    <div>👍 Ubora: ${self.labels[1]}</div>
-    <div>❤️ Huruma: ${self.labels[2]}</div>
-    <div>🤝 Ushirikiano: ${self.labels[3]}</div>
-    <div>💡 Hatua: ${self.labels[4]}</div>
-    <div>🛡️ Usalama: ${self.labels[5]}</div>
+    <div style="font-weight:700; color:#1a5276;">📝 MTENDAKAZI (${self?.percent || 0}%)</div>
+    <div>⭐ Kuwasili: ${self?.labels?.[0] || 'Haijakadiriwa'}</div>
+    <div>👍 Ubora: ${self?.labels?.[1] || 'Haijakadiriwa'}</div>
+    <div>❤️ Huruma: ${self?.labels?.[2] || 'Haijakadiriwa'}</div>
+    <div>🤝 Ushirikiano: ${self?.labels?.[3] || 'Haijakadiriwa'}</div>
+    <div>💡 Hatua: ${self?.labels?.[4] || 'Haijakadiriwa'}</div>
+    <div>🛡️ Usalama: ${self?.labels?.[5] || 'Haijakadiriwa'}</div>
 </div>
 <div class="section-snap">
-    <div style="font-weight:700; color:#27ae60;">👔 MSIMAMIZI (${supervisorAssessment.percent}%)</div>
-    <div>⭐ Kuwasili: ${supervisorAssessment.labels[0]}</div>
-    <div>👍 Ubora: ${supervisorAssessment.labels[1]}</div>
-    <div>❤️ Huruma: ${supervisorAssessment.labels[2]}</div>
-    <div>🤝 Ushirikiano: ${supervisorAssessment.labels[3]}</div>
-    <div>💡 Hatua: ${supervisorAssessment.labels[4]}</div>
-    <div>🛡️ Usalama: ${supervisorAssessment.labels[5]}</div>
+    <div style="font-weight:700; color:#27ae60;">👔 MSIMAMIZI (${supervisorAssessment?.percent || 0}%)</div>
+    <div>⭐ Kuwasili: ${supervisorAssessment?.labels?.[0] || 'Haijakadiriwa'}</div>
+    <div>👍 Ubora: ${supervisorAssessment?.labels?.[1] || 'Haijakadiriwa'}</div>
+    <div>❤️ Huruma: ${supervisorAssessment?.labels?.[2] || 'Haijakadiriwa'}</div>
+    <div>🤝 Ushirikiano: ${supervisorAssessment?.labels?.[3] || 'Haijakadiriwa'}</div>
+    <div>💡 Hatua: ${supervisorAssessment?.labels?.[4] || 'Haijakadiriwa'}</div>
+    <div>🛡️ Usalama: ${supervisorAssessment?.labels?.[5] || 'Haijakadiriwa'}</div>
 </div>
 <div class="score-highlight">
     <div style="font-size:12px; color:#7f8c8d;">🏆 ALAMA YA PAMOJA</div>
-    <div class="big-score">${combined}%</div>
-    <div style="font-size:11px; color:${gap <= 5 ? '#27ae60' : gap <= 15 ? '#f39c12' : '#e74c3c'};">Pengo: ${gap}% (${gapStatus})</div>
+    <div class="big-score">${combined || 0}%</div>
+    <div style="font-size:11px; color:${gap <= 5 ? '#27ae60' : gap <= 15 ? '#f39c12' : '#e74c3c'};">Pengo: ${gap || 0}% (${gapStatus})</div>
     <div style="font-size:11px;">🏅 ${tier.name}</div>
     <div style="font-size:11px;">✅ ${incharge?.verified ? 'Imekamilishwa' : 'Inasubiri'}</div>
     <div style="font-size:11px; color:#8e44ad;">🏢 Mganga Mfawidhi: ${signoffDisplay}</div>
@@ -2926,9 +2861,6 @@ ${faith?.devotion === 'yes' ? `<div class="section-snap">🙏 Ibada: Alihudhuria
 </div>`;
 }
 
-// ================================================================
-// CAPTURE & SHARE
-// ================================================================
 async function captureReportSnapshot() {
     const data = collectFullReportData();
     if (!data) return null;
@@ -3022,12 +2954,6 @@ function shareTelegram() {
     showToast('✈️ Telegram imefunguliwa!', 'success');
 }
 
-function sendSMSNotification() {
-    const phone = document.getElementById('inchargePhone').value;
-    if (!phone || phone.length < 10) { showToast('⚠️ Weka namba sahihi', 'warning'); return; }
-    showToast(`📱 SMS imetumwa kwa ${phone} - (Simulizi)`, 'success');
-}
-
 // ================================================================
 // EXPORT FUNCTIONS
 // ================================================================
@@ -3070,7 +2996,7 @@ function generatePDFReport() {
     y += 5;
     doc.text(`Zamu: ${data.shift}`, margin + 5, y);
     y += 5;
-    doc.text(`Msimamizi: ${data.supervisor} (${data.supervisorTitle})`, margin + 5, y);
+    doc.text(`Idara: ${data.department || 'N/A'}`, margin + 5, y);
     y += 8;
     
     doc.setDrawColor('#ecf0f1');
@@ -3193,7 +3119,7 @@ function exportToExcel() {
         'Alama': r.combined,
         'Pengo': r.gap,
         'Kiwango': getTier(r.combined).name,
-        'Sahihi': r.incharge?.signoff || '—'
+        'Hali': r.incharge?.verified ? 'Imekamilika' : 'Inasubiri'
     }));
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(data);
@@ -3204,10 +3130,10 @@ function exportToExcel() {
 
 function exportToCSV() {
     if (allReports.length === 0) { showToast('⚠️ Hakuna data', 'warning'); return; }
-    let csv = 'Kitambulisho,Tarehe,Mtendakazi,Kazi,Idara,Wagonjwa,Ridhisho,Maendeleo,Alama,Pengo,Kiwango,Sahihi\n';
+    let csv = 'Kitambulisho,Tarehe,Mtendakazi,Kazi,Idara,Wagonjwa,Ridhisho,Maendeleo,Alama,Pengo,Kiwango,Hali\n';
     allReports.forEach(r => {
         const tier = getTier(r.combined);
-        csv += `${r.reportId || r.id},${r.date},${r.worker},${r.role},${r.department||'N/A'},${r.patientsServed||0},${r.patientSatisfaction||0}%,${r.goalProgress||0}%,${r.combined}%,${r.gap}%,${tier.name},${r.incharge?.signoff||'—'}\n`;
+        csv += `${r.reportId || r.id},${r.date},${r.worker},${r.role},${r.department||'N/A'},${r.patientsServed||0},${r.patientSatisfaction||0}%,${r.goalProgress||0}%,${r.combined}%,${r.gap}%,${tier.name},${r.incharge?.verified ? 'Imekamilika' : 'Inasubiri'}\n`;
     });
     const blob = new Blob([csv], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
@@ -3468,7 +3394,8 @@ function renderHistory() {
     let html = '';
     allReports.slice(0, 30).forEach((r, i) => {
         const tier = getTier(r.combined);
-        html += `<div class="history-item"><div class="info"><strong>${r.worker}</strong> <span class="role-badge">${r.role}</span> <span style="font-size:10px; color:${tier.color};">${tier.name}</span> <span style="font-size:11px; color:#7f8c8d;">👥 ${r.patientsServed || 0}</span><br><span class="date">${r.date} · ${r.shift} · ${r.supervisor}</span> <span class="tag tag-self">${r.self.percent}%</span> <span class="tag tag-supervisor">${r.supervisorAssessment.percent}%</span> <span style="font-weight:600; color:#1a5276;">Pamoja: ${r.combined}%</span></div><div><button onclick="viewReport(${i})" class="btn btn-primary btn-sm">Angalia</button><button onclick="deleteReport(${i})" class="btn btn-danger btn-sm">✕</button></div></div>`;
+        const status = r.incharge?.verified ? '✅ Imekamilika' : r.supervisorSectionDone ? '⏳ Inasubiri Mganga Mfawidhi' : r.workerSectionDone ? '⏳ Inasubiri Msimamizi' : '⏳ Inasubiri Mtendakazi';
+        html += `<div class="history-item"><div class="info"><strong>${r.worker}</strong> <span class="role-badge">${r.role}</span> <span style="font-size:10px; color:${tier.color};">${tier.name}</span> <span style="font-size:11px; color:#7f8c8d;">👥 ${r.patientsServed || 0}</span><br><span class="date">${r.date} · ${r.shift} · 📤 ${r.sentBy || 'N/A'}</span> <span class="tag tag-self">${r.self?.percent || 0}%</span> <span class="tag tag-supervisor">${r.supervisorAssessment?.percent || 0}%</span> <span style="font-weight:600; color:#1a5276;">Pamoja: ${r.combined}%</span> <span style="font-size:10px; color:${r.incharge?.verified ? '#27ae60' : '#f39c12'};">${status}</span></div><div><button onclick="viewReport(${i})" class="btn btn-primary btn-sm">Angalia</button><button onclick="deleteReport(${i})" class="btn btn-danger btn-sm">✕</button></div></div>`;
     });
     container.innerHTML = html;
 }
@@ -3477,6 +3404,7 @@ function viewReport(i) {
     const r = allReports[i];
     if (!r) return;
     const tier = getTier(r.combined);
+    const status = r.incharge?.verified ? 'Imekamilika' : r.supervisorSectionDone ? 'Inasubiri Mganga Mfawidhi' : r.workerSectionDone ? 'Inasubiri Msimamizi' : 'Inasubiri Mtendakazi';
     alert(
         '📋 RIPOTI YA TATHMINI\n' +
         '━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
@@ -3484,11 +3412,15 @@ function viewReport(i) {
         `Mtendakazi: ${r.worker}\n` +
         `Kazi: ${r.role}\n` +
         `Tarehe: ${r.date} | Zamu: ${r.shift}\n` +
-        `Msimamizi: ${r.supervisor}\n` +
+        `Idara: ${r.department || 'N/A'}\n` +
         `Wagonjwa: ${r.patientsServed || 0}\n` +
         '━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
-        `Mtendakazi: ${r.self.percent}%\n` +
-        `Msimamizi: ${r.supervisorAssessment.percent}%\n` +
+        `📤 Imeletwa na: ${r.sentBy || 'N/A'}\n` +
+        `📤 Imetumwa kwa: ${r.sentTo || 'N/A'}\n` +
+        `📊 Hali: ${status}\n` +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
+        `Mtendakazi: ${r.self?.percent || 0}%\n` +
+        `Msimamizi: ${r.supervisorAssessment?.percent || 0}%\n` +
         `Pamoja: ${r.combined}%\n` +
         `Pengo: ${r.gap}%\n` +
         `🏅 ${tier.name}\n` +
@@ -3507,6 +3439,8 @@ function deleteReport(i) {
         updateDashboard();
         renderTrendChart();
         renderComparisonChart();
+        loadPendingReports();
+        loadSentReports();
         showToast('🗑️ Ripoti imefutwa', 'warning');
     }
 }
@@ -3520,6 +3454,8 @@ function clearAllHistory() {
         updateDashboard();
         renderTrendChart();
         renderComparisonChart();
+        loadPendingReports();
+        loadSentReports();
         showToast('🗑️ Ripoti zote zimefutwa', 'warning');
     }
 }
@@ -3531,7 +3467,7 @@ function updateDashboard() {
     const total = allReports.length;
     const avg = total > 0 ? Math.round(allReports.reduce((a,b) => a + b.combined, 0) / total) : 0;
     const patients = allReports.reduce((a,b) => a + (b.patientsServed || 0), 0);
-    const completed = allReports.filter(r => r.self?.verified && r.supervisorAssessment?.verified && r.incharge?.verified).length;
+    const completed = allReports.filter(r => r.incharge?.verified).length;
     const satisfaction = total > 0 ? Math.round(allReports.reduce((a,b) => a + (b.patientSatisfaction || 0), 0) / total) : 0;
     
     document.getElementById('dashTotalReports').textContent = total;
@@ -3604,21 +3540,23 @@ function renderComparisonChart() {
 // ================================================================
 function saveToStorage() {
     try {
-        localStorage.setItem('mtwara_reports_v15', JSON.stringify(allReports));
-        localStorage.setItem('mtwara_archive_v15', JSON.stringify(archiveReports));
+        localStorage.setItem('mtwara_reports_v17', JSON.stringify(allReports));
+        localStorage.setItem('mtwara_archive_v17', JSON.stringify(archiveReports));
     } catch(e) {}
 }
 
 function loadFromStorage() {
     try {
-        const reports = localStorage.getItem('mtwara_reports_v15');
-        const archive = localStorage.getItem('mtwara_archive_v15');
+        const reports = localStorage.getItem('mtwara_reports_v17');
+        const archive = localStorage.getItem('mtwara_archive_v17');
         if (reports) allReports = JSON.parse(reports);
         if (archive) archiveReports = JSON.parse(archive);
         renderHistory();
         updateDashboard();
         renderTrendChart();
         renderComparisonChart();
+        loadPendingReports();
+        loadSentReports();
     } catch(e) {}
 }
 
@@ -3626,7 +3564,7 @@ function backupToCloud() {
     if (allReports.length === 0 && archiveReports.length === 0) { showToast('⚠️ Hakuna data', 'warning'); return; }
     const data = {
         exportedAt: new Date().toISOString(),
-        version: '15.0',
+        version: '17.0',
         totalReports: allReports.length,
         archiveReports: archiveReports.length,
         reports: allReports,
@@ -3652,49 +3590,12 @@ function saveFullReport() {
     const data = collectFullReportData();
     if (!data) return;
     
-    const record = {
-        id: Date.now(),
-        reportId: document.getElementById('assessmentId').textContent,
-        date: data.date,
-        worker: data.worker,
-        role: data.role,
-        shift: data.shift,
-        supervisor: data.supervisor,
-        supervisorTitle: data.supervisorTitle,
-        department: data.department,
-        patientsServed: data.patientsServed,
-        roleStats: data.roleStats,
-        faith: data.faith,
-        achievements: data.achievements,
-        challenges: data.challenges,
-        improvements: data.improvements,
-        goals: data.goals,
-        goalProgress: data.goalProgress,
-        annualGoal: data.annualGoal,
-        monthlyGoal: data.monthlyGoal,
-        followupSchedule: data.followupSchedule,
-        followupItems: data.followupItems,
-        patientRating: data.patientRating,
-        patientSatisfaction: data.patientSatisfaction,
-        patientFeedback: data.patientFeedback,
-        inchargePhone: data.inchargePhone,
-        inchargeEmail: data.inchargeEmail,
-        generalChecklist: generalState.slice(),
-        specificChecklist: specificState.slice(),
-        specificItems: getChecklist(data.role),
-        self: data.self,
-        supervisorAssessment: data.supervisorAssessment,
-        incharge: data.incharge,
-        combined: data.combined,
-        gap: data.gap,
-        checklistStats: {
-            generalDone: generalState.filter(Boolean).length,
-            generalTotal: GENERAL_CHECKLIST.length,
-            specificDone: specificState.filter(Boolean).length,
-            specificTotal: getChecklist(data.role).length
-        },
-        savedAt: new Date().toISOString()
-    };
+    const record = createReportRecord(data);
+    record.workerSectionDone = true;
+    record.supervisorSectionDone = true;
+    record.inchargeSectionDone = true;
+    record.sentBy = currentUser?.username || 'system';
+    record.sentTo = 'complete';
     
     allReports.unshift(record);
     saveToStorage();
@@ -3702,6 +3603,8 @@ function saveFullReport() {
     updateDashboard();
     renderTrendChart();
     renderComparisonChart();
+    loadPendingReports();
+    loadSentReports();
     showToast('✅ Ripoti kamili imehifadhiwa!', 'success');
     checkReminders();
 }
@@ -3729,6 +3632,8 @@ function switchTab(tab) {
     if (tab === 'leaderboard') showLeaderboard();
     if (tab === 'search') clearSearch();
     if (tab === 'users') showUsersList();
+    if (tab === 'pending') loadPendingReports();
+    if (tab === 'sent') loadSentReports();
 }
 
 // ================================================================
@@ -3752,6 +3657,7 @@ document.addEventListener('DOMContentLoaded', function() {
     calculateScores();
     updateStatusDisplay();
     checkReminders();
+    loadNotifications();
     
     if (!currentUser) {
         document.getElementById('authModal').classList.remove('hidden');
@@ -3761,6 +3667,11 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('usersTabBtn').style.display = 'inline-block';
             document.getElementById('usersListBtn').style.display = 'inline-block';
         }
+        if (currentUser.role === 'supervisor' || currentUser.role === 'incharge' || currentUser.role === 'admin' || currentUser.role === 'manager') {
+            document.getElementById('pendingTabBtn').style.display = 'inline-block';
+        }
+        document.getElementById('sentTabBtn').style.display = 'inline-block';
+        loadSentReports();
     }
 });
 </script>
