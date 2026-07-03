@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Mtwara SDA - Tathmini ya Utendaji Kamili Sana</title>
+    <title>Mtwara SDA - Tathmini ya Utendaji Kazi</title>
     
     <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -13,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     
     <style>
-        /* ===== ALL STYLES ===== */
+        /* ===== RESET & BASE ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -27,26 +27,77 @@
             background: #1a1a2e;
             color: #ecf0f1;
         }
-        body.dark-mode .container {
-            background: #2c3e50;
-            color: #ecf0f1;
-        }
+        body.dark-mode .container,
         body.dark-mode .modal-content {
             background: #2c3e50;
             color: #ecf0f1;
         }
-        body.dark-mode .modal-content h3 {
-            color: #ecf0f1;
-        }
         body.dark-mode .header h1,
-        body.dark-mode .header h2 {
+        body.dark-mode .header h2,
+        body.dark-mode .modal-content h3,
+        body.dark-mode .section-divider,
+        body.dark-mode .form-group label,
+        body.dark-mode .score-box h3,
+        body.dark-mode .dashboard-card .number,
+        body.dark-mode .quick-stat .value {
             color: #ecf0f1;
         }
-        body.dark-mode .header .mission {
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group select,
+        body.dark-mode .form-group textarea,
+        body.dark-mode .signature-pad {
+            background: #34495e;
+            color: #ecf0f1;
+            border-color: #5d6d7e;
+        }
+        body.dark-mode .score-box,
+        body.dark-mode .progress-header,
+        body.dark-mode .share-section,
+        body.dark-mode .quick-stat,
+        body.dark-mode .dashboard-card,
+        body.dark-mode .score-item,
+        body.dark-mode .role-stats,
+        body.dark-mode .role-stats .stat-item,
+        body.dark-mode .history-item,
+        body.dark-mode .report-snapshot,
+        body.dark-mode .benchmark-card,
+        body.dark-mode .national-benchmark-item,
+        body.dark-mode .comparison-container,
+        body.dark-mode .chart-container,
+        body.dark-mode .achievement-box,
+        body.dark-mode .challenge-box {
+            background: #2c3e50;
+            border-color: #5d6d7e;
+            color: #ecf0f1;
+        }
+        body.dark-mode .tab-btn {
             background: #34495e;
             color: #ecf0f1;
         }
-        
+        body.dark-mode .tab-btn.active {
+            background: #1a5276;
+            color: #fff;
+        }
+        body.dark-mode .header .mission,
+        body.dark-mode .print-note,
+        body.dark-mode .reminder-box,
+        body.dark-mode .notification-banner {
+            background: #34495e;
+            color: #ecf0f1;
+            border-color: #5d6d7e;
+        }
+        body.dark-mode .footer .verse {
+            color: #ecf0f1;
+        }
+        body.dark-mode .user-badge {
+            background: #27ae60;
+            color: #fff;
+        }
+        body.dark-mode .user-badge.admin { background: #8e44ad; }
+        body.dark-mode .user-badge.manager { background: #2e86c1; }
+        body.dark-mode .user-badge.supervisor { background: #f39c12; }
+        body.dark-mode .user-badge.worker { background: #27ae60; }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -61,12 +112,14 @@
             .container { padding: 14px 14px 20px; }
         }
 
+        /* ===== HEADER ===== */
         .header {
             text-align: center;
             border-bottom: 4px solid #1a5276;
             padding-bottom: 14px;
             margin-bottom: 18px;
         }
+        body.dark-mode .header { border-bottom-color: #5d6d7e; }
         .logo-container {
             display: flex;
             align-items: center;
@@ -90,6 +143,11 @@
             font-weight: 700;
             flex-shrink: 0;
         }
+        body.dark-mode .logo-placeholder {
+            border-color: #5d6d7e;
+            background: #34495e;
+            color: #ecf0f1;
+        }
         .logo-placeholder img {
             width: 100%;
             height: 100%;
@@ -112,7 +170,7 @@
             .logo-placeholder { width: 45px; height: 45px; }
         }
 
-        /* ===== MODAL STYLES ===== */
+        /* ===== MODAL ===== */
         .modal {
             display: flex;
             position: fixed;
@@ -158,6 +216,8 @@
             text-decoration: underline;
         }
         .modal-content .switch-link a:hover { color: #2e86c1; }
+        body.dark-mode .modal-content .switch-link { color: #bdc3c7; }
+        body.dark-mode .modal-content .switch-link a { color: #ecf0f1; }
         
         .user-badge {
             display: inline-block;
@@ -173,6 +233,7 @@
         .user-badge.supervisor { background: #f39c12; color: #fff; }
         .user-badge.worker { background: #27ae60; color: #fff; }
 
+        /* ===== TABS ===== */
         .tabs {
             display: flex;
             gap: 6px;
@@ -216,6 +277,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* ===== FORM ===== */
         .form-group { margin-bottom: 12px; }
         .form-group label {
             display: block;
@@ -234,6 +296,7 @@
             font-size: 14px;
             font-family: inherit;
             background: #fafbfc;
+            transition: background 0.3s, color 0.3s, border-color 0.3s;
         }
         .form-group textarea { min-height: 55px; resize: vertical; }
         .form-group input:focus,
@@ -250,6 +313,7 @@
         }
         @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
 
+        /* ===== SECTION DIVIDERS ===== */
         .section-divider {
             padding: 7px 14px;
             border-radius: 6px;
@@ -278,9 +342,6 @@
         .section-divider.benchmark { background: #3498db; color: #fff; border-left: 4px solid #2c3e50; }
         .section-divider.leaderboard { background: #f1c40f; color: #1a1a2e; border-left: 4px solid #d4a017; }
         .section-divider.users { background: #8e44ad; color: #fff; border-left: 4px solid #6c3483; }
-        .section-divider.scorecard { background: #1abc9c; color: #fff; border-left: 4px solid #0e6655; }
-        .section-divider.individual { background: #2e86c1; color: #fff; border-left: 4px solid #1a5276; }
-        .section-divider.archive { background: #95a5a6; color: #fff; border-left: 4px solid #7f8c8d; }
         .section-divider .badge-section {
             padding: 2px 12px;
             border-radius: 20px;
@@ -288,234 +349,133 @@
             font-weight: 400;
             background: rgba(255,255,255,0.2);
         }
+        body.dark-mode .section-divider.self { background: #1a5276; color: #ecf0f1; }
+        body.dark-mode .section-divider.supervisor { background: #1a7a3a; color: #ecf0f1; }
+        body.dark-mode .section-divider.incharge { background: #2c3e50; color: #ecf0f1; }
+        body.dark-mode .section-divider.info { background: #935e38; color: #ecf0f1; }
+        body.dark-mode .section-divider.general { background: #6c3483; color: #ecf0f1; }
+        body.dark-mode .section-divider.specific { background: #0e6655; color: #ecf0f1; }
+        body.dark-mode .section-divider.faith { background: #7d6608; color: #ecf0f1; }
+        body.dark-mode .section-divider.stats { background: #0e6655; color: #ecf0f1; }
+        body.dark-mode .section-divider.status { background: #2c3e50; color: #ecf0f1; }
+        body.dark-mode .section-divider.dashboard { background: #6c3483; color: #ecf0f1; }
+        body.dark-mode .section-divider.share { background: #d68910; color: #ecf0f1; }
+        body.dark-mode .section-divider.badges { background: #d4a017; color: #1a1a2e; }
+        body.dark-mode .section-divider.goals { background: #1a7a3a; color: #ecf0f1; }
+        body.dark-mode .section-divider.feedback { background: #d35400; color: #ecf0f1; }
+        body.dark-mode .section-divider.benchmark { background: #2c3e50; color: #ecf0f1; }
+        body.dark-mode .section-divider.leaderboard { background: #d4a017; color: #1a1a2e; }
+        body.dark-mode .section-divider.users { background: #6c3483; color: #ecf0f1; }
 
-        /* ===== SCORECARD ===== */
-        .scorecard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 14px;
-            margin: 14px 0;
-        }
-        .scorecard-card {
-            background: #fff;
-            border-radius: 10px;
-            padding: 16px 18px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border: 2px solid #ecf0f1;
-            transition: 0.3s;
-        }
-        .scorecard-card:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .scorecard-card h4 { font-size: 13px; margin-bottom: 6px; }
-        .scorecard-card .score { font-size: 28px; font-weight: 800; }
-        .scorecard-card.financial { border-color: #27ae60; }
-        .scorecard-card.financial .score { color: #27ae60; }
-        .scorecard-card.customer { border-color: #3498db; }
-        .scorecard-card.customer .score { color: #3498db; }
-        .scorecard-card.process { border-color: #f39c12; }
-        .scorecard-card.process .score { color: #f39c12; }
-        .scorecard-card.learning { border-color: #8e44ad; }
-        .scorecard-card.learning .score { color: #8e44ad; }
-        body.dark-mode .scorecard-card { background: #2c3e50; border-color: #5d6d7e; }
-
-        /* ===== THEME SELECTOR ===== */
-        .theme-selector {
+        /* ===== CHECKLIST ===== */
+        .checklist-item {
             display: flex;
+            align-items: center;
             gap: 10px;
-            flex-wrap: wrap;
-            margin: 10px 0;
+            padding: 6px 0;
+            border-bottom: 1px solid #f0f2f5;
+            font-size: 13px;
+            line-height: 1.4;
         }
-        .theme-btn {
-            width: 40px;
-            height: 40px;
+        body.dark-mode .checklist-item { border-bottom-color: #5d6d7e; }
+        .checklist-item:last-child { border-bottom: none; }
+        .checklist-item .num {
+            width: 24px;
+            height: 24px;
+            background: #ecf0f1;
             border-radius: 50%;
-            border: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: #7f8c8d;
+            flex-shrink: 0;
+        }
+        body.dark-mode .checklist-item .num {
+            background: #5d6d7e;
+            color: #ecf0f1;
+        }
+        .checklist-item .text { flex: 1; }
+        .checklist-item .toggle {
+            position: relative;
+            width: 42px;
+            height: 24px;
+            flex-shrink: 0;
+            background: #d5d8dc;
+            border-radius: 12px;
             cursor: pointer;
             transition: 0.3s;
-            font-size: 18px;
         }
-        .theme-btn:hover { transform: scale(1.1); }
-        .theme-btn.active { border-color: #1a5276; }
-        body.dark-mode .theme-btn.active { border-color: #ecf0f1; }
+        body.dark-mode .checklist-item .toggle { background: #5d6d7e; }
+        .checklist-item .toggle.active { background: #27ae60; }
+        .checklist-item .toggle .thumb {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            transition: 0.3s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+        }
+        .checklist-item .toggle.active .thumb { left: 20px; }
 
-        /* ===== STAR RATING ===== */
-        .star-rating {
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 16px;
+            padding: 4px 0;
+        }
+        .checklist-grid .checklist-item { border-bottom: none; padding: 4px 0; }
+        @media (max-width: 600px) { .checklist-grid { grid-template-columns: 1fr; } }
+
+        /* ===== RATING ===== */
+        .rating-group {
             display: flex;
             gap: 5px;
-            font-size: 28px;
+            flex-wrap: wrap;
+            margin: 3px 0;
+        }
+        .rating-group .rating-btn {
+            padding: 5px 12px;
+            border: 2px solid #d5d8dc;
+            border-radius: 6px;
+            background: #fff;
             cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+            font-family: inherit;
+            flex: 1 1 auto;
+            min-width: 45px;
+            text-align: center;
         }
-        .star-rating span {
-            transition: 0.2s;
-            color: #bdc3c7;
+        body.dark-mode .rating-group .rating-btn {
+            background: #34495e;
+            color: #ecf0f1;
+            border-color: #5d6d7e;
         }
-        .star-rating span.active,
-        .star-rating span:hover {
-            color: #f1c40f;
+        .rating-group .rating-btn:hover { background: #eaf2f8; }
+        body.dark-mode .rating-group .rating-btn:hover { background: #5d6d7e; }
+        .rating-group .rating-btn.selected {
+            border-color: #1a5276;
+            background: #1a5276;
+            color: #fff;
         }
-        .star-rating span:hover ~ span { color: #bdc3c7; }
+        .rating-group .rating-btn.selected-excellent { border-color: #27ae60; background: #27ae60; color: #fff; }
+        .rating-group .rating-btn.selected-good { border-color: #2e86c1; background: #2e86c1; color: #fff; }
+        .rating-group .rating-btn.selected-average { border-color: #f39c12; background: #f39c12; color: #fff; }
+        .rating-group .rating-btn.selected-poor { border-color: #e74c3c; background: #e74c3c; color: #fff; }
 
-        /* ===== EXPORT OPTIONS ===== */
-        .export-options {
+        /* ===== BUTTONS ===== */
+        .btn-group {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
-            margin: 10px 0;
+            margin: 14px 0 4px;
         }
-
-        /* ===== COMPARISON CHART ===== */
-        .comparison-container {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 14px;
-            margin: 10px 0;
-            border: 1px solid #ecf0f1;
-        }
-        body.dark-mode .comparison-container {
-            background: #34495e;
-            border-color: #5d6d7e;
-        }
-        .comparison-container h4 {
-            color: #1a5276;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-        body.dark-mode .comparison-container h4 { color: #ecf0f1; }
-
-        /* ===== FOLLOW-UP ===== */
-        .followup-list {
-            margin: 8px 0;
-        }
-        .followup-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 12px;
-            border-bottom: 1px solid #ecf0f1;
-            font-size: 13px;
-        }
-        body.dark-mode .followup-item { border-bottom-color: #5d6d7e; }
-        .followup-item .status {
-            font-weight: 600;
-        }
-        .followup-item .status.completed { color: #27ae60; }
-        .followup-item .status.pending { color: #f39c12; }
-        .followup-item .status.overdue { color: #e74c3c; }
-
-        /* ===== SYSTEM FEEDBACK ===== */
-        .feedback-item {
-            padding: 8px 14px;
-            border-radius: 6px;
-            margin: 4px 0;
-            font-size: 13px;
-            border-left: 4px solid;
-            background: #f8f9fa;
-        }
-        body.dark-mode .feedback-item { background: #34495e; }
-        .feedback-item.excellent { border-color: #27ae60; }
-        .feedback-item.good { border-color: #3498db; }
-        .feedback-item.average { border-color: #f39c12; }
-        .feedback-item.poor { border-color: #e74c3c; }
-
-        /* ===== MOBILE OPTIMIZATION ===== */
-        @media (max-width: 480px) {
-            .container { padding: 8px; }
-            .form-row { grid-template-columns: 1fr; }
-            .dashboard-grid { grid-template-columns: 1fr 1fr; }
-            .scorecard-grid { grid-template-columns: 1fr 1fr; }
-            .tabs { flex-wrap: nowrap; overflow-x: auto; }
-            .tab-btn { 
-                flex: 0 0 auto; 
-                font-size: 10px; 
-                padding: 4px 10px; 
-                min-width: 50px; 
-                white-space: nowrap;
-            }
-            .dark-mode-toggle { width: 40px; height: 40px; font-size: 18px; bottom: 10px; right: 10px; }
-            .modal-content { padding: 20px; max-width: 95%; }
-            .star-rating { font-size: 22px; }
-            .scorecard-card .score { font-size: 22px; }
-            .theme-btn { width: 32px; height: 32px; font-size: 14px; }
-        }
-
-        /* ===== DARK MODE TOGGLE ===== */
-        .dark-mode-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 100;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 24px;
-            background: #1a5276;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: 0.3s;
-        }
-        .dark-mode-toggle:hover { transform: scale(1.1); }
-        body.dark-mode .dark-mode-toggle { background: #ecf0f1; color: #1a1a2e; }
-
-        /* ===== TOAST ===== */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            max-width: 400px;
-            width: 90%;
-            background: #1a1a2e;
-            color: #fff;
-            padding: 10px 18px;
-            border-radius: 10px;
-            font-size: 13px;
-            text-align: center;
-            z-index: 999;
-            opacity: 0;
-            transition: all 0.4s ease;
-            pointer-events: none;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.20);
-        }
-        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-        .toast.success { background: #27ae60; }
-        .toast.warning { background: #f39c12; color: #1a1a2e; }
-        .toast.error { background: #e74c3c; }
-
-        /* ===== PRINT ===== */
-        @media print {
-            body { background: #fff; padding: 0; }
-            .container { box-shadow: none; padding: 14px; max-width: 100%; border-radius: 0; }
-            .btn-group, .print-note, .tabs, .modal, .dark-mode-toggle, .share-options { display: none !important; }
-            .tab-content { display: block !important; }
-            .score-box { break-inside: avoid; }
-            .header { border-bottom-width: 2px; }
-            .section-divider { break-inside: avoid; }
-        }
-
-        /* ===== OTHER EXISTING STYLES ===== */
-        .checklist-item, .rating-group, .score-box, .role-stats, .share-section,
-        .report-snapshot, .quick-stats, .dashboard-grid, .history-item,
-        .leaderboard-table, .benchmark-grid, .national-benchmark-grid,
-        .progress-header, .print-note, .footer, .reminder-box,
-        .notification-banner, .alert-box, .signature-pad {
-            /* Inherit from existing styles */
-        }
-        .progress-header {
-            background: #eaf2f8;
-            border-radius: 8px;
-            padding: 10px 16px;
-            margin-bottom: 14px;
-            border-left: 4px solid #1a5276;
-        }
-        .progress-header .progress-text { font-size: 13px; color: #1a5276; font-weight: 600; }
-        .progress-header .progress-bar { height: 8px; background: #d5d8dc; border-radius: 4px; margin-top: 4px; overflow: hidden; }
-        .progress-header .progress-bar .fill { height: 100%; background: linear-gradient(90deg, #27ae60, #1a5276); border-radius: 4px; transition: width 0.5s ease; }
-        body.dark-mode .progress-header { background: #34495e; }
-        body.dark-mode .progress-header .progress-text { color: #ecf0f1; }
-        body.dark-mode .progress-header .progress-bar { background: #5d6d7e; }
-        
-        .btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 4px; }
         .btn {
             padding: 9px 18px;
             border: none;
@@ -553,6 +513,7 @@
             .btn { font-size: 11px; padding: 6px 12px; min-width: 60px; }
         }
 
+        /* ===== SIGNATURE ===== */
         .signature-pad {
             border: 2px dashed #1a5276;
             border-radius: 10px;
@@ -563,164 +524,115 @@
             height: 120px;
             cursor: crosshair;
             margin: 6px 0;
+            transition: background 0.3s, border-color 0.3s;
         }
-        .signature-pad canvas { width: 100%; height: 100%; border-radius: 8px; touch-action: none; }
-        .signature-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0; }
-        
-        .print-note {
-            background: #fef9e7;
-            border: 1px solid #f1c40f;
-            border-radius: 6px;
-            padding: 8px 14px;
-            margin: 10px 0 14px;
-            font-size: 12px;
-            color: #7d6608;
+        body.dark-mode .signature-pad {
+            background: #34495e;
+            border-color: #5d6d7e;
+        }
+        .signature-pad canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            touch-action: none;
+        }
+        .signature-actions {
             display: flex;
-            align-items: center;
             gap: 10px;
             flex-wrap: wrap;
+            margin: 6px 0;
         }
-        body.dark-mode .print-note { background: #34495e; color: #ecf0f1; border-color: #5d6d7e; }
+        .signature-actions .btn { flex: 0 1 auto; min-width: 80px; }
 
-        .footer {
-            text-align: center;
-            margin-top: 22px;
-            padding-top: 14px;
-            border-top: 2px solid #ecf0f1;
-            font-size: 12px;
-            color: #7f8c8d;
-        }
-        body.dark-mode .footer { border-top-color: #5d6d7e; color: #bdc3c7; }
-        .footer .verse { font-style: italic; color: #1a5276; font-size: 13px; margin-bottom: 4px; }
-        body.dark-mode .footer .verse { color: #ecf0f1; }
-
-        .history-item {
-            padding: 10px 12px;
-            border-bottom: 1px solid #ecf0f1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-        body.dark-mode .history-item { border-bottom-color: #5d6d7e; }
-        .history-item .info { font-size: 13px; }
-        .history-item .info strong { color: #1a5276; }
-        body.dark-mode .history-item .info strong { color: #ecf0f1; }
-        .history-item .date { font-size: 11px; color: #7f8c8d; }
-        body.dark-mode .history-item .date { color: #bdc3c7; }
-        .history-empty { text-align: center; color: #7f8c8d; padding: 20px 0; }
-
-        .tag {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 600;
-        }
-        .tag-self { background: #d6eaf8; color: #1a5276; }
-        .tag-supervisor { background: #d5f5e3; color: #1a7a3a; }
-        .tag-incharge { background: #2c3e50; color: #fff; }
-        .role-badge {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 600;
+        /* ===== SCORE BOX ===== */
+        .score-box {
             background: #eaf2f8;
-            color: #1a5276;
-        }
-        body.dark-mode .role-badge { background: #34495e; color: #ecf0f1; }
-
-        .role-stats {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 14px 18px;
-            margin: 10px 0;
-            border: 1px solid #ecf0f1;
-        }
-        body.dark-mode .role-stats { background: #34495e; border-color: #5d6d7e; }
-        .role-stats h4 { color: #1a5276; margin-bottom: 10px; font-size: 14px; }
-        body.dark-mode .role-stats h4 { color: #ecf0f1; }
-        .role-stats .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .role-stats .stat-row .stat-item {
-            background: #fff;
-            padding: 8px 12px;
-            border-radius: 6px;
-            border: 1px solid #ecf0f1;
-        }
-        body.dark-mode .role-stats .stat-row .stat-item { background: #2c3e50; border-color: #5d6d7e; }
-        .role-stats .stat-row .stat-item label { font-size: 11px; color: #7f8c8d; display: block; }
-        body.dark-mode .role-stats .stat-row .stat-item label { color: #bdc3c7; }
-        .role-stats .stat-row .stat-item input {
-            width: 100%;
-            border: none;
-            padding: 4px 0;
-            font-size: 16px;
-            font-weight: 600;
-            color: #1a5276;
-            background: transparent;
-        }
-        body.dark-mode .role-stats .stat-row .stat-item input { color: #ecf0f1; }
-        .role-stats .stat-row .stat-item input:focus { outline: none; }
-        @media (max-width: 500px) { .role-stats .stat-row { grid-template-columns: 1fr; } }
-
-        .share-section {
-            background: #e8daef;
             border-radius: 10px;
             padding: 14px 18px;
             margin: 14px 0;
-            border-left: 5px solid #8e44ad;
+            border-left: 5px solid #1a5276;
+            transition: background 0.3s;
         }
-        body.dark-mode .share-section { background: #34495e; border-left-color: #8e44ad; }
-        .share-section h4 { color: #6c3483; margin-bottom: 8px; }
-        body.dark-mode .share-section h4 { color: #ecf0f1; }
-        .share-options { display: flex; gap: 10px; flex-wrap: wrap; }
-        .share-status {
-            margin-top: 8px;
-            font-size: 13px;
-            color: #7f8c8d;
-            padding: 6px 12px;
-            background: #f8f9fa;
+        body.dark-mode .score-box {
+            background: #34495e;
+            border-left-color: #5d6d7e;
+        }
+        .score-box h3 {
+            color: #1a5276;
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+        body.dark-mode .score-box h3 { color: #ecf0f1; }
+        .score-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .score-item {
+            background: #fff;
+            padding: 8px 14px;
             border-radius: 6px;
-            border-left: 3px solid #8e44ad;
+            min-width: 80px;
+            text-align: center;
+            flex: 1;
+            transition: background 0.3s;
         }
-        body.dark-mode .share-status { background: #2c3e50; color: #ecf0f1; border-left-color: #8e44ad; }
-        .share-status.success { border-left-color: #27ae60; color: #1a7a3a; }
-        body.dark-mode .share-status.success { color: #27ae60; }
-
-        .report-snapshot {
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: 10px auto;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            border: 2px solid #1a5276;
-            display: none;
+        body.dark-mode .score-item { background: #2c3e50; }
+        .score-item .number {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1a5276;
+            display: block;
         }
-        body.dark-mode .report-snapshot { background: #2c3e50; color: #ecf0f1; border-color: #5d6d7e; }
-        .report-snapshot.show { display: block; }
-        .report-snapshot .header-snap { text-align: center; border-bottom: 3px double #1a5276; padding-bottom: 10px; margin-bottom: 10px; }
-        body.dark-mode .report-snapshot .header-snap { border-bottom-color: #5d6d7e; }
-        .report-snapshot .header-snap h2 { color: #1a5276; font-size: 16px; margin: 0; }
-        body.dark-mode .report-snapshot .header-snap h2 { color: #ecf0f1; }
-        .report-snapshot .section-snap { margin: 8px 0; padding: 6px 0; border-bottom: 1px dashed #ecf0f1; }
-        body.dark-mode .report-snapshot .section-snap { border-bottom-color: #5d6d7e; }
-        .report-snapshot .section-snap .label { font-weight: 600; color: #2c3e50; }
-        body.dark-mode .report-snapshot .section-snap .label { color: #ecf0f1; }
-        .report-snapshot .section-snap .value { color: #1a5276; }
-        body.dark-mode .report-snapshot .section-snap .value { color: #ecf0f1; }
-        .report-snapshot .score-highlight { background: #eaf2f8; padding: 10px; border-radius: 6px; margin: 8px 0; text-align: center; }
-        body.dark-mode .report-snapshot .score-highlight { background: #34495e; }
-        .report-snapshot .score-highlight .big-score { font-size: 28px; font-weight: 800; color: #1a5276; }
-        body.dark-mode .report-snapshot .score-highlight .big-score { color: #ecf0f1; }
-        .report-snapshot .footer-snap { text-align: center; border-top: 3px double #1a5276; padding-top: 10px; margin-top: 10px; font-style: italic; color: #1a5276; font-size: 10px; }
-        body.dark-mode .report-snapshot .footer-snap { border-top-color: #5d6d7e; color: #ecf0f1; }
-        .report-snapshot .link-snap { background: #f8f9fa; padding: 8px; border-radius: 4px; margin-top: 8px; font-size: 10px; word-break: break-all; color: #2e86c1; }
-        body.dark-mode .report-snapshot .link-snap { background: #34495e; color: #ecf0f1; }
+        body.dark-mode .score-item .number { color: #ecf0f1; }
+        .score-item .label {
+            font-size: 10px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+        }
+        body.dark-mode .score-item .label { color: #bdc3c7; }
+        .score-item .number.green { color: #27ae60; }
+        .score-item .number.orange { color: #f39c12; }
+        .score-item .number.red { color: #e74c3c; }
+        .score-item .number.purple { color: #8e44ad; }
+        .score-item .number.teal { color: #1abc9c; }
+        .score-item .number.gold { color: #d4a017; }
 
+        /* ===== PROGRESS ===== */
+        .progress-header {
+            background: #eaf2f8;
+            border-radius: 8px;
+            padding: 10px 16px;
+            margin-bottom: 14px;
+            border-left: 4px solid #1a5276;
+            transition: background 0.3s;
+        }
+        body.dark-mode .progress-header {
+            background: #34495e;
+            border-left-color: #5d6d7e;
+        }
+        .progress-header .progress-text {
+            font-size: 13px;
+            color: #1a5276;
+            font-weight: 600;
+        }
+        body.dark-mode .progress-header .progress-text { color: #ecf0f1; }
+        .progress-header .progress-bar {
+            height: 8px;
+            background: #d5d8dc;
+            border-radius: 4px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+        body.dark-mode .progress-header .progress-bar { background: #5d6d7e; }
+        .progress-header .progress-bar .fill {
+            height: 100%;
+            background: linear-gradient(90deg, #27ae60, #1a5276);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        /* ===== QUICK STATS ===== */
         .quick-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -734,11 +646,24 @@
             text-align: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             border: 1px solid #ecf0f1;
+            transition: background 0.3s, border-color 0.3s;
         }
-        body.dark-mode .quick-stat { background: #2c3e50; border-color: #5d6d7e; }
-        .quick-stat .value { font-size: 24px; font-weight: 800; color: #1a5276; display: block; }
+        body.dark-mode .quick-stat {
+            background: #2c3e50;
+            border-color: #5d6d7e;
+        }
+        .quick-stat .value {
+            font-size: 24px;
+            font-weight: 800;
+            color: #1a5276;
+            display: block;
+        }
         body.dark-mode .quick-stat .value { color: #ecf0f1; }
-        .quick-stat .label { font-size: 10px; color: #7f8c8d; text-transform: uppercase; }
+        .quick-stat .label {
+            font-size: 10px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+        }
         body.dark-mode .quick-stat .label { color: #bdc3c7; }
         .quick-stat .value.green { color: #27ae60; }
         .quick-stat .value.orange { color: #f39c12; }
@@ -746,6 +671,7 @@
         .quick-stat .value.teal { color: #1abc9c; }
         .quick-stat .value.gold { color: #d4a017; }
 
+        /* ===== DASHBOARD ===== */
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -759,11 +685,22 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             border: 1px solid #ecf0f1;
             text-align: center;
+            transition: background 0.3s, border-color 0.3s;
         }
-        body.dark-mode .dashboard-card { background: #2c3e50; border-color: #5d6d7e; }
-        .dashboard-card .number { font-size: 28px; font-weight: 800; color: #1a5276; }
+        body.dark-mode .dashboard-card {
+            background: #2c3e50;
+            border-color: #5d6d7e;
+        }
+        .dashboard-card .number {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1a5276;
+        }
         body.dark-mode .dashboard-card .number { color: #ecf0f1; }
-        .dashboard-card .label { font-size: 11px; color: #7f8c8d; }
+        .dashboard-card .label {
+            font-size: 11px;
+            color: #7f8c8d;
+        }
         body.dark-mode .dashboard-card .label { color: #bdc3c7; }
         .dashboard-card .number.green { color: #27ae60; }
         .dashboard-card .number.orange { color: #f39c12; }
@@ -771,58 +708,73 @@
         .dashboard-card .number.teal { color: #1abc9c; }
         .dashboard-card .number.gold { color: #d4a017; }
 
-        .achievement-box {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 12px 16px;
-            border-left: 4px solid #27ae60;
-            margin: 6px 0;
+        /* ===== HISTORY ===== */
+        .history-item {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ecf0f1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            transition: border-color 0.3s;
         }
-        body.dark-mode .achievement-box { background: #34495e; }
-        .challenge-box {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 12px 16px;
-            border-left: 4px solid #e74c3c;
-            margin: 6px 0;
+        body.dark-mode .history-item { border-bottom-color: #5d6d7e; }
+        .history-item:last-child { border-bottom: none; }
+        .history-item .info { font-size: 13px; }
+        .history-item .info strong { color: #1a5276; }
+        body.dark-mode .history-item .info strong { color: #ecf0f1; }
+        .history-item .date { font-size: 11px; color: #7f8c8d; }
+        body.dark-mode .history-item .date { color: #bdc3c7; }
+        .history-empty {
+            text-align: center;
+            color: #7f8c8d;
+            padding: 20px 0;
         }
-        body.dark-mode .challenge-box { background: #34495e; }
-        .reminder-box {
-            background: #fef9e7;
-            border-left: 4px solid #f1c40f;
-            padding: 10px 14px;
-            border-radius: 6px;
-            margin: 6px 0;
-            font-size: 13px;
-            color: #7d6608;
-            display: none;
-        }
-        body.dark-mode .reminder-box { background: #34495e; color: #ecf0f1; border-left-color: #d4a017; }
-        .notification-banner {
-            background: #d6eaf8;
-            border-left: 4px solid #2e86c1;
-            padding: 10px 14px;
-            border-radius: 6px;
-            margin: 8px 0;
-            font-size: 13px;
-            color: #1a5276;
-            display: none;
-        }
-        body.dark-mode .notification-banner { background: #34495e; color: #ecf0f1; border-left-color: #5d6d7e; }
-        .notification-banner.show { display: block; }
 
-        .alert-box {
-            padding: 8px 14px;
-            border-radius: 6px;
-            margin: 6px 0;
-            font-size: 13px;
+        /* ===== BADGES & TAGS ===== */
+        .tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
         }
-        .alert-box.warning { background: #fadbd8; color: #922b21; border-left: 4px solid #e74c3c; }
-        .alert-box.success { background: #d5f5e3; color: #1a7a3a; border-left: 4px solid #27ae60; }
-        .alert-box.info { background: #d6eaf8; color: #1a5276; border-left: 4px solid #2e86c1; }
-        body.dark-mode .alert-box.warning { background: #922b21; color: #ecf0f1; }
-        body.dark-mode .alert-box.success { background: #1a7a3a; color: #ecf0f1; }
-        body.dark-mode .alert-box.info { background: #1a5276; color: #ecf0f1; }
+        .tag-self { background: #d6eaf8; color: #1a5276; }
+        .tag-supervisor { background: #d5f5e3; color: #1a7a3a; }
+        .tag-incharge { background: #2c3e50; color: #fff; }
+        body.dark-mode .tag-self { background: #1a5276; color: #ecf0f1; }
+        body.dark-mode .tag-supervisor { background: #1a7a3a; color: #ecf0f1; }
+        body.dark-mode .tag-incharge { background: #2c3e50; color: #ecf0f1; }
+        .role-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            background: #eaf2f8;
+            color: #1a5276;
+        }
+        body.dark-mode .role-badge {
+            background: #34495e;
+            color: #ecf0f1;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 11px;
+        }
+        .badge-excellent { background: #d5f5e3; color: #1a7a3a; }
+        .badge-good { background: #d6eaf8; color: #1a5276; }
+        .badge-average { background: #fdebd0; color: #a04000; }
+        .badge-poor { background: #fadbd8; color: #922b21; }
+        body.dark-mode .badge-excellent { background: #1a7a3a; color: #ecf0f1; }
+        body.dark-mode .badge-good { background: #1a5276; color: #ecf0f1; }
+        body.dark-mode .badge-average { background: #a04000; color: #ecf0f1; }
+        body.dark-mode .badge-poor { background: #922b21; color: #ecf0f1; }
 
         .achievement-badge {
             display: inline-block;
@@ -849,6 +801,223 @@
         body.dark-mode .badge-diamond { background: #1a5276; color: #ecf0f1; }
         body.dark-mode .badge-legend { background: #7b241c; color: #ecf0f1; }
 
+        .signoff-badge {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        .signoff-approved { background: #d5f5e3; color: #1a7a3a; }
+        .signoff-conditional { background: #fdebd0; color: #a04000; }
+        .signoff-rejected { background: #fadbd8; color: #922b21; }
+        body.dark-mode .signoff-approved { background: #1a7a3a; color: #ecf0f1; }
+        body.dark-mode .signoff-conditional { background: #a04000; color: #ecf0f1; }
+        body.dark-mode .signoff-rejected { background: #922b21; color: #ecf0f1; }
+
+        /* ===== OTHER ===== */
+        .role-stats {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 10px 0;
+            border: 1px solid #ecf0f1;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        body.dark-mode .role-stats {
+            background: #34495e;
+            border-color: #5d6d7e;
+        }
+        .role-stats h4 {
+            color: #1a5276;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        body.dark-mode .role-stats h4 { color: #ecf0f1; }
+        .role-stats .stat-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .role-stats .stat-row .stat-item {
+            background: #fff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #ecf0f1;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        body.dark-mode .role-stats .stat-row .stat-item {
+            background: #2c3e50;
+            border-color: #5d6d7e;
+        }
+        .role-stats .stat-row .stat-item label {
+            font-size: 11px;
+            color: #7f8c8d;
+            display: block;
+        }
+        body.dark-mode .role-stats .stat-row .stat-item label { color: #bdc3c7; }
+        .role-stats .stat-row .stat-item input {
+            width: 100%;
+            border: none;
+            padding: 4px 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a5276;
+            background: transparent;
+        }
+        body.dark-mode .role-stats .stat-row .stat-item input { color: #ecf0f1; }
+        .role-stats .stat-row .stat-item input:focus { outline: none; }
+        @media (max-width: 500px) { .role-stats .stat-row { grid-template-columns: 1fr; } }
+
+        .share-section {
+            background: #e8daef;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 14px 0;
+            border-left: 5px solid #8e44ad;
+            transition: background 0.3s;
+        }
+        body.dark-mode .share-section {
+            background: #34495e;
+            border-left-color: #8e44ad;
+        }
+        .share-section h4 {
+            color: #6c3483;
+            margin-bottom: 8px;
+        }
+        body.dark-mode .share-section h4 { color: #ecf0f1; }
+        .share-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .share-options .btn { flex: 1 1 auto; min-width: 100px; }
+        .share-status {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #7f8c8d;
+            padding: 6px 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 3px solid #8e44ad;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode .share-status {
+            background: #2c3e50;
+            color: #ecf0f1;
+            border-left-color: #8e44ad;
+        }
+        .share-status.success { border-left-color: #27ae60; color: #1a7a3a; }
+        body.dark-mode .share-status.success { color: #27ae60; }
+        .share-status.error { border-left-color: #e74c3c; color: #922b21; }
+        body.dark-mode .share-status.error { color: #e74c3c; }
+
+        .report-snapshot {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 10px auto;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            border: 2px solid #1a5276;
+            display: none;
+            transition: background 0.3s, color 0.3s, border-color 0.3s;
+        }
+        body.dark-mode .report-snapshot {
+            background: #2c3e50;
+            color: #ecf0f1;
+            border-color: #5d6d7e;
+        }
+        .report-snapshot.show { display: block; }
+
+        .achievement-box {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px 16px;
+            border-left: 4px solid #27ae60;
+            margin: 6px 0;
+            transition: background 0.3s;
+        }
+        body.dark-mode .achievement-box { background: #34495e; }
+        .challenge-box {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px 16px;
+            border-left: 4px solid #e74c3c;
+            margin: 6px 0;
+            transition: background 0.3s;
+        }
+        body.dark-mode .challenge-box { background: #34495e; }
+
+        .reminder-box {
+            background: #fef9e7;
+            border-left: 4px solid #f1c40f;
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin: 6px 0;
+            font-size: 13px;
+            color: #7d6608;
+            display: none;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode .reminder-box {
+            background: #34495e;
+            color: #ecf0f1;
+            border-left-color: #d4a017;
+        }
+
+        .notification-banner {
+            background: #d6eaf8;
+            border-left: 4px solid #2e86c1;
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin: 8px 0;
+            font-size: 13px;
+            color: #1a5276;
+            display: none;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode .notification-banner {
+            background: #34495e;
+            color: #ecf0f1;
+            border-left-color: #5d6d7e;
+        }
+        .notification-banner.show { display: block; }
+
+        .alert-box {
+            padding: 8px 14px;
+            border-radius: 6px;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+        .alert-box.warning { background: #fadbd8; color: #922b21; border-left: 4px solid #e74c3c; }
+        .alert-box.success { background: #d5f5e3; color: #1a7a3a; border-left: 4px solid #27ae60; }
+        .alert-box.info { background: #d6eaf8; color: #1a5276; border-left: 4px solid #2e86c1; }
+        body.dark-mode .alert-box.warning { background: #922b21; color: #ecf0f1; }
+        body.dark-mode .alert-box.success { background: #1a7a3a; color: #ecf0f1; }
+        body.dark-mode .alert-box.info { background: #1a5276; color: #ecf0f1; }
+
+        .chart-container {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 14px;
+            margin: 10px 0;
+            border: 1px solid #ecf0f1;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        body.dark-mode .chart-container {
+            background: #34495e;
+            border-color: #5d6d7e;
+        }
+        .chart-container h4 {
+            color: #1a5276;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        body.dark-mode .chart-container h4 { color: #ecf0f1; }
+        #trendChart, #comparisonChart { width: 100% !important; max-height: 250px; }
+
         .benchmark-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -861,51 +1030,21 @@
             padding: 12px;
             border: 1px solid #ecf0f1;
             text-align: center;
+            transition: background 0.3s, border-color 0.3s;
         }
-        body.dark-mode .benchmark-card { background: #34495e; border-color: #5d6d7e; }
-        .benchmark-card .role-name { font-weight: 600; color: #1a5276; }
+        body.dark-mode .benchmark-card {
+            background: #34495e;
+            border-color: #5d6d7e;
+        }
+        .benchmark-card .role-name {
+            font-weight: 600;
+            color: #1a5276;
+        }
         body.dark-mode .benchmark-card .role-name { color: #ecf0f1; }
         .benchmark-card .bench-value { font-size: 20px; font-weight: 800; }
         .benchmark-card .bench-value.above { color: #27ae60; }
         .benchmark-card .bench-value.below { color: #e74c3c; }
         .benchmark-card .bench-value.equal { color: #f39c12; }
-
-        .leaderboard-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-            margin-top: 10px;
-        }
-        .leaderboard-table th {
-            background: #1a5276;
-            color: #fff;
-            padding: 8px 12px;
-            text-align: left;
-        }
-        body.dark-mode .leaderboard-table th { background: #2c3e50; color: #ecf0f1; }
-        .leaderboard-table td {
-            padding: 6px 12px;
-            border-bottom: 1px solid #ecf0f1;
-        }
-        body.dark-mode .leaderboard-table td { border-bottom-color: #5d6d7e; }
-        .leaderboard-table tr:hover { background: #f8f9fa; }
-        body.dark-mode .leaderboard-table tr:hover { background: #2c3e50; }
-        .leaderboard-rank { font-weight: 700; font-size: 16px; }
-        .rank-1 { color: #f1c40f; }
-        .rank-2 { color: #bdc3c7; }
-        .rank-3 { color: #e67e22; }
-
-        .chart-container {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 14px;
-            margin: 10px 0;
-            border: 1px solid #ecf0f1;
-        }
-        body.dark-mode .chart-container { background: #34495e; border-color: #5d6d7e; }
-        .chart-container h4 { color: #1a5276; margin-bottom: 8px; font-size: 14px; }
-        body.dark-mode .chart-container h4 { color: #ecf0f1; }
-        #trendChart, #comparisonChart { width: 100% !important; max-height: 250px; }
 
         .national-benchmark-grid {
             display: grid;
@@ -919,14 +1058,26 @@
             padding: 10px;
             text-align: center;
             border: 1px solid #ecf0f1;
+            transition: background 0.3s, border-color 0.3s;
         }
-        body.dark-mode .national-benchmark-item { background: #34495e; border-color: #5d6d7e; }
-        .national-benchmark-item .role { font-weight: 600; font-size: 12px; color: #1a5276; }
+        body.dark-mode .national-benchmark-item {
+            background: #34495e;
+            border-color: #5d6d7e;
+        }
+        .national-benchmark-item .role {
+            font-weight: 600;
+            font-size: 12px;
+            color: #1a5276;
+        }
         body.dark-mode .national-benchmark-item .role { color: #ecf0f1; }
         .national-benchmark-item .score { font-size: 18px; font-weight: 800; }
         .national-benchmark-item .score.target { color: #27ae60; }
         .national-benchmark-item .score.min { color: #f39c12; }
-        .national-benchmark-item .your-score { font-size: 14px; font-weight: 700; margin-top: 4px; }
+        .national-benchmark-item .your-score {
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
         .national-benchmark-item .your-score.above { color: #27ae60; }
         .national-benchmark-item .your-score.below { color: #e74c3c; }
         .national-benchmark-item .your-score.equal { color: #f39c12; }
@@ -937,10 +1088,155 @@
             padding: 14px;
             margin: 10px 0;
             border: 1px solid #ecf0f1;
+            transition: background 0.3s, border-color 0.3s;
         }
-        body.dark-mode .comparison-container { background: #34495e; border-color: #5d6d7e; }
-        .comparison-container h4 { color: #1a5276; margin-bottom: 8px; font-size: 14px; }
+        body.dark-mode .comparison-container {
+            background: #34495e;
+            border-color: #5d6d7e;
+        }
+        .comparison-container h4 {
+            color: #1a5276;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
         body.dark-mode .comparison-container h4 { color: #ecf0f1; }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+        .leaderboard-table th {
+            background: #1a5276;
+            color: #fff;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        body.dark-mode .leaderboard-table th {
+            background: #2c3e50;
+            color: #ecf0f1;
+        }
+        .leaderboard-table td {
+            padding: 6px 12px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        body.dark-mode .leaderboard-table td { border-bottom-color: #5d6d7e; }
+        .leaderboard-table tr:hover { background: #f8f9fa; }
+        body.dark-mode .leaderboard-table tr:hover { background: #2c3e50; }
+        .leaderboard-rank { font-weight: 700; font-size: 16px; }
+        .rank-1 { color: #f1c40f; }
+        .rank-2 { color: #bdc3c7; }
+        .rank-3 { color: #e67e22; }
+
+        .print-note {
+            background: #fef9e7;
+            border: 1px solid #f1c40f;
+            border-radius: 6px;
+            padding: 8px 14px;
+            margin: 10px 0 14px;
+            font-size: 12px;
+            color: #7d6608;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            transition: background 0.3s, color 0.3s, border-color 0.3s;
+        }
+        body.dark-mode .print-note {
+            background: #34495e;
+            color: #ecf0f1;
+            border-color: #5d6d7e;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 22px;
+            padding-top: 14px;
+            border-top: 2px solid #ecf0f1;
+            font-size: 12px;
+            color: #7f8c8d;
+            transition: border-color 0.3s, color 0.3s;
+        }
+        body.dark-mode .footer {
+            border-top-color: #5d6d7e;
+            color: #bdc3c7;
+        }
+        .footer .verse {
+            font-style: italic;
+            color: #1a5276;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+        body.dark-mode .footer .verse { color: #ecf0f1; }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            max-width: 400px;
+            width: 90%;
+            background: #1a1a2e;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 13px;
+            text-align: center;
+            z-index: 999;
+            opacity: 0;
+            transition: all 0.4s ease;
+            pointer-events: none;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.20);
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast.success { background: #27ae60; }
+        .toast.warning { background: #f39c12; color: #1a1a2e; }
+        .toast.error { background: #e74c3c; }
+
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            background: #1a5276;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+        .dark-mode-toggle:hover { transform: scale(1.1); }
+        body.dark-mode .dark-mode-toggle {
+            background: #ecf0f1;
+            color: #1a1a2e;
+        }
+        @media (max-width: 480px) {
+            .dark-mode-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+
+        @media print {
+            body { background: #fff; padding: 0; }
+            .container { box-shadow: none; padding: 14px; max-width: 100%; border-radius: 0; }
+            .btn-group, .print-note, .tabs, .modal, .dark-mode-toggle, .share-options { display: none !important; }
+            .tab-content { display: block !important; }
+            .score-box { break-inside: avoid; }
+            .header { border-bottom-width: 2px; }
+            .section-divider { break-inside: avoid; }
+            .signature-pad { border: 1px solid #000; }
+            body.dark-mode { background: #fff; color: #1a1a2e; }
+            body.dark-mode .container { background: #fff; color: #1a1a2e; }
+        }
     </style>
 </head>
 <body>
@@ -1033,7 +1329,11 @@
     </div>
 </div>
 
+<!-- ============================================================ -->
+<!-- MAIN CONTAINER -->
+<!-- ============================================================ -->
 <div class="container">
+
     <!-- HEADER -->
     <div class="header">
         <div class="logo-container">
@@ -1042,7 +1342,7 @@
             </div>
             <div>
                 <h1>MTWARA SDA DISPENSARY</h1>
-                <h2>Nyenzo ya Tathmini ya Utendaji Kazi - Toleo Kamili Sana</h2>
+                <h2>Nyenzo ya Tathmini ya Utendaji Kazi - Toleo Kamili</h2>
                 <div style="font-size:12px; color:#7f8c8d; margin-top:4px;">
                     Kitambulisho: <span id="assessmentId" style="font-weight:700; color:#1a5276;"></span>
                     <span id="userBadge" class="user-badge">👤 Imetoka nje</span>
@@ -1056,7 +1356,7 @@
     </div>
 
     <!-- USER TOOLS -->
-    <div style="display:flex; gap:10px; flex-wrap:wrap; margin:10px 0; padding:10px; background:#f8f9fa; border-radius:8px; align-items:center;">
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin:10px 0; padding:10px; background:#f8f9fa; border-radius:8px; align-items:center; transition:background 0.3s;">
         <span style="font-size:13px; color:#1a5276; font-weight:600;">👤 <span id="currentUserDisplay">Mgeni</span></span>
         <button class="btn btn-sm btn-primary" onclick="showChangePassword()" id="changePwdBtn" style="display:none;">🔑 Badilisha Nenosiri</button>
         <button class="btn btn-sm btn-danger" onclick="logoutUser()" id="logoutBtn" style="display:none;">🚪 Toka</button>
@@ -1065,16 +1365,16 @@
 
     <!-- PROGRESS -->
     <div class="progress-header">
-        <div class="progress-text">📊 Maendeleo: <span id="progressPercent">0%</span></div>
+        <div class="progress-text">📊 Maendeleo ya Tathmini: <span id="progressPercent">0%</span></div>
         <div class="progress-bar"><div class="fill" id="mainProgressBar" style="width:0%;"></div></div>
     </div>
 
-    <!-- NOTIFICATION BANNER -->
+    <!-- NOTIFICATION -->
     <div id="notificationBanner" class="notification-banner">
         <span id="notificationMessage">🔔</span>
     </div>
 
-    <!-- REMINDER BOX -->
+    <!-- REMINDER -->
     <div id="reminderBox" class="reminder-box">⏰ <span id="reminderMessage"></span></div>
 
     <div class="print-note">
@@ -1091,9 +1391,6 @@
         <button class="tab-btn" onclick="switchTab('leaderboard')">🏆 Bora</button>
         <button class="tab-btn" onclick="switchTab('search')">🔍 Tafuta</button>
         <button class="tab-btn" onclick="switchTab('users')" id="usersTabBtn" style="display:none;">👥 Watumiaji</button>
-        <button class="tab-btn" onclick="switchTab('scorecard')">📊 Scorecard</button>
-        <button class="tab-btn" onclick="switchTab('individual')">👤 Binafsi</button>
-        <button class="tab-btn" onclick="switchTab('archive')">🗂️ Archive</button>
         <button class="tab-btn" onclick="window.print()" style="background:#1a5276; color:#fff;">🖨️ PDF</button>
     </div>
 
@@ -1101,61 +1398,123 @@
     <!-- TAB: TATHMINI -->
     <!-- ============================================================ -->
     <div id="assessment" class="tab-content active">
-        <!-- [ASSESSMENT FORM - Same as previous with all fields] -->
-        <div class="section-divider status">📊 Hali ya Tathmini <span class="badge-section" id="assessmentStatus">⏳ Inasubiri Mtendakazi</span></div>
-        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; padding:10px; background:#f8f9fa; border-radius:8px;">
+
+        <!-- Status -->
+        <div class="section-divider status">
+            📊 Hali ya Tathmini
+            <span class="badge-section" id="assessmentStatus">⏳ Inasubiri Mtendakazi</span>
+        </div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; padding:10px; background:#f8f9fa; border-radius:8px; transition:background 0.3s;">
             <div><span class="status-dot red" id="workerStatusDot"></span>Mtendakazi: <span id="workerStatusText">⏳ Hajajaza</span></div>
             <div><span class="status-dot orange" id="supervisorStatusDot"></span>Msimamizi: <span id="supervisorStatusText">⏳ Hajajaza</span></div>
             <div><span class="status-dot purple" id="inchargeStatusDot"></span>Mganga Mfawidhi: <span id="inchargeStatusText">⏳ Hajajaza</span></div>
             <div style="margin-left:auto;">📅 Mwisho: <span id="deadlineDisplay" style="font-weight:600; color:#1a5276;"></span></div>
         </div>
 
+        <!-- Maelezo -->
         <div class="section-divider info">👤 Maelezo ya Mtendakazi</div>
         <div class="form-row">
-            <div class="form-group"><label>👤 Jina</label><input type="text" id="workerName" placeholder="Jina lako" value=""></div>
-            <div class="form-group"><label>📋 Kazi</label><select id="workerRole" onchange="updateRoleStats(); updateSpecificChecklist();"><option value="Doctor">🩺 Daktari</option><option value="Clinical Officer">🩺 Afisa Tabibu</option><option value="Nurse">💉 Muuguzi</option><option value="Midwife">🤱 Mkunga</option><option value="Laboratory Technician">🔬 Mtaalamu wa Maabara</option><option value="Pharmacist">💊 Mfamasia</option><option value="Accountant">💰 Mhasibu</option><option value="Cashier">🧾 Mhudumu wa Keshia</option><option value="Receptionist">📞 Mhudumu wa Mapokezi</option><option value="Janitor">🧹 Mhudumu wa Usafi</option><option value="Cook">🍳 Mpishi</option><option value="Porter">🚪 Mhudumu wa Usafirishaji</option><option value="Driver">🚗 Dereva</option><option value="Administrator">📋 Msimamizi</option><option value="HR Officer">👔 Afisa HR</option><option value="Insurance Data Clerk">📋 Mhudumu wa Bima</option></select></div>
+            <div class="form-group">
+                <label>👤 Jina</label>
+                <input type="text" id="workerName" placeholder="Jina lako" value="">
+            </div>
+            <div class="form-group">
+                <label>📋 Kazi</label>
+                <select id="workerRole" onchange="updateRoleStats(); updateSpecificChecklist();">
+                    <option value="Doctor">🩺 Daktari</option>
+                    <option value="Clinical Officer">🩺 Afisa Tabibu</option>
+                    <option value="Nurse">💉 Muuguzi</option>
+                    <option value="Midwife">🤱 Mkunga</option>
+                    <option value="Laboratory Technician">🔬 Mtaalamu wa Maabara</option>
+                    <option value="Pharmacist">💊 Mfamasia</option>
+                    <option value="Accountant">💰 Mhasibu</option>
+                    <option value="Cashier">🧾 Mhudumu wa Keshia</option>
+                    <option value="Receptionist">📞 Mhudumu wa Mapokezi</option>
+                    <option value="Janitor">🧹 Mhudumu wa Usafi</option>
+                    <option value="Cook">🍳 Mpishi</option>
+                    <option value="Porter">🚪 Mhudumu wa Usafirishaji</option>
+                    <option value="Driver">🚗 Dereva</option>
+                    <option value="Administrator">📋 Msimamizi</option>
+                    <option value="HR Officer">👔 Afisa HR</option>
+                    <option value="Insurance Data Clerk">📋 Mhudumu wa Bima</option>
+                </select>
+            </div>
         </div>
         <div class="form-row">
-            <div class="form-group"><label>📅 Tarehe</label><input type="date" id="reportDate"></div>
-            <div class="form-group"><label>🕐 Zamu</label><select id="workerShift"><option>Mchana</option><option>Usiku</option><option>Dharura</option></select></div>
+            <div class="form-group">
+                <label>📅 Tarehe</label>
+                <input type="date" id="reportDate">
+            </div>
+            <div class="form-group">
+                <label>🕐 Zamu</label>
+                <select id="workerShift">
+                    <option>Mchana</option>
+                    <option>Usiku</option>
+                    <option>Dharura</option>
+                </select>
+            </div>
         </div>
         <div class="form-row">
-            <div class="form-group"><label>📅 Tarehe ya Mwisho</label><input type="date" id="deadlineDate"></div>
-            <div class="form-group"><label>🏢 Idara</label><select id="workerDepartment"><option>Clinical</option><option>Nursing</option><option>Pharmacy</option><option>Laboratory</option><option>Administration</option><option>Finance</option><option>HR</option><option>Front Office</option></select></div>
+            <div class="form-group">
+                <label>📅 Tarehe ya Mwisho</label>
+                <input type="date" id="deadlineDate">
+            </div>
+            <div class="form-group">
+                <label>🏢 Idara</label>
+                <select id="workerDepartment">
+                    <option>Clinical</option>
+                    <option>Nursing</option>
+                    <option>Pharmacy</option>
+                    <option>Laboratory</option>
+                    <option>Administration</option>
+                    <option>Finance</option>
+                    <option>HR</option>
+                    <option>Front Office</option>
+                </select>
+            </div>
         </div>
 
-        <!-- Role Stats -->
-        <div class="section-divider stats">📊 Takwimu Maalum za Kazi Yako <span class="badge-section" id="roleStatsLabel">Daktari</span></div>
+        <!-- Takwimu Maalum -->
+        <div class="section-divider stats">
+            📊 Takwimu Maalum za Kazi Yako
+            <span class="badge-section" id="roleStatsLabel">Daktari</span>
+        </div>
         <div id="roleStatsContainer"></div>
 
-        <!-- General Checklist -->
-        <div class="section-divider general">📋 Orodha ya Jumla</div>
+        <!-- Orodha ya Jumla -->
+        <div class="section-divider general">📋 Orodha ya Jumla — Wafanyakazi Wote</div>
         <div id="generalChecklistContainer"></div>
 
-        <!-- Specific Checklist -->
-        <div class="section-divider specific">🎯 Orodha Maalum - <span id="roleSpecificLabel">Daktari</span></div>
+        <!-- Orodha Maalum -->
+        <div class="section-divider specific">🎯 Orodha Maalum — <span id="roleSpecificLabel">Daktari</span></div>
         <div id="specificChecklistContainer"></div>
 
-        <!-- Goals -->
+        <!-- Malengo -->
         <div class="section-divider goals">🎯 Malengo na Maendeleo</div>
-        <div class="form-group"><label>Malengo ya Mwezi Ujao</label><textarea id="goals" placeholder="Nina mpango wa kuboresha..."></textarea></div>
-        <div class="form-group"><label>📊 Maendeleo ya Malengo (0-100%)</label><input type="range" id="goalProgress" min="0" max="100" value="0" oninput="document.getElementById('goalProgressDisplay').textContent = this.value + '%'"><span id="goalProgressDisplay" style="font-weight:700; color:#1a5276;">0%</span></div>
-        
-        <!-- Annual & Monthly Goals - NEW -->
+        <div class="form-group">
+            <label>Malengo ya Mwezi Ujao</label>
+            <textarea id="goals" placeholder="Nina mpango wa kuboresha..."></textarea>
+        </div>
+        <div class="form-group">
+            <label>📊 Maendeleo ya Malengo (0-100%)</label>
+            <input type="range" id="goalProgress" min="0" max="100" value="0" oninput="document.getElementById('goalProgressDisplay').textContent = this.value + '%'">
+            <span id="goalProgressDisplay" style="font-weight:700; color:#1a5276;">0%</span>
+        </div>
         <div class="form-row">
             <div class="form-group"><label>📊 Lengo la Mwaka (%)</label><input type="number" id="annualGoal" min="0" max="100" value="80"></div>
             <div class="form-group"><label>📊 Lengo la Mwezi (%)</label><input type="number" id="monthlyGoal" min="0" max="100" value="75"></div>
         </div>
 
-        <!-- Follow-up Schedule - NEW -->
+        <!-- Ufuatiliaji -->
         <div class="section-divider goals">📅 Ratiba ya Ufuatiliaji</div>
         <div class="form-row">
             <div class="form-group"><label>📅 Tarehe ya Ufuatiliaji</label><input type="date" id="followupSchedule"></div>
             <div class="form-group"><label>📝 Mambo ya Kufuatilia</label><textarea id="followupItems" placeholder="Orodha ya mambo ya kufuatilia..."></textarea></div>
         </div>
 
-        <!-- Patient Rating - NEW -->
-        <div class="section-divider feedback">⭐ Ukadiriaji wa Wagonjwa</div>
+        <!-- Maoni ya Wagonjwa -->
+        <div class="section-divider feedback">⭐ Maoni ya Wagonjwa</div>
         <div class="form-row">
             <div class="form-group">
                 <label>🌟 Ukadiriaji wa Huduma (1-5)</label>
@@ -1174,22 +1533,7 @@
         <div class="form-group"><label>📧 Barua Pepe ya Mganga Mfawidhi</label><input type="email" id="inchargeEmail" placeholder="email@mfawidhi.com"></div>
         <div class="form-group"><label>Maoni ya Wagonjwa</label><textarea id="patientFeedback" placeholder="Maoni kutoka kwa wagonjwa..."></textarea></div>
 
-        <!-- System Feedback - NEW -->
-        <div class="section-divider feedback">💬 Maoni Kuhusu Mfumo</div>
-        <div class="form-row">
-            <div class="form-group">
-                <label>Je, unapenda mfumo huu?</label>
-                <select id="systemFeedback">
-                    <option value="excellent">⭐ Bora Sana</option>
-                    <option value="good">👍 Nzuri</option>
-                    <option value="average">👌 Wastani</option>
-                    <option value="poor">⚠️ Inahitaji Kuboresha</option>
-                </select>
-            </div>
-            <div class="form-group"><label>Mapendekezo yako</label><textarea id="systemSuggestions" placeholder="Tueleze jinsi ya kuboresha mfumo..."></textarea></div>
-        </div>
-
-        <!-- Faith -->
+        <!-- Imani -->
         <div class="section-divider faith">🙏 Imani na Maombi</div>
         <div class="form-row">
             <div class="form-group"><label>✅ Ibada ya Asubuhi</label><select id="faithDevotion"><option value="yes">Ndiyo</option><option value="no">Hapana</option></select></div>
@@ -1197,7 +1541,7 @@
         </div>
         <div class="form-group"><label>💭 Tafakari</label><textarea id="faithReflection" placeholder="Maombi au mawazo yako..."></textarea></div>
 
-        <!-- Self Assessment -->
+        <!-- Tathmini ya Mtendakazi -->
         <div class="section-divider self">✍️ Tathmini ya Mtendakazi</div>
         <div class="form-row">
             <div class="form-group"><label>1. Kuwasili</label><div class="rating-group" id="selfPunctuality"><button class="rating-btn" data-value="5" onclick="selectRating('selfPunctuality', this)">⭐ Bora Sana</button><button class="rating-btn" data-value="4" onclick="selectRating('selfPunctuality', this)">👍 Nzuri</button><button class="rating-btn" data-value="3" onclick="selectRating('selfPunctuality', this)">👌 Wastani</button><button class="rating-btn" data-value="2" onclick="selectRating('selfPunctuality', this)">⚠️ Dhaifu</button></div></div>
@@ -1219,7 +1563,7 @@
         </div>
         <div class="form-group"><label>📝 Maoni ya Mtendakazi</label><textarea id="selfComments" placeholder="Mawazo yako..."></textarea></div>
 
-        <!-- Signature -->
+        <!-- Sahihi ya Mtendakazi -->
         <div class="section-divider self">✍️ Sahihi ya Mtendakazi</div>
         <div style="background:#fef9e7; border-left:4px solid #e74c3c; padding:10px 14px; border-radius:6px; margin:8px 0; font-size:13px; color:#7d6608;">
             <strong>⚠️ ONYO:</strong> Taarifa za uongo ni kosa la kinidhamu.
@@ -1238,7 +1582,7 @@
         </div>
         <button class="btn btn-success" onclick="saveWorkerSection()">💾 Hifadhi Sehemu ya Mtendakazi</button>
 
-        <!-- Supervisor Section -->
+        <!-- Tathmini ya Msimamizi -->
         <div class="section-divider supervisor" id="supervisorSection">👔 Tathmini ya Msimamizi <span class="badge-section">Msimamizi anakagua mtendakazi</span></div>
         <div style="background:#fef9e7; padding:10px 14px; border-radius:6px; margin-bottom:10px; border-left:4px solid #f39c12;">
             <span style="font-size:13px; color:#7d6608;">ℹ️ Inajazwa na <strong>Msimamizi</strong></span>
@@ -1280,7 +1624,7 @@
             ✅ Sehemu ya Msimamizi imehifadhiwa. Bonyeza "Tuma kwa Mganga Mfawidhi" kuishirikisha.
         </div>
 
-        <!-- Incharge Section -->
+        <!-- Tathmini ya Mganga Mfawidhi -->
         <div class="section-divider incharge" id="inchargeSection">🏢 Tathmini ya Mganga Mfawidhi <span class="badge-section">Kagua Mwisho na Sahihi</span></div>
         <div style="background:#fef9e7; padding:10px 14px; border-radius:6px; margin-bottom:10px; border-left:4px solid #8e44ad;">
             <span style="font-size:13px; color:#7d6608;">ℹ️ Inajazwa na <strong>Mganga Mfawidhi</strong></span>
@@ -1320,7 +1664,7 @@
         </div>
         <button class="btn btn-success" onclick="saveInchargeSection()" style="margin:10px 0;">💾 Hifadhi Sehemu ya Mganga Mfawidhi</button>
 
-        <!-- Scores -->
+        <!-- Muhtasari wa Alama -->
         <div class="score-box" id="scoreBox">
             <h3>📊 Muhtasari wa Tathmini</h3>
             <div class="quick-stats">
@@ -1356,17 +1700,21 @@
         <div id="benchmarkComparison" style="margin:10px 0;"><p style="color:#7f8c8d; font-size:13px;">Kamilisha tathmini ili kuona ulinganisho wako na viwango vya sekta.</p></div>
         <button class="btn btn-primary btn-sm" onclick="compareWithBenchmark()">📊 Linganisha Sasa</button>
 
-        <!-- National Benchmarks -->
+        <!-- Viwango vya Kitaifa -->
         <div class="section-divider benchmark" style="margin-top:14px;">📊 Viwango vya Kitaifa</div>
         <div id="nationalBenchmarksContainer" style="margin:10px 0;"></div>
         <button class="btn btn-teal btn-sm" onclick="showNationalBenchmarks()">📊 Onyesha Viwango vya Kitaifa</button>
 
-        <!-- Tiered Achievements -->
+        <!-- Kiwango cha Mafanikio -->
         <div id="tieredAchievements" style="margin:10px 0;"></div>
+
+        <!-- Mafunzo -->
         <div id="trainingRecommendations" style="margin:10px 0;"></div>
+
+        <!-- Beji -->
         <div id="achievementBadges" style="margin:10px 0;"></div>
 
-        <!-- Share -->
+        <!-- Shirikisha -->
         <div class="section-divider share">📤 Shirikisha</div>
         <div class="share-section">
             <h4>📤 Shirikisha Ripoti</h4>
@@ -1380,16 +1728,10 @@
                 <button class="btn btn-gold" onclick="generatePDFReport()">📄 Pakua PDF</button>
                 <button class="btn btn-primary" onclick="shareTelegram()">✈️ Telegram</button>
             </div>
-            <!-- Export Options - NEW -->
-            <div class="export-options">
-                <button class="btn btn-sm btn-primary" onclick="exportToPDF()">📄 PDF</button>
-                <button class="btn btn-sm btn-success" onclick="exportToExcel()">📊 Excel</button>
-                <button class="btn btn-sm btn-info" onclick="exportToWord()">📝 Word</button>
-                <button class="btn btn-sm btn-danger" onclick="exportToPPT()">📊 PowerPoint</button>
-            </div>
             <div style="margin-top:8px;">
                 <button class="btn btn-sm btn-primary" onclick="toggleReportPreview()" style="background:#2e86c1; color:#fff; border:none; padding:6px 16px; border-radius:6px; cursor:pointer;">👁️ Tazama Karatasi</button>
                 <button class="btn btn-sm btn-warning" onclick="sendSMSNotification()" style="background:#e67e22; color:#fff; border:none; padding:6px 16px; border-radius:6px; cursor:pointer; margin-left:6px;">📱 Tuma SMS</button>
+                <button class="btn btn-sm btn-success" onclick="exportToExcel()" style="background:#217346; color:#fff; border:none; padding:6px 16px; border-radius:6px; cursor:pointer; margin-left:6px;">📊 Excel</button>
             </div>
             <div id="shareStatus" class="share-status">💡 Bonyeza kitufe cha kushirikisha</div>
         </div>
@@ -1416,13 +1758,11 @@
             <div class="dashboard-card"><div class="number" id="dashTopWorker">—</div><div class="label">Bora</div></div>
         </div>
         
-        <!-- Trend Chart -->
         <div class="chart-container">
             <h4>📈 Mwenendo wa Utendaji</h4>
             <canvas id="trendChart"></canvas>
         </div>
         
-        <!-- Comparison Chart - NEW -->
         <div class="comparison-container">
             <h4>📊 Ulinganisho wa Alama</h4>
             <canvas id="comparisonChart"></canvas>
@@ -1501,7 +1841,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- TAB: WATUMIAJI (Users) -->
+    <!-- TAB: WATUMIAJI -->
     <!-- ============================================================ -->
     <div id="users" class="tab-content">
         <div class="section-divider users">👥 Watumiaji Wote</div>
@@ -1512,86 +1852,26 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- TAB: BALANCE SCORECARD -->
-    <!-- ============================================================ -->
-    <div id="scorecard" class="tab-content">
-        <div class="section-divider scorecard">📊 Balance Scorecard</div>
-        <p style="font-size:13px; color:#7f8c8d; margin-bottom:10px;">Tazama viwango vinne muhimu vya utendaji.</p>
-        <div class="scorecard-grid">
-            <div class="scorecard-card financial">
-                <h4>💰 Kifedha</h4>
-                <div class="score" id="scoreFinancial">0%</div>
-                <div style="font-size:11px; color:#7f8c8d;">Mapato na Matumizi</div>
-            </div>
-            <div class="scorecard-card customer">
-                <h4>👥 Wateja</h4>
-                <div class="score" id="scoreCustomer">0%</div>
-                <div style="font-size:11px; color:#7f8c8d;">Ridhisho la Wagonjwa</div>
-            </div>
-            <div class="scorecard-card process">
-                <h4>⚙️ Michakato</h4>
-                <div class="score" id="scoreProcess">0%</div>
-                <div style="font-size:11px; color:#7f8c8d;">Ubora wa Huduma</div>
-            </div>
-            <div class="scorecard-card learning">
-                <h4>📚 Kujifunza</h4>
-                <div class="score" id="scoreLearning">0%</div>
-                <div style="font-size:11px; color:#7f8c8d;">Mafunzo na Maendeleo</div>
-            </div>
-        </div>
-        <button class="btn btn-teal" onclick="updateScorecard()">🔄 Sasisha Scorecard</button>
-        
-        <!-- Department Benchmarking - NEW -->
-        <div class="section-divider benchmark" style="margin-top:14px;">📊 Ulinganisho wa Idara</div>
-        <div id="departmentBenchmark" style="margin:10px 0;"></div>
-        <button class="btn btn-info" onclick="renderDepartmentBenchmark()">📊 Onyesha Ulinganisho</button>
-    </div>
-
-    <!-- ============================================================ -->
-    <!-- TAB: INDIVIDUAL REPORTS -->
-    <!-- ============================================================ -->
-    <div id="individual" class="tab-content">
-        <div class="section-divider individual">👤 Ripoti ya Mtendakazi</div>
-        <p style="font-size:13px; color:#7f8c8d; margin-bottom:10px;">Angalia ripoti kamili ya mtendakazi mmoja mmoja.</p>
-        <div class="form-group">
-            <label>👤 Chagua Mtendakazi</label>
-            <select id="individualWorker" onchange="showIndividualReport()">
-                <option value="">-- Chagua --</option>
-            </select>
-        </div>
-        <div id="individualReportContainer" style="margin:14px 0;"></div>
-        <button class="btn btn-primary" onclick="showIndividualReport()">👤 Onyesha Ripoti</button>
-        <button class="btn btn-success" onclick="exportIndividualReport()" style="margin-left:6px;">📊 Hamisha</button>
-    </div>
-
-    <!-- ============================================================ -->
-    <!-- TAB: ARCHIVE -->
-    <!-- ============================================================ -->
-    <div id="archive" class="tab-content">
-        <div class="section-divider archive">🗂️ Archive ya Ripoti</div>
-        <p style="font-size:13px; color:#7f8c8d; margin-bottom:10px;">Ripoti za zamani zilizohifadhiwa kwenye archive.</p>
-        <div id="archiveContainer" style="margin:14px 0;">
-            <div class="history-empty">Hakuna ripoti kwenye archive.</div>
-        </div>
-        <div class="btn-group">
-            <button class="btn btn-warning" onclick="archiveOldReports()">🗂️ Hamisha Ripoti Za Zamani</button>
-            <button class="btn btn-success" onclick="restoreArchive()">↩️ Rejesha Zote</button>
-            <button class="btn btn-danger" onclick="clearArchive()">🗑️ Futa Archive</button>
-        </div>
-    </div>
-
     <!-- FOOTER -->
+    <!-- ============================================================ -->
     <div class="footer">
         <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
-        <div>Mtwara SDA Dispensary | Toleo 15.0 (2026) | Vipengele vyote 15 vimeongezwa!</div>
+        <div>Mtwara SDA Dispensary | Toleo 15.0 (2026) | Tathmini ya Utendaji Kazi</div>
     </div>
+
 </div>
 
+<!-- ============================================================ -->
+<!-- TOAST -->
+<!-- ============================================================ -->
 <div class="toast" id="toast"></div>
 
+<!-- ============================================================ -->
+<!-- JAVASCRIPT - KAMILI -->
+<!-- ============================================================ -->
 <script>
 // ================================================================
-// USER MANAGEMENT SYSTEM
+// USER MANAGEMENT
 // ================================================================
 let users = [];
 let currentUser = null;
@@ -1650,7 +1930,6 @@ function loginUser() {
         document.getElementById('usersTabBtn').style.display = 'inline-block';
         document.getElementById('usersListBtn').style.display = 'inline-block';
     }
-    populateIndividualWorkers();
 }
 
 function logoutUser() {
@@ -1739,11 +2018,39 @@ function clearAllUsers() {
 }
 
 // ================================================================
+// DARK MODE
+// ================================================================
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const btn = document.querySelector('.dark-mode-toggle');
+    btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
+}
+
+if (localStorage.getItem('darkMode') === 'enabled') {
+    document.body.classList.add('dark-mode');
+    document.querySelector('.dark-mode-toggle').textContent = '☀️';
+}
+
+// ================================================================
+// TOAST
+// ================================================================
+function showToast(msg, type = 'success') {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.className = 'toast ' + type;
+    clearTimeout(toast._timer);
+    void toast.offsetWidth;
+    toast.classList.add('show');
+    toast._timer = setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// ================================================================
 // DATA
 // ================================================================
 let allReports = [];
 let archiveReports = [];
-let generalState = new Array(15).fill(false);
+let generalState = [];
 let specificState = [];
 let signatureData = { worker: null, supervisor: null, incharge: null };
 let workerSectionDone = false;
@@ -1815,32 +2122,6 @@ function setRating(val) {
 }
 
 // ================================================================
-// THEME SELECTOR
-// ================================================================
-function setTheme(color) {
-    document.documentElement.style.setProperty('--primary-color', color);
-    document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
-    event.target.classList.add('active');
-    localStorage.setItem('theme', color);
-    showToast('🎨 Rangi imebadilishwa!', 'success');
-}
-
-// ================================================================
-// DARK MODE
-// ================================================================
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-    const btn = document.querySelector('.dark-mode-toggle');
-    btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
-}
-
-if (localStorage.getItem('darkMode') === 'enabled') {
-    document.body.classList.add('dark-mode');
-    document.querySelector('.dark-mode-toggle').textContent = '☀️';
-}
-
-// ================================================================
 // ROLE STATS
 // ================================================================
 function getRoleStatsHTML(role) {
@@ -1884,10 +2165,11 @@ function updateRoleStats() {
 // CHECKLISTS
 // ================================================================
 function renderGeneralChecklist() {
+    generalState = new Array(GENERAL_CHECKLIST.length).fill(false);
     const container = document.getElementById('generalChecklistContainer');
     let html = '<div class="checklist-grid">';
     GENERAL_CHECKLIST.forEach((item, i) => {
-        html += `<div class="checklist-item"><span class="num">${i+1}</span><span class="text">${item}</span><div class="toggle ${generalState[i] ? 'active' : ''}" onclick="toggleGeneral(${i})"><div class="thumb"></div></div></div>`;
+        html += `<div class="checklist-item"><span class="num">${i+1}</span><span class="text">${item}</span><div class="toggle" onclick="toggleGeneral(${i})"><div class="thumb"></div></div></div>`;
     });
     html += '</div>';
     container.innerHTML = html;
@@ -1897,12 +2179,12 @@ function renderGeneralChecklist() {
 function renderSpecificChecklist() {
     const role = document.getElementById('workerRole').value;
     const items = getChecklist(role);
+    specificState = new Array(items.length).fill(false);
     const container = document.getElementById('specificChecklistContainer');
     document.getElementById('roleSpecificLabel').textContent = role;
-    if (specificState.length !== items.length) specificState = new Array(items.length).fill(false);
     let html = '<div class="checklist-grid">';
     items.forEach((item, i) => {
-        html += `<div class="checklist-item"><span class="num">${i+1}</span><span class="text">${item}</span><div class="toggle ${specificState[i] ? 'active' : ''}" onclick="toggleSpecific(${i})"><div class="thumb"></div></div></div>`;
+        html += `<div class="checklist-item"><span class="num">${i+1}</span><span class="text">${item}</span><div class="toggle" onclick="toggleSpecific(${i})"><div class="thumb"></div></div></div>`;
     });
     html += '</div>';
     container.innerHTML = html;
@@ -1910,8 +2192,20 @@ function renderSpecificChecklist() {
 }
 
 function updateSpecificChecklist() { renderSpecificChecklist(); }
-function toggleGeneral(i) { generalState[i] = !generalState[i]; renderGeneralChecklist(); }
-function toggleSpecific(i) { specificState[i] = !specificState[i]; renderSpecificChecklist(); }
+
+function toggleGeneral(i) {
+    const el = document.querySelectorAll('#generalChecklistContainer .toggle')[i];
+    generalState[i] = !generalState[i];
+    el.classList.toggle('active');
+    updateChecklistStats();
+}
+
+function toggleSpecific(i) {
+    const el = document.querySelectorAll('#specificChecklistContainer .toggle')[i];
+    specificState[i] = !specificState[i];
+    el.classList.toggle('active');
+    updateChecklistStats();
+}
 
 function updateChecklistStats() {
     const gDone = generalState.filter(Boolean).length;
@@ -1954,8 +2248,22 @@ function getRatingLabel(groupId) {
 // SCORES
 // ================================================================
 function calculateScores() {
-    const selfScores = [1,2,3,4,5,6].map(i => getRatingValue('selfPunctuality'));
-    const supScores = [1,2,3,4,5,6].map(i => getRatingValue('supPunctuality'));
+    const selfScores = [
+        getRatingValue('selfPunctuality'),
+        getRatingValue('selfQuality'),
+        getRatingValue('selfCompassion'),
+        getRatingValue('selfTeamwork'),
+        getRatingValue('selfInitiative'),
+        getRatingValue('selfSafety')
+    ];
+    const supScores = [
+        getRatingValue('supPunctuality'),
+        getRatingValue('supQuality'),
+        getRatingValue('supCompassion'),
+        getRatingValue('supTeamwork'),
+        getRatingValue('supInitiative'),
+        getRatingValue('supSafety')
+    ];
     const selfTotal = selfScores.reduce((a,b) => a+b, 0);
     const selfPercent = Math.round((selfTotal / 30) * 100);
     const supTotal = supScores.reduce((a,b) => a+b, 0);
@@ -2015,10 +2323,8 @@ function calculateScores() {
     updateTieredAchievements();
     renderTrendChart();
     renderComparisonChart();
-    updateScorecard();
     checkReminders();
     showNationalBenchmarks();
-    populateIndividualWorkers();
 }
 
 function getBadge(pct) {
@@ -2094,188 +2400,6 @@ function showNationalBenchmarks() {
     });
     html += '</div>';
     container.innerHTML = html;
-}
-
-// ================================================================
-// SCORECARD
-// ================================================================
-function updateScorecard() {
-    const all = allReports;
-    const total = all.length;
-    
-    // Financial - based on income and expenses
-    const income = all.reduce((a, r) => a + (parseInt(r.roleStats?.statIncome) || 0), 0);
-    const expenses = all.reduce((a, r) => a + (parseInt(r.roleStats?.statExpenses) || 0), 0);
-    const financialScore = total > 0 ? Math.min(100, Math.round((income / (expenses || 1)) * 50)) : 0;
-    
-    // Customer - based on satisfaction
-    const satisfaction = total > 0 ? Math.round(all.reduce((a, r) => a + (r.patientSatisfaction || 0), 0) / total) : 0;
-    
-    // Process - based on combined scores
-    const processScore = total > 0 ? Math.round(all.reduce((a, r) => a + r.combined, 0) / total) : 0;
-    
-    // Learning - based on goals progress
-    const goalProgress = total > 0 ? Math.round(all.reduce((a, r) => a + (r.goalProgress || 0), 0) / total) : 0;
-    
-    document.getElementById('scoreFinancial').textContent = Math.min(100, financialScore) + '%';
-    document.getElementById('scoreCustomer').textContent = Math.min(100, satisfaction) + '%';
-    document.getElementById('scoreProcess').textContent = Math.min(100, processScore) + '%';
-    document.getElementById('scoreLearning').textContent = Math.min(100, goalProgress) + '%';
-}
-
-// ================================================================
-// DEPARTMENT BENCHMARK
-// ================================================================
-function renderDepartmentBenchmark() {
-    const departments = {};
-    allReports.forEach(r => {
-        const dept = r.department || 'Unknown';
-        if (!departments[dept]) departments[dept] = { total: 0, count: 0 };
-        departments[dept].total += r.combined;
-        departments[dept].count++;
-    });
-    const container = document.getElementById('departmentBenchmark');
-    if (Object.keys(departments).length === 0) {
-        container.innerHTML = '<div class="history-empty">Hakuna data ya idara.</div>';
-        return;
-    }
-    let html = '<div class="benchmark-grid">';
-    Object.keys(departments).forEach(dept => {
-        const avg = Math.round(departments[dept].total / departments[dept].count);
-        const color = avg >= 75 ? '#27ae60' : avg >= 55 ? '#f39c12' : '#e74c3c';
-        html += `<div class="benchmark-card"><div class="role-name">🏢 ${dept}</div><div class="bench-value" style="color:${color};">${avg}%</div><div style="font-size:11px; color:#7f8c8d;">${departments[dept].count} ripoti</div></div>`;
-    });
-    html += '</div>';
-    container.innerHTML = html;
-}
-
-// ================================================================
-// INDIVIDUAL REPORTS
-// ================================================================
-function populateIndividualWorkers() {
-    const select = document.getElementById('individualWorker');
-    const workers = [...new Set(allReports.map(r => r.worker))];
-    select.innerHTML = '<option value="">-- Chagua --</option>';
-    workers.forEach(w => {
-        select.innerHTML += `<option value="${w}">${w}</option>`;
-    });
-}
-
-function showIndividualReport() {
-    const worker = document.getElementById('individualWorker').value;
-    const container = document.getElementById('individualReportContainer');
-    if (!worker) { container.innerHTML = '<div class="history-empty">Chagua mtendakazi.</div>'; return; }
-    const reports = allReports.filter(r => r.worker === worker);
-    if (reports.length === 0) { container.innerHTML = '<div class="history-empty">Hakuna ripoti za mtendakazi huyu.</div>'; return; }
-    
-    const avg = Math.round(reports.reduce((a,b) => a + b.combined, 0) / reports.length);
-    const latest = reports[0];
-    const totalPatients = reports.reduce((a,b) => a + (b.patientsServed || 0), 0);
-    const tier = getTier(avg);
-    
-    let html = `
-        <div style="background:#f8f9fa; border-radius:10px; padding:16px; border:2px solid ${tier.color};">
-            <h3 style="color:#1a5276;">👤 ${worker}</h3>
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap:10px; margin:10px 0;">
-                <div style="background:#fff; padding:10px; border-radius:6px; text-align:center;"><div style="font-size:24px; font-weight:800; color:#1a5276;">${reports.length}</div><div style="font-size:11px; color:#7f8c8d;">Ripoti</div></div>
-                <div style="background:#fff; padding:10px; border-radius:6px; text-align:center;"><div style="font-size:24px; font-weight:800; color:${tier.color};">${avg}%</div><div style="font-size:11px; color:#7f8c8d;">Wastani</div></div>
-                <div style="background:#fff; padding:10px; border-radius:6px; text-align:center;"><div style="font-size:24px; font-weight:800; color:#8e44ad;">${totalPatients}</div><div style="font-size:11px; color:#7f8c8d;">Wagonjwa</div></div>
-                <div style="background:#fff; padding:10px; border-radius:6px; text-align:center;"><div style="font-size:24px; font-weight:800; color:#27ae60;">${latest?.combined || 0}%</div><div style="font-size:11px; color:#7f8c8d;">Ya Mwisho</div></div>
-            </div>
-            <div style="font-size:12px; color:#7f8c8d;">🏅 ${tier.name} | 📋 Kazi: ${latest?.role || 'N/A'} | 🏢 Idara: ${latest?.department || 'N/A'}</div>
-            <div style="margin-top:8px; max-height:200px; overflow-y:auto;">
-                ${reports.slice(0, 10).map(r => `
-                    <div style="display:flex; justify-content:space-between; padding:4px 8px; border-bottom:1px solid #ecf0f1; font-size:12px;">
-                        <span>${r.date}</span>
-                        <span>${r.combined}% ${r.incharge?.verified ? '✅' : '⏳'}</span>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-    `;
-    container.innerHTML = html;
-}
-
-function exportIndividualReport() {
-    const worker = document.getElementById('individualWorker').value;
-    if (!worker) { showToast('⚠️ Chagua mtendakazi kwanza', 'warning'); return; }
-    const reports = allReports.filter(r => r.worker === worker);
-    if (reports.length === 0) { showToast('⚠️ Hakuna ripoti', 'warning'); return; }
-    
-    const data = reports.map(r => ({
-        'Tarehe': r.date,
-        'Kazi': r.role,
-        'Idara': r.department,
-        'Wagonjwa': r.patientsServed || 0,
-        'Alama': r.combined,
-        'Pengo': r.gap,
-        'Hali': r.incharge?.verified ? 'Imekamilika' : 'Inasubiri'
-    }));
-    
-    const wb = XLSX.utils.book_new();
-    const ws = XLSX.utils.json_to_sheet(data);
-    XLSX.utils.book_append_sheet(wb, ws, worker);
-    XLSX.writeFile(wb, `ripoti_${worker}_${new Date().toISOString().split('T')[0]}.xlsx`);
-    showToast('📊 Ripoti imehamishwa!', 'success');
-}
-
-// ================================================================
-// ARCHIVE SYSTEM
-// ================================================================
-function archiveOldReports() {
-    const sixMonthsAgo = new Date();
-    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
-    const old = allReports.filter(r => new Date(r.date) < sixMonthsAgo);
-    if (old.length === 0) { showToast('⚠️ Hakuna ripoti za zamani', 'warning'); return; }
-    archiveReports = [...archiveReports, ...old];
-    allReports = allReports.filter(r => new Date(r.date) >= sixMonthsAgo);
-    saveToStorage();
-    renderArchive();
-    renderHistory();
-    showToast(`🗂️ ${old.length} ripoti zimehamishiwa archive`, 'success');
-}
-
-function renderArchive() {
-    const container = document.getElementById('archiveContainer');
-    if (archiveReports.length === 0) {
-        container.innerHTML = '<div class="history-empty">Hakuna ripoti kwenye archive.</div>';
-        return;
-    }
-    let html = '';
-    archiveReports.slice(0, 20).forEach((r, i) => {
-        html += `<div class="history-item"><div class="info"><strong>${r.worker}</strong> - ${r.role}<br><span class="date">${r.date}</span></div><div><span style="font-weight:600; color:#1a5276;">${r.combined}%</span><button class="btn btn-sm btn-success" onclick="restoreFromArchive(${i})" style="margin-left:6px;">↩️</button></div></div>`;
-    });
-    container.innerHTML = html;
-}
-
-function restoreFromArchive(index) {
-    const report = archiveReports[index];
-    if (report) {
-        allReports.unshift(report);
-        archiveReports.splice(index, 1);
-        saveToStorage();
-        renderArchive();
-        renderHistory();
-        showToast('↩️ Ripoti imerejeshwa', 'success');
-    }
-}
-
-function restoreArchive() {
-    if (archiveReports.length === 0) { showToast('⚠️ Hakuna ripoti kwenye archive', 'warning'); return; }
-    allReports = [...archiveReports, ...allReports];
-    archiveReports = [];
-    saveToStorage();
-    renderArchive();
-    renderHistory();
-    showToast('↩️ Ripoti zote zimerejeshwa', 'success');
-}
-
-function clearArchive() {
-    if (archiveReports.length === 0) { showToast('⚠️ Hakuna ripoti kwenye archive', 'warning'); return; }
-    if (!confirm('Futa archive YOTE?')) return;
-    archiveReports = [];
-    renderArchive();
-    showToast('🗑️ Archive imefutwa', 'warning');
 }
 
 // ================================================================
@@ -2500,7 +2624,7 @@ function checkReminders() {
 }
 
 // ================================================================
-// SHARE FUNCTIONS
+// SHARE FUNCTIONS - SUPERVISOR TO IN-CHARGE
 // ================================================================
 function shareSupervisorToInCharge() {
     if (!supervisorSectionDone) { showToast('⚠️ Kamilisha sehemu ya msimamizi', 'warning'); return; }
@@ -2581,6 +2705,9 @@ function shareSupervisorDownloadPDF() {
     showToast('📄 PDF imefunguliwa!', 'success');
 }
 
+// ================================================================
+// SHARE FUNCTIONS - GENERAL
+// ================================================================
 function collectFullReportData() {
     if (!workerSectionDone) { showToast('⚠️ Kamilisha sehemu ya mtendakazi', 'warning'); return null; }
     const role = document.getElementById('workerRole').value;
@@ -2613,8 +2740,6 @@ function collectFullReportData() {
         patientRating: parseInt(document.getElementById('patientRating').value) || 0,
         patientSatisfaction: parseInt(document.getElementById('patientSatisfaction').value) || 0,
         patientFeedback: document.getElementById('patientFeedback').value,
-        systemFeedback: document.getElementById('systemFeedback').value,
-        systemSuggestions: document.getElementById('systemSuggestions').value,
         inchargePhone: document.getElementById('inchargePhone').value,
         inchargeEmail: document.getElementById('inchargeEmail').value,
         self: {
@@ -2906,53 +3031,6 @@ function sendSMSNotification() {
 // ================================================================
 // EXPORT FUNCTIONS
 // ================================================================
-function exportToPDF() {
-    const data = collectFullReportData();
-    if (!data) return;
-    generatePDFReport();
-}
-
-function exportToWord() {
-    const data = collectFullReportData();
-    if (!data) return;
-    const text = generateReportText(data);
-    const blob = new Blob([text], { type: 'application/msword' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `ripoti_${data.worker}_${data.date}.doc`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    showToast('📝 Faili ya Word imepakuliwa!', 'success');
-}
-
-function exportToPPT() {
-    const data = collectFullReportData();
-    if (!data) return;
-    const text = generateReportText(data);
-    const html = `
-        <html><head><title>Ripoti ya Tathmini</title>
-        <style>body { font-family: Arial; padding: 40px; } h1 { color: #1a5276; }</style>
-        </head><body>
-        <h1>MTWARA SDA DISPENSARY</h1>
-        <h2>Ripoti ya Tathmini</h2>
-        <pre>${text}</pre>
-        </body></html>
-    `;
-    const blob = new Blob([html], { type: 'application/vnd.ms-powerpoint' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `ripoti_${data.worker}_${data.date}.ppt`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    showToast('📊 Faili ya PowerPoint imepakuliwa!', 'success');
-}
-
 function generatePDFReport() {
     const data = collectFullReportData();
     if (!data) return;
@@ -3429,7 +3507,6 @@ function deleteReport(i) {
         updateDashboard();
         renderTrendChart();
         renderComparisonChart();
-        updateScorecard();
         showToast('🗑️ Ripoti imefutwa', 'warning');
     }
 }
@@ -3440,11 +3517,9 @@ function clearAllHistory() {
         archiveReports = [];
         saveToStorage();
         renderHistory();
-        renderArchive();
         updateDashboard();
         renderTrendChart();
         renderComparisonChart();
-        updateScorecard();
         showToast('🗑️ Ripoti zote zimefutwa', 'warning');
     }
 }
@@ -3541,12 +3616,9 @@ function loadFromStorage() {
         if (reports) allReports = JSON.parse(reports);
         if (archive) archiveReports = JSON.parse(archive);
         renderHistory();
-        renderArchive();
         updateDashboard();
         renderTrendChart();
         renderComparisonChart();
-        updateScorecard();
-        populateIndividualWorkers();
     } catch(e) {}
 }
 
@@ -3558,8 +3630,7 @@ function backupToCloud() {
         totalReports: allReports.length,
         archiveReports: archiveReports.length,
         reports: allReports,
-        archive: archiveReports,
-        features: ['Login', 'Registration', 'Dark Mode', 'Scorecard', 'Comparison Charts', 'Individual Reports', 'Archive', 'Follow-up', 'Patient Rating', 'Trends', 'Goals', 'Department Benchmarking', 'Tiers', 'User Feedback', 'Custom Themes']
+        archive: archiveReports
     };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -3606,8 +3677,6 @@ function saveFullReport() {
         patientRating: data.patientRating,
         patientSatisfaction: data.patientSatisfaction,
         patientFeedback: data.patientFeedback,
-        systemFeedback: data.systemFeedback,
-        systemSuggestions: data.systemSuggestions,
         inchargePhone: data.inchargePhone,
         inchargeEmail: data.inchargeEmail,
         generalChecklist: generalState.slice(),
@@ -3633,8 +3702,6 @@ function saveFullReport() {
     updateDashboard();
     renderTrendChart();
     renderComparisonChart();
-    updateScorecard();
-    populateIndividualWorkers();
     showToast('✅ Ripoti kamili imehifadhiwa!', 'success');
     checkReminders();
 }
@@ -3662,19 +3729,6 @@ function switchTab(tab) {
     if (tab === 'leaderboard') showLeaderboard();
     if (tab === 'search') clearSearch();
     if (tab === 'users') showUsersList();
-    if (tab === 'scorecard') { updateScorecard(); renderDepartmentBenchmark(); }
-    if (tab === 'individual') populateIndividualWorkers();
-    if (tab === 'archive') renderArchive();
-}
-
-function showToast(msg, type = 'success') {
-    const toast = document.getElementById('toast');
-    toast.textContent = msg;
-    toast.className = 'toast ' + type;
-    clearTimeout(toast._timer);
-    void toast.offsetWidth;
-    toast.classList.add('show');
-    toast._timer = setTimeout(() => toast.classList.remove('show'), 3000);
 }
 
 // ================================================================
@@ -3698,9 +3752,6 @@ document.addEventListener('DOMContentLoaded', function() {
     calculateScores();
     updateStatusDisplay();
     checkReminders();
-    updateScorecard();
-    renderDepartmentBenchmark();
-    populateIndividualWorkers();
     
     if (!currentUser) {
         document.getElementById('authModal').classList.remove('hidden');
