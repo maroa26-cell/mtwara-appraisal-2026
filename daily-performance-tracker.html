@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mtwara SDA - Tathmini Supervisor</title>
+    <title>Mtwara SDA - Tathmini</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -27,8 +27,6 @@
             margin-bottom: 20px;
         }
         .header h1 { color: #1a5276; font-size: 22px; }
-        .header p { color: #7f8c8d; font-size: 14px; }
-        
         .card {
             background: #f8f9fa;
             border-radius: 10px;
@@ -37,14 +35,12 @@
             border: 1px solid #ecf0f1;
         }
         .card h3 { color: #1a5276; margin-bottom: 10px; font-size: 16px; }
-        
         .form-group { margin-bottom: 12px; }
         .form-group label { display: block; font-weight: 600; color: #2c3e50; margin-bottom: 4px; font-size: 13px; }
         .form-group input, .form-group select, .form-group textarea {
             width: 100%; padding: 8px 12px; border: 1px solid #d5d8dc; border-radius: 6px;
             font-size: 14px; background: #fff;
         }
-        .form-group textarea { min-height: 60px; resize: vertical; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
         @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
         
@@ -52,16 +48,14 @@
             padding: 10px 20px; border: none; border-radius: 6px; font-weight: 600;
             cursor: pointer; font-size: 13px; transition: 0.3s; margin: 3px;
         }
-        .btn-primary { background: #1a5276; color: #fff; }
-        .btn-primary:hover { background: #154360; }
         .btn-success { background: #27ae60; color: #fff; }
         .btn-success:hover { background: #1e8449; }
-        .btn-warning { background: #f39c12; color: #fff; }
-        .btn-warning:hover { background: #d68910; }
-        .btn-danger { background: #e74c3c; color: #fff; }
-        .btn-danger:hover { background: #c0392b; }
         .btn-purple { background: #8e44ad; color: #fff; }
         .btn-purple:hover { background: #6c3483; }
+        .btn-primary { background: #1a5276; color: #fff; }
+        .btn-primary:hover { background: #154360; }
+        .btn-danger { background: #e74c3c; color: #fff; }
+        .btn-danger:hover { background: #c0392b; }
         .btn-sm { padding: 5px 12px; font-size: 11px; }
         .btn-block { width: 100%; }
         
@@ -105,41 +99,6 @@
         .history-item .date { font-size: 11px; color: #7f8c8d; }
         .history-empty { text-align: center; color: #7f8c8d; padding: 20px 0; }
         
-        .notification-bell {
-            cursor: pointer; font-size: 20px; margin-left: 10px; position: relative;
-        }
-        .notification-bell .badge {
-            position: absolute; top: -8px; right: -8px; background: #e74c3c;
-            color: #fff; border-radius: 50%; padding: 2px 6px; font-size: 10px;
-            font-weight: 700; min-width: 18px; text-align: center;
-        }
-        .notification-bell .badge.hidden { display: none; }
-        .notification-dropdown {
-            display: none; position: absolute; right: 0; top: 30px;
-            background: #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            min-width: 280px; max-height: 300px; overflow-y: auto; z-index: 100;
-            padding: 10px 0;
-        }
-        .notification-dropdown.show { display: block; }
-        .notification-item {
-            padding: 8px 14px; border-bottom: 1px solid #ecf0f1; cursor: pointer;
-        }
-        .notification-item:hover { background: #f8f9fa; }
-        .notification-item .title { font-weight: 600; font-size: 13px; }
-        .notification-item .subtitle { font-size: 11px; color: #7f8c8d; }
-        .notification-item .time { font-size: 10px; color: #95a5a6; }
-        .notification-item.unread { background: #d6eaf8; }
-        
-        .toast {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            background: #1a1a2e; color: #fff; padding: 10px 20px; border-radius: 10px;
-            opacity: 0; transition: 0.4s; z-index: 999; max-width: 400px; text-align: center;
-        }
-        .toast.show { opacity: 1; }
-        .toast.success { background: #27ae60; }
-        .toast.warning { background: #f39c12; color: #1a1a2e; }
-        .toast.error { background: #e74c3c; }
-        
         .pending-item {
             background: #fef9e7; border-left: 4px solid #f39c12; padding: 12px 16px;
             margin-bottom: 8px; border-radius: 4px;
@@ -154,6 +113,24 @@
         }
         .login-box h2 { text-align: center; color: #1a5276; margin-bottom: 20px; }
         
+        .toast {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: #1a1a2e; color: #fff; padding: 10px 20px; border-radius: 10px;
+            opacity: 0; transition: 0.4s; z-index: 999; max-width: 400px; text-align: center;
+        }
+        .toast.show { opacity: 1; }
+        .toast.success { background: #27ae60; }
+        .toast.warning { background: #f39c12; color: #1a1a2e; }
+        .toast.error { background: #e74c3c; }
+        
+        .rating-group { display: flex; gap: 5px; flex-wrap: wrap; }
+        .rating-btn {
+            padding: 5px 12px; border: 2px solid #ddd; border-radius: 6px;
+            background: #fff; cursor: pointer; font-weight: 600;
+        }
+        .rating-btn:hover { background: #eaf2f8; }
+        .rating-btn.selected { border-color: #1a5276; background: #1a5276; color: #fff; }
+        
         .theme-toggle {
             position: fixed; bottom: 20px; right: 20px; z-index: 100;
             border-radius: 50%; width: 50px; height: 50px; font-size: 24px;
@@ -165,15 +142,12 @@
 </head>
 <body>
 
-<!-- THEME TOGGLE -->
 <button class="theme-toggle" onclick="toggleDarkMode()">🌙</button>
 
-<!-- ============================================================ -->
-<!-- LOGIN SECTION -->
-<!-- ============================================================ -->
+<!-- LOGIN -->
 <div id="loginSection" class="login-box">
-    <h2>🔐 Mtwara SDA Dispensary</h2>
-    <p style="text-align:center; color:#7f8c8d; margin-bottom:20px;">Ingia kwenye Mfumo</p>
+    <h2>🔐 Mtwara SDA</h2>
+    <p style="text-align:center; color:#7f8c8d; margin-bottom:20px;">Tathmini ya Utendaji</p>
     <div class="form-group">
         <label>👤 Jina la Mtumiaji</label>
         <input type="text" id="loginUsername" placeholder="Weka username" value="supervisor">
@@ -188,13 +162,9 @@
     </p>
 </div>
 
-<!-- ============================================================ -->
 <!-- MAIN APP -->
-<!-- ============================================================ -->
 <div id="mainApp" style="display:none;">
     <div class="container">
-
-        <!-- HEADER -->
         <div class="header">
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
                 <div>
@@ -203,20 +173,11 @@
                 </div>
                 <div style="display:flex; align-items:center; gap:10px;">
                     <span id="userBadge" class="user-badge">👤 Imetoka nje</span>
-                    <span id="userNameDisplay" style="font-size:13px; color:#1a5276;"></span>
-                    <span class="notification-bell" onclick="toggleNotifications()" id="notificationBell">
-                        🔔
-                        <span class="badge hidden" id="notificationBadge">0</span>
-                        <div class="notification-dropdown" id="notificationDropdown">
-                            <div id="notificationList"><div class="history-empty">Hakuna arifa</div></div>
-                        </div>
-                    </span>
                     <button class="btn btn-danger btn-sm" onclick="logout()">🚪 Toka</button>
                 </div>
             </div>
         </div>
 
-        <!-- STATUS -->
         <div class="card">
             <div style="display:flex; gap:15px; flex-wrap:wrap;">
                 <div><span class="status-dot red" id="workerStatusDot"></span>Mtendakazi: <span id="workerStatusText">⏳ Hajajaza</span></div>
@@ -225,50 +186,41 @@
             </div>
         </div>
 
-        <!-- TABS -->
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab('assessment')">📝 Tathmini</button>
             <button class="tab-btn" onclick="switchTab('pending')">⏳ Inasubiri</button>
             <button class="tab-btn" onclick="switchTab('sent')">📤 Zilizotumwa</button>
             <button class="tab-btn" onclick="switchTab('history')">📂 Historia</button>
-            <button class="tab-btn" onclick="switchTab('dashboard')">📊 Dashibodi</button>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- TAB: TATHMINI -->
-        <!-- ============================================================ -->
+        <!-- TATHMINI -->
         <div id="assessment" class="tab-content active">
-
-            <!-- Maelezo -->
             <div class="card">
                 <h3>👤 Maelezo ya Mtendakazi</h3>
                 <div class="form-row">
-                    <div class="form-group"><label>Jina</label><input type="text" id="workerName" placeholder="Jina lako" value="John Doe"></div>
-                    <div class="form-group"><label>Kazi</label><select id="workerRole"><option>Daktari</option><option>Muuguzi</option><option>Mfamasia</option><option>Mtaalamu wa Maabara</option></select></div>
+                    <div class="form-group"><label>Jina</label><input type="text" id="workerName" value="John Doe"></div>
+                    <div class="form-group"><label>Kazi</label><select id="workerRole"><option>Daktari</option><option>Muuguzi</option></select></div>
                 </div>
                 <div class="form-row">
                     <div class="form-group"><label>Tarehe</label><input type="date" id="reportDate"></div>
                     <div class="form-group"><label>Zamu</label><select id="workerShift"><option>Mchana</option><option>Usiku</option></select></div>
                 </div>
-                <div class="form-group"><label>Idara</label><input type="text" id="department" placeholder="Clinical, Nursing, n.k." value="Clinical"></div>
             </div>
 
-            <!-- Takwimu -->
             <div class="card">
-                <h3>📊 Takwimu za Kazi</h3>
+                <h3>📊 Takwimu</h3>
                 <div class="form-row">
-                    <div class="form-group"><label>👥 Wagonjwa</label><input type="number" id="statPatients" value="0"></div>
-                    <div class="form-group"><label>📊 Ultrasound</label><input type="number" id="statUltrasound" value="0"></div>
+                    <div class="form-group"><label>👥 Wagonjwa</label><input type="number" id="statPatients" value="15"></div>
+                    <div class="form-group"><label>📊 Ultrasound</label><input type="number" id="statUltrasound" value="3"></div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group"><label>📋 Referral</label><input type="number" id="statReferral" value="0"></div>
-                    <div class="form-group"><label>🔄 Waliorudi</label><input type="number" id="statFollowup" value="0"></div>
+                    <div class="form-group"><label>📋 Referral</label><input type="number" id="statReferral" value="2"></div>
+                    <div class="form-group"><label>🔄 Waliorudi</label><input type="number" id="statFollowup" value="5"></div>
                 </div>
             </div>
 
-            <!-- Tathmini -->
             <div class="card">
-                <h3>✍️ Tathmini ya Mtendakazi</h3>
+                <h3>✍️ Tathmini</h3>
                 <div class="form-group">
                     <label>1. Kuwasili</label>
                     <div class="rating-group" id="selfPunctuality">
@@ -325,39 +277,34 @@
                 </div>
                 
                 <div style="margin-top:15px;">
-                    <button class="btn btn-success" onclick="saveWorker()">💾 Hifadhi Sehemu ya Mtendakazi</button>
+                    <button class="btn btn-success" onclick="saveWorker()">💾 Hifadhi</button>
                     <button class="btn btn-purple" onclick="submitToSupervisor()" id="submitToSupervisorBtn" style="display:none;">📤 Tuma kwa Msimamizi</button>
                 </div>
                 <div id="workerSubmitStatus" style="font-size:12px; color:#7f8c8d; margin-top:6px; display:none;"></div>
             </div>
 
-            <!-- Muhtasari -->
             <div class="card" style="background:#eaf2f8; border-left:5px solid #1a5276;">
-                <h3>📊 Muhtasari wa Tathmini</h3>
+                <h3>📊 Muhtasari</h3>
                 <div style="display:flex; gap:15px; flex-wrap:wrap;">
                     <div><span style="font-size:24px; font-weight:800; color:#1a5276;" id="selfTotal">0</span> <span style="color:#7f8c8d;">Alama</span></div>
                     <div><span style="font-size:24px; font-weight:800; color:#27ae60;" id="selfPercent">0%</span> <span style="color:#7f8c8d;">Asilimia</span></div>
                 </div>
             </div>
-
         </div>
 
-        <!-- ============================================================ -->
-        <!-- TAB: INASUBIRI (Muhimu kwa Supervisor) -->
-        <!-- ============================================================ -->
+        <!-- INASUBIRI -->
         <div id="pending" class="tab-content">
             <div class="card">
-                <h3>⏳ Ripoti Zinazosubiri Msimamizi</h3>
+                <h3>⏳ Ripoti Zinazosubiri</h3>
                 <div id="pendingReportsContainer">
                     <div class="history-empty">Hakuna ripoti zinazosubiri.</div>
                 </div>
                 <button class="btn btn-primary btn-sm" onclick="loadPendingReports()">🔄 Sasisha</button>
+                <button class="btn btn-warning btn-sm" onclick="createTestReport()" style="margin-left:6px;">📝 Unda Ripoti ya Mtihani</button>
             </div>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- TAB: ZILIZOTUMWA -->
-        <!-- ============================================================ -->
+        <!-- ZILIZOTUMWA -->
         <div id="sent" class="tab-content">
             <div class="card">
                 <h3>📤 Ripoti Zilizotumwa</h3>
@@ -368,51 +315,21 @@
             </div>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- TAB: HISTORIA -->
-        <!-- ============================================================ -->
+        <!-- HISTORIA -->
         <div id="history" class="tab-content">
             <div class="card">
-                <h3>📂 Historia ya Tathmini</h3>
+                <h3>📂 Historia</h3>
                 <div id="historyList">
-                    <div class="history-empty">Hakuna ripoti zilizohifadhiwa.</div>
+                    <div class="history-empty">Hakuna ripoti.</div>
                 </div>
-            </div>
-        </div>
-
-        <!-- ============================================================ -->
-        <!-- TAB: DASHIBODI -->
-        <!-- ============================================================ -->
-        <div id="dashboard" class="tab-content">
-            <div class="card">
-                <h3>📊 Dashibodi ya Utendaji</h3>
-                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:15px;">
-                    <div style="background:#fff; padding:15px; border-radius:8px; text-align:center; border:1px solid #ecf0f1;">
-                        <div style="font-size:28px; font-weight:800; color:#1a5276;" id="dashTotal">0</div>
-                        <div style="font-size:11px; color:#7f8c8d;">Ripoti</div>
-                    </div>
-                    <div style="background:#fff; padding:15px; border-radius:8px; text-align:center; border:1px solid #ecf0f1;">
-                        <div style="font-size:28px; font-weight:800; color:#27ae60;" id="dashPending">0</div>
-                        <div style="font-size:11px; color:#7f8c8d;">Zinazosubiri</div>
-                    </div>
-                    <div style="background:#fff; padding:15px; border-radius:8px; text-align:center; border:1px solid #ecf0f1;">
-                        <div style="font-size:28px; font-weight:800; color:#8e44ad;" id="dashCompleted">0</div>
-                        <div style="font-size:11px; color:#7f8c8d;">Zimekamilika</div>
-                    </div>
-                </div>
-                <button class="btn btn-primary btn-sm" onclick="updateDashboard()">🔄 Sasisha</button>
             </div>
         </div>
 
     </div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- ============================================================ -->
-<!-- JAVASCRIPT -->
-<!-- ============================================================ -->
 <script>
 // ================================================================
 // DATA
@@ -420,7 +337,6 @@
 let allReports = [];
 let currentUser = null;
 let workerDone = false;
-let notifications = [];
 let pendingReports = [];
 
 // ================================================================
@@ -447,7 +363,7 @@ function getRatingLabel(groupId) {
 }
 
 // ================================================================
-// CALCULATE SCORES
+// SCORES
 // ================================================================
 function calculateScores() {
     const scores = [
@@ -463,6 +379,41 @@ function calculateScores() {
     document.getElementById('selfTotal').textContent = total;
     document.getElementById('selfPercent').textContent = percent + '%';
     return { total, percent };
+}
+
+// ================================================================
+// CREATE TEST REPORT - KWA SUPERVISOR
+// ================================================================
+function createTestReport() {
+    const testReport = {
+        id: Date.now(),
+        reportId: 'TEST-' + Date.now().toString().slice(-8),
+        date: new Date().toISOString().split('T')[0],
+        worker: 'Dkt. John Mwakyusa',
+        role: 'Daktari',
+        shift: 'Mchana',
+        department: 'Clinical',
+        patientsServed: 15,
+        self: {
+            total: 27,
+            percent: 90,
+            labels: ['Bora Sana', 'Nzuri', 'Bora Sana', 'Nzuri', 'Nzuri', 'Bora Sana']
+        },
+        supervisor: '',
+        supervisorSectionDone: false,
+        inchargeSectionDone: false,
+        sentBy: 'worker',
+        sentTo: 'supervisor',
+        savedAt: new Date().toISOString()
+    };
+    
+    allReports.unshift(testReport);
+    saveToStorage();
+    loadPendingReports();
+    loadSentReports();
+    renderHistory();
+    updateStatusDisplay();
+    showToast('✅ Ripoti ya mtihani imeundwa!', 'success');
 }
 
 // ================================================================
@@ -482,16 +433,20 @@ function login() {
         const roleLabels = { 'admin': 'Msimamizi Mkuu', 'supervisor': 'Msimamizi', 'incharge': 'Mganga Mfawidhi' };
         document.getElementById('userBadge').textContent = '👤 ' + (roleLabels[user] || user);
         document.getElementById('userBadge').className = 'user-badge ' + user;
-        document.getElementById('userNameDisplay').textContent = user;
         
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('reportDate').value = today;
         
         loadPendingReports();
         loadSentReports();
-        loadNotifications();
-        updateDashboard();
+        renderHistory();
+        updateStatusDisplay();
         showToast('✅ Karibu ' + user + '!', 'success');
+        
+        // Kama hakuna ripoti, onyesha ujumbe
+        if (allReports.length === 0) {
+            showToast('💡 Bonyeza "📝 Unda Ripoti ya Mtihani" kuona mfano', 'warning');
+        }
     } else {
         showToast('❌ Jina au nenosiri si sahihi', 'error');
     }
@@ -547,13 +502,13 @@ function submitToSupervisor() {
     allReports.unshift(record);
     saveToStorage();
     
-    addNotification('📋 Ripoti Mpya', `Ripoti ya ${data.worker} imetumwa kwa Msimamizi.`, 'warning');
-    
     document.getElementById('submitToSupervisorBtn').style.display = 'none';
     document.getElementById('workerSubmitStatus').innerHTML = '✅ Ripoti imetumwa kwa Msimamizi!';
     showToast('✅ Ripoti imetumwa kwa Msimamizi!', 'success');
+    loadPendingReports();
     loadSentReports();
-    updateDashboard();
+    renderHistory();
+    updateStatusDisplay();
 }
 
 function collectReportData() {
@@ -563,7 +518,7 @@ function collectReportData() {
         role: document.getElementById('workerRole').value,
         date: document.getElementById('reportDate').value || new Date().toISOString().split('T')[0],
         shift: document.getElementById('workerShift').value,
-        department: document.getElementById('department').value || 'Clinical',
+        department: 'Clinical',
         patientsServed: parseInt(document.getElementById('statPatients').value) || 0,
         self: {
             total: scores.total,
@@ -581,12 +536,11 @@ function collectReportData() {
 }
 
 // ================================================================
-// PENDING REPORTS (Kwa Supervisor)
+// PENDING REPORTS
 // ================================================================
 function loadPendingReports() {
     if (!currentUser) return;
     
-    // Supervisor anapata ripoti ambazo zimetumwa kwake
     if (currentUser === 'supervisor' || currentUser === 'admin') {
         pendingReports = allReports.filter(r => 
             r.sentTo === 'supervisor' && 
@@ -606,7 +560,12 @@ function loadPendingReports() {
 function renderPendingReports() {
     const container = document.getElementById('pendingReportsContainer');
     if (pendingReports.length === 0) {
-        container.innerHTML = '<div class="history-empty">✅ Hakuna ripoti zinazosubiri. Vema!</div>';
+        container.innerHTML = `
+            <div class="history-empty">✅ Hakuna ripoti zinazosubiri.</div>
+            <div style="text-align:center; margin-top:8px;">
+                <button class="btn btn-warning btn-sm" onclick="createTestReport()">📝 Unda Ripoti ya Mtihani</button>
+            </div>
+        `;
         return;
     }
     
@@ -618,7 +577,7 @@ function renderPendingReports() {
                 <div class="sub">📅 ${r.date} · 👤 Imeletwa na: ${r.sentBy}</div>
                 <div class="sub">📊 Alama: ${r.self?.percent || 0}%</div>
                 <div class="actions">
-                    <button class="btn btn-primary btn-sm" onclick="openPendingReport(${i})">👁️ Kagua</button>
+                    <button class="btn btn-primary btn-sm" onclick="viewPendingReport(${i})">👁️ Kagua</button>
                     <button class="btn btn-success btn-sm" onclick="approvePendingReport(${i})">✅ Kamilisha</button>
                 </div>
             </div>
@@ -627,18 +586,20 @@ function renderPendingReports() {
     container.innerHTML = html;
 }
 
-function openPendingReport(index) {
+function viewPendingReport(index) {
     const r = pendingReports[index];
     if (!r) return;
-    
-    // Switch to assessment tab
-    switchTab('assessment');
-    
-    // Fill supervisor section
-    document.getElementById('workerName').value = r.worker;
-    document.getElementById('reportDate').value = r.date;
-    
-    showToast('👁️ Kagua ripoti ya ' + r.worker, 'info');
+    alert(
+        '📋 RIPOTI INASUBIRI\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
+        `Mtendakazi: ${r.worker}\n` +
+        `Kazi: ${r.role}\n` +
+        `Tarehe: ${r.date}\n` +
+        `Alama: ${r.self?.percent || 0}%\n` +
+        `📤 Imeletwa na: ${r.sentBy}\n` +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
+        'Bonyeza "✅ Kamilisha" kuikamilisha.'
+    );
 }
 
 function approvePendingReport(index) {
@@ -646,7 +607,6 @@ function approvePendingReport(index) {
     if (!r) return;
     if (!confirm(`Je, unataka kukamilisha ripoti ya ${r.worker}?`)) return;
     
-    // Find in allReports
     const mainIndex = allReports.findIndex(a => a.id === r.id);
     if (mainIndex === -1) return;
     
@@ -655,20 +615,13 @@ function approvePendingReport(index) {
         allReports[mainIndex].supervisor = currentUser;
         allReports[mainIndex].sentTo = 'incharge';
         allReports[mainIndex].sentBy = currentUser;
-        addNotification('✅ Tathmini ya Msimamizi', `Msimamizi amekamilisha tathmini ya ${r.worker}. Tuma kwa Mganga Mfawidhi.`, 'success');
         showToast('✅ Ripoti imekamilishwa kama Msimamizi!', 'success');
-    } else if (currentUser === 'incharge') {
-        allReports[mainIndex].inchargeSectionDone = true;
-        allReports[mainIndex].incharge = currentUser;
-        addNotification('✅ Tathmini Imekamilika', `Mganga Mfawidhi amekamilisha tathmini ya ${r.worker}.`, 'success');
-        showToast('✅ Ripoti imekamilishwa!', 'success');
     }
     
     saveToStorage();
     loadPendingReports();
     loadSentReports();
     renderHistory();
-    updateDashboard();
     updateStatusDisplay();
 }
 
@@ -764,25 +717,13 @@ function deleteReport(index) {
         renderHistory();
         loadPendingReports();
         loadSentReports();
-        updateDashboard();
+        updateStatusDisplay();
         showToast('🗑️ Ripoti imefutwa', 'warning');
     }
 }
 
 // ================================================================
-// DASHBOARD
-// ================================================================
-function updateDashboard() {
-    const total = allReports.length;
-    const pending = allReports.filter(r => !r.inchargeSectionDone).length;
-    const completed = allReports.filter(r => r.inchargeSectionDone).length;
-    document.getElementById('dashTotal').textContent = total;
-    document.getElementById('dashPending').textContent = pending;
-    document.getElementById('dashCompleted').textContent = completed;
-}
-
-// ================================================================
-// STATUS DISPLAY
+// STATUS
 // ================================================================
 function updateStatusDisplay() {
     const latest = allReports[0];
@@ -797,97 +738,6 @@ function updateStatusDisplay() {
 }
 
 // ================================================================
-// NOTIFICATIONS
-// ================================================================
-function loadNotifications() {
-    try {
-        const stored = localStorage.getItem('mtwara_notifications_simple');
-        if (stored) notifications = JSON.parse(stored);
-    } catch(e) { notifications = []; }
-    updateNotificationBadge();
-}
-
-function saveNotifications() {
-    try { localStorage.setItem('mtwara_notifications_simple', JSON.stringify(notifications)); } catch(e) {}
-}
-
-function addNotification(title, message, type = 'info') {
-    const notif = {
-        id: Date.now(),
-        title: title,
-        message: message,
-        type: type,
-        read: false,
-        timestamp: new Date().toISOString()
-    };
-    notifications.unshift(notif);
-    if (notifications.length > 50) notifications.pop();
-    saveNotifications();
-    updateNotificationBadge();
-    showToast('🔔 ' + title, 'success');
-}
-
-function updateNotificationBadge() {
-    const unread = notifications.filter(n => !n.read).length;
-    const badge = document.getElementById('notificationBadge');
-    if (unread > 0) {
-        badge.textContent = unread;
-        badge.classList.remove('hidden');
-    } else {
-        badge.classList.add('hidden');
-    }
-    renderNotifications();
-}
-
-function renderNotifications() {
-    const container = document.getElementById('notificationList');
-    if (notifications.length === 0) {
-        container.innerHTML = '<div class="history-empty">Hakuna arifa</div>';
-        return;
-    }
-    let html = '';
-    notifications.slice(0, 10).forEach(n => {
-        const isUnread = !n.read ? 'unread' : '';
-        html += `
-            <div class="notification-item ${isUnread}" onclick="markNotificationRead(${n.id})">
-                <div class="title">${n.title}</div>
-                <div class="subtitle">${n.message}</div>
-                <div class="time">${new Date(n.timestamp).toLocaleString()}</div>
-            </div>
-        `;
-    });
-    container.innerHTML = html;
-}
-
-function markNotificationRead(id) {
-    const notif = notifications.find(n => n.id === id);
-    if (notif) {
-        notif.read = true;
-        saveNotifications();
-        updateNotificationBadge();
-    }
-}
-
-function toggleNotifications() {
-    const dropdown = document.getElementById('notificationDropdown');
-    dropdown.classList.toggle('show');
-    if (dropdown.classList.contains('show')) {
-        notifications.forEach(n => n.read = true);
-        saveNotifications();
-        updateNotificationBadge();
-        renderNotifications();
-    }
-}
-
-document.addEventListener('click', function(e) {
-    const bell = document.getElementById('notificationBell');
-    const dropdown = document.getElementById('notificationDropdown');
-    if (!bell.contains(e.target) && !dropdown.contains(e.target)) {
-        dropdown.classList.remove('show');
-    }
-});
-
-// ================================================================
 // TABS
 // ================================================================
 function switchTab(tab) {
@@ -899,7 +749,6 @@ function switchTab(tab) {
     if (tab === 'pending') loadPendingReports();
     if (tab === 'sent') loadSentReports();
     if (tab === 'history') renderHistory();
-    if (tab === 'dashboard') updateDashboard();
 }
 
 // ================================================================
@@ -915,10 +764,6 @@ function toggleDarkMode() {
 if (localStorage.getItem('darkMode') === 'enabled') {
     document.body.classList.add('dark-mode');
     document.querySelector('.theme-toggle').textContent = '☀️';
-    // Dark mode styles
-    document.body.style.background = '#1a1a2e';
-    document.querySelector('.container').style.background = '#2c3e50';
-    document.querySelector('.container').style.color = '#ecf0f1';
 }
 
 // ================================================================
@@ -936,7 +781,6 @@ function loadFromStorage() {
             renderHistory();
             loadPendingReports();
             loadSentReports();
-            updateDashboard();
             updateStatusDisplay();
         }
     } catch(e) {}
@@ -960,7 +804,6 @@ function showToast(msg, type = 'success') {
 // ================================================================
 document.addEventListener('DOMContentLoaded', function() {
     loadFromStorage();
-    loadNotifications();
 });
 </script>
 
