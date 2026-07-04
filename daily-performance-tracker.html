@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Mtwara SDA - Tathmini ya Utendaji Kamili</title>
+    <title>Mtwara SDA - Tathmini ya Utendaji</title>
     
     <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -226,7 +226,6 @@
             .logo-placeholder { width: 45px; height: 45px; }
         }
 
-        /* Modal */
         .modal {
             display: flex;
             position: fixed;
@@ -292,7 +291,6 @@
         .user-badge.worker { background: #27ae60; color: #fff; }
         .user-badge.incharge { background: #8e44ad; color: #fff; }
 
-        /* Notification Bell */
         .notification-bell {
             position: relative;
             display: inline-block;
@@ -365,7 +363,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Tabs */
         .tabs {
             display: flex;
             gap: 6px;
@@ -399,7 +396,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Form */
         .form-group { margin-bottom: 12px; }
         .form-group label {
             display: block;
@@ -436,7 +432,6 @@
         }
         @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
 
-        /* Section Dividers */
         .section-divider {
             padding: 7px 14px;
             border-radius: 6px;
@@ -475,7 +470,6 @@
             background: rgba(255,255,255,0.2);
         }
 
-        /* Buttons */
         .btn-group {
             display: flex;
             gap: 8px;
@@ -516,7 +510,6 @@
         .btn-info { background: #2e86c1; color: #fff; }
         .btn-info:hover { background: #1a5276; }
 
-        /* Checklist */
         .checklist-item {
             display: flex;
             align-items: center;
@@ -575,7 +568,6 @@
         .checklist-grid .checklist-item { border-bottom: none; padding: 4px 0; }
         @media (max-width: 600px) { .checklist-grid { grid-template-columns: 1fr; } }
 
-        /* Rating */
         .rating-group {
             display: flex;
             gap: 5px;
@@ -607,7 +599,6 @@
         .rating-group .rating-btn.selected-average { border-color: #f39c12; background: #f39c12; color: #fff; }
         .rating-group .rating-btn.selected-poor { border-color: #e74c3c; background: #e74c3c; color: #fff; }
 
-        /* Signature */
         .signature-pad {
             border: 2px dashed #1a5276;
             border-radius: 10px;
@@ -623,7 +614,6 @@
         .signature-pad canvas { width: 100%; height: 100%; border-radius: 8px; touch-action: none; }
         .signature-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0; }
 
-        /* Score Box */
         .score-box {
             background: #eaf2f8;
             border-radius: 10px;
@@ -672,7 +662,6 @@
         .score-item .number.teal { color: #1abc9c; }
         .score-item .number.gold { color: #d4a017; }
 
-        /* Progress */
         .progress-header {
             background: #eaf2f8;
             border-radius: 8px;
@@ -702,7 +691,6 @@
             transition: width 0.5s ease;
         }
 
-        /* Quick Stats */
         .quick-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -737,7 +725,6 @@
         .quick-stat .value.teal { color: #1abc9c; }
         .quick-stat .value.gold { color: #d4a017; }
 
-        /* Dashboard */
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -770,7 +757,6 @@
         .dashboard-card .number.teal { color: #1abc9c; }
         .dashboard-card .number.gold { color: #d4a017; }
 
-        /* History */
         .history-item {
             padding: 10px 12px;
             border-bottom: 1px solid #ecf0f1;
@@ -792,7 +778,6 @@
             transition: color 0.3s;
         }
 
-        /* Tags & Badges */
         .tag {
             display: inline-block;
             padding: 2px 10px;
@@ -858,7 +843,6 @@
         .signoff-conditional { background: #fdebd0; color: #a04000; }
         .signoff-rejected { background: #fadbd8; color: #922b21; }
 
-        /* Role Stats */
         .role-stats {
             background: #f8f9fa;
             border-radius: 10px;
@@ -904,7 +888,6 @@
         .role-stats .stat-row .stat-item input:focus { outline: none; }
         @media (max-width: 500px) { .role-stats .stat-row { grid-template-columns: 1fr; } }
 
-        /* Share */
         .share-section {
             background: #e8daef;
             border-radius: 10px;
@@ -931,7 +914,6 @@
         }
         .share-status.success { border-left-color: #27ae60; color: #1a7a3a; }
 
-        /* Report Snapshot */
         .report-snapshot {
             background: #ffffff;
             padding: 20px;
@@ -946,7 +928,6 @@
         }
         .report-snapshot.show { display: block; }
 
-        /* Toast */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -971,7 +952,6 @@
         .toast.warning { background: #f39c12; color: #1a1a2e; }
         .toast.error { background: #e74c3c; }
 
-        /* Dark Mode Toggle */
         .dark-mode-toggle {
             position: fixed;
             bottom: 20px;
@@ -990,7 +970,6 @@
         }
         .dark-mode-toggle:hover { transform: scale(1.1); }
 
-        /* Benchmark */
         .benchmark-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1047,7 +1026,6 @@
         .national-benchmark-item .your-score.below { color: #e74c3c; }
         .national-benchmark-item .your-score.equal { color: #f39c12; }
 
-        /* Charts */
         .chart-container {
             background: #f8f9fa;
             border-radius: 10px;
@@ -1064,7 +1042,6 @@
         }
         #trendChart, #comparisonChart { width: 100% !important; max-height: 250px; }
 
-        /* Leaderboard */
         .leaderboard-table {
             width: 100%;
             border-collapse: collapse;
@@ -1089,7 +1066,6 @@
         .rank-2 { color: #bdc3c7; }
         .rank-3 { color: #e67e22; }
 
-        /* Misc */
         .print-note {
             background: #fef9e7;
             border: 1px solid #f1c40f;
@@ -1235,7 +1211,7 @@
 <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="Badilisha Rangi">🌙</button>
 
 <!-- ============================================================ -->
-<!-- AUTH MODAL (Login / Register) -->
+<!-- AUTH MODAL -->
 <!-- ============================================================ -->
 <div id="authModal" class="modal">
     <div class="modal-content">
@@ -1700,7 +1676,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- TAB: INASUBIRI (Pending) -->
+    <!-- TAB: INASUBIRI -->
     <!-- ============================================================ -->
     <div id="pending" class="tab-content">
         <div class="section-divider pending">⏳ Ripoti Zinazosubiri</div>
@@ -1710,7 +1686,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- TAB: ZILIZOTUMWA (Sent) -->
+    <!-- TAB: ZILIZOTUMWA -->
     <!-- ============================================================ -->
     <div id="sent" class="tab-content">
         <div class="section-divider dashboard">📤 Ripoti Zilizotumwa</div>
@@ -1724,7 +1700,7 @@
     <!-- ============================================================ -->
     <div class="footer">
         <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
-        <div>Mtwara SDA Dispensary | Toleo 18.0 (2026) | Vipengele vyote 19 vimeongezwa!</div>
+        <div>Mtwara SDA Dispensary | Toleo 19.0 (2026) | Vipengele vyote vimeongezwa!</div>
     </div>
 
 </div>
@@ -1758,7 +1734,7 @@ let trendChartInstance = null;
 let comparisonChartInstance = null;
 
 // ================================================================
-// DATA
+// DATA - CONSTANTS
 // ================================================================
 const GENERAL_CHECKLIST = [
     'Nimewasili kazini walau dakika 10 kabla ya zamu',
@@ -1818,7 +1794,7 @@ function getTier(score) {
 // ================================================================
 function loadUsers() {
     try {
-        const stored = localStorage.getItem('mtwara_users_v18');
+        const stored = localStorage.getItem('mtwara_users_v19');
         if (stored) {
             users = JSON.parse(stored);
         } else {
@@ -1840,7 +1816,7 @@ function loadUsers() {
 }
 
 function saveUsers() {
-    try { localStorage.setItem('mtwara_users_v18', JSON.stringify(users)); } catch(e) {}
+    try { localStorage.setItem('mtwara_users_v19', JSON.stringify(users)); } catch(e) {}
 }
 
 function registerUser() {
@@ -1979,7 +1955,7 @@ function clearAllUsers() {
 // ================================================================
 function loadNotifications() {
     try {
-        const stored = localStorage.getItem('mtwara_notifications_v18');
+        const stored = localStorage.getItem('mtwara_notifications_v19');
         if (stored) {
             notifications = JSON.parse(stored);
         }
@@ -1988,7 +1964,7 @@ function loadNotifications() {
 }
 
 function saveNotifications() {
-    try { localStorage.setItem('mtwara_notifications_v18', JSON.stringify(notifications)); } catch(e) {}
+    try { localStorage.setItem('mtwara_notifications_v19', JSON.stringify(notifications)); } catch(e) {}
 }
 
 function addNotification(title, message, type = 'info', link = null) {
@@ -3770,15 +3746,15 @@ function renderComparisonChart() {
 // ================================================================
 function saveToStorage() {
     try {
-        localStorage.setItem('mtwara_reports_v18', JSON.stringify(allReports));
-        localStorage.setItem('mtwara_archive_v18', JSON.stringify(archiveReports));
+        localStorage.setItem('mtwara_reports_v19', JSON.stringify(allReports));
+        localStorage.setItem('mtwara_archive_v19', JSON.stringify(archiveReports));
     } catch(e) {}
 }
 
 function loadFromStorage() {
     try {
-        const reports = localStorage.getItem('mtwara_reports_v18');
-        const archive = localStorage.getItem('mtwara_archive_v18');
+        const reports = localStorage.getItem('mtwara_reports_v19');
+        const archive = localStorage.getItem('mtwara_archive_v19');
         if (reports) allReports = JSON.parse(reports);
         if (archive) archiveReports = JSON.parse(archive);
         renderHistory();
@@ -3794,7 +3770,7 @@ function backupToCloud() {
     if (allReports.length === 0 && archiveReports.length === 0) { showToast('⚠️ Hakuna data', 'warning'); return; }
     const data = {
         exportedAt: new Date().toISOString(),
-        version: '18.0',
+        version: '19.0',
         totalReports: allReports.length,
         archiveReports: archiveReports.length,
         reports: allReports,
