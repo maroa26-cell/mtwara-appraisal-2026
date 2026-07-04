@@ -1,0 +1,1586 @@
+
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Mtwara SDA - Tathmini ya Utendaji</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #e8ecf1;
+            padding: 12px;
+            color: #1a1a2e;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+            padding: 25px 30px 35px;
+        }
+        @media (max-width: 600px) {
+            body { padding: 8px; }
+            .container { padding: 14px 14px 20px; }
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 4px solid #1a5276;
+            padding-bottom: 14px;
+            margin-bottom: 18px;
+        }
+        .logo-placeholder {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            border: 2px solid #1a5276;
+            background: #eaf2f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #1a5276;
+            text-align: center;
+            font-weight: 700;
+            margin: 0 auto 8px;
+        }
+        .header h1 { font-size: 22px; color: #1a5276; }
+        .header h2 { font-size: 14px; color: #2c3e50; font-weight: normal; font-style: italic; }
+        .header .mission {
+            margin-top: 6px;
+            padding: 6px 14px;
+            background: #eaf2f8;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #1a5276;
+            border-left: 4px solid #1a5276;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 14px;
+        }
+        .status-step {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: #ecf0f1;
+        }
+        .status-step.active { background: #1a5276; color: #fff; }
+        .status-step.done { background: #27ae60; color: #fff; }
+        .status-step .num {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            text-align: center;
+            line-height: 22px;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .section-divider {
+            padding: 7px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 700;
+            margin: 16px 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .section-divider.worker { background: #d6eaf8; color: #1a5276; border-left: 4px solid #1a5276; }
+        .section-divider.supervisor { background: #d5f5e3; color: #1a7a3a; border-left: 4px solid #27ae60; }
+        .section-divider.incharge { background: #2c3e50; color: #fff; border-left: 4px solid #1a5276; }
+        .section-divider .badge {
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 400;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .form-group { margin-bottom: 12px; }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #1a5276;
+            margin-bottom: 3px;
+            font-size: 13px;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #d5d8dc;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            background: #fafbfc;
+        }
+        .form-group textarea { min-height: 50px; resize: vertical; }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+
+        .rating-group {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin: 3px 0;
+        }
+        .rating-btn {
+            padding: 5px 12px;
+            border: 2px solid #d5d8dc;
+            border-radius: 6px;
+            background: #fff;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+            font-family: inherit;
+            flex: 1 1 auto;
+            min-width: 45px;
+            text-align: center;
+        }
+        .rating-btn:hover { background: #eaf2f8; }
+        .rating-btn.selected {
+            border-color: #1a5276;
+            background: #1a5276;
+            color: #fff;
+        }
+        .rating-btn.selected-excellent { border-color: #27ae60; background: #27ae60; color: #fff; }
+        .rating-btn.selected-good { border-color: #2e86c1; background: #2e86c1; color: #fff; }
+        .rating-btn.selected-average { border-color: #f39c12; background: #f39c12; color: #fff; }
+        .rating-btn.selected-poor { border-color: #e74c3c; background: #e74c3c; color: #fff; }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+            border-bottom: 1px solid #f0f2f5;
+            font-size: 13px;
+        }
+        .checklist-item:last-child { border-bottom: none; }
+        .checklist-item .toggle {
+            width: 42px;
+            height: 24px;
+            flex-shrink: 0;
+            background: #d5d8dc;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+        }
+        .checklist-item .toggle.active { background: #27ae60; }
+        .checklist-item .toggle .thumb {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            transition: 0.3s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+        }
+        .checklist-item .toggle.active .thumb { left: 20px; }
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 16px;
+            padding: 4px 0;
+        }
+        .checklist-grid .checklist-item { border-bottom: none; padding: 4px 0; }
+        @media (max-width: 600px) { .checklist-grid { grid-template-columns: 1fr; } }
+
+        .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+        .btn:active { transform: scale(0.97); }
+        .btn-primary { background: #1a5276; color: #fff; }
+        .btn-primary:hover { background: #154360; }
+        .btn-success { background: #27ae60; color: #fff; }
+        .btn-success:hover { background: #1e8449; }
+        .btn-warning { background: #f39c12; color: #fff; }
+        .btn-warning:hover { background: #d68910; }
+        .btn-purple { background: #8e44ad; color: #fff; }
+        .btn-purple:hover { background: #6c3483; }
+        .btn-danger { background: #e74c3c; color: #fff; }
+        .btn-danger:hover { background: #c0392b; }
+        .btn-sm { padding: 4px 12px; font-size: 11px; }
+        .btn-block { width: 100%; }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 14px 0;
+        }
+        .btn-group .btn { flex: 1 1 auto; min-width: 120px; }
+
+        .signature-pad {
+            border: 2px dashed #1a5276;
+            border-radius: 10px;
+            background: #fafbfc;
+            touch-action: none;
+            width: 100%;
+            max-width: 400px;
+            height: 100px;
+            cursor: crosshair;
+            margin: 6px 0;
+        }
+        .signature-pad canvas { width: 100%; height: 100%; border-radius: 8px; touch-action: none; }
+
+        .score-box {
+            background: #eaf2f8;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 14px 0;
+            border-left: 5px solid #1a5276;
+        }
+        .score-box h3 { color: #1a5276; margin-bottom: 6px; font-size: 15px; }
+        .score-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .score-item {
+            background: #fff;
+            padding: 8px 14px;
+            border-radius: 6px;
+            min-width: 80px;
+            text-align: center;
+            flex: 1;
+        }
+        .score-item .number { font-size: 22px; font-weight: 800; color: #1a5276; display: block; }
+        .score-item .label { font-size: 10px; color: #7f8c8d; text-transform: uppercase; }
+        .score-item .number.green { color: #27ae60; }
+        .score-item .number.orange { color: #f39c12; }
+        .score-item .number.purple { color: #8e44ad; }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e8ecf1;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 4px 0 2px;
+        }
+        .progress-bar .fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+            background: linear-gradient(90deg, #27ae60, #1a5276);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            max-width: 400px;
+            width: 90%;
+            background: #1a1a2e;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 13px;
+            text-align: center;
+            z-index: 999;
+            opacity: 0;
+            transition: all 0.4s ease;
+            pointer-events: none;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.20);
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast.success { background: #27ae60; }
+        .toast.warning { background: #f39c12; color: #1a1a2e; }
+        .toast.error { background: #e74c3c; }
+
+        .footer {
+            text-align: center;
+            margin-top: 22px;
+            padding-top: 14px;
+            border-top: 2px solid #ecf0f1;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        .footer .verse {
+            font-style: italic;
+            color: #1a5276;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        /* Hidden sections for different roles */
+        .role-section {
+            display: none;
+        }
+        .role-section.active {
+            display: block;
+        }
+
+        .pending-item {
+            background: #fef9e7;
+            border-left: 4px solid #f39c12;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+        }
+        .pending-item .title { font-weight: 600; font-size: 14px; }
+        .pending-item .sub { font-size: 12px; color: #7f8c8d; }
+        .pending-item .actions { margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap; }
+        .history-empty { text-align: center; color: #7f8c8d; padding: 20px 0; }
+
+        .login-box {
+            max-width: 400px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .login-box h2 { text-align: center; color: #1a5276; margin-bottom: 20px; }
+        .user-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #d5f5e3;
+            color: #1a7a3a;
+        }
+        .user-badge.supervisor { background: #f39c12; color: #fff; }
+        .user-badge.incharge { background: #8e44ad; color: #fff; }
+        .user-badge.admin { background: #1a5276; color: #fff; }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- LOGIN -->
+<!-- ============================================================ -->
+<div id="loginSection" class="login-box">
+    <h2>🔐 Mtwara SDA Dispensary</h2>
+    <p style="text-align:center; color:#7f8c8d; margin-bottom:20px;">Tathmini ya Utendaji Kazi</p>
+    <div class="form-group">
+        <label>👤 Jina la Mtumiaji</label>
+        <input type="text" id="loginUsername" placeholder="Weka username" value="supervisor">
+    </div>
+    <div class="form-group">
+        <label>🔑 Nenosiri</label>
+        <input type="password" id="loginPassword" placeholder="Weka nenosiri" value="1234">
+    </div>
+    <button class="btn btn-primary btn-block" onclick="login()">🔓 Ingia</button>
+    <p style="font-size:12px; color:#7f8c8d; margin-top:10px; text-align:center;">
+        Majina: worker, supervisor, incharge | Nenosiri: 1234
+    </p>
+</div>
+
+<!-- ============================================================ -->
+<!-- MFUMO KUU -->
+<!-- ============================================================ -->
+<div id="mainApp" style="display:none;">
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo-placeholder">🏥</div>
+            <h1>MTWARA SDA DISPENSARY</h1>
+            <h2>Nyenzo ya Tathmini ya Utendaji Kazi</h2>
+            <div style="font-size:12px; color:#7f8c8d; margin-top:4px;">
+                Kitambulisho: <span id="assessmentId" style="font-weight:700; color:#1a5276;"></span>
+                <span id="userBadge" class="user-badge" style="margin-left:10px;">👤 Imetoka nje</span>
+            </div>
+            <div class="mission"><strong>Dhamira:</strong> "Ubora katika Huduma, Imani katika Vitendo"</div>
+        </div>
+
+        <!-- USER TOOLS -->
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin:10px 0; padding:10px; background:#f8f9fa; border-radius:8px; align-items:center;">
+            <span style="font-size:13px; color:#1a5276; font-weight:600;">👤 <span id="currentUserDisplay">Mgeni</span></span>
+            <button class="btn btn-danger btn-sm" onclick="logout()">🚪 Toka</button>
+            <button class="btn btn-primary btn-sm" onclick="switchTab('pending')" id="pendingBtn" style="display:none;">⏳ Inasubiri</button>
+            <button class="btn btn-success btn-sm" onclick="switchTab('history')" id="historyBtn">📂 Historia</button>
+        </div>
+
+        <!-- STATUS BAR -->
+        <div class="status-bar">
+            <div class="status-step" id="stepWorker"><span class="num">1</span> Mtendakazi</div>
+            <div class="status-step" id="stepSupervisor"><span class="num">2</span> Msimamizi</div>
+            <div class="status-step" id="stepIncharge"><span class="num">3</span> Mganga Mfawidhi</div>
+            <div style="margin-left:auto; font-size:12px; color:#7f8c8d;" id="statusMessage">⏳ Inasubiri Mtendakazi</div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- TABS -->
+        <!-- ============================================================ -->
+        <div class="tabs" style="display:flex; gap:6px; margin:14px 0 16px; flex-wrap:wrap;">
+            <button class="tab-btn active" onclick="switchTab('assessment')" style="padding:8px 16px; border:none; border-radius:6px; background:#1a5276; color:#fff; font-weight:600; cursor:pointer;">📝 Tathmini</button>
+            <button class="tab-btn" onclick="switchTab('history')" style="padding:8px 16px; border:none; border-radius:6px; background:#ecf0f1; color:#2c3e50; font-weight:600; cursor:pointer;">📂 Historia</button>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- TAB: TATHMINI -->
+        <!-- ============================================================ -->
+        <div id="assessment" class="tab-content active">
+
+            <!-- ========================================================== -->
+            <!-- SEHEMU YA MTENDAKAZI -->
+            <!-- ========================================================== -->
+            <div id="workerSection" class="role-section active">
+                <div class="section-divider worker">
+                    👤 SEHEMU YA MTENDAKAZI
+                    <span class="badge">Jaza taarifa zako</span>
+                </div>
+
+                <!-- Maelezo -->
+                <div class="form-row">
+                    <div class="form-group"><label>👤 Jina</label><input type="text" id="workerName" placeholder="Jina lako" value=""></div>
+                    <div class="form-group"><label>📋 Kazi</label><select id="workerRole"><option value="Daktari">🩺 Daktari</option><option value="Muuguzi">💉 Muuguzi</option><option value="Mfamasia">💊 Mfamasia</option><option value="Mtaalamu wa Maabara">🔬 Mtaalamu wa Maabara</option></select></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>📅 Tarehe</label><input type="date" id="reportDate"></div>
+                    <div class="form-group"><label>🕐 Zamu</label><select id="workerShift"><option>Mchana</option><option>Usiku</option></select></div>
+                </div>
+                <div class="form-group"><label>🏢 Idara</label><input type="text" id="department" placeholder="Clinical, Nursing, n.k." value="Clinical"></div>
+
+                <!-- Takwimu -->
+                <div class="section-divider worker" style="margin-top:14px;">📊 Takwimu za Kazi</div>
+                <div class="form-row">
+                    <div class="form-group"><label>👥 Wagonjwa waliohudumiwa</label><input type="number" id="statPatients" min="0" value="0"></div>
+                    <div class="form-group"><label>📊 Ultrasound zilizofanywa</label><input type="number" id="statUltrasound" min="0" value="0"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>📋 Referral zilizotolewa</label><input type="number" id="statReferral" min="0" value="0"></div>
+                    <div class="form-group"><label>🔄 Waliorudi</label><input type="number" id="statFollowup" min="0" value="0"></div>
+                </div>
+
+                <!-- Orodha -->
+                <div class="section-divider worker" style="margin-top:14px;">📋 Orodha ya Jumla</div>
+                <div id="generalChecklistContainer"></div>
+
+                <!-- Tathmini ya Mtendakazi -->
+                <div class="section-divider worker" style="margin-top:14px;">✍️ Tathmini ya Mtendakazi</div>
+                <div class="form-group">
+                    <label>1. Kuwasili kazini</label>
+                    <div class="rating-group" id="selfPunctuality">
+                        <button class="rating-btn" onclick="selectRating('selfPunctuality', this)">⭐ Bora Sana</button>
+                        <button class="rating-btn" onclick="selectRating('selfPunctuality', this)">👍 Nzuri</button>
+                        <button class="rating-btn" onclick="selectRating('selfPunctuality', this)">👌 Wastani</button>
+                        <button class="rating-btn" onclick="selectRating('selfPunctuality', this)">⚠️ Dhaifu</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>2. Ubora wa Kazi</label>
+                    <div class="rating-group" id="selfQuality">
+                        <button class="rating-btn" onclick="selectRating('selfQuality', this)">⭐ Bora Sana</button>
+                        <button class="rating-btn" onclick="selectRating('selfQuality', this)">👍 Nzuri</button>
+                        <button class="rating-btn" onclick="selectRating('selfQuality', this)">👌 Wastani</button>
+                        <button class="rating-btn" onclick="selectRating('selfQuality', this)">⚠️ Dhaifu</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>3. Huduma na Huruma</label>
+                    <div class="rating-group" id="selfCompassion">
+                        <button class="rating-btn" onclick="selectRating('selfCompassion', this)">⭐ Bora Sana</button>
+                        <button class="rating-btn" onclick="selectRating('selfCompassion', this)">👍 Nzuri</button>
+                        <button class="rating-btn" onclick="selectRating('selfCompassion', this)">👌 Wastani</button>
+                        <button class="rating-btn" onclick="selectRating('selfCompassion', this)">⚠️ Dhaifu</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>4. Ushirikiano</label>
+                    <div class="rating-group" id="selfTeamwork">
+                        <button class="rating-btn" onclick="selectRating('selfTeamwork', this)">⭐ Bora Sana</button>
+                        <button class="rating-btn" onclick="selectRating('selfTeamwork', this)">👍 Nzuri</button>
+                        <button class="rating-btn" onclick="selectRating('selfTeamwork', this)">👌 Wastani</button>
+                        <button class="rating-btn" onclick="selectRating('selfTeamwork', this)">⚠️ Dhaifu</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>5. Kuchukua Hatua</label>
+                    <div class="rating-group" id="selfInitiative">
+                        <button class="rating-btn" onclick="selectRating('selfInitiative', this)">⭐ Bora Sana</button>
+                        <button class="rating-btn" onclick="selectRating('selfInitiative', this)">👍 Nzuri</button>
+                        <button class="rating-btn" onclick="selectRating('selfInitiative', this)">👌 Wastani</button>
+                        <button class="rating-btn" onclick="selectRating('selfInitiative', this)">⚠️ Dhaifu</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>6. Usalama na Kinga</label>
+                    <div class="rating-group" id="selfSafety">
+                        <button class="rating-btn" onclick="selectRating('selfSafety', this)">⭐ Bora Sana</button>
+                        <button class="rating-btn" onclick="selectRating('selfSafety', this)">👍 Nzuri</button>
+                        <button class="rating-btn" onclick="selectRating('selfSafety', this)">👌 Wastani</button>
+                        <button class="rating-btn" onclick="selectRating('selfSafety', this)">⚠️ Dhaifu</button>
+                    </div>
+                </div>
+
+                <div class="form-group"><label>📝 Maoni ya Mtendakazi</label><textarea id="selfComments" placeholder="Mawazo yako..."></textarea></div>
+
+                <!-- Sahihi ya Mtendakazi -->
+                <div class="section-divider worker">✍️ Sahihi ya Mtendakazi</div>
+                <div style="background:#fef9e7; border-left:4px solid #e74c3c; padding:10px 14px; border-radius:6px; margin:8px 0; font-size:13px; color:#7d6608;">
+                    <strong>⚠️ ONYO:</strong> Taarifa za uongo ni kosa la kinidhamu.
+                </div>
+                <div style="background:#d5f5e3; border-left:4px solid #27ae60; padding:10px 14px; border-radius:6px; margin:8px 0;">
+                    <label><input type="checkbox" id="workerVerification"> <strong>Nathibitisha taarifa zangu ni za kweli</strong></label>
+                </div>
+                <div class="form-group">
+                    <label>✍️ Sahihi (Chora hapa)</label>
+                    <div class="signature-pad" id="workerSignaturePad"><canvas id="workerSignatureCanvas"></canvas></div>
+                    <div class="signature-actions" style="display:flex; gap:10px; flex-wrap:wrap; margin:6px 0;">
+                        <button class="btn btn-warning btn-sm" onclick="clearSignature('worker')">🔄 Futa</button>
+                        <button class="btn btn-primary btn-sm" onclick="saveSignature('worker')">💾 Hifadhi</button>
+                        <span id="workerSignatureStatus" style="font-size:12px; color:#7f8c8d;">Hakuna sahihi</span>
+                    </div>
+                </div>
+
+                <button class="btn btn-success" onclick="submitToSupervisor()" style="margin:10px 0; width:100%;">
+                    📤 TUMA KWA MSIMAMIZI
+                </button>
+                <div id="workerSubmitStatus" style="font-size:12px; color:#7f8c8d; margin-top:6px; display:none;"></div>
+            </div>
+
+            <!-- ========================================================== -->
+            <!-- SEHEMU YA MSIMAMIZI -->
+            <!-- ========================================================== -->
+            <div id="supervisorSection" class="role-section">
+                <div class="section-divider supervisor">
+                    👔 SEHEMU YA MSIMAMIZI
+                    <span class="badge">Kagua na jaza</span>
+                </div>
+
+                <!-- Preview ya data ya Mtendakazi -->
+                <div style="background:#f8f9fa; padding:12px; border-radius:8px; margin-bottom:12px; border:1px solid #ecf0f1;">
+                    <p style="font-size:13px; color:#1a5276; font-weight:600;">📋 Taarifa za Mtendakazi:</p>
+                    <div id="workerPreview" style="font-size:13px; color:#2c3e50;"></div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group"><label>👔 Jina la Msimamizi</label><input type="text" id="supervisorName" placeholder="Jina la msimamizi" value=""></div>
+                    <div class="form-group"><label>📋 Wadhifa</label><select id="supervisorTitle"><option>Mkuu wa Idara</option><option>Afisa Mwandamizi</option><option>Msimamizi</option></select></div>
+                </div>
+
+                <div class="form-group">
+                    <label>1. Kuwasili kazini</label>
+                    <div class="rating-group" id="supPunctuality">
+                        <button class="rating-btn" onclick="selectRating('supPunctuality', this)">⭐ Bora Sana</button>
+                        <button class="rating-btn" onclick="selectRating('supPunctuality', this)">👍 Nzuri</button>
+                        <button class="rating-btn" onclick="selectRating('supPunctuality', this)">👌 Wastani</button>
+                        <button class="rating-btn" onclick="selectRating('supPunctuality', this)">⚠️ Dhaifu</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>2. Ubora wa Kazi</label>
+                    <div class="rating-group" id="supQuality">
+                        <button class="rating-btn" onclick="selectRating('supQuality', this)">⭐ Bora Sana</button>
+                        <button class="rating-btn" onclick="selectRating('supQuality', this)">👍 Nzuri</button>
+                        <button class="rating-btn" onclick="selectRating('supQuality', this)">👌 Wastani</button>
+                        <button class="rating-btn" onclick="selectRating('supQuality', this)">⚠️ Dhaifu</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>3. Huduma na Huruma</label>
+                    <div class="rating-group" id="supCompassion">
+                        <button class="rating-btn" onclick="selectRating('supCompassion', this)">⭐ Bora Sana</button>
+                        <button class="rating-btn" onclick="selectRating('supCompassion', this)">👍 Nzuri</button>
+                        <button class="rating-btn" onclick="selectRating('supCompassion', this)">👌 Wastani</button>
+                        <button class="rating-btn" onclick="selectRating('supCompassion', this)">⚠️ Dhaifu</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>4. Ushirikiano</label>
+                    <div class="rating-group" id="supTeamwork">
+                        <button class="rating-btn" onclick="selectRating('supTeamwork', this)">⭐ Bora Sana</button>
+                        <button class="rating-btn" onclick="selectRating('supTeamwork', this)">👍 Nzuri</button>
+                        <button class="rating-btn" onclick="selectRating('supTeamwork', this)">👌 Wastani</button>
+                        <button class="rating-btn" onclick="selectRating('supTeamwork', this)">⚠️ Dhaifu</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>5. Kuchukua Hatua</label>
+                    <div class="rating-group" id="supInitiative">
+                        <button class="rating-btn" onclick="selectRating('supInitiative', this)">⭐ Bora Sana</button>
+                        <button class="rating-btn" onclick="selectRating('supInitiative', this)">👍 Nzuri</button>
+                        <button class="rating-btn" onclick="selectRating('supInitiative', this)">👌 Wastani</button>
+                        <button class="rating-btn" onclick="selectRating('supInitiative', this)">⚠️ Dhaifu</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>6. Usalama na Kinga</label>
+                    <div class="rating-group" id="supSafety">
+                        <button class="rating-btn" onclick="selectRating('supSafety', this)">⭐ Bora Sana</button>
+                        <button class="rating-btn" onclick="selectRating('supSafety', this)">👍 Nzuri</button>
+                        <button class="rating-btn" onclick="selectRating('supSafety', this)">👌 Wastani</button>
+                        <button class="rating-btn" onclick="selectRating('supSafety', this)">⚠️ Dhaifu</button>
+                    </div>
+                </div>
+
+                <div class="form-group"><label>📝 Maoni ya Msimamizi</label><textarea id="supComments" placeholder="Uchunguzi, nguvu, maeneo ya kuboresha..."></textarea></div>
+
+                <div style="background:#d5f5e3; border-left:4px solid #27ae60; padding:10px 14px; border-radius:6px; margin:8px 0;">
+                    <label><input type="checkbox" id="supervisorVerification"> <strong>Nathibitisha tathmini yangu ni sahihi</strong></label>
+                </div>
+                <div class="form-group">
+                    <label>✍️ Sahihi ya Msimamizi</label>
+                    <div class="signature-pad" id="supervisorSignaturePad"><canvas id="supervisorSignatureCanvas"></canvas></div>
+                    <div class="signature-actions" style="display:flex; gap:10px; flex-wrap:wrap; margin:6px 0;">
+                        <button class="btn btn-warning btn-sm" onclick="clearSignature('supervisor')">🔄 Futa</button>
+                        <button class="btn btn-primary btn-sm" onclick="saveSignature('supervisor')">💾 Hifadhi</button>
+                        <span id="supervisorSignatureStatus" style="font-size:12px; color:#7f8c8d;">Hakuna sahihi</span>
+                    </div>
+                </div>
+
+                <button class="btn btn-purple" onclick="submitToInCharge()" style="margin:10px 0; width:100%;">
+                    📤 TUMA KWA MGANGA MFAWIDHI
+                </button>
+                <div id="supervisorSubmitStatus" style="font-size:12px; color:#7f8c8d; margin-top:6px; display:none;"></div>
+            </div>
+
+            <!-- ========================================================== -->
+            <!-- SEHEMU YA MGANGA MFAWIDHI -->
+            <!-- ========================================================== -->
+            <div id="inchargeSection" class="role-section">
+                <div class="section-divider incharge">
+                    🏢 SEHEMU YA MGANGA MFAWIDHI
+                    <span class="badge">Kagua na kukamilisha</span>
+                </div>
+
+                <!-- Preview -->
+                <div style="background:#f8f9fa; padding:12px; border-radius:8px; margin-bottom:12px; border:1px solid #ecf0f1;">
+                    <p style="font-size:13px; color:#1a5276; font-weight:600;">📋 Taarifa za Tathmini:</p>
+                    <div id="inchargePreview" style="font-size:13px; color:#2c3e50;"></div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group"><label>🏢 Jina</label><input type="text" id="inchargeName" placeholder="Jina la Mganga Mfawidhi" value=""></div>
+                    <div class="form-group"><label>📋 Wadhifa</label><select id="inchargeTitle"><option>Mganga Mfawidhi</option><option>Msimamizi wa Kituo</option><option>Mganga Mkuu</option></select></div>
+                </div>
+
+                <div class="form-group">
+                    <label>📊 Kiwango cha Jumla</label>
+                    <div class="rating-group" id="inchargeRating">
+                        <button class="rating-btn" onclick="selectRating('inchargeRating', this)">⭐ Bora Sana</button>
+                        <button class="rating-btn" onclick="selectRating('inchargeRating', this)">👍 Nzuri</button>
+                        <button class="rating-btn" onclick="selectRating('inchargeRating', this)">👌 Wastani</button>
+                        <button class="rating-btn" onclick="selectRating('inchargeRating', this)">⚠️ Inahitaji Kuboresha</button>
+                        <button class="rating-btn" onclick="selectRating('inchargeRating', this)">❌ Haikubaliki</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>✅ Mapendekezo</label>
+                    <select id="inchargeRecommendation" style="width:100%; padding:8px 12px; border:1px solid #d5d8dc; border-radius:6px;">
+                        <option value="continue">Endelea kama Kawaida</option>
+                        <option value="coaching">Ushauri na Mafunzo</option>
+                        <option value="training">Mafunzo ya Ziada</option>
+                        <option value="supervision">Uangalizi wa Ziada</option>
+                        <option value="performance-improvement">Mpango wa Kuboresha Utendaji</option>
+                        <option value="disciplinary">Hatua za Kinidhamu</option>
+                        <option value="promotion">Fikiria Kupandishwa Cheo</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>📝 Maoni ya Mganga Mfawidhi</label><textarea id="inchargeComments" placeholder="Tathmini ya mwisho..."></textarea></div>
+
+                <div class="form-row">
+                    <div class="form-group"><label>📅 Tarehe ya Ufuatiliaji</label><input type="date" id="inchargeFollowupDate"></div>
+                    <div class="form-group"><label>⏳ Muda wa Ufuatiliaji</label><select id="inchargeFollowupPeriod" style="width:100%; padding:8px 12px; border:1px solid #d5d8dc; border-radius:6px;"><option value="1-week">Wiki 1</option><option value="2-weeks">Wiki 2</option><option value="1-month" selected>Mwezi 1</option><option value="3-months">Miezi 3</option></select></div>
+                </div>
+
+                <div class="form-group">
+                    <label>✅ Sahihi ya Mganga Mfawidhi</label>
+                    <div style="display:flex; gap:16px; flex-wrap:wrap; padding:8px 0;">
+                        <label><input type="radio" name="inchargeSignoff" value="approved" checked> ✔️ Imekubaliwa</label>
+                        <label><input type="radio" name="inchargeSignoff" value="conditional"> ⚠️ Ina Masharti</label>
+                        <label><input type="radio" name="inchargeSignoff" value="rejected"> ❌ Imerejeshwa</label>
+                    </div>
+                </div>
+
+                <div style="background:#d5f5e3; border-left:4px solid #27ae60; padding:10px 14px; border-radius:6px; margin:8px 0;">
+                    <label><input type="checkbox" id="inchargeVerification"> <strong>Nathibitisha tathmini yangu ni sahihi</strong></label>
+                </div>
+                <div class="form-group">
+                    <label>✍️ Sahihi ya Mganga Mfawidhi</label>
+                    <div class="signature-pad" id="inchargeSignaturePad"><canvas id="inchargeSignatureCanvas"></canvas></div>
+                    <div class="signature-actions" style="display:flex; gap:10px; flex-wrap:wrap; margin:6px 0;">
+                        <button class="btn btn-warning btn-sm" onclick="clearSignature('incharge')">🔄 Futa</button>
+                        <button class="btn btn-primary btn-sm" onclick="saveSignature('incharge')">💾 Hifadhi</button>
+                        <span id="inchargeSignatureStatus" style="font-size:12px; color:#7f8c8d;">Hakuna sahihi</span>
+                    </div>
+                </div>
+
+                <button class="btn btn-success" onclick="completeAssessment()" style="margin:10px 0; width:100%;">
+                    ✅ KUKAMILISHA TATHMINI
+                </button>
+                <div id="inchargeSubmitStatus" style="font-size:12px; color:#7f8c8d; margin-top:6px; display:none;"></div>
+            </div>
+
+            <!-- ========================================================== -->
+            <!-- MUHTASARI WA ALAMA -->
+            <!-- ========================================================== -->
+            <div class="score-box" id="scoreBox">
+                <h3>📊 Muhtasari wa Tathmini</h3>
+                <div class="score-row">
+                    <div class="score-item"><span class="number" id="selfTotal">0</span><span class="label">Mtendakazi</span></div>
+                    <div class="score-item"><span class="number green" id="selfPercent">0%</span><span class="label">Asilimia</span></div>
+                    <div class="score-item"><span class="number purple" id="supTotal">0</span><span class="label">Msimamizi</span></div>
+                    <div class="score-item"><span class="number orange" id="supPercent">0%</span><span class="label">Asilimia</span></div>
+                </div>
+                <div class="score-row" style="margin-top:6px;">
+                    <div class="score-item"><span class="number teal" id="combinedScore">0%</span><span class="label">Alama ya Pamoja</span></div>
+                    <div class="score-item"><span class="number" id="gapScore">0</span><span class="label">Pengo</span></div>
+                    <div class="score-item"><span class="number" id="inchargeRatingDisplay">—</span><span class="label">Mganga Mfawidhi</span></div>
+                </div>
+                <div class="progress-bar"><div class="fill" id="combinedProgress" style="width:0%;"></div></div>
+                <div style="text-align:center; font-size:12px; margin-top:4px; color:#7f8c8d;">
+                    Hali: <span id="assessmentStatusText">⏳ Inasubiri</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- TAB: HISTORIA -->
+        <!-- ============================================================ -->
+        <div id="history" class="tab-content">
+            <h2 style="color:#1a5276; font-size:18px;">📂 Historia ya Tathmini</h2>
+            <div id="historyList"><div class="history-empty">Hakuna ripoti zilizohifadhiwa.</div></div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- TAB: INASUBIRI -->
+        <!-- ============================================================ -->
+        <div id="pending" class="tab-content">
+            <div class="section-divider status">⏳ Ripoti Zinazosubiri</div>
+            <div id="pendingReportsContainer"><div class="history-empty">Hakuna ripoti zinazosubiri.</div></div>
+            <button class="btn btn-primary btn-sm" onclick="loadPendingReports()">🔄 Sasisha</button>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
+            <div>Mtwara SDA Dispensary | Toleo Rahisi (2026)</div>
+        </div>
+
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ================================================================
+// DATA
+// ================================================================
+let allReports = [];
+let currentUser = null;
+let pendingReports = [];
+let currentReport = null;
+let generalState = [];
+let signatureData = { worker: null, supervisor: null, incharge: null };
+
+const GENERAL_CHECKLIST = [
+    'Nimewasili kazini mapema',
+    'Nimevaa sare safi na kitambulisho',
+    'Nimejisajili kwenye daftari',
+    'Nimehudhuria ibada ya asubuhi',
+    'Nimeandaa eneo la kazi',
+    'Nimekagua vifaa na zana',
+    'Nimewaonyesha huruma wagonjwa',
+    'Nimewasiliana vizuri na wenzangu',
+    'Nimeweka eneo langu safi',
+    'Nimekamilisha ripoti ya mwisho wa zamu'
+];
+
+// ================================================================
+// RENDER CHECKLIST
+// ================================================================
+function renderChecklist() {
+    generalState = new Array(GENERAL_CHECKLIST.length).fill(false);
+    const container = document.getElementById('generalChecklistContainer');
+    let html = '<div class="checklist-grid">';
+    GENERAL_CHECKLIST.forEach((item, i) => {
+        html += `
+            <div class="checklist-item">
+                <span>${i+1}. ${item}</span>
+                <div class="toggle" onclick="toggleCheck(${i})"><div class="thumb"></div></div>
+            </div>
+        `;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+function toggleCheck(i) {
+    const toggles = document.querySelectorAll('#generalChecklistContainer .toggle');
+    generalState[i] = !generalState[i];
+    toggles[i].classList.toggle('active');
+}
+
+// ================================================================
+// RATING
+// ================================================================
+function selectRating(groupId, btn) {
+    document.querySelectorAll(`#${groupId} .rating-btn`).forEach(b => b.classList.remove('selected', 'selected-excellent', 'selected-good', 'selected-average', 'selected-poor'));
+    btn.classList.add('selected');
+    const val = parseInt(btn.dataset.value) || 0;
+    if (val >= 5) btn.classList.add('selected-excellent');
+    else if (val >= 4) btn.classList.add('selected-good');
+    else if (val >= 3) btn.classList.add('selected-average');
+    else btn.classList.add('selected-poor');
+    updateScores();
+}
+
+function getRatingValue(groupId) {
+    const sel = document.querySelector(`#${groupId} .rating-btn.selected`);
+    if (!sel) return 0;
+    const val = parseInt(sel.dataset.value) || 0;
+    if (sel.textContent.includes('Bora Sana')) return 5;
+    if (sel.textContent.includes('Nzuri')) return 4;
+    if (sel.textContent.includes('Wastani')) return 3;
+    if (sel.textContent.includes('Inahitaji')) return 2;
+    if (sel.textContent.includes('Haikubaliki')) return 1;
+    return val || 0;
+}
+
+function getRatingLabel(groupId) {
+    const sel = document.querySelector(`#${groupId} .rating-btn.selected`);
+    return sel ? sel.textContent.trim() : 'Haijakadiriwa';
+}
+
+// ================================================================
+// UPDATE SCORES
+// ================================================================
+function updateScores() {
+    const selfScores = [
+        getRatingValue('selfPunctuality'),
+        getRatingValue('selfQuality'),
+        getRatingValue('selfCompassion'),
+        getRatingValue('selfTeamwork'),
+        getRatingValue('selfInitiative'),
+        getRatingValue('selfSafety')
+    ];
+    const selfTotal = selfScores.reduce((a,b) => a+b, 0);
+    const selfPercent = Math.round((selfTotal / 30) * 100);
+    
+    const supScores = [
+        getRatingValue('supPunctuality'),
+        getRatingValue('supQuality'),
+        getRatingValue('supCompassion'),
+        getRatingValue('supTeamwork'),
+        getRatingValue('supInitiative'),
+        getRatingValue('supSafety')
+    ];
+    const supTotal = supScores.reduce((a,b) => a+b, 0);
+    const supPercent = Math.round((supTotal / 30) * 100);
+    
+    document.getElementById('selfTotal').textContent = selfTotal;
+    document.getElementById('selfPercent').textContent = selfPercent + '%';
+    document.getElementById('supTotal').textContent = supTotal;
+    document.getElementById('supPercent').textContent = supPercent + '%';
+    
+    const combined = Math.round((selfPercent + supPercent) / 2);
+    document.getElementById('combinedScore').textContent = combined + '%';
+    document.getElementById('combinedProgress').style.width = combined + '%';
+    document.getElementById('gapScore').textContent = Math.abs(selfPercent - supPercent);
+    document.getElementById('inchargeRatingDisplay').textContent = getRatingLabel('inchargeRating');
+}
+
+// ================================================================
+// SIGNATURE
+// ================================================================
+function initSignaturePad(canvasId, padId, statusId) {
+    const canvas = document.getElementById(canvasId);
+    const pad = document.getElementById(padId);
+    if (!canvas || !pad) return null;
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = pad.clientWidth * dpr;
+    canvas.height = pad.clientHeight * dpr;
+    canvas.style.width = pad.clientWidth + 'px';
+    canvas.style.height = pad.clientHeight + 'px';
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    ctx.strokeStyle = '#1a5276';
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    let drawing = false, lastX = 0, lastY = 0;
+    
+    function getPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        const cx = e.clientX || e.touches?.[0]?.clientX || 0;
+        const cy = e.clientY || e.touches?.[0]?.clientY || 0;
+        return { x: cx - rect.left, y: cy - rect.top };
+    }
+    function start(e) {
+        e.preventDefault();
+        drawing = true;
+        const pos = getPos(e);
+        lastX = pos.x; lastY = pos.y;
+    }
+    function draw(e) {
+        e.preventDefault();
+        if (!drawing) return;
+        const pos = getPos(e);
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+        lastX = pos.x; lastY = pos.y;
+    }
+    function end(e) {
+        e?.preventDefault();
+        if (drawing) {
+            drawing = false;
+            const status = document.getElementById(statusId);
+            if (status) { status.textContent = '✅ Imesajiliwa'; status.style.color = '#27ae60'; }
+        }
+    }
+    canvas.addEventListener('mousedown', start);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', end);
+    canvas.addEventListener('mouseleave', end);
+    canvas.addEventListener('touchstart', e => { e.preventDefault(); const t = e.touches[0]; start({ clientX: t.clientX, clientY: t.clientY, preventDefault: ()=>{} }); }, { passive: false });
+    canvas.addEventListener('touchmove', e => { e.preventDefault(); const t = e.touches[0]; draw({ clientX: t.clientX, clientY: t.clientY, preventDefault: ()=>{} }); }, { passive: false });
+    canvas.addEventListener('touchend', end, { passive: false });
+    return { canvas, ctx, clear: function() {
+        ctx.clearRect(0, 0, canvas.width/dpr, canvas.height/dpr);
+        const status = document.getElementById(statusId);
+        if (status) { status.textContent = '🔄 Imefutwa'; status.style.color = '#e74c3c'; }
+    }};
+}
+
+let pads = { worker: null, supervisor: null, incharge: null };
+
+function initAllPads() {
+    pads.worker = initSignaturePad('workerSignatureCanvas', 'workerSignaturePad', 'workerSignatureStatus');
+    pads.supervisor = initSignaturePad('supervisorSignatureCanvas', 'supervisorSignaturePad', 'supervisorSignatureStatus');
+    pads.incharge = initSignaturePad('inchargeSignatureCanvas', 'inchargeSignaturePad', 'inchargeSignatureStatus');
+}
+
+function clearSignature(who) {
+    if (pads[who]) { pads[who].clear(); signatureData[who] = null; }
+}
+
+function saveSignature(who) {
+    const map = { worker: 'workerSignatureCanvas', supervisor: 'supervisorSignatureCanvas', incharge: 'inchargeSignatureCanvas' };
+    const statusMap = { worker: 'workerSignatureStatus', supervisor: 'supervisorSignatureStatus', incharge: 'inchargeSignatureStatus' };
+    const canvas = document.getElementById(map[who]);
+    if (canvas) {
+        signatureData[who] = canvas.toDataURL();
+        document.getElementById(statusMap[who]).textContent = '✅ Sahihi imehifadhiwa';
+        document.getElementById(statusMap[who]).style.color = '#27ae60';
+        showToast('✅ Sahihi imehifadhiwa!', 'success');
+    }
+}
+
+// ================================================================
+// SUBMIT: WORKER → SUPERVISOR
+// ================================================================
+function submitToSupervisor() {
+    if (!document.getElementById('workerVerification').checked) {
+        showToast('⚠️ Thibitisha uhalisia wa taarifa zako', 'warning');
+        return;
+    }
+    if (!signatureData.worker) {
+        showToast('⚠️ Chora sahihi yako', 'warning');
+        return;
+    }
+    
+    const workerName = document.getElementById('workerName').value.trim();
+    if (!workerName) {
+        showToast('⚠️ Tafadhali weka jina lako', 'warning');
+        return;
+    }
+    
+    // Collect worker data
+    const data = collectWorkerData();
+    
+    // Create report
+    currentReport = {
+        id: Date.now(),
+        reportId: 'RPT-' + Date.now().toString().slice(-8),
+        date: data.date,
+        worker: data.worker,
+        role: data.role,
+        shift: data.shift,
+        department: data.department,
+        patientsServed: data.patientsServed,
+        stats: data.stats,
+        generalChecklist: generalState.slice(),
+        self: data.self,
+        supervisor: null,
+        supervisorAssessment: null,
+        incharge: null,
+        status: 'worker_done', // worker_done → supervisor_done → complete
+        sentBy: data.worker,
+        sentTo: 'supervisor',
+        savedAt: new Date().toISOString()
+    };
+    
+    // Save to storage
+    allReports.unshift(currentReport);
+    saveToStorage();
+    
+    // Update UI
+    document.getElementById('workerSubmitStatus').style.display = 'block';
+    document.getElementById('workerSubmitStatus').innerHTML = '✅ Ripoti imetumwa kwa Msimamizi!';
+    document.getElementById('workerSubmitStatus').style.color = '#27ae60';
+    
+    // Show worker section as done
+    document.getElementById('workerSection').classList.remove('active');
+    document.getElementById('stepWorker').className = 'status-step done';
+    document.getElementById('stepWorker').innerHTML = '<span class="num">✓</span> Mtendakazi';
+    document.getElementById('statusMessage').textContent = '⏳ Inasubiri Msimamizi';
+    
+    showToast('✅ Ripoti imetumwa kwa Msimamizi!', 'success');
+    
+    // Load pending for supervisor if logged in as supervisor
+    if (currentUser === 'supervisor' || currentUser === 'admin') {
+        loadPendingReports();
+    }
+}
+
+function collectWorkerData() {
+    const selfScores = [
+        getRatingValue('selfPunctuality'),
+        getRatingValue('selfQuality'),
+        getRatingValue('selfCompassion'),
+        getRatingValue('selfTeamwork'),
+        getRatingValue('selfInitiative'),
+        getRatingValue('selfSafety')
+    ];
+    return {
+        worker: document.getElementById('workerName').value,
+        role: document.getElementById('workerRole').value,
+        date: document.getElementById('reportDate').value || new Date().toISOString().split('T')[0],
+        shift: document.getElementById('workerShift').value,
+        department: document.getElementById('department').value || 'Clinical',
+        patientsServed: parseInt(document.getElementById('statPatients').value) || 0,
+        stats: {
+            ultrasound: parseInt(document.getElementById('statUltrasound').value) || 0,
+            referral: parseInt(document.getElementById('statReferral').value) || 0,
+            followup: parseInt(document.getElementById('statFollowup').value) || 0
+        },
+        self: {
+            scores: selfScores,
+            total: selfScores.reduce((a,b) => a+b, 0),
+            percent: Math.round((selfScores.reduce((a,b) => a+b, 0) / 30) * 100),
+            labels: [
+                getRatingLabel('selfPunctuality'),
+                getRatingLabel('selfQuality'),
+                getRatingLabel('selfCompassion'),
+                getRatingLabel('selfTeamwork'),
+                getRatingLabel('selfInitiative'),
+                getRatingLabel('selfSafety')
+            ],
+            comments: document.getElementById('selfComments').value,
+            verified: document.getElementById('workerVerification').checked,
+            signature: signatureData.worker
+        }
+    };
+}
+
+// ================================================================
+// SUBMIT: SUPERVISOR → INCHARGE
+// ================================================================
+function submitToInCharge() {
+    if (!document.getElementById('supervisorVerification').checked) {
+        showToast('⚠️ Thibitisha uhalisia wa tathmini yako', 'warning');
+        return;
+    }
+    if (!signatureData.supervisor) {
+        showToast('⚠️ Chora sahihi yako', 'warning');
+        return;
+    }
+    
+    const supScores = [
+        getRatingValue('supPunctuality'),
+        getRatingValue('supQuality'),
+        getRatingValue('supCompassion'),
+        getRatingValue('supTeamwork'),
+        getRatingValue('supInitiative'),
+        getRatingValue('supSafety')
+    ];
+    
+    // Find the current report
+    const report = findCurrentReport();
+    if (report) {
+        report.supervisor = document.getElementById('supervisorName').value || 'Msimamizi';
+        report.supervisorTitle = document.getElementById('supervisorTitle').value;
+        report.supervisorAssessment = {
+            scores: supScores,
+            total: supScores.reduce((a,b) => a+b, 0),
+            percent: Math.round((supScores.reduce((a,b) => a+b, 0) / 30) * 100),
+            labels: [
+                getRatingLabel('supPunctuality'),
+                getRatingLabel('supQuality'),
+                getRatingLabel('supCompassion'),
+                getRatingLabel('supTeamwork'),
+                getRatingLabel('supInitiative'),
+                getRatingLabel('supSafety')
+            ],
+            comments: document.getElementById('supComments').value,
+            verified: document.getElementById('supervisorVerification').checked,
+            signature: signatureData.supervisor
+        };
+        report.status = 'supervisor_done';
+        report.sentTo = 'incharge';
+        report.sentBy = report.supervisor;
+        
+        // Update combined score
+        const combined = Math.round((report.self.percent + report.supervisorAssessment.percent) / 2);
+        report.combined = combined;
+        report.gap = Math.abs(report.self.percent - report.supervisorAssessment.percent);
+        
+        saveToStorage();
+    }
+    
+    // Update UI
+    document.getElementById('supervisorSubmitStatus').style.display = 'block';
+    document.getElementById('supervisorSubmitStatus').innerHTML = '✅ Ripoti imetumwa kwa Mganga Mfawidhi!';
+    document.getElementById('supervisorSubmitStatus').style.color = '#27ae60';
+    
+    document.getElementById('supervisorSection').classList.remove('active');
+    document.getElementById('stepSupervisor').className = 'status-step done';
+    document.getElementById('stepSupervisor').innerHTML = '<span class="num">✓</span> Msimamizi';
+    document.getElementById('statusMessage').textContent = '⏳ Inasubiri Mganga Mfawidhi';
+    
+    showToast('✅ Ripoti imetumwa kwa Mganga Mfawidhi!', 'success');
+    
+    // Load pending for incharge if logged in as incharge
+    if (currentUser === 'incharge' || currentUser === 'admin') {
+        loadPendingReports();
+    }
+}
+
+// ================================================================
+// COMPLETE: INCHARGE
+// ================================================================
+function completeAssessment() {
+    if (!document.getElementById('inchargeVerification').checked) {
+        showToast('⚠️ Thibitisha uhalisia wa tathmini yako', 'warning');
+        return;
+    }
+    if (!signatureData.incharge) {
+        showToast('⚠️ Chora sahihi yako', 'warning');
+        return;
+    }
+    
+    const report = findCurrentReport();
+    if (report) {
+        report.incharge = {
+            name: document.getElementById('inchargeName').value || 'Mganga Mfawidhi',
+            title: document.getElementById('inchargeTitle').value,
+            rating: getRatingValue('inchargeRating'),
+            ratingLabel: getRatingLabel('inchargeRating'),
+            recommendation: document.getElementById('inchargeRecommendation').value,
+            comments: document.getElementById('inchargeComments').value,
+            followupDate: document.getElementById('inchargeFollowupDate').value || '',
+            followupPeriod: document.getElementById('inchargeFollowupPeriod').value,
+            signoff: document.querySelector('input[name="inchargeSignoff"]:checked')?.value || 'approved',
+            verified: document.getElementById('inchargeVerification').checked,
+            signature: signatureData.incharge
+        };
+        report.status = 'complete';
+        report.sentTo = 'complete';
+        report.sentBy = report.incharge.name;
+        
+        saveToStorage();
+    }
+    
+    // Update UI
+    document.getElementById('inchargeSubmitStatus').style.display = 'block';
+    document.getElementById('inchargeSubmitStatus').innerHTML = '✅ TATHMINI IMEKAMILIKA!';
+    document.getElementById('inchargeSubmitStatus').style.color = '#27ae60';
+    document.getElementById('inchargeSubmitStatus').style.fontWeight = '700';
+    
+    document.getElementById('inchargeSection').classList.remove('active');
+    document.getElementById('stepIncharge').className = 'status-step done';
+    document.getElementById('stepIncharge').innerHTML = '<span class="num">✓</span> Mganga Mfawidhi';
+    document.getElementById('statusMessage').textContent = '✅ Tathmini Imekamilika!';
+    document.getElementById('statusMessage').style.color = '#27ae60';
+    
+    document.getElementById('assessmentStatusText').textContent = '✅ Imekamilika';
+    document.getElementById('assessmentStatusText').style.color = '#27ae60';
+    
+    showToast('🎉 TATHMINI IMEKAMILIKA!', 'success');
+    renderHistory();
+}
+
+// ================================================================
+// FIND CURRENT REPORT
+// ================================================================
+function findCurrentReport() {
+    // Find the most recent report that is not complete
+    let report = allReports.find(r => r.status !== 'complete');
+    if (!report) {
+        // Create new if not exists
+        const data = collectWorkerData();
+        report = {
+            id: Date.now(),
+            reportId: 'RPT-' + Date.now().toString().slice(-8),
+            date: data.date,
+            worker: data.worker,
+            role: data.role,
+            shift: data.shift,
+            department: data.department,
+            patientsServed: data.patientsServed,
+            stats: data.stats,
+            generalChecklist: generalState.slice(),
+            self: data.self,
+            supervisor: null,
+            supervisorAssessment: null,
+            incharge: null,
+            status: 'worker_done',
+            sentBy: data.worker,
+            sentTo: 'supervisor',
+            savedAt: new Date().toISOString()
+        };
+        allReports.unshift(report);
+        saveToStorage();
+    }
+    return report;
+}
+
+// ================================================================
+// PENDING REPORTS
+// ================================================================
+function loadPendingReports() {
+    if (!currentUser) return;
+    
+    if (currentUser === 'supervisor' || currentUser === 'admin') {
+        pendingReports = allReports.filter(r => r.status === 'worker_done');
+    } else if (currentUser === 'incharge') {
+        pendingReports = allReports.filter(r => r.status === 'supervisor_done');
+    } else {
+        pendingReports = [];
+    }
+    renderPendingReports();
+}
+
+function renderPendingReports() {
+    const container = document.getElementById('pendingReportsContainer');
+    if (pendingReports.length === 0) {
+        container.innerHTML = '<div class="history-empty">✅ Hakuna ripoti zinazosubiri.</div>';
+        return;
+    }
+    let html = '';
+    pendingReports.forEach((r, i) => {
+        html += `
+            <div class="pending-item">
+                <div class="title">📋 ${r.worker} - ${r.role}</div>
+                <div class="sub">📅 ${r.date} · 👤 Imeletwa na: ${r.sentBy}</div>
+                <div class="sub">📊 Alama ya Mtendakazi: ${r.self?.percent || 0}%</div>
+                <div class="actions">
+                    <button class="btn btn-primary btn-sm" onclick="openPendingReport(${i})">👁️ Kagua</button>
+                    <button class="btn btn-success btn-sm" onclick="approvePendingReport(${i})">✅ Kamilisha</button>
+                </div>
+            </div>
+        `;
+    });
+    container.innerHTML = html;
+}
+
+function openPendingReport(index) {
+    const r = pendingReports[index];
+    if (!r) return;
+    
+    switchTab('assessment');
+    // Load data into the appropriate section
+    if (currentUser === 'supervisor' || currentUser === 'admin') {
+        document.getElementById('supervisorSection').classList.add('active');
+        document.getElementById('workerPreview').innerHTML = `
+            <strong>Jina:</strong> ${r.worker}<br>
+            <strong>Kazi:</strong> ${r.role}<br>
+            <strong>Tarehe:</strong> ${r.date}<br>
+            <strong>Alama:</strong> ${r.self?.percent || 0}%
+        `;
+        document.getElementById('supervisorName').value = currentUser || '';
+    } else if (currentUser === 'incharge') {
+        document.getElementById('inchargeSection').classList.add('active');
+        const combined = r.combined || Math.round((r.self?.percent || 0 + r.supervisorAssessment?.percent || 0) / 2);
+        document.getElementById('inchargePreview').innerHTML = `
+            <strong>Mtendakazi:</strong> ${r.worker} (${r.role})<br>
+            <strong>Alama ya Mtendakazi:</strong> ${r.self?.percent || 0}%<br>
+            <strong>Alama ya Msimamizi:</strong> ${r.supervisorAssessment?.percent || 0}%<br>
+            <strong>Alama ya Pamoja:</strong> ${combined || 0}%
+        `;
+        document.getElementById('inchargeName').value = currentUser || '';
+    }
+    
+    showToast('👁️ Kagua ripoti na kamilisha sehemu yako', 'info');
+}
+
+function approvePendingReport(index) {
+    const r = pendingReports[index];
+    if (!r) return;
+    if (!confirm(`Je, unataka kukamilisha ripoti ya ${r.worker}?`)) return;
+    
+    const mainIndex = allReports.findIndex(a => a.id === r.id);
+    if (mainIndex === -1) return;
+    
+    if (currentUser === 'supervisor' || currentUser === 'admin') {
+        // Show supervisor section
+        switchTab('assessment');
+        document.getElementById('supervisorSection').classList.add('active');
+        document.getElementById('workerPreview').innerHTML = `
+            <strong>Jina:</strong> ${r.worker}<br>
+            <strong>Kazi:</strong> ${r.role}<br>
+            <strong>Tarehe:</strong> ${r.date}<br>
+            <strong>Alama:</strong> ${r.self?.percent || 0}%
+        `;
+        document.getElementById('supervisorName').value = currentUser || '';
+        showToast('👁️ Kagua na kamilisha sehemu ya Msimamizi', 'info');
+    } else if (currentUser === 'incharge') {
+        // Show incharge section
+        switchTab('assessment');
+        document.getElementById('inchargeSection').classList.add('active');
+        const combined = r.combined || Math.round((r.self?.percent || 0 + r.supervisorAssessment?.percent || 0) / 2);
+        document.getElementById('inchargePreview').innerHTML = `
+            <strong>Mtendakazi:</strong> ${r.worker} (${r.role})<br>
+            <strong>Alama ya Mtendakazi:</strong> ${r.self?.percent || 0}%<br>
+            <strong>Alama ya Msimamizi:</strong> ${r.supervisorAssessment?.percent || 0}%<br>
+            <strong>Alama ya Pamoja:</strong> ${combined || 0}%
+        `;
+        document.getElementById('inchargeName').value = currentUser || '';
+        showToast('👁️ Kagua na kamilisha sehemu ya Mganga Mfawidhi', 'info');
+    }
+}
+
+// ================================================================
+// LOGIN
+// ================================================================
+function login() {
+    const user = document.getElementById('loginUsername').value.trim().toLowerCase();
+    const pass = document.getElementById('loginPassword').value;
+    
+    const validUsers = ['worker', 'supervisor', 'incharge', 'admin'];
+    
+    if (validUsers.includes(user) && pass === '1234') {
+        currentUser = user;
+        document.getElementById('loginSection').style.display = 'none';
+        document.getElementById('mainApp').style.display = 'block';
+        
+        const roleLabels = { 
+            'worker': '🧑‍💼 Mtendakazi', 
+            'supervisor': '👔 Msimamizi', 
+            'incharge': '🏢 Mganga Mfawidhi',
+            'admin': '👑 Msimamizi Mkuu'
+        };
+        document.getElementById('userBadge').textContent = roleLabels[user] || user;
+        document.getElementById('userBadge').className = 'user-badge ' + (user === 'admin' ? 'admin' : user);
+        document.getElementById('currentUserDisplay').textContent = roleLabels[user] || user;
+        
+        // Set date
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('reportDate').value = today;
+        document.getElementById('inchargeFollowupDate').value = today;
+        
+        // Generate assessment ID
+        document.getElementById('assessmentId').textContent = 'MTW-' + Date.now().toString().slice(-8) + '-' + Math.random().toString(36).substring(2, 6).toUpperCase();
+        
+        // Show appropriate sections
+        if (user === 'worker') {
+            document.getElementById('workerSection').classList.add('active');
+            document.getElementById('stepWorker').className = 'status-step active';
+            document.getElementById('statusMessage').textContent = '📝 Jaza sehemu yako';
+        } else if (user === 'supervisor' || user === 'admin') {
+            document.getElementById('workerSection').classList.add('active');
+            document.getElementById('stepWorker').className = 'status-step done';
+            document.getElementById('stepWorker').innerHTML = '<span class="num">✓</span> Mtendakazi';
+            document.getElementById('stepSupervisor').className = 'status-step active';
+            document.getElementById('statusMessage').textContent = '👔 Jaza sehemu ya Msimamizi';
+            document.getElementById('pendingBtn').style.display = 'inline-block';
+            loadPendingReports();
+        } else if (user === 'incharge') {
+            document.getElementById('workerSection').classList.add('active');
+            document.getElementById('stepWorker').className = 'status-step done';
+            document.getElementById('stepWorker').innerHTML = '<span class="num">✓</span> Mtendakazi';
+            document.getElementById('stepSupervisor').className = 'status-step done';
+            document.getElementById('stepSupervisor').innerHTML = '<span class="num">✓</span> Msimamizi';
+            document.getElementById('stepIncharge').className = 'status-step active';
+            document.getElementById('statusMessage').textContent = '🏢 Jaza sehemu ya Mganga Mfawidhi';
+            document.getElementById('pendingBtn').style.display = 'inline-block';
+            loadPendingReports();
+        }
+        
+        renderChecklist();
+        initAllPads();
+        renderHistory();
+        updateScores();
+        
+        showToast('✅ Karibu ' + roleLabels[user] + '!', 'success');
+        
+        // If no data, show hint
+        if (allReports.length === 0) {
+            showToast('💡 Jaza fomu na utume kwa hatua inayofuata', 'warning');
+        }
+    } else {
+        showToast('❌ Jina au nenosiri si sahihi', 'error');
+    }
+}
+
+function logout() {
+    if (!confirm('Je, unataka kutoka kwenye mfumo?')) return;
+    currentUser = null;
+    document.getElementById('loginSection').style.display = 'block';
+    document.getElementById('mainApp').style.display = 'none';
+    showToast('🚪 Umetoka', 'warning');
+}
+
+// ================================================================
+// HISTORY
+// ================================================================
+function renderHistory() {
+    const container = document.getElementById('historyList');
+    if (allReports.length === 0) {
+        container.innerHTML = '<div class="history-empty">Hakuna ripoti zilizohifadhiwa.</div>';
+        return;
+    }
+    let html = '';
+    allReports.slice(0, 20).forEach((r, i) => {
+        const statusMap = {
+            'worker_done': '⏳ Inasubiri Msimamizi',
+            'supervisor_done': '⏳ Inasubiri Mganga Mfawidhi',
+            'complete': '✅ Imekamilika'
+        };
+        const status = statusMap[r.status] || '⏳ Inasubiri';
+        const combined = r.combined || Math.round((r.self?.percent || 0 + r.supervisorAssessment?.percent || 0) / 2);
+        html += `
+            <div class="history-item" style="padding:10px 12px; border-bottom:1px solid #ecf0f1; display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px;">
+                <div style="font-size:13px;">
+                    <strong>${r.worker}</strong> - ${r.role}
+                    <br><span style="font-size:11px; color:#7f8c8d;">📅 ${r.date} · 📤 ${r.sentBy || 'N/A'}</span>
+                    <span style="margin-left:6px; font-weight:600; color:#1a5276;">${combined}%</span>
+                    <span style="margin-left:6px; font-size:10px; color:${r.status === 'complete' ? '#27ae60' : '#f39c12'};">${status}</span>
+                </div>
+                <div>
+                    <button class="btn btn-primary btn-sm" onclick="viewReport(${i})">👁️ Angalia</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteReport(${i})">✕</button>
+                </div>
+            </div>
+        `;
+    });
+    container.innerHTML = html;
+}
+
+function viewReport(index) {
+    const r = allReports[index];
+    if (!r) return;
+    const combined = r.combined || Math.round((r.self?.percent || 0 + r.supervisorAssessment?.percent || 0) / 2);
+    alert(
+        '📋 RIPOTI YA TATHMINI\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
+        `Kitambulisho: ${r.reportId}\n` +
+        `Mtendakazi: ${r.worker}\n` +
+        `Kazi: ${r.role}\n` +
+        `Tarehe: ${r.date}\n` +
+        `Wagonjwa: ${r.patientsServed || 0}\n` +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
+        `Mtendakazi: ${r.self?.percent || 0}%\n` +
+        `Msimamizi: ${r.supervisorAssessment?.percent || 0}%\n` +
+        `Pamoja: ${combined}%\n` +
+        `Pengo: ${r.gap || 0}%\n` +
+        `Hali: ${r.status === 'complete' ? '✅ Imekamilika' : '⏳ Inasubiri'}\n` +
+        `📤 Imetumwa na: ${r.sentBy || 'N/A'}`
+    );
+}
+
+function deleteReport(index) {
+    if (confirm('Futa ripoti hii?')) {
+        allReports.splice(index, 1);
+        saveToStorage();
+        renderHistory();
+        showToast('🗑️ Ripoti imefutwa', 'warning');
+    }
+}
+
+// ================================================================
+// TABS
+// ================================================================
+function switchTab(tab) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tab).classList.add('active');
+    const btns = document.querySelectorAll('.tab-btn');
+    btns.forEach(b => {
+        if (b.textContent.includes(tab) || b.onclick?.toString().includes(tab)) {
+            b.style.background = '#1a5276';
+            b.style.color = '#fff';
+        } else {
+            b.style.background = '#ecf0f1';
+            b.style.color = '#2c3e50';
+        }
+    });
+    if (tab === 'history') renderHistory();
+    if (tab === 'pending') loadPendingReports();
+}
+
+// ================================================================
+// STORAGE
+// ================================================================
+function saveToStorage() {
+    try { localStorage.setItem('mtwara_reports_simple', JSON.stringify(allReports)); } catch(e) {}
+}
+
+function loadFromStorage() {
+    try {
+        const stored = localStorage.getItem('mtwara_reports_simple');
+        if (stored) {
+            allReports = JSON.parse(stored);
+            renderHistory();
+        }
+    } catch(e) {}
+}
+
+// ================================================================
+// TOAST
+// ================================================================
+function showToast(msg, type = 'success') {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.className = 'toast ' + type;
+    clearTimeout(toast._timer);
+    void toast.offsetWidth;
+    toast.classList.add('show');
+    toast._timer = setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// ================================================================
+// INIT
+// ================================================================
+document.addEventListener('DOMContentLoaded', function() {
+    loadFromStorage();
+    renderChecklist();
+    updateScores();
+    initAllPads();
+});
+</script>
+
+</body>
+</html>
