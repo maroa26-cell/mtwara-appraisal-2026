@@ -181,11 +181,205 @@
             background: #1a5276;
             color: #fff;
         }
-        .rating-btn.selected-excellent { border-color: #27ae60; background: #27ae60; color: #fff; }
-        .rating-btn.selected-good { border-color: #2e86c1; background: #2e86c1; color: #fff; }
-        .rating-btn.selected-average { border-color: #f39c12; background: #f39c12; color: #fff; }
-        .rating-btn.selected-poor { border-color: #e74c3c; background: #e74c3c; color: #fff; }
 
+        .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+        .btn:active { transform: scale(0.97); }
+        .btn-success { background: #27ae60; color: #fff; }
+        .btn-success:hover { background: #1e8449; }
+        .btn-primary { background: #1a5276; color: #fff; }
+        .btn-primary:hover { background: #154360; }
+        .btn-danger { background: #e74c3c; color: #fff; }
+        .btn-danger:hover { background: #c0392b; }
+        .btn-warning { background: #f39c12; color: #fff; }
+        .btn-warning:hover { background: #d68910; }
+        .btn-sm { padding: 4px 12px; font-size: 11px; }
+        .btn-block { width: 100%; }
+
+        .signature-pad {
+            border: 2px dashed #1a5276;
+            border-radius: 10px;
+            background: #fafbfc;
+            touch-action: none;
+            width: 100%;
+            max-width: 400px;
+            height: 100px;
+            cursor: crosshair;
+            margin: 6px 0;
+        }
+        .signature-pad canvas { width: 100%; height: 100%; border-radius: 8px; touch-action: none; }
+        .signature-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0; }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            max-width: 400px;
+            width: 90%;
+            background: #1a1a2e;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 13px;
+            text-align: center;
+            z-index: 999;
+            opacity: 0;
+            transition: all 0.4s ease;
+            pointer-events: none;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.20);
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast.success { background: #27ae60; }
+        .toast.warning { background: #f39c12; color: #1a1a2e; }
+        .toast.error { background: #e74c3c; }
+
+        .footer {
+            text-align: center;
+            margin-top: 22px;
+            padding-top: 14px;
+            border-top: 2px solid #ecf0f1;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+
+        .role-section { display: none; }
+        .role-section.active { display: block; }
+        .pending-item {
+            background: #fef9e7;
+            border-left: 4px solid #f39c12;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+        }
+        .pending-item .title { font-weight: 600; font-size: 14px; }
+        .pending-item .sub { font-size: 12px; color: #7f8c8d; }
+        .history-empty { text-align: center; color: #7f8c8d; padding: 20px 0; }
+
+        .tabs {
+            display: flex;
+            gap: 6px;
+            margin: 14px 0 16px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            background: #ecf0f1;
+            color: #2c3e50;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.3s;
+            flex: 1;
+            text-align: center;
+        }
+        .tab-btn:hover { background: #d5dbdb; }
+        .tab-btn.active { background: #1a5276; color: #fff; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .user-tools {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            align-items: center;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            background: #eaf2f8;
+            color: #1a5276;
+        }
+
+        .bin-status {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .bin-status.active { background: #d5f5e3; color: #1a7a3a; }
+        .bin-status.inactive { background: #fadbd8; color: #922b21; }
+
+        .info-box {
+            background: #eaf2f8;
+            border-left: 4px solid #1a5276;
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin: 8px 0;
+            font-size: 13px;
+        }
+        .warning-box {
+            background: #fef9e7;
+            border-left: 4px solid #e74c3c;
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin: 8px 0;
+            font-size: 13px;
+            color: #7d6608;
+        }
+        .success-box {
+            background: #d5f5e3;
+            border-left: 4px solid #27ae60;
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin: 8px 0;
+        }
+        .checklist-tools {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            align-items: center;
+        }
+        .checklist-tools input {
+            flex: 1;
+            padding: 6px 10px;
+            border: 1px solid #d5d8dc;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        .checklist-tools .btn-sm { padding: 6px 14px; }
+        .checklist-item .delete-btn {
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 11px;
+            cursor: pointer;
+            margin-left: auto;
+        }
+        .checklist-item .delete-btn:hover { background: #c0392b; }
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 16px;
+            padding: 4px 0;
+        }
+        .checklist-grid .checklist-item { border-bottom: none; padding: 4px 0; }
+        @media (max-width: 600px) { .checklist-grid { grid-template-columns: 1fr; } }
         .checklist-item {
             display: flex;
             align-items: center;
@@ -231,359 +425,12 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.12);
         }
         .checklist-item .toggle.active .thumb { left: 20px; }
-        .checklist-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6px 16px;
-            padding: 4px 0;
-        }
-        .checklist-grid .checklist-item { border-bottom: none; padding: 4px 0; }
-        @media (max-width: 600px) { .checklist-grid { grid-template-columns: 1fr; } }
-
-        .btn {
-            padding: 10px 24px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: inherit;
-        }
-        .btn:active { transform: scale(0.97); }
-        .btn-success { background: #27ae60; color: #fff; }
-        .btn-success:hover { background: #1e8449; }
-        .btn-purple { background: #8e44ad; color: #fff; }
-        .btn-purple:hover { background: #6c3483; }
-        .btn-primary { background: #1a5276; color: #fff; }
-        .btn-primary:hover { background: #154360; }
-        .btn-danger { background: #e74c3c; color: #fff; }
-        .btn-danger:hover { background: #c0392b; }
-        .btn-warning { background: #f39c12; color: #fff; }
-        .btn-warning:hover { background: #d68910; }
-        .btn-sm { padding: 4px 12px; font-size: 11px; }
-        .btn-block { width: 100%; }
-
-        .signature-pad {
-            border: 2px dashed #1a5276;
-            border-radius: 10px;
-            background: #fafbfc;
-            touch-action: none;
-            width: 100%;
-            max-width: 400px;
-            height: 100px;
-            cursor: crosshair;
-            margin: 6px 0;
-        }
-        .signature-pad canvas { width: 100%; height: 100%; border-radius: 8px; touch-action: none; }
-        .signature-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0; }
-
-        .score-box {
-            background: #eaf2f8;
-            border-radius: 10px;
-            padding: 14px 18px;
-            margin: 14px 0;
-            border-left: 5px solid #1a5276;
-        }
-        .score-box h3 { color: #1a5276; margin-bottom: 6px; font-size: 15px; }
-        .score-row {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .score-item {
-            background: #fff;
-            padding: 8px 14px;
-            border-radius: 6px;
-            min-width: 80px;
-            text-align: center;
-            flex: 1;
-        }
-        .score-item .number { font-size: 22px; font-weight: 800; color: #1a5276; display: block; }
-        .score-item .label { font-size: 10px; color: #7f8c8d; text-transform: uppercase; }
-        .score-item .number.green { color: #27ae60; }
-        .score-item .number.orange { color: #f39c12; }
-        .score-item .number.purple { color: #8e44ad; }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e8ecf1;
-            border-radius: 4px;
-            overflow: hidden;
-            margin: 4px 0 2px;
-        }
-        .progress-bar .fill {
-            height: 100%;
-            border-radius: 4px;
-            transition: width 0.5s ease;
-            background: linear-gradient(90deg, #27ae60, #1a5276);
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            max-width: 400px;
-            width: 90%;
-            background: #1a1a2e;
-            color: #fff;
-            padding: 10px 18px;
-            border-radius: 10px;
-            font-size: 13px;
-            text-align: center;
-            z-index: 999;
-            opacity: 0;
-            transition: all 0.4s ease;
-            pointer-events: none;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.20);
-        }
-        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-        .toast.success { background: #27ae60; }
-        .toast.warning { background: #f39c12; color: #1a1a2e; }
-        .toast.error { background: #e74c3c; }
-
-        .footer {
-            text-align: center;
-            margin-top: 22px;
-            padding-top: 14px;
-            border-top: 2px solid #ecf0f1;
-            font-size: 12px;
-            color: #7f8c8d;
-        }
-        .footer .verse {
-            font-style: italic;
-            color: #1a5276;
-            font-size: 13px;
-            margin-bottom: 4px;
-        }
-
-        .role-section { display: none; }
-        .role-section.active { display: block; }
-        .pending-item {
-            background: #fef9e7;
-            border-left: 4px solid #f39c12;
-            padding: 12px 16px;
-            margin-bottom: 8px;
-            border-radius: 4px;
-        }
-        .pending-item .title { font-weight: 600; font-size: 14px; }
-        .pending-item .sub { font-size: 12px; color: #7f8c8d; }
-        .pending-item .actions { margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap; }
-        .history-empty { text-align: center; color: #7f8c8d; padding: 20px 0; }
-
-        .tabs {
-            display: flex;
-            gap: 6px;
-            margin: 14px 0 16px;
-            flex-wrap: wrap;
-        }
-        .tab-btn {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 6px;
-            background: #ecf0f1;
-            color: #2c3e50;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 13px;
-            transition: 0.3s;
-            flex: 1;
-            text-align: center;
-        }
-        .tab-btn:hover { background: #d5dbdb; }
-        .tab-btn.active { background: #1a5276; color: #fff; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-
-        .user-tools {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin: 10px 0;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            align-items: center;
-        }
-
-        .preview-box {
-            background: #f8f9fa;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            border: 1px solid #ecf0f1;
-        }
-        .preview-box .title {
-            font-size: 13px;
-            color: #1a5276;
-            font-weight: 600;
-        }
-        .preview-box .content {
-            font-size: 13px;
-            color: #2c3e50;
-        }
-
-        .role-badge {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 600;
-            background: #eaf2f8;
-            color: #1a5276;
-        }
-
-        .loader {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #ecf0f1;
-            border-top: 3px solid #1a5276;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .status-online {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #27ae60;
-            margin-right: 6px;
-        }
-        .status-offline {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #e74c3c;
-            margin-right: 6px;
-        }
-        .bin-status {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 600;
-        }
-        .bin-status.active { background: #d5f5e3; color: #1a7a3a; }
-        .bin-status.inactive { background: #fadbd8; color: #922b21; }
-        .info-box {
-            background: #eaf2f8;
-            border-left: 4px solid #1a5276;
-            padding: 10px 14px;
-            border-radius: 6px;
-            margin: 8px 0;
-            font-size: 13px;
-        }
-        .warning-box {
-            background: #fef9e7;
-            border-left: 4px solid #e74c3c;
-            padding: 10px 14px;
-            border-radius: 6px;
-            margin: 8px 0;
-            font-size: 13px;
-            color: #7d6608;
-        }
-        .success-box {
-            background: #d5f5e3;
-            border-left: 4px solid #27ae60;
-            padding: 10px 14px;
-            border-radius: 6px;
-            margin: 8px 0;
-        }
-        .score-summary {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 10px;
-            margin: 10px 0;
-        }
-        .score-card {
-            background: #fff;
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-            border: 1px solid #ecf0f1;
-        }
-        .score-card .value {
-            font-size: 24px;
-            font-weight: 800;
-            color: #1a5276;
-        }
-        .score-card .label {
-            font-size: 11px;
-            color: #7f8c8d;
-        }
-        .score-card .value.green { color: #27ae60; }
-        .score-card .value.orange { color: #f39c12; }
-        .score-card .value.purple { color: #8e44ad; }
-        .score-card .value.red { color: #e74c3c; }
-
-        /* Zana za kuongeza checklist */
-        .checklist-tools {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin: 10px 0;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            align-items: center;
-        }
-        .checklist-tools input {
-            flex: 1;
-            padding: 6px 10px;
-            border: 1px solid #d5d8dc;
-            border-radius: 4px;
-            font-size: 13px;
-        }
-        .checklist-tools .btn-sm { padding: 6px 14px; }
-        .checklist-item .delete-btn {
-            background: #e74c3c;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            padding: 2px 8px;
-            font-size: 11px;
-            cursor: pointer;
-            margin-left: auto;
-        }
-        .checklist-item .delete-btn:hover { background: #c0392b; }
-
-        /* Taaluma badge */
-        .profession-badge {
-            display: inline-block;
-            padding: 2px 12px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 600;
-            margin-left: 8px;
-        }
-        .profession-badge.doctor { background: #d5f5e3; color: #1a7a3a; }
-        .profession-badge.nurse { background: #d6eaf8; color: #1a5276; }
-        .profession-badge.lab { background: #e8daef; color: #6c3483; }
-        .profession-badge.pharmacy { background: #fdebd0; color: #a04000; }
-        
-        .role-indicator {
-            font-size: 12px;
-            color: #7f8c8d;
-            padding: 4px 10px;
-            background: #f8f9fa;
-            border-radius: 4px;
-            margin: 4px 0;
-        }
-        .role-indicator strong { color: #1a5276; }
     </style>
 </head>
 <body>
 
 <!-- ============================================================ -->
-<!-- TOAST (Arifa) -->
+<!-- TOAST -->
 <!-- ============================================================ -->
 <div id="toast" class="toast"></div>
 
@@ -622,7 +469,7 @@
             <div style="font-size:12px; color:#7f8c8d; margin-top:4px;">
                 <span id="userBadge" class="user-badge">👤 Imetoka nje</span>
                 <span style="margin-left:10px; font-size:11px;" id="binStatusDisplay">
-                    <span class="bin-status inactive">📦 BIN: Hajaundwa</span>
+                    <span class="bin-status active">📦 BIN: 6a4aa26f...</span>
                 </span>
             </div>
             <div class="mission"><strong>Dhamira:</strong> "Ubora katika Huduma, Imani katika Vitendo"</div>
@@ -633,9 +480,9 @@
             <span style="font-size:13px; color:#1a5276; font-weight:600;">👤 <span id="currentUserDisplay">Mgeni</span></span>
             <span id="roleDisplay" class="role-badge">🧑‍💼 Mtendakazi</span>
             <button class="btn btn-danger btn-sm" onclick="logout()">🚪 Toka</button>
-            <button class="btn btn-primary btn-sm" onclick="switchTab('pending')" id="pendingBtn" style="display:none;">⏳ Inasubiri</button>
+            <button class="btn btn-primary btn-sm" onclick="switchTab('pending')">⏳ Inasubiri</button>
             <button class="btn btn-success btn-sm" onclick="switchTab('history')">📂 Historia</button>
-            <button class="btn btn-warning btn-sm" onclick="syncData()" id="syncBtn">🔄 Sync</button>
+            <button class="btn btn-warning btn-sm" onclick="syncData()">🔄 Sync</button>
         </div>
 
         <!-- STEPS -->
@@ -679,15 +526,7 @@
 
             <div class="form-row">
                 <div class="form-group"><label>👤 Jina la Mtendakazi</label><input type="text" id="workerName" placeholder="Jina lako" value=""></div>
-                <div class="form-group">
-                    <label>📋 Taaluma / Kazi</label>
-                    <select id="workerRole" onchange="updateRoleChecklist()">
-                        <option value="Daktari">🩺 Daktari</option>
-                        <option value="Muuguzi">💉 Muuguzi</option>
-                        <option value="Mtaalamu wa Maabara">🔬 Mtaalamu wa Maabara</option>
-                        <option value="Mfamasia">💊 Mfamasia</option>
-                    </select>
-                </div>
+                <div class="form-group"><label>📋 Kazi</label><select id="workerRole"><option value="Daktari">🩺 Daktari</option><option value="Muuguzi">💉 Muuguzi</option><option value="Mtaalamu wa Maabara">🔬 Mtaalamu wa Maabara</option><option value="Mfamasia">💊 Mfamasia</option></select></div>
             </div>
             <div class="form-row">
                 <div class="form-group"><label>📅 Tarehe</label><input type="date" id="reportDate"></div>
@@ -705,25 +544,12 @@
                 <div class="form-group"><label>🔄 Waliorudi</label><input type="number" id="statFollowup" min="0" value="0"></div>
             </div>
 
-            <!-- ============================================================ -->
-            <!-- ORODHA MAALUM KULINGANA NA TAALUMA -->
-            <!-- ============================================================ -->
+            <!-- ORODHA YA JUMLA -->
             <div class="section-divider general">
-                📋 MAJUKUMU MAALUM
-                <span class="badge" id="roleBadgeDisplay">🩺 Daktari</span>
+                📋 ORODHA YA JUMLA
+                <span class="badge">Wafanyakazi wote</span>
             </div>
             
-            <div class="role-indicator" id="roleIndicator">
-                <strong>Majukumu ya <span id="roleNameDisplay">Daktari</span>:</strong> Angalia yale uliyokamilisha
-            </div>
-
-            <div id="generalChecklistContainer">
-                <div class="checklist-grid" id="checklistGrid">
-                    <!-- Vitu vitaundwa na JavaScript kulingana na taaluma -->
-                </div>
-            </div>
-
-            <!-- Zana za kuhariri orodha (kwa ajili ya usimamizi) -->
             <div class="checklist-tools">
                 <input type="text" id="newChecklistItem" placeholder="Weka jukumu jipya..." style="flex:1;">
                 <button class="btn btn-primary btn-sm" onclick="addChecklistItem()">➕ Ongeza</button>
@@ -731,11 +557,13 @@
                 <span style="font-size:11px; color:#7f8c8d;" id="checklistCount">Vitu: 0</span>
             </div>
 
-            <!-- ============================================================ -->
+            <div id="generalChecklistContainer">
+                <div class="checklist-grid" id="checklistGrid"></div>
+            </div>
 
-            <div class="section-divider worker">✍️ Tathmini ya Mtendakazi (Jithamini)</div>
+            <div class="section-divider worker">✍️ Tathmini ya Mtendakazi</div>
             <div class="form-group">
-                <label>1. Kuwasili (Punctuality)</label>
+                <label>1. Kuwasili</label>
                 <div class="rating-group" id="selfPunctuality">
                     <button class="rating-btn" onclick="selectRating('selfPunctuality', this)">⭐ Bora</button>
                     <button class="rating-btn" onclick="selectRating('selfPunctuality', this)">👍 Nzuri</button>
@@ -753,7 +581,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label>3. Huruma kwa Wagonjwa</label>
+                <label>3. Huruma</label>
                 <div class="rating-group" id="selfCompassion">
                     <button class="rating-btn" onclick="selectRating('selfCompassion', this)">⭐ Bora</button>
                     <button class="rating-btn" onclick="selectRating('selfCompassion', this)">👍 Nzuri</button>
@@ -762,7 +590,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label>4. Ushirikiano na Wenzake</label>
+                <label>4. Ushirikiano</label>
                 <div class="rating-group" id="selfTeamwork">
                     <button class="rating-btn" onclick="selectRating('selfTeamwork', this)">⭐ Bora</button>
                     <button class="rating-btn" onclick="selectRating('selfTeamwork', this)">👍 Nzuri</button>
@@ -771,7 +599,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label>5. Hatua/Ubunifu</label>
+                <label>5. Hatua</label>
                 <div class="rating-group" id="selfInitiative">
                     <button class="rating-btn" onclick="selectRating('selfInitiative', this)">⭐ Bora</button>
                     <button class="rating-btn" onclick="selectRating('selfInitiative', this)">👍 Nzuri</button>
@@ -780,7 +608,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label>6. Usalama na Usafi</label>
+                <label>6. Usalama</label>
                 <div class="rating-group" id="selfSafety">
                     <button class="rating-btn" onclick="selectRating('selfSafety', this)">⭐ Bora</button>
                     <button class="rating-btn" onclick="selectRating('selfSafety', this)">👍 Nzuri</button>
@@ -789,23 +617,13 @@
                 </div>
             </div>
 
-            <div class="form-group"><label>📝 Maoni ya Mtendakazi</label><textarea id="selfComments" placeholder="Mawazo yako kuhusu utendaji wako..."></textarea></div>
+            <div class="form-group"><label>📝 Maoni ya Mtendakazi</label><textarea id="selfComments" placeholder="Mawazo yako..."></textarea></div>
 
-            <div class="section-divider worker">✍️ Sahihi ya Mtendakazi</div>
             <div class="warning-box">
                 <strong>⚠️ ONYO:</strong> Taarifa za uongo ni kosa la kinidhamu.
             </div>
             <div class="success-box">
                 <label><input type="checkbox" id="workerVerification"> <strong>Nathibitisha taarifa zangu ni za kweli</strong></label>
-            </div>
-            <div class="form-group">
-                <label>✍️ Sahihi</label>
-                <div class="signature-pad" id="workerSignaturePad"><canvas id="workerSignatureCanvas"></canvas></div>
-                <div class="signature-actions">
-                    <button class="btn btn-warning btn-sm" onclick="clearSignature('worker')">🔄 Futa</button>
-                    <button class="btn btn-primary btn-sm" onclick="saveSignature('worker')">💾 Hifadhi</button>
-                    <span id="workerSignatureStatus" style="font-size:12px; color:#7f8c8d;">Hakuna</span>
-                </div>
             </div>
 
             <button class="btn btn-success" onclick="submitToSupervisor()" id="submitWorkerBtn" style="margin:10px 0; width:100%;">
@@ -813,7 +631,7 @@
             </button>
             <div id="workerSubmitStatus" style="font-size:12px; color:#7f8c8d; margin-top:6px; display:none;"></div>
 
-            <!-- SEHEMU YA MSIMAMIZI (Inaonekana baada ya mtendakazi kutumia) -->
+            <!-- SEHEMU YA MSIMAMIZI -->
             <div id="supervisorSection" style="display:none; margin-top:20px; border-top: 3px solid #27ae60; padding-top: 20px;">
                 <div class="section-divider supervisor">
                     👔 SEHEMU YA MSIMAMIZI
@@ -840,7 +658,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>2. Ubora wa Huduma</label>
+                    <label>2. Ubora</label>
                     <div class="rating-group" id="supQuality">
                         <button class="rating-btn" onclick="selectRating('supQuality', this)">⭐ Bora</button>
                         <button class="rating-btn" onclick="selectRating('supQuality', this)">👍 Nzuri</button>
@@ -867,17 +685,7 @@
                     </div>
                 </div>
 
-                <div class="form-group"><label>📝 Maoni ya Msimamizi</label><textarea id="supervisorComments" placeholder="Mawazo yako kuhusu mtendakazi..."></textarea></div>
-
-                <div class="form-group">
-                    <label>✍️ Sahihi ya Msimamizi</label>
-                    <div class="signature-pad" id="supervisorSignaturePad"><canvas id="supervisorSignatureCanvas"></canvas></div>
-                    <div class="signature-actions">
-                        <button class="btn btn-warning btn-sm" onclick="clearSignature('supervisor')">🔄 Futa</button>
-                        <button class="btn btn-primary btn-sm" onclick="saveSignature('supervisor')">💾 Hifadhi</button>
-                        <span id="supervisorSignatureStatus" style="font-size:12px; color:#7f8c8d;">Hakuna</span>
-                    </div>
-                </div>
+                <div class="form-group"><label>📝 Maoni ya Msimamizi</label><textarea id="supervisorComments" placeholder="Mawazo yako..."></textarea></div>
 
                 <button class="btn btn-primary" onclick="submitToIncharge()" id="submitSupervisorBtn" style="margin:10px 0; width:100%;">
                     📤 TUMA KWA MGANGA MFAWIDHI
@@ -907,16 +715,6 @@
                     <textarea id="inchargeComments" placeholder="Maoni ya jumla..."></textarea>
                 </div>
 
-                <div class="form-group">
-                    <label>✍️ Sahihi ya Mganga Mfawidhi</label>
-                    <div class="signature-pad" id="inchargeSignaturePad"><canvas id="inchargeSignatureCanvas"></canvas></div>
-                    <div class="signature-actions">
-                        <button class="btn btn-warning btn-sm" onclick="clearSignature('incharge')">🔄 Futa</button>
-                        <button class="btn btn-primary btn-sm" onclick="saveSignature('incharge')">💾 Hifadhi</button>
-                        <span id="inchargeSignatureStatus" style="font-size:12px; color:#7f8c8d;">Hakuna</span>
-                    </div>
-                </div>
-
                 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                     <button class="btn btn-success" onclick="approveAssessment()" id="approveBtn" style="flex:1;">
                         ✅ IDHINI
@@ -926,20 +724,6 @@
                     </button>
                 </div>
                 <div id="inchargeSubmitStatus" style="font-size:12px; color:#7f8c8d; margin-top:6px; display:none;"></div>
-            </div>
-
-            <!-- ============================================================ -->
-            <!-- MUHTASARI WA ALAMA -->
-            <!-- ============================================================ -->
-            <div class="score-box" style="margin-top:20px;">
-                <h3>📊 Muhtasari wa Tathmini</h3>
-                <div class="score-summary" id="scoreSummary">
-                    <div class="score-card"><div class="value" id="scoreWorker">0</div><div class="label">Mtendakazi</div></div>
-                    <div class="score-card"><div class="value" id="scoreSupervisor">0</div><div class="label">Msimamizi</div></div>
-                    <div class="score-card"><div class="value" id="scoreTotal">0%</div><div class="label">Alama ya Pamoja</div></div>
-                    <div class="score-card"><div class="value" id="scoreGap">0</div><div class="label">Pengo</div></div>
-                    <div class="score-card"><div class="value" id="scoreStatus">⏳</div><div class="label">Hali</div></div>
-                </div>
             </div>
         </div>
 
@@ -978,14 +762,22 @@
 </div>
 
 <!-- ============================================================ -->
-<!-- JAVASCRIPT - Toleo Kamili na Orodha Maalum kwa Taaluma -->
+<!-- JAVASCRIPT - ILIYOREKEBISHWA KWA BIN ID YAKO -->
 <!-- ============================================================ -->
 <script>
 // ==============================
-// USANIDI WA JSONBIN
+// USANIDI WA JSONBIN - ILIYOREKEBISHWA
 // ==============================
-const API_KEY = "6a4aa26fda38895dfe31b5fb";
-let BIN_ID = localStorage.getItem("mtwaraBinId") || "";
+
+// ✅ API KEY YAKO (Master Key)
+const API_KEY = "$2a$10$ieBYZAz82qDdCbFIIZaqReUxD7ebM1v7Wrc/W3yHe2M8qOtleei5y";
+
+// ✅ BIN ID YAKO
+const BIN_ID = "6a4aa26fda38895dfe31b5fb";
+
+// Hifadhi BIN ID kwenye localStorage
+localStorage.setItem("mtwaraBinId", BIN_ID);
+
 let currentUser = null;
 let currentRole = null;
 let reports = [];
@@ -993,7 +785,7 @@ let currentReportId = null;
 let signatureData = { worker: null, supervisor: null, incharge: null };
 
 // ==============================
-// ORODHA MAALUM KULINGANA NA TAALUMA
+// ORODHA KWA TAALUMA
 // ==============================
 const ROLE_CHECKLISTS = {
     "Daktari": [
@@ -1046,7 +838,6 @@ const ROLE_CHECKLISTS = {
     ]
 };
 
-// Checklist za default (za jumla)
 const DEFAULT_CHECKLIST = [
     "Nimewasili kazini mapema",
     "Nimevaa sare safi na kitambulisho",
@@ -1063,35 +854,14 @@ const DEFAULT_CHECKLIST = [
 // ==============================
 // VIRATIBU VYA CHECKLIST
 // ==============================
-let currentRoleChecklist = [];
-
 function getRoleChecklist(role) {
     return ROLE_CHECKLISTS[role] || ROLE_CHECKLISTS["Daktari"];
-}
-
-function updateRoleChecklist() {
-    const role = document.getElementById("workerRole").value;
-    const items = getRoleChecklist(role);
-    currentRoleChecklist = [...items];
-    renderChecklist(items, role);
-    
-    // Update badge
-    const badge = document.getElementById("roleBadgeDisplay");
-    const roleNames = {
-        "Daktari": "🩺 Daktari",
-        "Muuguzi": "💉 Muuguzi",
-        "Mtaalamu wa Maabara": "🔬 Mtaalamu wa Maabara",
-        "Mfamasia": "💊 Mfamasia"
-    };
-    badge.textContent = roleNames[role] || role;
-    document.getElementById("roleNameDisplay").textContent = role;
 }
 
 function renderChecklist(items, role) {
     const grid = document.getElementById("checklistGrid");
     if (!grid) return;
     
-    // Weka checked states kutoka localStorage
     const savedStates = JSON.parse(localStorage.getItem("mtwaraChecklistStates") || "{}");
     const roleKey = role || document.getElementById("workerRole").value;
     
@@ -1117,7 +887,6 @@ function toggleChecklist(el, roleKey, index) {
     el.classList.toggle("active");
     const checked = el.classList.contains("active");
     
-    // Hifadhi state
     const savedStates = JSON.parse(localStorage.getItem("mtwaraChecklistStates") || "{}");
     const key = `${roleKey}_${index}`;
     savedStates[key] = checked;
@@ -1154,7 +923,6 @@ function addChecklistItem() {
     const role = document.getElementById("workerRole").value;
     const items = getRoleChecklist(role);
     items.push(text);
-    currentRoleChecklist = items;
     renderChecklist(items, role);
     input.value = "";
     showToast("✅ Jukumu limeongezwa!", "success");
@@ -1164,10 +932,15 @@ function resetChecklist() {
     if (confirm("Je, unataka kuweka orodha ya awali kwa taaluma hii?")) {
         const role = document.getElementById("workerRole").value;
         const items = getRoleChecklist(role);
-        currentRoleChecklist = [...items];
         renderChecklist(items, role);
         showToast("✅ Orodha imewekwa upya!", "success");
     }
+}
+
+function updateRoleChecklist() {
+    const role = document.getElementById("workerRole").value;
+    const items = getRoleChecklist(role);
+    renderChecklist(items, role);
 }
 
 // ==============================
@@ -1289,8 +1062,62 @@ function saveSignature(type) {
 }
 
 // ==============================
-// SHUGHULI ZA JSONBIN
+// SHUGHULI ZA JSONBIN - KWA BIN ID YAKO
 // ==============================
+async function getBinData() {
+    try {
+        console.log("📤 Inasoma data kutoka BIN:", BIN_ID);
+        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            method: "GET",
+            headers: {
+                "X-Master-Key": API_KEY
+            }
+        });
+        
+        if (!response.ok) {
+            if (response.status === 404) {
+                showToast("⚠️ BIN haipatikani, itaundwa mpya", "warning");
+                return await createBin();
+            }
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const result = await response.json();
+        console.log("✅ Data imesomwa:", result);
+        return result.record || result;
+    } catch (error) {
+        console.error("❌ Hitilafu ya kusoma data:", error);
+        showToast("❌ Imeshindwa kusoma data: " + error.message, "error");
+        return null;
+    }
+}
+
+async function updateBinData(data) {
+    try {
+        console.log("📤 Inahifadhi data kwenye BIN:", BIN_ID);
+        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "X-Master-Key": API_KEY
+            },
+            body: JSON.stringify(data)
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const result = await response.json();
+        console.log("✅ Data imehifadhiwa:", result);
+        return result;
+    } catch (error) {
+        console.error("❌ Hitilafu ya kuhifadhi data:", error);
+        showToast("❌ Imeshindwa kuhifadhi: " + error.message, "error");
+        return null;
+    }
+}
+
 async function createBin() {
     try {
         const data = {
@@ -1320,89 +1147,18 @@ async function createBin() {
         }
         
         const result = await response.json();
-        const binId = result.metadata?.id || result.record;
+        const newBinId = result.metadata?.id || result.record;
         
-        if (!binId) {
+        if (!newBinId) {
             throw new Error("Hakuna BIN ID iliyorejeshwa");
         }
         
-        localStorage.setItem("mtwaraBinId", binId);
-        BIN_ID = binId;
-        
-        document.getElementById("binStatusDisplay").innerHTML = 
-            `<span class="bin-status active">📦 BIN: ${binId.substring(0,8)}...</span>`;
-        
-        showToast("✅ BIN imeundwa kikamilifu!", "success");
-        return binId;
+        localStorage.setItem("mtwaraBinId", newBinId);
+        showToast("✅ BIN mpya imeundwa!", "success");
+        return result.record || result;
     } catch (error) {
         console.error("❌ Hitilafu ya kuunda BIN:", error);
         showToast("❌ Imeshindwa kuunda BIN: " + error.message, "error");
-        return null;
-    }
-}
-
-async function getBinData() {
-    if (!BIN_ID) {
-        const newId = await createBin();
-        if (!newId) return null;
-        BIN_ID = newId;
-    }
-    
-    try {
-        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-            method: "GET",
-            headers: {
-                "X-Master-Key": API_KEY
-            }
-        });
-        
-        if (!response.ok) {
-            if (response.status === 404) {
-                const newId = await createBin();
-                if (newId) {
-                    BIN_ID = newId;
-                    return await getBinData();
-                }
-                return null;
-            }
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const result = await response.json();
-        return result.record || result;
-    } catch (error) {
-        console.error("❌ Hitilafu ya kusoma data:", error);
-        showToast("❌ Imeshindwa kusoma data: " + error.message, "error");
-        return null;
-    }
-}
-
-async function updateBinData(data) {
-    if (!BIN_ID) {
-        const newId = await createBin();
-        if (!newId) return null;
-        BIN_ID = newId;
-    }
-    
-    try {
-        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "X-Master-Key": API_KEY
-            },
-            body: JSON.stringify(data)
-        });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const result = await response.json();
-        return result;
-    } catch (error) {
-        console.error("❌ Hitilafu ya kuhifadhi data:", error);
-        showToast("❌ Imeshindwa kuhifadhi: " + error.message, "error");
         return null;
     }
 }
@@ -1480,23 +1236,17 @@ async function login() {
         showFullAssessment();
     }
     
-    if (BIN_ID) {
-        document.getElementById("binStatusDisplay").innerHTML = 
-            `<span class="bin-status active">📦 BIN: ${BIN_ID.substring(0,8)}...</span>`;
-    }
-    
+    document.getElementById("binStatusDisplay").innerHTML = 
+        `<span class="bin-status active">📦 BIN: ${BIN_ID.substring(0,8)}...</span>`;
     document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
     
-    // Initialize signature pads
     setTimeout(() => {
         initSignaturePad("worker");
         initSignaturePad("supervisor");
         initSignaturePad("incharge");
     }, 500);
     
-    // Pakia checklist kwa taaluma iliyochaguliwa
     updateRoleChecklist();
-    
     updateScoreSummary();
     loadPending();
     loadHistory();
@@ -1890,24 +1640,24 @@ window.onload = function() {
         dateInput.value = new Date().toISOString().split("T")[0];
     }
     
-    // Pakia checklist kwa taaluma default
+    // Weka BIN ID
+    localStorage.setItem("mtwaraBinId", BIN_ID);
+    document.getElementById("binStatusDisplay").innerHTML = 
+        `<span class="bin-status active">📦 BIN: ${BIN_ID.substring(0,8)}...</span>`;
+    document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
+    
+    // Pakia data
     setTimeout(() => {
         updateRoleChecklist();
-    }, 100);
-    
-    if (BIN_ID) {
-        document.getElementById("binStatusDisplay").innerHTML = 
-            `<span class="bin-status active">📦 BIN: ${BIN_ID.substring(0,8)}...</span>`;
-        document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
         getBinData().then(data => {
             if (data) {
                 reports = data.reports || [];
                 console.log("✅ Data imepakiwa, reports:", reports.length);
+                loadPending();
+                loadHistory();
             }
         });
-    } else {
-        document.getElementById("connectionStatus").textContent = "ℹ️ BIN haijaundwa, itaundwa wakati wa kuingia";
-    }
+    }, 100);
     
     setTimeout(() => {
         initSignaturePad("worker");
@@ -1915,12 +1665,11 @@ window.onload = function() {
         initSignaturePad("incharge");
     }, 500);
     
-    console.log("✅ Mfumo umeanza (Toleo Kamili - Orodha Maalum kwa Taaluma)");
-    console.log("🔑 API KEY:", API_KEY);
-    console.log("📦 BIN ID:", BIN_ID || "Hajaundwa");
-    console.log("📋 Taaluma zilizopo:", Object.keys(ROLE_CHECKLISTS).join(", "));
+    console.log("✅ Mfumo umeanza");
+    console.log("🔑 API KEY:", API_KEY.substring(0, 20) + "...");
+    console.log("📦 BIN ID:", BIN_ID);
+    console.log("📋 BIN ipo na inasubiri kuunganishwa!");
 };
 </script>
-
 </body>
 </html>
