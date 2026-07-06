@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -725,7 +724,7 @@
             </div>
 
             <!-- ========================================================== -->
-            <!-- ===== FORM 2: SUPERVISOR - ILIYOREKEBISHWA ===== -->
+            <!-- ===== FORM 2: SUPERVISOR - ILIYOONGEZEWA TAARIFA ZA MTENDAKAZI ===== -->
             <!-- ========================================================== -->
             <div id="formSupervisor" class="form-card supervisor" style="display:none;">
                 <div class="form-title">
@@ -735,18 +734,47 @@
                     <span id="supervisorStatusBadge" class="status-badge pending">⏳ Inasubiri</span>
                 </div>
 
+                <!-- ===== SEHEMU YA TAARIFA ZA MTENDAKAZI ===== -->
+                <div style="background:#eaf2f8; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #27ae60;">
+                    <div style="font-weight:700; color:#1a5276; font-size:14px; margin-bottom:10px;">📋 TAARIFA ZA MTENDAKAZI ANAYETATHMINIWA</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>👤 Jina Kamili la Mtendakazi <span class="required">*</span></label>
+                            <input type="text" id="supWorkerName" placeholder="Jina la mtendakazi" value="">
+                        </div>
+                        <div class="form-group">
+                            <label>📋 Taaluma <span class="required">*</span></label>
+                            <select id="supWorkerRole">
+                                <option value="Medical Officer">🩺 Medical Officer (MD)</option>
+                                <option value="Clinical Officer">📋 Clinical Officer</option>
+                                <option value="Specialist">⭐ Specialist</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>📅 Tarehe ya Tathmini</label>
+                            <input type="date" id="supWorkerDate">
+                        </div>
+                        <div class="form-group">
+                            <label>🕐 Zamu</label>
+                            <select id="supWorkerShift">
+                                <option>Mchana</option>
+                                <option>Usiku</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>🏢 Idara</label>
+                        <input type="text" id="supWorkerDepartment" value="Clinical">
+                    </div>
+                </div>
+
                 <div class="preview-box">
                     <div class="title">📋 Taarifa za Mtendakazi (Kwa Marejeleo)</div>
                     <div id="workerPreview" class="content">
                         <div style="color:#7f8c8d;">⏳ Hakuna tathmini inayosubiri</div>
                     </div>
-                </div>
-
-                <!-- ===== SEHEMU MPYA: JINA LA MTENDAKAZI ===== -->
-                <div class="form-group">
-                    <label>👤 Jina la Mtendakazi Anayetathminiwa <span class="required">*</span></label>
-                    <input type="text" id="supervisorWorkerName" placeholder="Weka jina la mtendakazi" value="">
-                    <div style="font-size:11px; color:#7f8c8d; margin-top:2px;">Taja jina la mtendakazi unayemtathmini</div>
                 </div>
 
                 <div class="form-row">
@@ -838,7 +866,9 @@
                 <div id="supervisorSubmitMsg" style="font-size:12px; color:#7f8c8d; margin-top:8px; display:none;"></div>
             </div>
 
-            <!-- ===== FORM 3: IN-CHARGE ===== -->
+            <!-- ========================================================== -->
+            <!-- ===== FORM 3: IN-CHARGE - ILIYOONGEZEWA TAARIFA ZA MTENDAKAZI ===== -->
+            <!-- ========================================================== -->
             <div id="formIncharge" class="form-card incharge" style="display:none;">
                 <div class="form-title">
                     <span class="icon">🏥</span>
@@ -847,15 +877,51 @@
                     <span id="inchargeStatusBadge" class="status-badge pending">⏳ Inasubiri</span>
                 </div>
 
+                <!-- ===== SEHEMU YA TAARIFA ZA MTENDAKAZI ===== -->
+                <div style="background:#eaf2f8; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #8e44ad;">
+                    <div style="font-weight:700; color:#1a5276; font-size:14px; margin-bottom:10px;">📋 TAARIFA ZA MTENDAKAZI</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>👤 Jina Kamili la Mtendakazi <span class="required">*</span></label>
+                            <input type="text" id="inchargeWorkerName" placeholder="Jina la mtendakazi" value="">
+                        </div>
+                        <div class="form-group">
+                            <label>📋 Taaluma <span class="required">*</span></label>
+                            <select id="inchargeWorkerRole">
+                                <option value="Medical Officer">🩺 Medical Officer (MD)</option>
+                                <option value="Clinical Officer">📋 Clinical Officer</option>
+                                <option value="Specialist">⭐ Specialist</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>📅 Tarehe ya Tathmini</label>
+                            <input type="date" id="inchargeWorkerDate">
+                        </div>
+                        <div class="form-group">
+                            <label>🕐 Zamu</label>
+                            <select id="inchargeWorkerShift">
+                                <option>Mchana</option>
+                                <option>Usiku</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>🏢 Idara</label>
+                        <input type="text" id="inchargeWorkerDepartment" value="Clinical">
+                    </div>
+                </div>
+
                 <div class="preview-box">
-                    <div class="title">📋 Taarifa za Mtendakazi</div>
+                    <div class="title">📋 Taarifa za Mtendakazi (Kwa Marejeleo)</div>
                     <div id="inchargeWorkerPreview" class="content">
                         <div style="color:#7f8c8d;">⏳ Hakuna tathmini ya mtendakazi</div>
                     </div>
                 </div>
 
                 <div class="preview-box" style="border-left-color:#27ae60;">
-                    <div class="title">📋 Taarifa za Msimamizi</div>
+                    <div class="title">📋 Taarifa za Msimamizi (Kwa Marejeleo)</div>
                     <div id="inchargeSupervisorPreview" class="content">
                         <div style="color:#7f8c8d;">⏳ Hakuna tathmini ya msimamizi</div>
                     </div>
@@ -1347,11 +1413,13 @@ async function login() {
         document.getElementById("formSupervisor").style.display = "block";
         document.getElementById("statusMessage").textContent = "✅ Jaza fomu yako kisha tuma kwa Mganga Mfawidhi";
         document.getElementById("supervisorDate").value = new Date().toISOString().split("T")[0];
+        document.getElementById("supWorkerDate").value = new Date().toISOString().split("T")[0];
         updateSteps(2);
         checkSupervisorStatus();
     } else if (user.role === "incharge") {
         document.getElementById("formIncharge").style.display = "block";
         document.getElementById("statusMessage").textContent = "✅ Kagua tathmini zote kisha idhinisha au kata";
+        document.getElementById("inchargeWorkerDate").value = new Date().toISOString().split("T")[0];
         updateSteps(3);
         loadAllAssessments();
         checkInchargeStatus();
@@ -1387,36 +1455,46 @@ function updateSteps(step) {
 }
 
 // ==============================================================
-// LOAD WORKER DATA
+// CHECK STATUS FUNCTIONS
 // ==============================================================
-function loadWorkerData() {
-    const allReports = reports || [];
-    const pending = allReports.filter(r => r.workerName && r.workerName !== "" && r.status === "Inasubiri Mganga Mfawidhi");
-    
-    if (pending.length === 0) {
-        document.getElementById("workerPreview").innerHTML = `<div style="color:#7f8c8d;">⏳ Hakuna tathmini inayosubiri</div>`;
-        return;
+function checkWorkerStatus() {
+    const pending = reports.filter(r => r.workerName && r.status === "Inasubiri Mganga Mfawidhi");
+    if (pending.length > 0) {
+        document.getElementById("workerStatusBadge").textContent = "✅ Imetumwa";
+        document.getElementById("workerStatusBadge").className = "status-badge approved";
+        document.getElementById("workerSubmitBtn").disabled = true;
+        document.getElementById("workerSubmitBtn").innerHTML = "✅ Imetumwa kwa Mganga Mfawidhi";
+        document.getElementById("workerSubmitMsg").style.display = "block";
+        document.getElementById("workerSubmitMsg").textContent = "✅ Tathmini yako imetumwa. Subiri Mganga Mfawidhi.";
+        document.getElementById("workerSubmitMsg").style.color = "#27ae60";
     }
-    
-    const d = pending[pending.length - 1];
-    document.getElementById("workerPreview").innerHTML = `
-        <div class="preview-grid">
-            <div class="item"><strong>Jina:</strong> ${d.workerName || "N/A"}</div>
-            <div class="item"><strong>Taaluma:</strong> ${d.role || "N/A"}</div>
-            <div class="item"><strong>Tarehe:</strong> ${d.date || "N/A"}</div>
-            <div class="item"><strong>Zamu:</strong> ${d.shift || "N/A"}</div>
-            <div class="item"><strong>Wagonjwa:</strong> ${d.stats?.patients || 0}</div>
-            <div class="item"><strong>Ultrasound:</strong> ${d.stats?.ultrasound || 0}</div>
-            <div class="item"><strong>Referral:</strong> ${d.stats?.referral || 0}</div>
-            <div class="item"><strong>Waliorudi:</strong> ${d.stats?.followup || 0}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Malengo SMART:</strong> ${d.smartGoals?.filter(c=>c.checked).length||0}/${d.smartGoals?.length||0}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Majukumu Jumla:</strong> ${d.generalChecklist?.filter(c=>c.checked).length||0}/${d.generalChecklist?.length||0}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Majukumu Maalum:</strong> ${d.specialChecklist?.filter(c=>c.checked).length||0}/${d.specialChecklist?.length||0}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Tathmini Binafsi:</strong> ${Object.values(d.selfRatings || {}).join(" | ")}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Maoni:</strong> ${d.selfComments || "Hakuna"}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Sahihi:</strong> ${d.signature ? "✅ Imehifadhiwa" : "❌ Hakuna"}</div>
-        </div>
-    `;
+}
+
+function checkSupervisorStatus() {
+    const pending = reports.filter(r => r.supervisorName && r.status === "Inasubiri Mganga Mfawidhi");
+    if (pending.length > 0) {
+        document.getElementById("supervisorStatusBadge").textContent = "✅ Imetumwa";
+        document.getElementById("supervisorStatusBadge").className = "status-badge approved";
+        document.getElementById("supervisorSubmitBtn").disabled = true;
+        document.getElementById("supervisorSubmitBtn").innerHTML = "✅ Imetumwa kwa Mganga Mfawidhi";
+        document.getElementById("supervisorSubmitMsg").style.display = "block";
+        document.getElementById("supervisorSubmitMsg").textContent = "✅ Tathmini imetumwa. Subiri Mganga Mfawidhi.";
+        document.getElementById("supervisorSubmitMsg").style.color = "#27ae60";
+    }
+}
+
+function checkInchargeStatus() {
+    const pending = reports.filter(r => r.workerName && (r.status === "Imekubaliwa" || r.status === "Imekataliwa"));
+    if (pending.length > 0) {
+        const last = pending[pending.length - 1];
+        document.getElementById("inchargeStatusBadge").textContent = last.status;
+        document.getElementById("inchargeStatusBadge").className = "status-badge " + (last.status === "Imekubaliwa" ? "approved" : "rejected");
+        document.getElementById("approveBtn").disabled = true;
+        document.getElementById("rejectBtn").disabled = true;
+        document.getElementById("inchargeSubmitMsg").style.display = "block";
+        document.getElementById("inchargeSubmitMsg").textContent = `✅ Tathmini ${last.status}`;
+        document.getElementById("inchargeSubmitMsg").style.color = last.status === "Imekubaliwa" ? "#27ae60" : "#e74c3c";
+    }
 }
 
 // ==============================================================
@@ -1462,49 +1540,6 @@ function loadAllAssessments() {
             <div class="item" style="grid-column:span 2;"><strong>Sahihi:</strong> ${d.supervisorSignature ? "✅ Imehifadhiwa" : "❌ Hakuna"}</div>
         </div>
     ` : `<div style="color:#7f8c8d;">⏳ Msimamizi bado hajajaza tathmini yake</div>`;
-}
-
-// ==============================================================
-// CHECK STATUS FUNCTIONS
-// ==============================================================
-function checkWorkerStatus() {
-    const pending = reports.filter(r => r.workerName && r.status === "Inasubiri Mganga Mfawidhi");
-    if (pending.length > 0) {
-        document.getElementById("workerStatusBadge").textContent = "✅ Imetumwa";
-        document.getElementById("workerStatusBadge").className = "status-badge approved";
-        document.getElementById("workerSubmitBtn").disabled = true;
-        document.getElementById("workerSubmitBtn").innerHTML = "✅ Imetumwa kwa Mganga Mfawidhi";
-        document.getElementById("workerSubmitMsg").style.display = "block";
-        document.getElementById("workerSubmitMsg").textContent = "✅ Tathmini yako imetumwa. Subiri Mganga Mfawidhi.";
-        document.getElementById("workerSubmitMsg").style.color = "#27ae60";
-    }
-}
-
-function checkSupervisorStatus() {
-    const pending = reports.filter(r => r.supervisorName && r.status === "Inasubiri Mganga Mfawidhi");
-    if (pending.length > 0) {
-        document.getElementById("supervisorStatusBadge").textContent = "✅ Imetumwa";
-        document.getElementById("supervisorStatusBadge").className = "status-badge approved";
-        document.getElementById("supervisorSubmitBtn").disabled = true;
-        document.getElementById("supervisorSubmitBtn").innerHTML = "✅ Imetumwa kwa Mganga Mfawidhi";
-        document.getElementById("supervisorSubmitMsg").style.display = "block";
-        document.getElementById("supervisorSubmitMsg").textContent = "✅ Tathmini imetumwa. Subiri Mganga Mfawidhi.";
-        document.getElementById("supervisorSubmitMsg").style.color = "#27ae60";
-    }
-}
-
-function checkInchargeStatus() {
-    const pending = reports.filter(r => r.workerName && (r.status === "Imekubaliwa" || r.status === "Imekataliwa"));
-    if (pending.length > 0) {
-        const last = pending[pending.length - 1];
-        document.getElementById("inchargeStatusBadge").textContent = last.status;
-        document.getElementById("inchargeStatusBadge").className = "status-badge " + (last.status === "Imekubaliwa" ? "approved" : "rejected");
-        document.getElementById("approveBtn").disabled = true;
-        document.getElementById("rejectBtn").disabled = true;
-        document.getElementById("inchargeSubmitMsg").style.display = "block";
-        document.getElementById("inchargeSubmitMsg").textContent = `✅ Tathmini ${last.status}`;
-        document.getElementById("inchargeSubmitMsg").style.color = last.status === "Imekubaliwa" ? "#27ae60" : "#e74c3c";
-    }
 }
 
 // ==============================================================
@@ -1573,7 +1608,7 @@ async function submitWorker() {
 // SUBMIT SUPERVISOR - ILIYOREKEBISHWA
 // ==============================================================
 async function submitSupervisor() {
-    const workerName = document.getElementById("supervisorWorkerName").value.trim();
+    const workerName = document.getElementById("supWorkerName").value.trim();
     if (!workerName) {
         showToast("⚠️ Tafadhali weka jina la mtendakazi", "warning");
         return;
@@ -1590,7 +1625,11 @@ async function submitSupervisor() {
     }
 
     const report = {
-        supervisorWorkerName: workerName,
+        supWorkerName: workerName,
+        supWorkerRole: document.getElementById("supWorkerRole").value,
+        supWorkerDate: document.getElementById("supWorkerDate").value,
+        supWorkerShift: document.getElementById("supWorkerShift").value,
+        supWorkerDepartment: document.getElementById("supWorkerDepartment").value,
         supervisorName: name,
         supervisorTitle: document.getElementById("supervisorTitle").value,
         supervisorDate: document.getElementById("supervisorDate").value,
@@ -1608,15 +1647,17 @@ async function submitSupervisor() {
         if (!data) return;
         if (!data.reports) data.reports = [];
         
-        let existingReport = data.reports.find(r => r.workerName && r.status === "Inasubiri Mganga Mfawidhi");
+        // Tafuta report iliyopo ya mtendakazi
+        let existingReport = data.reports.find(r => r.workerName && r.workerName === workerName && r.status === "Inasubiri Mganga Mfawidhi");
         if (!existingReport) {
+            // Unda report mpya
             existingReport = {
                 id: Date.now(),
                 workerName: workerName,
-                role: "Msimamizi",
-                date: new Date().toISOString().split("T")[0],
-                shift: "Mchana",
-                department: "Clinical",
+                role: report.supWorkerRole,
+                date: report.supWorkerDate,
+                shift: report.supWorkerShift,
+                department: report.supWorkerDepartment,
                 stats: { patients: 0, ultrasound: 0, referral: 0, followup: 0 },
                 smartGoals: [],
                 generalChecklist: [],
@@ -1645,6 +1686,10 @@ async function submitSupervisor() {
         
         const index = data.reports.indexOf(existingReport);
         data.reports[index].workerName = workerName;
+        data.reports[index].role = report.supWorkerRole;
+        data.reports[index].date = report.supWorkerDate;
+        data.reports[index].shift = report.supWorkerShift;
+        data.reports[index].department = report.supWorkerDepartment;
         data.reports[index].supervisorName = report.supervisorName;
         data.reports[index].supervisorTitle = report.supervisorTitle;
         data.reports[index].supervisorDate = report.supervisorDate;
@@ -1679,6 +1724,12 @@ async function submitSupervisor() {
 // INCHARGE FUNCTIONS
 // ==============================================================
 async function submitIncharge() {
+    const workerName = document.getElementById("inchargeWorkerName").value.trim();
+    if (!workerName) {
+        showToast("⚠️ Tafadhali weka jina la mtendakazi", "warning");
+        return;
+    }
+    
     const name = document.getElementById("inchargeName").value.trim();
     if (!name) { showToast("⚠️ Tafadhali weka jina lako", "warning"); return; }
     if (!signatureData.incharge) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
@@ -1689,6 +1740,13 @@ async function submitIncharge() {
     const lastIndex = reports.length - 1;
     if (lastIndex < 0) { showToast("❌ Hakuna tathmini", "error"); return; }
 
+    // Hakikisha report ina jina la mtendakazi
+    reports[lastIndex].workerName = workerName;
+    reports[lastIndex].role = document.getElementById("inchargeWorkerRole").value;
+    reports[lastIndex].date = document.getElementById("inchargeWorkerDate").value;
+    reports[lastIndex].shift = document.getElementById("inchargeWorkerShift").value;
+    reports[lastIndex].department = document.getElementById("inchargeWorkerDepartment").value;
+    
     reports[lastIndex].inchargeName = name;
     reports[lastIndex].inchargeRatings = getLikertLabels("iQuality","iIntegrity","iSafety","iTeamwork");
     reports[lastIndex].inchargeRatingsValues = getLikertValues("iQuality","iIntegrity","iSafety","iTeamwork");
@@ -1826,6 +1884,8 @@ async function syncData() {
 window.onload = function() {
     document.getElementById("reportDate").value = new Date().toISOString().split("T")[0];
     document.getElementById("supervisorDate").value = new Date().toISOString().split("T")[0];
+    document.getElementById("supWorkerDate").value = new Date().toISOString().split("T")[0];
+    document.getElementById("inchargeWorkerDate").value = new Date().toISOString().split("T")[0];
     document.getElementById("binIdDisplay").textContent = BIN_ID;
     document.getElementById("connectionStatus").textContent = "✅ Tayari";
     updateWorkerChecklist();
