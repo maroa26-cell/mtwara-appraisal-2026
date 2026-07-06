@@ -891,13 +891,13 @@
 
 <script>
 // ==============================================================
-// JSONBIN CONFIGURATION - ILIYOSASISHWA
+// JSONBIN CONFIGURATION
 // ==============================================================
 
 // ✅ ACCESS KEY (Master Key)
 const API_KEY = "$2a$10$VfPZVlhjWTV.gErIv2yxX.3QmHdrMCgM1evuIR.BJreI7G0jQxGqW";
 
-// ✅ BIN ID MPYA
+// ✅ BIN ID
 const BIN_ID = "6a4b0205da38895dfe32b506";
 
 // ✅ JINA LA BIN
@@ -1158,6 +1158,9 @@ async function getBinData() {
     }
 }
 
+// ==============================================================
+// UPDATE BIN DATA - ILIYOREKEBISHWA (HAKUNA UJUMBE WA "IMEHIFADHIWA")
+// ==============================================================
 async function updateBinData(data) {
     try {
         console.log("📤 Inahifadhi data kwenye JSONBin...");
@@ -1179,13 +1182,14 @@ async function updateBinData(data) {
         }
         
         const result = await response.json();
-        console.log("✅ Data imehifadhiwa:", result);
+        console.log("✅ Data imehifadhiwa kwenye JSONBin:", result);
         document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
+        // ✅ ONDOA ujumbe wa "Data imehifadhiwa" kutoka hapa - sasa inaonyeshwa kwenye submitWorker
         return result;
     } catch (error) {
         console.error("❌ Hitilafu ya kuhifadhi data:", error);
         document.getElementById("connectionStatus").textContent = "⚠️ Hitilafu";
-        showToast("❌ Imeshindwa kuhifadhi: " + error.message, "error");
+        // Usionyeshe toast hapa, iruhusu submitWorker ionyeshe
         return null;
     }
 }
@@ -1316,17 +1320,21 @@ function updateSteps(step) {
 }
 
 // ==============================================================
-// SUBMIT WORKER
+// SUBMIT WORKER - ILIYOREKEBISHWA (UJUMBE WA "IMETUMWA")
 // ==============================================================
 async function submitWorker() {
     console.log("📤 Inaanza kutuma tathmini...");
+    console.log("🔍 BIN ID:", BIN_ID);
+    console.log("🔑 API KEY:", API_KEY.substring(0, 20) + "...");
     
+    // 1. Angalia uthibitishaji
     if (!document.getElementById("workerVerify").checked) {
         showToast("⚠️ Tafadhali thibitisha taarifa zako", "warning");
         console.log("❌ Uthibitishaji haujathibitishwa");
         return;
     }
     
+    // 2. Angalia jina
     const name = document.getElementById("workerName").value.trim();
     if (!name) {
         showToast("⚠️ Tafadhali weka jina lako", "warning");
@@ -1334,6 +1342,7 @@ async function submitWorker() {
         return;
     }
     
+    // 3. Angalia sahihi
     if (!signatureData.worker) {
         showToast("⚠️ Tafadhali weka sahihi yako", "warning");
         console.log("❌ Sahihi haijapatikana");
@@ -1342,6 +1351,7 @@ async function submitWorker() {
 
     console.log("✅ Uthibitishaji umepita");
 
+    // 4. Kusanya data
     const role = document.getElementById("workerRole").value;
     const report = {
         id: Date.now(),
@@ -1380,6 +1390,8 @@ async function submitWorker() {
     console.log("📤 Report iliyokusanywa:", report);
 
     try {
+        // 5. Soma data ya sasa
+        console.log("📤 Inasoma data kutoka JSONBin...");
         const data = await getBinData();
         if (!data) {
             showToast("❌ Imeshindwa kusoma data", "error");
@@ -1388,15 +1400,24 @@ async function submitWorker() {
         }
         
         console.log("✅ Data imesomwa kikamilifu");
+        console.log("📊 Data iliyopatikana:", data);
         
-        if (!data.reports) data.reports = [];
+        // 6. Ongeza report
+        if (!data.reports) {
+            console.log("⚠️ Hakuna reports array, inaunda mpya...");
+            data.reports = [];
+        }
         data.reports.push(report);
+        console.log("📊 Reports sasa:", data.reports.length);
         
-        console.log("📤 Inahifadhi data...");
+        // 7. Hifadhi kwenye JSONBin
+        console.log("📤 Inahifadhi data kwenye JSONBin...");
         const result = await updateBinData(data);
         
         if (result) {
             reports = data.reports;
+            
+            // ✅ BADILISHA UJUMBE - SASA NI "IMETUMWA" SIO "IMEHIFADHIWA"
             document.getElementById("workerSubmitBtn").disabled = true;
             document.getElementById("workerSubmitBtn").innerHTML = "✅ Imetumwa!";
             document.getElementById("workerSubmitMsg").style.display = "block";
@@ -1404,16 +1425,20 @@ async function submitWorker() {
             document.getElementById("workerSubmitMsg").style.color = "#27ae60";
             document.getElementById("workerStatusBadge").textContent = "✅ Imetumwa";
             document.getElementById("workerStatusBadge").className = "status-badge approved";
-            showToast("✅ Tathmini imetumwa kikamilifu!", "success");
+            
+            // ✅ BADILISHA TOAST MESSAGE
+            showToast("✅ Tathmini imetumwa kwa Msimamizi!", "success");
+            
             loadHistory();
             updateScoreSummary();
-            console.log("✅ Tathmini imehifadhiwa kikamilifu!");
+            console.log("✅ Tathmini imetumwa kikamilifu!");
         } else {
-            showToast("❌ Imeshindwa kuhifadhi", "error");
+            showToast("❌ Imeshindwa kutumwa kwa Msimamizi", "error");
             console.log("❌ updateBinData() imerudisha null");
         }
     } catch (error) {
         console.error("❌ Hitilafu:", error);
+        console.error("❌ Maelezo ya hitilafu:", error.message);
         showToast("❌ Hitilafu: " + error.message, "error");
     }
 }
@@ -1465,12 +1490,12 @@ async function submitSupervisor() {
             document.getElementById("supervisorSubmitMsg").style.color = "#27ae60";
             document.getElementById("supervisorStatusBadge").textContent = "✅ Imetumwa";
             document.getElementById("supervisorStatusBadge").className = "status-badge approved";
-            showToast("✅ Tathmini imetumwa!", "success");
+            showToast("✅ Tathmini imetumwa kwa Mganga Mfawidhi!", "success");
             loadHistory();
             updateScoreSummary();
             console.log("✅ Tathmini imetumwa kwa Mganga Mfawidhi!");
         } else {
-            showToast("❌ Imeshindwa kuhifadhi", "error");
+            showToast("❌ Imeshindwa kutumwa kwa Mganga Mfawidhi", "error");
             console.log("❌ updateBinData() imerudisha null");
         }
     } catch (error) {
