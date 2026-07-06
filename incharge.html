@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -432,6 +431,25 @@
             color: #1a5276;
             font-size: 13px;
         }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 8px 12px;
+            border: 1px solid #dee2e6;
+            text-align: left;
+        }
+        .comparison-table th {
+            background: #e8daef;
+            color: #1a5276;
+            font-weight: 600;
+        }
+        .comparison-table .highlight { background: #d5f5e3; }
+        .comparison-table .warning { background: #fef9e7; }
+        .comparison-table .danger { background: #fadbd8; }
     </style>
 </head>
 <body>
@@ -442,7 +460,7 @@
 <!-- ===== LOGIN ===== -->
 <div id="loginSection" class="login-box">
     <h2>🔐 Mtwara Performance</h2>
-    <p class="subtitle">Fomu ya Mganga Mfawidhi</p>
+    <p class="subtitle">Fomu ya Mganga Mfawidhi - Toleo Bora</p>
     <div style="text-align:center; margin-bottom:16px; font-size:12px; color:#7f8c8d;">
         <span id="connectionStatus">🔄 Inaunganisha...</span>
     </div>
@@ -563,7 +581,77 @@
             </div>
 
             <!-- ========================================================== -->
-            <!-- SEHEMU 2: TATHMINI YA MGANGA MFAWIDHI -->
+            <!-- SEHEMU 2: TAARIFA ZA MSIMAMIZI -->
+            <!-- ========================================================== -->
+            <div style="background:#d5f5e3; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #8e44ad;">
+                <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">👔 TAARIFA ZA MSIMAMIZI</div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>👔 Jina la Msimamizi</label>
+                        <input type="text" id="supervisorName" placeholder="Jina la msimamizi" value="">
+                    </div>
+                    <div class="form-group">
+                        <label>📋 Wadhifa</label>
+                        <input type="text" id="supervisorTitle" placeholder="Wadhifa wa msimamizi" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>🏢 Idara ya Msimamizi</label>
+                    <input type="text" id="supervisorDepartment" placeholder="Idara ya msimamizi" value="">
+                </div>
+            </div>
+
+            <!-- ========================================================== -->
+            <!-- SEHEMU 3: MUHTASARI WA TATHMINI -->
+            <!-- ========================================================== -->
+            <div style="background:#f8f9fa; padding:16px 20px; border-radius:12px; margin-bottom:16px; border:1px solid #dee2e6;">
+                <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">📊 MUHTASARI WA TATHMINI</div>
+                
+                <div style="font-weight:600; color:#1a5276; font-size:13px; margin-bottom:6px;">📋 Tathmini ya Mtendakazi</div>
+                <div class="preview-grid" id="workerAssessmentPreview">
+                    <div class="item"><strong>Jina:</strong> <span id="previewWorkerName">-</span></div>
+                    <div class="item"><strong>Taaluma:</strong> <span id="previewWorkerRole">-</span></div>
+                    <div class="item"><strong>Alama:</strong> <span id="previewWorkerScore">-</span></div>
+                    <div class="item"><strong>Hali:</strong> <span id="previewWorkerStatus">-</span></div>
+                </div>
+                
+                <div style="font-weight:600; color:#1a5276; font-size:13px; margin-top:10px; margin-bottom:6px;">👔 Tathmini ya Msimamizi</div>
+                <div class="preview-grid" id="supervisorAssessmentPreview">
+                    <div class="item"><strong>Jina:</strong> <span id="previewSupervisorName">-</span></div>
+                    <div class="item"><strong>Wadhifa:</strong> <span id="previewSupervisorTitle">-</span></div>
+                    <div class="item"><strong>Alama:</strong> <span id="previewSupervisorScore">-</span></div>
+                    <div class="item"><strong>Maoni:</strong> <span id="previewSupervisorComments">-</span></div>
+                </div>
+            </div>
+
+            <!-- ========================================================== -->
+            <!-- SEHEMU 4: COMPARISON TABLE -->
+            <!-- ========================================================== -->
+            <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">📊 COMPARISON TABLE</div>
+            <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Linganisha tathmini ya mtendakazi na msimamizi</div>
+            <table class="comparison-table" id="comparisonTable">
+                <thead>
+                    <tr>
+                        <th>Kipengele</th>
+                        <th>Mtendakazi</th>
+                        <th>Msimamizi</th>
+                        <th>Pengo</th>
+                        <th>Hali</th>
+                    </tr>
+                </thead>
+                <tbody id="comparisonBody">
+                    <tr><td>Kuwasili</td><td id="cWorkerPunctuality">-</td><td id="cSupervisorPunctuality">-</td><td id="cGapPunctuality">-</td><td id="cStatusPunctuality">-</td></tr>
+                    <tr><td>Ubora</td><td id="cWorkerQuality">-</td><td id="cSupervisorQuality">-</td><td id="cGapQuality">-</td><td id="cStatusQuality">-</td></tr>
+                    <tr><td>Ushirikiano</td><td id="cWorkerTeamwork">-</td><td id="cSupervisorTeamwork">-</td><td id="cGapTeamwork">-</td><td id="cStatusTeamwork">-</td></tr>
+                    <tr><td>Uongozi</td><td id="cWorkerLeadership">-</td><td id="cSupervisorLeadership">-</td><td id="cGapLeadership">-</td><td id="cStatusLeadership">-</td></tr>
+                    <tr><td>Mawasiliano</td><td id="cWorkerCommunication">-</td><td id="cSupervisorCommunication">-</td><td id="cGapCommunication">-</td><td id="cStatusCommunication">-</td></tr>
+                    <tr><td>Uamuzi</td><td id="cWorkerDecision">-</td><td id="cSupervisorDecision">-</td><td id="cGapDecision">-</td><td id="cStatusDecision">-</td></tr>
+                </tbody>
+            </table>
+
+            <!-- ========================================================== -->
+            <!-- SEHEMU 5: TATHMINI YA MGANGA MFAWIDHI -->
             <!-- ========================================================== -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">📊 TATHMINI YA MGANGA MFAWIDHI (1-5)</div>
             
@@ -629,7 +717,7 @@
             </div>
 
             <!-- ========================================================== -->
-            <!-- SEHEMU 3: UAMUZI WA MWISHO -->
+            <!-- SEHEMU 6: UAMUZI WA MWISHO -->
             <!-- ========================================================== -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">⚖️ UAMUZI WA MWISHO</div>
             
@@ -644,7 +732,29 @@
             </div>
 
             <!-- ========================================================== -->
-            <!-- SEHEMU 4: NOTIFICATION -->
+            <!-- SEHEMU 7: RECOMMENDATION CARDS -->
+            <!-- ========================================================== -->
+            <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">💡 RECOMMENDATION CARDS</div>
+            <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Mapendekezo ya uboreshaji kwa mtendakazi</div>
+            
+            <div class="rec-card">
+                <span class="icon">📚</span>
+                <span class="text">Kuhudhuria mafunzo ya uongozi ili kuboresha uwezo wa kuongoza timu</span>
+                <span class="priority high">JUU</span>
+            </div>
+            <div class="rec-card">
+                <span class="icon">🗣️</span>
+                <span class="text">Kuboresha mawasiliano na wagonjwa na wafanyakazi wenzake</span>
+                <span class="priority medium">WASTANI</span>
+            </div>
+            <div class="rec-card">
+                <span class="icon">📊</span>
+                <span class="text">Kufuatilia mwenendo wa utendaji kwa kutumia KPI zilizowekwa</span>
+                <span class="priority low">CHINI</span>
+            </div>
+
+            <!-- ========================================================== -->
+            <!-- SEHEMU 8: NOTIFICATION -->
             <!-- ========================================================== -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">🔔 NOTIFICATION</div>
             
@@ -663,7 +773,19 @@
             </div>
 
             <!-- ========================================================== -->
-            <!-- SEHEMU 5: MUHTASARI WA HALI -->
+            <!-- SEHEMU 9: DOCUMENT UPLOAD -->
+            <!-- ========================================================== -->
+            <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">📎 DOCUMENT UPLOAD</div>
+            <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Pakia nyaraka za usaidizi (ripoti, cheti, n.k.)</div>
+            <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+                <div class="icon">📄</div>
+                <div class="text">Bonyeza hapa kupakia faili au buruta na uachia</div>
+                <input type="file" id="fileInput" multiple onchange="handleFiles(this.files)">
+            </div>
+            <div class="file-list" id="fileList"></div>
+
+            <!-- ========================================================== -->
+            <!-- SEHEMU 10: MUHTASARI WA HALI -->
             <!-- ========================================================== -->
             <div class="score-box" style="margin-top:16px;">
                 <h3>📊 MUHTASARI WA HALI</h3>
@@ -677,6 +799,10 @@
                         <span class="label">Hali</span>
                     </div>
                     <div class="score-item">
+                        <span class="number" id="scoreGap">0</span>
+                        <span class="label">Pengo</span>
+                    </div>
+                    <div class="score-item">
                         <span class="number" id="scoreDecision">⏳</span>
                         <span class="label">Uamuzi</span>
                     </div>
@@ -687,7 +813,7 @@
             </div>
 
             <!-- ========================================================== -->
-            <!-- SEHEMU 6: SAHIHI -->
+            <!-- SEHEMU 11: SAHIHI -->
             <!-- ========================================================== -->
             <div class="form-group">
                 <label>✍️ Sahihi Yako <span class="required">*</span></label>
@@ -700,7 +826,7 @@
             </div>
 
             <!-- ========================================================== -->
-            <!-- SEHEMU 7: IDHINI AU KATA -->
+            <!-- SEHEMU 12: IDHINI AU KATA -->
             <!-- ========================================================== -->
             <div style="display:flex; gap:12px; flex-wrap:wrap;">
                 <button class="btn btn-success" onclick="approveFinal()" id="approveBtn" style="flex:1;">
@@ -719,7 +845,7 @@
 
         <div class="footer">
             <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
-            <div>Mtwara Performance | Fomu ya Mganga Mfawidhi | Toleo la Kimataifa</div>
+            <div>Mtwara Performance | Fomu ya Mganga Mfawidhi | Toleo Bora</div>
         </div>
 
     </div>
@@ -740,6 +866,28 @@ let currentUser = null;
 let currentRole = null;
 let reports = [];
 let signatureData = { incharge: null };
+let uploadedFiles = [];
+
+// ==============================================================
+// SAMPLE DATA FOR COMPARISON
+// ==============================================================
+const sampleWorkerData = {
+    punctuality: 4,
+    quality: 5,
+    teamwork: 3,
+    leadership: 4,
+    communication: 4,
+    decision: 3
+};
+
+const sampleSupervisorData = {
+    punctuality: 4,
+    quality: 4,
+    teamwork: 5,
+    leadership: 4,
+    communication: 3,
+    decision: 4
+};
 
 // ==============================================================
 // FUNCTIONS
@@ -835,6 +983,21 @@ function saveSig(type) {
     showToast("✅ Sahihi imehifadhiwa!", "success");
 }
 
+function handleFiles(files) {
+    for (let file of files) {
+        uploadedFiles.push(file);
+        const list = document.getElementById("fileList");
+        const item = document.createElement("div");
+        item.className = "file-item";
+        item.innerHTML = `
+            <span>📄 ${file.name} (${(file.size/1024).toFixed(1)} KB)</span>
+            <span class="remove" onclick="this.parentElement.remove()">✕ Ondoa</span>
+        `;
+        list.appendChild(item);
+    }
+    showToast(`✅ Faili ${files.length} zimepakuliwa!`, "success");
+}
+
 function updateDecisionNotification() {
     const value = document.getElementById("finalDecision").value;
     const msg = document.getElementById("decisionMessage");
@@ -853,6 +1016,31 @@ function updateDecisionNotification() {
     updateScoreSummary();
 }
 
+function updateComparisonTable(workerData, supervisorData) {
+    const categories = [
+        { key: 'Punctuality', label: 'Kuwasili' },
+        { key: 'Quality', label: 'Ubora' },
+        { key: 'Teamwork', label: 'Ushirikiano' },
+        { key: 'Leadership', label: 'Uongozi' },
+        { key: 'Communication', label: 'Mawasiliano' },
+        { key: 'Decision', label: 'Uamuzi' }
+    ];
+    
+    categories.forEach(cat => {
+        const wVal = workerData[cat.key.toLowerCase()] || 0;
+        const sVal = supervisorData[cat.key.toLowerCase()] || 0;
+        const gap = Math.abs(wVal - sVal);
+        const status = gap <= 1 ? '✅ Sawa' : gap <= 2 ? '⚠️ Tofauti' : '❌ Pengo Kubwa';
+        const statusClass = gap <= 1 ? 'highlight' : gap <= 2 ? 'warning' : 'danger';
+        
+        document.getElementById(`cWorker${cat.key}`).textContent = wVal || '-';
+        document.getElementById(`cSupervisor${cat.key}`).textContent = sVal || '-';
+        document.getElementById(`cGap${cat.key}`).textContent = gap;
+        document.getElementById(`cStatus${cat.key}`).textContent = status;
+        document.getElementById(`cStatus${cat.key}`).parentElement.className = statusClass;
+    });
+}
+
 function updateScoreSummary() {
     const ratings = getLikertValues("iQuality","iIntegrity","iSafety","iTeamwork","iLeadership","iCommunication");
     const ratingValues = Object.values(ratings);
@@ -860,8 +1048,14 @@ function updateScoreSummary() {
     const maxRating = ratingValues.length * 5;
     const ratingPercentage = maxRating > 0 ? Math.round((totalRating / maxRating) * 100) : 0;
     
+    const workerAvg = Object.values(sampleWorkerData).reduce((a,b) => a+b, 0) / Object.values(sampleWorkerData).length;
+    const supervisorAvg = Object.values(sampleSupervisorData).reduce((a,b) => a+b, 0) / Object.values(sampleSupervisorData).length;
+    const gap = Math.round(Math.abs(workerAvg - supervisorAvg) * 10);
+    
     document.getElementById("scoreTotal").textContent = ratingPercentage + "%";
     document.getElementById("scoreTotal").className = "number " + (ratingPercentage >= 70 ? "green" : ratingPercentage >= 50 ? "orange" : "red");
+    document.getElementById("scoreGap").textContent = gap;
+    document.getElementById("scoreGap").className = "number " + (gap <= 10 ? "green" : gap <= 20 ? "orange" : "red");
     
     const decision = document.getElementById("finalDecision").value;
     const decisionText = decision === "approved" ? "✅ Idhini" : decision === "rejected" ? "❌ Kata" : "⏳ Ahirisha";
@@ -873,6 +1067,23 @@ function updateScoreSummary() {
     document.getElementById("scoreStatus").className = "number " + (ratingPercentage >= 70 ? "green" : ratingPercentage >= 50 ? "orange" : "red");
     
     document.getElementById("progressFill").style.width = ratingPercentage + "%";
+}
+
+function updatePreview() {
+    const workerName = document.getElementById("workerName").value || "-";
+    const workerRole = document.getElementById("workerRole").value || "-";
+    const supervisorName = document.getElementById("supervisorName").value || "-";
+    const supervisorTitle = document.getElementById("supervisorTitle").value || "-";
+    
+    document.getElementById("previewWorkerName").textContent = workerName;
+    document.getElementById("previewWorkerRole").textContent = workerRole;
+    document.getElementById("previewSupervisorName").textContent = supervisorName;
+    document.getElementById("previewSupervisorTitle").textContent = supervisorTitle;
+    
+    document.getElementById("previewWorkerScore").textContent = "78%";
+    document.getElementById("previewWorkerStatus").textContent = "✅ Nzuri";
+    document.getElementById("previewSupervisorScore").textContent = "82%";
+    document.getElementById("previewSupervisorComments").textContent = "Anafanya kazi vizuri";
 }
 
 // ==============================================================
@@ -1017,7 +1228,7 @@ function exportCopy() {
                           `=============================\n` +
                           `Tarehe: ${new Date().toLocaleString()}\n\n` +
                           text + `\n\n` +
-                          `---\nMtwara Performance | Toleo la Kimataifa`;
+                          `---\nMtwara Performance | Toleo Bora`;
             
             navigator.clipboard.writeText(report).then(() => {
                 showToast("✅ Ripoti imenakiliwa!", "success");
@@ -1188,6 +1399,8 @@ async function login() {
         initSigPad("incharge");
     }, 500);
     
+    updateComparisonTable(sampleWorkerData, sampleSupervisorData);
+    updatePreview();
     updateDecisionNotification();
     updateScoreSummary();
     showToast(`✅ Karibu ${username}!`, "success");
@@ -1243,6 +1456,10 @@ async function finalizeAssessment(status) {
         workerEmail: document.getElementById("workerEmail").value,
         workerPhone: document.getElementById("workerPhone").value,
         
+        supervisorName: document.getElementById("supervisorName").value,
+        supervisorTitle: document.getElementById("supervisorTitle").value,
+        supervisorDepartment: document.getElementById("supervisorDepartment").value,
+        
         inchargeRatings: getLikertLabels("iQuality","iIntegrity","iSafety","iTeamwork","iLeadership","iCommunication"),
         inchargeRatingsValues: getLikertValues("iQuality","iIntegrity","iSafety","iTeamwork","iLeadership","iCommunication"),
         
@@ -1282,14 +1499,37 @@ async function finalizeAssessment(status) {
 }
 
 // ==============================================================
+// EVENT LISTENERS
+// ==============================================================
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".likert-btn").forEach(btn => {
+        btn.addEventListener("click", function() {
+            setTimeout(updateScoreSummary, 100);
+        });
+    });
+    
+    document.getElementById("finalDecision").addEventListener("change", function() {
+        updateDecisionNotification();
+        updateScoreSummary();
+    });
+    
+    document.querySelectorAll("#workerName, #workerRole, #supervisorName, #supervisorTitle").forEach(el => {
+        el.addEventListener("input", updatePreview);
+        el.addEventListener("change", updatePreview);
+    });
+});
+
+// ==============================================================
 // INIT
 // ==============================================================
 window.onload = function() {
     document.getElementById("binIdDisplay").textContent = BIN_ID;
     document.getElementById("connectionStatus").textContent = "✅ Tayari";
+    updateComparisonTable(sampleWorkerData, sampleSupervisorData);
+    updatePreview();
     updateDecisionNotification();
     updateScoreSummary();
-    console.log("✅ Mtwara Performance - Fomu ya Mganga Mfawidhi");
+    console.log("✅ Mtwara Performance - Fomu ya Mganga Mfawidhi (Toleo Bora)");
     console.log("📦 BIN ID:", BIN_ID);
     console.log("👤 Taaluma: Medical Officer, Clinical Officer, Specialist, Nurse, Laboratory Scientist, Pharmacist, HR, Accountant, Cashier, Chef, Environment Officer, Data Clerk, Receptionist");
 };
