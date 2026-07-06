@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -552,7 +551,7 @@
             </div>
             <div class="mission"><strong>Dhamira:</strong> "Ubora katika Huduma, Imani katika Vitendo"</div>
             <div class="bin-info">
-                📦 BIN: <span id="binIdDisplay">6a4b0205da38895dfe32b506</span>
+                📦 BIN: <span id="binIdDisplay">6a4b0bc9da38895dfe32cc08</span>
             </div>
         </div>
 
@@ -891,14 +890,14 @@
 
 <script>
 // ==============================================================
-// JSONBIN CONFIGURATION
+// JSONBIN CONFIGURATION - ILIYOSASISHWA
 // ==============================================================
 
 // ✅ ACCESS KEY (Master Key)
 const API_KEY = "$2a$10$VfPZVlhjWTV.gErIv2yxX.3QmHdrMCgM1evuIR.BJreI7G0jQxGqW";
 
-// ✅ BIN ID
-const BIN_ID = "6a4b0205da38895dfe32b506";
+// ✅ BIN ID MPYA
+const BIN_ID = "6a4b0bc9da38895dfe32cc08";
 
 // ✅ JINA LA BIN
 const BIN_NAME = "MTWARA PERFORMANCE";
@@ -1158,9 +1157,6 @@ async function getBinData() {
     }
 }
 
-// ==============================================================
-// UPDATE BIN DATA - ILIYOREKEBISHWA (HAKUNA UJUMBE WA "IMEHIFADHIWA")
-// ==============================================================
 async function updateBinData(data) {
     try {
         console.log("📤 Inahifadhi data kwenye JSONBin...");
@@ -1184,12 +1180,10 @@ async function updateBinData(data) {
         const result = await response.json();
         console.log("✅ Data imehifadhiwa kwenye JSONBin:", result);
         document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
-        // ✅ ONDOA ujumbe wa "Data imehifadhiwa" kutoka hapa - sasa inaonyeshwa kwenye submitWorker
         return result;
     } catch (error) {
         console.error("❌ Hitilafu ya kuhifadhi data:", error);
         document.getElementById("connectionStatus").textContent = "⚠️ Hitilafu";
-        // Usionyeshe toast hapa, iruhusu submitWorker ionyeshe
         return null;
     }
 }
@@ -1320,7 +1314,7 @@ function updateSteps(step) {
 }
 
 // ==============================================================
-// SUBMIT WORKER - ILIYOREKEBISHWA (UJUMBE WA "IMETUMWA")
+// SUBMIT WORKER
 // ==============================================================
 async function submitWorker() {
     console.log("📤 Inaanza kutuma tathmini...");
@@ -1417,7 +1411,6 @@ async function submitWorker() {
         if (result) {
             reports = data.reports;
             
-            // ✅ BADILISHA UJUMBE - SASA NI "IMETUMWA" SIO "IMEHIFADHIWA"
             document.getElementById("workerSubmitBtn").disabled = true;
             document.getElementById("workerSubmitBtn").innerHTML = "✅ Imetumwa!";
             document.getElementById("workerSubmitMsg").style.display = "block";
@@ -1426,7 +1419,6 @@ async function submitWorker() {
             document.getElementById("workerStatusBadge").textContent = "✅ Imetumwa";
             document.getElementById("workerStatusBadge").className = "status-badge approved";
             
-            // ✅ BADILISHA TOAST MESSAGE
             showToast("✅ Tathmini imetumwa kwa Msimamizi!", "success");
             
             loadHistory();
