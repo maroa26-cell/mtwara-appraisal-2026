@@ -25,6 +25,7 @@
             body { padding: 8px; }
             .container { padding: 16px; }
         }
+
         .header {
             text-align: center;
             border-bottom: 4px solid #1a5276;
@@ -59,6 +60,7 @@
             font-size: 11px;
             color: #7f8c8d;
         }
+
         .login-box {
             max-width: 420px;
             margin: 60px auto;
@@ -69,6 +71,7 @@
         }
         .login-box h2 { text-align: center; color: #1a5276; margin-bottom: 8px; }
         .login-box .subtitle { text-align: center; color: #7f8c8d; font-size: 13px; margin-bottom: 24px; }
+
         .steps {
             display: flex;
             justify-content: center;
@@ -103,6 +106,7 @@
         .step-badge.active .num { background: #fff; color: #1a5276; }
         .step-badge.done { background: #27ae60; color: #fff; }
         .step-badge.done .num { background: #fff; color: #27ae60; }
+
         .form-card {
             background: #f8f9fa;
             border-radius: 16px;
@@ -115,6 +119,7 @@
         .form-card.worker { border-top: 5px solid #1a5276; }
         .form-card.supervisor { border-top: 5px solid #27ae60; }
         .form-card.incharge { border-top: 5px solid #8e44ad; }
+
         .form-title {
             display: flex;
             align-items: center;
@@ -144,6 +149,7 @@
         .status-badge.pending { background: #fef9e7; color: #f39c12; }
         .status-badge.approved { background: #d5f5e3; color: #27ae60; }
         .status-badge.rejected { background: #fadbd8; color: #e74c3c; }
+
         .form-group { margin-bottom: 14px; }
         .form-group label {
             display: block;
@@ -175,6 +181,7 @@
             gap: 16px;
         }
         @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+
         .likert-scale {
             display: flex;
             gap: 6px;
@@ -209,6 +216,7 @@
             margin-top: 1px;
         }
         .likert-btn.selected .sub { color: rgba(255,255,255,0.8); }
+
         .checklist-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -261,6 +269,7 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.12);
         }
         .checklist-item .toggle.active .thumb { left: 20px; }
+
         .btn {
             padding: 11px 28px;
             border: none;
@@ -286,6 +295,7 @@
         .btn-sm { padding: 6px 16px; font-size: 12px; }
         .btn-block { width: 100%; justify-content: center; }
         .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
         .signature-pad {
             border: 2px dashed #1a5276;
             border-radius: 10px;
@@ -299,6 +309,7 @@
         }
         .signature-pad canvas { width: 100%; height: 100%; border-radius: 8px; touch-action: none; }
         .signature-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0; }
+
         .preview-box {
             background: #eaf2f8;
             padding: 16px 20px;
@@ -321,6 +332,7 @@
         @media (max-width: 600px) { .preview-grid { grid-template-columns: 1fr; } }
         .preview-grid .item { padding: 2px 0; }
         .preview-grid .item strong { color: #1a5276; }
+
         .score-dashboard {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -349,6 +361,7 @@
         .score-card .value.green { color: #27ae60; }
         .score-card .value.orange { color: #f39c12; }
         .score-card .value.red { color: #e74c3c; }
+
         .progress-bar {
             width: 100%;
             height: 6px;
@@ -363,6 +376,7 @@
             transition: width 0.8s ease;
             background: linear-gradient(90deg, #27ae60, #1a5276);
         }
+
         .toast {
             position: fixed;
             bottom: 30px;
@@ -386,6 +400,7 @@
         .toast.success { background: #27ae60; }
         .toast.warning { background: #f39c12; color: #1a1a2e; }
         .toast.error { background: #e74c3c; }
+
         .tabs {
             display: flex;
             gap: 8px;
@@ -407,6 +422,7 @@
         .tab-btn.active { background: #1a5276; color: #fff; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
+
         .history-empty { text-align: center; color: #7f8c8d; padding: 30px 0; }
         .pending-item {
             background: #fef9e7;
@@ -417,6 +433,7 @@
         }
         .pending-item .title { font-weight: 600; font-size: 14px; }
         .pending-item .sub { font-size: 12px; color: #7f8c8d; margin-top: 2px; }
+
         .footer {
             text-align: center;
             margin-top: 28px;
@@ -431,6 +448,7 @@
             font-size: 14px;
             margin-bottom: 4px;
         }
+
         .warning-box {
             background: #fef9e7;
             border-left: 4px solid #e74c3c;
@@ -715,11 +733,10 @@
                     <span id="supervisorStatusBadge" class="status-badge pending">⏳ Inasubiri</span>
                 </div>
 
-                <!-- Onyesha taarifa za mtendakazi -->
                 <div class="preview-box">
-                    <div class="title">📋 Taarifa za Mtendakazi (Kwa Marejeleo)</div>
-                    <div id="workerPreviewForSupervisor" class="content">
-                        <div style="color:#7f8c8d;">⏳ Hakuna tathmini ya mtendakazi iliyotumwa</div>
+                    <div class="title">📋 Taarifa za Mtendakazi</div>
+                    <div id="workerPreview" class="content">
+                        <div style="color:#7f8c8d;">⏳ Hakuna tathmini inayosubiri</div>
                     </div>
                 </div>
 
@@ -821,18 +838,16 @@
                     <span id="inchargeStatusBadge" class="status-badge pending">⏳ Inasubiri</span>
                 </div>
 
-                <!-- Onyesha taarifa za mtendakazi -->
                 <div class="preview-box">
                     <div class="title">📋 Taarifa za Mtendakazi</div>
-                    <div id="workerPreviewForIncharge" class="content">
+                    <div id="inchargeWorkerPreview" class="content">
                         <div style="color:#7f8c8d;">⏳ Hakuna tathmini ya mtendakazi</div>
                     </div>
                 </div>
 
-                <!-- Onyesha taarifa za msimamizi -->
                 <div class="preview-box" style="border-left-color:#27ae60;">
                     <div class="title">📋 Taarifa za Msimamizi</div>
-                    <div id="supervisorPreviewForIncharge" class="content">
+                    <div id="inchargeSupervisorPreview" class="content">
                         <div style="color:#7f8c8d;">⏳ Hakuna tathmini ya msimamizi</div>
                     </div>
                 </div>
@@ -938,7 +953,6 @@
 // ==============================================================
 // JSONBIN CONFIGURATION
 // ==============================================================
-
 const API_KEY = "$2a$10$VfPZVlhjWTV.gErIv2yxX.3QmHdrMCgM1evuIR.BJreI7G0jQxGqW";
 const BIN_ID = "6a4b0bc9da38895dfe32cc08";
 const BIN_NAME = "MTWARA PERFORMANCE";
@@ -946,6 +960,9 @@ const BIN_NAME = "MTWARA PERFORMANCE";
 localStorage.setItem("mtwaraBinId", BIN_ID);
 localStorage.setItem("mtwaraApiKey", API_KEY);
 
+// ==============================================================
+// VARIABLES
+// ==============================================================
 let currentUser = null;
 let currentRole = null;
 let reports = [];
@@ -955,23 +972,23 @@ let signatureData = { worker: null, supervisor: null, incharge: null };
 // CHECKLIST DATA
 // ==============================================================
 const SMART_GOALS = [
-    "Kukamilisha kazi zote ndani ya muda",
-    "Kufikia kuridhika kwa wagonjwa 90%",
-    "Kupunguza makosa kwa 50%",
-    "Kukamilisha mafunzo yote",
-    "Kuwasilisha ripoti ndani ya saa 24"
+    "Kukamilisha kazi zote ndani ya muda uliopangwa",
+    "Kufikia kuridhika kwa wagonjwa zaidi ya 90%",
+    "Kupunguza makosa kwa 50% katika taratibu za kliniki",
+    "Kukamilisha mafunzo yote ya lazima",
+    "Kuwasilisha ripoti zote ndani ya saa 24"
 ];
 
 const GENERAL_CHECKLIST = [
-    "Nimewasili kazini mapema",
+    "Nimewasili kazini mapema kila siku",
     "Nimevaa sare safi na kitambulisho",
-    "Nimejisajili kwenye daftari",
-    "Nimehudhuria ibada",
-    "Nimeandaa eneo la kazi",
-    "Nimekagua vifaa na zana",
-    "Nimewaonyesha huruma wagonjwa",
+    "Nimejisajili kwenye daftari la hudhurio",
+    "Nimehudhuria ibada ya asubuhi",
+    "Nimeandaa eneo la kazi kabla ya zamu",
+    "Nimekagua vifaa na zana zote",
+    "Nimewaonyesha huruma wagonjwa wote",
     "Nimewasiliana vizuri na wenzangu",
-    "Nimeweka eneo langu safi",
+    "Nimeweka eneo langu safi na salama",
     "Nimekamilisha ripoti ya mwisho wa zamu"
 ];
 
@@ -1322,13 +1339,13 @@ async function login() {
         document.getElementById("statusMessage").textContent = "✅ Kagua taarifa za mtendakazi kisha tuma kwa Mganga Mfawidhi";
         document.getElementById("supervisorDate").value = new Date().toISOString().split("T")[0];
         updateSteps(2);
-        loadWorkerDataForSupervisor();
+        loadWorkerData();
         checkSupervisorStatus();
     } else if (user.role === "incharge") {
         document.getElementById("formIncharge").style.display = "block";
         document.getElementById("statusMessage").textContent = "✅ Kagua tathmini zote kisha idhinisha au kata";
         updateSteps(3);
-        loadAllDataForIncharge();
+        loadAllAssessments();
         checkInchargeStatus();
     }
     
@@ -1359,6 +1376,145 @@ function updateSteps(step) {
         if (i + 1 < step) s.classList.add("done");
         else if (i + 1 === step) s.classList.add("active");
     });
+}
+
+// ==============================================================
+// LOAD WORKER DATA - ILIYOREKEBISHWA
+// ==============================================================
+function loadWorkerData() {
+    console.log("📤 Inapakia data ya mtendakazi...");
+    console.log("📊 Reports zote:", reports);
+    
+    // Tafuta report ya mtendakazi
+    const allReports = reports || [];
+    const pending = allReports.filter(r => r.workerName && r.workerName !== "" && r.status === "Inasubiri Mganga Mfawidhi");
+    
+    console.log("📊 Pending reports:", pending);
+    
+    if (pending.length === 0) {
+        document.getElementById("workerPreview").innerHTML = `<div style="color:#7f8c8d;">⏳ Hakuna tathmini inayosubiri</div>`;
+        return;
+    }
+    
+    const d = pending[pending.length - 1];
+    console.log("📋 Data ya mtendakazi:", d);
+    
+    document.getElementById("workerPreview").innerHTML = `
+        <div class="preview-grid">
+            <div class="item"><strong>Jina:</strong> ${d.workerName || "N/A"}</div>
+            <div class="item"><strong>Taaluma:</strong> ${d.role || "N/A"}</div>
+            <div class="item"><strong>Tarehe:</strong> ${d.date || "N/A"}</div>
+            <div class="item"><strong>Zamu:</strong> ${d.shift || "N/A"}</div>
+            <div class="item"><strong>Wagonjwa:</strong> ${d.stats?.patients || 0}</div>
+            <div class="item"><strong>Ultrasound:</strong> ${d.stats?.ultrasound || 0}</div>
+            <div class="item"><strong>Referral:</strong> ${d.stats?.referral || 0}</div>
+            <div class="item"><strong>Waliorudi:</strong> ${d.stats?.followup || 0}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Malengo SMART:</strong> ${d.smartGoals?.filter(c=>c.checked).length||0}/${d.smartGoals?.length||0}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Majukumu Jumla:</strong> ${d.generalChecklist?.filter(c=>c.checked).length||0}/${d.generalChecklist?.length||0}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Majukumu Maalum:</strong> ${d.specialChecklist?.filter(c=>c.checked).length||0}/${d.specialChecklist?.length||0}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Tathmini Binafsi:</strong> ${Object.values(d.selfRatings || {}).join(" | ")}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Maoni:</strong> ${d.selfComments || "Hakuna"}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Sahihi:</strong> ${d.signature ? "✅ Imehifadhiwa" : "❌ Hakuna"}</div>
+        </div>
+    `;
+}
+
+// ==============================================================
+// LOAD ALL ASSESSMENTS - ILIYOREKEBISHWA
+// ==============================================================
+function loadAllAssessments() {
+    console.log("📤 Inapakia tathmini zote kwa Mganga Mfawidhi...");
+    console.log("📊 Reports zote:", reports);
+    
+    const allReports = reports || [];
+    
+    // Tafuta report ya mtendakazi
+    const workerReports = allReports.filter(r => r.workerName && r.workerName !== "");
+    const pendingWorker = workerReports.length > 0 ? workerReports[workerReports.length - 1] : null;
+    
+    console.log("📊 Worker reports:", workerReports);
+    console.log("📋 Pending worker:", pendingWorker);
+    
+    if (!pendingWorker) {
+        document.getElementById("inchargeWorkerPreview").innerHTML = `<div style="color:#7f8c8d;">⏳ Hakuna tathmini ya mtendakazi</div>`;
+        document.getElementById("inchargeSupervisorPreview").innerHTML = `<div style="color:#7f8c8d;">⏳ Hakuna tathmini ya msimamizi</div>`;
+        return;
+    }
+    
+    // Onyesha data ya mtendakazi
+    const d = pendingWorker;
+    document.getElementById("inchargeWorkerPreview").innerHTML = `
+        <div class="preview-grid">
+            <div class="item"><strong>Jina:</strong> ${d.workerName || "N/A"}</div>
+            <div class="item"><strong>Taaluma:</strong> ${d.role || "N/A"}</div>
+            <div class="item"><strong>Tarehe:</strong> ${d.date || "N/A"}</div>
+            <div class="item"><strong>Zamu:</strong> ${d.shift || "N/A"}</div>
+            <div class="item"><strong>Wagonjwa:</strong> ${d.stats?.patients || 0}</div>
+            <div class="item"><strong>Ultrasound:</strong> ${d.stats?.ultrasound || 0}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Malengo SMART:</strong> ${d.smartGoals?.filter(c=>c.checked).length||0}/${d.smartGoals?.length||0}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Majukumu:</strong> ${(d.generalChecklist?.filter(c=>c.checked).length||0) + (d.specialChecklist?.filter(c=>c.checked).length||0)}/${(d.generalChecklist?.length||0) + (d.specialChecklist?.length||0)}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Tathmini:</strong> ${Object.values(d.selfRatings || {}).join(" | ")}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Maoni:</strong> ${d.selfComments || "Hakuna"}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Sahihi:</strong> ${d.signature ? "✅ Imehifadhiwa" : "❌ Hakuna"}</div>
+        </div>
+    `;
+    
+    // Onyesha data ya msimamizi (ikiwa ipo)
+    const hasSupervisor = d.supervisorName && d.supervisorName !== "";
+    document.getElementById("inchargeSupervisorPreview").innerHTML = hasSupervisor ? `
+        <div class="preview-grid">
+            <div class="item"><strong>Jina:</strong> ${d.supervisorName}</div>
+            <div class="item"><strong>Wadhifa:</strong> ${d.supervisorTitle || "N/A"}</div>
+            <div class="item"><strong>Tarehe:</strong> ${d.supervisorDate || "N/A"}</div>
+            <div class="item"><strong>Idara:</strong> ${d.supervisorDepartment || "N/A"}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Tathmini:</strong> ${Object.values(d.supervisorRatings || {}).join(" | ")}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Maoni:</strong> ${d.supervisorComments || "Hakuna"}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Sahihi:</strong> ${d.supervisorSignature ? "✅ Imehifadhiwa" : "❌ Hakuna"}</div>
+        </div>
+    ` : `<div style="color:#7f8c8d;">⏳ Msimamizi bado hajajaza tathmini yake</div>`;
+}
+
+// ==============================================================
+// CHECK STATUS FUNCTIONS
+// ==============================================================
+function checkWorkerStatus() {
+    const pending = reports.filter(r => r.workerName && r.status === "Inasubiri Mganga Mfawidhi");
+    if (pending.length > 0) {
+        document.getElementById("workerStatusBadge").textContent = "✅ Imetumwa";
+        document.getElementById("workerStatusBadge").className = "status-badge approved";
+        document.getElementById("workerSubmitBtn").disabled = true;
+        document.getElementById("workerSubmitBtn").innerHTML = "✅ Imetumwa kwa Mganga Mfawidhi";
+        document.getElementById("workerSubmitMsg").style.display = "block";
+        document.getElementById("workerSubmitMsg").textContent = "✅ Tathmini yako imetumwa. Subiri Mganga Mfawidhi.";
+        document.getElementById("workerSubmitMsg").style.color = "#27ae60";
+    }
+}
+
+function checkSupervisorStatus() {
+    const pending = reports.filter(r => r.supervisorName && r.status === "Inasubiri Mganga Mfawidhi");
+    if (pending.length > 0) {
+        document.getElementById("supervisorStatusBadge").textContent = "✅ Imetumwa";
+        document.getElementById("supervisorStatusBadge").className = "status-badge approved";
+        document.getElementById("supervisorSubmitBtn").disabled = true;
+        document.getElementById("supervisorSubmitBtn").innerHTML = "✅ Imetumwa kwa Mganga Mfawidhi";
+        document.getElementById("supervisorSubmitMsg").style.display = "block";
+        document.getElementById("supervisorSubmitMsg").textContent = "✅ Tathmini imetumwa. Subiri Mganga Mfawidhi.";
+        document.getElementById("supervisorSubmitMsg").style.color = "#27ae60";
+    }
+}
+
+function checkInchargeStatus() {
+    const pending = reports.filter(r => r.workerName && (r.status === "Imekubaliwa" || r.status === "Imekataliwa"));
+    if (pending.length > 0) {
+        const last = pending[pending.length - 1];
+        document.getElementById("inchargeStatusBadge").textContent = last.status;
+        document.getElementById("inchargeStatusBadge").className = "status-badge " + (last.status === "Imekubaliwa" ? "approved" : "rejected");
+        document.getElementById("approveBtn").disabled = true;
+        document.getElementById("rejectBtn").disabled = true;
+        document.getElementById("inchargeSubmitMsg").style.display = "block";
+        document.getElementById("inchargeSubmitMsg").textContent = `✅ Tathmini ${last.status}`;
+        document.getElementById("inchargeSubmitMsg").style.color = last.status === "Imekubaliwa" ? "#27ae60" : "#e74c3c";
+    }
 }
 
 // ==============================================================
@@ -1395,31 +1551,13 @@ async function submitWorker() {
         selfComments: document.getElementById("workerComments").value,
         signature: signatureData.worker,
         status: "Inasubiri Mganga Mfawidhi",
-        timestamp: new Date().toISOString(),
-        supervisorName: "",
-        supervisorTitle: "",
-        supervisorDate: "",
-        supervisorDepartment: "",
-        supervisorRatings: {},
-        supervisorRatingsValues: {},
-        supervisorComments: "",
-        supervisorSignature: null,
-        inchargeName: "",
-        inchargeRatings: {},
-        inchargeRatingsValues: {},
-        inchargeComments: "",
-        inchargeSignature: null,
-        finalStatus: "Inasubiri"
+        timestamp: new Date().toISOString()
     };
 
     try {
         const data = await getBinData();
         if (!data) return;
         if (!data.reports) data.reports = [];
-        
-        // Remove any existing pending reports for this worker
-        data.reports = data.reports.filter(r => r.workerName !== name || r.status === "Imekubaliwa" || r.status === "Imekataliwa");
-        
         data.reports.push(report);
         const result = await updateBinData(data);
         if (result) {
@@ -1449,28 +1587,70 @@ async function submitSupervisor() {
     if (!name) { showToast("⚠️ Tafadhali weka jina lako", "warning"); return; }
     if (!signatureData.supervisor) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
 
+    const report = {
+        supervisorName: name,
+        supervisorTitle: document.getElementById("supervisorTitle").value,
+        supervisorDate: document.getElementById("supervisorDate").value,
+        supervisorDepartment: document.getElementById("supervisorDepartment").value,
+        supervisorRatings: getLikertLabels("sLeadership","sManagement","sCommunication","sDecision"),
+        supervisorRatingsValues: getLikertValues("sLeadership","sManagement","sCommunication","sDecision"),
+        supervisorComments: document.getElementById("supervisorComments").value,
+        supervisorSignature: signatureData.supervisor,
+        status: "Inasubiri Mganga Mfawidhi",
+        timestamp: new Date().toISOString()
+    };
+
     try {
         const data = await getBinData();
         if (!data) return;
-        const reports = data.reports || [];
+        if (!data.reports) data.reports = [];
         
-        // Find the latest pending report
-        const pendingIndex = reports.findIndex(r => r.status === "Inasubiri Mganga Mfawidhi" && !r.supervisorName);
-        if (pendingIndex === -1) {
-            showToast("❌ Hakuna tathmini ya mtendakazi inayosubiri", "error");
-            return;
+        let existingReport = data.reports.find(r => r.workerName && r.status === "Inasubiri Mganga Mfawidhi");
+        if (!existingReport) {
+            existingReport = {
+                id: Date.now(),
+                workerName: "Msimamizi",
+                role: "Msimamizi",
+                date: new Date().toISOString().split("T")[0],
+                shift: "Mchana",
+                department: "Clinical",
+                stats: { patients: 0, ultrasound: 0, referral: 0, followup: 0 },
+                smartGoals: [],
+                generalChecklist: [],
+                specialChecklist: [],
+                selfRatings: {},
+                selfRatingsValues: {},
+                selfComments: "",
+                signature: null,
+                status: "Inasubiri Mganga Mfawidhi",
+                timestamp: new Date().toISOString(),
+                supervisorName: "",
+                supervisorTitle: "",
+                supervisorRatings: {},
+                supervisorRatingsValues: {},
+                supervisorComments: "",
+                supervisorSignature: null,
+                inchargeName: "",
+                inchargeRatings: {},
+                inchargeRatingsValues: {},
+                inchargeComments: "",
+                inchargeSignature: null,
+                finalStatus: "Inasubiri"
+            };
+            data.reports.push(existingReport);
         }
-
-        reports[pendingIndex].supervisorName = name;
-        reports[pendingIndex].supervisorTitle = document.getElementById("supervisorTitle").value;
-        reports[pendingIndex].supervisorDate = document.getElementById("supervisorDate").value;
-        reports[pendingIndex].supervisorDepartment = document.getElementById("supervisorDepartment").value;
-        reports[pendingIndex].supervisorRatings = getLikertLabels("sLeadership","sManagement","sCommunication","sDecision");
-        reports[pendingIndex].supervisorRatingsValues = getLikertValues("sLeadership","sManagement","sCommunication","sDecision");
-        reports[pendingIndex].supervisorComments = document.getElementById("supervisorComments").value;
-        reports[pendingIndex].supervisorSignature = signatureData.supervisor;
-        reports[pendingIndex].status = "Inasubiri Mganga Mfawidhi";
-
+        
+        const index = data.reports.indexOf(existingReport);
+        data.reports[index].supervisorName = report.supervisorName;
+        data.reports[index].supervisorTitle = report.supervisorTitle;
+        data.reports[index].supervisorDate = report.supervisorDate;
+        data.reports[index].supervisorDepartment = report.supervisorDepartment;
+        data.reports[index].supervisorRatings = report.supervisorRatings;
+        data.reports[index].supervisorRatingsValues = report.supervisorRatingsValues;
+        data.reports[index].supervisorComments = report.supervisorComments;
+        data.reports[index].supervisorSignature = report.supervisorSignature;
+        data.reports[index].status = "Inasubiri Mganga Mfawidhi";
+        
         const result = await updateBinData(data);
         if (result) {
             reports = data.reports;
@@ -1494,109 +1674,6 @@ async function submitSupervisor() {
 // ==============================================================
 // INCHARGE FUNCTIONS
 // ==============================================================
-function loadWorkerDataForSupervisor() {
-    const pending = reports.filter(r => r.workerName && r.status === "Inasubiri Mganga Mfawidhi" && !r.supervisorName);
-    if (pending.length === 0) {
-        document.getElementById("workerPreviewForSupervisor").innerHTML = `
-            <div style="color:#7f8c8d;">⏳ Hakuna tathmini ya mtendakazi inayosubiri</div>
-        `;
-        return;
-    }
-    const d = pending[pending.length - 1];
-    document.getElementById("workerPreviewForSupervisor").innerHTML = `
-        <div class="preview-grid">
-            <div class="item"><strong>Jina:</strong> ${d.workerName}</div>
-            <div class="item"><strong>Taaluma:</strong> ${d.role}</div>
-            <div class="item"><strong>Tarehe:</strong> ${d.date}</div>
-            <div class="item"><strong>Zamu:</strong> ${d.shift}</div>
-            <div class="item"><strong>Wagonjwa:</strong> ${d.stats?.patients || 0}</div>
-            <div class="item"><strong>Ultrasound:</strong> ${d.stats?.ultrasound || 0}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Majukumu:</strong> ${(d.generalChecklist?.filter(c=>c.checked).length||0) + (d.specialChecklist?.filter(c=>c.checked).length||0)}/${(d.generalChecklist?.length||0) + (d.specialChecklist?.length||0)}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Tathmini:</strong> ${Object.values(d.selfRatings || {}).join(" | ")}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Maoni:</strong> ${d.selfComments || "Hakuna"}</div>
-        </div>
-    `;
-}
-
-function loadAllDataForIncharge() {
-    const pending = reports.filter(r => r.workerName && r.status === "Inasubiri Mganga Mfawidhi");
-    if (pending.length === 0) {
-        document.getElementById("workerPreviewForIncharge").innerHTML = `<div style="color:#7f8c8d;">⏳ Hakuna tathmini ya mtendakazi</div>`;
-        document.getElementById("supervisorPreviewForIncharge").innerHTML = `<div style="color:#7f8c8d;">⏳ Hakuna tathmini ya msimamizi</div>`;
-        return;
-    }
-    
-    const d = pending[pending.length - 1];
-    
-    // Worker data
-    document.getElementById("workerPreviewForIncharge").innerHTML = `
-        <div class="preview-grid">
-            <div class="item"><strong>Jina:</strong> ${d.workerName || "N/A"}</div>
-            <div class="item"><strong>Taaluma:</strong> ${d.role || "N/A"}</div>
-            <div class="item"><strong>Tarehe:</strong> ${d.date || "N/A"}</div>
-            <div class="item"><strong>Zamu:</strong> ${d.shift || "N/A"}</div>
-            <div class="item"><strong>Wagonjwa:</strong> ${d.stats?.patients || 0}</div>
-            <div class="item"><strong>Ultrasound:</strong> ${d.stats?.ultrasound || 0}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Majukumu:</strong> ${(d.generalChecklist?.filter(c=>c.checked).length||0) + (d.specialChecklist?.filter(c=>c.checked).length||0)}/${(d.generalChecklist?.length||0) + (d.specialChecklist?.length||0)}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Tathmini:</strong> ${Object.values(d.selfRatings || {}).join(" | ")}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Maoni:</strong> ${d.selfComments || "Hakuna"}</div>
-        </div>
-    `;
-    
-    // Supervisor data
-    const hasSupervisor = d.supervisorName && d.supervisorName !== "";
-    document.getElementById("supervisorPreviewForIncharge").innerHTML = hasSupervisor ? `
-        <div class="preview-grid">
-            <div class="item"><strong>Jina:</strong> ${d.supervisorName}</div>
-            <div class="item"><strong>Wadhifa:</strong> ${d.supervisorTitle || "N/A"}</div>
-            <div class="item"><strong>Tarehe:</strong> ${d.supervisorDate || "N/A"}</div>
-            <div class="item"><strong>Idara:</strong> ${d.supervisorDepartment || "N/A"}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Tathmini:</strong> ${Object.values(d.supervisorRatings || {}).join(" | ")}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Maoni:</strong> ${d.supervisorComments || "Hakuna"}</div>
-        </div>
-    ` : `<div style="color:#7f8c8d;">⏳ Msimamizi bado hajajaza tathmini yake</div>`;
-}
-
-function checkWorkerStatus() {
-    const pending = reports.filter(r => r.workerName && r.status === "Inasubiri Mganga Mfawidhi" && !r.supervisorName);
-    if (pending.length > 0) {
-        document.getElementById("workerStatusBadge").textContent = "✅ Imetumwa";
-        document.getElementById("workerStatusBadge").className = "status-badge approved";
-        document.getElementById("workerSubmitBtn").disabled = true;
-        document.getElementById("workerSubmitBtn").innerHTML = "✅ Imetumwa kwa Mganga Mfawidhi";
-        document.getElementById("workerSubmitMsg").style.display = "block";
-        document.getElementById("workerSubmitMsg").textContent = "✅ Tathmini imetumwa. Subiri Msimamizi na Mganga Mfawidhi.";
-        document.getElementById("workerSubmitMsg").style.color = "#27ae60";
-    }
-}
-
-function checkSupervisorStatus() {
-    const pending = reports.filter(r => r.workerName && r.status === "Inasubiri Mganga Mfawidhi" && r.supervisorName);
-    if (pending.length > 0) {
-        document.getElementById("supervisorStatusBadge").textContent = "✅ Imetumwa";
-        document.getElementById("supervisorStatusBadge").className = "status-badge approved";
-        document.getElementById("supervisorSubmitBtn").disabled = true;
-        document.getElementById("supervisorSubmitBtn").innerHTML = "✅ Imetumwa kwa Mganga Mfawidhi";
-        document.getElementById("supervisorSubmitMsg").style.display = "block";
-        document.getElementById("supervisorSubmitMsg").textContent = "✅ Tathmini imetumwa. Subiri Mganga Mfawidhi.";
-        document.getElementById("supervisorSubmitMsg").style.color = "#27ae60";
-    }
-}
-
-function checkInchargeStatus() {
-    const pending = reports.filter(r => r.workerName && (r.status === "Imekubaliwa" || r.status === "Imekataliwa"));
-    if (pending.length > 0) {
-        const last = pending[pending.length - 1];
-        document.getElementById("inchargeStatusBadge").textContent = last.status;
-        document.getElementById("inchargeStatusBadge").className = "status-badge " + (last.status === "Imekubaliwa" ? "approved" : "rejected");
-        document.getElementById("approveBtn").disabled = true;
-        document.getElementById("rejectBtn").disabled = true;
-        document.getElementById("inchargeSubmitMsg").style.display = "block";
-        document.getElementById("inchargeSubmitMsg").textContent = `✅ Tathmini ${last.status}`;
-        document.getElementById("inchargeSubmitMsg").style.color = last.status === "Imekubaliwa" ? "#27ae60" : "#e74c3c";
-    }
-}
-
 async function submitIncharge() {
     const name = document.getElementById("inchargeName").value.trim();
     if (!name) { showToast("⚠️ Tafadhali weka jina lako", "warning"); return; }
@@ -1617,6 +1694,7 @@ async function submitIncharge() {
     const result = await updateBinData(data);
     if (result) {
         reports = data.reports;
+        document.getElementById("inchargeSubmitBtn").disabled = true;
         document.getElementById("inchargeSubmitMsg").style.display = "block";
         document.getElementById("inchargeSubmitMsg").textContent = "✅ Tathmini imehifadhiwa! Sasa idhinisha au kata.";
         document.getElementById("inchargeSubmitMsg").style.color = "#27ae60";
@@ -1640,7 +1718,6 @@ async function finalizeAssessment(status) {
     const lastIndex = reports.length - 1;
     if (lastIndex < 0) { showToast("❌ Hakuna tathmini", "error"); return; }
 
-    // Check if incharge has saved assessment
     if (!reports[lastIndex].inchargeName) {
         showToast("⚠️ Tafadhali jaza na uhifadhi tathmini yako kwanza", "warning");
         return;
@@ -1751,6 +1828,7 @@ window.onload = function() {
     console.log("✅ Mtwara Performance Appraisal System");
     console.log("📦 BIN ID:", BIN_ID);
     console.log("👤 Watumiaji: worker, supervisor, incharge");
+    console.log("💾 Imeunganishwa na JSONBin + LocalStorage (Backup)");
 };
 </script>
 
