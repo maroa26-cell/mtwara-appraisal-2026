@@ -568,7 +568,7 @@
                 <div class="form-title">
                     <span class="icon">👤</span>
                     <span class="title-text">Fomu ya Mtendakazi</span>
-                    <span class="badge">Sehemu 1 ya 3</span>
+                    <span class="badge">Jaza na Tuma</span>
                     <span id="workerStatusBadge" class="status-badge pending">⏳ Inasubiri</span>
                 </div>
 
@@ -686,11 +686,11 @@
 
                 <div class="form-group">
                     <label>📝 Maoni na Tafakari Binafsi</label>
-                    <textarea id="workerComments" placeholder="Andika mawazo yako kuhusu utendaji wako..."></textarea>
+                    <textarea id="workerComments" placeholder="Andika mawazo yako..."></textarea>
                 </div>
 
-                <div class="warning-box"><strong>⚠️ Tamko:</strong> Nathibitisha kuwa taarifa zote nilizotoa ni za kweli na sahihi.</div>
-                <div class="success-box"><label><input type="checkbox" id="workerVerify"> <strong>Nathibitisha taarifa zangu ni sahihi na kamili.</strong></label></div>
+                <div class="warning-box"><strong>⚠️ Tamko:</strong> Nathibitisha taarifa zangu ni za kweli.</div>
+                <div class="success-box"><label><input type="checkbox" id="workerVerify"> <strong>Nathibitisha taarifa zangu ni sahihi.</strong></label></div>
 
                 <div class="form-group">
                     <label>✍️ Sahihi Yako <span class="required">*</span></label>
@@ -703,7 +703,7 @@
                 </div>
 
                 <button class="btn btn-success" onclick="submitWorker()" id="workerSubmitBtn" style="width:100%;">
-                    📤 TUMA KWA MSIMAMIZI
+                    📤 TUMA KWA MGANGA MFAWIDHI
                 </button>
                 <div id="workerSubmitMsg" style="font-size:12px; color:#7f8c8d; margin-top:8px; display:none;"></div>
             </div>
@@ -713,13 +713,8 @@
                 <div class="form-title">
                     <span class="icon">👔</span>
                     <span class="title-text">Fomu ya Msimamizi</span>
-                    <span class="badge">Sehemu 2 ya 3</span>
+                    <span class="badge">Jaza na Tuma</span>
                     <span id="supervisorStatusBadge" class="status-badge pending">⏳ Inasubiri</span>
-                </div>
-
-                <div class="preview-box">
-                    <div class="title">🔒 Taarifa za Mtendakazi (Hazibadiliki)</div>
-                    <div id="workerPreview" class="content"></div>
                 </div>
 
                 <div class="form-row">
@@ -737,52 +732,62 @@
                         </select>
                     </div>
                 </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>📅 Tarehe</label>
+                        <input type="date" id="supervisorDate">
+                    </div>
+                    <div class="form-group">
+                        <label>🏢 Idara</label>
+                        <input type="text" id="supervisorDepartment" value="Clinical">
+                    </div>
+                </div>
 
                 <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">📊 Tathmini ya Msimamizi (1-5)</div>
                 <div class="form-group">
-                    <label>1. Kuwasili na Uwepo</label>
-                    <div class="likert-scale" id="sPunctuality">
-                        <button class="likert-btn" onclick="selectLikert('sPunctuality',this,1)">1 <span class="sub">Dhaifu</span></button>
-                        <button class="likert-btn" onclick="selectLikert('sPunctuality',this,2)">2 <span class="sub">Wastani</span></button>
-                        <button class="likert-btn" onclick="selectLikert('sPunctuality',this,3)">3 <span class="sub">Nzuri</span></button>
-                        <button class="likert-btn" onclick="selectLikert('sPunctuality',this,4)">4 <span class="sub">Nzuri Sana</span></button>
-                        <button class="likert-btn" onclick="selectLikert('sPunctuality',this,5)">5 <span class="sub">Bora</span></button>
+                    <label>1. Uongozi</label>
+                    <div class="likert-scale" id="sLeadership">
+                        <button class="likert-btn" onclick="selectLikert('sLeadership',this,1)">1 <span class="sub">Dhaifu</span></button>
+                        <button class="likert-btn" onclick="selectLikert('sLeadership',this,2)">2 <span class="sub">Wastani</span></button>
+                        <button class="likert-btn" onclick="selectLikert('sLeadership',this,3)">3 <span class="sub">Nzuri</span></button>
+                        <button class="likert-btn" onclick="selectLikert('sLeadership',this,4)">4 <span class="sub">Nzuri Sana</span></button>
+                        <button class="likert-btn" onclick="selectLikert('sLeadership',this,5)">5 <span class="sub">Bora</span></button>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>2. Ubora wa Kazi</label>
-                    <div class="likert-scale" id="sQuality">
-                        <button class="likert-btn" onclick="selectLikert('sQuality',this,1)">1 <span class="sub">Dhaifu</span></button>
-                        <button class="likert-btn" onclick="selectLikert('sQuality',this,2)">2 <span class="sub">Wastani</span></button>
-                        <button class="likert-btn" onclick="selectLikert('sQuality',this,3)">3 <span class="sub">Nzuri</span></button>
-                        <button class="likert-btn" onclick="selectLikert('sQuality',this,4)">4 <span class="sub">Nzuri Sana</span></button>
-                        <button class="likert-btn" onclick="selectLikert('sQuality',this,5)">5 <span class="sub">Bora</span></button>
+                    <label>2. Usimamizi</label>
+                    <div class="likert-scale" id="sManagement">
+                        <button class="likert-btn" onclick="selectLikert('sManagement',this,1)">1 <span class="sub">Dhaifu</span></button>
+                        <button class="likert-btn" onclick="selectLikert('sManagement',this,2)">2 <span class="sub">Wastani</span></button>
+                        <button class="likert-btn" onclick="selectLikert('sManagement',this,3)">3 <span class="sub">Nzuri</span></button>
+                        <button class="likert-btn" onclick="selectLikert('sManagement',this,4)">4 <span class="sub">Nzuri Sana</span></button>
+                        <button class="likert-btn" onclick="selectLikert('sManagement',this,5)">5 <span class="sub">Bora</span></button>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>3. Huruma kwa Wagonjwa</label>
-                    <div class="likert-scale" id="sCompassion">
-                        <button class="likert-btn" onclick="selectLikert('sCompassion',this,1)">1 <span class="sub">Dhaifu</span></button>
-                        <button class="likert-btn" onclick="selectLikert('sCompassion',this,2)">2 <span class="sub">Wastani</span></button>
-                        <button class="likert-btn" onclick="selectLikert('sCompassion',this,3)">3 <span class="sub">Nzuri</span></button>
-                        <button class="likert-btn" onclick="selectLikert('sCompassion',this,4)">4 <span class="sub">Nzuri Sana</span></button>
-                        <button class="likert-btn" onclick="selectLikert('sCompassion',this,5)">5 <span class="sub">Bora</span></button>
+                    <label>3. Mawasiliano</label>
+                    <div class="likert-scale" id="sCommunication">
+                        <button class="likert-btn" onclick="selectLikert('sCommunication',this,1)">1 <span class="sub">Dhaifu</span></button>
+                        <button class="likert-btn" onclick="selectLikert('sCommunication',this,2)">2 <span class="sub">Wastani</span></button>
+                        <button class="likert-btn" onclick="selectLikert('sCommunication',this,3)">3 <span class="sub">Nzuri</span></button>
+                        <button class="likert-btn" onclick="selectLikert('sCommunication',this,4)">4 <span class="sub">Nzuri Sana</span></button>
+                        <button class="likert-btn" onclick="selectLikert('sCommunication',this,5)">5 <span class="sub">Bora</span></button>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>4. Ushirikiano</label>
-                    <div class="likert-scale" id="sTeamwork">
-                        <button class="likert-btn" onclick="selectLikert('sTeamwork',this,1)">1 <span class="sub">Dhaifu</span></button>
-                        <button class="likert-btn" onclick="selectLikert('sTeamwork',this,2)">2 <span class="sub">Wastani</span></button>
-                        <button class="likert-btn" onclick="selectLikert('sTeamwork',this,3)">3 <span class="sub">Nzuri</span></button>
-                        <button class="likert-btn" onclick="selectLikert('sTeamwork',this,4)">4 <span class="sub">Nzuri Sana</span></button>
-                        <button class="likert-btn" onclick="selectLikert('sTeamwork',this,5)">5 <span class="sub">Bora</span></button>
+                    <label>4. Uamuzi</label>
+                    <div class="likert-scale" id="sDecision">
+                        <button class="likert-btn" onclick="selectLikert('sDecision',this,1)">1 <span class="sub">Dhaifu</span></button>
+                        <button class="likert-btn" onclick="selectLikert('sDecision',this,2)">2 <span class="sub">Wastani</span></button>
+                        <button class="likert-btn" onclick="selectLikert('sDecision',this,3)">3 <span class="sub">Nzuri</span></button>
+                        <button class="likert-btn" onclick="selectLikert('sDecision',this,4)">4 <span class="sub">Nzuri Sana</span></button>
+                        <button class="likert-btn" onclick="selectLikert('sDecision',this,5)">5 <span class="sub">Bora</span></button>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>📝 Maoni ya Msimamizi</label>
-                    <textarea id="supervisorComments" placeholder="Andika maoni yako kuhusu mtendakazi..."></textarea>
+                    <textarea id="supervisorComments" placeholder="Andika maoni yako..."></textarea>
                 </div>
 
                 <div class="form-group">
@@ -806,13 +811,18 @@
                 <div class="form-title">
                     <span class="icon">🏥</span>
                     <span class="title-text">Fomu ya Mganga Mfawidhi</span>
-                    <span class="badge">Sehemu 3 ya 3</span>
+                    <span class="badge">Kagua na Idhinisha</span>
                     <span id="inchargeStatusBadge" class="status-badge pending">⏳ Inasubiri</span>
                 </div>
 
                 <div class="preview-box">
-                    <div class="title">🔒 Muhtasari wa Tathmini (Hazibadiliki)</div>
-                    <div id="inchargePreview" class="content"></div>
+                    <div class="title">📋 Taarifa za Mtendakazi</div>
+                    <div id="workerPreview" class="content"></div>
+                </div>
+
+                <div class="preview-box" style="border-left-color:#27ae60;">
+                    <div class="title">📋 Taarifa za Msimamizi</div>
+                    <div id="supervisorPreview" class="content"></div>
                 </div>
 
                 <div class="form-group">
@@ -820,9 +830,51 @@
                     <input type="text" id="inchargeName" placeholder="Jina lako" value="">
                 </div>
 
+                <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">📊 Tathmini ya Mganga Mfawidhi (1-5)</div>
+                <div class="form-group">
+                    <label>1. Ubora wa Huduma</label>
+                    <div class="likert-scale" id="iQuality">
+                        <button class="likert-btn" onclick="selectLikert('iQuality',this,1)">1 <span class="sub">Dhaifu</span></button>
+                        <button class="likert-btn" onclick="selectLikert('iQuality',this,2)">2 <span class="sub">Wastani</span></button>
+                        <button class="likert-btn" onclick="selectLikert('iQuality',this,3)">3 <span class="sub">Nzuri</span></button>
+                        <button class="likert-btn" onclick="selectLikert('iQuality',this,4)">4 <span class="sub">Nzuri Sana</span></button>
+                        <button class="likert-btn" onclick="selectLikert('iQuality',this,5)">5 <span class="sub">Bora</span></button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>2. Uaminifu</label>
+                    <div class="likert-scale" id="iIntegrity">
+                        <button class="likert-btn" onclick="selectLikert('iIntegrity',this,1)">1 <span class="sub">Dhaifu</span></button>
+                        <button class="likert-btn" onclick="selectLikert('iIntegrity',this,2)">2 <span class="sub">Wastani</span></button>
+                        <button class="likert-btn" onclick="selectLikert('iIntegrity',this,3)">3 <span class="sub">Nzuri</span></button>
+                        <button class="likert-btn" onclick="selectLikert('iIntegrity',this,4)">4 <span class="sub">Nzuri Sana</span></button>
+                        <button class="likert-btn" onclick="selectLikert('iIntegrity',this,5)">5 <span class="sub">Bora</span></button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>3. Usalama</label>
+                    <div class="likert-scale" id="iSafety">
+                        <button class="likert-btn" onclick="selectLikert('iSafety',this,1)">1 <span class="sub">Dhaifu</span></button>
+                        <button class="likert-btn" onclick="selectLikert('iSafety',this,2)">2 <span class="sub">Wastani</span></button>
+                        <button class="likert-btn" onclick="selectLikert('iSafety',this,3)">3 <span class="sub">Nzuri</span></button>
+                        <button class="likert-btn" onclick="selectLikert('iSafety',this,4)">4 <span class="sub">Nzuri Sana</span></button>
+                        <button class="likert-btn" onclick="selectLikert('iSafety',this,5)">5 <span class="sub">Bora</span></button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>4. Ushirikiano</label>
+                    <div class="likert-scale" id="iTeamwork">
+                        <button class="likert-btn" onclick="selectLikert('iTeamwork',this,1)">1 <span class="sub">Dhaifu</span></button>
+                        <button class="likert-btn" onclick="selectLikert('iTeamwork',this,2)">2 <span class="sub">Wastani</span></button>
+                        <button class="likert-btn" onclick="selectLikert('iTeamwork',this,3)">3 <span class="sub">Nzuri</span></button>
+                        <button class="likert-btn" onclick="selectLikert('iTeamwork',this,4)">4 <span class="sub">Nzuri Sana</span></button>
+                        <button class="likert-btn" onclick="selectLikert('iTeamwork',this,5)">5 <span class="sub">Bora</span></button>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label>📝 Maoni ya Mwisho</label>
-                    <textarea id="inchargeComments" placeholder="Andika maoni ya jumla, mapendekezo, na uamuzi wako..."></textarea>
+                    <textarea id="inchargeComments" placeholder="Andika maoni yako..."></textarea>
                 </div>
 
                 <div class="form-group">
@@ -875,16 +927,10 @@
 // JSONBIN CONFIGURATION
 // ==============================================================
 
-// ✅ ACCESS KEY (Master Key)
 const API_KEY = "$2a$10$VfPZVlhjWTV.gErIv2yxX.3QmHdrMCgM1evuIR.BJreI7G0jQxGqW";
-
-// ✅ BIN ID
 const BIN_ID = "6a4b0bc9da38895dfe32cc08";
-
-// ✅ JINA LA BIN
 const BIN_NAME = "MTWARA PERFORMANCE";
 
-// Hifadhi kwenye localStorage
 localStorage.setItem("mtwaraBinId", BIN_ID);
 localStorage.setItem("mtwaraApiKey", API_KEY);
 
@@ -895,7 +941,6 @@ let currentUser = null;
 let currentRole = null;
 let reports = [];
 let signatureData = { worker: null, supervisor: null, incharge: null };
-let useLocalStorage = false;
 
 // ==============================================================
 // CHECKLIST DATA
@@ -1108,24 +1153,17 @@ function saveSig(type) {
 // ==============================================================
 async function getBinData() {
     try {
-        // Angalia kama tunatumia LocalStorage
         if (localStorage.getItem("useLocalStorage") === "true") {
-            console.log("📤 Inasoma data kutoka LocalStorage...");
             const data = JSON.parse(localStorage.getItem("mtwaraData") || '{"reports":[],"users":{}}');
             return data;
         }
         
-        console.log("📤 Inasoma data kutoka JSONBin...");
         document.getElementById("connectionStatus").innerHTML = '<span class="loading"></span> Inasoma...';
         
         const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
             method: "GET",
-            headers: {
-                "X-Master-Key": API_KEY
-            }
+            headers: { "X-Master-Key": API_KEY }
         });
-        
-        console.log("📊 Status:", response.status);
         
         if (!response.ok) {
             if (response.status === 404) {
@@ -1136,33 +1174,26 @@ async function getBinData() {
         }
         
         const result = await response.json();
-        console.log("✅ Data imesomwa:", result);
         document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
         return result.record || result;
     } catch (error) {
-        console.error("❌ Hitilafu ya kusoma data:", error);
+        console.error("❌ Hitilafu:", error);
         document.getElementById("connectionStatus").textContent = "⚠️ Hitilafu";
-        // Ikiwa JSONBin inashindwa, jaribu LocalStorage
         if (localStorage.getItem("mtwaraData")) {
-            console.log("📤 Inatumia LocalStorage badala ya JSONBin...");
             return JSON.parse(localStorage.getItem("mtwaraData"));
         }
-        showToast("❌ Imeshindwa kusoma data: " + error.message, "error");
+        showToast("❌ Imeshindwa kusoma data", "error");
         return null;
     }
 }
 
 async function updateBinData(data) {
     try {
-        // Angalia kama tunatumia LocalStorage
         if (localStorage.getItem("useLocalStorage") === "true") {
-            console.log("📤 Inahifadhi data kwenye LocalStorage...");
             localStorage.setItem("mtwaraData", JSON.stringify(data));
-            console.log("✅ Data imehifadhiwa kwenye LocalStorage!");
             return { success: true };
         }
         
-        console.log("📤 Inahifadhi data kwenye JSONBin...");
         document.getElementById("connectionStatus").innerHTML = '<span class="loading"></span> Inahifadhi...';
         
         const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
@@ -1174,24 +1205,18 @@ async function updateBinData(data) {
             body: JSON.stringify(data)
         });
         
-        console.log("📊 Status:", response.status);
-        
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
         
         const result = await response.json();
-        console.log("✅ Data imehifadhiwa kwenye JSONBin:", result);
         document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
         return result;
     } catch (error) {
-        console.error("❌ Hitilafu ya kuhifadhi data:", error);
+        console.error("❌ Hitilafu:", error);
         document.getElementById("connectionStatus").textContent = "⚠️ Hitilafu";
-        // Ikiwa JSONBin inashindwa, jaribu LocalStorage
         try {
-            console.log("📤 Inatumia LocalStorage badala ya JSONBin...");
             localStorage.setItem("mtwaraData", JSON.stringify(data));
-            console.log("✅ Data imehifadhiwa kwenye LocalStorage!");
             return { success: true };
         } catch (e) {
             console.error("❌ Hitilafu:", e);
@@ -1278,21 +1303,21 @@ async function login() {
     
     if (user.role === "worker") {
         document.getElementById("formWorker").style.display = "block";
-        document.getElementById("statusMessage").textContent = "✅ Jaza fomu yako kisha tuma kwa Msimamizi";
+        document.getElementById("statusMessage").textContent = "✅ Jaza fomu yako kisha tuma kwa Mganga Mfawidhi";
         updateWorkerChecklist();
         updateSteps(1);
         checkWorkerStatus();
     } else if (user.role === "supervisor") {
         document.getElementById("formSupervisor").style.display = "block";
-        document.getElementById("statusMessage").textContent = "✅ Kagua taarifa za mtendakazi kisha tuma kwa Mganga Mfawidhi";
+        document.getElementById("statusMessage").textContent = "✅ Jaza fomu yako kisha tuma kwa Mganga Mfawidhi";
+        document.getElementById("supervisorDate").value = new Date().toISOString().split("T")[0];
         updateSteps(2);
-        loadWorkerData();
         checkSupervisorStatus();
     } else if (user.role === "incharge") {
         document.getElementById("formIncharge").style.display = "block";
-        document.getElementById("statusMessage").textContent = "✅ Kagua tathmini yote kisha idhinisha au kata";
+        document.getElementById("statusMessage").textContent = "✅ Kagua tathmini zote kisha idhinisha au kata";
         updateSteps(3);
-        loadFullAssessment();
+        loadAllAssessments();
         checkInchargeStatus();
     }
     
@@ -1326,37 +1351,17 @@ function updateSteps(step) {
 }
 
 // ==============================================================
-// SUBMIT WORKER - ILIYOREKEBISHWA KABISA
+// SUBMIT WORKER
 // ==============================================================
 async function submitWorker() {
-    console.log("📤 Inaanza kutuma tathmini...");
-    console.log("🔍 BIN ID:", BIN_ID);
-    
-    // 1. Angalia uthibitishaji
     if (!document.getElementById("workerVerify").checked) {
         showToast("⚠️ Tafadhali thibitisha taarifa zako", "warning");
-        console.log("❌ Uthibitishaji haujathibitishwa");
         return;
     }
-    
-    // 2. Angalia jina
     const name = document.getElementById("workerName").value.trim();
-    if (!name) {
-        showToast("⚠️ Tafadhali weka jina lako", "warning");
-        console.log("❌ Jina halijajazwa");
-        return;
-    }
-    
-    // 3. Angalia sahihi
-    if (!signatureData.worker) {
-        showToast("⚠️ Tafadhali weka sahihi yako", "warning");
-        console.log("❌ Sahihi haijapatikana");
-        return;
-    }
+    if (!name) { showToast("⚠️ Tafadhali weka jina lako", "warning"); return; }
+    if (!signatureData.worker) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
 
-    console.log("✅ Uthibitishaji umepita");
-
-    // 4. Kusanya data
     const role = document.getElementById("workerRole").value;
     const report = {
         id: Date.now(),
@@ -1378,7 +1383,7 @@ async function submitWorker() {
         selfRatingsValues: getLikertValues("wPunctuality","wQuality","wCompassion","wTeamwork","wInitiative","wSafety"),
         selfComments: document.getElementById("workerComments").value,
         signature: signatureData.worker,
-        status: "Inasubiri Msimamizi",
+        status: "Inasubiri Mganga Mfawidhi",
         timestamp: new Date().toISOString(),
         supervisorName: "",
         supervisorTitle: "",
@@ -1387,60 +1392,34 @@ async function submitWorker() {
         supervisorComments: "",
         supervisorSignature: null,
         inchargeName: "",
+        inchargeRatings: {},
+        inchargeRatingsValues: {},
         inchargeComments: "",
         inchargeSignature: null,
         finalStatus: "Inasubiri"
     };
 
-    console.log("📤 Report iliyokusanywa:", report);
-
     try {
-        // 5. Soma data ya sasa
-        console.log("📤 Inasoma data kutoka JSONBin...");
         const data = await getBinData();
-        if (!data) {
-            showToast("❌ Imeshindwa kusoma data", "error");
-            console.log("❌ getBinData() imerudisha null");
-            return;
-        }
-        
-        console.log("✅ Data imesomwa kikamilifu");
-        
-        // 6. Ongeza report
-        if (!data.reports) {
-            console.log("⚠️ Hakuna reports array, inaunda mpya...");
-            data.reports = [];
-        }
+        if (!data) return;
+        if (!data.reports) data.reports = [];
         data.reports.push(report);
-        console.log("📊 Reports sasa:", data.reports.length);
-        
-        // 7. Hifadhi kwenye JSONBin
-        console.log("📤 Inahifadhi data kwenye JSONBin...");
         const result = await updateBinData(data);
-        
         if (result) {
             reports = data.reports;
-            
             document.getElementById("workerSubmitBtn").disabled = true;
             document.getElementById("workerSubmitBtn").innerHTML = "✅ Imetumwa!";
             document.getElementById("workerSubmitMsg").style.display = "block";
-            document.getElementById("workerSubmitMsg").textContent = "✅ Tathmini imetumwa kwa Msimamizi!";
+            document.getElementById("workerSubmitMsg").textContent = "✅ Tathmini imetumwa kwa Mganga Mfawidhi!";
             document.getElementById("workerSubmitMsg").style.color = "#27ae60";
             document.getElementById("workerStatusBadge").textContent = "✅ Imetumwa";
             document.getElementById("workerStatusBadge").className = "status-badge approved";
-            
-            showToast("✅ Tathmini imetumwa kwa Msimamizi!", "success");
-            
+            showToast("✅ Tathmini imetumwa!", "success");
             loadHistory();
             updateScoreSummary();
-            console.log("✅ Tathmini imetumwa kikamilifu!");
-        } else {
-            showToast("❌ Imeshindwa kutumwa kwa Msimamizi", "error");
-            console.log("❌ updateBinData() imerudisha null");
         }
     } catch (error) {
         console.error("❌ Hitilafu:", error);
-        console.error("❌ Maelezo ya hitilafu:", error.message);
         showToast("❌ Hitilafu: " + error.message, "error");
     }
 }
@@ -1449,39 +1428,78 @@ async function submitWorker() {
 // SUBMIT SUPERVISOR
 // ==============================================================
 async function submitSupervisor() {
-    console.log("📤 Inaanza kutuma kwa Mganga Mfawidhi...");
-    
     const name = document.getElementById("supervisorName").value.trim();
-    if (!name) {
-        showToast("⚠️ Tafadhali weka jina lako", "warning");
-        console.log("❌ Jina la msimamizi halijajazwa");
-        return;
-    }
-    if (!signatureData.supervisor) {
-        showToast("⚠️ Tafadhali weka sahihi yako", "warning");
-        console.log("❌ Sahihi ya msimamizi haijapatikana");
-        return;
-    }
+    if (!name) { showToast("⚠️ Tafadhali weka jina lako", "warning"); return; }
+    if (!signatureData.supervisor) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
+
+    const report = {
+        id: Date.now(),
+        supervisorName: name,
+        supervisorTitle: document.getElementById("supervisorTitle").value,
+        supervisorDate: document.getElementById("supervisorDate").value,
+        supervisorDepartment: document.getElementById("supervisorDepartment").value,
+        supervisorRatings: getLikertLabels("sLeadership","sManagement","sCommunication","sDecision"),
+        supervisorRatingsValues: getLikertValues("sLeadership","sManagement","sCommunication","sDecision"),
+        supervisorComments: document.getElementById("supervisorComments").value,
+        supervisorSignature: signatureData.supervisor,
+        status: "Inasubiri Mganga Mfawidhi",
+        timestamp: new Date().toISOString()
+    };
 
     try {
         const data = await getBinData();
         if (!data) return;
-        const reports = data.reports || [];
-        const lastIndex = reports.length - 1;
-        if (lastIndex < 0) {
-            showToast("❌ Hakuna tathmini", "error");
-            console.log("❌ Hakuna tathmini iliyopatikana");
-            return;
+        if (!data.reports) data.reports = [];
+        
+        // Tafuta tathmini ya mtendakazi iliyopo au unda mpya
+        let existingReport = data.reports.find(r => r.workerName && r.status === "Inasubiri Mganga Mfawidhi");
+        if (!existingReport) {
+            // Unda report mpya kwa supervisor pekee
+            existingReport = {
+                id: Date.now(),
+                workerName: "Msimamizi",
+                role: "Msimamizi",
+                date: new Date().toISOString().split("T")[0],
+                shift: "Mchana",
+                department: "Clinical",
+                stats: { patients: 0, ultrasound: 0, referral: 0, followup: 0 },
+                smartGoals: [],
+                generalChecklist: [],
+                specialChecklist: [],
+                selfRatings: {},
+                selfRatingsValues: {},
+                selfComments: "",
+                signature: null,
+                status: "Inasubiri Mganga Mfawidhi",
+                timestamp: new Date().toISOString(),
+                supervisorName: "",
+                supervisorTitle: "",
+                supervisorRatings: {},
+                supervisorRatingsValues: {},
+                supervisorComments: "",
+                supervisorSignature: null,
+                inchargeName: "",
+                inchargeRatings: {},
+                inchargeRatingsValues: {},
+                inchargeComments: "",
+                inchargeSignature: null,
+                finalStatus: "Inasubiri"
+            };
+            data.reports.push(existingReport);
         }
-
-        reports[lastIndex].supervisorName = name;
-        reports[lastIndex].supervisorTitle = document.getElementById("supervisorTitle").value;
-        reports[lastIndex].supervisorRatings = getLikertLabels("sPunctuality","sQuality","sCompassion","sTeamwork");
-        reports[lastIndex].supervisorRatingsValues = getLikertValues("sPunctuality","sQuality","sCompassion","sTeamwork");
-        reports[lastIndex].supervisorComments = document.getElementById("supervisorComments").value;
-        reports[lastIndex].supervisorSignature = signatureData.supervisor;
-        reports[lastIndex].status = "Inasubiri Mganga Mfawidhi";
-
+        
+        // Sasisha report na data ya supervisor
+        const index = data.reports.indexOf(existingReport);
+        data.reports[index].supervisorName = report.supervisorName;
+        data.reports[index].supervisorTitle = report.supervisorTitle;
+        data.reports[index].supervisorDate = report.supervisorDate;
+        data.reports[index].supervisorDepartment = report.supervisorDepartment;
+        data.reports[index].supervisorRatings = report.supervisorRatings;
+        data.reports[index].supervisorRatingsValues = report.supervisorRatingsValues;
+        data.reports[index].supervisorComments = report.supervisorComments;
+        data.reports[index].supervisorSignature = report.supervisorSignature;
+        data.reports[index].status = "Inasubiri Mganga Mfawidhi";
+        
         const result = await updateBinData(data);
         if (result) {
             reports = data.reports;
@@ -1492,13 +1510,9 @@ async function submitSupervisor() {
             document.getElementById("supervisorSubmitMsg").style.color = "#27ae60";
             document.getElementById("supervisorStatusBadge").textContent = "✅ Imetumwa";
             document.getElementById("supervisorStatusBadge").className = "status-badge approved";
-            showToast("✅ Tathmini imetumwa kwa Mganga Mfawidhi!", "success");
+            showToast("✅ Tathmini imetumwa!", "success");
             loadHistory();
             updateScoreSummary();
-            console.log("✅ Tathmini imetumwa kwa Mganga Mfawidhi!");
-        } else {
-            showToast("❌ Imeshindwa kutumwa kwa Mganga Mfawidhi", "error");
-            console.log("❌ updateBinData() imerudisha null");
         }
     } catch (error) {
         console.error("❌ Hitilafu:", error);
@@ -1506,60 +1520,51 @@ async function submitSupervisor() {
     }
 }
 
-function approveFinal() { finalizeAssessment("Imekubaliwa"); }
-function rejectFinal() { finalizeAssessment("Imekataliwa"); }
-
-async function finalizeAssessment(status) {
-    const name = document.getElementById("inchargeName").value.trim();
-    if (!name) { showToast("⚠️ Tafadhali weka jina lako", "warning"); return; }
-    if (!signatureData.incharge) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
-
-    const data = await getBinData();
-    if (!data) return;
-    const reports = data.reports || [];
-    const lastIndex = reports.length - 1;
-    if (lastIndex < 0) { showToast("❌ Hakuna tathmini", "error"); return; }
-
-    reports[lastIndex].inchargeName = name;
-    reports[lastIndex].inchargeComments = document.getElementById("inchargeComments").value;
-    reports[lastIndex].inchargeSignature = signatureData.incharge;
-    reports[lastIndex].finalStatus = status;
-    reports[lastIndex].status = status;
-
-    const result = await updateBinData(data);
-    if (result) {
-        reports = data.reports;
-        document.getElementById("approveBtn").disabled = true;
-        document.getElementById("rejectBtn").disabled = true;
-        document.getElementById("inchargeSubmitMsg").style.display = "block";
-        document.getElementById("inchargeSubmitMsg").textContent = `✅ Tathmini ${status}!`;
-        document.getElementById("inchargeSubmitMsg").style.color = status === "Imekubaliwa" ? "#27ae60" : "#e74c3c";
-        document.getElementById("inchargeStatusBadge").textContent = status;
-        document.getElementById("inchargeStatusBadge").className = "status-badge " + (status === "Imekubaliwa" ? "approved" : "rejected");
-        showToast(`✅ Tathmini ${status}!`, status === "Imekubaliwa" ? "success" : "error");
-        loadHistory();
-        updateScoreSummary();
-    }
-}
-
 // ==============================================================
-// LOAD DATA FUNCTIONS
+// INCHARGE FUNCTIONS
 // ==============================================================
-function checkWorkerStatus() {
-    const pending = reports.filter(r => r.workerName && r.status === "Inasubiri Msimamizi");
-    if (pending.length > 0) {
-        document.getElementById("workerStatusBadge").textContent = "✅ Imetumwa";
-        document.getElementById("workerStatusBadge").className = "status-badge approved";
-        document.getElementById("workerSubmitBtn").disabled = true;
-        document.getElementById("workerSubmitBtn").innerHTML = "✅ Imetumwa kwa Msimamizi";
-        document.getElementById("workerSubmitMsg").style.display = "block";
-        document.getElementById("workerSubmitMsg").textContent = "✅ Tathmini yako imetumwa. Subiri Msimamizi.";
-        document.getElementById("workerSubmitMsg").style.color = "#27ae60";
+function loadAllAssessments() {
+    const pending = reports.filter(r => r.workerName && r.status === "Inasubiri Mganga Mfawidhi");
+    if (pending.length === 0) {
+        document.getElementById("workerPreview").innerHTML = `<div style="color:#7f8c8d;">⏳ Hakuna tathmini ya mtendakazi</div>`;
+        document.getElementById("supervisorPreview").innerHTML = `<div style="color:#7f8c8d;">⏳ Hakuna tathmini ya msimamizi</div>`;
+        return;
     }
+    
+    const d = pending[pending.length - 1];
+    
+    // Onyesha data ya mtendakazi
+    document.getElementById("workerPreview").innerHTML = `
+        <div class="preview-grid">
+            <div class="item"><strong>Jina:</strong> ${d.workerName || "N/A"}</div>
+            <div class="item"><strong>Taaluma:</strong> ${d.role || "N/A"}</div>
+            <div class="item"><strong>Tarehe:</strong> ${d.date || "N/A"}</div>
+            <div class="item"><strong>Zamu:</strong> ${d.shift || "N/A"}</div>
+            <div class="item"><strong>Wagonjwa:</strong> ${d.stats?.patients || 0}</div>
+            <div class="item"><strong>Ultrasound:</strong> ${d.stats?.ultrasound || 0}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Malengo SMART:</strong> ${d.smartGoals?.filter(c=>c.checked).length||0}/${d.smartGoals?.length||0}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Majukumu:</strong> ${(d.generalChecklist?.filter(c=>c.checked).length||0) + (d.specialChecklist?.filter(c=>c.checked).length||0)}/${(d.generalChecklist?.length||0) + (d.specialChecklist?.length||0)}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Tathmini:</strong> ${Object.values(d.selfRatings || {}).join(" | ")}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Maoni:</strong> ${d.selfComments || "Hakuna"}</div>
+        </div>
+    `;
+    
+    // Onyesha data ya msimamizi
+    const hasSupervisor = d.supervisorName && d.supervisorName !== "";
+    document.getElementById("supervisorPreview").innerHTML = hasSupervisor ? `
+        <div class="preview-grid">
+            <div class="item"><strong>Jina:</strong> ${d.supervisorName}</div>
+            <div class="item"><strong>Wadhifa:</strong> ${d.supervisorTitle || "N/A"}</div>
+            <div class="item"><strong>Tarehe:</strong> ${d.supervisorDate || "N/A"}</div>
+            <div class="item"><strong>Idara:</strong> ${d.supervisorDepartment || "N/A"}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Tathmini:</strong> ${Object.values(d.supervisorRatings || {}).join(" | ")}</div>
+            <div class="item" style="grid-column:span 2;"><strong>Maoni:</strong> ${d.supervisorComments || "Hakuna"}</div>
+        </div>
+    ` : `<div style="color:#7f8c8d;">⏳ Msimamizi bado hajajaza tathmini yake</div>`;
 }
 
 function checkSupervisorStatus() {
-    const pending = reports.filter(r => r.workerName && r.status === "Inasubiri Mganga Mfawidhi");
+    const pending = reports.filter(r => r.supervisorName && r.status === "Inasubiri Mganga Mfawidhi");
     if (pending.length > 0) {
         document.getElementById("supervisorStatusBadge").textContent = "✅ Imetumwa";
         document.getElementById("supervisorStatusBadge").className = "status-badge approved";
@@ -1585,55 +1590,86 @@ function checkInchargeStatus() {
     }
 }
 
-function loadWorkerData() {
-    const pending = reports.filter(r => r.workerName && r.status === "Inasubiri Msimamizi");
-    if (pending.length === 0) {
-        document.getElementById("workerPreview").innerHTML = `<div style="color:#7f8c8d;">⏳ Hakuna tathmini inayosubiri</div>`;
-        return;
+function checkWorkerStatus() {
+    const pending = reports.filter(r => r.workerName && r.status === "Inasubiri Mganga Mfawidhi");
+    if (pending.length > 0) {
+        document.getElementById("workerStatusBadge").textContent = "✅ Imetumwa";
+        document.getElementById("workerStatusBadge").className = "status-badge approved";
+        document.getElementById("workerSubmitBtn").disabled = true;
+        document.getElementById("workerSubmitBtn").innerHTML = "✅ Imetumwa kwa Mganga Mfawidhi";
+        document.getElementById("workerSubmitMsg").style.display = "block";
+        document.getElementById("workerSubmitMsg").textContent = "✅ Tathmini imetumwa. Subiri Mganga Mfawidhi.";
+        document.getElementById("workerSubmitMsg").style.color = "#27ae60";
     }
-    const d = pending[pending.length - 1];
-    document.getElementById("workerPreview").innerHTML = `
-        <div class="preview-grid">
-            <div class="item"><strong>Jina:</strong> ${d.workerName}</div>
-            <div class="item"><strong>Taaluma:</strong> ${d.role}</div>
-            <div class="item"><strong>Tarehe:</strong> ${d.date}</div>
-            <div class="item"><strong>Zamu:</strong> ${d.shift}</div>
-            <div class="item"><strong>Wagonjwa:</strong> ${d.stats?.patients || 0}</div>
-            <div class="item"><strong>Ultrasound:</strong> ${d.stats?.ultrasound || 0}</div>
-            <div class="item"><strong>Referral:</strong> ${d.stats?.referral || 0}</div>
-            <div class="item"><strong>Waliorudi:</strong> ${d.stats?.followup || 0}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Malengo SMART:</strong> ${d.smartGoals?.filter(c=>c.checked).length||0}/${d.smartGoals?.length||0}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Majukumu Jumla:</strong> ${d.generalChecklist?.filter(c=>c.checked).length||0}/${d.generalChecklist?.length||0}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Majukumu Maalum:</strong> ${d.specialChecklist?.filter(c=>c.checked).length||0}/${d.specialChecklist?.length||0}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Tathmini Binafsi:</strong> ${Object.values(d.selfRatings || {}).join(" | ")}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Maoni:</strong> ${d.selfComments || "Hakuna"}</div>
-        </div>
-    `;
 }
 
-function loadFullAssessment() {
-    const pending = reports.filter(r => r.workerName && (r.status === "Inasubiri Mganga Mfawidhi" || r.status === "Inasubiri Msimamizi"));
-    if (pending.length === 0) {
-        document.getElementById("inchargePreview").innerHTML = `<div style="color:#7f8c8d;">⏳ Hakuna tathmini inayosubiri</div>`;
+async function submitIncharge() {
+    const name = document.getElementById("inchargeName").value.trim();
+    if (!name) { showToast("⚠️ Tafadhali weka jina lako", "warning"); return; }
+    if (!signatureData.incharge) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
+
+    const data = await getBinData();
+    if (!data) return;
+    const reports = data.reports || [];
+    const lastIndex = reports.length - 1;
+    if (lastIndex < 0) { showToast("❌ Hakuna tathmini", "error"); return; }
+
+    reports[lastIndex].inchargeName = name;
+    reports[lastIndex].inchargeRatings = getLikertLabels("iQuality","iIntegrity","iSafety","iTeamwork");
+    reports[lastIndex].inchargeRatingsValues = getLikertValues("iQuality","iIntegrity","iSafety","iTeamwork");
+    reports[lastIndex].inchargeComments = document.getElementById("inchargeComments").value;
+    reports[lastIndex].inchargeSignature = signatureData.incharge;
+
+    const result = await updateBinData(data);
+    if (result) {
+        reports = data.reports;
+        document.getElementById("inchargeSubmitBtn").disabled = true;
+        document.getElementById("inchargeSubmitMsg").style.display = "block";
+        document.getElementById("inchargeSubmitMsg").textContent = "✅ Tathmini imehifadhiwa! Sasa idhinisha au kata.";
+        document.getElementById("inchargeSubmitMsg").style.color = "#27ae60";
+        showToast("✅ Tathmini imehifadhiwa!", "success");
+        loadHistory();
+        updateScoreSummary();
+    }
+}
+
+function approveFinal() { finalizeAssessment("Imekubaliwa"); }
+function rejectFinal() { finalizeAssessment("Imekataliwa"); }
+
+async function finalizeAssessment(status) {
+    const name = document.getElementById("inchargeName").value.trim();
+    if (!name) { showToast("⚠️ Tafadhali weka jina lako", "warning"); return; }
+    if (!signatureData.incharge) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
+
+    const data = await getBinData();
+    if (!data) return;
+    const reports = data.reports || [];
+    const lastIndex = reports.length - 1;
+    if (lastIndex < 0) { showToast("❌ Hakuna tathmini", "error"); return; }
+
+    // Angalia kama incharge ameshahifadhi tathmini yake
+    if (!reports[lastIndex].inchargeName) {
+        showToast("⚠️ Tafadhali jaza na uhifadhi tathmini yako kwanza", "warning");
         return;
     }
-    const d = pending[pending.length - 1];
-    document.getElementById("inchargePreview").innerHTML = `
-        <div class="preview-grid">
-            <div class="item"><strong>Mtendakazi:</strong> ${d.workerName} (${d.role})</div>
-            <div class="item"><strong>Tarehe:</strong> ${d.date}</div>
-            <div class="item"><strong>Wagonjwa:</strong> ${d.stats?.patients || 0}</div>
-            <div class="item"><strong>Ultrasound:</strong> ${d.stats?.ultrasound || 0}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Tathmini ya Mtendakazi:</strong> ${Object.values(d.selfRatings || {}).join(" | ")}</div>
-            <div class="item" style="grid-column:span 2;"><strong>Maoni ya Mtendakazi:</strong> ${d.selfComments || "Hakuna"}</div>
-            ${d.supervisorRatings ? `
-                <div class="item" style="grid-column:span 2;"><strong>Tathmini ya Msimamizi:</strong> ${Object.values(d.supervisorRatings || {}).join(" | ")}</div>
-                <div class="item" style="grid-column:span 2;"><strong>Maoni ya Msimamizi:</strong> ${d.supervisorComments || "Hakuna"}</div>
-            ` : `
-                <div class="item" style="grid-column:span 2; color:#7f8c8d;">⏳ Tathmini ya Msimamizi bado haijakamilika</div>
-            `}
-        </div>
-    `;
+
+    reports[lastIndex].finalStatus = status;
+    reports[lastIndex].status = status;
+
+    const result = await updateBinData(data);
+    if (result) {
+        reports = data.reports;
+        document.getElementById("approveBtn").disabled = true;
+        document.getElementById("rejectBtn").disabled = true;
+        document.getElementById("inchargeSubmitMsg").style.display = "block";
+        document.getElementById("inchargeSubmitMsg").textContent = `✅ Tathmini ${status}!`;
+        document.getElementById("inchargeSubmitMsg").style.color = status === "Imekubaliwa" ? "#27ae60" : "#e74c3c";
+        document.getElementById("inchargeStatusBadge").textContent = status;
+        document.getElementById("inchargeStatusBadge").className = "status-badge " + (status === "Imekubaliwa" ? "approved" : "rejected");
+        showToast(`✅ Tathmini ${status}!`, status === "Imekubaliwa" ? "success" : "error");
+        loadHistory();
+        updateScoreSummary();
+    }
 }
 
 // ==============================================================
@@ -1690,6 +1726,7 @@ async function loadHistory() {
             <div class="sub">
                 📅 ${r.date || "Tarehe haijulikani"} | 
                 📊 ${(r.generalChecklist?.filter(c=>c.checked).length||0) + (r.specialChecklist?.filter(c=>c.checked).length||0)}/${(r.generalChecklist?.length||0) + (r.specialChecklist?.length||0)} majukumu |
+                ${r.supervisorName ? `👔 Msimamizi: ${r.supervisorName} | ` : ''}
                 Status: <strong style="color: ${r.finalStatus === 'Imekubaliwa' ? '#27ae60' : r.finalStatus === 'Imekataliwa' ? '#e74c3c' : '#f39c12'}">${r.status || "Inasubiri"}</strong>
             </div>
             ${r.finalStatus && r.finalStatus !== "Inasubiri" ? `<div style="font-size:12px; margin-top:4px;">✅ ${r.finalStatus} na ${r.inchargeName || "Mganga Mfawidhi"}</div>` : ''}
@@ -1715,11 +1752,13 @@ async function syncData() {
 // ==============================================================
 window.onload = function() {
     document.getElementById("reportDate").value = new Date().toISOString().split("T")[0];
+    document.getElementById("supervisorDate").value = new Date().toISOString().split("T")[0];
     document.getElementById("binIdDisplay").textContent = BIN_ID;
     document.getElementById("connectionStatus").textContent = "✅ Tayari";
     updateWorkerChecklist();
     console.log("✅ Mtwara Performance Appraisal System");
     console.log("📦 BIN ID:", BIN_ID);
+    console.log("👤 Watumiaji: worker, supervisor, incharge");
     console.log("💾 Imeunganishwa na JSONBin + LocalStorage (Backup)");
 };
 </script>
