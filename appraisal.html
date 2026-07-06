@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -899,7 +900,7 @@ const API_KEY = "$2a$10$VfPZVlhjWTV.gErIv2yxX.3QmHdrMCgM1evuIR.BJreI7G0jQxGqW";
 // ✅ ACCESS KEY ID (Kwa marejeleo tu)
 const ACCESS_KEY_ID = "6a4ae0b3da38895dfe326ada";
 
-// ✅ BIN ID - ILIYOSASISHWA
+// ✅ BIN ID
 const BIN_ID = "6a4aed99da38895dfe328879";
 
 // ✅ JINA LA BIN
@@ -1120,10 +1121,11 @@ function saveSig(type) {
 }
 
 // ==============================================================
-// JSONBIN OPERATIONS
+// JSONBIN OPERATIONS - ILIYOREKEBISHWA
 // ==============================================================
 async function getBinData() {
     try {
+        console.log("📤 Inasoma data kutoka JSONBin...");
         document.getElementById("connectionStatus").innerHTML = '<span class="loading"></span> Inasoma...';
         
         const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
@@ -1132,6 +1134,8 @@ async function getBinData() {
                 "X-Master-Key": API_KEY
             }
         });
+        
+        console.log("📊 Status:", response.status);
         
         if (!response.ok) {
             if (response.status === 404) {
@@ -1142,18 +1146,20 @@ async function getBinData() {
         }
         
         const result = await response.json();
+        console.log("✅ Data imesomwa:", result);
         document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
         return result.record || result;
     } catch (error) {
-        console.error("❌ Hitilafu:", error);
+        console.error("❌ Hitilafu ya kusoma data:", error);
         document.getElementById("connectionStatus").textContent = "⚠️ Hitilafu";
-        showToast("❌ Imeshindwa kusoma data", "error");
+        showToast("❌ Imeshindwa kusoma data: " + error.message, "error");
         return null;
     }
 }
 
 async function updateBinData(data) {
     try {
+        console.log("📤 Inahifadhi data kwenye JSONBin...");
         document.getElementById("connectionStatus").innerHTML = '<span class="loading"></span> Inahifadhi...';
         
         const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
@@ -1165,16 +1171,21 @@ async function updateBinData(data) {
             body: JSON.stringify(data)
         });
         
+        console.log("📊 Status:", response.status);
+        
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
         
+        const result = await response.json();
+        console.log("✅ Data imehifadhiwa:", result);
         document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
-        return await response.json();
+        showToast("✅ Data imehifadhiwa kikamilifu!", "success");
+        return result;
     } catch (error) {
-        console.error("❌ Hitilafu:", error);
+        console.error("❌ Hitilafu ya kuhifadhi data:", error);
         document.getElementById("connectionStatus").textContent = "⚠️ Hitilafu";
-        showToast("❌ Imeshindwa kuhifadhi", "error");
+        showToast("❌ Imeshindwa kuhifadhi: " + error.message, "error");
         return null;
     }
 }
@@ -1219,103 +1230,38 @@ async function createBin() {
 }
 
 // ==============================================================
-// LOGIN
-// ==============================================================
-async function login() {
-    const username = document.getElementById("loginUsername").value.trim();
-    const password = document.getElementById("loginPassword").value.trim();
-    if (!username || !password) { showToast("❌ Tafadhali jaza sehemu zote", "error"); return; }
-    
-    showToast("⏳ Inaingiza...", "info");
-    const data = await getBinData();
-    if (!data) { showToast("❌ Imeshindwa kuunganisha", "error"); return; }
-    
-    const users = data.users || {};
-    const user = users[username];
-    if (!user || user.password !== password) {
-        showToast("❌ Jina au nenosiri si sahihi", "error");
-        return;
-    }
-    
-    currentUser = username;
-    currentRole = user.role;
-    reports = data.reports || [];
-    
-    document.getElementById("loginSection").style.display = "none";
-    document.getElementById("mainApp").style.display = "block";
-    document.getElementById("currentUserDisplay").textContent = username;
-    document.getElementById("userBadge").textContent = `👤 ${username}`;
-    
-    const roleNames = { worker: "🧑‍💼 Mtendakazi", supervisor: "👔 Msimamizi", incharge: "🏥 Mganga Mfawidhi" };
-    document.getElementById("roleDisplay").textContent = roleNames[user.role] || "🧑‍💼 Mtendakazi";
-    document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
-    document.getElementById("binIdDisplay").textContent = BIN_ID;
-    
-    document.getElementById("formWorker").style.display = "none";
-    document.getElementById("formSupervisor").style.display = "none";
-    document.getElementById("formIncharge").style.display = "none";
-    
-    if (user.role === "worker") {
-        document.getElementById("formWorker").style.display = "block";
-        document.getElementById("statusMessage").textContent = "✅ Jaza fomu yako kisha tuma kwa Msimamizi";
-        updateWorkerChecklist();
-        updateSteps(1);
-        checkWorkerStatus();
-    } else if (user.role === "supervisor") {
-        document.getElementById("formSupervisor").style.display = "block";
-        document.getElementById("statusMessage").textContent = "✅ Kagua taarifa za mtendakazi kisha tuma kwa Mganga Mfawidhi";
-        updateSteps(2);
-        loadWorkerData();
-        checkSupervisorStatus();
-    } else if (user.role === "incharge") {
-        document.getElementById("formIncharge").style.display = "block";
-        document.getElementById("statusMessage").textContent = "✅ Kagua tathmini yote kisha idhinisha au kata";
-        updateSteps(3);
-        loadFullAssessment();
-        checkInchargeStatus();
-    }
-    
-    setTimeout(() => {
-        initSigPad("worker");
-        initSigPad("supervisor");
-        initSigPad("incharge");
-    }, 500);
-    
-    updateScoreSummary();
-    loadHistory();
-    showToast(`✅ Karibu ${username}!`, "success");
-}
-
-function logout() {
-    currentUser = null;
-    currentRole = null;
-    document.getElementById("loginSection").style.display = "block";
-    document.getElementById("mainApp").style.display = "none";
-    document.getElementById("connectionStatus").textContent = "🔄 Tafadhali ingia tena";
-    showToast("👋 Umetoka nje", "info");
-}
-
-function updateSteps(step) {
-    const steps = document.querySelectorAll(".step-badge");
-    steps.forEach((s, i) => {
-        s.className = "step-badge";
-        if (i + 1 < step) s.classList.add("done");
-        else if (i + 1 === step) s.classList.add("active");
-    });
-}
-
-// ==============================================================
-// SUBMIT FUNCTIONS
+// SUBMIT WORKER - ILIYOREKEBISHWA KABISA
 // ==============================================================
 async function submitWorker() {
+    console.log("📤 Inaanza kutuma tathmini...");
+    
+    // 1. Angalia uthibitishaji
     if (!document.getElementById("workerVerify").checked) {
         showToast("⚠️ Tafadhali thibitisha taarifa zako", "warning");
+        console.log("❌ Uthibitishaji haujathibitishwa");
         return;
     }
+    
+    // 2. Angalia jina
     const name = document.getElementById("workerName").value.trim();
-    if (!name) { showToast("⚠️ Tafadhali weka jina lako", "warning"); return; }
-    if (!signatureData.worker) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
+    if (!name) {
+        showToast("⚠️ Tafadhali weka jina lako", "warning");
+        console.log("❌ Jina halijajazwa");
+        return;
+    }
+    
+    // 3. Angalia sahihi
+    if (!signatureData.worker) {
+        showToast("⚠️ Tafadhali weka sahihi yako", "warning");
+        console.log("❌ Sahihi haijapatikana");
+        return;
+    }
 
+    console.log("✅ Uthibitishaji umepita");
+    console.log("👤 Jina:", name);
+    console.log("📋 Taaluma:", document.getElementById("workerRole").value);
+
+    // 4. Kusanya data
     const role = document.getElementById("workerRole").value;
     const report = {
         id: Date.now(),
@@ -1351,26 +1297,54 @@ async function submitWorker() {
         finalStatus: "Inasubiri"
     };
 
-    const data = await getBinData();
-    if (!data) return;
-    if (!data.reports) data.reports = [];
-    data.reports.push(report);
-    const result = await updateBinData(data);
-    if (result) {
-        reports = data.reports;
-        document.getElementById("workerSubmitBtn").disabled = true;
-        document.getElementById("workerSubmitBtn").innerHTML = "✅ Imetumwa!";
-        document.getElementById("workerSubmitMsg").style.display = "block";
-        document.getElementById("workerSubmitMsg").textContent = "✅ Tathmini imetumwa kwa Msimamizi!";
-        document.getElementById("workerSubmitMsg").style.color = "#27ae60";
-        document.getElementById("workerStatusBadge").textContent = "✅ Imetumwa";
-        document.getElementById("workerStatusBadge").className = "status-badge approved";
-        showToast("✅ Tathmini imetumwa!", "success");
-        loadHistory();
-        updateScoreSummary();
+    console.log("📤 Report iliyokusanywa:", report);
+
+    try {
+        // 5. Soma data ya sasa
+        const data = await getBinData();
+        if (!data) {
+            showToast("❌ Imeshindwa kusoma data", "error");
+            console.log("❌ getBinData() imerudisha null");
+            return;
+        }
+        
+        console.log("✅ Data imesomwa kikamilifu");
+        
+        // 6. Ongeza report
+        if (!data.reports) data.reports = [];
+        data.reports.push(report);
+        
+        console.log("📤 Inahifadhi data...");
+        
+        // 7. Hifadhi
+        const result = await updateBinData(data);
+        
+        if (result) {
+            reports = data.reports;
+            document.getElementById("workerSubmitBtn").disabled = true;
+            document.getElementById("workerSubmitBtn").innerHTML = "✅ Imetumwa!";
+            document.getElementById("workerSubmitMsg").style.display = "block";
+            document.getElementById("workerSubmitMsg").textContent = "✅ Tathmini imetumwa kwa Msimamizi!";
+            document.getElementById("workerSubmitMsg").style.color = "#27ae60";
+            document.getElementById("workerStatusBadge").textContent = "✅ Imetumwa";
+            document.getElementById("workerStatusBadge").className = "status-badge approved";
+            showToast("✅ Tathmini imetumwa kikamilifu!", "success");
+            loadHistory();
+            updateScoreSummary();
+            console.log("✅ Tathmini imehifadhiwa kikamilifu!");
+        } else {
+            showToast("❌ Imeshindwa kuhifadhi", "error");
+            console.log("❌ updateBinData() imerudisha null");
+        }
+    } catch (error) {
+        console.error("❌ Hitilafu:", error);
+        showToast("❌ Hitilafu: " + error.message, "error");
     }
 }
 
+// ==============================================================
+// SUBMIT SUPERVISOR
+// ==============================================================
 async function submitSupervisor() {
     const name = document.getElementById("supervisorName").value.trim();
     if (!name) { showToast("⚠️ Tafadhali weka jina lako", "warning"); return; }
@@ -1608,6 +1582,92 @@ async function syncData() {
         showToast(`✅ Data imesawazishwa! Reports: ${reports.length}`, "success");
     }
     document.getElementById("syncBtn").innerHTML = '🔄 Sync';
+}
+
+// ==============================================================
+// LOGIN
+// ==============================================================
+async function login() {
+    const username = document.getElementById("loginUsername").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+    if (!username || !password) { showToast("❌ Tafadhali jaza sehemu zote", "error"); return; }
+    
+    showToast("⏳ Inaingiza...", "info");
+    const data = await getBinData();
+    if (!data) { showToast("❌ Imeshindwa kuunganisha", "error"); return; }
+    
+    const users = data.users || {};
+    const user = users[username];
+    if (!user || user.password !== password) {
+        showToast("❌ Jina au nenosiri si sahihi", "error");
+        return;
+    }
+    
+    currentUser = username;
+    currentRole = user.role;
+    reports = data.reports || [];
+    
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("mainApp").style.display = "block";
+    document.getElementById("currentUserDisplay").textContent = username;
+    document.getElementById("userBadge").textContent = `👤 ${username}`;
+    
+    const roleNames = { worker: "🧑‍💼 Mtendakazi", supervisor: "👔 Msimamizi", incharge: "🏥 Mganga Mfawidhi" };
+    document.getElementById("roleDisplay").textContent = roleNames[user.role] || "🧑‍💼 Mtendakazi";
+    document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
+    document.getElementById("binIdDisplay").textContent = BIN_ID;
+    
+    document.getElementById("formWorker").style.display = "none";
+    document.getElementById("formSupervisor").style.display = "none";
+    document.getElementById("formIncharge").style.display = "none";
+    
+    if (user.role === "worker") {
+        document.getElementById("formWorker").style.display = "block";
+        document.getElementById("statusMessage").textContent = "✅ Jaza fomu yako kisha tuma kwa Msimamizi";
+        updateWorkerChecklist();
+        updateSteps(1);
+        checkWorkerStatus();
+    } else if (user.role === "supervisor") {
+        document.getElementById("formSupervisor").style.display = "block";
+        document.getElementById("statusMessage").textContent = "✅ Kagua taarifa za mtendakazi kisha tuma kwa Mganga Mfawidhi";
+        updateSteps(2);
+        loadWorkerData();
+        checkSupervisorStatus();
+    } else if (user.role === "incharge") {
+        document.getElementById("formIncharge").style.display = "block";
+        document.getElementById("statusMessage").textContent = "✅ Kagua tathmini yote kisha idhinisha au kata";
+        updateSteps(3);
+        loadFullAssessment();
+        checkInchargeStatus();
+    }
+    
+    setTimeout(() => {
+        initSigPad("worker");
+        initSigPad("supervisor");
+        initSigPad("incharge");
+    }, 500);
+    
+    updateScoreSummary();
+    loadHistory();
+    showToast(`✅ Karibu ${username}!`, "success");
+}
+
+function logout() {
+    currentUser = null;
+    currentRole = null;
+    document.getElementById("loginSection").style.display = "block";
+    document.getElementById("mainApp").style.display = "none";
+    document.getElementById("connectionStatus").textContent = "🔄 Tafadhali ingia tena";
+    showToast("👋 Umetoka nje", "info");
+}
+
+function updateSteps(step) {
+    const steps = document.querySelectorAll(".step-badge");
+    steps.forEach((s, i) => {
+        s.className = "step-badge";
+        if (i + 1 < step) s.classList.add("done");
+        else if (i + 1 === step) s.classList.add("active");
+    });
 }
 
 // ==============================================================
