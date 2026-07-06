@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -723,7 +724,9 @@
                 <div id="workerSubmitMsg" style="font-size:12px; color:#7f8c8d; margin-top:8px; display:none;"></div>
             </div>
 
-            <!-- ===== FORM 2: SUPERVISOR ===== -->
+            <!-- ========================================================== -->
+            <!-- ===== FORM 2: SUPERVISOR - ILIYOREKEBISHWA ===== -->
+            <!-- ========================================================== -->
             <div id="formSupervisor" class="form-card supervisor" style="display:none;">
                 <div class="form-title">
                     <span class="icon">👔</span>
@@ -733,10 +736,17 @@
                 </div>
 
                 <div class="preview-box">
-                    <div class="title">📋 Taarifa za Mtendakazi</div>
+                    <div class="title">📋 Taarifa za Mtendakazi (Kwa Marejeleo)</div>
                     <div id="workerPreview" class="content">
                         <div style="color:#7f8c8d;">⏳ Hakuna tathmini inayosubiri</div>
                     </div>
+                </div>
+
+                <!-- ===== SEHEMU MPYA: JINA LA MTENDAKAZI ===== -->
+                <div class="form-group">
+                    <label>👤 Jina la Mtendakazi Anayetathminiwa <span class="required">*</span></label>
+                    <input type="text" id="supervisorWorkerName" placeholder="Weka jina la mtendakazi" value="">
+                    <div style="font-size:11px; color:#7f8c8d; margin-top:2px;">Taja jina la mtendakazi unayemtathmini</div>
                 </div>
 
                 <div class="form-row">
@@ -1335,10 +1345,9 @@ async function login() {
         checkWorkerStatus();
     } else if (user.role === "supervisor") {
         document.getElementById("formSupervisor").style.display = "block";
-        document.getElementById("statusMessage").textContent = "✅ Kagua taarifa za mtendakazi kisha tuma kwa Mganga Mfawidhi";
+        document.getElementById("statusMessage").textContent = "✅ Jaza fomu yako kisha tuma kwa Mganga Mfawidhi";
         document.getElementById("supervisorDate").value = new Date().toISOString().split("T")[0];
         updateSteps(2);
-        loadWorkerData();
         checkSupervisorStatus();
     } else if (user.role === "incharge") {
         document.getElementById("formIncharge").style.display = "block";
@@ -1378,17 +1387,11 @@ function updateSteps(step) {
 }
 
 // ==============================================================
-// LOAD WORKER DATA - ILIYOREKEBISHWA
+// LOAD WORKER DATA
 // ==============================================================
 function loadWorkerData() {
-    console.log("📤 Inapakia data ya mtendakazi...");
-    console.log("📊 Reports zote:", reports);
-    
-    // Tafuta report ya mtendakazi
     const allReports = reports || [];
     const pending = allReports.filter(r => r.workerName && r.workerName !== "" && r.status === "Inasubiri Mganga Mfawidhi");
-    
-    console.log("📊 Pending reports:", pending);
     
     if (pending.length === 0) {
         document.getElementById("workerPreview").innerHTML = `<div style="color:#7f8c8d;">⏳ Hakuna tathmini inayosubiri</div>`;
@@ -1396,8 +1399,6 @@ function loadWorkerData() {
     }
     
     const d = pending[pending.length - 1];
-    console.log("📋 Data ya mtendakazi:", d);
-    
     document.getElementById("workerPreview").innerHTML = `
         <div class="preview-grid">
             <div class="item"><strong>Jina:</strong> ${d.workerName || "N/A"}</div>
@@ -1419,20 +1420,12 @@ function loadWorkerData() {
 }
 
 // ==============================================================
-// LOAD ALL ASSESSMENTS - ILIYOREKEBISHWA
+// LOAD ALL ASSESSMENTS
 // ==============================================================
 function loadAllAssessments() {
-    console.log("📤 Inapakia tathmini zote kwa Mganga Mfawidhi...");
-    console.log("📊 Reports zote:", reports);
-    
     const allReports = reports || [];
-    
-    // Tafuta report ya mtendakazi
     const workerReports = allReports.filter(r => r.workerName && r.workerName !== "");
     const pendingWorker = workerReports.length > 0 ? workerReports[workerReports.length - 1] : null;
-    
-    console.log("📊 Worker reports:", workerReports);
-    console.log("📋 Pending worker:", pendingWorker);
     
     if (!pendingWorker) {
         document.getElementById("inchargeWorkerPreview").innerHTML = `<div style="color:#7f8c8d;">⏳ Hakuna tathmini ya mtendakazi</div>`;
@@ -1440,7 +1433,6 @@ function loadAllAssessments() {
         return;
     }
     
-    // Onyesha data ya mtendakazi
     const d = pendingWorker;
     document.getElementById("inchargeWorkerPreview").innerHTML = `
         <div class="preview-grid">
@@ -1458,7 +1450,6 @@ function loadAllAssessments() {
         </div>
     `;
     
-    // Onyesha data ya msimamizi (ikiwa ipo)
     const hasSupervisor = d.supervisorName && d.supervisorName !== "";
     document.getElementById("inchargeSupervisorPreview").innerHTML = hasSupervisor ? `
         <div class="preview-grid">
@@ -1579,14 +1570,27 @@ async function submitWorker() {
 }
 
 // ==============================================================
-// SUBMIT SUPERVISOR
+// SUBMIT SUPERVISOR - ILIYOREKEBISHWA
 // ==============================================================
 async function submitSupervisor() {
+    const workerName = document.getElementById("supervisorWorkerName").value.trim();
+    if (!workerName) {
+        showToast("⚠️ Tafadhali weka jina la mtendakazi", "warning");
+        return;
+    }
+    
     const name = document.getElementById("supervisorName").value.trim();
-    if (!name) { showToast("⚠️ Tafadhali weka jina lako", "warning"); return; }
-    if (!signatureData.supervisor) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
+    if (!name) {
+        showToast("⚠️ Tafadhali weka jina lako", "warning");
+        return;
+    }
+    if (!signatureData.supervisor) {
+        showToast("⚠️ Tafadhali weka sahihi yako", "warning");
+        return;
+    }
 
     const report = {
+        supervisorWorkerName: workerName,
         supervisorName: name,
         supervisorTitle: document.getElementById("supervisorTitle").value,
         supervisorDate: document.getElementById("supervisorDate").value,
@@ -1608,7 +1612,7 @@ async function submitSupervisor() {
         if (!existingReport) {
             existingReport = {
                 id: Date.now(),
-                workerName: "Msimamizi",
+                workerName: workerName,
                 role: "Msimamizi",
                 date: new Date().toISOString().split("T")[0],
                 shift: "Mchana",
@@ -1640,6 +1644,7 @@ async function submitSupervisor() {
         }
         
         const index = data.reports.indexOf(existingReport);
+        data.reports[index].workerName = workerName;
         data.reports[index].supervisorName = report.supervisorName;
         data.reports[index].supervisorTitle = report.supervisorTitle;
         data.reports[index].supervisorDate = report.supervisorDate;
