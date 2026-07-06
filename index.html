@@ -1,217 +1,179 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Mtwara SDA - Tathmini ya Utendaji</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mtwara Performance - Fomu ya Mtendakazi</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #e8ecf1;
-            padding: 12px;
+            background: #f0f2f5;
+            padding: 16px;
             color: #1a1a2e;
         }
         .container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
             background: #ffffff;
-            border-radius: 14px;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.10);
-            padding: 25px 30px 35px;
+            border-radius: 16px;
+            box-shadow: 0 4px 60px rgba(0,0,0,0.08);
+            padding: 30px 35px 40px;
         }
-        @media (max-width: 600px) {
-            body { padding: 8px; }
-            .container { padding: 14px 14px 20px; }
-        }
-
         .header {
             text-align: center;
             border-bottom: 4px solid #1a5276;
-            padding-bottom: 14px;
-            margin-bottom: 18px;
+            padding-bottom: 18px;
+            margin-bottom: 20px;
         }
-        .header h1 { font-size: 22px; color: #1a5276; }
-        .header h2 { font-size: 14px; color: #2c3e50; font-weight: normal; font-style: italic; }
-        .header .mission {
-            margin-top: 6px;
-            padding: 6px 14px;
-            background: #eaf2f8;
-            border-radius: 6px;
-            font-size: 12px;
-            color: #1a5276;
-            border-left: 4px solid #1a5276;
-        }
-
-        .login-box {
-            max-width: 400px;
-            margin: 50px auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .login-box h2 { text-align: center; color: #1a5276; margin-bottom: 20px; }
-        .user-badge {
+        .header h1 { font-size: 28px; color: #1a5276; }
+        .header h2 { font-size: 15px; color: #2c3e50; font-weight: 400; }
+        .header .org-badge {
             display: inline-block;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            background: #d5f5e3;
-            color: #1a7a3a;
-        }
-        .user-badge.supervisor { background: #f39c12; color: #fff; }
-        .user-badge.incharge { background: #8e44ad; color: #fff; }
-
-        .steps {
-            display: flex;
-            justify-content: space-between;
-            margin: 20px 0;
-            position: relative;
-        }
-        .steps::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 5%;
-            right: 5%;
-            height: 3px;
-            background: #ecf0f1;
-            z-index: 0;
-        }
-        .step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 1;
-            flex: 1;
-        }
-        .step .circle {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: #ecf0f1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 14px;
-            color: #7f8c8d;
-            border: 3px solid #ecf0f1;
-            transition: 0.3s;
-        }
-        .step.active .circle { background: #1a5276; color: #fff; border-color: #1a5276; }
-        .step.done .circle { background: #27ae60; color: #fff; border-color: #27ae60; }
-        .step .label { font-size: 11px; margin-top: 4px; color: #7f8c8d; text-align: center; }
-        .step.active .label { color: #1a5276; font-weight: 600; }
-        .step.done .label { color: #27ae60; }
-
-        .section-divider {
-            padding: 7px 14px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 700;
-            margin: 16px 0 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .section-divider.worker { background: #d6eaf8; color: #1a5276; border-left: 4px solid #1a5276; }
-        .section-divider.supervisor { background: #d5f5e3; color: #1a7a3a; border-left: 4px solid #27ae60; }
-        .section-divider.incharge { background: #2c3e50; color: #fff; border-left: 4px solid #1a5276; }
-        .section-divider.general { background: #e8daef; color: #6c3483; border-left: 4px solid #8e44ad; }
-        .section-divider .badge {
-            padding: 2px 12px;
+            background: #1a5276;
+            color: #fff;
+            padding: 4px 20px;
             border-radius: 20px;
             font-size: 11px;
-            font-weight: 400;
-            background: rgba(255,255,255,0.2);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
         }
-
-        .form-group { margin-bottom: 12px; }
+        .form-card {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin-bottom: 24px;
+            border: 1px solid #e9ecef;
+            border-top: 5px solid #1a5276;
+        }
+        .form-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .form-title .icon { font-size: 24px; }
+        .form-title .title-text { font-size: 18px; font-weight: 700; color: #1a1a2e; }
+        .form-title .badge {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 14px;
+            border-radius: 20px;
+            background: #eaf2f8;
+            color: #1a5276;
+        }
+        .form-title .status-badge {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 14px;
+            border-radius: 20px;
+            margin-left: auto;
+        }
+        .status-badge.pending { background: #fef9e7; color: #f39c12; }
+        .status-badge.approved { background: #d5f5e3; color: #27ae60; }
+        .status-badge.rejected { background: #fadbd8; color: #e74c3c; }
+        .form-group { margin-bottom: 14px; }
         .form-group label {
             display: block;
             font-weight: 600;
             color: #1a5276;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
             font-size: 13px;
         }
+        .form-group label .required { color: #e74c3c; margin-left: 2px; }
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #d5d8dc;
-            border-radius: 6px;
+            padding: 10px 14px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
             font-size: 14px;
             font-family: inherit;
-            background: #fafbfc;
+            background: #fff;
+            transition: 0.3s;
         }
-        .form-group textarea { min-height: 50px; resize: vertical; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #1a5276;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(26,82,118,0.1);
+        }
+        .form-group textarea { min-height: 60px; resize: vertical; }
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 14px;
+            gap: 16px;
         }
         @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
-
-        .rating-group {
+        .likert-scale {
             display: flex;
-            gap: 5px;
+            gap: 6px;
             flex-wrap: wrap;
-            margin: 3px 0;
+            margin: 4px 0;
         }
-        .rating-btn {
-            padding: 5px 12px;
-            border: 2px solid #d5d8dc;
-            border-radius: 6px;
+        .likert-btn {
+            padding: 6px 14px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
             background: #fff;
             cursor: pointer;
             font-size: 12px;
             font-weight: 600;
             transition: 0.3s;
             font-family: inherit;
-            flex: 1 1 auto;
-            min-width: 45px;
+            min-width: 48px;
             text-align: center;
+            flex: 1;
         }
-        .rating-btn:hover { background: #eaf2f8; }
-        .rating-btn.selected {
+        .likert-btn:hover { background: #eaf2f8; border-color: #1a5276; }
+        .likert-btn.selected {
             border-color: #1a5276;
             background: #1a5276;
             color: #fff;
         }
-        .rating-btn.selected-excellent { border-color: #27ae60; background: #27ae60; color: #fff; }
-        .rating-btn.selected-good { border-color: #2e86c1; background: #2e86c1; color: #fff; }
-        .rating-btn.selected-average { border-color: #f39c12; background: #f39c12; color: #fff; }
-        .rating-btn.selected-poor { border-color: #e74c3c; background: #e74c3c; color: #fff; }
-
+        .likert-btn .sub {
+            display: block;
+            font-weight: 400;
+            font-size: 9px;
+            color: #7f8c8d;
+            margin-top: 1px;
+        }
+        .likert-btn.selected .sub { color: rgba(255,255,255,0.8); }
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 20px;
+            padding: 4px 0;
+        }
+        @media (max-width: 600px) { .checklist-grid { grid-template-columns: 1fr; } }
         .checklist-item {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 6px 0;
+            padding: 5px 0;
             border-bottom: 1px solid #f0f2f5;
             font-size: 13px;
         }
         .checklist-item:last-child { border-bottom: none; }
         .checklist-item .num {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             background: #ecf0f1;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             color: #7f8c8d;
             flex-shrink: 0;
         }
         .checklist-item .toggle {
-            width: 42px;
-            height: 24px;
+            width: 40px;
+            height: 22px;
             flex-shrink: 0;
             background: #d5d8dc;
             border-radius: 12px;
@@ -224,47 +186,37 @@
             position: absolute;
             top: 2px;
             left: 2px;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             background: #fff;
             border-radius: 50%;
             transition: 0.3s;
             box-shadow: 0 2px 6px rgba(0,0,0,0.12);
         }
         .checklist-item .toggle.active .thumb { left: 20px; }
-        .checklist-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6px 16px;
-            padding: 4px 0;
-        }
-        .checklist-grid .checklist-item { border-bottom: none; padding: 4px 0; }
-        @media (max-width: 600px) { .checklist-grid { grid-template-columns: 1fr; } }
-
         .btn {
-            padding: 10px 24px;
+            padding: 11px 28px;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: 600;
             font-size: 14px;
             cursor: pointer;
             transition: 0.3s;
             font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
         .btn:active { transform: scale(0.97); }
         .btn-success { background: #27ae60; color: #fff; }
         .btn-success:hover { background: #1e8449; }
-        .btn-purple { background: #8e44ad; color: #fff; }
-        .btn-purple:hover { background: #6c3483; }
         .btn-primary { background: #1a5276; color: #fff; }
         .btn-primary:hover { background: #154360; }
         .btn-danger { background: #e74c3c; color: #fff; }
         .btn-danger:hover { background: #c0392b; }
-        .btn-warning { background: #f39c12; color: #fff; }
-        .btn-warning:hover { background: #d68910; }
-        .btn-sm { padding: 4px 12px; font-size: 11px; }
-        .btn-block { width: 100%; }
-
+        .btn-sm { padding: 6px 16px; font-size: 12px; }
+        .btn-block { width: 100%; justify-content: center; }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
         .signature-pad {
             border: 2px dashed #1a5276;
             border-radius: 10px;
@@ -278,77 +230,49 @@
         }
         .signature-pad canvas { width: 100%; height: 100%; border-radius: 8px; touch-action: none; }
         .signature-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0; }
-
-        .score-box {
-            background: #eaf2f8;
-            border-radius: 10px;
-            padding: 14px 18px;
-            margin: 14px 0;
-            border-left: 5px solid #1a5276;
-        }
-        .score-box h3 { color: #1a5276; margin-bottom: 6px; font-size: 15px; }
-        .score-row {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .score-item {
-            background: #fff;
-            padding: 8px 14px;
-            border-radius: 6px;
-            min-width: 80px;
-            text-align: center;
-            flex: 1;
-        }
-        .score-item .number { font-size: 22px; font-weight: 800; color: #1a5276; display: block; }
-        .score-item .label { font-size: 10px; color: #7f8c8d; text-transform: uppercase; }
-        .score-item .number.green { color: #27ae60; }
-        .score-item .number.orange { color: #f39c12; }
-        .score-item .number.purple { color: #8e44ad; }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e8ecf1;
-            border-radius: 4px;
-            overflow: hidden;
-            margin: 4px 0 2px;
-        }
-        .progress-bar .fill {
-            height: 100%;
-            border-radius: 4px;
-            transition: width 0.5s ease;
-            background: linear-gradient(90deg, #27ae60, #1a5276);
-        }
-
         .toast {
             position: fixed;
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(20px);
-            max-width: 400px;
-            width: 90%;
+            max-width: 450px;
+            width: 92%;
             background: #1a1a2e;
             color: #fff;
-            padding: 10px 18px;
-            border-radius: 10px;
-            font-size: 13px;
+            padding: 14px 22px;
+            border-radius: 12px;
+            font-size: 14px;
             text-align: center;
             z-index: 999;
             opacity: 0;
             transition: all 0.4s ease;
             pointer-events: none;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.20);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.20);
         }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
         .toast.success { background: #27ae60; }
         .toast.warning { background: #f39c12; color: #1a1a2e; }
         .toast.error { background: #e74c3c; }
-
+        .warning-box {
+            background: #fef9e7;
+            border-left: 4px solid #e74c3c;
+            padding: 10px 16px;
+            border-radius: 8px;
+            margin: 8px 0;
+            font-size: 13px;
+            color: #7d6608;
+        }
+        .success-box {
+            background: #d5f5e3;
+            border-left: 4px solid #27ae60;
+            padding: 10px 16px;
+            border-radius: 8px;
+            margin: 8px 0;
+        }
         .footer {
             text-align: center;
-            margin-top: 22px;
-            padding-top: 14px;
+            margin-top: 28px;
+            padding-top: 20px;
             border-top: 2px solid #ecf0f1;
             font-size: 12px;
             color: #7f8c8d;
@@ -356,95 +280,80 @@
         .footer .verse {
             font-style: italic;
             color: #1a5276;
-            font-size: 13px;
+            font-size: 14px;
             margin-bottom: 4px;
         }
-
-        .role-section { display: none; }
-        .role-section.active { display: block; }
-        .pending-item {
-            background: #fef9e7;
-            border-left: 4px solid #f39c12;
-            padding: 12px 16px;
-            margin-bottom: 8px;
-            border-radius: 4px;
+        .login-box {
+            max-width: 420px;
+            margin: 60px auto;
+            background: #fff;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.08);
         }
-        .pending-item .title { font-weight: 600; font-size: 14px; }
-        .pending-item .sub { font-size: 12px; color: #7f8c8d; }
-        .pending-item .actions { margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap; }
-        .history-empty { text-align: center; color: #7f8c8d; padding: 20px 0; }
-
-        .tabs {
-            display: flex;
-            gap: 6px;
-            margin: 14px 0 16px;
-            flex-wrap: wrap;
+        .login-box h2 { text-align: center; color: #1a5276; margin-bottom: 8px; }
+        .login-box .subtitle { text-align: center; color: #7f8c8d; font-size: 13px; margin-bottom: 24px; }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #ecf0f1;
+            border-top: 3px solid #1a5276;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
-        .tab-btn {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 6px;
-            background: #ecf0f1;
-            color: #2c3e50;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .user-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
             font-weight: 600;
-            cursor: pointer;
-            font-size: 13px;
-            transition: 0.3s;
-            flex: 1;
-            text-align: center;
+            background: #d5f5e3;
+            color: #1a7a3a;
         }
-        .tab-btn:hover { background: #d5dbdb; }
-        .tab-btn.active { background: #1a5276; color: #fff; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-
+        .role-badge {
+            display: inline-block;
+            padding: 3px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #eaf2f8;
+            color: #1a5276;
+        }
         .user-tools {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
             margin: 10px 0;
-            padding: 10px;
+            padding: 12px 16px;
             background: #f8f9fa;
-            border-radius: 8px;
+            border-radius: 10px;
             align-items: center;
         }
-
-        .preview-box {
-            background: #f8f9fa;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            border: 1px solid #ecf0f1;
-        }
-        .preview-box .title {
-            font-size: 13px;
-            color: #1a5276;
-            font-weight: 600;
-        }
-        .preview-box .content {
-            font-size: 13px;
-            color: #2c3e50;
-        }
-
-        .role-badge {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 12px;
+        .bin-info {
+            margin-top: 6px;
             font-size: 11px;
-            font-weight: 600;
-            background: #eaf2f8;
-            color: #1a5276;
+            color: #7f8c8d;
         }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-<!-- ============================================================ -->
-<!-- LOGIN -->
-<!-- ============================================================ -->
+<!-- ===== TOAST ===== -->
+<div id="toast" class="toast"></div>
+
+<!-- ===== LOGIN ===== -->
 <div id="loginSection" class="login-box">
-    <h2>🔐 Mtwara SDA Dispensary</h2>
-    <p style="text-align:center; color:#7f8c8d; margin-bottom:20px;">Tathmini ya Utendaji Kazi</p>
+    <h2>🔐 Mtwara Performance</h2>
+    <p class="subtitle">Fomu ya Mtendakazi</p>
+    <div style="text-align:center; margin-bottom:16px; font-size:12px; color:#7f8c8d;">
+        <span id="connectionStatus">🔄 Inaunganisha...</span>
+    </div>
     <div class="form-group">
         <label>👤 Jina la Mtumiaji</label>
         <input type="text" id="loginUsername" placeholder="Weka username" value="worker">
@@ -454,1245 +363,648 @@
         <input type="password" id="loginPassword" placeholder="Weka nenosiri" value="1234">
     </div>
     <button class="btn btn-primary btn-block" onclick="login()">🔓 Ingia</button>
-    <p style="font-size:12px; color:#7f8c8d; margin-top:10px; text-align:center;">
-        Majina: worker, supervisor, incharge | Nenosiri: 1234
+    <p style="font-size:12px; color:#7f8c8d; margin-top:12px; text-align:center;">
+        Watumiaji: worker, supervisor, incharge | Nenosiri: 1234
     </p>
 </div>
 
-<!-- ============================================================ -->
-<!-- MFUMO KUU -->
-<!-- ============================================================ -->
+<!-- ===== MAIN APP ===== -->
 <div id="mainApp" style="display:none;">
     <div class="container">
 
         <div class="header">
-            <h1>🏥 MTWARA SDA DISPENSARY</h1>
-            <h2>Nyenzo ya Tathmini ya Utendaji Kazi</h2>
+            <div class="org-badge">🏥 Mtwara SDA Dispensary</div>
+            <h1>Fomu ya Mtendakazi</h1>
+            <h2>Jaza Tathmini Yako</h2>
             <div style="font-size:12px; color:#7f8c8d; margin-top:4px;">
-                Kitambulisho: <span id="assessmentId" style="font-weight:700; color:#1a5276;"></span>
-                <span id="userBadge" class="user-badge" style="margin-left:10px;">👤 Imetoka nje</span>
+                <span id="userBadge" class="user-badge">👤 Imetoka nje</span>
+                <span style="margin-left:12px; font-size:11px; color:#27ae60;">☁️ Online</span>
             </div>
-            <div class="mission"><strong>Dhamira:</strong> "Ubora katika Huduma, Imani katika Vitendo"</div>
+            <div class="bin-info">
+                📦 BIN: <span id="binIdDisplay">6a4b0bc9da38895dfe32cc08</span>
+            </div>
         </div>
 
-        <!-- USER TOOLS -->
         <div class="user-tools">
-            <span style="font-size:13px; color:#1a5276; font-weight:600;">👤 <span id="currentUserDisplay">Mgeni</span></span>
+            <span style="font-weight:600; color:#1a5276;">👤 <span id="currentUserDisplay">Mgeni</span></span>
             <span id="roleDisplay" class="role-badge">🧑‍💼 Mtendakazi</span>
             <button class="btn btn-danger btn-sm" onclick="logout()">🚪 Toka</button>
-            <button class="btn btn-primary btn-sm" onclick="switchTab('pending')" id="pendingBtn" style="display:none;">⏳ Inasubiri</button>
-            <button class="btn btn-success btn-sm" onclick="switchTab('history')">📂 Historia</button>
+            <button class="btn btn-warning btn-sm" onclick="syncData()" id="syncBtn">🔄 Sync</button>
         </div>
 
-        <!-- STEPS -->
-        <div class="steps">
-            <div class="step active" id="stepWorker">
-                <div class="circle">1</div>
-                <div class="label">Mtendakazi</div>
-            </div>
-            <div class="step" id="stepSupervisor">
-                <div class="circle">2</div>
-                <div class="label">Msimamizi</div>
-            </div>
-            <div class="step" id="stepIncharge">
-                <div class="circle">3</div>
-                <div class="label">Mganga Mfawidhi</div>
-            </div>
-        </div>
-
-        <!-- STATUS MESSAGE -->
-        <div style="text-align:center; font-size:13px; color:#7f8c8d; margin-bottom:14px;" id="statusMessage">
-            ⏳ Tafadhali jaza sehemu yako
-        </div>
-
-        <!-- TABS -->
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('assessment')">📝 Tathmini</button>
-            <button class="tab-btn" onclick="switchTab('pending')">⏳ Inasubiri</button>
-            <button class="tab-btn" onclick="switchTab('history')">📂 Historia</button>
-        </div>
-
-        <!-- ============================================================ -->
-        <!-- TAB: TATHMINI - FOMU MOJA KAMILI -->
-        <!-- ============================================================ -->
-        <div id="assessment" class="tab-content active">
-
-            <!-- ========================================================== -->
-            <!-- SEHEMU YA MTENDAKAZI -->
-            <!-- ========================================================== -->
-            <div class="section-divider worker">
-                👤 SEHEMU YA MTENDAKAZI
-                <span class="badge">Imejazwa na Mtendakazi</span>
+        <div id="formWorker" class="form-card worker">
+            <div class="form-title">
+                <span class="icon">👤</span>
+                <span class="title-text">Fomu ya Mtendakazi</span>
+                <span class="badge">Jaza na Tuma</span>
+                <span id="workerStatusBadge" class="status-badge pending">⏳ Inasubiri</span>
             </div>
 
             <div class="form-row">
-                <div class="form-group"><label>👤 Jina la Mtendakazi</label><input type="text" id="workerName" placeholder="Jina lako" value=""></div>
-                <div class="form-group"><label>📋 Kazi</label><select id="workerRole"><option value="Daktari">🩺 Daktari</option><option value="Muuguzi">💉 Muuguzi</option></select></div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label>📅 Tarehe</label><input type="date" id="reportDate"></div>
-                <div class="form-group"><label>🕐 Zamu</label><select id="workerShift"><option>Mchana</option><option>Usiku</option></select></div>
-            </div>
-            <div class="form-group"><label>🏢 Idara</label><input type="text" id="department" value="Clinical"></div>
-
-            <!-- Takwimu -->
-            <div class="section-divider worker" style="margin-top:14px;">📊 Takwimu za Kazi</div>
-            <div class="form-row">
-                <div class="form-group"><label>👥 Wagonjwa</label><input type="number" id="statPatients" min="0" value="0"></div>
-                <div class="form-group"><label>📊 Ultrasound</label><input type="number" id="statUltrasound" min="0" value="0"></div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label>📋 Referral</label><input type="number" id="statReferral" min="0" value="0"></div>
-                <div class="form-group"><label>🔄 Waliorudi</label><input type="number" id="statFollowup" min="0" value="0"></div>
-            </div>
-
-            <!-- ORODHA YA JUMLA (Inaonekana kwa wote) -->
-            <div class="section-divider general">
-                📋 ORODHA YA JUMLA
-                <span class="badge">Wafanyakazi wote</span>
-            </div>
-            <div id="generalChecklistContainer"></div>
-
-            <!-- Tathmini ya Mtendakazi -->
-            <div class="section-divider worker">✍️ Tathmini ya Mtendakazi</div>
-            <div class="form-group">
-                <label>1. Kuwasili</label>
-                <div class="rating-group" id="selfPunctuality">
-                    <button class="rating-btn" onclick="selectRating('selfPunctuality', this)">⭐ Bora</button>
-                    <button class="rating-btn" onclick="selectRating('selfPunctuality', this)">👍 Nzuri</button>
-                    <button class="rating-btn" onclick="selectRating('selfPunctuality', this)">👌 Wastani</button>
-                    <button class="rating-btn" onclick="selectRating('selfPunctuality', this)">⚠️ Dhaifu</button>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>2. Ubora</label>
-                <div class="rating-group" id="selfQuality">
-                    <button class="rating-btn" onclick="selectRating('selfQuality', this)">⭐ Bora</button>
-                    <button class="rating-btn" onclick="selectRating('selfQuality', this)">👍 Nzuri</button>
-                    <button class="rating-btn" onclick="selectRating('selfQuality', this)">👌 Wastani</button>
-                    <button class="rating-btn" onclick="selectRating('selfQuality', this)">⚠️ Dhaifu</button>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>3. Huruma</label>
-                <div class="rating-group" id="selfCompassion">
-                    <button class="rating-btn" onclick="selectRating('selfCompassion', this)">⭐ Bora</button>
-                    <button class="rating-btn" onclick="selectRating('selfCompassion', this)">👍 Nzuri</button>
-                    <button class="rating-btn" onclick="selectRating('selfCompassion', this)">👌 Wastani</button>
-                    <button class="rating-btn" onclick="selectRating('selfCompassion', this)">⚠️ Dhaifu</button>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>4. Ushirikiano</label>
-                <div class="rating-group" id="selfTeamwork">
-                    <button class="rating-btn" onclick="selectRating('selfTeamwork', this)">⭐ Bora</button>
-                    <button class="rating-btn" onclick="selectRating('selfTeamwork', this)">👍 Nzuri</button>
-                    <button class="rating-btn" onclick="selectRating('selfTeamwork', this)">👌 Wastani</button>
-                    <button class="rating-btn" onclick="selectRating('selfTeamwork', this)">⚠️ Dhaifu</button>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>5. Hatua</label>
-                <div class="rating-group" id="selfInitiative">
-                    <button class="rating-btn" onclick="selectRating('selfInitiative', this)">⭐ Bora</button>
-                    <button class="rating-btn" onclick="selectRating('selfInitiative', this)">👍 Nzuri</button>
-                    <button class="rating-btn" onclick="selectRating('selfInitiative', this)">👌 Wastani</button>
-                    <button class="rating-btn" onclick="selectRating('selfInitiative', this)">⚠️ Dhaifu</button>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>6. Usalama</label>
-                <div class="rating-group" id="selfSafety">
-                    <button class="rating-btn" onclick="selectRating('selfSafety', this)">⭐ Bora</button>
-                    <button class="rating-btn" onclick="selectRating('selfSafety', this)">👍 Nzuri</button>
-                    <button class="rating-btn" onclick="selectRating('selfSafety', this)">👌 Wastani</button>
-                    <button class="rating-btn" onclick="selectRating('selfSafety', this)">⚠️ Dhaifu</button>
-                </div>
-            </div>
-
-            <div class="form-group"><label>📝 Maoni ya Mtendakazi</label><textarea id="selfComments" placeholder="Mawazo yako..."></textarea></div>
-
-            <div class="section-divider worker">✍️ Sahihi ya Mtendakazi</div>
-            <div style="background:#fef9e7; border-left:4px solid #e74c3c; padding:10px 14px; border-radius:6px; margin:8px 0; font-size:13px; color:#7d6608;">
-                <strong>⚠️ ONYO:</strong> Taarifa za uongo ni kosa la kinidhamu.
-            </div>
-            <div style="background:#d5f5e3; border-left:4px solid #27ae60; padding:10px 14px; border-radius:6px; margin:8px 0;">
-                <label><input type="checkbox" id="workerVerification"> <strong>Nathibitisha taarifa zangu ni za kweli</strong></label>
-            </div>
-            <div class="form-group">
-                <label>✍️ Sahihi</label>
-                <div class="signature-pad" id="workerSignaturePad"><canvas id="workerSignatureCanvas"></canvas></div>
-                <div class="signature-actions">
-                    <button class="btn btn-warning btn-sm" onclick="clearSignature('worker')">🔄 Futa</button>
-                    <button class="btn btn-primary btn-sm" onclick="saveSignature('worker')">💾 Hifadhi</button>
-                    <span id="workerSignatureStatus" style="font-size:12px; color:#7f8c8d;">Hakuna</span>
-                </div>
-            </div>
-
-            <button class="btn btn-success" onclick="submitToSupervisor()" id="submitWorkerBtn" style="margin:10px 0; width:100%;">
-                📤 TUMA KWA MSIMAMIZI
-            </button>
-            <div id="workerSubmitStatus" style="font-size:12px; color:#7f8c8d; margin-top:6px; display:none;"></div>
-
-
-            <!-- ========================================================== -->
-            <!-- SEHEMU YA MSIMAMIZI -->
-            <!-- ========================================================== -->
-            <div id="supervisorSection" style="display:none;">
-                <div class="section-divider supervisor">
-                    👔 SEHEMU YA MSIMAMIZI
-                    <span class="badge">Inajazwa na Msimamizi</span>
-                </div>
-
-                <div class="preview-box">
-                    <div class="title">📋 Taarifa za Mtendakazi:</div>
-                    <div class="content" id="workerPreview"></div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group"><label>👔 Jina la Msimamizi</label><input type="text" id="supervisorName" placeholder="Jina lako" value=""></div>
-                    <div class="form-group"><label>📋 Wadhifa</label><select id="supervisorTitle"><option>Mkuu wa Idara</option><option>Afisa Mwandamizi</option><option>Msimamizi</option></select></div>
-                </div>
-
                 <div class="form-group">
-                    <label>1. Kuwasili</label>
-                    <div class="rating-group" id="supPunctuality">
-                        <button class="rating-btn" onclick="selectRating('supPunctuality', this)">⭐ Bora</button>
-                        <button class="rating-btn" onclick="selectRating('supPunctuality', this)">👍 Nzuri</button>
-                        <button class="rating-btn" onclick="selectRating('supPunctuality', this)">👌 Wastani</button>
-                        <button class="rating-btn" onclick="selectRating('supPunctuality', this)">⚠️ Dhaifu</button>
-                    </div>
+                    <label>Jina Lako <span class="required">*</span></label>
+                    <input type="text" id="workerName" placeholder="Jina lako" value="">
                 </div>
                 <div class="form-group">
-                    <label>2. Ubora</label>
-                    <div class="rating-group" id="supQuality">
-                        <button class="rating-btn" onclick="selectRating('supQuality', this)">⭐ Bora</button>
-                        <button class="rating-btn" onclick="selectRating('supQuality', this)">👍 Nzuri</button>
-                        <button class="rating-btn" onclick="selectRating('supQuality', this)">👌 Wastani</button>
-                        <button class="rating-btn" onclick="selectRating('supQuality', this)">⚠️ Dhaifu</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>3. Huruma</label>
-                    <div class="rating-group" id="supCompassion">
-                        <button class="rating-btn" onclick="selectRating('supCompassion', this)">⭐ Bora</button>
-                        <button class="rating-btn" onclick="selectRating('supCompassion', this)">👍 Nzuri</button>
-                        <button class="rating-btn" onclick="selectRating('supCompassion', this)">👌 Wastani</button>
-                        <button class="rating-btn" onclick="selectRating('supCompassion', this)">⚠️ Dhaifu</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>4. Ushirikiano</label>
-                    <div class="rating-group" id="supTeamwork">
-                        <button class="rating-btn" onclick="selectRating('supTeamwork', this)">⭐ Bora</button>
-                        <button class="rating-btn" onclick="selectRating('supTeamwork', this)">👍 Nzuri</button>
-                        <button class="rating-btn" onclick="selectRating('supTeamwork', this)">👌 Wastani</button>
-                        <button class="rating-btn" onclick="selectRating('supTeamwork', this)">⚠️ Dhaifu</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>5. Hatua</label>
-                    <div class="rating-group" id="supInitiative">
-                        <button class="rating-btn" onclick="selectRating('supInitiative', this)">⭐ Bora</button>
-                        <button class="rating-btn" onclick="selectRating('supInitiative', this)">👍 Nzuri</button>
-                        <button class="rating-btn" onclick="selectRating('supInitiative', this)">👌 Wastani</button>
-                        <button class="rating-btn" onclick="selectRating('supInitiative', this)">⚠️ Dhaifu</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>6. Usalama</label>
-                    <div class="rating-group" id="supSafety">
-                        <button class="rating-btn" onclick="selectRating('supSafety', this)">⭐ Bora</button>
-                        <button class="rating-btn" onclick="selectRating('supSafety', this)">👍 Nzuri</button>
-                        <button class="rating-btn" onclick="selectRating('supSafety', this)">👌 Wastani</button>
-                        <button class="rating-btn" onclick="selectRating('supSafety', this)">⚠️ Dhaifu</button>
-                    </div>
-                </div>
-
-                <div class="form-group"><label>📝 Maoni ya Msimamizi</label><textarea id="supComments" placeholder="Uchunguzi, nguvu, maeneo ya kuboresha..."></textarea></div>
-
-                <div style="background:#d5f5e3; border-left:4px solid #27ae60; padding:10px 14px; border-radius:6px; margin:8px 0;">
-                    <label><input type="checkbox" id="supervisorVerification"> <strong>Nathibitisha tathmini yangu ni sahihi</strong></label>
-                </div>
-                <div class="form-group">
-                    <label>✍️ Sahihi ya Msimamizi</label>
-                    <div class="signature-pad" id="supervisorSignaturePad"><canvas id="supervisorSignatureCanvas"></canvas></div>
-                    <div class="signature-actions">
-                        <button class="btn btn-warning btn-sm" onclick="clearSignature('supervisor')">🔄 Futa</button>
-                        <button class="btn btn-primary btn-sm" onclick="saveSignature('supervisor')">💾 Hifadhi</button>
-                        <span id="supervisorSignatureStatus" style="font-size:12px; color:#7f8c8d;">Hakuna</span>
-                    </div>
-                </div>
-
-                <button class="btn btn-purple" onclick="submitToInCharge()" id="submitSupervisorBtn" style="margin:10px 0; width:100%;">
-                    📤 TUMA KWA MGANGA MFAWIDHI
-                </button>
-                <div id="supervisorSubmitStatus" style="font-size:12px; color:#7f8c8d; margin-top:6px; display:none;"></div>
-            </div>
-
-
-            <!-- ========================================================== -->
-            <!-- SEHEMU YA MGANGA MFAWIDHI -->
-            <!-- ========================================================== -->
-            <div id="inchargeSection" style="display:none;">
-                <div class="section-divider incharge">
-                    🏢 SEHEMU YA MGANGA MFAWIDHI
-                    <span class="badge">Inajazwa na Mganga Mfawidhi</span>
-                </div>
-
-                <div class="preview-box">
-                    <div class="title">📋 Taarifa za Tathmini:</div>
-                    <div class="content" id="inchargePreview"></div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group"><label>🏢 Jina</label><input type="text" id="inchargeName" placeholder="Jina lako" value=""></div>
-                    <div class="form-group"><label>📋 Wadhifa</label><select id="inchargeTitle"><option>Mganga Mfawidhi</option><option>Msimamizi wa Kituo</option><option>Mganga Mkuu</option></select></div>
-                </div>
-
-                <div class="form-group">
-                    <label>📊 Kiwango cha Jumla</label>
-                    <div class="rating-group" id="inchargeRating">
-                        <button class="rating-btn" onclick="selectRating('inchargeRating', this)">⭐ Bora</button>
-                        <button class="rating-btn" onclick="selectRating('inchargeRating', this)">👍 Nzuri</button>
-                        <button class="rating-btn" onclick="selectRating('inchargeRating', this)">👌 Wastani</button>
-                        <button class="rating-btn" onclick="selectRating('inchargeRating', this)">⚠️ Inahitaji</button>
-                        <button class="rating-btn" onclick="selectRating('inchargeRating', this)">❌ Haikubaliki</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>✅ Mapendekezo</label>
-                    <select id="inchargeRecommendation" style="width:100%; padding:8px 12px; border:1px solid #d5d8dc; border-radius:6px;">
-                        <option value="continue">Endelea</option>
-                        <option value="coaching">Ushauri</option>
-                        <option value="training">Mafunzo</option>
-                        <option value="supervision">Uangalizi</option>
-                        <option value="performance-improvement">Kuboresha</option>
-                        <option value="disciplinary">Kinidhamu</option>
+                    <label>Taaluma <span class="required">*</span></label>
+                    <select id="workerRole" onchange="updateWorkerChecklist()">
+                        <option value="Medical Officer">🩺 Medical Officer (MD)</option>
+                        <option value="Clinical Officer">📋 Clinical Officer</option>
+                        <option value="Specialist">⭐ Specialist</option>
                     </select>
                 </div>
-                <div class="form-group"><label>📝 Maoni ya Mganga Mfawidhi</label><textarea id="inchargeComments" placeholder="Tathmini ya mwisho..."></textarea></div>
-
-                <div class="form-row">
-                    <div class="form-group"><label>📅 Tarehe ya Ufuatiliaji</label><input type="date" id="inchargeFollowupDate"></div>
-                    <div class="form-group"><label>⏳ Muda</label><select id="inchargeFollowupPeriod" style="width:100%; padding:8px 12px; border:1px solid #d5d8dc; border-radius:6px;"><option value="1-week">Wiki 1</option><option value="2-weeks">Wiki 2</option><option value="1-month" selected>Mwezi 1</option><option value="3-months">Miezi 3</option></select></div>
-                </div>
-
+            </div>
+            <div class="form-row">
                 <div class="form-group">
-                    <label>✅ Sahihi</label>
-                    <div style="display:flex; gap:16px; flex-wrap:wrap; padding:8px 0;">
-                        <label><input type="radio" name="inchargeSignoff" value="approved" checked> ✔️ Imekubaliwa</label>
-                        <label><input type="radio" name="inchargeSignoff" value="conditional"> ⚠️ Ina Masharti</label>
-                        <label><input type="radio" name="inchargeSignoff" value="rejected"> ❌ Imerejeshwa</label>
-                    </div>
-                </div>
-
-                <div style="background:#d5f5e3; border-left:4px solid #27ae60; padding:10px 14px; border-radius:6px; margin:8px 0;">
-                    <label><input type="checkbox" id="inchargeVerification"> <strong>Nathibitisha tathmini yangu ni sahihi</strong></label>
+                    <label>Kipindi cha Tathmini <span class="required">*</span></label>
+                    <input type="date" id="reportDate">
                 </div>
                 <div class="form-group">
-                    <label>✍️ Sahihi ya Mganga Mfawidhi</label>
-                    <div class="signature-pad" id="inchargeSignaturePad"><canvas id="inchargeSignatureCanvas"></canvas></div>
-                    <div class="signature-actions">
-                        <button class="btn btn-warning btn-sm" onclick="clearSignature('incharge')">🔄 Futa</button>
-                        <button class="btn btn-primary btn-sm" onclick="saveSignature('incharge')">💾 Hifadhi</button>
-                        <span id="inchargeSignatureStatus" style="font-size:12px; color:#7f8c8d;">Hakuna</span>
-                    </div>
-                </div>
-
-                <button class="btn btn-success" onclick="completeAssessment()" id="completeBtn" style="margin:10px 0; width:100%;">
-                    ✅ KUKAMILISHA TATHMINI
-                </button>
-                <div id="inchargeSubmitStatus" style="font-size:12px; color:#7f8c8d; margin-top:6px; display:none;"></div>
-            </div>
-
-
-            <!-- ========================================================== -->
-            <!-- MUHTASARI WA ALAMA -->
-            <!-- ========================================================== -->
-            <div class="score-box" id="scoreBox">
-                <h3>📊 Muhtasari wa Tathmini</h3>
-                <div class="score-row">
-                    <div class="score-item"><span class="number" id="selfTotal">0</span><span class="label">Mtendakazi</span></div>
-                    <div class="score-item"><span class="number green" id="selfPercent">0%</span><span class="label">Asilimia</span></div>
-                    <div class="score-item"><span class="number purple" id="supTotal">0</span><span class="label">Msimamizi</span></div>
-                    <div class="score-item"><span class="number orange" id="supPercent">0%</span><span class="label">Asilimia</span></div>
-                </div>
-                <div class="score-row" style="margin-top:6px;">
-                    <div class="score-item"><span class="number teal" id="combinedScore">0%</span><span class="label">Pamoja</span></div>
-                    <div class="score-item"><span class="number" id="gapScore">0</span><span class="label">Pengo</span></div>
-                    <div class="score-item"><span class="number" id="inchargeRatingDisplay">—</span><span class="label">Mganga Mfawidhi</span></div>
-                </div>
-                <div class="progress-bar"><div class="fill" id="combinedProgress" style="width:0%;"></div></div>
-                <div style="text-align:center; font-size:12px; margin-top:4px; color:#7f8c8d;">
-                    Hali: <span id="assessmentStatusText">⏳ Inasubiri</span>
+                    <label>Zamu</label>
+                    <select id="workerShift"><option>Mchana</option><option>Usiku</option></select>
                 </div>
             </div>
+            <div class="form-group">
+                <label>Idara <span class="required">*</span></label>
+                <input type="text" id="department" value="Clinical">
+            </div>
 
-        </div>
+            <div style="margin-top:16px; font-weight:700; color:#1a5276; font-size:15px;">📊 Takwimu za Kazi</div>
+            <div class="form-row">
+                <div class="form-group"><label>Wagonjwa Waliohudumiwa</label><input type="number" id="statPatients" min="0" value="0"></div>
+                <div class="form-group"><label>Ultrasound</label><input type="number" id="statUltrasound" min="0" value="0"></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Referral</label><input type="number" id="statReferral" min="0" value="0"></div>
+                <div class="form-group"><label>Waliorudi</label><input type="number" id="statFollowup" min="0" value="0"></div>
+            </div>
 
-        <!-- ============================================================ -->
-        <!-- TAB: INASUBIRI -->
-        <!-- ============================================================ -->
-        <div id="pending" class="tab-content">
-            <div class="section-divider status" style="background:#e67e22; color:#fff; border-left:4px solid #d35400;">⏳ Ripoti Zinazosubiri</div>
-            <div id="pendingReportsContainer"><div class="history-empty">Hakuna ripoti zinazosubiri.</div></div>
-            <button class="btn btn-primary btn-sm" onclick="loadPendingReports()">🔄 Sasisha</button>
-        </div>
+            <div style="margin-top:16px; font-weight:700; color:#1a5276; font-size:15px;">🎯 Malengo ya SMART</div>
+            <div class="checklist-grid" id="workerSmartGoals"></div>
 
-        <!-- ============================================================ -->
-        <!-- TAB: HISTORIA -->
-        <!-- ============================================================ -->
-        <div id="history" class="tab-content">
-            <h2 style="color:#1a5276; font-size:18px;">📂 Historia</h2>
-            <div id="historyList"><div class="history-empty">Hakuna ripoti.</div></div>
+            <div style="margin-top:16px; font-weight:700; color:#1a5276; font-size:15px;">📋 Majukumu ya Jumla</div>
+            <div class="checklist-grid" id="workerGeneralChecklist"></div>
+
+            <div style="margin-top:16px; font-weight:700; color:#1a5276; font-size:15px;">📋 Majukumu Maalum (<span id="workerRoleLabel">Medical Officer</span>)</div>
+            <div class="checklist-grid" id="workerSpecialChecklist"></div>
+
+            <div style="margin-top:16px; font-weight:700; color:#1a5276; font-size:15px;">📊 Tathmini ya Uwezo (1-5)</div>
+            <div class="form-group">
+                <label>1. Kuwasili na Uwepo</label>
+                <div class="likert-scale" id="wPunctuality">
+                    <button class="likert-btn" onclick="selectLikert('wPunctuality',this,1)">1 <span class="sub">Dhaifu</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wPunctuality',this,2)">2 <span class="sub">Wastani</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wPunctuality',this,3)">3 <span class="sub">Nzuri</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wPunctuality',this,4)">4 <span class="sub">Nzuri Sana</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wPunctuality',this,5)">5 <span class="sub">Bora</span></button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>2. Ubora wa Huduma</label>
+                <div class="likert-scale" id="wQuality">
+                    <button class="likert-btn" onclick="selectLikert('wQuality',this,1)">1 <span class="sub">Dhaifu</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wQuality',this,2)">2 <span class="sub">Wastani</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wQuality',this,3)">3 <span class="sub">Nzuri</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wQuality',this,4)">4 <span class="sub">Nzuri Sana</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wQuality',this,5)">5 <span class="sub">Bora</span></button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>3. Huruma kwa Wagonjwa</label>
+                <div class="likert-scale" id="wCompassion">
+                    <button class="likert-btn" onclick="selectLikert('wCompassion',this,1)">1 <span class="sub">Dhaifu</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wCompassion',this,2)">2 <span class="sub">Wastani</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wCompassion',this,3)">3 <span class="sub">Nzuri</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wCompassion',this,4)">4 <span class="sub">Nzuri Sana</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wCompassion',this,5)">5 <span class="sub">Bora</span></button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>4. Ushirikiano na Wenzake</label>
+                <div class="likert-scale" id="wTeamwork">
+                    <button class="likert-btn" onclick="selectLikert('wTeamwork',this,1)">1 <span class="sub">Dhaifu</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wTeamwork',this,2)">2 <span class="sub">Wastani</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wTeamwork',this,3)">3 <span class="sub">Nzuri</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wTeamwork',this,4)">4 <span class="sub">Nzuri Sana</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wTeamwork',this,5)">5 <span class="sub">Bora</span></button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>5. Hatua na Uvumbuzi</label>
+                <div class="likert-scale" id="wInitiative">
+                    <button class="likert-btn" onclick="selectLikert('wInitiative',this,1)">1 <span class="sub">Dhaifu</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wInitiative',this,2)">2 <span class="sub">Wastani</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wInitiative',this,3)">3 <span class="sub">Nzuri</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wInitiative',this,4)">4 <span class="sub">Nzuri Sana</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wInitiative',this,5)">5 <span class="sub">Bora</span></button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>6. Usalama na Usafi</label>
+                <div class="likert-scale" id="wSafety">
+                    <button class="likert-btn" onclick="selectLikert('wSafety',this,1)">1 <span class="sub">Dhaifu</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wSafety',this,2)">2 <span class="sub">Wastani</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wSafety',this,3)">3 <span class="sub">Nzuri</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wSafety',this,4)">4 <span class="sub">Nzuri Sana</span></button>
+                    <button class="likert-btn" onclick="selectLikert('wSafety',this,5)">5 <span class="sub">Bora</span></button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>📝 Maoni na Tafakari Binafsi</label>
+                <textarea id="workerComments" placeholder="Andika mawazo yako..."></textarea>
+            </div>
+
+            <div class="warning-box"><strong>⚠️ Tamko:</strong> Nathibitisha taarifa zangu ni za kweli.</div>
+            <div class="success-box"><label><input type="checkbox" id="workerVerify"> <strong>Nathibitisha taarifa zangu ni sahihi.</strong></label></div>
+
+            <div class="form-group">
+                <label>✍️ Sahihi Yako <span class="required">*</span></label>
+                <div class="signature-pad"><canvas id="workerSigCanvas"></canvas></div>
+                <div class="signature-actions">
+                    <button class="btn btn-warning btn-sm" onclick="clearSig('worker')">🔄 Futa</button>
+                    <button class="btn btn-primary btn-sm" onclick="saveSig('worker')">💾 Hifadhi</button>
+                    <span id="workerSigStatus" style="font-size:12px; color:#7f8c8d;">Hakuna</span>
+                </div>
+            </div>
+
+            <button class="btn btn-success" onclick="submitWorker()" id="workerSubmitBtn" style="width:100%;">
+                📤 TUMA KWA MGANGA MFAWIDHI
+            </button>
+            <div id="workerSubmitMsg" style="font-size:12px; color:#7f8c8d; margin-top:8px; display:none;"></div>
         </div>
 
         <div class="footer">
             <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
-            <div>Mtwara SDA Dispensary | Toleo Fomu Moja (2026)</div>
+            <div>Mtwara Performance | Fomu ya Mtendakazi</div>
         </div>
 
     </div>
 </div>
 
-<div class="toast" id="toast"></div>
-
 <script>
-// ================================================================
-// DATA
-// ================================================================
-let allReports = [];
-let currentUser = null;
-let pendingReports = [];
-let currentReport = null;
-let generalState = [];
-let signatureData = { worker: null, supervisor: null, incharge: null };
-let workerSubmitted = false;
-let supervisorSubmitted = false;
+// ==============================================================
+// JSONBIN CONFIGURATION
+// ==============================================================
+const API_KEY = "$2a$10$VfPZVlhjWTV.gErIv2yxX.3QmHdrMCgM1evuIR.BJreI7G0jQxGqW";
+const BIN_ID = "6a4b0bc9da38895dfe32cc08";
+const BIN_NAME = "MTWARA PERFORMANCE";
 
-const GENERAL_CHECKLIST = [
-    'Nimewasili kazini mapema',
-    'Nimevaa sare safi na kitambulisho',
-    'Nimejisajili kwenye daftari la mahudhurio',
-    'Nimehudhuria ibada ya asubuhi',
-    'Nimeandaa eneo langu la kazi',
-    'Nimekagua vifaa na zana',
-    'Nimewaonyesha huruma wagonjwa',
-    'Nimewasiliana vizuri na wenzangu',
-    'Nimeweka eneo langu safi',
-    'Nimekamilisha ripoti ya mwisho wa zamu'
+localStorage.setItem("mtwaraBinId", BIN_ID);
+localStorage.setItem("mtwaraApiKey", API_KEY);
+
+let currentUser = null;
+let currentRole = null;
+let reports = [];
+let signatureData = { worker: null };
+
+// ==============================================================
+// CHECKLIST DATA
+// ==============================================================
+const SMART_GOALS = [
+    "Kukamilisha kazi zote ndani ya muda",
+    "Kufikia kuridhika kwa wagonjwa 90%",
+    "Kupunguza makosa kwa 50%",
+    "Kukamilisha mafunzo yote",
+    "Kuwasilisha ripoti ndani ya saa 24"
 ];
 
-// ================================================================
-// RENDER CHECKLIST
-// ================================================================
-function renderChecklist() {
-    generalState = new Array(GENERAL_CHECKLIST.length).fill(false);
-    const container = document.getElementById('generalChecklistContainer');
-    let html = '<div class="checklist-grid">';
-    GENERAL_CHECKLIST.forEach((item, i) => {
-        html += `
-            <div class="checklist-item">
-                <span class="num">${i+1}</span>
-                <span class="text">${item}</span>
-                <div class="toggle" onclick="toggleCheck(${i})"><div class="thumb"></div></div>
+const GENERAL_CHECKLIST = [
+    "Nimewasili kazini mapema",
+    "Nimevaa sare safi na kitambulisho",
+    "Nimejisajili kwenye daftari",
+    "Nimehudhuria ibada",
+    "Nimeandaa eneo la kazi",
+    "Nimekagua vifaa na zana",
+    "Nimewaonyesha huruma wagonjwa",
+    "Nimewasiliana vizuri na wenzangu",
+    "Nimeweka eneo langu safi",
+    "Nimekamilisha ripoti ya mwisho wa zamu"
+];
+
+// Majukumu maalum kulingana na taaluma
+const SPECIAL_CHECKLISTS = {
+    "Medical Officer": [
+        "Kufanya uchunguzi kamili wa wagonjwa",
+        "Kuandika historia sahihi za wagonjwa",
+        "Kuagiza dawa sahihi",
+        "Kufanya taratibu za kliniki kwa ufanisi",
+        "Kushiriki katika rufaa za wagonjwa",
+        "Kuhudhuria doria za wagonjwa",
+        "Kuandaa ripoti za matibabu",
+        "Kushiriki katika mikutano ya idara",
+        "Kuhakikisha usalama wa wagonjwa",
+        "Kutoa elimu kwa wagonjwa"
+    ],
+    "Clinical Officer": [
+        "Kufanya mashauriano ya wagonjwa",
+        "Kufanya uchunguzi wa kliniki",
+        "Kutekeleza mipango ya matibabu",
+        "Kushiriki katika elimu ya wagonjwa",
+        "Kuhakikisha viwango vya usalama",
+        "Kufuatilia hali ya wagonjwa",
+        "Kuandaa ripoti za kliniki",
+        "Kushiriki katika doria za wagonjwa",
+        "Kusimamia taratibu za kliniki",
+        "Kushiriki katika rufaa"
+    ],
+    "Specialist": [
+        "Kufanya uchunguzi wa kitaalamu",
+        "Kutoa ushauri wa kitaalamu",
+        "Kusimamia taratibu maalum",
+        "Kufanya tathmini za kitaalamu",
+        "Kushiriki katika rufaa za kitaalamu",
+        "Kuandaa ripoti za kitaalamu",
+        "Kuhudhuria mikutano ya kitaalamu",
+        "Kutoa elimu ya kitaalamu",
+        "Kusimamia ubora wa huduma",
+        "Kushiriki katika utafiti"
+    ]
+};
+
+// ==============================================================
+// FUNCTIONS
+// ==============================================================
+function renderChecklist(containerId, items, storageKey) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+    container.innerHTML = items.map((text, i) => {
+        const checked = saved[i] || false;
+        return `<div class="checklist-item">
+            <span class="num">${i+1}</span>
+            ${text}
+            <div class="toggle ${checked?'active':''}" onclick="toggleChecklist(this,'${storageKey}',${i})">
+                <div class="thumb"></div>
             </div>
-        `;
+        </div>`;
+    }).join("");
+}
+
+function toggleChecklist(el, storageKey, index) {
+    el.classList.toggle("active");
+    const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+    saved[index] = el.classList.contains("active");
+    localStorage.setItem(storageKey, JSON.stringify(saved));
+}
+
+function getChecklistData(containerId, storageKey) {
+    const items = [];
+    const container = document.getElementById(containerId);
+    if (!container) return items;
+    const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+    container.querySelectorAll(".checklist-item").forEach((item, i) => {
+        const text = item.textContent.replace(/[✕]/g, "").trim();
+        items.push({ text, checked: saved[i] || false });
     });
-    html += '</div>';
-    container.innerHTML = html;
+    return items;
 }
 
-function toggleCheck(i) {
-    const toggles = document.querySelectorAll('#generalChecklistContainer .toggle');
-    generalState[i] = !generalState[i];
-    toggles[i].classList.toggle('active');
+function updateWorkerChecklist() {
+    const role = document.getElementById("workerRole").value;
+    document.getElementById("workerRoleLabel").textContent = role;
+    renderChecklist("workerSmartGoals", SMART_GOALS, "workerSmart");
+    renderChecklist("workerGeneralChecklist", GENERAL_CHECKLIST, "workerGeneral");
+    renderChecklist("workerSpecialChecklist", SPECIAL_CHECKLISTS[role] || SPECIAL_CHECKLISTS["Medical Officer"], "workerSpecial");
 }
 
-// ================================================================
-// RATING
-// ================================================================
-function selectRating(groupId, btn) {
-    document.querySelectorAll(`#${groupId} .rating-btn`).forEach(b => b.classList.remove('selected', 'selected-excellent', 'selected-good', 'selected-average', 'selected-poor'));
-    btn.classList.add('selected');
-    const val = parseInt(btn.dataset.value) || 0;
-    if (val >= 5) btn.classList.add('selected-excellent');
-    else if (val >= 4) btn.classList.add('selected-good');
-    else if (val >= 3) btn.classList.add('selected-average');
-    else btn.classList.add('selected-poor');
-    updateScores();
+function selectLikert(groupId, btn, value) {
+    const g = document.getElementById(groupId);
+    g.querySelectorAll(".likert-btn").forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
+    btn.dataset.value = value;
 }
 
-function getRatingValue(groupId) {
-    const sel = document.querySelector(`#${groupId} .rating-btn.selected`);
-    if (!sel) return 0;
-    const text = sel.textContent.trim();
-    if (text.includes('Bora')) return 5;
-    if (text.includes('Nzuri')) return 4;
-    if (text.includes('Wastani')) return 3;
-    if (text.includes('Inahitaji')) return 2;
-    if (text.includes('Haikubaliki')) return 1;
-    return 0;
+function getLikertValues(...ids) {
+    const values = {};
+    ids.forEach(id => {
+        const sel = document.querySelector(`#${id} .likert-btn.selected`);
+        values[id] = sel ? parseInt(sel.dataset.value) || 0 : 0;
+    });
+    return values;
 }
 
-function getRatingLabel(groupId) {
-    const sel = document.querySelector(`#${groupId} .rating-btn.selected`);
-    return sel ? sel.textContent.trim() : 'Haijakadiriwa';
+function getLikertLabels(...ids) {
+    const labels = {};
+    ids.forEach(id => {
+        const sel = document.querySelector(`#${id} .likert-btn.selected`);
+        labels[id] = sel ? sel.textContent.trim().split(" ")[0] : "0";
+    });
+    return labels;
 }
 
-// ================================================================
-// UPDATE SCORES
-// ================================================================
-function updateScores() {
-    const selfScores = [
-        getRatingValue('selfPunctuality'),
-        getRatingValue('selfQuality'),
-        getRatingValue('selfCompassion'),
-        getRatingValue('selfTeamwork'),
-        getRatingValue('selfInitiative'),
-        getRatingValue('selfSafety')
-    ];
-    const selfTotal = selfScores.reduce((a,b) => a+b, 0);
-    const selfPercent = Math.round((selfTotal / 30) * 100);
-    
-    const supScores = [
-        getRatingValue('supPunctuality'),
-        getRatingValue('supQuality'),
-        getRatingValue('supCompassion'),
-        getRatingValue('supTeamwork'),
-        getRatingValue('supInitiative'),
-        getRatingValue('supSafety')
-    ];
-    const supTotal = supScores.reduce((a,b) => a+b, 0);
-    const supPercent = Math.round((supTotal / 30) * 100);
-    
-    document.getElementById('selfTotal').textContent = selfTotal;
-    document.getElementById('selfPercent').textContent = selfPercent + '%';
-    document.getElementById('supTotal').textContent = supTotal;
-    document.getElementById('supPercent').textContent = supPercent + '%';
-    
-    const combined = Math.round((selfPercent + supPercent) / 2);
-    document.getElementById('combinedScore').textContent = combined + '%';
-    document.getElementById('combinedProgress').style.width = combined + '%';
-    document.getElementById('gapScore').textContent = Math.abs(selfPercent - supPercent);
-    document.getElementById('inchargeRatingDisplay').textContent = getRatingLabel('inchargeRating');
+function showToast(msg, type = "info") {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.className = "toast " + type + " show";
+    setTimeout(() => t.classList.remove("show"), 3500);
 }
 
-// ================================================================
-// SIGNATURE
-// ================================================================
-function initSignaturePad(canvasId, padId, statusId) {
-    const canvas = document.getElementById(canvasId);
-    const pad = document.getElementById(padId);
-    if (!canvas || !pad) return null;
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = pad.clientWidth * dpr;
-    canvas.height = pad.clientHeight * dpr;
-    canvas.style.width = pad.clientWidth + 'px';
-    canvas.style.height = pad.clientHeight + 'px';
-    const ctx = canvas.getContext('2d');
-    ctx.scale(dpr, dpr);
-    ctx.strokeStyle = '#1a5276';
-    ctx.lineWidth = 2;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
+function initSigPad(type) {
+    const canvas = document.getElementById(`${type}SigCanvas`);
+    if (!canvas) return;
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = rect.width || 400;
+    canvas.height = 100;
+    const ctx = canvas.getContext("2d");
     let drawing = false, lastX = 0, lastY = 0;
-    
     function getPos(e) {
-        const rect = canvas.getBoundingClientRect();
-        const cx = e.clientX || e.touches?.[0]?.clientX || 0;
-        const cy = e.clientY || e.touches?.[0]?.clientY || 0;
-        return { x: cx - rect.left, y: cy - rect.top };
+        const r = canvas.getBoundingClientRect();
+        const cx = e.touches ? e.touches[0].clientX : e.clientX;
+        const cy = e.touches ? e.touches[0].clientY : e.clientY;
+        return { x: cx - r.left, y: cy - r.top };
     }
-    function start(e) {
-        e.preventDefault();
-        drawing = true;
-        const pos = getPos(e);
-        lastX = pos.x; lastY = pos.y;
-    }
+    function start(e) { e.preventDefault(); drawing = true; const p = getPos(e); lastX = p.x; lastY = p.y; }
     function draw(e) {
         e.preventDefault();
         if (!drawing) return;
-        const pos = getPos(e);
+        const p = getPos(e);
         ctx.beginPath();
         ctx.moveTo(lastX, lastY);
-        ctx.lineTo(pos.x, pos.y);
+        ctx.lineTo(p.x, p.y);
+        ctx.strokeStyle = "#1a5276";
+        ctx.lineWidth = 2.5;
         ctx.stroke();
-        lastX = pos.x; lastY = pos.y;
+        lastX = p.x; lastY = p.y;
     }
-    function end(e) {
-        e?.preventDefault();
-        if (drawing) {
-            drawing = false;
-            const status = document.getElementById(statusId);
-            if (status) { status.textContent = '✅ Imesajiliwa'; status.style.color = '#27ae60'; }
+    function end(e) { drawing = false; }
+    canvas.addEventListener("mousedown", start);
+    canvas.addEventListener("mousemove", draw);
+    canvas.addEventListener("mouseup", end);
+    canvas.addEventListener("mouseleave", end);
+    canvas.addEventListener("touchstart", start);
+    canvas.addEventListener("touchmove", draw);
+    canvas.addEventListener("touchend", end);
+}
+
+function clearSig(type) {
+    const canvas = document.getElementById(`${type}SigCanvas`);
+    if (!canvas) return;
+    canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+    document.getElementById(`${type}SigStatus`).textContent = "Imefutwa";
+    signatureData[type] = null;
+}
+
+function saveSig(type) {
+    const canvas = document.getElementById(`${type}SigCanvas`);
+    if (!canvas) return;
+    const dataUrl = canvas.toDataURL("image/png");
+    if (dataUrl === "data:," || canvas.width === 0) {
+        showToast("⚠️ Tafadhali weka sahihi kwanza", "warning");
+        return;
+    }
+    signatureData[type] = dataUrl;
+    document.getElementById(`${type}SigStatus`).textContent = "✅ Imehifadhiwa";
+    showToast("✅ Sahihi imehifadhiwa!", "success");
+}
+
+// ==============================================================
+// JSONBIN OPERATIONS
+// ==============================================================
+async function getBinData() {
+    try {
+        if (localStorage.getItem("useLocalStorage") === "true") {
+            const data = JSON.parse(localStorage.getItem("mtwaraData") || '{"reports":[],"users":{}}');
+            return data;
         }
-    }
-    canvas.addEventListener('mousedown', start);
-    canvas.addEventListener('mousemove', draw);
-    canvas.addEventListener('mouseup', end);
-    canvas.addEventListener('mouseleave', end);
-    canvas.addEventListener('touchstart', e => { e.preventDefault(); const t = e.touches[0]; start({ clientX: t.clientX, clientY: t.clientY, preventDefault: ()=>{} }); }, { passive: false });
-    canvas.addEventListener('touchmove', e => { e.preventDefault(); const t = e.touches[0]; draw({ clientX: t.clientX, clientY: t.clientY, preventDefault: ()=>{} }); }, { passive: false });
-    canvas.addEventListener('touchend', end, { passive: false });
-    return { canvas, ctx, clear: function() {
-        ctx.clearRect(0, 0, canvas.width/dpr, canvas.height/dpr);
-        const status = document.getElementById(statusId);
-        if (status) { status.textContent = '🔄 Imefutwa'; status.style.color = '#e74c3c'; }
-    }};
-}
-
-let pads = { worker: null, supervisor: null, incharge: null };
-
-function initAllPads() {
-    pads.worker = initSignaturePad('workerSignatureCanvas', 'workerSignaturePad', 'workerSignatureStatus');
-    pads.supervisor = initSignaturePad('supervisorSignatureCanvas', 'supervisorSignaturePad', 'supervisorSignatureStatus');
-    pads.incharge = initSignaturePad('inchargeSignatureCanvas', 'inchargeSignaturePad', 'inchargeSignatureStatus');
-}
-
-function clearSignature(who) {
-    if (pads[who]) { pads[who].clear(); signatureData[who] = null; }
-}
-
-function saveSignature(who) {
-    const map = { worker: 'workerSignatureCanvas', supervisor: 'supervisorSignatureCanvas', incharge: 'inchargeSignatureCanvas' };
-    const statusMap = { worker: 'workerSignatureStatus', supervisor: 'supervisorSignatureStatus', incharge: 'inchargeSignatureStatus' };
-    const canvas = document.getElementById(map[who]);
-    if (canvas) {
-        signatureData[who] = canvas.toDataURL();
-        document.getElementById(statusMap[who]).textContent = '✅ Sahihi imehifadhiwa';
-        document.getElementById(statusMap[who]).style.color = '#27ae60';
-        showToast('✅ Sahihi imehifadhiwa!', 'success');
-    }
-}
-
-// ================================================================
-// COLLECT WORKER DATA
-// ================================================================
-function collectWorkerData() {
-    const selfScores = [
-        getRatingValue('selfPunctuality'),
-        getRatingValue('selfQuality'),
-        getRatingValue('selfCompassion'),
-        getRatingValue('selfTeamwork'),
-        getRatingValue('selfInitiative'),
-        getRatingValue('selfSafety')
-    ];
-    return {
-        worker: document.getElementById('workerName').value,
-        role: document.getElementById('workerRole').value,
-        date: document.getElementById('reportDate').value || new Date().toISOString().split('T')[0],
-        shift: document.getElementById('workerShift').value,
-        department: document.getElementById('department').value || 'Clinical',
-        patientsServed: parseInt(document.getElementById('statPatients').value) || 0,
-        stats: {
-            ultrasound: parseInt(document.getElementById('statUltrasound').value) || 0,
-            referral: parseInt(document.getElementById('statReferral').value) || 0,
-            followup: parseInt(document.getElementById('statFollowup').value) || 0
-        },
-        self: {
-            scores: selfScores,
-            total: selfScores.reduce((a,b) => a+b, 0),
-            percent: Math.round((selfScores.reduce((a,b) => a+b, 0) / 30) * 100),
-            labels: [
-                getRatingLabel('selfPunctuality'),
-                getRatingLabel('selfQuality'),
-                getRatingLabel('selfCompassion'),
-                getRatingLabel('selfTeamwork'),
-                getRatingLabel('selfInitiative'),
-                getRatingLabel('selfSafety')
-            ],
-            comments: document.getElementById('selfComments').value,
-            verified: document.getElementById('workerVerification').checked,
-            signature: signatureData.worker
+        
+        document.getElementById("connectionStatus").innerHTML = '<span class="loading"></span> Inasoma...';
+        
+        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            method: "GET",
+            headers: { "X-Master-Key": API_KEY }
+        });
+        
+        if (!response.ok) {
+            if (response.status === 404) {
+                showToast("⚠️ BIN haipatikani, itaundwa mpya", "warning");
+                return await createBin();
+            }
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
-    };
-}
-
-// ================================================================
-// SUBMIT: WORKER → SUPERVISOR
-// ================================================================
-function submitToSupervisor() {
-    if (!document.getElementById('workerVerification').checked) {
-        showToast('⚠️ Thibitisha uhalisia wa taarifa zako', 'warning');
-        return;
-    }
-    if (!signatureData.worker) {
-        showToast('⚠️ Chora sahihi yako', 'warning');
-        return;
-    }
-    
-    const workerName = document.getElementById('workerName').value.trim();
-    if (!workerName) {
-        showToast('⚠️ Tafadhali weka jina lako', 'warning');
-        return;
-    }
-    
-    const data = collectWorkerData();
-    currentReport = {
-        id: Date.now(),
-        reportId: 'RPT-' + Date.now().toString().slice(-8),
-        date: data.date,
-        worker: data.worker,
-        role: data.role,
-        shift: data.shift,
-        department: data.department,
-        patientsServed: data.patientsServed,
-        stats: data.stats,
-        generalChecklist: generalState.slice(),
-        self: data.self,
-        supervisor: null,
-        supervisorAssessment: null,
-        incharge: null,
-        status: 'worker_done',
-        sentBy: data.worker,
-        sentTo: 'supervisor',
-        savedAt: new Date().toISOString()
-    };
-    
-    allReports.unshift(currentReport);
-    saveToStorage();
-    
-    workerSubmitted = true;
-    document.getElementById('submitWorkerBtn').style.display = 'none';
-    document.getElementById('workerSubmitStatus').style.display = 'block';
-    document.getElementById('workerSubmitStatus').innerHTML = '✅ Ripoti imetumwa kwa Msimamizi!';
-    document.getElementById('workerSubmitStatus').style.color = '#27ae60';
-    
-    // Update steps
-    document.getElementById('stepWorker').className = 'step done';
-    document.getElementById('stepWorker').innerHTML = '<div class="circle">✓</div><div class="label">Mtendakazi</div>';
-    document.getElementById('stepSupervisor').className = 'step active';
-    document.getElementById('statusMessage').textContent = '👔 Inasubiri Msimamizi';
-    document.getElementById('statusMessage').style.color = '#f39c12';
-    
-    // Show supervisor section
-    document.getElementById('supervisorSection').style.display = 'block';
-    
-    // Show preview
-    document.getElementById('workerPreview').innerHTML = `
-        <strong>Jina:</strong> ${data.worker}<br>
-        <strong>Kazi:</strong> ${data.role}<br>
-        <strong>Tarehe:</strong> ${data.date}<br>
-        <strong>Wagonjwa:</strong> ${data.patientsServed}<br>
-        <strong>Alama:</strong> ${data.self.percent}%
-    `;
-    
-    showToast('✅ Ripoti imetumwa kwa Msimamizi!', 'success');
-    
-    if (currentUser === 'supervisor' || currentUser === 'admin') {
-        loadPendingReports();
+        
+        const result = await response.json();
+        document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
+        return result.record || result;
+    } catch (error) {
+        console.error("❌ Hitilafu:", error);
+        document.getElementById("connectionStatus").textContent = "⚠️ Hitilafu";
+        if (localStorage.getItem("mtwaraData")) {
+            return JSON.parse(localStorage.getItem("mtwaraData"));
+        }
+        showToast("❌ Imeshindwa kusoma data", "error");
+        return null;
     }
 }
 
-// ================================================================
-// SUBMIT: SUPERVISOR → INCHARGE
-// ================================================================
-function submitToInCharge() {
-    if (!document.getElementById('supervisorVerification').checked) {
-        showToast('⚠️ Thibitisha uhalisia wa tathmini yako', 'warning');
-        return;
+async function updateBinData(data) {
+    try {
+        if (localStorage.getItem("useLocalStorage") === "true") {
+            localStorage.setItem("mtwaraData", JSON.stringify(data));
+            return { success: true };
+        }
+        
+        document.getElementById("connectionStatus").innerHTML = '<span class="loading"></span> Inahifadhi...';
+        
+        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "X-Master-Key": API_KEY
+            },
+            body: JSON.stringify(data)
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const result = await response.json();
+        document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
+        return result;
+    } catch (error) {
+        console.error("❌ Hitilafu:", error);
+        document.getElementById("connectionStatus").textContent = "⚠️ Hitilafu";
+        try {
+            localStorage.setItem("mtwaraData", JSON.stringify(data));
+            return { success: true };
+        } catch (e) {
+            console.error("❌ Hitilafu:", e);
+        }
+        return null;
     }
-    if (!signatureData.supervisor) {
-        showToast('⚠️ Chora sahihi yako', 'warning');
-        return;
-    }
-    
-    const supScores = [
-        getRatingValue('supPunctuality'),
-        getRatingValue('supQuality'),
-        getRatingValue('supCompassion'),
-        getRatingValue('supTeamwork'),
-        getRatingValue('supInitiative'),
-        getRatingValue('supSafety')
-    ];
-    
-    const report = findCurrentReport();
-    if (report) {
-        report.supervisor = document.getElementById('supervisorName').value || 'Msimamizi';
-        report.supervisorTitle = document.getElementById('supervisorTitle').value;
-        report.supervisorAssessment = {
-            scores: supScores,
-            total: supScores.reduce((a,b) => a+b, 0),
-            percent: Math.round((supScores.reduce((a,b) => a+b, 0) / 30) * 100),
-            labels: [
-                getRatingLabel('supPunctuality'),
-                getRatingLabel('supQuality'),
-                getRatingLabel('supCompassion'),
-                getRatingLabel('supTeamwork'),
-                getRatingLabel('supInitiative'),
-                getRatingLabel('supSafety')
-            ],
-            comments: document.getElementById('supComments').value,
-            verified: document.getElementById('supervisorVerification').checked,
-            signature: signatureData.supervisor
+}
+
+async function createBin() {
+    try {
+        const data = {
+            name: BIN_NAME,
+            description: "Mtwara Performance Appraisal System",
+            private: false,
+            reports: [],
+            users: {
+                worker: { password: "1234", role: "worker" },
+                supervisor: { password: "1234", role: "supervisor" },
+                incharge: { password: "1234", role: "incharge" }
+            }
         };
-        report.status = 'supervisor_done';
-        report.sentTo = 'incharge';
-        report.sentBy = report.supervisor;
         
-        const combined = Math.round((report.self.percent + report.supervisorAssessment.percent) / 2);
-        report.combined = combined;
-        report.gap = Math.abs(report.self.percent - report.supervisorAssessment.percent);
+        const response = await fetch("https://api.jsonbin.io/v3/b", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-Master-Key": API_KEY,
+                "X-Bin-Name": BIN_NAME
+            },
+            body: JSON.stringify(data)
+        });
         
-        saveToStorage();
-    }
-    
-    supervisorSubmitted = true;
-    document.getElementById('submitSupervisorBtn').style.display = 'none';
-    document.getElementById('supervisorSubmitStatus').style.display = 'block';
-    document.getElementById('supervisorSubmitStatus').innerHTML = '✅ Ripoti imetumwa kwa Mganga Mfawidhi!';
-    document.getElementById('supervisorSubmitStatus').style.color = '#27ae60';
-    
-    // Update steps
-    document.getElementById('stepSupervisor').className = 'step done';
-    document.getElementById('stepSupervisor').innerHTML = '<div class="circle">✓</div><div class="label">Msimamizi</div>';
-    document.getElementById('stepIncharge').className = 'step active';
-    document.getElementById('statusMessage').textContent = '🏢 Inasubiri Mganga Mfawidhi';
-    document.getElementById('statusMessage').style.color = '#8e44ad';
-    
-    // Show incharge section
-    document.getElementById('inchargeSection').style.display = 'block';
-    
-    // Update preview
-    const combined = report?.combined || 0;
-    document.getElementById('inchargePreview').innerHTML = `
-        <strong>Mtendakazi:</strong> ${report?.worker || 'N/A'} (${report?.role || 'N/A'})<br>
-        <strong>Alama ya Mtendakazi:</strong> ${report?.self?.percent || 0}%<br>
-        <strong>Alama ya Msimamizi:</strong> ${report?.supervisorAssessment?.percent || 0}%<br>
-        <strong>Alama ya Pamoja:</strong> ${combined}%
-    `;
-    
-    showToast('✅ Ripoti imetumwa kwa Mganga Mfawidhi!', 'success');
-    
-    if (currentUser === 'incharge' || currentUser === 'admin') {
-        loadPendingReports();
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const result = await response.json();
+        const newBinId = result.metadata?.id || result.record;
+        showToast("✅ BIN mpya imeundwa!", "success");
+        return result.record || result;
+    } catch (error) {
+        console.error("❌ Hitilafu:", error);
+        showToast("❌ Imeshindwa kuunda BIN", "error");
+        return null;
     }
 }
 
-// ================================================================
-// COMPLETE: INCHARGE
-// ================================================================
-function completeAssessment() {
-    if (!document.getElementById('inchargeVerification').checked) {
-        showToast('⚠️ Thibitisha uhalisia wa tathmini yako', 'warning');
-        return;
-    }
-    if (!signatureData.incharge) {
-        showToast('⚠️ Chora sahihi yako', 'warning');
-        return;
-    }
-    
-    const report = findCurrentReport();
-    if (report) {
-        report.incharge = {
-            name: document.getElementById('inchargeName').value || 'Mganga Mfawidhi',
-            title: document.getElementById('inchargeTitle').value,
-            rating: getRatingValue('inchargeRating'),
-            ratingLabel: getRatingLabel('inchargeRating'),
-            recommendation: document.getElementById('inchargeRecommendation').value,
-            comments: document.getElementById('inchargeComments').value,
-            followupDate: document.getElementById('inchargeFollowupDate').value || '',
-            followupPeriod: document.getElementById('inchargeFollowupPeriod').value,
-            signoff: document.querySelector('input[name="inchargeSignoff"]:checked')?.value || 'approved',
-            verified: document.getElementById('inchargeVerification').checked,
-            signature: signatureData.incharge
-        };
-        report.status = 'complete';
-        report.sentTo = 'complete';
-        report.sentBy = report.incharge.name;
-        
-        saveToStorage();
-    }
-    
-    document.getElementById('completeBtn').style.display = 'none';
-    document.getElementById('inchargeSubmitStatus').style.display = 'block';
-    document.getElementById('inchargeSubmitStatus').innerHTML = '✅ TATHMINI IMEKAMILIKA!';
-    document.getElementById('inchargeSubmitStatus').style.color = '#27ae60';
-    document.getElementById('inchargeSubmitStatus').style.fontWeight = '700';
-    
-    // Update steps
-    document.getElementById('stepIncharge').className = 'step done';
-    document.getElementById('stepIncharge').innerHTML = '<div class="circle">✓</div><div class="label">Mganga Mfawidhi</div>';
-    document.getElementById('statusMessage').textContent = '✅ Tathmini Imekamilika!';
-    document.getElementById('statusMessage').style.color = '#27ae60';
-    
-    document.getElementById('assessmentStatusText').textContent = '✅ Imekamilika';
-    document.getElementById('assessmentStatusText').style.color = '#27ae60';
-    
-    showToast('🎉 TATHMINI IMEKAMILIKA!', 'success');
-    renderHistory();
-}
-
-// ================================================================
-// FIND CURRENT REPORT
-// ================================================================
-function findCurrentReport() {
-    let report = allReports.find(r => r.status !== 'complete' && r.status !== 'supervisor_done');
-    if (!report && supervisorSubmitted) {
-        report = allReports.find(r => r.status === 'supervisor_done');
-    }
-    if (!report) {
-        const data = collectWorkerData();
-        report = {
-            id: Date.now(),
-            reportId: 'RPT-' + Date.now().toString().slice(-8),
-            date: data.date,
-            worker: data.worker,
-            role: data.role,
-            shift: data.shift,
-            department: data.department,
-            patientsServed: data.patientsServed,
-            stats: data.stats,
-            generalChecklist: generalState.slice(),
-            self: data.self,
-            supervisor: null,
-            supervisorAssessment: null,
-            incharge: null,
-            status: 'worker_done',
-            sentBy: data.worker,
-            sentTo: 'supervisor',
-            savedAt: new Date().toISOString()
-        };
-        allReports.unshift(report);
-        saveToStorage();
-    }
-    return report;
-}
-
-// ================================================================
-// PENDING REPORTS
-// ================================================================
-function loadPendingReports() {
-    if (!currentUser) return;
-    
-    if (currentUser === 'supervisor' || currentUser === 'admin') {
-        pendingReports = allReports.filter(r => r.status === 'worker_done');
-    } else if (currentUser === 'incharge') {
-        pendingReports = allReports.filter(r => r.status === 'supervisor_done');
-    } else {
-        pendingReports = [];
-    }
-    renderPendingReports();
-}
-
-function renderPendingReports() {
-    const container = document.getElementById('pendingReportsContainer');
-    if (pendingReports.length === 0) {
-        container.innerHTML = '<div class="history-empty">✅ Hakuna ripoti zinazosubiri.</div>';
-        return;
-    }
-    let html = '';
-    pendingReports.forEach((r, i) => {
-        html += `
-            <div class="pending-item">
-                <div class="title">📋 ${r.worker} - ${r.role}</div>
-                <div class="sub">📅 ${r.date} · 👤 ${r.sentBy}</div>
-                <div class="sub">📊 Alama: ${r.self?.percent || 0}%</div>
-                <div class="actions">
-                    <button class="btn btn-primary btn-sm" onclick="openPendingReport(${i})">👁️ Kagua</button>
-                    <button class="btn btn-success btn-sm" onclick="approvePendingReport(${i})">✅ Kamilisha</button>
-                </div>
-            </div>
-        `;
-    });
-    container.innerHTML = html;
-}
-
-function openPendingReport(index) {
-    const r = pendingReports[index];
-    if (!r) return;
-    
-    switchTab('assessment');
-    if (currentUser === 'supervisor' || currentUser === 'admin') {
-        // Load worker data into the form
-        document.getElementById('workerName').value = r.worker;
-        document.getElementById('workerRole').value = r.role;
-        document.getElementById('reportDate').value = r.date;
-        document.getElementById('department').value = r.department || 'Clinical';
-        document.getElementById('statPatients').value = r.patientsServed || 0;
-        
-        // Show supervisor section
-        document.getElementById('supervisorSection').style.display = 'block';
-        document.getElementById('submitWorkerBtn').style.display = 'none';
-        document.getElementById('workerSubmitStatus').style.display = 'block';
-        document.getElementById('workerSubmitStatus').innerHTML = '✅ Ripoti imekamilishwa na Mtendakazi';
-        document.getElementById('workerSubmitStatus').style.color = '#27ae60';
-        
-        // Update steps
-        document.getElementById('stepWorker').className = 'step done';
-        document.getElementById('stepWorker').innerHTML = '<div class="circle">✓</div><div class="label">Mtendakazi</div>';
-        document.getElementById('stepSupervisor').className = 'step active';
-        document.getElementById('statusMessage').textContent = '👔 Jaza sehemu ya Msimamizi';
-        document.getElementById('statusMessage').style.color = '#f39c12';
-        
-        // Show preview
-        document.getElementById('workerPreview').innerHTML = `
-            <strong>Jina:</strong> ${r.worker}<br>
-            <strong>Kazi:</strong> ${r.role}<br>
-            <strong>Tarehe:</strong> ${r.date}<br>
-            <strong>Wagonjwa:</strong> ${r.patientsServed || 0}<br>
-            <strong>Alama:</strong> ${r.self?.percent || 0}%
-        `;
-        
-        showToast('👁️ Kagua na kamilisha sehemu ya Msimamizi', 'info');
-    } else if (currentUser === 'incharge') {
-        // Show incharge section
-        document.getElementById('inchargeSection').style.display = 'block';
-        document.getElementById('submitSupervisorBtn').style.display = 'none';
-        document.getElementById('supervisorSubmitStatus').style.display = 'block';
-        document.getElementById('supervisorSubmitStatus').innerHTML = '✅ Ripoti imekamilishwa na Msimamizi';
-        document.getElementById('supervisorSubmitStatus').style.color = '#27ae60';
-        
-        // Update steps
-        document.getElementById('stepWorker').className = 'step done';
-        document.getElementById('stepWorker').innerHTML = '<div class="circle">✓</div><div class="label">Mtendakazi</div>';
-        document.getElementById('stepSupervisor').className = 'step done';
-        document.getElementById('stepSupervisor').innerHTML = '<div class="circle">✓</div><div class="label">Msimamizi</div>';
-        document.getElementById('stepIncharge').className = 'step active';
-        document.getElementById('statusMessage').textContent = '🏢 Jaza sehemu ya Mganga Mfawidhi';
-        document.getElementById('statusMessage').style.color = '#8e44ad';
-        
-        const combined = r.combined || Math.round((r.self?.percent || 0 + r.supervisorAssessment?.percent || 0) / 2);
-        document.getElementById('inchargePreview').innerHTML = `
-            <strong>Mtendakazi:</strong> ${r.worker} (${r.role})<br>
-            <strong>Alama ya Mtendakazi:</strong> ${r.self?.percent || 0}%<br>
-            <strong>Alama ya Msimamizi:</strong> ${r.supervisorAssessment?.percent || 0}%<br>
-            <strong>Alama ya Pamoja:</strong> ${combined || 0}%
-        `;
-        
-        showToast('👁️ Kagua na kamilisha sehemu ya Mganga Mfawidhi', 'info');
-    }
-}
-
-function approvePendingReport(index) {
-    const r = pendingReports[index];
-    if (!r) return;
-    if (!confirm(`Je, unataka kukamilisha ripoti ya ${r.worker}?`)) return;
-    
-    // This function is now handled by submitToInCharge or completeAssessment
-    // It's kept as a fallback for the pending list
-    if (currentUser === 'supervisor' || currentUser === 'admin') {
-        // Open supervisor section
-        openPendingReport(index);
-        showToast('👁️ Kagua na kamilisha sehemu ya Msimamizi', 'info');
-    } else if (currentUser === 'incharge') {
-        openPendingReport(index);
-        showToast('👁️ Kagua na kamilisha sehemu ya Mganga Mfawidhi', 'info');
-    }
-}
-
-// ================================================================
+// ==============================================================
 // LOGIN
-// ================================================================
-function login() {
-    const user = document.getElementById('loginUsername').value.trim().toLowerCase();
-    const pass = document.getElementById('loginPassword').value;
+// ==============================================================
+async function login() {
+    const username = document.getElementById("loginUsername").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+    if (!username || !password) { showToast("❌ Tafadhali jaza sehemu zote", "error"); return; }
     
-    const validUsers = ['worker', 'supervisor', 'incharge', 'admin'];
+    showToast("⏳ Inaingiza...", "info");
+    const data = await getBinData();
+    if (!data) { showToast("❌ Imeshindwa kuunganisha", "error"); return; }
     
-    if (validUsers.includes(user) && pass === '1234') {
-        currentUser = user;
-        document.getElementById('loginSection').style.display = 'none';
-        document.getElementById('mainApp').style.display = 'block';
-        
-        const roleLabels = { 
-            'worker': '🧑‍💼 Mtendakazi', 
-            'supervisor': '👔 Msimamizi', 
-            'incharge': '🏢 Mganga Mfawidhi',
-            'admin': '👑 Msimamizi Mkuu'
-        };
-        document.getElementById('userBadge').textContent = roleLabels[user] || user;
-        document.getElementById('userBadge').className = 'user-badge ' + (user === 'admin' ? 'admin' : user);
-        document.getElementById('currentUserDisplay').textContent = roleLabels[user] || user;
-        document.getElementById('roleDisplay').textContent = roleLabels[user] || user;
-        
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById('reportDate').value = today;
-        document.getElementById('inchargeFollowupDate').value = today;
-        
-        document.getElementById('assessmentId').textContent = 'MTW-' + Date.now().toString().slice(-8) + '-' + Math.random().toString(36).substring(2, 6).toUpperCase();
-        
-        if (user === 'worker') {
-            document.getElementById('stepWorker').className = 'step active';
-            document.getElementById('statusMessage').textContent = '📝 Jaza sehemu yako';
-        } else if (user === 'supervisor' || user === 'admin') {
-            document.getElementById('stepWorker').className = 'step done';
-            document.getElementById('stepWorker').innerHTML = '<div class="circle">✓</div><div class="label">Mtendakazi</div>';
-            document.getElementById('stepSupervisor').className = 'step active';
-            document.getElementById('statusMessage').textContent = '👔 Jaza sehemu ya Msimamizi';
-            document.getElementById('statusMessage').style.color = '#f39c12';
-            document.getElementById('pendingBtn').style.display = 'inline-block';
-            
-            // Show supervisor section
-            document.getElementById('supervisorSection').style.display = 'block';
-            document.getElementById('submitWorkerBtn').style.display = 'none';
-            document.getElementById('workerSubmitStatus').style.display = 'block';
-            document.getElementById('workerSubmitStatus').innerHTML = '✅ Mtendakazi ameshajaza sehemu yake';
-            document.getElementById('workerSubmitStatus').style.color = '#27ae60';
-            
-            loadPendingReports();
-        } else if (user === 'incharge') {
-            document.getElementById('stepWorker').className = 'step done';
-            document.getElementById('stepWorker').innerHTML = '<div class="circle">✓</div><div class="label">Mtendakazi</div>';
-            document.getElementById('stepSupervisor').className = 'step done';
-            document.getElementById('stepSupervisor').innerHTML = '<div class="circle">✓</div><div class="label">Msimamizi</div>';
-            document.getElementById('stepIncharge').className = 'step active';
-            document.getElementById('statusMessage').textContent = '🏢 Jaza sehemu ya Mganga Mfawidhi';
-            document.getElementById('statusMessage').style.color = '#8e44ad';
-            document.getElementById('pendingBtn').style.display = 'inline-block';
-            
-            // Show incharge section
-            document.getElementById('inchargeSection').style.display = 'block';
-            document.getElementById('submitSupervisorBtn').style.display = 'none';
-            document.getElementById('supervisorSubmitStatus').style.display = 'block';
-            document.getElementById('supervisorSubmitStatus').innerHTML = '✅ Msimamizi ameshajaza sehemu yake';
-            document.getElementById('supervisorSubmitStatus').style.color = '#27ae60';
-            
-            loadPendingReports();
-        }
-        
-        renderChecklist();
-        initAllPads();
-        renderHistory();
-        updateScores();
-        
-        showToast('✅ Karibu ' + roleLabels[user] + '!', 'success');
-        
-        if (allReports.length === 0 && user === 'worker') {
-            showToast('💡 Jaza fomu na utume kwa Msimamizi', 'warning');
-        }
-    } else {
-        showToast('❌ Jina au nenosiri si sahihi', 'error');
+    const users = data.users || {};
+    const user = users[username];
+    if (!user || user.password !== password) {
+        showToast("❌ Jina au nenosiri si sahihi", "error");
+        return;
     }
+    
+    currentUser = username;
+    currentRole = user.role;
+    reports = data.reports || [];
+    
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("mainApp").style.display = "block";
+    document.getElementById("currentUserDisplay").textContent = username;
+    document.getElementById("userBadge").textContent = `👤 ${username}`;
+    document.getElementById("roleDisplay").textContent = "🧑‍💼 Mtendakazi";
+    document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
+    document.getElementById("binIdDisplay").textContent = BIN_ID;
+    
+    setTimeout(() => {
+        initSigPad("worker");
+    }, 500);
+    
+    updateWorkerChecklist();
+    showToast(`✅ Karibu ${username}!`, "success");
 }
 
 function logout() {
-    if (!confirm('Je, unataka kutoka kwenye mfumo?')) return;
     currentUser = null;
-    document.getElementById('loginSection').style.display = 'block';
-    document.getElementById('mainApp').style.display = 'none';
-    showToast('🚪 Umetoka', 'warning');
+    currentRole = null;
+    document.getElementById("loginSection").style.display = "block";
+    document.getElementById("mainApp").style.display = "none";
+    document.getElementById("connectionStatus").textContent = "🔄 Tafadhali ingia tena";
+    showToast("👋 Umetoka nje", "info");
 }
 
-// ================================================================
-// TABS
-// ================================================================
-function switchTab(tab) {
-    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(tab).classList.add('active');
-    document.querySelector(`.tab-btn[onclick="switchTab('${tab}')"]`).classList.add('active');
-    if (tab === 'pending') loadPendingReports();
-    if (tab === 'history') renderHistory();
-}
-
-// ================================================================
-// HISTORY
-// ================================================================
-function renderHistory() {
-    const container = document.getElementById('historyList');
-    if (allReports.length === 0) {
-        container.innerHTML = '<div class="history-empty">Hakuna ripoti.</div>';
+// ==============================================================
+// SUBMIT WORKER
+// ==============================================================
+async function submitWorker() {
+    if (!document.getElementById("workerVerify").checked) {
+        showToast("⚠️ Tafadhali thibitisha taarifa zako", "warning");
         return;
     }
-    let html = '';
-    allReports.slice(0, 20).forEach((r, i) => {
-        const statusMap = {
-            'worker_done': '⏳ Inasubiri Msimamizi',
-            'supervisor_done': '⏳ Inasubiri Mganga Mfawidhi',
-            'complete': '✅ Imekamilika'
-        };
-        const status = statusMap[r.status] || '⏳ Inasubiri';
-        const combined = r.combined || Math.round((r.self?.percent || 0 + r.supervisorAssessment?.percent || 0) / 2);
-        html += `
-            <div style="padding:10px 12px; border-bottom:1px solid #ecf0f1; display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px;">
-                <div style="font-size:13px;">
-                    <strong>${r.worker}</strong> - ${r.role}
-                    <br><span style="font-size:11px; color:#7f8c8d;">📅 ${r.date} · 📤 ${r.sentBy || 'N/A'}</span>
-                    <span style="margin-left:6px; font-weight:600; color:#1a5276;">${combined}%</span>
-                    <span style="margin-left:6px; font-size:10px; color:${r.status === 'complete' ? '#27ae60' : '#f39c12'};">${status}</span>
-                </div>
-                <div>
-                    <button class="btn btn-primary btn-sm" onclick="viewReport(${i})">👁️ Angalia</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteReport(${i})">✕</button>
-                </div>
-            </div>
-        `;
-    });
-    container.innerHTML = html;
-}
+    const name = document.getElementById("workerName").value.trim();
+    if (!name) { showToast("⚠️ Tafadhali weka jina lako", "warning"); return; }
+    if (!signatureData.worker) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
 
-function viewReport(index) {
-    const r = allReports[index];
-    if (!r) return;
-    const combined = r.combined || Math.round((r.self?.percent || 0 + r.supervisorAssessment?.percent || 0) / 2);
-    alert(
-        '📋 RIPOTI\n' +
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
-        `Mtendakazi: ${r.worker}\n` +
-        `Kazi: ${r.role}\n` +
-        `Tarehe: ${r.date}\n` +
-        `Wagonjwa: ${r.patientsServed || 0}\n` +
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
-        `Mtendakazi: ${r.self?.percent || 0}%\n` +
-        `Msimamizi: ${r.supervisorAssessment?.percent || 0}%\n` +
-        `Pamoja: ${combined}%\n` +
-        `Pengo: ${r.gap || 0}%\n` +
-        `Hali: ${r.status === 'complete' ? '✅ Imekamilika' : '⏳ Inasubiri'}\n` +
-        `📤 ${r.sentBy || 'N/A'}`
-    );
-}
+    const role = document.getElementById("workerRole").value;
+    const report = {
+        id: Date.now(),
+        workerName: name,
+        role: role,
+        date: document.getElementById("reportDate").value,
+        shift: document.getElementById("workerShift").value,
+        department: document.getElementById("department").value,
+        stats: {
+            patients: parseInt(document.getElementById("statPatients").value) || 0,
+            ultrasound: parseInt(document.getElementById("statUltrasound").value) || 0,
+            referral: parseInt(document.getElementById("statReferral").value) || 0,
+            followup: parseInt(document.getElementById("statFollowup").value) || 0
+        },
+        smartGoals: getChecklistData("workerSmartGoals", "workerSmart"),
+        generalChecklist: getChecklistData("workerGeneralChecklist", "workerGeneral"),
+        specialChecklist: getChecklistData("workerSpecialChecklist", "workerSpecial"),
+        selfRatings: getLikertLabels("wPunctuality","wQuality","wCompassion","wTeamwork","wInitiative","wSafety"),
+        selfRatingsValues: getLikertValues("wPunctuality","wQuality","wCompassion","wTeamwork","wInitiative","wSafety"),
+        selfComments: document.getElementById("workerComments").value,
+        signature: signatureData.worker,
+        status: "Inasubiri Mganga Mfawidhi",
+        timestamp: new Date().toISOString()
+    };
 
-function deleteReport(index) {
-    if (confirm('Futa ripoti hii?')) {
-        allReports.splice(index, 1);
-        saveToStorage();
-        renderHistory();
-        showToast('🗑️ Ripoti imefutwa', 'warning');
+    try {
+        const data = await getBinData();
+        if (!data) return;
+        if (!data.reports) data.reports = [];
+        data.reports.push(report);
+        const result = await updateBinData(data);
+        if (result) {
+            reports = data.reports;
+            document.getElementById("workerSubmitBtn").disabled = true;
+            document.getElementById("workerSubmitBtn").innerHTML = "✅ Imetumwa!";
+            document.getElementById("workerSubmitMsg").style.display = "block";
+            document.getElementById("workerSubmitMsg").textContent = "✅ Tathmini imetumwa kwa Mganga Mfawidhi!";
+            document.getElementById("workerSubmitMsg").style.color = "#27ae60";
+            document.getElementById("workerStatusBadge").textContent = "✅ Imetumwa";
+            document.getElementById("workerStatusBadge").className = "status-badge approved";
+            showToast("✅ Tathmini imetumwa!", "success");
+        }
+    } catch (error) {
+        console.error("❌ Hitilafu:", error);
+        showToast("❌ Hitilafu: " + error.message, "error");
     }
 }
 
-// ================================================================
-// STORAGE
-// ================================================================
-function saveToStorage() {
-    try { localStorage.setItem('mtwara_reports_simple', JSON.stringify(allReports)); } catch(e) {}
+async function syncData() {
+    showToast("🔄 Inasawazisha...", "info");
+    document.getElementById("syncBtn").innerHTML = '<span class="loading"></span>';
+    const data = await getBinData();
+    if (data) {
+        reports = data.reports || [];
+        showToast(`✅ Data imesawazishwa! Reports: ${reports.length}`, "success");
+    }
+    document.getElementById("syncBtn").innerHTML = '🔄 Sync';
 }
 
-function loadFromStorage() {
-    try {
-        const stored = localStorage.getItem('mtwara_reports_simple');
-        if (stored) {
-            allReports = JSON.parse(stored);
-            renderHistory();
-        }
-    } catch(e) {}
-}
-
-// ================================================================
-// TOAST
-// ================================================================
-function showToast(msg, type = 'success') {
-    const toast = document.getElementById('toast');
-    toast.textContent = msg;
-    toast.className = 'toast ' + type;
-    clearTimeout(toast._timer);
-    void toast.offsetWidth;
-    toast.classList.add('show');
-    toast._timer = setTimeout(() => toast.classList.remove('show'), 3000);
-}
-
-// ================================================================
+// ==============================================================
 // INIT
-// ================================================================
-document.addEventListener('DOMContentLoaded', function() {
-    loadFromStorage();
-    renderChecklist();
-    updateScores();
-    initAllPads();
-});
+// ==============================================================
+window.onload = function() {
+    document.getElementById("reportDate").value = new Date().toISOString().split("T")[0];
+    document.getElementById("binIdDisplay").textContent = BIN_ID;
+    document.getElementById("connectionStatus").textContent = "✅ Tayari";
+    updateWorkerChecklist();
+    console.log("✅ Mtwara Performance - Fomu ya Mtendakazi");
+    console.log("📦 BIN ID:", BIN_ID);
+    console.log("👨‍⚕️ Taaluma: Medical Officer (MD), Clinical Officer, Specialist");
+};
 </script>
 
 </body>
