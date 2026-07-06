@@ -552,7 +552,7 @@
             </div>
             <div class="mission"><strong>Dhamira:</strong> "Ubora katika Huduma, Imani katika Vitendo"</div>
             <div class="bin-info">
-                📦 BIN: <span id="binIdDisplay">6a4aed99da38895dfe328879</span>
+                📦 BIN: <span id="binIdDisplay">6a4afb8fda38895dfe32a783</span>
             </div>
         </div>
 
@@ -891,20 +891,21 @@
 
 <script>
 // ==============================================================
-// JSONBIN CONFIGURATION - MTWARA PERFORMANCE
+// JSONBIN CONFIGURATION - ILIYOSASISHWA
 // ==============================================================
 
 // ✅ ACCESS KEY (Master Key)
 const API_KEY = "$2a$10$VfPZVlhjWTV.gErIv2yxX.3QmHdrMCgM1evuIR.BJreI7G0jQxGqW";
 
-// ✅ ACCESS KEY ID (Kwa marejeleo tu)
-const ACCESS_KEY_ID = "6a4ae0b3da38895dfe326ada";
-
-// ✅ BIN ID
-const BIN_ID = "6a4aed99da38895dfe328879";
+// ✅ BIN ID MPYA
+const BIN_ID = "6a4afb8fda38895dfe32a783";
 
 // ✅ JINA LA BIN
 const BIN_NAME = "MTWARA PERFORMANCE";
+
+// Hifadhi kwenye localStorage
+localStorage.setItem("mtwaraBinId", BIN_ID);
+localStorage.setItem("mtwaraApiKey", API_KEY);
 
 // ==============================================================
 // VARIABLES
@@ -1121,7 +1122,7 @@ function saveSig(type) {
 }
 
 // ==============================================================
-// JSONBIN OPERATIONS - ILIYOREKEBISHWA
+// JSONBIN OPERATIONS
 // ==============================================================
 async function getBinData() {
     try {
@@ -1180,7 +1181,6 @@ async function updateBinData(data) {
         const result = await response.json();
         console.log("✅ Data imehifadhiwa:", result);
         document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
-        showToast("✅ Data imehifadhiwa kikamilifu!", "success");
         return result;
     } catch (error) {
         console.error("❌ Hitilafu ya kuhifadhi data:", error);
@@ -1230,19 +1230,103 @@ async function createBin() {
 }
 
 // ==============================================================
-// SUBMIT WORKER - ILIYOREKEBISHWA KABISA
+// LOGIN
+// ==============================================================
+async function login() {
+    const username = document.getElementById("loginUsername").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+    if (!username || !password) { showToast("❌ Tafadhali jaza sehemu zote", "error"); return; }
+    
+    showToast("⏳ Inaingiza...", "info");
+    const data = await getBinData();
+    if (!data) { showToast("❌ Imeshindwa kuunganisha", "error"); return; }
+    
+    const users = data.users || {};
+    const user = users[username];
+    if (!user || user.password !== password) {
+        showToast("❌ Jina au nenosiri si sahihi", "error");
+        return;
+    }
+    
+    currentUser = username;
+    currentRole = user.role;
+    reports = data.reports || [];
+    
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("mainApp").style.display = "block";
+    document.getElementById("currentUserDisplay").textContent = username;
+    document.getElementById("userBadge").textContent = `👤 ${username}`;
+    
+    const roleNames = { worker: "🧑‍💼 Mtendakazi", supervisor: "👔 Msimamizi", incharge: "🏥 Mganga Mfawidhi" };
+    document.getElementById("roleDisplay").textContent = roleNames[user.role] || "🧑‍💼 Mtendakazi";
+    document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
+    document.getElementById("binIdDisplay").textContent = BIN_ID;
+    
+    document.getElementById("formWorker").style.display = "none";
+    document.getElementById("formSupervisor").style.display = "none";
+    document.getElementById("formIncharge").style.display = "none";
+    
+    if (user.role === "worker") {
+        document.getElementById("formWorker").style.display = "block";
+        document.getElementById("statusMessage").textContent = "✅ Jaza fomu yako kisha tuma kwa Msimamizi";
+        updateWorkerChecklist();
+        updateSteps(1);
+        checkWorkerStatus();
+    } else if (user.role === "supervisor") {
+        document.getElementById("formSupervisor").style.display = "block";
+        document.getElementById("statusMessage").textContent = "✅ Kagua taarifa za mtendakazi kisha tuma kwa Mganga Mfawidhi";
+        updateSteps(2);
+        loadWorkerData();
+        checkSupervisorStatus();
+    } else if (user.role === "incharge") {
+        document.getElementById("formIncharge").style.display = "block";
+        document.getElementById("statusMessage").textContent = "✅ Kagua tathmini yote kisha idhinisha au kata";
+        updateSteps(3);
+        loadFullAssessment();
+        checkInchargeStatus();
+    }
+    
+    setTimeout(() => {
+        initSigPad("worker");
+        initSigPad("supervisor");
+        initSigPad("incharge");
+    }, 500);
+    
+    updateScoreSummary();
+    loadHistory();
+    showToast(`✅ Karibu ${username}!`, "success");
+}
+
+function logout() {
+    currentUser = null;
+    currentRole = null;
+    document.getElementById("loginSection").style.display = "block";
+    document.getElementById("mainApp").style.display = "none";
+    document.getElementById("connectionStatus").textContent = "🔄 Tafadhali ingia tena";
+    showToast("👋 Umetoka nje", "info");
+}
+
+function updateSteps(step) {
+    const steps = document.querySelectorAll(".step-badge");
+    steps.forEach((s, i) => {
+        s.className = "step-badge";
+        if (i + 1 < step) s.classList.add("done");
+        else if (i + 1 === step) s.classList.add("active");
+    });
+}
+
+// ==============================================================
+// SUBMIT WORKER
 // ==============================================================
 async function submitWorker() {
     console.log("📤 Inaanza kutuma tathmini...");
     
-    // 1. Angalia uthibitishaji
     if (!document.getElementById("workerVerify").checked) {
         showToast("⚠️ Tafadhali thibitisha taarifa zako", "warning");
         console.log("❌ Uthibitishaji haujathibitishwa");
         return;
     }
     
-    // 2. Angalia jina
     const name = document.getElementById("workerName").value.trim();
     if (!name) {
         showToast("⚠️ Tafadhali weka jina lako", "warning");
@@ -1250,7 +1334,6 @@ async function submitWorker() {
         return;
     }
     
-    // 3. Angalia sahihi
     if (!signatureData.worker) {
         showToast("⚠️ Tafadhali weka sahihi yako", "warning");
         console.log("❌ Sahihi haijapatikana");
@@ -1258,10 +1341,7 @@ async function submitWorker() {
     }
 
     console.log("✅ Uthibitishaji umepita");
-    console.log("👤 Jina:", name);
-    console.log("📋 Taaluma:", document.getElementById("workerRole").value);
 
-    // 4. Kusanya data
     const role = document.getElementById("workerRole").value;
     const report = {
         id: Date.now(),
@@ -1300,7 +1380,6 @@ async function submitWorker() {
     console.log("📤 Report iliyokusanywa:", report);
 
     try {
-        // 5. Soma data ya sasa
         const data = await getBinData();
         if (!data) {
             showToast("❌ Imeshindwa kusoma data", "error");
@@ -1310,13 +1389,10 @@ async function submitWorker() {
         
         console.log("✅ Data imesomwa kikamilifu");
         
-        // 6. Ongeza report
         if (!data.reports) data.reports = [];
         data.reports.push(report);
         
         console.log("📤 Inahifadhi data...");
-        
-        // 7. Hifadhi
         const result = await updateBinData(data);
         
         if (result) {
@@ -1346,37 +1422,60 @@ async function submitWorker() {
 // SUBMIT SUPERVISOR
 // ==============================================================
 async function submitSupervisor() {
+    console.log("📤 Inaanza kutuma kwa Mganga Mfawidhi...");
+    
     const name = document.getElementById("supervisorName").value.trim();
-    if (!name) { showToast("⚠️ Tafadhali weka jina lako", "warning"); return; }
-    if (!signatureData.supervisor) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
+    if (!name) {
+        showToast("⚠️ Tafadhali weka jina lako", "warning");
+        console.log("❌ Jina la msimamizi halijajazwa");
+        return;
+    }
+    if (!signatureData.supervisor) {
+        showToast("⚠️ Tafadhali weka sahihi yako", "warning");
+        console.log("❌ Sahihi ya msimamizi haijapatikana");
+        return;
+    }
 
-    const data = await getBinData();
-    if (!data) return;
-    const reports = data.reports || [];
-    const lastIndex = reports.length - 1;
-    if (lastIndex < 0) { showToast("❌ Hakuna tathmini", "error"); return; }
+    try {
+        const data = await getBinData();
+        if (!data) return;
+        const reports = data.reports || [];
+        const lastIndex = reports.length - 1;
+        if (lastIndex < 0) {
+            showToast("❌ Hakuna tathmini", "error");
+            console.log("❌ Hakuna tathmini iliyopatikana");
+            return;
+        }
 
-    reports[lastIndex].supervisorName = name;
-    reports[lastIndex].supervisorTitle = document.getElementById("supervisorTitle").value;
-    reports[lastIndex].supervisorRatings = getLikertLabels("sPunctuality","sQuality","sCompassion","sTeamwork");
-    reports[lastIndex].supervisorRatingsValues = getLikertValues("sPunctuality","sQuality","sCompassion","sTeamwork");
-    reports[lastIndex].supervisorComments = document.getElementById("supervisorComments").value;
-    reports[lastIndex].supervisorSignature = signatureData.supervisor;
-    reports[lastIndex].status = "Inasubiri Mganga Mfawidhi";
+        reports[lastIndex].supervisorName = name;
+        reports[lastIndex].supervisorTitle = document.getElementById("supervisorTitle").value;
+        reports[lastIndex].supervisorRatings = getLikertLabels("sPunctuality","sQuality","sCompassion","sTeamwork");
+        reports[lastIndex].supervisorRatingsValues = getLikertValues("sPunctuality","sQuality","sCompassion","sTeamwork");
+        reports[lastIndex].supervisorComments = document.getElementById("supervisorComments").value;
+        reports[lastIndex].supervisorSignature = signatureData.supervisor;
+        reports[lastIndex].status = "Inasubiri Mganga Mfawidhi";
 
-    const result = await updateBinData(data);
-    if (result) {
-        reports = data.reports;
-        document.getElementById("supervisorSubmitBtn").disabled = true;
-        document.getElementById("supervisorSubmitBtn").innerHTML = "✅ Imetumwa!";
-        document.getElementById("supervisorSubmitMsg").style.display = "block";
-        document.getElementById("supervisorSubmitMsg").textContent = "✅ Tathmini imetumwa kwa Mganga Mfawidhi!";
-        document.getElementById("supervisorSubmitMsg").style.color = "#27ae60";
-        document.getElementById("supervisorStatusBadge").textContent = "✅ Imetumwa";
-        document.getElementById("supervisorStatusBadge").className = "status-badge approved";
-        showToast("✅ Tathmini imetumwa!", "success");
-        loadHistory();
-        updateScoreSummary();
+        const result = await updateBinData(data);
+        if (result) {
+            reports = data.reports;
+            document.getElementById("supervisorSubmitBtn").disabled = true;
+            document.getElementById("supervisorSubmitBtn").innerHTML = "✅ Imetumwa!";
+            document.getElementById("supervisorSubmitMsg").style.display = "block";
+            document.getElementById("supervisorSubmitMsg").textContent = "✅ Tathmini imetumwa kwa Mganga Mfawidhi!";
+            document.getElementById("supervisorSubmitMsg").style.color = "#27ae60";
+            document.getElementById("supervisorStatusBadge").textContent = "✅ Imetumwa";
+            document.getElementById("supervisorStatusBadge").className = "status-badge approved";
+            showToast("✅ Tathmini imetumwa!", "success");
+            loadHistory();
+            updateScoreSummary();
+            console.log("✅ Tathmini imetumwa kwa Mganga Mfawidhi!");
+        } else {
+            showToast("❌ Imeshindwa kuhifadhi", "error");
+            console.log("❌ updateBinData() imerudisha null");
+        }
+    } catch (error) {
+        console.error("❌ Hitilafu:", error);
+        showToast("❌ Hitilafu: " + error.message, "error");
     }
 }
 
@@ -1585,92 +1684,6 @@ async function syncData() {
 }
 
 // ==============================================================
-// LOGIN
-// ==============================================================
-async function login() {
-    const username = document.getElementById("loginUsername").value.trim();
-    const password = document.getElementById("loginPassword").value.trim();
-    if (!username || !password) { showToast("❌ Tafadhali jaza sehemu zote", "error"); return; }
-    
-    showToast("⏳ Inaingiza...", "info");
-    const data = await getBinData();
-    if (!data) { showToast("❌ Imeshindwa kuunganisha", "error"); return; }
-    
-    const users = data.users || {};
-    const user = users[username];
-    if (!user || user.password !== password) {
-        showToast("❌ Jina au nenosiri si sahihi", "error");
-        return;
-    }
-    
-    currentUser = username;
-    currentRole = user.role;
-    reports = data.reports || [];
-    
-    document.getElementById("loginSection").style.display = "none";
-    document.getElementById("mainApp").style.display = "block";
-    document.getElementById("currentUserDisplay").textContent = username;
-    document.getElementById("userBadge").textContent = `👤 ${username}`;
-    
-    const roleNames = { worker: "🧑‍💼 Mtendakazi", supervisor: "👔 Msimamizi", incharge: "🏥 Mganga Mfawidhi" };
-    document.getElementById("roleDisplay").textContent = roleNames[user.role] || "🧑‍💼 Mtendakazi";
-    document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
-    document.getElementById("binIdDisplay").textContent = BIN_ID;
-    
-    document.getElementById("formWorker").style.display = "none";
-    document.getElementById("formSupervisor").style.display = "none";
-    document.getElementById("formIncharge").style.display = "none";
-    
-    if (user.role === "worker") {
-        document.getElementById("formWorker").style.display = "block";
-        document.getElementById("statusMessage").textContent = "✅ Jaza fomu yako kisha tuma kwa Msimamizi";
-        updateWorkerChecklist();
-        updateSteps(1);
-        checkWorkerStatus();
-    } else if (user.role === "supervisor") {
-        document.getElementById("formSupervisor").style.display = "block";
-        document.getElementById("statusMessage").textContent = "✅ Kagua taarifa za mtendakazi kisha tuma kwa Mganga Mfawidhi";
-        updateSteps(2);
-        loadWorkerData();
-        checkSupervisorStatus();
-    } else if (user.role === "incharge") {
-        document.getElementById("formIncharge").style.display = "block";
-        document.getElementById("statusMessage").textContent = "✅ Kagua tathmini yote kisha idhinisha au kata";
-        updateSteps(3);
-        loadFullAssessment();
-        checkInchargeStatus();
-    }
-    
-    setTimeout(() => {
-        initSigPad("worker");
-        initSigPad("supervisor");
-        initSigPad("incharge");
-    }, 500);
-    
-    updateScoreSummary();
-    loadHistory();
-    showToast(`✅ Karibu ${username}!`, "success");
-}
-
-function logout() {
-    currentUser = null;
-    currentRole = null;
-    document.getElementById("loginSection").style.display = "block";
-    document.getElementById("mainApp").style.display = "none";
-    document.getElementById("connectionStatus").textContent = "🔄 Tafadhali ingia tena";
-    showToast("👋 Umetoka nje", "info");
-}
-
-function updateSteps(step) {
-    const steps = document.querySelectorAll(".step-badge");
-    steps.forEach((s, i) => {
-        s.className = "step-badge";
-        if (i + 1 < step) s.classList.add("done");
-        else if (i + 1 === step) s.classList.add("active");
-    });
-}
-
-// ==============================================================
 // INIT
 // ==============================================================
 window.onload = function() {
@@ -1680,7 +1693,6 @@ window.onload = function() {
     updateWorkerChecklist();
     console.log("✅ Mtwara Performance Appraisal System");
     console.log("📦 BIN ID:", BIN_ID);
-    console.log("🔑 ACCESS KEY ID:", ACCESS_KEY_ID);
 };
 </script>
 
