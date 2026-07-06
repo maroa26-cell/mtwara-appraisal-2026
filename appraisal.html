@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -5,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mtwara Performance - Appraisal System</title>
     <style>
-        /* ===== RESET & BASE ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -25,7 +25,6 @@
             body { padding: 8px; }
             .container { padding: 16px; }
         }
-
         .header {
             text-align: center;
             border-bottom: 4px solid #1a5276;
@@ -60,7 +59,6 @@
             font-size: 11px;
             color: #7f8c8d;
         }
-
         .login-box {
             max-width: 420px;
             margin: 60px auto;
@@ -71,7 +69,6 @@
         }
         .login-box h2 { text-align: center; color: #1a5276; margin-bottom: 8px; }
         .login-box .subtitle { text-align: center; color: #7f8c8d; font-size: 13px; margin-bottom: 24px; }
-
         .steps {
             display: flex;
             justify-content: center;
@@ -106,7 +103,6 @@
         .step-badge.active .num { background: #fff; color: #1a5276; }
         .step-badge.done { background: #27ae60; color: #fff; }
         .step-badge.done .num { background: #fff; color: #27ae60; }
-
         .form-card {
             background: #f8f9fa;
             border-radius: 16px;
@@ -119,7 +115,6 @@
         .form-card.worker { border-top: 5px solid #1a5276; }
         .form-card.supervisor { border-top: 5px solid #27ae60; }
         .form-card.incharge { border-top: 5px solid #8e44ad; }
-
         .form-title {
             display: flex;
             align-items: center;
@@ -149,7 +144,6 @@
         .status-badge.pending { background: #fef9e7; color: #f39c12; }
         .status-badge.approved { background: #d5f5e3; color: #27ae60; }
         .status-badge.rejected { background: #fadbd8; color: #e74c3c; }
-
         .form-group { margin-bottom: 14px; }
         .form-group label {
             display: block;
@@ -181,7 +175,6 @@
             gap: 16px;
         }
         @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
-
         .likert-scale {
             display: flex;
             gap: 6px;
@@ -216,7 +209,6 @@
             margin-top: 1px;
         }
         .likert-btn.selected .sub { color: rgba(255,255,255,0.8); }
-
         .checklist-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -269,7 +261,6 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.12);
         }
         .checklist-item .toggle.active .thumb { left: 20px; }
-
         .btn {
             padding: 11px 28px;
             border: none;
@@ -295,7 +286,6 @@
         .btn-sm { padding: 6px 16px; font-size: 12px; }
         .btn-block { width: 100%; justify-content: center; }
         .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-
         .signature-pad {
             border: 2px dashed #1a5276;
             border-radius: 10px;
@@ -309,7 +299,6 @@
         }
         .signature-pad canvas { width: 100%; height: 100%; border-radius: 8px; touch-action: none; }
         .signature-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0; }
-
         .preview-box {
             background: #eaf2f8;
             padding: 16px 20px;
@@ -332,7 +321,6 @@
         @media (max-width: 600px) { .preview-grid { grid-template-columns: 1fr; } }
         .preview-grid .item { padding: 2px 0; }
         .preview-grid .item strong { color: #1a5276; }
-
         .score-dashboard {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -361,7 +349,6 @@
         .score-card .value.green { color: #27ae60; }
         .score-card .value.orange { color: #f39c12; }
         .score-card .value.red { color: #e74c3c; }
-
         .progress-bar {
             width: 100%;
             height: 6px;
@@ -376,7 +363,6 @@
             transition: width 0.8s ease;
             background: linear-gradient(90deg, #27ae60, #1a5276);
         }
-
         .toast {
             position: fixed;
             bottom: 30px;
@@ -400,7 +386,6 @@
         .toast.success { background: #27ae60; }
         .toast.warning { background: #f39c12; color: #1a1a2e; }
         .toast.error { background: #e74c3c; }
-
         .tabs {
             display: flex;
             gap: 8px;
@@ -422,7 +407,6 @@
         .tab-btn.active { background: #1a5276; color: #fff; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-
         .history-empty { text-align: center; color: #7f8c8d; padding: 30px 0; }
         .pending-item {
             background: #fef9e7;
@@ -433,7 +417,6 @@
         }
         .pending-item .title { font-weight: 600; font-size: 14px; }
         .pending-item .sub { font-size: 12px; color: #7f8c8d; margin-top: 2px; }
-
         .footer {
             text-align: center;
             margin-top: 28px;
@@ -448,7 +431,6 @@
             font-size: 14px;
             margin-bottom: 4px;
         }
-
         .warning-box {
             background: #fef9e7;
             border-left: 4px solid #e74c3c;
@@ -890,13 +872,13 @@
 
 <script>
 // ==============================================================
-// JSONBIN CONFIGURATION - ILIYOSASISHWA
+// JSONBIN CONFIGURATION
 // ==============================================================
 
 // ✅ ACCESS KEY (Master Key)
 const API_KEY = "$2a$10$VfPZVlhjWTV.gErIv2yxX.3QmHdrMCgM1evuIR.BJreI7G0jQxGqW";
 
-// ✅ BIN ID MPYA
+// ✅ BIN ID
 const BIN_ID = "6a4b0bc9da38895dfe32cc08";
 
 // ✅ JINA LA BIN
@@ -913,6 +895,7 @@ let currentUser = null;
 let currentRole = null;
 let reports = [];
 let signatureData = { worker: null, supervisor: null, incharge: null };
+let useLocalStorage = false;
 
 // ==============================================================
 // CHECKLIST DATA
@@ -1125,6 +1108,13 @@ function saveSig(type) {
 // ==============================================================
 async function getBinData() {
     try {
+        // Angalia kama tunatumia LocalStorage
+        if (localStorage.getItem("useLocalStorage") === "true") {
+            console.log("📤 Inasoma data kutoka LocalStorage...");
+            const data = JSON.parse(localStorage.getItem("mtwaraData") || '{"reports":[],"users":{}}');
+            return data;
+        }
+        
         console.log("📤 Inasoma data kutoka JSONBin...");
         document.getElementById("connectionStatus").innerHTML = '<span class="loading"></span> Inasoma...';
         
@@ -1152,6 +1142,11 @@ async function getBinData() {
     } catch (error) {
         console.error("❌ Hitilafu ya kusoma data:", error);
         document.getElementById("connectionStatus").textContent = "⚠️ Hitilafu";
+        // Ikiwa JSONBin inashindwa, jaribu LocalStorage
+        if (localStorage.getItem("mtwaraData")) {
+            console.log("📤 Inatumia LocalStorage badala ya JSONBin...");
+            return JSON.parse(localStorage.getItem("mtwaraData"));
+        }
         showToast("❌ Imeshindwa kusoma data: " + error.message, "error");
         return null;
     }
@@ -1159,6 +1154,14 @@ async function getBinData() {
 
 async function updateBinData(data) {
     try {
+        // Angalia kama tunatumia LocalStorage
+        if (localStorage.getItem("useLocalStorage") === "true") {
+            console.log("📤 Inahifadhi data kwenye LocalStorage...");
+            localStorage.setItem("mtwaraData", JSON.stringify(data));
+            console.log("✅ Data imehifadhiwa kwenye LocalStorage!");
+            return { success: true };
+        }
+        
         console.log("📤 Inahifadhi data kwenye JSONBin...");
         document.getElementById("connectionStatus").innerHTML = '<span class="loading"></span> Inahifadhi...';
         
@@ -1184,6 +1187,15 @@ async function updateBinData(data) {
     } catch (error) {
         console.error("❌ Hitilafu ya kuhifadhi data:", error);
         document.getElementById("connectionStatus").textContent = "⚠️ Hitilafu";
+        // Ikiwa JSONBin inashindwa, jaribu LocalStorage
+        try {
+            console.log("📤 Inatumia LocalStorage badala ya JSONBin...");
+            localStorage.setItem("mtwaraData", JSON.stringify(data));
+            console.log("✅ Data imehifadhiwa kwenye LocalStorage!");
+            return { success: true };
+        } catch (e) {
+            console.error("❌ Hitilafu:", e);
+        }
         return null;
     }
 }
@@ -1314,12 +1326,11 @@ function updateSteps(step) {
 }
 
 // ==============================================================
-// SUBMIT WORKER
+// SUBMIT WORKER - ILIYOREKEBISHWA KABISA
 // ==============================================================
 async function submitWorker() {
     console.log("📤 Inaanza kutuma tathmini...");
     console.log("🔍 BIN ID:", BIN_ID);
-    console.log("🔑 API KEY:", API_KEY.substring(0, 20) + "...");
     
     // 1. Angalia uthibitishaji
     if (!document.getElementById("workerVerify").checked) {
@@ -1394,7 +1405,6 @@ async function submitWorker() {
         }
         
         console.log("✅ Data imesomwa kikamilifu");
-        console.log("📊 Data iliyopatikana:", data);
         
         // 6. Ongeza report
         if (!data.reports) {
@@ -1710,6 +1720,7 @@ window.onload = function() {
     updateWorkerChecklist();
     console.log("✅ Mtwara Performance Appraisal System");
     console.log("📦 BIN ID:", BIN_ID);
+    console.log("💾 Imeunganishwa na JSONBin + LocalStorage (Backup)");
 };
 </script>
 
