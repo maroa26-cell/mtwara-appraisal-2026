@@ -1,1 +1,333 @@
 Add index.html - login page for supervisor
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mtwara Performance - Ingia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a5276 0%, #27ae60 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .login-container {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 50px 40px;
+            max-width: 440px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideUp 0.6s ease;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .login-header .logo { font-size: 48px; margin-bottom: 8px; }
+        .login-header h1 { color: #1a5276; font-size: 24px; font-weight: 700; }
+        .login-header p { color: #7f8c8d; font-size: 14px; margin-top: 4px; }
+        .login-header .badge {
+            display: inline-block;
+            background: #27ae60;
+            color: #fff;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 8px;
+        }
+        .form-group { margin-bottom: 18px; }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #1a5276;
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+        .form-group input:focus {
+            border-color: #27ae60;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(39,174,96,0.1);
+        }
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+            background: #27ae60;
+            color: #fff;
+        }
+        .btn:hover {
+            background: #1e8449;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(39,174,96,0.3);
+        }
+        .btn:active { transform: scale(0.97); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .login-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #95a5a6;
+        }
+        .login-footer .verse {
+            color: #1a5276;
+            font-style: italic;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+        .connection-status {
+            text-align: center;
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 16px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .connection-status .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid #ecf0f1;
+            border-top: 3px solid #27ae60;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            max-width: 400px;
+            width: 90%;
+            background: #1a1a2e;
+            color: #fff;
+            padding: 14px 22px;
+            border-radius: 12px;
+            font-size: 14px;
+            text-align: center;
+            z-index: 999;
+            opacity: 0;
+            transition: all 0.4s ease;
+            pointer-events: none;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.20);
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast.success { background: #27ae60; }
+        .toast.warning { background: #f39c12; color: #1a1a2e; }
+        .toast.error { background: #e74c3c; }
+        .users-hint {
+            font-size: 11px;
+            color: #95a5a6;
+            text-align: center;
+            margin-top: 12px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .users-hint code {
+            background: #ecf0f1;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="toast" class="toast"></div>
+
+<div class="login-container">
+    <div class="login-header">
+        <div class="logo">🏥</div>
+        <h1>Mtwara Performance</h1>
+        <p>Fomu ya Msimamizi</p>
+        <span class="badge">Toleo la Kimataifa</span>
+    </div>
+
+    <div class="connection-status" id="connectionStatus">
+        <span class="loading"></span> Inaunganisha...
+    </div>
+
+    <div class="form-group">
+        <label>👤 Jina la Mtumiaji</label>
+        <input type="text" id="loginUsername" placeholder="Weka username" value="supervisor">
+    </div>
+    <div class="form-group">
+        <label>🔑 Nenosiri</label>
+        <input type="password" id="loginPassword" placeholder="Weka nenosiri" value="1234">
+    </div>
+
+    <button class="btn" onclick="login()" id="loginBtn">🔓 Ingia</button>
+
+    <div class="users-hint">
+        <strong>Watumiaji:</strong><br>
+        <code>supervisor / 1234</code> &nbsp;|&nbsp;
+        <code>worker / 1234</code> &nbsp;|&nbsp;
+        <code>incharge / 1234</code>
+    </div>
+
+    <div class="login-footer">
+        <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote" — Wakolosai 3:23</div>
+        <div style="margin-top:6px;">Mtwara SDA Dispensary &copy; 2026</div>
+    </div>
+</div>
+
+<script>
+// ==============================================================
+// JSONBIN CONFIGURATION
+// ==============================================================
+const API_KEY = "$2a$10$VfPZVlhjWTV.gErIv2yxX.3QmHdrMCgM1evuIR.BJreI7G0jQxGqW";
+const BIN_ID = "6a4b0bc9da38895dfe32cc08";
+
+// ==============================================================
+// TOAST FUNCTION
+// ==============================================================
+function showToast(msg, type = "info") {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.className = "toast " + type + " show";
+    setTimeout(() => t.classList.remove("show"), 3500);
+}
+
+// ==============================================================
+// LOGIN FUNCTION
+// ==============================================================
+async function login() {
+    const username = document.getElementById("loginUsername").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+    const btn = document.getElementById("loginBtn");
+    
+    if (!username || !password) {
+        showToast("❌ Tafadhali jaza sehemu zote", "error");
+        return;
+    }
+    
+    btn.disabled = true;
+    btn.textContent = "⏳ Inaingiza...";
+    showToast("⏳ Inaingiza...", "info");
+    
+    try {
+        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            method: "GET",
+            headers: { "X-Master-Key": API_KEY }
+        });
+        
+        if (!response.ok) {
+            throw new Error("Imeshindwa kuunganisha na server");
+        }
+        
+        const result = await response.json();
+        const data = result.record || result;
+        const users = data.users || {};
+        
+        const user = users[username];
+        if (!user || user.password !== password) {
+            showToast("❌ Jina au nenosiri si sahihi", "error");
+            btn.disabled = false;
+            btn.textContent = "🔓 Ingia";
+            return;
+        }
+        
+        localStorage.setItem("mtwaraUser", JSON.stringify({
+            username: username,
+            role: user.role
+        }));
+        localStorage.setItem("mtwaraReports", JSON.stringify(data.reports || []));
+        
+        showToast(`✅ Karibu ${username}!`, "success");
+        
+        setTimeout(() => {
+            window.location.href = "supervisor.html";
+        }, 500);
+        
+    } catch (error) {
+        console.error("❌ Hitilafu:", error);
+        showToast("❌ " + error.message, "error");
+        btn.disabled = false;
+        btn.textContent = "🔓 Ingia";
+    }
+}
+
+// ==============================================================
+// CHECK CONNECTION ON LOAD
+// ==============================================================
+async function checkConnection() {
+    const status = document.getElementById("connectionStatus");
+    try {
+        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            method: "GET",
+            headers: { "X-Master-Key": API_KEY }
+        });
+        if (response.ok) {
+            status.innerHTML = "✅ Imeunganishwa";
+        } else {
+            status.innerHTML = "⚠️ Hitilafu ya muunganisho";
+        }
+    } catch (error) {
+        status.innerHTML = "⚠️ Hakuna mtandao";
+    }
+}
+
+// ==============================================================
+// KEYBOARD SHORTCUT
+// ==============================================================
+document.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+        login();
+    }
+});
+
+// ==============================================================
+// INIT
+// ==============================================================
+window.onload = function() {
+    checkConnection();
+    const user = localStorage.getItem("mtwaraUser");
+    if (user) {
+        try {
+            const data = JSON.parse(user);
+            if (data && data.username) {
+                document.getElementById("loginUsername").value = data.username;
+            }
+        } catch(e) {}
+    }
+    console.log("✅ Mtwara Performance Login Page Loaded");
+};
+</script>
+
+</body>
+</html>
