@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -25,7 +26,6 @@
             .container { padding: 16px; }
         }
 
-        /* ===== HEADER ===== */
         .header {
             text-align: center;
             border-bottom: 4px solid #8e44ad;
@@ -72,7 +72,6 @@
         .deadline-badge.warning { background: #fef9e7; color: #f39c12; }
         .deadline-badge.ok { background: #d5f5e3; color: #27ae60; }
 
-        /* ===== LOGIN ===== */
         .login-box {
             max-width: 420px;
             margin: 60px auto;
@@ -84,7 +83,6 @@
         .login-box h2 { text-align: center; color: #1a5276; margin-bottom: 8px; }
         .login-box .subtitle { text-align: center; color: #7f8c8d; font-size: 13px; margin-bottom: 24px; }
 
-        /* ===== FORM CARDS ===== */
         .form-card {
             background: #f8f9fa;
             border-radius: 16px;
@@ -138,7 +136,6 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
-        /* ===== DASHBOARD STATS (MPYA) ===== */
         .dashboard-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -184,7 +181,6 @@
             margin-bottom: 4px;
         }
 
-        /* ===== FORM GROUPS ===== */
         .form-group { margin-bottom: 14px; }
         .form-group label {
             display: block;
@@ -217,7 +213,6 @@
         }
         @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
 
-        /* ===== SECTION PROGRESS ===== */
         .section-progress {
             background: #fff;
             padding: 12px 16px;
@@ -246,7 +241,6 @@
             width: 0%;
         }
 
-        /* ===== LIKERT SCALE ===== */
         .likert-scale {
             display: flex;
             gap: 6px;
@@ -284,7 +278,6 @@
         }
         .likert-btn.selected .sub { color: rgba(255,255,255,0.8); }
 
-        /* ===== BUTTONS ===== */
         .btn {
             padding: 11px 28px;
             border: none;
@@ -313,7 +306,6 @@
         .btn-block { width: 100%; justify-content: center; }
         .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
 
-        /* ===== SIGNATURE ===== */
         .signature-pad {
             border: 2px dashed #8e44ad;
             border-radius: 10px;
@@ -330,7 +322,6 @@
         .signature-pad canvas { width: 100%; height: 100%; border-radius: 8px; touch-action: none; }
         .signature-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0; }
 
-        /* ===== TOAST ===== */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -355,7 +346,6 @@
         .toast.warning { background: #f39c12; color: #1a1a2e; }
         .toast.error { background: #e74c3c; }
 
-        /* ===== FOOTER ===== */
         .footer {
             text-align: center;
             margin-top: 28px;
@@ -371,7 +361,6 @@
             margin-bottom: 4px;
         }
 
-        /* ===== USER TOOLS ===== */
         .user-badge {
             display: inline-block;
             padding: 4px 14px;
@@ -421,7 +410,6 @@
             margin-left: auto;
         }
 
-        /* ===== SCORE BOX ===== */
         .score-box {
             background: #e8daef;
             border-radius: 12px;
@@ -479,7 +467,6 @@
             background: linear-gradient(90deg, #8e44ad, #1a5276);
         }
 
-        /* ===== COMPARISON TABLE ===== */
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
@@ -499,7 +486,6 @@
         .comparison-table .warning { background: #fef9e7; }
         .comparison-table .danger { background: #fadbd8; }
 
-        /* ===== NOTIFICATION ===== */
         .notification-box {
             background: #fef9e7;
             border-left: 4px solid #f39c12;
@@ -511,7 +497,7 @@
         .notification-box.success { background: #d5f5e3; border-left-color: #27ae60; }
         .notification-box.danger { background: #fadbd8; border-left-color: #e74c3c; }
 
-        /* ===== CONTACT CARDS ===== */
+        /* ===== CONTACT CARDS (ZILIZOBOBESHWA - ZINAONYESHA MSIMAMIZI) ===== */
         .contact-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -574,7 +560,69 @@
         .contact-card .action-btn.email { background: #1a5276; color: #fff; }
         .contact-card .action-btn.email:hover { background: #154360; }
 
-        /* ===== CALENDAR (MPYA) ===== */
+        /* ===== SUPERVISOR CONTACT CARDS (MPYA) ===== */
+        .supervisor-contact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin: 12px 0;
+        }
+        .supervisor-contact-card {
+            background: #fef9e7;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border: 2px solid #f39c12;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+        .supervisor-contact-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-color: #8e44ad;
+        }
+        .supervisor-contact-card .icon {
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fef9e7;
+            border-radius: 50%;
+        }
+        .supervisor-contact-card .info {
+            flex: 1;
+        }
+        .supervisor-contact-card .info .label {
+            font-size: 10px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .supervisor-contact-card .info .value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a5276;
+            word-break: break-word;
+        }
+        .supervisor-contact-card .action-btn {
+            padding: 4px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .supervisor-contact-card .action-btn.call { background: #27ae60; color: #fff; }
+        .supervisor-contact-card .action-btn.call:hover { background: #1e8449; }
+        .supervisor-contact-card .action-btn.whatsapp { background: #25D366; color: #fff; }
+        .supervisor-contact-card .action-btn.whatsapp:hover { background: #1da851; }
+        .supervisor-contact-card .action-btn.email { background: #1a5276; color: #fff; }
+        .supervisor-contact-card .action-btn.email:hover { background: #154360; }
+
         .calendar-container {
             background: #fff;
             border-radius: 12px;
@@ -687,7 +735,6 @@
         }
         .event-item .event-remove:hover { opacity: 0.7; }
 
-        /* ===== REMINDER (MPYA) ===== */
         .reminder-item {
             display: flex;
             align-items: center;
@@ -727,7 +774,6 @@
         .reminder-item .reminder-status.pending { background: #fef9e7; color: #f39c12; }
         .reminder-item .reminder-status.done { background: #d5f5e3; color: #27ae60; }
 
-        /* ===== GROUP REPORT (MPYA) ===== */
         .group-report {
             background: #f8f9fa;
             border-radius: 12px;
@@ -762,7 +808,6 @@
         .group-report .dept-item .dept-score.orange { color: #f39c12; }
         .group-report .dept-item .dept-score.red { color: #e74c3c; }
 
-        /* ===== STAR RATING ===== */
         .star-rating {
             display: flex;
             gap: 8px;
@@ -780,7 +825,6 @@
             transform: scale(1.2);
         }
 
-        /* ===== FUTURE GOALS (MPYA) ===== */
         .goal-item {
             display: flex;
             align-items: flex-start;
@@ -821,7 +865,6 @@
             color: #e74c3c;
         }
 
-        /* ===== CHECKLIST ===== */
         .checklist-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -902,7 +945,6 @@
             font-weight: 400;
         }
 
-        /* ===== FILE UPLOAD ===== */
         .file-upload {
             border: 2px dashed #dee2e6;
             border-radius: 10px;
@@ -928,11 +970,20 @@
         }
         .file-item .remove { color: #e74c3c; cursor: pointer; }
 
-        /* ===== RESPONSIVE ===== */
+        .preview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 20px;
+            font-size: 13px;
+        }
+        .preview-grid .item { padding: 2px 0; }
+        .preview-grid .item strong { color: #1a5276; }
+
         @media (max-width: 768px) {
             .form-card { padding: 16px; }
             .form-row { grid-template-columns: 1fr; }
             .contact-cards { grid-template-columns: 1fr; }
+            .supervisor-contact-cards { grid-template-columns: 1fr; }
             .score-row { grid-template-columns: 1fr 1fr; }
             .user-tools .last-saved { margin-left: 0; width: 100%; text-align: center; }
             .comparison-table { font-size: 11px; }
@@ -1019,7 +1070,7 @@
             </div>
         </div>
 
-        <!-- ===== DASHBOARD STATS (VIPENGELE #1) ===== -->
+        <!-- ===== DASHBOARD STATS ===== -->
         <div class="dashboard-stats" id="dashboardStats">
             <div class="stat-card">
                 <span class="stat-icon">📊</span>
@@ -1053,7 +1104,7 @@
             </div>
         </div>
 
-        <!-- ===== KUMBUSHO ZA UFUATILIAJI (VIPENGELE #2) ===== -->
+        <!-- ===== KUMBUSHO ZA UFUATILIAJI ===== -->
         <div style="background:#fef9e7; border-radius:12px; padding:16px 20px; margin-bottom:16px; border-left:4px solid #f39c12;">
             <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
                 🔔 KUMBUSHO ZA UFUATILIAJI
@@ -1090,7 +1141,7 @@
             </div>
         </div>
 
-        <!-- ===== KALENDA (VIPENGELE #6) ===== -->
+        <!-- ===== KALENDA ===== -->
         <div style="background:#f8f9fa; border-radius:12px; padding:16px 20px; margin-bottom:16px; border:1px solid #e9ecef;">
             <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
                 📅 KALENDA YA MATUKIO
@@ -1102,16 +1153,14 @@
                     <span class="month-year" id="calendarMonthYear">Januari 2025</span>
                     <button class="nav-btn" onclick="changeMonth(1)">▶</button>
                 </div>
-                <div class="calendar-grid" id="calendarGrid">
-                    <!-- Calendar days will be rendered here -->
-                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
                 <div class="event-list" id="eventList">
                     <div style="font-size:12px; color:#7f8c8d; text-align:center;">Bonyeza tarehe kuongeza tukio</div>
                 </div>
             </div>
         </div>
 
-        <!-- ===== RIPOTI ZA KIKUNDI (VIPENGELE #3) ===== -->
+        <!-- ===== RIPOTI ZA KIKUNDI ===== -->
         <div class="group-report">
             <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
                 🏢 RIPOTI ZA KIKUNDI
@@ -1141,7 +1190,7 @@
             </div>
         </div>
 
-        <!-- ===== MALENGO YA BAADAYE (VIPENGELE #4) ===== -->
+        <!-- ===== MALENGO YA BAADAYE ===== -->
         <div style="background:#eaf2f8; border-radius:12px; padding:16px 20px; margin-bottom:16px; border-left:4px solid #8e44ad;">
             <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
                 🎯 MALENGO YA BAADAYE
@@ -1241,7 +1290,7 @@
                     <input type="text" id="workerDepartment" value="Clinical" onchange="autoSave(); updateSectionProgress(); updateDashboard();" oninput="autoSave(); updateSectionProgress(); updateDashboard();">
                 </div>
 
-                <!-- ===== MAWASILIANO YA MTENDAKAZI ===== -->
+                <!-- ===== MAWASILIANO YA MTENDAKAZI (KUTOKA MSIMAMIZI) ===== -->
                 <div style="margin-top:12px; background:#fff; border-radius:8px; padding:12px 16px; border:2px solid #8e44ad;">
                     <div style="font-weight:700; color:#8e44ad; font-size:14px; margin-bottom:8px; display:flex; align-items:center; gap:8px;">
                         📞 MAWASILIANO YA MTENDAKAZI
@@ -1254,7 +1303,7 @@
                                 <div class="label">Simu</div>
                                 <div class="value" id="workerPhoneDisplay">-</div>
                             </div>
-                            <button class="action-btn call" onclick="makeCall()" id="callBtn" style="display:none;">📞 Piga</button>
+                            <button class="action-btn call" onclick="makeCall('worker')" id="callBtn" style="display:none;">📞 Piga</button>
                         </div>
                         <div class="contact-card" id="whatsappCard">
                             <div class="icon">💬</div>
@@ -1262,7 +1311,7 @@
                                 <div class="label">WhatsApp</div>
                                 <div class="value" id="workerWhatsAppDisplay">-</div>
                             </div>
-                            <button class="action-btn whatsapp" onclick="sendWhatsApp()" id="whatsappBtn" style="display:none;">💬 Tuma</button>
+                            <button class="action-btn whatsapp" onclick="sendWhatsApp('worker')" id="whatsappBtn" style="display:none;">💬 Tuma</button>
                         </div>
                         <div class="contact-card" id="emailCard">
                             <div class="icon">📧</div>
@@ -1270,17 +1319,18 @@
                                 <div class="label">Barua Pepe</div>
                                 <div class="value" id="workerEmailDisplay">-</div>
                             </div>
-                            <button class="action-btn email" onclick="sendEmail()" id="emailBtn" style="display:none;">📧 Tuma</button>
+                            <button class="action-btn email" onclick="sendEmail('worker')" id="emailBtn" style="display:none;">📧 Tuma</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- ========================================================== -->
-            <!-- SEHEMU 2: TAARIFA ZA MSIMAMIZI -->
+            <!-- SEHEMU 2: TAARIFA ZA MSIMAMIZI (ZILIZOBOBESHWA) -->
             <!-- ========================================================== -->
             <div style="background:#d5f5e3; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #8e44ad;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">👔 TAARIFA ZA MSIMAMIZI</div>
+                
                 <div class="form-row">
                     <div class="form-group">
                         <label>👔 Jina la Msimamizi</label>
@@ -1294,6 +1344,40 @@
                 <div class="form-group">
                     <label>🏢 Idara ya Msimamizi</label>
                     <input type="text" id="supervisorDepartment" placeholder="Idara ya msimamizi" value="" onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();">
+                </div>
+
+                <!-- ===== MAWASILIANO YA MSIMAMIZI (MPYA - INAYOONEKANA KWA MGANGA MFAWIDHI) ===== -->
+                <div style="margin-top:12px; background:#fef9e7; border-radius:8px; padding:12px 16px; border:2px solid #f39c12;">
+                    <div style="font-weight:700; color:#f39c12; font-size:14px; margin-bottom:8px; display:flex; align-items:center; gap:8px;">
+                        📞 MAWASILIANO YA MSIMAMIZI
+                        <span style="font-size:10px; background:#f39c12; color:#fff; padding:2px 10px; border-radius:12px;">Mawasiliano ya Msimamizi</span>
+                    </div>
+                    <div class="supervisor-contact-cards">
+                        <div class="supervisor-contact-card" id="supervisorPhoneCard">
+                            <div class="icon">📱</div>
+                            <div class="info">
+                                <div class="label">Simu ya Msimamizi</div>
+                                <div class="value" id="supervisorPhoneDisplay">-</div>
+                            </div>
+                            <button class="action-btn call" onclick="makeCall('supervisor')" id="supervisorCallBtn" style="display:none;">📞 Piga</button>
+                        </div>
+                        <div class="supervisor-contact-card" id="supervisorWhatsAppCard">
+                            <div class="icon">💬</div>
+                            <div class="info">
+                                <div class="label">WhatsApp ya Msimamizi</div>
+                                <div class="value" id="supervisorWhatsAppDisplay">-</div>
+                            </div>
+                            <button class="action-btn whatsapp" onclick="sendWhatsApp('supervisor')" id="supervisorWhatsAppBtn" style="display:none;">💬 Tuma</button>
+                        </div>
+                        <div class="supervisor-contact-card" id="supervisorEmailCard">
+                            <div class="icon">📧</div>
+                            <div class="info">
+                                <div class="label">Barua Pepe ya Msimamizi</div>
+                                <div class="value" id="supervisorEmailDisplay">-</div>
+                            </div>
+                            <button class="action-btn email" onclick="sendEmail('supervisor')" id="supervisorEmailBtn" style="display:none;">📧 Tuma</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1310,8 +1394,6 @@
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px 20px; font-size:13px;">
                     <div style="padding:4px 0;"><strong>👔 Jina:</strong> <span id="supervisorNameDisplay">-</span></div>
                     <div style="padding:4px 0;"><strong>📋 Wadhifa:</strong> <span id="supervisorTitleDisplay">-</span></div>
-                    <div style="padding:4px 0;"><strong>📞 Simu:</strong> <span id="supervisorPhoneDisplay">-</span></div>
-                    <div style="padding:4px 0;"><strong>🏢 Idara:</strong> <span id="supervisorDeptDisplay">-</span></div>
                     <div style="padding:4px 0;"><strong>⭐ Alama:</strong> <span id="supervisorScoreDisplay">-</span></div>
                     <div style="padding:4px 0;"><strong>📅 Tarehe:</strong> <span id="supervisorDateDisplay">-</span></div>
                     <div style="grid-column:span 2; padding:4px 0;"><strong>📝 Maoni:</strong> <span id="supervisorCommentsDisplay">-</span></div>
@@ -1555,7 +1637,7 @@
             <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
             <div>Mtwara Performance | Fomu ya Mganga Mfawidhi (Maboresho Yote)</div>
             <div style="margin-top:4px; font-size:10px; color:#aab;">
-                📊 Dashboard | 🔔 Kumbusho | 📅 Kalenda | 🏢 Ripoti za Kikundi | 🎯 Malengo | 📊 CSV
+                📊 Dashboard | 🔔 Kumbusho | 📅 Kalenda | 🏢 Ripoti za Kikundi | 🎯 Malengo | 📊 CSV | 📞 Mawasiliano
             </div>
         </div>
 
@@ -1578,6 +1660,7 @@ let uploadedFiles = [];
 let starRatings = {};
 let autoSaveInterval = null;
 let workerContactData = { phone: '', whatsapp: '', email: '' };
+let supervisorContactData = { phone: '', whatsapp: '', email: '' };
 
 // ===== CALENDAR DATA =====
 let currentDate = new Date();
@@ -1598,11 +1681,11 @@ const GENERAL_CHECKLIST = [
 ];
 
 const SPECIAL_CHECKLISTS = {
-    "Medical Officer": ["Kufanya uchunguzi kamili wa wagonjwa","Kuandika historia sahihi za wagonjwa","Kuagiza dawa sahihi","Kufanya taratibu za kliniki kwa ufanisi","Kushiriki katika rufaa za wagonjwa"],
+    "Medical Officer": ["Kufanya uchunguzi kamili wa wagonjwa","Kuandika historia sahihi","Kuagiza dawa sahihi","Kufanya taratibu za kliniki","Kushiriki katika rufaa"],
     "Clinical Officer": ["Kufanya mashauriano ya wagonjwa","Kufanya uchunguzi wa kliniki","Kutekeleza mipango ya matibabu","Kushiriki katika elimu ya wagonjwa","Kuhakikisha viwango vya usalama"],
-    "Specialist": ["Kufanya uchunguzi wa kitaalamu","Kutoa ushauri wa kitaalamu","Kusimamia taratibu maalum","Kufanya tathmini za kitaalamu","Kushiriki katika rufaa za kitaalamu"],
-    "Nurse": ["Kupima vipimo muhimu kwa usahihi","Kusimamia dawa kwa usahihi","Kuandaa wagonjwa kwa taratibu","Kufuatilia hali ya wagonjwa","Kusimamia mipango ya wagonjwa"],
-    "Laboratory Scientist": ["Kuchukua sampuli kwa usahihi","Kufanya vipimo sahihi vya maabara","Kurekodi na kuthibitisha matokeo","Kudumisha viwango vya usalama","Kuhakikisha udhibiti wa ubora"],
+    "Specialist": ["Kufanya uchunguzi wa kitaalamu","Kutoa ushauri wa kitaalamu","Kusimamia taratibu maalum","Kufanya tathmini za kitaalamu","Kushiriki katika rufaa"],
+    "Nurse": ["Kupima vipimo muhimu","Kusimamia dawa kwa usahihi","Kuandaa wagonjwa kwa taratibu","Kufuatilia hali ya wagonjwa","Kusimamia mipango ya wagonjwa"],
+    "Laboratory Scientist": ["Kuchukua sampuli kwa usahihi","Kufanya vipimo sahihi","Kurekodi na kuthibitisha matokeo","Kudumisha viwango vya usalama","Kuhakikisha udhibiti wa ubora"],
     "Pharmacist": ["Kuandaa dawa kwa usahihi","Kushauri wagonjwa kuhusu dawa","Kuhifadhi dawa kwa usalama","Kusimamia orodha ya dawa","Kuchakata maagizo kwa usahihi"]
 };
 
@@ -1638,10 +1721,7 @@ function renderChecklist(containerId, items, storageKey, countId) {
             </div>
         </div>`;
     }).join("");
-    
-    if (countId) {
-        updateChecklistCount(countId, containerId, storageKey);
-    }
+    if (countId) updateChecklistCount(countId);
 }
 
 function toggleChecklist(el, storageKey, index, countId) {
@@ -1649,17 +1729,14 @@ function toggleChecklist(el, storageKey, index, countId) {
     const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
     saved[index] = el.classList.contains("active");
     localStorage.setItem(storageKey, JSON.stringify(saved));
-    
-    if (countId) {
-        updateChecklistCount(countId, null, storageKey);
-    }
+    if (countId) updateChecklistCount(countId);
     autoSave();
     updateScoreSummary();
     updateSectionProgress();
     updateDashboard();
 }
 
-function updateChecklistCount(countId, containerId, storageKey) {
+function updateChecklistCount(countId) {
     const countEl = document.getElementById(countId);
     if (!countEl) return;
     let total = 0, checked = 0;
@@ -1699,15 +1776,11 @@ function playStarSound(rating) {
         const gainNode = audioCtx.createGain();
         oscillator.connect(gainNode);
         gainNode.connect(audioCtx.destination);
-        
-        let frequency = 440;
-        let duration = 0.2;
-        
+        let frequency = 440, duration = 0.2;
         if (rating <= 2) { frequency = 330; duration = 0.15; }
         else if (rating <= 4) { frequency = 523; duration = 0.2; }
         else {
-            frequency = 659;
-            duration = 0.35;
+            frequency = 659; duration = 0.35;
             setTimeout(() => {
                 const osc2 = audioCtx.createOscillator();
                 const gain2 = audioCtx.createGain();
@@ -1719,14 +1792,11 @@ function playStarSound(rating) {
                 osc2.stop(audioCtx.currentTime + 0.2);
             }, 150);
         }
-        
         oscillator.frequency.value = frequency;
         gainNode.gain.value = 0.15;
         oscillator.start();
         oscillator.stop(audioCtx.currentTime + duration);
-    } catch(e) {
-        console.log("Sauti haipatikani");
-    }
+    } catch(e) { console.log("Sauti haipatikani"); }
 }
 
 function selectStar(el) {
@@ -1751,7 +1821,7 @@ function selectStar(el) {
 function getStarValues() { return starRatings; }
 
 // ==============================================================
-// LOAD SUPERVISOR DATA
+// LOAD SUPERVISOR DATA (PAMOJA NA MAWASILIANO YA MSIMAMIZI)
 // ==============================================================
 function loadSupervisorData() {
     const workerName = document.getElementById("workerName").value.trim();
@@ -1765,6 +1835,12 @@ function loadSupervisorData() {
         document.getElementById("callBtn").style.display = 'none';
         document.getElementById("whatsappBtn").style.display = 'none';
         document.getElementById("emailBtn").style.display = 'none';
+        document.getElementById("supervisorPhoneDisplay").textContent = '-';
+        document.getElementById("supervisorWhatsAppDisplay").textContent = '-';
+        document.getElementById("supervisorEmailDisplay").textContent = '-';
+        document.getElementById("supervisorCallBtn").style.display = 'none';
+        document.getElementById("supervisorWhatsAppBtn").style.display = 'none';
+        document.getElementById("supervisorEmailBtn").style.display = 'none';
         return;
     }
     
@@ -1779,8 +1855,6 @@ function loadSupervisorData() {
         
         document.getElementById("supervisorNameDisplay").textContent = latest.supervisorName || '-';
         document.getElementById("supervisorTitleDisplay").textContent = latest.supervisorTitle || '-';
-        document.getElementById("supervisorPhoneDisplay").textContent = latest.supervisorPhone || '-';
-        document.getElementById("supervisorDeptDisplay").textContent = latest.supervisorDepartment || '-';
         document.getElementById("supervisorScoreDisplay").textContent = latest.score ? `${latest.score}%` : '-';
         document.getElementById("supervisorDateDisplay").textContent = latest.timestamp ? new Date(latest.timestamp).toLocaleDateString() : '-';
         document.getElementById("supervisorCommentsDisplay").textContent = latest.comments || 'Hakuna maoni';
@@ -1789,6 +1863,7 @@ function loadSupervisorData() {
         document.getElementById("supervisorScorePercent").textContent = score + '%';
         document.getElementById("supervisorProgressFill").style.width = score + '%';
         
+        // ===== PAKIA MAWASILIANO YA MTENDAKAZI =====
         workerContactData.phone = latest.workerPhone || '';
         workerContactData.whatsapp = latest.workerWhatsApp || '';
         workerContactData.email = latest.workerEmail || '';
@@ -1800,6 +1875,19 @@ function loadSupervisorData() {
         document.getElementById("callBtn").style.display = workerContactData.phone ? 'inline-flex' : 'none';
         document.getElementById("whatsappBtn").style.display = workerContactData.whatsapp ? 'inline-flex' : 'none';
         document.getElementById("emailBtn").style.display = workerContactData.email ? 'inline-flex' : 'none';
+        
+        // ===== PAKIA MAWASILIANO YA MSIMAMIZI (MPYA) =====
+        supervisorContactData.phone = latest.supervisorPhone || '';
+        supervisorContactData.whatsapp = latest.supervisorWhatsApp || '';
+        supervisorContactData.email = latest.supervisorEmail || '';
+        
+        document.getElementById("supervisorPhoneDisplay").textContent = supervisorContactData.phone || '-';
+        document.getElementById("supervisorWhatsAppDisplay").textContent = supervisorContactData.whatsapp || '-';
+        document.getElementById("supervisorEmailDisplay").textContent = supervisorContactData.email || '-';
+        
+        document.getElementById("supervisorCallBtn").style.display = supervisorContactData.phone ? 'inline-flex' : 'none';
+        document.getElementById("supervisorWhatsAppBtn").style.display = supervisorContactData.whatsapp ? 'inline-flex' : 'none';
+        document.getElementById("supervisorEmailBtn").style.display = supervisorContactData.email ? 'inline-flex' : 'none';
         
         document.getElementById("previewSupervisorName").textContent = latest.supervisorName || '-';
         document.getElementById("previewSupervisorTitle").textContent = latest.supervisorTitle || '-';
@@ -1815,70 +1903,92 @@ function loadSupervisorData() {
         document.getElementById("callBtn").style.display = 'none';
         document.getElementById("whatsappBtn").style.display = 'none';
         document.getElementById("emailBtn").style.display = 'none';
+        document.getElementById("supervisorPhoneDisplay").textContent = '-';
+        document.getElementById("supervisorWhatsAppDisplay").textContent = '-';
+        document.getElementById("supervisorEmailDisplay").textContent = '-';
+        document.getElementById("supervisorCallBtn").style.display = 'none';
+        document.getElementById("supervisorWhatsAppBtn").style.display = 'none';
+        document.getElementById("supervisorEmailBtn").style.display = 'none';
     }
 }
 
 // ==============================================================
-// MAWASILIANO FUNCTIONS
+// MAWASILIANO FUNCTIONS (ZILIZOBOBESHWA)
 // ==============================================================
-function makeCall() {
-    const phone = workerContactData.phone;
-    if (!phone) { showToast("⚠️ Hakuna namba ya simu", "warning"); return; }
+function makeCall(type) {
+    let phone = '';
+    let name = '';
+    if (type === 'worker') {
+        phone = workerContactData.phone;
+        name = 'mtendakazi';
+    } else if (type === 'supervisor') {
+        phone = supervisorContactData.phone;
+        name = 'msimamizi';
+    }
+    if (!phone) { showToast(`⚠️ Hakuna namba ya simu ya ${name}`, "warning"); return; }
     let cleanPhone = phone.replace(/[^0-9+]/g, '');
     if (!cleanPhone.startsWith('+')) cleanPhone = '+' + cleanPhone;
     window.location.href = `tel:${cleanPhone}`;
-    showToast(`📞 Inapiga simu ${phone}...`, "info");
+    showToast(`📞 Inapiga simu ${name}...`, "info");
 }
 
-function sendWhatsApp() {
-    const whatsapp = workerContactData.whatsapp;
-    if (!whatsapp) { showToast("⚠️ Hakuna namba ya WhatsApp", "warning"); return; }
+function sendWhatsApp(type) {
+    let whatsapp = '';
+    let name = '';
+    if (type === 'worker') {
+        whatsapp = workerContactData.whatsapp;
+        name = 'mtendakazi';
+    } else if (type === 'supervisor') {
+        whatsapp = supervisorContactData.whatsapp;
+        name = 'msimamizi';
+    }
+    if (!whatsapp) { showToast(`⚠️ Hakuna namba ya WhatsApp ya ${name}`, "warning"); return; }
     let cleanWhatsApp = whatsapp.replace(/[^0-9]/g, '');
     if (cleanWhatsApp.startsWith('0')) cleanWhatsApp = '255' + cleanWhatsApp.substring(1);
     if (!cleanWhatsApp.startsWith('255')) cleanWhatsApp = '255' + cleanWhatsApp;
-    const workerName = document.getElementById("workerName").value.trim() || 'Mtendakazi';
-    const message = `Habari ${workerName}, ninakutumia taarifa kuhusu tathmini yako ya utendaji. Tafadhali angalia maelezo yaliyotumwa na Mganga Mfawidhi.`;
+    const personName = document.getElementById("workerName").value.trim() || 'Mtendakazi';
+    const message = `Habari ${name === 'msimamizi' ? 'Msimamizi' : personName}, ninakutumia taarifa kuhusu tathmini yako ya utendaji.`;
     window.open(`https://wa.me/${cleanWhatsApp}?text=${encodeURIComponent(message)}`, '_blank');
-    showToast(`💬 Inafungua WhatsApp kwa ${whatsapp}...`, "success");
+    showToast(`💬 Inafungua WhatsApp kwa ${name}...`, "success");
 }
 
-function sendEmail() {
-    const email = workerContactData.email;
-    if (!email) { showToast("⚠️ Hakuna barua pepe", "warning"); return; }
-    const workerName = document.getElementById("workerName").value.trim() || 'Mtendakazi';
-    const subject = `Taarifa ya Tathmini - ${workerName}`;
-    const body = `Habari ${workerName},\n\nNinatuma taarifa kuhusu tathmini yako ya utendaji kazi. Tafadhali angalia ripoti iliyotumwa na Mganga Mfawidhi.\n\nAsante.`;
+function sendEmail(type) {
+    let email = '';
+    let name = '';
+    if (type === 'worker') {
+        email = workerContactData.email;
+        name = 'mtendakazi';
+    } else if (type === 'supervisor') {
+        email = supervisorContactData.email;
+        name = 'msimamizi';
+    }
+    if (!email) { showToast(`⚠️ Hakuna barua pepe ya ${name}`, "warning"); return; }
+    const personName = document.getElementById("workerName").value.trim() || 'Mtendakazi';
+    const subject = `Taarifa ya Tathmini - ${personName}`;
+    const body = `Habari ${name === 'msimamizi' ? 'Msimamizi' : personName},\n\nNinatuma taarifa kuhusu tathmini yako ya utendaji kazi.\n\nAsante.`;
     window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    showToast(`📧 Inafungua email kwa ${email}...`, "success");
+    showToast(`📧 Inafungua email kwa ${name}...`, "success");
 }
 
 // ==============================================================
-// DASHBOARD (VIPENGELE #1)
+// DASHBOARD
 // ==============================================================
 function updateDashboard() {
-    // Total assessments
     const total = reports.length;
     document.getElementById("totalAssessments").textContent = total;
     
-    // Approved rate
     const approved = reports.filter(r => r.finalDecision === 'approved' || r.status === 'Imekubaliwa').length;
     const rate = total > 0 ? Math.round((approved / total) * 100) : 0;
     document.getElementById("approvedRate").textContent = rate + '%';
     
-    // Pending
     const pending = reports.filter(r => r.finalDecision === 'pending' || r.status === 'Inasubiri Mganga Mfawidhi' || !r.finalDecision).length;
     document.getElementById("pendingCount").textContent = pending;
     
-    // Average score
-    let totalScore = 0;
-    let scored = 0;
-    reports.forEach(r => {
-        if (r.score) { totalScore += r.score; scored++; }
-    });
+    let totalScore = 0, scored = 0;
+    reports.forEach(r => { if (r.score) { totalScore += r.score; scored++; } });
     const avg = scored > 0 ? Math.round(totalScore / scored) : 0;
     document.getElementById("avgScore").textContent = avg + '%';
     
-    // Top worker
     if (reports.length > 0) {
         const scores = {};
         reports.forEach(r => {
@@ -1887,22 +1997,16 @@ function updateDashboard() {
                 scores[r.workerName].push(r.score);
             }
         });
-        let topName = '-';
-        let topScore = 0;
+        let topName = '-', topScore = 0;
         Object.keys(scores).forEach(name => {
             const avgScore = scores[name].reduce((a,b) => a+b, 0) / scores[name].length;
-            if (avgScore > topScore) {
-                topScore = avgScore;
-                topName = name;
-            }
+            if (avgScore > topScore) { topScore = avgScore; topName = name; }
         });
         document.getElementById("topWorker").textContent = topName !== '-' ? topName + ` (${Math.round(topScore)}%)` : '-';
     }
     
-    // Monthly count
     const now = new Date();
-    const month = now.getMonth();
-    const year = now.getFullYear();
+    const month = now.getMonth(), year = now.getFullYear();
     const monthly = reports.filter(r => {
         if (!r.timestamp) return false;
         const d = new Date(r.timestamp);
@@ -1910,20 +2014,18 @@ function updateDashboard() {
     }).length;
     document.getElementById("monthlyCount").textContent = monthly;
     
-    // Update reminder count
     const reminderItems = document.querySelectorAll('#reminderList .reminder-item').length;
     document.getElementById("reminderCount").textContent = reminderItems;
 }
 
 // ==============================================================
-// REMINDERS (VIPENGELE #2)
+// REMINDERS
 // ==============================================================
 function addReminder() {
     const title = prompt("📝 Weka kichwa cha kumbusho:", "Tathmini inayokaribia");
     if (!title) return;
     const desc = prompt("📝 Weka maelezo ya kumbusho:", "Tafadhali kamilisha tathmini kabla ya tarehe...");
     if (!desc) return;
-    
     const list = document.getElementById("reminderList");
     const item = document.createElement("div");
     item.className = "reminder-item";
@@ -1941,23 +2043,17 @@ function addReminder() {
 }
 
 // ==============================================================
-// CALENDAR (VIPENGELE #6)
+// CALENDAR
 // ==============================================================
 function renderCalendar() {
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    
+    const year = currentDate.getFullYear(), month = currentDate.getMonth();
     document.getElementById("calendarMonthYear").textContent = 
         new Date(year, month).toLocaleDateString('sw', { month: 'long', year: 'numeric' });
-    
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const daysInPrevMonth = new Date(year, month, 0).getDate();
-    
     const grid = document.getElementById("calendarGrid");
     grid.innerHTML = '';
-    
-    // Day names
     const dayNames = ['J2', 'J3', 'J4', 'J5', 'J6', 'J7', 'J1'];
     dayNames.forEach(name => {
         const div = document.createElement('div');
@@ -1965,38 +2061,28 @@ function renderCalendar() {
         div.textContent = name;
         grid.appendChild(div);
     });
-    
-    // Previous month days
     for (let i = firstDay - 1; i >= 0; i--) {
         const div = document.createElement('div');
         div.className = 'day other-month';
         div.textContent = daysInPrevMonth - i;
         grid.appendChild(div);
     }
-    
-    // Current month days
     const today = new Date();
     for (let i = 1; i <= daysInMonth; i++) {
         const div = document.createElement('div');
         div.className = 'day';
         div.textContent = i;
-        
         if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
             div.classList.add('today');
         }
-        
-        // Check if has events
         const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
         const dayEvents = events.filter(e => e.date === dateStr);
         if (dayEvents.length > 0) {
             div.classList.add('has-event', 'event-day');
         }
-        
         div.onclick = () => addEvent(dateStr);
         grid.appendChild(div);
     }
-    
-    // Next month days
     const totalDays = firstDay + daysInMonth;
     const remainingDays = (7 - (totalDays % 7)) % 7;
     for (let i = 1; i <= remainingDays; i++) {
@@ -2005,8 +2091,6 @@ function renderCalendar() {
         div.textContent = i;
         grid.appendChild(div);
     }
-    
-    // Render events
     renderEvents();
 }
 
@@ -2018,10 +2102,8 @@ function changeMonth(delta) {
 function addEvent(dateStr) {
     const title = prompt("📝 Weka tukio kwa tarehe " + dateStr + ":", "Mkutano wa ufuatiliaji");
     if (!title) return;
-    
     const time = prompt("🕐 Weka saa (kwa mfano 14:30):", "10:00");
     if (time === null) return;
-    
     events.push({ date: dateStr, title: title, time: time || '10:00' });
     localStorage.setItem('calendarEvents', JSON.stringify(events));
     renderCalendar();
@@ -2031,21 +2113,15 @@ function addEvent(dateStr) {
 
 function renderEvents() {
     const container = document.getElementById("eventList");
-    const today = new Date();
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    
-    // Filter events for current month
+    const year = currentDate.getFullYear(), month = currentDate.getMonth();
     const monthEvents = events.filter(e => {
         const parts = e.date.split('-');
         return parseInt(parts[0]) === year && parseInt(parts[1]) === month + 1;
     });
-    
     if (monthEvents.length === 0) {
         container.innerHTML = `<div style="font-size:12px; color:#7f8c8d; text-align:center;">Hakuna matukio kwa mwezi huu. Bonyeza tarehe kuongeza tukio.</div>`;
         return;
     }
-    
     container.innerHTML = monthEvents.map(e => `
         <div class="event-item">
             <span class="event-time">${e.time || '10:00'}</span>
@@ -2053,7 +2129,6 @@ function renderEvents() {
             <span class="event-remove" onclick="removeEvent('${e.date}', '${e.title}')">✕</span>
         </div>
     `).join('');
-    
     document.getElementById("eventCount").textContent = monthEvents.length + ' Matukio';
 }
 
@@ -2066,7 +2141,7 @@ function removeEvent(date, title) {
 }
 
 // ==============================================================
-// GROUP REPORTS (VIPENGELE #3)
+// GROUP REPORTS
 // ==============================================================
 function updateGroupReports() {
     const departments = {};
@@ -2081,24 +2156,18 @@ function updateGroupReports() {
         }
         if (r.score) departments[dept].scores.push(r.score);
     });
-    
     const container = document.getElementById("departmentReport");
     const deptNames = Object.keys(departments);
-    
     if (deptNames.length === 0) {
         container.innerHTML = `<div style="font-size:12px; color:#7f8c8d; text-align:center;">Hakuna ripoti za kikundi bado</div>`;
         document.getElementById("deptCount").textContent = '0 Idara';
         return;
     }
-    
     document.getElementById("deptCount").textContent = deptNames.length + ' Idara';
-    
     container.innerHTML = deptNames.map(dept => {
         const data = departments[dept];
         const avgScore = data.scores.length > 0 ? Math.round(data.scores.reduce((a,b) => a+b, 0) / data.scores.length) : 0;
-        const rate = data.total > 0 ? Math.round((data.approved / data.total) * 100) : 0;
         const scoreClass = avgScore >= 70 ? 'green' : avgScore >= 50 ? 'orange' : 'red';
-        
         return `
             <div class="dept-item">
                 <span class="dept-name">🏢 ${dept}</span>
@@ -2110,7 +2179,7 @@ function updateGroupReports() {
 }
 
 // ==============================================================
-// FUTURE GOALS (VIPENGELE #4)
+// FUTURE GOALS
 // ==============================================================
 function addGoal() {
     const title = prompt("🎯 Weka lengo mpya:", "Kuboresha utendaji kwa 10%");
@@ -2119,7 +2188,6 @@ function addGoal() {
     if (!desc) return;
     const deadline = prompt("📅 Weka tarehe ya mwisho (DD/MM/YYYY):", "31/12/2025");
     if (!deadline) return;
-    
     const container = document.getElementById("futureGoals");
     const item = document.createElement("div");
     item.className = "goal-item";
@@ -2157,14 +2225,13 @@ function updateGoalCount() {
 }
 
 // ==============================================================
-// EXPORT CSV (VIPENGELE #5)
+// EXPORT CSV
 // ==============================================================
 function exportCSV() {
     if (reports.length === 0) {
         showToast("⚠️ Hakuna data ya kuweka kwenye CSV", "warning");
         return;
     }
-    
     let csv = 'Nambari,Jina,Taaluma,Idara,Alama,Uamuzi,Tarehe\n';
     reports.forEach((r, i) => {
         const row = [
@@ -2178,7 +2245,6 @@ function exportCSV() {
         ];
         csv += row.join(',') + '\n';
     });
-    
     const blob = new Blob([csv], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -2200,24 +2266,16 @@ function updateSectionProgress() {
         'supervisorName', 'supervisorTitle', 'supervisorDepartment',
         'finalComments', 'finalRecommendations'
     ];
-    
-    let filled = 0;
-    let total = fields.length;
-    
+    let filled = 0, total = fields.length;
     fields.forEach(id => {
         const el = document.getElementById(id);
         if (el && el.value && el.value.trim()) filled++;
     });
-    
-    // Check star ratings
     const starValues = getStarValues();
     if (Object.keys(starValues).length >= 3) filled++;
     total++;
-    
-    // Check signature
     if (signatureData.incharge) filled++;
     total++;
-    
     const progress = Math.min(Math.round((filled / total) * 100), 100);
     document.getElementById("sectionProgressText").textContent = progress + '%';
     document.getElementById("sectionProgressBar").style.width = progress + '%';
@@ -2696,6 +2754,9 @@ async function finalizeAssessment(status, reason = "") {
         supervisorName: document.getElementById("supervisorName").value,
         supervisorTitle: document.getElementById("supervisorTitle").value,
         supervisorDepartment: document.getElementById("supervisorDepartment").value,
+        supervisorPhone: supervisorContactData.phone,
+        supervisorWhatsApp: supervisorContactData.whatsapp,
+        supervisorEmail: supervisorContactData.email,
         generalChecklist: getChecklistData("inchargeGeneralChecklist", "inchargeGeneral"),
         specialChecklist: getChecklistData("inchargeSpecialChecklist", "inchargeSpecial"),
         starRatings: getStarValues(),
@@ -2758,16 +2819,18 @@ window.onload = function() {
     console.log("✅ Mtwara Performance - Fomu ya Mganga Mfawidhi (Maboresho Yote)");
     console.log("📦 BIN ID:", BIN_ID);
     console.log("📋 Vipengele vipya:");
-    console.log("  1. Dashboard ya Takwimu ✅");
-    console.log("  2. Kumbusho za Ufuatiliaji ✅");
-    console.log("  3. Ripoti za Kikundi ✅");
-    console.log("  4. Malengo ya Baadaye ✅");
-    console.log("  5. Export CSV ✅");
-    console.log("  6. Kalenda ya Matukio ✅");
-    console.log("  7. Mawasiliano (Simu, WhatsApp, Email) ✅");
-    console.log("  8. Auto-Save ✅");
-    console.log("  9. Section Progress ✅");
-    console.log("  10. Mobile Responsive ✅");
+    console.log("  1. Mawasiliano ya Msimamizi (Simu, WhatsApp, Email) ✅");
+    console.log("  2. Vitufe vya Kupiga Simu, WhatsApp, Email kwa Msimamizi ✅");
+    console.log("  3. Dashboard ya Takwimu ✅");
+    console.log("  4. Kumbusho za Ufuatiliaji ✅");
+    console.log("  5. Ripoti za Kikundi ✅");
+    console.log("  6. Malengo ya Baadaye ✅");
+    console.log("  7. Export CSV ✅");
+    console.log("  8. Kalenda ya Matukio ✅");
+    console.log("  9. Auto-Save ✅");
+    console.log("  10. Section Progress ✅");
+    console.log("  11. Mobile Responsive ✅");
+    console.log("  12. Star Rating yenye Sauti ✅");
 };
 </script>
 
