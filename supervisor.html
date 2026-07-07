@@ -125,6 +125,280 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
+        /* ===== DASHBOARD STATS ===== */
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+            margin: 16px 0 20px 0;
+        }
+        .stat-card {
+            background: #fff;
+            padding: 16px 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border-color: #27ae60;
+        }
+        .stat-card .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: #1a5276;
+            display: block;
+            line-height: 1.2;
+        }
+        .stat-card .stat-number.green { color: #27ae60; }
+        .stat-card .stat-number.orange { color: #f39c12; }
+        .stat-card .stat-number.red { color: #e74c3c; }
+        .stat-card .stat-number.purple { color: #8e44ad; }
+        .stat-card .stat-number.blue { color: #1a5276; }
+        .stat-card .stat-label {
+            font-size: 11px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            margin-top: 4px;
+            letter-spacing: 0.5px;
+        }
+        .stat-card .stat-icon {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* ===== CALENDAR ===== */
+        .calendar-container {
+            background: #fff;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #e9ecef;
+            margin: 12px 0;
+        }
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .calendar-header .month-year {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a5276;
+        }
+        .calendar-header .nav-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 4px 12px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+        .calendar-header .nav-btn:hover {
+            background: #f0f2f5;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+        .calendar-grid .day-name {
+            font-size: 11px;
+            font-weight: 600;
+            color: #7f8c8d;
+            text-align: center;
+            padding: 6px 0;
+        }
+        .calendar-grid .day {
+            font-size: 13px;
+            text-align: center;
+            padding: 8px 4px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+        .calendar-grid .day:hover {
+            background: #f0f2f5;
+        }
+        .calendar-grid .day.today {
+            background: #d5f5e3;
+            color: #27ae60;
+            font-weight: 700;
+        }
+        .calendar-grid .day.has-event {
+            border-color: #27ae60;
+            position: relative;
+        }
+        .calendar-grid .day.has-event::after {
+            content: '•';
+            color: #27ae60;
+            font-size: 14px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .calendar-grid .day.other-month {
+            color: #d5d8dc;
+        }
+        .calendar-grid .day.event-day {
+            background: #d5f5e3;
+            color: #1a7a3a;
+            font-weight: 600;
+        }
+        .event-list {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e9ecef;
+        }
+        .event-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 4px;
+            font-size: 13px;
+            border-left: 3px solid #27ae60;
+        }
+        .event-item .event-time {
+            font-weight: 600;
+            color: #1a5276;
+            font-size: 11px;
+            min-width: 60px;
+        }
+        .event-item .event-title {
+            flex: 1;
+        }
+        .event-item .event-remove {
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* ===== REMINDERS ===== */
+        .reminder-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            margin-bottom: 6px;
+            transition: 0.3s;
+        }
+        .reminder-item:hover {
+            border-color: #27ae60;
+        }
+        .reminder-item .reminder-icon {
+            font-size: 20px;
+        }
+        .reminder-item .reminder-info {
+            flex: 1;
+        }
+        .reminder-item .reminder-info .title {
+            font-weight: 600;
+            color: #1a5276;
+            font-size: 13px;
+        }
+        .reminder-item .reminder-info .desc {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        .reminder-item .reminder-status {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 12px;
+        }
+        .reminder-item .reminder-status.urgent { background: #fadbd8; color: #e74c3c; }
+        .reminder-item .reminder-status.pending { background: #fef9e7; color: #f39c12; }
+        .reminder-item .reminder-status.done { background: #d5f5e3; color: #27ae60; }
+
+        /* ===== GROUP REPORTS ===== */
+        .group-report {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #e9ecef;
+            margin: 12px 0;
+        }
+        .group-report .dept-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 12px;
+            background: #fff;
+            border-radius: 6px;
+            margin-bottom: 4px;
+            border-left: 3px solid #27ae60;
+        }
+        .group-report .dept-item .dept-name {
+            flex: 1;
+            font-weight: 600;
+            color: #1a5276;
+        }
+        .group-report .dept-item .dept-stats {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        .group-report .dept-item .dept-score {
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .group-report .dept-item .dept-score.green { color: #27ae60; }
+        .group-report .dept-item .dept-score.orange { color: #f39c12; }
+        .group-report .dept-item .dept-score.red { color: #e74c3c; }
+
+        /* ===== FUTURE GOALS ===== */
+        .goal-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 14px;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            margin-bottom: 6px;
+            transition: 0.3s;
+        }
+        .goal-item:hover {
+            border-color: #27ae60;
+        }
+        .goal-item .goal-check {
+            margin-top: 2px;
+        }
+        .goal-item .goal-check input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #27ae60;
+        }
+        .goal-item .goal-info {
+            flex: 1;
+        }
+        .goal-item .goal-info .goal-title {
+            font-weight: 600;
+            color: #1a5276;
+            font-size: 13px;
+        }
+        .goal-item .goal-info .goal-desc {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        .goal-item .goal-info .goal-deadline {
+            font-size: 11px;
+            color: #e74c3c;
+        }
+
         .form-group { margin-bottom: 14px; }
         .form-group label {
             display: block;
@@ -287,7 +561,34 @@
             margin-left: auto;
         }
 
-        /* ===== LIKERT SCALE ===== */
+        .section-progress {
+            background: #fff;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #e9ecef;
+        }
+        .section-progress .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #1a5276;
+            margin-bottom: 4px;
+        }
+        .section-progress .progress-bar {
+            height: 6px;
+            background: #e8ecf1;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .section-progress .progress-bar .fill {
+            height: 100%;
+            background: linear-gradient(90deg, #27ae60, #1a5276);
+            border-radius: 3px;
+            transition: width 0.8s ease;
+            width: 0%;
+        }
+
         .likert-scale {
             display: flex;
             gap: 6px;
@@ -325,7 +626,6 @@
         }
         .likert-btn.selected .sub { color: rgba(255,255,255,0.8); }
 
-        /* ===== CHECKLIST ===== */
         .checklist-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -382,7 +682,6 @@
         }
         .checklist-item .toggle.active .thumb { left: 20px; }
 
-        /* ===== CONTACT CARDS ===== */
         .contact-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -445,36 +744,152 @@
         .contact-card .action-btn.email { background: #1a5276; color: #fff; }
         .contact-card .action-btn.email:hover { background: #154360; }
 
-        /* ===== SECTION PROGRESS ===== */
-        .section-progress {
-            background: #fff;
-            padding: 12px 16px;
+        .contact-info {
+            background: #fef9e7;
+            border: 2px solid #f39c12;
             border-radius: 10px;
-            margin-bottom: 16px;
-            border: 1px solid #e9ecef;
+            padding: 12px 16px;
+            margin-bottom: 12px;
         }
-        .section-progress .progress-header {
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
+        .contact-info .contact-title {
+            font-weight: 700;
             color: #1a5276;
-            margin-bottom: 4px;
-        }
-        .section-progress .progress-bar {
-            height: 6px;
-            background: #e8ecf1;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        .section-progress .progress-bar .fill {
-            height: 100%;
-            background: linear-gradient(90deg, #27ae60, #1a5276);
-            border-radius: 3px;
-            transition: width 0.8s ease;
-            width: 0%;
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* ===== SCORE BOX ===== */
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 8px 0;
+        }
+        @media (max-width: 600px) { .matrix-grid { grid-template-columns: 1fr; } }
+        .matrix-item {
+            background: #fff;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+        .matrix-item:hover { transform: translateX(4px); border-color: #27ae60; }
+        .matrix-item .label { font-size: 12px; color: #1a5276; }
+        .matrix-item .level {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 12px;
+        }
+        .matrix-item .level.high { background: #d5f5e3; color: #27ae60; }
+        .matrix-item .level.medium { background: #fdebd0; color: #f39c12; }
+        .matrix-item .level.low { background: #fadbd8; color: #e74c3c; }
+
+        .file-upload {
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .file-upload:hover { border-color: #27ae60; background: #f8f9fa; }
+        .file-upload input[type="file"] { display: none; }
+        .file-upload .icon { font-size: 30px; }
+        .file-upload .text { font-size: 13px; color: #7f8c8d; margin-top: 4px; }
+        .file-list { margin-top: 8px; }
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            margin-top: 4px;
+            font-size: 12px;
+        }
+        .file-item .remove { color: #e74c3c; cursor: pointer; }
+
+        .chart-container {
+            background: #fff;
+            border-radius: 10px;
+            padding: 16px;
+            margin: 14px 0;
+            border: 1px solid #e9ecef;
+        }
+        .chart-container .chart-title {
+            font-weight: 600;
+            color: #1a5276;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .chart-bars {
+            display: flex;
+            gap: 8px;
+            align-items: flex-end;
+            height: 120px;
+            padding: 8px 0;
+        }
+        @media (max-width: 600px) { .chart-bars { height: 80px; } }
+        .chart-bar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .chart-bar .bar {
+            width: 100%;
+            background: linear-gradient(180deg, #27ae60, #1a5276);
+            border-radius: 4px 4px 0 0;
+            min-height: 10px;
+            transition: height 0.8s ease;
+        }
+        .chart-bar .label {
+            font-size: 10px;
+            color: #7f8c8d;
+            text-align: center;
+        }
+        .chart-bar .value {
+            font-size: 11px;
+            font-weight: 700;
+            color: #1a5276;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+        .kpi-item {
+            background: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .kpi-item:hover { transform: translateY(-4px); box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        .kpi-item .value {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1a5276;
+            display: block;
+        }
+        .kpi-item .label {
+            font-size: 10px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+        }
+        .kpi-item .value.green { color: #27ae60; }
+        .kpi-item .value.orange { color: #f39c12; }
+        .kpi-item .value.red { color: #e74c3c; }
+
         .score-box {
             background: #d5f5e3;
             border-radius: 12px;
@@ -531,7 +946,6 @@
             background: linear-gradient(90deg, #27ae60, #1a5276);
         }
 
-        /* ===== NOTIFICATION ===== */
         .notification-box {
             background: #fef9e7;
             border-left: 4px solid #f39c12;
@@ -543,158 +957,6 @@
         .notification-box.success { background: #d5f5e3; border-left-color: #27ae60; }
         .notification-box.danger { background: #fadbd8; border-left-color: #e74c3c; }
 
-        /* ===== CONTACT INFO ===== */
-        .contact-info {
-            background: #fef9e7;
-            border: 2px solid #f39c12;
-            border-radius: 10px;
-            padding: 12px 16px;
-            margin-bottom: 12px;
-        }
-        .contact-info .contact-title {
-            font-weight: 700;
-            color: #1a5276;
-            font-size: 14px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* ===== MATRIX ===== */
-        .matrix-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 8px 0;
-        }
-        @media (max-width: 600px) { .matrix-grid { grid-template-columns: 1fr; } }
-        .matrix-item {
-            background: #fff;
-            padding: 10px 14px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: 0.3s;
-        }
-        .matrix-item:hover { transform: translateX(4px); border-color: #27ae60; }
-        .matrix-item .label { font-size: 12px; color: #1a5276; }
-        .matrix-item .level {
-            font-size: 12px;
-            font-weight: 600;
-            padding: 2px 12px;
-            border-radius: 12px;
-        }
-        .matrix-item .level.high { background: #d5f5e3; color: #27ae60; }
-        .matrix-item .level.medium { background: #fdebd0; color: #f39c12; }
-        .matrix-item .level.low { background: #fadbd8; color: #e74c3c; }
-
-        /* ===== FILE UPLOAD ===== */
-        .file-upload {
-            border: 2px dashed #dee2e6;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .file-upload:hover { border-color: #27ae60; background: #f8f9fa; }
-        .file-upload input[type="file"] { display: none; }
-        .file-upload .icon { font-size: 30px; }
-        .file-upload .text { font-size: 13px; color: #7f8c8d; margin-top: 4px; }
-        .file-list { margin-top: 8px; }
-        .file-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 4px 10px;
-            background: #f8f9fa;
-            border-radius: 4px;
-            margin-top: 4px;
-            font-size: 12px;
-        }
-        .file-item .remove { color: #e74c3c; cursor: pointer; }
-
-        /* ===== CHART ===== */
-        .chart-container {
-            background: #fff;
-            border-radius: 10px;
-            padding: 16px;
-            margin: 14px 0;
-            border: 1px solid #e9ecef;
-        }
-        .chart-container .chart-title {
-            font-weight: 600;
-            color: #1a5276;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-        .chart-bars {
-            display: flex;
-            gap: 8px;
-            align-items: flex-end;
-            height: 120px;
-            padding: 8px 0;
-        }
-        @media (max-width: 600px) { .chart-bars { height: 80px; } }
-        .chart-bar {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-        .chart-bar .bar {
-            width: 100%;
-            background: linear-gradient(180deg, #27ae60, #1a5276);
-            border-radius: 4px 4px 0 0;
-            min-height: 10px;
-            transition: height 0.8s ease;
-        }
-        .chart-bar .label {
-            font-size: 10px;
-            color: #7f8c8d;
-            text-align: center;
-        }
-        .chart-bar .value {
-            font-size: 11px;
-            font-weight: 700;
-            color: #1a5276;
-        }
-
-        /* ===== KPI ===== */
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-        }
-        .kpi-item {
-            background: #fff;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-            text-align: center;
-            transition: 0.3s;
-        }
-        .kpi-item:hover { transform: translateY(-4px); box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
-        .kpi-item .value {
-            font-size: 22px;
-            font-weight: 800;
-            color: #1a5276;
-            display: block;
-        }
-        .kpi-item .label {
-            font-size: 10px;
-            color: #7f8c8d;
-            text-transform: uppercase;
-        }
-        .kpi-item .value.green { color: #27ae60; }
-        .kpi-item .value.orange { color: #f39c12; }
-        .kpi-item .value.red { color: #e74c3c; }
-
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .form-card { padding: 16px; }
             .form-row { grid-template-columns: 1fr; }
@@ -703,11 +965,14 @@
             .user-tools .last-saved { margin-left: 0; width: 100%; text-align: center; }
             .matrix-grid { grid-template-columns: 1fr; }
             .kpi-grid { grid-template-columns: 1fr 1fr; }
+            .dashboard-stats { grid-template-columns: 1fr 1fr; }
+            .calendar-grid .day { font-size: 11px; padding: 4px 2px; }
             .likert-scale .likert-btn { font-size: 10px; padding: 4px 8px; min-width: 35px; }
         }
         @media (max-width: 400px) {
             .score-row { grid-template-columns: 1fr; }
             .kpi-grid { grid-template-columns: 1fr; }
+            .dashboard-stats { grid-template-columns: 1fr; }
             .header h1 { font-size: 20px; }
             .header h2 { font-size: 13px; }
         }
@@ -721,7 +986,7 @@
 <!-- ===== LOGIN ===== -->
 <div id="loginSection" class="login-box">
     <h2>🔐 Mtwara Performance</h2>
-    <p class="subtitle">Fomu ya Msimamizi - Toleo la Kimataifa</p>
+    <p class="subtitle">Fomu ya Msimamizi - Maboresho Yote</p>
     <div style="text-align:center; margin-bottom:16px; font-size:12px; color:#7f8c8d;">
         <span id="connectionStatus">🔄 Inaunganisha...</span>
     </div>
@@ -746,7 +1011,7 @@
         <div class="header">
             <div class="org-badge">👔 Mtwara SDA Dispensary</div>
             <h1>Fomu ya Msimamizi</h1>
-            <h2>Tathmini ya Utendaji Kazi - Toleo la Kimataifa</h2>
+            <h2>Tathmini ya Utendaji Kazi - Maboresho Yote</h2>
             <div style="font-size:12px; color:#7f8c8d; margin-top:4px;">
                 <span id="userBadge" class="user-badge">👤 Imetoka nje</span>
                 <span style="margin-left:12px; font-size:11px; color:#27ae60;">☁️ Online</span>
@@ -763,7 +1028,8 @@
             <span id="roleDisplay" class="role-badge">👔 Msimamizi</span>
             <button class="btn btn-danger btn-sm" onclick="logout()">🚪 Toka</button>
             <button class="btn btn-warning btn-sm" onclick="syncData()" id="syncBtn">🔄 Sync</button>
-            <button class="btn btn-success btn-sm" onclick="exportReport()" id="exportBtn">📊 Export PDF</button>
+            <button class="btn btn-success btn-sm" onclick="exportReport()">📊 PDF</button>
+            <button class="btn btn-primary btn-sm" onclick="exportCSV()">📊 CSV</button>
             <span id="lastSaved" class="last-saved">💾 Imehifadhiwa: sasa hivi</span>
         </div>
 
@@ -775,6 +1041,171 @@
             </div>
             <div class="progress-bar">
                 <div class="fill" id="sectionProgressBar" style="width:0%;"></div>
+            </div>
+        </div>
+
+        <!-- ===== DASHBOARD STATS (#1) ===== -->
+        <div class="dashboard-stats" id="dashboardStats">
+            <div class="stat-card">
+                <span class="stat-icon">📊</span>
+                <span class="stat-number" id="totalAssessments">0</span>
+                <span class="stat-label">Jumla ya Tathmini</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">✅</span>
+                <span class="stat-number green" id="approvedRate">0%</span>
+                <span class="stat-label">Kiwango cha Idhini</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">⏳</span>
+                <span class="stat-number orange" id="pendingCount">0</span>
+                <span class="stat-label">Zinazosubiri</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">⭐</span>
+                <span class="stat-number purple" id="avgScore">0%</span>
+                <span class="stat-label">Wastani wa Alama</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">🏆</span>
+                <span class="stat-number blue" id="topWorker">-</span>
+                <span class="stat-label">Mtendakazi Bora</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">📅</span>
+                <span class="stat-number" id="monthlyCount">0</span>
+                <span class="stat-label">Tathmini Mwezi Huu</span>
+            </div>
+        </div>
+
+        <!-- ===== KUMBUSHO ZA UFUATILIAJI (#2) ===== -->
+        <div style="background:#fef9e7; border-radius:12px; padding:16px 20px; margin-bottom:16px; border-left:4px solid #f39c12;">
+            <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+                🔔 KUMBUSHO ZA UFUATILIAJI
+                <span style="font-size:10px; background:#f39c12; color:#fff; padding:2px 12px; border-radius:12px;" id="reminderCount">0</span>
+            </div>
+            <div id="reminderList">
+                <div class="reminder-item">
+                    <span class="reminder-icon">⚠️</span>
+                    <div class="reminder-info">
+                        <div class="title">Tathmini Inakaribia Tarehe ya Mwisho</div>
+                        <div class="desc">Tathmini za mwezi huu zinahitaji kukamilishwa kabla ya tarehe 30</div>
+                    </div>
+                    <span class="reminder-status urgent">Haraka</span>
+                </div>
+                <div class="reminder-item">
+                    <span class="reminder-icon">📋</span>
+                    <div class="reminder-info">
+                        <div class="title">Malengo Yasiyofikiwa</div>
+                        <div class="desc">Wafanyakazi 3 wameshindwa kufikia malengo yao</div>
+                    </div>
+                    <span class="reminder-status pending">Inasubiri</span>
+                </div>
+                <div class="reminder-item">
+                    <span class="reminder-icon">📅</span>
+                    <div class="reminder-info">
+                        <div class="title">Mikutano ya Ufuatiliaji</div>
+                        <div class="desc">Mikutano ya ufuatiliaji imeratibiwa Jumatano wiki hii</div>
+                    </div>
+                    <span class="reminder-status pending">Inasubiri</span>
+                </div>
+            </div>
+            <div style="margin-top:10px;">
+                <button class="btn btn-primary btn-sm" onclick="addReminder()">➕ Ongeza Kumbusho</button>
+            </div>
+        </div>
+
+        <!-- ===== KALENDA (#3) ===== -->
+        <div style="background:#f8f9fa; border-radius:12px; padding:16px 20px; margin-bottom:16px; border:1px solid #e9ecef;">
+            <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+                📅 KALENDA YA MATUKIO
+                <span style="font-size:10px; background:#27ae60; color:#fff; padding:2px 12px; border-radius:12px;" id="eventCount">0 Matukio</span>
+            </div>
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button class="nav-btn" onclick="changeMonth(-1)">◀</button>
+                    <span class="month-year" id="calendarMonthYear">Januari 2025</span>
+                    <button class="nav-btn" onclick="changeMonth(1)">▶</button>
+                </div>
+                <div class="calendar-grid" id="calendarGrid">
+                    <!-- Calendar days will be rendered here -->
+                </div>
+                <div class="event-list" id="eventList">
+                    <div style="font-size:12px; color:#7f8c8d; text-align:center;">Bonyeza tarehe kuongeza tukio</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== RIPOTI ZA KIKUNDI (#4) ===== -->
+        <div class="group-report">
+            <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+                🏢 RIPOTI ZA KIKUNDI
+                <span style="font-size:10px; background:#27ae60; color:#fff; padding:2px 12px; border-radius:12px;" id="deptCount">0 Idara</span>
+            </div>
+            <div id="departmentReport">
+                <div class="dept-item">
+                    <span class="dept-name">🏥 Idara ya Matibabu</span>
+                    <span class="dept-stats">Wafanyakazi: 12 | Waliopendekezwa: 10</span>
+                    <span class="dept-score green">83%</span>
+                </div>
+                <div class="dept-item">
+                    <span class="dept-name">💊 Idara ya Dawa</span>
+                    <span class="dept-stats">Wafanyakazi: 8 | Waliopendekezwa: 6</span>
+                    <span class="dept-score orange">75%</span>
+                </div>
+                <div class="dept-item">
+                    <span class="dept-name">🔬 Idara ya Maabara</span>
+                    <span class="dept-stats">Wafanyakazi: 6 | Waliopendekezwa: 5</span>
+                    <span class="dept-score green">88%</span>
+                </div>
+                <div class="dept-item">
+                    <span class="dept-name">💉 Idara ya Uuguzi</span>
+                    <span class="dept-stats">Wafanyakazi: 15 | Waliopendekezwa: 12</span>
+                    <span class="dept-score green">80%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== MALENGO YA BAADAYE (#5) ===== -->
+        <div style="background:#eaf2f8; border-radius:12px; padding:16px 20px; margin-bottom:16px; border-left:4px solid #27ae60;">
+            <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+                🎯 MALENGO YA BAADAYE
+                <span style="font-size:10px; background:#27ae60; color:#fff; padding:2px 12px; border-radius:12px;" id="goalCount">0</span>
+            </div>
+            <div id="futureGoals">
+                <div class="goal-item">
+                    <div class="goal-check">
+                        <input type="checkbox" onchange="toggleGoal(this)">
+                    </div>
+                    <div class="goal-info">
+                        <div class="goal-title">Kupata Cheti cha Uongozi</div>
+                        <div class="goal-desc">Kuhudhuria mafunzo ya uongozi na kupata cheti</div>
+                        <div class="goal-deadline">📅 Tarehe ya Mwisho: 31/12/2025</div>
+                    </div>
+                </div>
+                <div class="goal-item">
+                    <div class="goal-check">
+                        <input type="checkbox" onchange="toggleGoal(this)">
+                    </div>
+                    <div class="goal-info">
+                        <div class="goal-title">Kuboresha Mawasiliano</div>
+                        <div class="goal-desc">Kuhudhuria warsha ya mawasiliano bora</div>
+                        <div class="goal-deadline">📅 Tarehe ya Mwisho: 30/06/2025</div>
+                    </div>
+                </div>
+                <div class="goal-item">
+                    <div class="goal-check">
+                        <input type="checkbox" onchange="toggleGoal(this)">
+                    </div>
+                    <div class="goal-info">
+                        <div class="goal-title">Kufikia Alama 90% katika Tathmini</div>
+                        <div class="goal-desc">Kuboresha utendaji ili kufikia alama za juu</div>
+                        <div class="goal-deadline">📅 Tarehe ya Mwisho: 31/12/2025</div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:10px;">
+                <button class="btn btn-primary btn-sm" onclick="addGoal()">➕ Ongeza Lengo</button>
             </div>
         </div>
 
@@ -795,7 +1226,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>👤 Jina Kamili la Mtendakazi <span class="required">*</span></label>
-                        <input type="text" id="workerName" placeholder="Jina la mtendakazi" value="" onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();">
+                        <input type="text" id="workerName" placeholder="Jina la mtendakazi" value="" onchange="autoSave(); updateSectionProgress(); updateDashboard();" oninput="autoSave(); updateSectionProgress(); updateDashboard();">
                     </div>
                     <div class="form-group">
                         <label>📋 Taaluma <span class="required">*</span></label>
@@ -824,10 +1255,9 @@
                 </div>
                 <div class="form-group">
                     <label>🏢 Idara ya Mtendakazi</label>
-                    <input type="text" id="workerDepartment" value="Clinical" onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();">
+                    <input type="text" id="workerDepartment" value="Clinical" onchange="autoSave(); updateSectionProgress(); updateDashboard(); updateGroupReports();" oninput="autoSave(); updateSectionProgress(); updateDashboard(); updateGroupReports();">
                 </div>
 
-                <!-- ===== MAWASILIANO YA MTENDAKAZI ===== -->
                 <div class="contact-info">
                     <div class="contact-title">📞 MAWASILIANO YA MTENDAKAZI</div>
                     <div class="form-row">
@@ -861,7 +1291,7 @@
             </div>
 
             <!-- ========================================================== -->
-            <!-- SEHEMU 3: TAARIFA ZA MSIMAMIZI (ZILIZOBOBESHWA) -->
+            <!-- SEHEMU 3: TAARIFA ZA MSIMAMIZI -->
             <!-- ========================================================== -->
             <div style="background:#d5f5e3; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #27ae60;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">👔 TAARIFA ZA MSIMAMIZI</div>
@@ -886,7 +1316,6 @@
                     <input type="text" id="supervisorDepartment" value="Clinical" onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();">
                 </div>
 
-                <!-- ===== MAWASILIANO YA MSIMAMIZI (MPYA) ===== -->
                 <div style="margin-top:12px; background:#fff; border-radius:8px; padding:12px 16px; border:2px solid #27ae60;">
                     <div style="font-weight:700; color:#27ae60; font-size:14px; margin-bottom:8px; display:flex; align-items:center; gap:8px;">
                         📞 MAWASILIANO YA MSIMAMIZI
@@ -1178,9 +1607,9 @@
 
         <div class="footer">
             <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
-            <div>Mtwara Performance | Fomu ya Msimamizi | Toleo la Kimataifa</div>
+            <div>Mtwara Performance | Fomu ya Msimamizi | Maboresho Yote</div>
             <div style="margin-top:4px; font-size:10px; color:#aab;">
-                🔄 Auto-Save | 📊 KPI Tracker | 🎯 SMART Goals | 📈 Performance Trends | ⭐ 360° Feedback
+                📊 Dashboard | 🔔 Kumbusho | 📅 Kalenda | 🏢 Ripoti za Kikundi | 🎯 Malengo | 📊 CSV
             </div>
         </div>
 
@@ -1189,7 +1618,7 @@
 
 <script>
 // ==============================================================
-// JSONBIN CONFIGURATION
+// CONFIGURATION
 // ==============================================================
 const API_KEY = "$2a$10$VfPZVlhjWTV.gErIv2yxX.3QmHdrMCgM1evuIR.BJreI7G0jQxGqW";
 const BIN_ID = "6a4b0bc9da38895dfe32cc08";
@@ -1201,6 +1630,8 @@ let reports = [];
 let signatureData = { supervisor: null };
 let uploadedFiles = [];
 let autoSaveInterval = null;
+let currentDate = new Date();
+let events = JSON.parse(localStorage.getItem('calendarEventsSupervisor') || '[]');
 
 // ==============================================================
 // CHECKLIST DATA
@@ -1509,7 +1940,6 @@ function updateSectionProgress() {
         if (el && el.value && el.value.trim()) filled++;
     });
     
-    // Check select fields
     const selectFields = ['workerRole', 'workerShift', 'supervisorTitle', 'goalsAchieved'];
     selectFields.forEach(id => {
         const el = document.getElementById(id);
@@ -1517,7 +1947,6 @@ function updateSectionProgress() {
     });
     total += selectFields.length;
     
-    // Check Likert ratings
     const likertFields = ['sPunctuality', 'sQuality', 'sTeamwork', 'sLeadership', 'sCommunication', 'sDecision'];
     likertFields.forEach(id => {
         const sel = document.querySelector(`#${id} .likert-btn.selected`);
@@ -1525,7 +1954,6 @@ function updateSectionProgress() {
     });
     total += likertFields.length;
     
-    // Check signature
     if (signatureData.supervisor) filled++;
     total++;
     
@@ -1592,10 +2020,334 @@ function restoreDraft() {
             showToast("📂 Rasimu imerejeshwa!", "info");
             updateSectionProgress();
             updateScoreSummary();
+            updateDashboard();
+            updateGroupReports();
         }
     } catch (e) {
         console.warn("Restore draft error:", e);
     }
+}
+
+// ==============================================================
+// DASHBOARD STATS (#1)
+// ==============================================================
+function updateDashboard() {
+    const total = reports.length;
+    document.getElementById("totalAssessments").textContent = total;
+    
+    const approved = reports.filter(r => r.finalDecision === 'approved' || r.status === 'Imekubaliwa').length;
+    const rate = total > 0 ? Math.round((approved / total) * 100) : 0;
+    document.getElementById("approvedRate").textContent = rate + '%';
+    
+    const pending = reports.filter(r => r.finalDecision === 'pending' || r.status === 'Inasubiri Mganga Mfawidhi' || !r.finalDecision).length;
+    document.getElementById("pendingCount").textContent = pending;
+    
+    let totalScore = 0;
+    let scored = 0;
+    reports.forEach(r => {
+        if (r.score) { totalScore += r.score; scored++; }
+    });
+    const avg = scored > 0 ? Math.round(totalScore / scored) : 0;
+    document.getElementById("avgScore").textContent = avg + '%';
+    
+    if (reports.length > 0) {
+        const scores = {};
+        reports.forEach(r => {
+            if (r.workerName && r.score) {
+                if (!scores[r.workerName]) scores[r.workerName] = [];
+                scores[r.workerName].push(r.score);
+            }
+        });
+        let topName = '-';
+        let topScore = 0;
+        Object.keys(scores).forEach(name => {
+            const avgScore = scores[name].reduce((a,b) => a+b, 0) / scores[name].length;
+            if (avgScore > topScore) {
+                topScore = avgScore;
+                topName = name;
+            }
+        });
+        document.getElementById("topWorker").textContent = topName !== '-' ? topName + ` (${Math.round(topScore)}%)` : '-';
+    }
+    
+    const now = new Date();
+    const month = now.getMonth();
+    const year = now.getFullYear();
+    const monthly = reports.filter(r => {
+        if (!r.timestamp) return false;
+        const d = new Date(r.timestamp);
+        return d.getMonth() === month && d.getFullYear() === year;
+    }).length;
+    document.getElementById("monthlyCount").textContent = monthly;
+    
+    const reminderItems = document.querySelectorAll('#reminderList .reminder-item').length;
+    document.getElementById("reminderCount").textContent = reminderItems;
+}
+
+// ==============================================================
+// REMINDERS (#2)
+// ==============================================================
+function addReminder() {
+    const title = prompt("📝 Weka kichwa cha kumbusho:", "Tathmini inayokaribia");
+    if (!title) return;
+    const desc = prompt("📝 Weka maelezo ya kumbusho:", "Tafadhali kamilisha tathmini kabla ya tarehe...");
+    if (!desc) return;
+    
+    const list = document.getElementById("reminderList");
+    const item = document.createElement("div");
+    item.className = "reminder-item";
+    item.innerHTML = `
+        <span class="reminder-icon">📌</span>
+        <div class="reminder-info">
+            <div class="title">${title}</div>
+            <div class="desc">${desc}</div>
+        </div>
+        <span class="reminder-status pending" onclick="this.parentElement.remove(); updateDashboard();">❌ Ondoa</span>
+    `;
+    list.appendChild(item);
+    updateDashboard();
+    showToast("✅ Kumbusho limeongezwa!", "success");
+}
+
+// ==============================================================
+// CALENDAR (#3)
+// ==============================================================
+function renderCalendar() {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    
+    document.getElementById("calendarMonthYear").textContent = 
+        new Date(year, month).toLocaleDateString('sw', { month: 'long', year: 'numeric' });
+    
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const daysInPrevMonth = new Date(year, month, 0).getDate();
+    
+    const grid = document.getElementById("calendarGrid");
+    grid.innerHTML = '';
+    
+    const dayNames = ['J2', 'J3', 'J4', 'J5', 'J6', 'J7', 'J1'];
+    dayNames.forEach(name => {
+        const div = document.createElement('div');
+        div.className = 'day-name';
+        div.textContent = name;
+        grid.appendChild(div);
+    });
+    
+    for (let i = firstDay - 1; i >= 0; i--) {
+        const div = document.createElement('div');
+        div.className = 'day other-month';
+        div.textContent = daysInPrevMonth - i;
+        grid.appendChild(div);
+    }
+    
+    const today = new Date();
+    for (let i = 1; i <= daysInMonth; i++) {
+        const div = document.createElement('div');
+        div.className = 'day';
+        div.textContent = i;
+        
+        if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+            div.classList.add('today');
+        }
+        
+        const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
+        const dayEvents = events.filter(e => e.date === dateStr);
+        if (dayEvents.length > 0) {
+            div.classList.add('has-event', 'event-day');
+        }
+        
+        div.onclick = () => addEvent(dateStr);
+        grid.appendChild(div);
+    }
+    
+    const totalDays = firstDay + daysInMonth;
+    const remainingDays = (7 - (totalDays % 7)) % 7;
+    for (let i = 1; i <= remainingDays; i++) {
+        const div = document.createElement('div');
+        div.className = 'day other-month';
+        div.textContent = i;
+        grid.appendChild(div);
+    }
+    
+    renderEvents();
+}
+
+function changeMonth(delta) {
+    currentDate.setMonth(currentDate.getMonth() + delta);
+    renderCalendar();
+}
+
+function addEvent(dateStr) {
+    const title = prompt("📝 Weka tukio kwa tarehe " + dateStr + ":", "Mkutano wa ufuatiliaji");
+    if (!title) return;
+    
+    const time = prompt("🕐 Weka saa (kwa mfano 14:30):", "10:00");
+    if (time === null) return;
+    
+    events.push({ date: dateStr, title: title, time: time || '10:00' });
+    localStorage.setItem('calendarEventsSupervisor', JSON.stringify(events));
+    renderCalendar();
+    showToast("✅ Tukio limeongezwa kwenye kalenda!", "success");
+}
+
+function renderEvents() {
+    const container = document.getElementById("eventList");
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    
+    const monthEvents = events.filter(e => {
+        const parts = e.date.split('-');
+        return parseInt(parts[0]) === year && parseInt(parts[1]) === month + 1;
+    });
+    
+    if (monthEvents.length === 0) {
+        container.innerHTML = `<div style="font-size:12px; color:#7f8c8d; text-align:center;">Hakuna matukio kwa mwezi huu. Bonyeza tarehe kuongeza tukio.</div>`;
+        return;
+    }
+    
+    container.innerHTML = monthEvents.map(e => `
+        <div class="event-item">
+            <span class="event-time">${e.time || '10:00'}</span>
+            <span class="event-title">${e.title}</span>
+            <span class="event-remove" onclick="removeEvent('${e.date}', '${e.title}')">✕</span>
+        </div>
+    `).join('');
+    
+    document.getElementById("eventCount").textContent = monthEvents.length + ' Matukio';
+}
+
+function removeEvent(date, title) {
+    events = events.filter(e => !(e.date === date && e.title === title));
+    localStorage.setItem('calendarEventsSupervisor', JSON.stringify(events));
+    renderCalendar();
+    showToast("🗑️ Tukio limeondolewa", "info");
+}
+
+// ==============================================================
+// GROUP REPORTS (#4)
+// ==============================================================
+function updateGroupReports() {
+    const departments = {};
+    reports.forEach(r => {
+        const dept = r.workerDepartment || 'Idara Nyingine';
+        if (!departments[dept]) {
+            departments[dept] = { total: 0, approved: 0, scores: [] };
+        }
+        departments[dept].total++;
+        if (r.finalDecision === 'approved' || r.status === 'Imekubaliwa') {
+            departments[dept].approved++;
+        }
+        if (r.score) departments[dept].scores.push(r.score);
+    });
+    
+    const container = document.getElementById("departmentReport");
+    const deptNames = Object.keys(departments);
+    
+    if (deptNames.length === 0) {
+        container.innerHTML = `<div style="font-size:12px; color:#7f8c8d; text-align:center;">Hakuna ripoti za kikundi bado</div>`;
+        document.getElementById("deptCount").textContent = '0 Idara';
+        return;
+    }
+    
+    document.getElementById("deptCount").textContent = deptNames.length + ' Idara';
+    
+    container.innerHTML = deptNames.map(dept => {
+        const data = departments[dept];
+        const avgScore = data.scores.length > 0 ? Math.round(data.scores.reduce((a,b) => a+b, 0) / data.scores.length) : 0;
+        const rate = data.total > 0 ? Math.round((data.approved / data.total) * 100) : 0;
+        const scoreClass = avgScore >= 70 ? 'green' : avgScore >= 50 ? 'orange' : 'red';
+        
+        return `
+            <div class="dept-item">
+                <span class="dept-name">🏢 ${dept}</span>
+                <span class="dept-stats">Wafanyakazi: ${data.total} | Waliopendekezwa: ${data.approved}</span>
+                <span class="dept-score ${scoreClass}">${avgScore}%</span>
+            </div>
+        `;
+    }).join('');
+}
+
+// ==============================================================
+// FUTURE GOALS (#5)
+// ==============================================================
+function addGoal() {
+    const title = prompt("🎯 Weka lengo mpya:", "Kuboresha utendaji kwa 10%");
+    if (!title) return;
+    const desc = prompt("📝 Weka maelezo ya lengo:", "Kuhudhuria mafunzo na kuboresha ujuzi");
+    if (!desc) return;
+    const deadline = prompt("📅 Weka tarehe ya mwisho (DD/MM/YYYY):", "31/12/2025");
+    if (!deadline) return;
+    
+    const container = document.getElementById("futureGoals");
+    const item = document.createElement("div");
+    item.className = "goal-item";
+    item.innerHTML = `
+        <div class="goal-check">
+            <input type="checkbox" onchange="toggleGoal(this)">
+        </div>
+        <div class="goal-info">
+            <div class="goal-title">${title}</div>
+            <div class="goal-desc">${desc}</div>
+            <div class="goal-deadline">📅 Tarehe ya Mwisho: ${deadline}</div>
+        </div>
+    `;
+    container.appendChild(item);
+    updateGoalCount();
+    showToast("✅ Lengo limeongezwa!", "success");
+}
+
+function toggleGoal(checkbox) {
+    const goalItem = checkbox.closest('.goal-item');
+    if (checkbox.checked) {
+        goalItem.style.opacity = '0.6';
+        goalItem.style.textDecoration = 'line-through';
+        showToast("✅ Lengo limekamilika!", "success");
+    } else {
+        goalItem.style.opacity = '1';
+        goalItem.style.textDecoration = 'none';
+    }
+    updateGoalCount();
+}
+
+function updateGoalCount() {
+    const goals = document.querySelectorAll('#futureGoals .goal-item').length;
+    document.getElementById("goalCount").textContent = goals;
+}
+
+// ==============================================================
+// EXPORT CSV (#6)
+// ==============================================================
+function exportCSV() {
+    if (reports.length === 0) {
+        showToast("⚠️ Hakuna data ya kuweka kwenye CSV", "warning");
+        return;
+    }
+    
+    let csv = 'Nambari,Jina,Taaluma,Idara,Alama,Uamuzi,Tarehe\n';
+    reports.forEach((r, i) => {
+        const row = [
+            i + 1,
+            r.workerName || '-',
+            r.workerRole || '-',
+            r.workerDepartment || '-',
+            r.score || 0,
+            r.finalDecision || r.status || 'Inasubiri',
+            r.timestamp ? new Date(r.timestamp).toLocaleDateString() : '-'
+        ];
+        csv += row.join(',') + '\n';
+    });
+    
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Ripoti_Tathmini_${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast("✅ CSV imepakuliwa!", "success");
 }
 
 // ==============================================================
@@ -1706,6 +2458,10 @@ async function login() {
     updateNotification();
     updateScoreSummary();
     updateSectionProgress();
+    renderCalendar();
+    updateDashboard();
+    updateGroupReports();
+    updateGoalCount();
     restoreDraft();
     
     if (autoSaveInterval) clearInterval(autoSaveInterval);
@@ -1731,6 +2487,8 @@ async function syncData() {
     if (data) {
         reports = data.reports || [];
         showToast(`✅ Data imesawazishwa! Reports: ${reports.length}`, "success");
+        updateDashboard();
+        updateGroupReports();
     }
     document.getElementById("syncBtn").innerHTML = '🔄 Sync';
 }
@@ -1777,14 +2535,14 @@ function updateScoreSummary() {
 }
 
 // ==============================================================
-// EXPORT REPORT
+// EXPORT REPORT (PDF)
 // ==============================================================
 function exportReport() {
     showToast("📊 Inaandaa ripoti...", "info");
     setTimeout(() => {
         try {
             const content = document.getElementById("formSupervisor").cloneNode(true);
-            content.querySelectorAll(".signature-pad, .signature-actions, .toast, .user-tools, .export-tools").forEach(el => el.remove());
+            content.querySelectorAll(".signature-pad, .signature-actions, .toast, .user-tools, .export-tools, .section-progress, .dashboard-stats, #reminderList, .calendar-container, .group-report, #futureGoals").forEach(el => el.remove());
             
             const win = window.open('', '_blank', 'width=1000,height=800');
             win.document.write(`
@@ -1811,7 +2569,7 @@ function exportReport() {
                 ${content.innerHTML}
                 <div class="footer">
                     <p>"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</p>
-                    <p>Mtwara Performance | Fomu ya Msimamizi | Toleo la Kimataifa</p>
+                    <p>Mtwara Performance | Fomu ya Msimamizi | Maboresho Yote</p>
                 </div>
                 <script>window.onload = function(){ window.print(); }</script>
             </body></html>
@@ -1825,7 +2583,7 @@ function exportReport() {
 }
 
 // ==============================================================
-// SUBMIT SUPERVISOR (ILIOBORESHA)
+// SUBMIT SUPERVISOR
 // ==============================================================
 async function submitSupervisor() {
     const workerName = document.getElementById("workerName").value.trim();
@@ -1904,6 +2662,8 @@ async function submitSupervisor() {
             document.getElementById("supervisorStatusBadge").textContent = "✅ Imetumwa";
             document.getElementById("supervisorStatusBadge").className = "status-badge submitted";
             showToast("✅ Tathmini imetumwa kikamilifu!", "success");
+            updateDashboard();
+            updateGroupReports();
         }
     } catch (error) {
         console.error("❌ Hitilafu:", error);
@@ -1922,17 +2682,20 @@ window.onload = function() {
     updateNotification();
     updateScoreSummary();
     updateSectionProgress();
+    renderCalendar();
+    updateDashboard();
+    updateGroupReports();
+    updateGoalCount();
     console.log("✅ Mtwara Performance - Fomu ya Msimamizi (Maboresho Yote)");
     console.log("📦 BIN ID:", BIN_ID);
     console.log("📋 Vipengele vipya:");
-    console.log("  1. Namba ya Simu ya Msimamizi ✅");
-    console.log("  2. Namba ya WhatsApp ya Msimamizi ✅");
-    console.log("  3. Barua Pepe ya Msimamizi ✅");
-    console.log("  4. Mawasiliano yanaunganishwa na Mganga Mfawidhi ✅");
-    console.log("  5. Auto-Save ✅");
-    console.log("  6. Section Progress ✅");
-    console.log("  7. Report ID ✅");
-    console.log("  8. Mobile Responsive ✅");
+    console.log("  1. Dashboard ya Takwimu ✅");
+    console.log("  2. Kumbusho za Ufuatiliaji ✅");
+    console.log("  3. Kalenda ya Matukio ✅");
+    console.log("  4. Ripoti za Kikundi ✅");
+    console.log("  5. Malengo ya Baadaye ✅");
+    console.log("  6. Export CSV ✅");
+    console.log("  7. Mawasiliano ya Msimamizi (Simu, WhatsApp, Email) ✅");
 };
 </script>
 
