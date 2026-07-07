@@ -1412,7 +1412,10 @@ function showToast(msg, type = "info") {
 // ==============================================================
 function initSigPad(type) {
     const canvas = document.getElementById(`${type}SigCanvas`);
-    if (!canvas) return;
+    if (!canvas) {
+        console.warn(`Canvas ${type}SigCanvas not found`);
+        return;
+    }
     const rect = canvas.parentElement.getBoundingClientRect();
     canvas.width = rect.width || 400;
     canvas.height = 100;
@@ -1522,7 +1525,7 @@ function exportPDF() {
                     <p>Mtwara Performance | Fomu ya Mganga Mfawidhi</p>
                 </div>
                 <script>window.onload = function(){ window.print(); }</script>
-            </body></html>
+            
             `);
             win.document.close();
             showToast("✅ Ripoti imeandaliwa!", "success");
@@ -1614,6 +1617,7 @@ function deferFinal() {
     if (!workerName) { showToast("⚠️ Tafadhali weka jina la mtendakazi", "warning"); return; }
     const reason = prompt("⏳ Sababu ya kuahirisha:", "Inahitaji ufuatiliaji zaidi");
     if (reason === null) return;
+    if (!reason.trim()) { showToast("⚠️ Lazima uweke sababu ya kuahirisha", "warning"); return; }
     if (!signatureData.incharge) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
     finalizeAssessment("Imeahirishwa", reason);
 }
