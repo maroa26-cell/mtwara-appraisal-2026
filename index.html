@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -5,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mtwara Performance - Fomu ya Msimamizi</title>
     <style>
+        /* ===== RESET & BASE ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -790,6 +792,33 @@
             font-weight: 600;
             font-size: 16px;
         }
+
+        /* ===== HOME PAGE ===== */
+        .home-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .home-card {
+            background: #fff;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: #1a1a2e;
+        }
+        .home-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            border-color: #27ae60;
+        }
+        .home-card .icon { font-size: 40px; margin-bottom: 12px; }
+        .home-card h3 { color: #1a5276; margin-bottom: 6px; }
+        .home-card p { color: #7f8c8d; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -842,12 +871,13 @@
             <button class="btn btn-success btn-sm" onclick="exportReport()" id="exportBtn">📊 Export PDF</button>
             <button class="btn btn-info btn-sm" onclick="window.print()">🖨️ Chapisha</button>
             <button class="btn btn-primary btn-sm" onclick="resetForm()">🔄 Weka Upya</button>
-            <button class="btn btn-primary btn-sm" onclick="window.location.href='index.html'">🏠 Nyumbani</button>
+            <button class="btn btn-primary btn-sm" onclick="showHome()">🏠 Nyumbani</button>
         </div>
 
         <!-- TABS -->
         <div class="tabs no-print">
-            <button class="tab-btn active" onclick="switchTab('tabDashboard', this)">📊 Dashboard</button>
+            <button class="tab-btn active" onclick="switchTab('tabHome', this)">🏠 Nyumbani</button>
+            <button class="tab-btn" onclick="switchTab('tabDashboard', this)">📊 Dashboard</button>
             <button class="tab-btn" onclick="switchTab('tabMain', this)">📝 Tathmini</button>
             <button class="tab-btn" onclick="switchTab('tabComparison', this)">📊 Comparison</button>
             <button class="tab-btn" onclick="switchTab('tabReports', this)">📊 Ripoti</button>
@@ -855,7 +885,62 @@
             <button class="tab-btn" onclick="switchTab('tabSettings', this)">⚙️ Mipangilio</button>
         </div>
 
-        <!-- ===== TAB 0: DASHBOARD ===== -->
+        <!-- ===== TAB: NYUMBANI (HOME) ===== -->
+        <div id="tabHome" class="tab-content">
+            <div class="form-card fade-in">
+                <div class="form-title">
+                    <span class="icon">🏠</span>
+                    <span class="title-text">Nyumbani</span>
+                    <span class="badge">Karibu</span>
+                </div>
+                
+                <div style="text-align:center; margin-bottom:20px;">
+                    <h2 style="color:#1a5276;">👋 Karibu Mtwara Performance</h2>
+                    <p style="color:#7f8c8d; font-size:14px;">Chagua kitendo unachotaka kufanya</p>
+                </div>
+
+                <div class="home-grid">
+                    <a href="#" class="home-card" onclick="switchTab('tabMain', document.querySelector('.tab-btn:nth-child(3)'))">
+                        <div class="icon">📝</div>
+                        <h3>Tathmini Mpya</h3>
+                        <p>Jaza fomu ya tathmini ya mtendakazi</p>
+                    </a>
+                    <a href="#" class="home-card" onclick="switchTab('tabDashboard', document.querySelector('.tab-btn:nth-child(2)'))">
+                        <div class="icon">📊</div>
+                        <h3>Dashboard</h3>
+                        <p>Angalia muhtasari wa tathmini zote</p>
+                    </a>
+                    <a href="#" class="home-card" onclick="switchTab('tabReports', document.querySelector('.tab-btn:nth-child(5)'))">
+                        <div class="icon">📊</div>
+                        <h3>Ripoti</h3>
+                        <p>Angalia ripoti zilizotumwa</p>
+                    </a>
+                    <a href="#" class="home-card" onclick="switchTab('tabChat', document.querySelector('.tab-btn:nth-child(6)'))">
+                        <div class="icon">💬</div>
+                        <h3>Mazungumzo</h3>
+                        <p>Wasiliana na wenzako</p>
+                    </a>
+                    <a href="#" class="home-card" onclick="switchTab('tabComparison', document.querySelector('.tab-btn:nth-child(4)'))">
+                        <div class="icon">📊</div>
+                        <h3>Comparison</h3>
+                        <p>Linganisha tathmini</p>
+                    </a>
+                    <a href="#" class="home-card" onclick="switchTab('tabSettings', document.querySelector('.tab-btn:nth-child(7)'))">
+                        <div class="icon">⚙️</div>
+                        <h3>Mipangilio</h3>
+                        <p>Badilisha mipangilio yako</p>
+                    </a>
+                </div>
+
+                <div style="margin-top:20px; padding:16px; background:#eaf2f8; border-radius:8px; border-left:4px solid #27ae60;">
+                    <p style="font-size:13px; color:#1a5276;">
+                        <strong>📌 Kidokezo:</strong> Bonyeza kitufe cha "📝 Tathmini" ili kujaza fomu ya tathmini ya mtendakazi.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TAB 1: DASHBOARD ===== -->
         <div id="tabDashboard" class="tab-content">
             <div class="form-card fade-in">
                 <div class="form-title">
@@ -917,7 +1002,7 @@
             </div>
         </div>
 
-        <!-- ===== TAB 1: TATHMINI ===== -->
+        <!-- ===== TAB 2: TATHMINI ===== -->
         <div id="tabMain" class="tab-content">
             <div id="formSupervisor" class="form-card fade-in">
                 <div class="form-title">
@@ -1211,7 +1296,7 @@
             </div>
         </div>
 
-        <!-- ===== TAB 2: COMPARISON ===== -->
+        <!-- ===== TAB 3: COMPARISON ===== -->
         <div id="tabComparison" class="tab-content">
             <div class="form-card fade-in">
                 <div class="form-title">
@@ -1299,7 +1384,7 @@
             </div>
         </div>
 
-        <!-- ===== TAB 3: RIPOTI ===== -->
+        <!-- ===== TAB 4: RIPOTI ===== -->
         <div id="tabReports" class="tab-content">
             <div class="form-card fade-in">
                 <div class="form-title">
@@ -1313,7 +1398,7 @@
             </div>
         </div>
 
-        <!-- ===== TAB 4: CHAT ===== -->
+        <!-- ===== TAB 5: CHAT ===== -->
         <div id="tabChat" class="tab-content">
             <div class="form-card fade-in">
                 <div class="form-title">
@@ -1337,7 +1422,7 @@
             </div>
         </div>
 
-        <!-- ===== TAB 5: MIPANGILIO ===== -->
+        <!-- ===== TAB 6: MIPANGILIO ===== -->
         <div id="tabSettings" class="tab-content">
             <div class="form-card fade-in">
                 <div class="form-title">
@@ -1483,7 +1568,6 @@ const SPECIAL_CHECKLISTS = {
 // AUTH CHECK
 // ==============================================================
 function checkAuth() {
-    // Jaribu sessionStorage kwanza, kisha localStorage
     let userData = sessionStorage.getItem("mtwaraUser");
     if (!userData) {
         userData = localStorage.getItem("mtwaraUser");
@@ -1512,7 +1596,6 @@ function checkAuth() {
         document.getElementById("userBadge").textContent = `👤 ${currentUser}`;
         document.getElementById("roleDisplay").textContent = "👔 " + (currentRole === "supervisor" ? "Msimamizi" : currentRole);
         
-        // Load saved reports
         const savedReports = localStorage.getItem("mtwaraSubmittedReports");
         if (savedReports) {
             submittedReports = JSON.parse(savedReports);
@@ -1526,13 +1609,8 @@ function checkAuth() {
             updateChat();
         }
         
-        // Load draft
         loadDraft();
-        
-        // Start session timer
         startSessionTimer();
-        
-        // Start auto-save
         startAutoSave();
         
         return true;
@@ -1545,6 +1623,19 @@ function checkAuth() {
 
 function goToLogin() {
     window.location.href = "index.html";
+}
+
+// ==============================================================
+// SHOW HOME
+// ==============================================================
+function showHome() {
+    const homeTab = document.querySelector('.tab-btn:first-child');
+    if (homeTab) {
+        switchTab('tabHome', homeTab);
+    } else {
+        // Fallback: reload page if home tab not found
+        location.reload();
+    }
 }
 
 // ==============================================================
@@ -1596,7 +1687,7 @@ function autoSaveDraft() {
         version: '3.0'
     };
     localStorage.setItem('supervisorDraft', JSON.stringify(draft));
-    showToast('📝 Imehifadhiwa kiotomatiki', 'info');
+    // Don't show toast for every auto-save to avoid spam
 }
 
 function loadDraft() {
@@ -1622,9 +1713,14 @@ function loadDraft() {
 // ==============================================================
 function switchTab(tabId, btn) {
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
+    const targetTab = document.getElementById(tabId);
+    if (targetTab) {
+        targetTab.classList.add('active');
+    }
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+    if (btn) {
+        btn.classList.add('active');
+    }
     resetSessionTimer();
     
     if (tabId === 'tabReports') {
@@ -2582,7 +2678,6 @@ function logout() {
     if (autoSaveTimer) {
         clearInterval(autoSaveTimer);
     }
-    // Save final draft
     autoSaveDraft();
     localStorage.removeItem("mtwaraUser");
     sessionStorage.removeItem("mtwaraUser");
@@ -2610,7 +2705,6 @@ function migrateData() {
 // INIT
 // ==============================================================
 window.onload = function() {
-    // Migrate old data
     migrateData();
     
     if (!checkAuth()) {
@@ -2626,7 +2720,6 @@ window.onload = function() {
         initSigPad("supervisor");
     }, 500);
     
-    // Add phone validation listeners
     document.querySelectorAll('input[type="tel"]').forEach(input => {
         input.addEventListener('blur', function() {
             const errorId = this.id + 'Error';
@@ -2639,7 +2732,6 @@ window.onload = function() {
         });
     });
     
-    // Add auto-save on input
     document.querySelectorAll('.form-input').forEach(el => {
         el.addEventListener('input', () => {
             if (saveTimeout) clearTimeout(saveTimeout);
@@ -2659,6 +2751,12 @@ window.onload = function() {
     updateReportsList();
     updateDashboard();
     updateChat();
+    
+    // Show home tab by default
+    const homeTab = document.querySelector('.tab-btn:first-child');
+    if (homeTab) {
+        switchTab('tabHome', homeTab);
+    }
     
     console.log("✅ Mtwara Performance - Fomu ya Msimamizi v3.0");
     console.log("📦 BIN ID:", BIN_ID);
