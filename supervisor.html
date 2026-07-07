@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -642,11 +643,45 @@
             display: block;
         }
 
+        /* ===== DASHBOARD ===== */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 16px 0;
+        }
+        .dashboard-card {
+            background: #fff;
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+        .dashboard-card .number {
+            font-size: 32px;
+            font-weight: 800;
+            color: #1a5276;
+        }
+        .dashboard-card .label {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 4px;
+        }
+        .dashboard-card .number.green { color: #27ae60; }
+        .dashboard-card .number.orange { color: #f39c12; }
+        .dashboard-card .number.red { color: #e74c3c; }
+
         /* ===== PRINT STYLES ===== */
         @media print {
-            .user-tools, .btn, .no-print { display: none !important; }
+            .user-tools, .btn, .no-print, .tabs { display: none !important; }
             .container { box-shadow: none; padding: 10px; }
             .form-card { border: 1px solid #ddd; }
+            .tab-content { display: block !important; }
         }
 
         /* ===== ANIMATIONS ===== */
@@ -663,6 +698,14 @@
         .mb-10 { margin-bottom: 10px; }
         .text-center { text-align: center; }
         .text-muted { color: #7f8c8d; font-size: 12px; }
+        
+        /* ===== RESPONSIVE ===== */
+        .share-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 8px 0;
+        }
     </style>
 </head>
 <body>
@@ -685,7 +728,7 @@
         <div class="header">
             <div class="org-badge">👔 Mtwara SDA Dispensary</div>
             <h1>Fomu ya Msimamizi</h1>
-            <h2>Tathmini ya Utendaji Kazi - Toleo la Kimataifa</h2>
+            <h2>Tathmini ya Utendaji Kazi - Toleo la Kimataifa v3.0</h2>
             <div style="font-size:12px; color:#7f8c8d; margin-top:4px;">
                 <span id="userBadge" class="user-badge">👤 Imetoka nje</span>
                 <span style="margin-left:12px; font-size:11px; color:#27ae60;">☁️ Online</span>
@@ -712,13 +755,79 @@
 
         <!-- ===== TABS ===== -->
         <div class="tabs no-print">
-            <button class="tab-btn active" onclick="switchTab('tabMain', this)">📝 Tathmini</button>
+            <button class="tab-btn active" onclick="switchTab('tabDashboard', this)">📊 Dashboard</button>
+            <button class="tab-btn" onclick="switchTab('tabMain', this)">📝 Tathmini</button>
             <button class="tab-btn" onclick="switchTab('tabReports', this)">📊 Ripoti</button>
             <button class="tab-btn" onclick="switchTab('tabSettings', this)">⚙️ Mipangilio</button>
         </div>
 
+        <!-- ===== TAB 0: DASHBOARD ===== -->
+        <div id="tabDashboard" class="tab-content">
+            <div class="form-card fade-in">
+                <div class="form-title">
+                    <span class="icon">📊</span>
+                    <span class="title-text">Dashboard ya Tathmini</span>
+                    <span class="badge">Muhtasari</span>
+                </div>
+                
+                <!-- Dashboard Cards -->
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <span class="number green" id="dashTotal">0</span>
+                        <div class="label">Jumla ya Tathmini</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <span class="number orange" id="dashPending">0</span>
+                        <div class="label">Inasubiri</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <span class="number green" id="dashApproved">0</span>
+                        <div class="label">Imeidhinishwa</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <span class="number red" id="dashRejected">0</span>
+                        <div class="label">Imekataliwa</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <span class="number green" id="dashAvgScore">0%</span>
+                        <div class="label">Alama ya Wastani</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <span class="number orange" id="dashWorkers">0</span>
+                        <div class="label">Wafanyakazi Walio Tathminiwa</div>
+                    </div>
+                </div>
+                
+                <!-- Quick Stats Chart -->
+                <div style="margin-top:16px;">
+                    <div class="section-header">📈 Mwenendo wa Tathmini</div>
+                    <div class="chart-container">
+                        <div class="chart-title">Tathmini kwa Miezi</div>
+                        <div class="chart-bars" id="trendChartDashboard">
+                            <div class="chart-bar"><div class="bar" style="height:30%;"></div><div class="value">3</div><div class="label">Jan</div></div>
+                            <div class="chart-bar"><div class="bar" style="height:45%;"></div><div class="value">5</div><div class="label">Feb</div></div>
+                            <div class="chart-bar"><div class="bar" style="height:60%;"></div><div class="value">8</div><div class="label">Mac</div></div>
+                            <div class="chart-bar"><div class="bar" style="height:75%;"></div><div class="value">10</div><div class="label">Apr</div></div>
+                            <div class="chart-bar"><div class="bar" style="height:85%;"></div><div class="value">12</div><div class="label">Mei</div></div>
+                            <div class="chart-bar"><div class="bar" style="height:100%;"></div><div class="value">15</div><div class="label">Jun</div></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Share Buttons -->
+                <div style="margin-top:16px;">
+                    <div class="section-header">📤 Shiriki Ripoti</div>
+                    <div class="share-buttons">
+                        <button class="btn btn-success" onclick="shareWhatsApp()">💬 Shiriki WhatsApp</button>
+                        <button class="btn btn-info" onclick="sendEmailReport()">📧 Tuma Barua Pepe</button>
+                        <button class="btn btn-primary" onclick="copyReportLink()">🔗 Nakili Link</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- ===== TAB 1: TATHMINI ===== -->
-        <div id="tabMain" class="tab-content active">
+        <div id="tabMain" class="tab-content">
             <div id="formSupervisor" class="form-card fade-in">
                 <div class="form-title">
                     <span class="icon">👔</span>
@@ -997,7 +1106,7 @@
                     <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Mwenendo wa utendaji kwa robo mwaka</div>
                     <div class="chart-container">
                         <div class="chart-title">Alama za Utendaji kwa Robo Mwaka</div>
-                        <div class="chart-bars" id="trendChart">
+                        <div class="chart-bars" id="trendChartMain">
                             <div class="chart-bar"><div class="bar" style="height:65%;"></div><div class="value">65%</div><div class="label">Q1</div></div>
                             <div class="chart-bar"><div class="bar" style="height:72%;"></div><div class="value">72%</div><div class="label">Q2</div></div>
                             <div class="chart-bar"><div class="bar" style="height:80%;"></div><div class="value">80%</div><div class="label">Q3</div></div>
@@ -1241,7 +1350,7 @@
         <!-- ===== FOOTER ===== -->
         <div class="footer">
             <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
-            <div>Mtwara Performance | Fomu ya Msimamizi | Toleo la Kimataifa v2.0</div>
+            <div>Mtwara Performance | Fomu ya Msimamizi | Toleo la Kimataifa v3.0</div>
             <div style="margin-top:4px; font-size:11px; color:#bdc3c7;">Imetengenezwa kwa ajili ya Mtwara SDA Dispensary</div>
         </div>
 
@@ -1367,11 +1476,11 @@ function checkAuth() {
         document.getElementById("userBadge").textContent = `👤 ${currentUser}`;
         document.getElementById("roleDisplay").textContent = "👔 " + (currentRole === "supervisor" ? "Msimamizi" : currentRole);
         
-        // Load saved reports
         const savedReports = localStorage.getItem("mtwaraSubmittedReports");
         if (savedReports) {
             submittedReports = JSON.parse(savedReports);
             updateReportsList();
+            updateDashboard();
         }
         
         return true;
@@ -1390,18 +1499,52 @@ function goToLogin() {
 // TAB SWITCHING
 // ==============================================================
 function switchTab(tabId, btn) {
-    // Hide all tabs
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    // Show selected tab
     document.getElementById(tabId).classList.add('active');
-    // Update buttons
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     
-    // Update reports list if switching to reports tab
     if (tabId === 'tabReports') {
         updateReportsList();
     }
+    if (tabId === 'tabDashboard') {
+        updateDashboard();
+    }
+}
+
+// ==============================================================
+// UPDATE DASHBOARD
+// ==============================================================
+function updateDashboard() {
+    const total = submittedReports.length;
+    const pending = submittedReports.filter(r => r.status && r.status.includes('Inasubiri')).length;
+    const approved = submittedReports.filter(r => r.status && r.status.includes('Imeidhinishwa')).length;
+    const rejected = submittedReports.filter(r => r.status && r.status.includes('Imekataliwa')).length;
+    
+    let totalScore = 0;
+    let scoreCount = 0;
+    submittedReports.forEach(r => {
+        if (r.overallScore) {
+            totalScore += r.overallScore;
+            scoreCount++;
+        }
+    });
+    const avgScore = scoreCount > 0 ? Math.round(totalScore / scoreCount) : 0;
+    
+    const workers = new Set();
+    submittedReports.forEach(r => {
+        if (r.workerName) workers.add(r.workerName);
+    });
+    
+    document.getElementById('dashTotal').textContent = total;
+    document.getElementById('dashPending').textContent = pending;
+    document.getElementById('dashApproved').textContent = approved;
+    document.getElementById('dashRejected').textContent = rejected;
+    document.getElementById('dashAvgScore').textContent = avgScore + '%';
+    document.getElementById('dashWorkers').textContent = workers.size;
+    
+    document.getElementById('dashPending').className = 'number ' + (pending > 5 ? 'orange' : 'green');
+    document.getElementById('dashRejected').className = 'number ' + (rejected > 2 ? 'red' : 'green');
 }
 
 // ==============================================================
@@ -1418,8 +1561,10 @@ function updateReportsList() {
     
     let html = '<div style="display:grid; gap:12px;">';
     submittedReports.slice().reverse().forEach((report, index) => {
+        const statusColor = report.status && report.status.includes('Inasubiri') ? '#f39c12' : 
+                           report.status && report.status.includes('Imeidhinishwa') ? '#27ae60' : '#e74c3c';
         html += `
-            <div style="background:#fff; padding:14px 18px; border-radius:10px; border:1px solid #e9ecef; border-left:4px solid #27ae60;">
+            <div style="background:#fff; padding:14px 18px; border-radius:10px; border:1px solid #e9ecef; border-left:4px solid ${statusColor};">
                 <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;">
                     <div>
                         <strong>👤 ${report.workerName || 'Mtendakazi'}</strong>
@@ -1433,6 +1578,7 @@ function updateReportsList() {
                 </div>
                 <div style="margin-top:6px; display:flex; gap:8px; flex-wrap:wrap;">
                     <button class="btn btn-info btn-sm" onclick="viewReport('${report.id}')">👁️ Angalia</button>
+                    <button class="btn btn-success btn-sm" onclick="shareReportWhatsApp('${report.id}')">💬 WhatsApp</button>
                     <button class="btn btn-danger btn-sm" onclick="deleteReport('${report.id}')">🗑️ Futa</button>
                 </div>
             </div>
@@ -1452,7 +1598,6 @@ function viewReport(reportId) {
         return;
     }
     
-    // Create a printable view
     const win = window.open('', '_blank');
     win.document.write(`
         <html><head><title>Ripoti ya Tathmini</title>
@@ -1463,22 +1608,32 @@ function viewReport(reportId) {
             .label{font-weight:600;color:#1a5276;display:inline-block;width:200px;}
             .value{display:inline-block;}
             .score{font-size:24px;font-weight:700;color:#27ae60;}
+            .status-badge{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;}
+            .status-badge.pending{background:#fef9e7;color:#f39c12;}
+            .status-badge.approved{background:#d5f5e3;color:#27ae60;}
+            .status-badge.rejected{background:#fadbd8;color:#e74c3c;}
         </style>
         </head><body>
         <h1>📊 Ripoti ya Tathmini</h1>
         <div style="margin-top:20px;">
             <div class="field"><span class="label">Mtendakazi:</span><span class="value">${report.workerName || 'N/A'}</span></div>
             <div class="field"><span class="label">Taaluma:</span><span class="value">${report.workerRole || 'N/A'}</span></div>
+            <div class="field"><span class="label">Idara:</span><span class="value">${report.workerDepartment || 'N/A'}</span></div>
             <div class="field"><span class="label">Msimamizi:</span><span class="value">${report.supervisorName || 'N/A'}</span></div>
             <div class="field"><span class="label">Tarehe:</span><span class="value">${new Date(report.timestamp).toLocaleString()}</span></div>
-            <div class="field"><span class="label">Hali:</span><span class="value">${report.status || 'Imetumwa'}</span></div>
+            <div class="field"><span class="label">Hali:</span><span class="value"><span class="status-badge ${report.status && report.status.includes('Inasubiri') ? 'pending' : report.status && report.status.includes('Imeidhinishwa') ? 'approved' : 'rejected'}">${report.status || 'Imetumwa'}</span></span></div>
             <div class="field"><span class="label">Alama ya Jumla:</span><span class="value score">${report.overallScore || 'N/A'}%</span></div>
+            ${report.ratings ? `<div class="field"><span class="label">Tathmini:</span><span class="value">${Object.values(report.ratings).join(', ')}</span></div>` : ''}
             ${report.comments ? `<div class="field"><span class="label">Maoni:</span><span class="value">${report.comments}</span></div>` : ''}
             ${report.recommendations ? `<div class="field"><span class="label">Mapendekezo:</span><span class="value">${report.recommendations}</span></div>` : ''}
+            ${report.smartGoals ? `<div class="field"><span class="label">Malengo SMART:</span><span class="value">${report.smartGoals}</span></div>` : ''}
+            ${report.actionPlan ? `<div class="field"><span class="label">Action Plan:</span><span class="value">${report.actionPlan}</span></div>` : ''}
+        </div>
+        <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+            <button onclick="window.print()" style="padding:10px 20px; background:#27ae60; color:#fff; border:none; border-radius:8px; cursor:pointer;">🖨️ Chapisha</button>
+            <button onclick="window.close()" style="padding:10px 20px; background:#e74c3c; color:#fff; border:none; border-radius:8px; cursor:pointer;">❌ Funga</button>
         </div>
         <p style="margin-top:30px; font-size:12px; color:#7f8c8d;">Imetolewa: ${new Date().toLocaleString()}</p>
-        <button onclick="window.print()" style="margin-top:20px; padding:10px 20px; background:#27ae60; color:#fff; border:none; border-radius:8px; cursor:pointer;">🖨️ Chapisha</button>
-        <button onclick="window.close()" style="margin-top:20px; margin-left:10px; padding:10px 20px; background:#e74c3c; color:#fff; border:none; border-radius:8px; cursor:pointer;">❌ Funga</button>
         </body></html>
     `);
     win.document.close();
@@ -1493,7 +1648,94 @@ function deleteReport(reportId) {
     submittedReports = submittedReports.filter(r => r.id != reportId);
     localStorage.setItem("mtwaraSubmittedReports", JSON.stringify(submittedReports));
     updateReportsList();
+    updateDashboard();
     showToast("✅ Ripoti imefutwa", "success");
+}
+
+// ==============================================================
+// SHARE FUNCTIONS
+// ==============================================================
+function shareWhatsApp() {
+    const workerName = document.getElementById("workerName").value.trim() || "Mtendakazi";
+    const supervisorName = document.getElementById("supervisorName").value.trim() || "Msimamizi";
+    const overallScore = document.getElementById("scoreTotal").textContent;
+    
+    const msg = encodeURIComponent(`📊 *Ripoti ya Tathmini - Mtwara Performance*\n\n👤 Mtendakazi: ${workerName}\n👔 Msimamizi: ${supervisorName}\n⭐ Alama: ${overallScore}\n📅 Tarehe: ${new Date().toLocaleDateString()}\n\n✅ Tathmini imekamilika!\n\nMtwara SDA Dispensary`);
+    
+    const whatsappInput = document.getElementById("workerWhatsApp");
+    let phone = whatsappInput ? whatsappInput.value.trim() : '';
+    if (!phone) {
+        phone = prompt("💬 Weka namba ya WhatsApp ya mpokeaji (pamoja na +255):", "+255");
+        if (!phone) return;
+    }
+    let cleanPhone = phone.replace(/[^0-9+]/g, '');
+    if (!cleanPhone.startsWith('+')) {
+        cleanPhone = '+' + cleanPhone;
+    }
+    window.open(`https://wa.me/${cleanPhone}?text=${msg}`, '_blank');
+    showToast("💬 Inafungua WhatsApp...", "info");
+}
+
+function shareReportWhatsApp(reportId) {
+    const report = submittedReports.find(r => r.id == reportId);
+    if (!report) {
+        showToast("⚠️ Ripoti haipatikani", "warning");
+        return;
+    }
+    
+    const msg = encodeURIComponent(`📊 *Ripoti ya Tathmini - Mtwara Performance*\n\n👤 Mtendakazi: ${report.workerName || 'N/A'}\n👔 Msimamizi: ${report.supervisorName || 'N/A'}\n⭐ Alama: ${report.overallScore || 'N/A'}%\n📅 Tarehe: ${new Date(report.timestamp).toLocaleDateString()}\n\n📋 Hali: ${report.status || 'Imetumwa'}\n\nMtwara SDA Dispensary`);
+    
+    let phone = prompt("💬 Weka namba ya WhatsApp ya mpokeaji (pamoja na +255):", "+255");
+    if (!phone) return;
+    let cleanPhone = phone.replace(/[^0-9+]/g, '');
+    if (!cleanPhone.startsWith('+')) {
+        cleanPhone = '+' + cleanPhone;
+    }
+    window.open(`https://wa.me/${cleanPhone}?text=${msg}`, '_blank');
+    showToast("💬 Inafungua WhatsApp...", "info");
+}
+
+function sendEmailReport() {
+    const workerName = document.getElementById("workerName").value.trim() || "Mtendakazi";
+    const supervisorName = document.getElementById("supervisorName").value.trim() || "Msimamizi";
+    const overallScore = document.getElementById("scoreTotal").textContent;
+    
+    const subject = encodeURIComponent(`Ripoti ya Tathmini - ${workerName}`);
+    const body = encodeURIComponent(`Ripoti ya Tathmini ya Utendaji
+
+Mtendakazi: ${workerName}
+Msimamizi: ${supervisorName}
+Alama: ${overallScore}
+Tarehe: ${new Date().toLocaleDateString()}
+
+Tafadhali angalia ripoti kamili kwenye mfumo wetu.
+
+Mtwara SDA Dispensary`);
+    
+    const email = document.getElementById("supervisorEmail").value.trim() || document.getElementById("workerEmail").value.trim();
+    if (email) {
+        window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+        showToast("📧 Inafungua barua pepe...", "info");
+    } else {
+        const userEmail = prompt("📧 Weka barua pepe ya mpokeaji:", "recipient@example.com");
+        if (userEmail) {
+            window.location.href = `mailto:${userEmail}?subject=${subject}&body=${body}`;
+            showToast("📧 Inafungua barua pepe...", "info");
+        }
+    }
+}
+
+function copyReportLink() {
+    const url = window.location.href;
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(() => {
+            showToast("🔗 Link imenakiliwa!", "success");
+        }).catch(() => {
+            prompt("Nakili link hii:", url);
+        });
+    } else {
+        prompt("Nakili link hii:", url);
+    }
 }
 
 // ==============================================================
@@ -1681,8 +1923,7 @@ function openWhatsApp(inputId) {
     if (!cleanPhone.startsWith('+')) {
         cleanPhone = '+' + cleanPhone;
     }
-    const url = `https://wa.me/${cleanPhone}`;
-    window.open(url, '_blank');
+    window.open(`https://wa.me/${cleanPhone}`, '_blank');
     showToast(`💬 Inafungua WhatsApp kwa ${cleanPhone}`, "success");
 }
 
@@ -1697,8 +1938,7 @@ function makeCall(inputId) {
     if (!cleanPhone.startsWith('+')) {
         cleanPhone = '+' + cleanPhone;
     }
-    const url = `tel:${cleanPhone}`;
-    window.open(url, '_blank');
+    window.open(`tel:${cleanPhone}`, '_blank');
     showToast(`📞 Inapiga simu kwa ${cleanPhone}`, "info");
 }
 
@@ -1708,33 +1948,24 @@ function makeCall(inputId) {
 function resetForm() {
     if (!confirm("Je, una uhakika unataka kuweka upya fomu yote?")) return;
     
-    // Reset checklist
     document.querySelectorAll('.toggle').forEach(t => t.classList.remove('active'));
     localStorage.removeItem("supervisorGeneral");
     localStorage.removeItem("supervisorSpecial");
     
-    // Reset likert
     document.querySelectorAll('.likert-btn').forEach(b => b.classList.remove('selected'));
     
-    // Reset text fields
     document.querySelectorAll('input[type="text"], input[type="tel"], input[type="email"], textarea').forEach(el => {
         if (el.id && !el.id.includes('Date') && !el.id.includes('WorkerDate') && !el.id.includes('ActionStart') && !el.id.includes('ActionEnd')) {
             el.value = '';
         }
     });
     
-    // Reset signature
     clearSig('supervisor');
-    
-    // Reset notification
     document.getElementById('goalsAchieved').value = 'yes';
     updateNotification();
-    
-    // Clear file list
     document.getElementById('fileList').innerHTML = '';
     uploadedFiles = [];
     
-    // Reset submit button
     document.getElementById('supervisorSubmitBtn').disabled = false;
     document.getElementById('supervisorSubmitBtn').innerHTML = '📤 TUMA KWA MGANGA MFAWIDHI';
     document.getElementById('supervisorSubmitMsg').style.display = 'none';
@@ -1914,7 +2145,7 @@ function exportReport() {
             <hr>
             ${content}
             <p style="margin-top:30px;"><em>Imetolewa: ${new Date().toLocaleString()}</em></p>
-            <p style="font-size:12px; color:#7f8c8d;">Mtwara Performance | Fomu ya Msimamizi v2.0</p>
+            <p style="font-size:12px; color:#7f8c8d;">Mtwara Performance | Fomu ya Msimamizi v3.0</p>
             </body></html>
         `);
         win.document.close();
@@ -1929,7 +2160,7 @@ function exportData() {
     const data = {
         reports: submittedReports,
         exportedAt: new Date().toISOString(),
-        version: "2.0"
+        version: "3.0"
     };
     const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
     const url = URL.createObjectURL(blob);
@@ -1956,6 +2187,7 @@ function clearAllData() {
     
     submittedReports = [];
     updateReportsList();
+    updateDashboard();
     showToast("🗑️ Data yote imefutwa!", "warning");
     
     setTimeout(() => {
@@ -1998,12 +2230,10 @@ async function submitSupervisor() {
     
     if (!signatureData.supervisor) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
     
-    // Check if all likert ratings are selected
     const ratings = getLikertValues("sPunctuality","sQuality","sTeamwork","sLeadership","sCommunication","sDecision");
     const allRated = Object.values(ratings).every(v => v > 0);
     if (!allRated) { showToast("⚠️ Tafadhali tathmini vipengele vyote (1-5)", "warning"); return; }
 
-    // Calculate overall score
     const generalItems = document.querySelectorAll("#supervisorGeneralChecklist .checklist-item");
     const specialItems = document.querySelectorAll("#supervisorSpecialChecklist .checklist-item");
     const totalItems = generalItems.length + specialItems.length;
@@ -2077,10 +2307,10 @@ async function submitSupervisor() {
         if (result) {
             reports = data.reports;
             
-            // Save to local reports
             submittedReports.push(report);
             localStorage.setItem("mtwaraSubmittedReports", JSON.stringify(submittedReports));
             updateReportsList();
+            updateDashboard();
             
             document.getElementById("supervisorSubmitBtn").disabled = true;
             document.getElementById("supervisorSubmitBtn").innerHTML = "✅ Imetumwa!";
@@ -2090,7 +2320,6 @@ async function submitSupervisor() {
             document.getElementById("supervisorStatusBadge").textContent = "✅ Imetumwa";
             document.getElementById("supervisorStatusBadge").className = "status-badge submitted";
             
-            // Send WhatsApp notification if enabled
             if (document.getElementById("whatsappNotification").checked && report.workerWhatsApp) {
                 setTimeout(() => {
                     const msg = encodeURIComponent(`Habari ${report.workerName},\nTathmini yako ya utendaji imekamilishwa na msimamizi ${report.supervisorName}.\nAlama: ${Math.min(overallScore, 100)}%\nTarehe: ${new Date().toLocaleDateString()}\n\nMtwara Performance`);
@@ -2113,17 +2342,16 @@ async function syncData() {
     const data = await getBinData();
     if (data) {
         reports = data.reports || [];
-        // Merge with local reports
         if (reports.length > 0) {
             const localReports = JSON.parse(localStorage.getItem("mtwaraSubmittedReports") || "[]");
             const allReports = [...localReports, ...reports];
-            // Remove duplicates
             const uniqueReports = allReports.filter((report, index, self) => 
                 index === self.findIndex(r => r.id === report.id)
             );
             submittedReports = uniqueReports;
             localStorage.setItem("mtwaraSubmittedReports", JSON.stringify(uniqueReports));
             updateReportsList();
+            updateDashboard();
         }
         showToast(`✅ Data imesawazishwa! Reports: ${reports.length}`, "success");
     }
@@ -2139,7 +2367,6 @@ function logout() {
 // INIT
 // ==============================================================
 window.onload = function() {
-    // Check authentication
     if (!checkAuth()) {
         return;
     }
@@ -2159,10 +2386,11 @@ window.onload = function() {
     updateNotification();
     updateScoreSummary();
     updateReportsList();
+    updateDashboard();
     
-    console.log("✅ Mtwara Performance - Fomu ya Msimamizi v2.0");
+    console.log("✅ Mtwara Performance - Fomu ya Msimamizi v3.0");
     console.log("📦 BIN ID:", BIN_ID);
-    console.log("📊 Vipengele: Performance Trends, Competency Matrix, KPI Tracker, Goal Setting, Action Plan, 360° Feedback, Self-Reflection, Document Upload, Export Report, WhatsApp Integration, Call Integration");
+    console.log("📊 Vipengele: Dashboard, Performance Trends, Competency Matrix, KPI Tracker, Goal Setting, Action Plan, 360° Feedback, Self-Reflection, Document Upload, Export Report, WhatsApp Integration, Call Integration, Share Features");
 };
 </script>
 
