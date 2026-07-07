@@ -1939,4 +1939,241 @@ function exportCopy() {
 👤 Jina: ${workerName}
 📋 Taaluma: ${workerRole}
 📅 Tarehe: ${document.getElementById("workerDate").value || '-'}
-🕐
+🕐 Zamu: ${document.getElementById("workerShift").value || '-'}
+🏢 Idara: ${document.getElementById("workerDepartment").value || '-'}
+
+👔 TAARIFA ZA MSIMAMIZI
+👔 Jina: ${supervisorName}
+📋 Wadhifa: ${document.getElementById("supervisorTitle").value || '-'}
+🏢 Idara: ${document.getElementById("supervisorDepartment").value || '-'}
+
+⭐ TATHMINI YA MGANGA MFAWIDHI
+${starLines}
+
+⚖️ UAMUZI WA MWISHO
+📝 Maoni: ${document.getElementById("finalComments").value || 'Hakuna'}
+💡 Mapendekezo: ${document.getElementById("finalRecommendations").value || 'Hakuna'}
+📊 Uamuzi: ${decisionText}
+
+📊 MUHTASARI WA HALI
+🎯 Alama: ${document.getElementById("scoreTotal").textContent}
+📈 Hali: ${document.getElementById("scoreStatus").textContent}
+
+━━━━━━━━━━━━━━━━━━━━━
+📅 ${new Date().toLocaleDateString()}
+🔄 Imetolewa kutoka Mtwara Performance`;
+
+            navigator.clipboard.writeText(report).then(() => {
+                showToast("✅ Ripoti imenakiliwa!", "success");
+            }).catch(() => {
+                // Fallback
+                const textarea = document.createElement('textarea');
+                textarea.value = report;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast("✅ Ripoti imenakiliwa!", "success");
+            });
+        } catch (e) {
+            showToast("❌ Hitilafu: " + e.message, "error");
+        }
+    }, 500);
+}
+
+// ==============================================================
+// LOGIN / LOGOUT / SYNC
+// ==============================================================
+function login() {
+    const username = document.getElementById("loginUsername").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+    
+    if (!username || !password) {
+        showToast("⚠️ Tafadhali jaza username na nenosiri", "warning");
+        return;
+    }
+    
+    if (password !== "1234") {
+        showToast("❌ Nenosiri si sahihi", "error");
+        return;
+    }
+    
+    if (username !== "incharge" && username !== "worker" && username !== "supervisor") {
+        showToast("❌ Username isiyo sahihi", "error");
+        return;
+    }
+    
+    currentUser = username;
+    currentRole = username === "incharge" ? "🏥 Mganga Mfawidhi" : 
+                  username === "supervisor" ? "👔 Msimamizi" : "👤 Mfanyakazi";
+    
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("mainApp").style.display = "block";
+    document.getElementById("currentUserDisplay").textContent = username;
+    document.getElementById("roleDisplay").textContent = currentRole;
+    document.getElementById("userBadge").textContent = "👤 " + username;
+    document.getElementById("reportIdDisplay").textContent = generateReportId();
+    
+    if (username === "incharge") {
+        document.getElementById("formIncharge").style.display = "block";
+    } else {
+        document.getElementById("formIncharge").style.display = "block";
+    }
+    
+    // Load checklists and restore draft
+    loadChecklists();
+    restoreDraft();
+    updateDeadline();
+    updateDecisionNotification();
+    updatePreview();
+    loadSupervisorData();
+    updateScoreSummary();
+    
+    // Initialize signature pads
+    setTimeout(() => {
+        initSigPad("incharge");
+    }, 500);
+    
+    showToast(`✅ Karibu ${username}!`, "success");
+}
+
+function logout() {
+    currentUser = null;
+    currentRole = null;
+    document.getElementById("loginSection").style.display = "block";
+    document.getElementById("mainApp").style.display = "none";
+    showToast("🚪 Umefunga kipindi", "info");
+}
+
+function syncData() {
+    showToast("🔄 Inasawazisha data...", "info");
+    const btn = document.getElementById("syncBtn");
+    btn.disabled = true;
+    btn.innerHTML = "⏳ Inasawazisha...";
+    
+    setTimeout(() => {
+        // Simulate sync
+        loadSupervisorData();
+        updateScoreSummary();
+        btn.disabled = false;
+        btn.innerHTML = "🔄 Sync";
+        showToast("✅ Data imesawazishwa!", "success");
+        document.getElementById("lastSaved").textContent = `💾 Imehifadhiwa: ${new Date().toLocaleTimeString()}`;
+    }, 1500);
+}
+
+// ==============================================================
+// APPROVE / REJECT / DEFER
+// ==============================================================
+function approveFinal() {
+    const workerName = document.getElementById("workerName").value.trim();
+    if (!workerName) {
+        showToast("⚠️ Tafadhali jaza jina la mtendakazi", "warning");
+        return;
+    }
+    
+    const statusBadge = document.getElementById("inchargeStatusBadge");
+    statusBadge.className = "status-badge approved";
+    statusBadge.textContent = "✅ Imeidhinishwa";
+    
+    document.getElementById("finalDecision").value = "approved";
+    updateDecisionNotification();
+    autoSave();
+    
+    const msg = document.getElementById("inchargeSubmitMsg");
+    msg.style.display = "block";
+    msg.textContent = "✅ Tathmini imeidhinishwa! Mtendakazi anapendekezwa.";
+    msg.style.color = "#27ae60";
+    
+    showToast("✅ Tathmini imeidhinishwa!", "success");
+    
+    // Send report to reports array
+    const report = collectFormData();
+    report.type = "incharge_approval";
+    report.status = "approved";
+    report.timestamp = new Date().toISOString();
+    reports.push(report);
+    
+    updateScoreSummary();
+}
+
+function rejectFinal() {
+    const workerName = document.getElementById("workerName").value.trim();
+    if (!workerName) {
+        showToast("⚠️ Tafadhali jaza jina la mtendakazi", "warning");
+        return;
+    }
+    
+    const statusBadge = document.getElementById("inchargeStatusBadge");
+    statusBadge.className = "status-badge rejected";
+    statusBadge.textContent = "❌ Imekataliwa";
+    
+    document.getElementById("finalDecision").value = "rejected";
+    updateDecisionNotification();
+    autoSave();
+    
+    const msg = document.getElementById("inchargeSubmitMsg");
+    msg.style.display = "block";
+    msg.textContent = "❌ Tathmini imekataliwa. Mtendakazi anahitaji uboreshaji.";
+    msg.style.color = "#e74c3c";
+    
+    showToast("❌ Tathmini imekataliwa", "error");
+    
+    const report = collectFormData();
+    report.type = "incharge_rejection";
+    report.status = "rejected";
+    report.timestamp = new Date().toISOString();
+    reports.push(report);
+    
+    updateScoreSummary();
+}
+
+function deferFinal() {
+    const workerName = document.getElementById("workerName").value.trim();
+    if (!workerName) {
+        showToast("⚠️ Tafadhali jaza jina la mtendakazi", "warning");
+        return;
+    }
+    
+    const statusBadge = document.getElementById("inchargeStatusBadge");
+    statusBadge.className = "status-badge pending";
+    statusBadge.textContent = "⏳ Imeahirishwa";
+    
+    document.getElementById("finalDecision").value = "deferred";
+    updateDecisionNotification();
+    autoSave();
+    
+    const msg = document.getElementById("inchargeSubmitMsg");
+    msg.style.display = "block";
+    msg.textContent = "⏳ Tathmini imeahirishwa. Ufuatiliaji zaidi unahitajika.";
+    msg.style.color = "#f39c12";
+    
+    showToast("⏳ Tathmini imeahirishwa", "warning");
+    
+    const report = collectFormData();
+    report.type = "incharge_deferred";
+    report.status = "deferred";
+    report.timestamp = new Date().toISOString();
+    reports.push(report);
+    
+    updateScoreSummary();
+}
+
+// ==============================================================
+// INIT
+// ==============================================================
+window.onload = function() {
+    // Set default date
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById("workerDate").value = today;
+    
+    // Load initial checklists
+    loadChecklists();
+    updateDeadline();
+    updateDecisionNotification();
+    updatePreview();
+    updateScoreSummary();
+};
+</script>
+</body>
+</html>
