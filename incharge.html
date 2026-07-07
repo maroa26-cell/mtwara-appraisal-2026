@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mtwara Performance - Fomu ya Mganga Mfawidhi</title>
+    <title>Mtwara Performance - Fomu ya Mganga Mfawidhi (Maboresho Yote)</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -26,6 +25,7 @@
             .container { padding: 16px; }
         }
 
+        /* ===== HEADER ===== */
         .header {
             text-align: center;
             border-bottom: 4px solid #8e44ad;
@@ -60,7 +60,19 @@
             font-size: 11px;
             color: #7f8c8d;
         }
+        .header .deadline-badge {
+            display: inline-block;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        .deadline-badge.urgent { background: #fadbd8; color: #e74c3c; }
+        .deadline-badge.warning { background: #fef9e7; color: #f39c12; }
+        .deadline-badge.ok { background: #d5f5e3; color: #27ae60; }
 
+        /* ===== LOGIN ===== */
         .login-box {
             max-width: 420px;
             margin: 60px auto;
@@ -71,20 +83,8 @@
         }
         .login-box h2 { text-align: center; color: #1a5276; margin-bottom: 8px; }
         .login-box .subtitle { text-align: center; color: #7f8c8d; font-size: 13px; margin-bottom: 24px; }
-        .login-box .status-text {
-            text-align: center;
-            margin-bottom: 16px;
-            font-size: 12px;
-            color: #7f8c8d;
-        }
 
-        #mainApp {
-            display: none;
-        }
-        #mainApp.show {
-            display: block;
-        }
-
+        /* ===== FORM CARDS ===== */
         .form-card {
             background: #f8f9fa;
             border-radius: 16px;
@@ -92,6 +92,10 @@
             margin-bottom: 24px;
             border: 1px solid #e9ecef;
             border-top: 5px solid #8e44ad;
+            transition: all 0.3s ease;
+        }
+        .form-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
         .form-title {
             display: flex;
@@ -118,8 +122,13 @@
             padding: 3px 14px;
             border-radius: 20px;
             margin-left: auto;
+            transition: all 0.3s ease;
         }
-        .status-badge.pending { background: #fef9e7; color: #f39c12; animation: pulse 1.5s infinite; }
+        .status-badge.pending {
+            background: #fef9e7;
+            color: #f39c12;
+            animation: pulse 1.5s infinite;
+        }
         .status-badge.approved { background: #d5f5e3; color: #27ae60; }
         .status-badge.rejected { background: #fadbd8; color: #e74c3c; }
         .status-badge.submitted { background: #d6eaf8; color: #1a5276; }
@@ -129,6 +138,53 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
+        /* ===== DASHBOARD STATS (MPYA) ===== */
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
+            margin: 16px 0 20px 0;
+        }
+        .stat-card {
+            background: #fff;
+            padding: 16px 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border-color: #8e44ad;
+        }
+        .stat-card .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: #1a5276;
+            display: block;
+            line-height: 1.2;
+        }
+        .stat-card .stat-number.green { color: #27ae60; }
+        .stat-card .stat-number.orange { color: #f39c12; }
+        .stat-card .stat-number.red { color: #e74c3c; }
+        .stat-card .stat-number.purple { color: #8e44ad; }
+        .stat-card .stat-number.blue { color: #1a5276; }
+        .stat-card .stat-label {
+            font-size: 11px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            margin-top: 4px;
+            letter-spacing: 0.5px;
+        }
+        .stat-card .stat-icon {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* ===== FORM GROUPS ===== */
         .form-group { margin-bottom: 14px; }
         .form-group label {
             display: block;
@@ -161,6 +217,74 @@
         }
         @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
 
+        /* ===== SECTION PROGRESS ===== */
+        .section-progress {
+            background: #fff;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #e9ecef;
+        }
+        .section-progress .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #1a5276;
+            margin-bottom: 4px;
+        }
+        .section-progress .progress-bar {
+            height: 6px;
+            background: #e8ecf1;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .section-progress .progress-bar .fill {
+            height: 100%;
+            background: linear-gradient(90deg, #8e44ad, #1a5276);
+            border-radius: 3px;
+            transition: width 0.8s ease;
+            width: 0%;
+        }
+
+        /* ===== LIKERT SCALE ===== */
+        .likert-scale {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin: 4px 0;
+        }
+        .likert-btn {
+            padding: 6px 14px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            background: #fff;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            min-width: 48px;
+            text-align: center;
+            flex: 1;
+        }
+        .likert-btn:hover { background: #eaf2f8; border-color: #8e44ad; transform: translateY(-2px); }
+        .likert-btn.selected {
+            border-color: #8e44ad;
+            background: #8e44ad;
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(142,68,173,0.3);
+        }
+        .likert-btn .sub {
+            display: block;
+            font-weight: 400;
+            font-size: 9px;
+            color: #7f8c8d;
+            margin-top: 1px;
+        }
+        .likert-btn.selected .sub { color: rgba(255,255,255,0.8); }
+
+        /* ===== BUTTONS ===== */
         .btn {
             padding: 11px 28px;
             border: none;
@@ -176,19 +300,20 @@
         }
         .btn:active { transform: scale(0.97); }
         .btn-success { background: #27ae60; color: #fff; }
-        .btn-success:hover { background: #1e8449; }
+        .btn-success:hover { background: #1e8449; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(39,174,96,0.3); }
         .btn-primary { background: #1a5276; color: #fff; }
-        .btn-primary:hover { background: #154360; }
+        .btn-primary:hover { background: #154360; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(26,82,118,0.3); }
         .btn-danger { background: #e74c3c; color: #fff; }
-        .btn-danger:hover { background: #c0392b; }
+        .btn-danger:hover { background: #c0392b; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(231,76,60,0.3); }
         .btn-warning { background: #f39c12; color: #fff; }
-        .btn-warning:hover { background: #d68910; }
+        .btn-warning:hover { background: #d68910; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(243,156,18,0.3); }
         .btn-purple { background: #8e44ad; color: #fff; }
-        .btn-purple:hover { background: #6c3483; }
+        .btn-purple:hover { background: #6c3483; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(142,68,173,0.3); }
         .btn-sm { padding: 6px 16px; font-size: 12px; }
         .btn-block { width: 100%; justify-content: center; }
-        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
 
+        /* ===== SIGNATURE ===== */
         .signature-pad {
             border: 2px dashed #8e44ad;
             border-radius: 10px;
@@ -199,10 +324,13 @@
             height: 100px;
             cursor: crosshair;
             margin: 6px 0;
+            transition: 0.3s;
         }
+        .signature-pad:hover { border-color: #1a5276; background: #f0f2f5; }
         .signature-pad canvas { width: 100%; height: 100%; border-radius: 8px; touch-action: none; }
         .signature-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0; }
 
+        /* ===== TOAST ===== */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -227,6 +355,7 @@
         .toast.warning { background: #f39c12; color: #1a1a2e; }
         .toast.error { background: #e74c3c; }
 
+        /* ===== FOOTER ===== */
         .footer {
             text-align: center;
             margin-top: 28px;
@@ -242,6 +371,7 @@
             margin-bottom: 4px;
         }
 
+        /* ===== USER TOOLS ===== */
         .user-badge {
             display: inline-block;
             padding: 4px 14px;
@@ -284,123 +414,25 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .hidden { display: none !important; }
         .last-saved {
             font-size: 11px;
             color: #7f8c8d;
             margin-left: auto;
         }
 
-        .star-rating {
-            display: flex;
-            gap: 8px;
-            font-size: 30px;
-            cursor: pointer;
-        }
-        .star-rating .star {
-            color: #d5d8dc;
-            transition: all 0.3s ease;
-        }
-        .star-rating .star.active {
-            color: #f39c12;
-        }
-        .star-rating .star:hover {
-            transform: scale(1.2);
-        }
-
-        .likert-scale {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            margin: 4px 0;
-        }
-        .likert-btn {
-            padding: 6px 14px;
-            border: 2px solid #dee2e6;
-            border-radius: 8px;
-            background: #fff;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            font-family: inherit;
-            min-width: 48px;
-            text-align: center;
-            flex: 1;
-        }
-        .likert-btn:hover { background: #eaf2f8; border-color: #8e44ad; }
-        .likert-btn.selected {
-            border-color: #8e44ad;
-            background: #8e44ad;
-            color: #fff;
-        }
-        .likert-btn .sub {
-            display: block;
-            font-weight: 400;
-            font-size: 9px;
-            color: #7f8c8d;
-            margin-top: 1px;
-        }
-        .likert-btn.selected .sub { color: rgba(255,255,255,0.8); }
-
-        .checklist-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4px 20px;
-            padding: 4px 0;
-        }
-        @media (max-width: 600px) { .checklist-grid { grid-template-columns: 1fr; } }
-        .checklist-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 5px 0;
-            border-bottom: 1px solid #f0f2f5;
-            font-size: 13px;
-        }
-        .checklist-item:last-child { border-bottom: none; }
-        .checklist-item .num {
-            width: 22px;
-            height: 22px;
-            background: #ecf0f1;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            font-weight: 700;
-            color: #7f8c8d;
-            flex-shrink: 0;
-        }
-        .checklist-item .toggle {
-            width: 40px;
-            height: 22px;
-            flex-shrink: 0;
-            background: #d5d8dc;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: 0.3s;
-            position: relative;
-        }
-        .checklist-item .toggle.active { background: #8e44ad; }
-        .checklist-item .toggle .thumb {
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 18px;
-            height: 18px;
-            background: #fff;
-            border-radius: 50%;
-            transition: 0.3s;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-        }
-        .checklist-item .toggle.active .thumb { left: 20px; }
-
+        /* ===== SCORE BOX ===== */
         .score-box {
             background: #e8daef;
             border-radius: 12px;
             padding: 16px 20px;
             margin: 14px 0;
             border-left: 5px solid #8e44ad;
+            transition: all 0.5s ease;
+        }
+        .score-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(142,68,173,0.15);
         }
         .score-box h3 { color: #1a5276; margin-bottom: 6px; font-size: 15px; }
         .score-row {
@@ -413,7 +445,9 @@
             padding: 10px 14px;
             border-radius: 8px;
             text-align: center;
+            transition: 0.3s;
         }
+        .score-item:hover { transform: scale(1.02); }
         .score-item .number {
             font-size: 24px;
             font-weight: 800;
@@ -445,6 +479,7 @@
             background: linear-gradient(90deg, #8e44ad, #1a5276);
         }
 
+        /* ===== COMPARISON TABLE ===== */
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
@@ -464,16 +499,19 @@
         .comparison-table .warning { background: #fef9e7; }
         .comparison-table .danger { background: #fadbd8; }
 
+        /* ===== NOTIFICATION ===== */
         .notification-box {
             background: #fef9e7;
             border-left: 4px solid #f39c12;
             padding: 12px 16px;
             border-radius: 8px;
             margin: 8px 0;
+            transition: 0.3s;
         }
         .notification-box.success { background: #d5f5e3; border-left-color: #27ae60; }
         .notification-box.danger { background: #fadbd8; border-left-color: #e74c3c; }
 
+        /* ===== CONTACT CARDS ===== */
         .contact-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -536,6 +574,335 @@
         .contact-card .action-btn.email { background: #1a5276; color: #fff; }
         .contact-card .action-btn.email:hover { background: #154360; }
 
+        /* ===== CALENDAR (MPYA) ===== */
+        .calendar-container {
+            background: #fff;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #e9ecef;
+            margin: 12px 0;
+        }
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .calendar-header .month-year {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a5276;
+        }
+        .calendar-header .nav-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 4px 12px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+        .calendar-header .nav-btn:hover {
+            background: #f0f2f5;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+        .calendar-grid .day-name {
+            font-size: 11px;
+            font-weight: 600;
+            color: #7f8c8d;
+            text-align: center;
+            padding: 6px 0;
+        }
+        .calendar-grid .day {
+            font-size: 13px;
+            text-align: center;
+            padding: 8px 4px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+        .calendar-grid .day:hover {
+            background: #f0f2f5;
+        }
+        .calendar-grid .day.today {
+            background: #e8daef;
+            color: #8e44ad;
+            font-weight: 700;
+        }
+        .calendar-grid .day.has-event {
+            border-color: #8e44ad;
+            position: relative;
+        }
+        .calendar-grid .day.has-event::after {
+            content: '•';
+            color: #8e44ad;
+            font-size: 14px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .calendar-grid .day.other-month {
+            color: #d5d8dc;
+        }
+        .calendar-grid .day.event-day {
+            background: #e8daef;
+            color: #6c3483;
+            font-weight: 600;
+        }
+        .event-list {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e9ecef;
+        }
+        .event-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 4px;
+            font-size: 13px;
+            border-left: 3px solid #8e44ad;
+        }
+        .event-item .event-time {
+            font-weight: 600;
+            color: #1a5276;
+            font-size: 11px;
+            min-width: 60px;
+        }
+        .event-item .event-title {
+            flex: 1;
+        }
+        .event-item .event-remove {
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .event-item .event-remove:hover { opacity: 0.7; }
+
+        /* ===== REMINDER (MPYA) ===== */
+        .reminder-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            margin-bottom: 6px;
+            transition: 0.3s;
+        }
+        .reminder-item:hover {
+            border-color: #8e44ad;
+        }
+        .reminder-item .reminder-icon {
+            font-size: 20px;
+        }
+        .reminder-item .reminder-info {
+            flex: 1;
+        }
+        .reminder-item .reminder-info .title {
+            font-weight: 600;
+            color: #1a5276;
+            font-size: 13px;
+        }
+        .reminder-item .reminder-info .desc {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        .reminder-item .reminder-status {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 12px;
+        }
+        .reminder-item .reminder-status.urgent { background: #fadbd8; color: #e74c3c; }
+        .reminder-item .reminder-status.pending { background: #fef9e7; color: #f39c12; }
+        .reminder-item .reminder-status.done { background: #d5f5e3; color: #27ae60; }
+
+        /* ===== GROUP REPORT (MPYA) ===== */
+        .group-report {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #e9ecef;
+            margin: 12px 0;
+        }
+        .group-report .dept-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 12px;
+            background: #fff;
+            border-radius: 6px;
+            margin-bottom: 4px;
+            border-left: 3px solid #8e44ad;
+        }
+        .group-report .dept-item .dept-name {
+            flex: 1;
+            font-weight: 600;
+            color: #1a5276;
+        }
+        .group-report .dept-item .dept-stats {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        .group-report .dept-item .dept-score {
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .group-report .dept-item .dept-score.green { color: #27ae60; }
+        .group-report .dept-item .dept-score.orange { color: #f39c12; }
+        .group-report .dept-item .dept-score.red { color: #e74c3c; }
+
+        /* ===== STAR RATING ===== */
+        .star-rating {
+            display: flex;
+            gap: 8px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .star-rating .star {
+            color: #d5d8dc;
+            transition: all 0.3s ease;
+        }
+        .star-rating .star.active {
+            color: #f39c12;
+        }
+        .star-rating .star:hover {
+            transform: scale(1.2);
+        }
+
+        /* ===== FUTURE GOALS (MPYA) ===== */
+        .goal-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 14px;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            margin-bottom: 6px;
+            transition: 0.3s;
+        }
+        .goal-item:hover {
+            border-color: #8e44ad;
+        }
+        .goal-item .goal-check {
+            margin-top: 2px;
+        }
+        .goal-item .goal-check input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #8e44ad;
+        }
+        .goal-item .goal-info {
+            flex: 1;
+        }
+        .goal-item .goal-info .goal-title {
+            font-weight: 600;
+            color: #1a5276;
+            font-size: 13px;
+        }
+        .goal-item .goal-info .goal-desc {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        .goal-item .goal-info .goal-deadline {
+            font-size: 11px;
+            color: #e74c3c;
+        }
+
+        /* ===== CHECKLIST ===== */
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 20px;
+            padding: 4px 0;
+        }
+        @media (max-width: 600px) { .checklist-grid { grid-template-columns: 1fr; } }
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 8px;
+            border-bottom: 1px solid #f0f2f5;
+            font-size: 13px;
+            background: #fff;
+            border-radius: 6px;
+            margin-bottom: 2px;
+        }
+        .checklist-item:last-child { border-bottom: none; }
+        .checklist-item:hover { background: #f8f9fa; }
+        .checklist-item .num {
+            width: 22px;
+            height: 22px;
+            background: #e8daef;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: #6c3483;
+            flex-shrink: 0;
+        }
+        .checklist-item .toggle {
+            width: 40px;
+            height: 22px;
+            flex-shrink: 0;
+            background: #d5d8dc;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+            margin-left: auto;
+        }
+        .checklist-item .toggle.active { background: #8e44ad; }
+        .checklist-item .toggle .thumb {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            border-radius: 50%;
+            transition: 0.3s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+        }
+        .checklist-item .toggle.active .thumb { left: 20px; }
+
+        .checklist-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 16px 18px;
+            margin-bottom: 16px;
+            border: 1px solid #e9ecef;
+        }
+        .checklist-section .section-title {
+            font-weight: 600;
+            color: #1a5276;
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .checklist-section .section-title .count {
+            font-size: 12px;
+            color: #7f8c8d;
+            font-weight: 400;
+        }
+
+        /* ===== FILE UPLOAD ===== */
         .file-upload {
             border: 2px dashed #dee2e6;
             border-radius: 10px;
@@ -561,129 +928,21 @@
         }
         .file-item .remove { color: #e74c3c; cursor: pointer; }
 
-        .chart-container {
-            background: #fff;
-            border-radius: 10px;
-            padding: 16px;
-            margin: 14px 0;
-            border: 1px solid #e9ecef;
-        }
-        .chart-container .chart-title {
-            font-weight: 600;
-            color: #1a5276;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-        .chart-bars {
-            display: flex;
-            gap: 8px;
-            align-items: flex-end;
-            height: 120px;
-            padding: 8px 0;
-        }
-        @media (max-width: 600px) { .chart-bars { height: 80px; } }
-        .chart-bar {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-        .chart-bar .bar {
-            width: 100%;
-            background: linear-gradient(180deg, #8e44ad, #1a5276);
-            border-radius: 4px 4px 0 0;
-            min-height: 10px;
-            transition: height 0.8s ease;
-        }
-        .chart-bar .label {
-            font-size: 10px;
-            color: #7f8c8d;
-            text-align: center;
-        }
-        .chart-bar .value {
-            font-size: 11px;
-            font-weight: 700;
-            color: #1a5276;
-        }
-
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-        }
-        .kpi-item {
-            background: #fff;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-            text-align: center;
-        }
-        .kpi-item .value {
-            font-size: 22px;
-            font-weight: 800;
-            color: #1a5276;
-            display: block;
-        }
-        .kpi-item .label {
-            font-size: 10px;
-            color: #7f8c8d;
-            text-transform: uppercase;
-        }
-        .kpi-item .value.green { color: #27ae60; }
-        .kpi-item .value.orange { color: #f39c12; }
-        .kpi-item .value.red { color: #e74c3c; }
-
-        .matrix-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 8px 0;
-        }
-        @media (max-width: 600px) { .matrix-grid { grid-template-columns: 1fr; } }
-        .matrix-item {
-            background: #fff;
-            padding: 10px 14px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .matrix-item .label { font-size: 12px; color: #1a5276; }
-        .matrix-item .level {
-            font-size: 12px;
-            font-weight: 600;
-            padding: 2px 12px;
-            border-radius: 12px;
-        }
-        .matrix-item .level.high { background: #d5f5e3; color: #27ae60; }
-        .matrix-item .level.medium { background: #fdebd0; color: #f39c12; }
-        .matrix-item .level.low { background: #fadbd8; color: #e74c3c; }
-
-        .preview-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4px 20px;
-            font-size: 13px;
-        }
-        .preview-grid .item { padding: 2px 0; }
-        .preview-grid .item strong { color: #1a5276; }
-
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .form-card { padding: 16px; }
             .form-row { grid-template-columns: 1fr; }
+            .contact-cards { grid-template-columns: 1fr; }
             .score-row { grid-template-columns: 1fr 1fr; }
             .user-tools .last-saved { margin-left: 0; width: 100%; text-align: center; }
-            .matrix-grid { grid-template-columns: 1fr; }
-            .kpi-grid { grid-template-columns: 1fr 1fr; }
-            .contact-cards { grid-template-columns: 1fr; }
-            .likert-scale .likert-btn { font-size: 10px; padding: 4px 8px; min-width: 35px; }
-            .preview-grid { grid-template-columns: 1fr; }
+            .comparison-table { font-size: 11px; }
+            .comparison-table th, .comparison-table td { padding: 4px 6px; }
+            .dashboard-stats { grid-template-columns: 1fr 1fr; }
+            .calendar-grid .day { font-size: 11px; padding: 4px 2px; }
         }
         @media (max-width: 400px) {
             .score-row { grid-template-columns: 1fr; }
-            .kpi-grid { grid-template-columns: 1fr; }
+            .dashboard-stats { grid-template-columns: 1fr; }
             .header h1 { font-size: 20px; }
             .header h2 { font-size: 13px; }
         }
@@ -691,13 +950,15 @@
 </head>
 <body>
 
+<!-- ===== TOAST ===== -->
 <div id="toast" class="toast"></div>
 
+<!-- ===== LOGIN ===== -->
 <div id="loginSection" class="login-box">
     <h2>🔐 Mtwara Performance</h2>
-    <p class="subtitle">Fomu ya Mganga Mfawidhi</p>
-    <div class="status-text">
-        <span id="connectionStatus">✅ TAYARI</span>
+    <p class="subtitle">Fomu ya Mganga Mfawidhi (Maboresho Yote)</p>
+    <div style="text-align:center; margin-bottom:16px; font-size:12px; color:#7f8c8d;">
+        <span id="connectionStatus">🔄 Inaunganisha...</span>
     </div>
     <div class="form-group">
         <label>👤 Jina la Mtumiaji</label>
@@ -713,7 +974,8 @@
     </p>
 </div>
 
-<div id="mainApp">
+<!-- ===== MAIN APP ===== -->
+<div id="mainApp" style="display:none;">
     <div class="container">
 
         <div class="header">
@@ -723,19 +985,203 @@
             <div style="font-size:12px; color:#7f8c8d; margin-top:4px;">
                 <span id="userBadge" class="user-badge">👤 Imetoka nje</span>
                 <span style="margin-left:12px; font-size:11px; color:#27ae60;">☁️ Online</span>
+                <span style="margin-left:12px; font-size:11px; color:#8e44ad;">📄 <span id="reportIdDisplay">-</span></span>
             </div>
             <div class="bin-info">
-                📦 Hifadhi: <span id="binIdDisplay">Local Storage</span>
+                📦 BIN: <span id="binIdDisplay">6a4b0bc9da38895dfe32cc08</span>
             </div>
             <div class="mission"><strong>Dhamira:</strong> "Ubora katika Huduma, Imani katika Vitendo"</div>
+            <div id="deadlineContainer" style="margin-top: 10px;">
+                <span class="deadline-badge ok" id="deadlineBadge">
+                    📅 Tarehe ya Mwisho: <span id="deadlineDate">-</span>
+                </span>
+            </div>
         </div>
 
         <div class="user-tools">
             <span style="font-weight:600; color:#1a5276;">👤 <span id="currentUserDisplay">Mgeni</span></span>
             <span id="roleDisplay" class="role-badge">🏥 Mganga Mfawidhi</span>
             <button class="btn btn-danger btn-sm" onclick="logout()">🚪 Toka</button>
-            <button class="btn btn-purple btn-sm" onclick="exportPDF()">📊 PDF</button>
+            <button class="btn btn-warning btn-sm" onclick="syncData()" id="syncBtn">🔄 Sync</button>
+            <button class="btn btn-primary btn-sm" onclick="showHistory()">📋 Historia</button>
+            <button class="btn btn-success btn-sm" onclick="exportCSV()">📊 CSV</button>
             <span id="lastSaved" class="last-saved">💾 Imehifadhiwa: sasa hivi</span>
+        </div>
+
+        <!-- ===== SECTION PROGRESS ===== -->
+        <div class="section-progress">
+            <div class="progress-header">
+                <span>📊 Maendeleo ya Fomu</span>
+                <span id="sectionProgressText">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="fill" id="sectionProgressBar" style="width:0%;"></div>
+            </div>
+        </div>
+
+        <!-- ===== DASHBOARD STATS (VIPENGELE #1) ===== -->
+        <div class="dashboard-stats" id="dashboardStats">
+            <div class="stat-card">
+                <span class="stat-icon">📊</span>
+                <span class="stat-number" id="totalAssessments">0</span>
+                <span class="stat-label">Jumla ya Tathmini</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">✅</span>
+                <span class="stat-number green" id="approvedRate">0%</span>
+                <span class="stat-label">Kiwango cha Idhini</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">⏳</span>
+                <span class="stat-number orange" id="pendingCount">0</span>
+                <span class="stat-label">Zinazosubiri</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">⭐</span>
+                <span class="stat-number purple" id="avgScore">0%</span>
+                <span class="stat-label">Wastani wa Alama</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">🏆</span>
+                <span class="stat-number blue" id="topWorker">-</span>
+                <span class="stat-label">Mtendakazi Bora</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">📅</span>
+                <span class="stat-number" id="monthlyCount">0</span>
+                <span class="stat-label">Tathmini Mwezi Huu</span>
+            </div>
+        </div>
+
+        <!-- ===== KUMBUSHO ZA UFUATILIAJI (VIPENGELE #2) ===== -->
+        <div style="background:#fef9e7; border-radius:12px; padding:16px 20px; margin-bottom:16px; border-left:4px solid #f39c12;">
+            <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+                🔔 KUMBUSHO ZA UFUATILIAJI
+                <span style="font-size:10px; background:#f39c12; color:#fff; padding:2px 12px; border-radius:12px;" id="reminderCount">0</span>
+            </div>
+            <div id="reminderList">
+                <div class="reminder-item">
+                    <span class="reminder-icon">⚠️</span>
+                    <div class="reminder-info">
+                        <div class="title">Tathmini Inakaribia Tarehe ya Mwisho</div>
+                        <div class="desc">Tathmini za mwezi huu zinahitaji kukamilishwa kabla ya tarehe 30</div>
+                    </div>
+                    <span class="reminder-status urgent">Haraka</span>
+                </div>
+                <div class="reminder-item">
+                    <span class="reminder-icon">📋</span>
+                    <div class="reminder-info">
+                        <div class="title">Malengo Yasiyofikiwa</div>
+                        <div class="desc">Wafanyakazi 3 wameshindwa kufikia malengo yao</div>
+                    </div>
+                    <span class="reminder-status pending">Inasubiri</span>
+                </div>
+                <div class="reminder-item">
+                    <span class="reminder-icon">📅</span>
+                    <div class="reminder-info">
+                        <div class="title">Mikutano ya Ufuatiliaji</div>
+                        <div class="desc">Mikutano ya ufuatiliaji imeratibiwa Jumatano wiki hii</div>
+                    </div>
+                    <span class="reminder-status pending">Inasubiri</span>
+                </div>
+            </div>
+            <div style="margin-top:10px;">
+                <button class="btn btn-primary btn-sm" onclick="addReminder()">➕ Ongeza Kumbusho</button>
+            </div>
+        </div>
+
+        <!-- ===== KALENDA (VIPENGELE #6) ===== -->
+        <div style="background:#f8f9fa; border-radius:12px; padding:16px 20px; margin-bottom:16px; border:1px solid #e9ecef;">
+            <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+                📅 KALENDA YA MATUKIO
+                <span style="font-size:10px; background:#8e44ad; color:#fff; padding:2px 12px; border-radius:12px;" id="eventCount">0 Matukio</span>
+            </div>
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button class="nav-btn" onclick="changeMonth(-1)">◀</button>
+                    <span class="month-year" id="calendarMonthYear">Januari 2025</span>
+                    <button class="nav-btn" onclick="changeMonth(1)">▶</button>
+                </div>
+                <div class="calendar-grid" id="calendarGrid">
+                    <!-- Calendar days will be rendered here -->
+                </div>
+                <div class="event-list" id="eventList">
+                    <div style="font-size:12px; color:#7f8c8d; text-align:center;">Bonyeza tarehe kuongeza tukio</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== RIPOTI ZA KIKUNDI (VIPENGELE #3) ===== -->
+        <div class="group-report">
+            <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+                🏢 RIPOTI ZA KIKUNDI
+                <span style="font-size:10px; background:#8e44ad; color:#fff; padding:2px 12px; border-radius:12px;" id="deptCount">0 Idara</span>
+            </div>
+            <div id="departmentReport">
+                <div class="dept-item">
+                    <span class="dept-name">🏥 Idara ya Matibabu</span>
+                    <span class="dept-stats">Wafanyakazi: 12 | Waliopendekezwa: 10</span>
+                    <span class="dept-score green">83%</span>
+                </div>
+                <div class="dept-item">
+                    <span class="dept-name">💊 Idara ya Dawa</span>
+                    <span class="dept-stats">Wafanyakazi: 8 | Waliopendekezwa: 6</span>
+                    <span class="dept-score orange">75%</span>
+                </div>
+                <div class="dept-item">
+                    <span class="dept-name">🔬 Idara ya Maabara</span>
+                    <span class="dept-stats">Wafanyakazi: 6 | Waliopendekezwa: 5</span>
+                    <span class="dept-score green">88%</span>
+                </div>
+                <div class="dept-item">
+                    <span class="dept-name">💉 Idara ya Uuguzi</span>
+                    <span class="dept-stats">Wafanyakazi: 15 | Waliopendekezwa: 12</span>
+                    <span class="dept-score green">80%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== MALENGO YA BAADAYE (VIPENGELE #4) ===== -->
+        <div style="background:#eaf2f8; border-radius:12px; padding:16px 20px; margin-bottom:16px; border-left:4px solid #8e44ad;">
+            <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+                🎯 MALENGO YA BAADAYE
+                <span style="font-size:10px; background:#8e44ad; color:#fff; padding:2px 12px; border-radius:12px;" id="goalCount">0</span>
+            </div>
+            <div id="futureGoals">
+                <div class="goal-item">
+                    <div class="goal-check">
+                        <input type="checkbox" onchange="toggleGoal(this)">
+                    </div>
+                    <div class="goal-info">
+                        <div class="goal-title">Kupata Cheti cha Uongozi</div>
+                        <div class="goal-desc">Kuhudhuria mafunzo ya uongozi na kupata cheti</div>
+                        <div class="goal-deadline">📅 Tarehe ya Mwisho: 31/12/2025</div>
+                    </div>
+                </div>
+                <div class="goal-item">
+                    <div class="goal-check">
+                        <input type="checkbox" onchange="toggleGoal(this)">
+                    </div>
+                    <div class="goal-info">
+                        <div class="goal-title">Kuboresha Mawasiliano</div>
+                        <div class="goal-desc">Kuhudhuria warsha ya mawasiliano bora</div>
+                        <div class="goal-deadline">📅 Tarehe ya Mwisho: 30/06/2025</div>
+                    </div>
+                </div>
+                <div class="goal-item">
+                    <div class="goal-check">
+                        <input type="checkbox" onchange="toggleGoal(this)">
+                    </div>
+                    <div class="goal-info">
+                        <div class="goal-title">Kufikia Alama 90% katika Tathmini</div>
+                        <div class="goal-desc">Kuboresha utendaji ili kufikia alama za juu</div>
+                        <div class="goal-deadline">📅 Tarehe ya Mwisho: 31/12/2025</div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:10px;">
+                <button class="btn btn-primary btn-sm" onclick="addGoal()">➕ Ongeza Lengo</button>
+            </div>
         </div>
 
         <div id="formIncharge" class="form-card">
@@ -746,18 +1192,21 @@
                 <span id="inchargeStatusBadge" class="status-badge pending">⏳ Inasubiri</span>
             </div>
 
-            <!-- TAARIFA ZA MTENDAKAZI -->
+            <!-- ========================================================== -->
+            <!-- SEHEMU 1: TAARIFA ZA MTENDAKAZI -->
+            <!-- ========================================================== -->
             <div style="background:#eaf2f8; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #8e44ad;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">📋 TAARIFA ZA MTENDAKAZI</div>
                 
                 <div class="form-row">
                     <div class="form-group">
                         <label>👤 Jina Kamili la Mtendakazi <span class="required">*</span></label>
-                        <input type="text" id="workerName" placeholder="Jina la mtendakazi" value="">
+                        <input type="text" id="workerName" placeholder="Jina la mtendakazi" value="" onchange="autoSave(); loadSupervisorData(); updateSectionProgress(); updateDashboard();" oninput="autoSave(); loadSupervisorData(); updateSectionProgress(); updateDashboard();">
                     </div>
                     <div class="form-group">
-                        <label>📋 Taaluma <span class="required">*</span></label>
-                        <select id="workerRole">
+                        <label>📋 Taaluma / Wadhifa <span class="required">*</span></label>
+                        <select id="workerRole" onchange="loadChecklists(); autoSave(); updateSectionProgress();">
+                            <option value="">-- Chagua Taaluma --</option>
                             <option value="Medical Officer">🩺 Medical Officer (MD)</option>
                             <option value="Clinical Officer">📋 Clinical Officer</option>
                             <option value="Specialist">⭐ Specialist</option>
@@ -777,11 +1226,11 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>📅 Tarehe ya Tathmini</label>
-                        <input type="date" id="workerDate">
+                        <input type="date" id="workerDate" onchange="autoSave(); updateSectionProgress();">
                     </div>
                     <div class="form-group">
                         <label>🕐 Zamu</label>
-                        <select id="workerShift">
+                        <select id="workerShift" onchange="autoSave(); updateSectionProgress();">
                             <option>Mchana</option>
                             <option>Usiku</option>
                         </select>
@@ -789,10 +1238,10 @@
                 </div>
                 <div class="form-group">
                     <label>🏢 Idara ya Mtendakazi</label>
-                    <input type="text" id="workerDepartment" value="Clinical">
+                    <input type="text" id="workerDepartment" value="Clinical" onchange="autoSave(); updateSectionProgress(); updateDashboard();" oninput="autoSave(); updateSectionProgress(); updateDashboard();">
                 </div>
 
-                <!-- MAWASILIANO YA MTENDAKAZI (KUTOKA MSIMAMIZI) -->
+                <!-- ===== MAWASILIANO YA MTENDAKAZI ===== -->
                 <div style="margin-top:12px; background:#fff; border-radius:8px; padding:12px 16px; border:2px solid #8e44ad;">
                     <div style="font-weight:700; color:#8e44ad; font-size:14px; margin-bottom:8px; display:flex; align-items:center; gap:8px;">
                         📞 MAWASILIANO YA MTENDAKAZI
@@ -827,26 +1276,30 @@
                 </div>
             </div>
 
-            <!-- TAARIFA ZA MSIMAMIZI -->
+            <!-- ========================================================== -->
+            <!-- SEHEMU 2: TAARIFA ZA MSIMAMIZI -->
+            <!-- ========================================================== -->
             <div style="background:#d5f5e3; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #8e44ad;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">👔 TAARIFA ZA MSIMAMIZI</div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>👔 Jina la Msimamizi</label>
-                        <input type="text" id="supervisorName" placeholder="Jina la msimamizi" value="">
+                        <input type="text" id="supervisorName" placeholder="Jina la msimamizi" value="" onchange="autoSave(); updatePreview(); updateSectionProgress();" oninput="autoSave(); updatePreview(); updateSectionProgress();">
                     </div>
                     <div class="form-group">
                         <label>📋 Wadhifa</label>
-                        <input type="text" id="supervisorTitle" placeholder="Wadhifa wa msimamizi" value="">
+                        <input type="text" id="supervisorTitle" placeholder="Wadhifa wa msimamizi" value="" onchange="autoSave(); updatePreview(); updateSectionProgress();" oninput="autoSave(); updatePreview(); updateSectionProgress();">
                     </div>
                 </div>
                 <div class="form-group">
                     <label>🏢 Idara ya Msimamizi</label>
-                    <input type="text" id="supervisorDepartment" placeholder="Idara ya msimamizi" value="">
+                    <input type="text" id="supervisorDepartment" placeholder="Idara ya msimamizi" value="" onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();">
                 </div>
             </div>
 
-            <!-- TATHMINI YA MSIMAMIZI -->
+            <!-- ========================================================== -->
+            <!-- SEHEMU 3: TATHMINI YA MSIMAMIZI -->
+            <!-- ========================================================== -->
             <div id="supervisorSection" style="display:none; background:#d5f5e3; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #27ae60;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:10px;">
                     👔 TATHMINI YA MSIMAMIZI
@@ -875,36 +1328,36 @@
                 </div>
             </div>
 
-            <!-- MAJUKUMU -->
+            <!-- ========================================================== -->
+            <!-- SEHEMU 4: MAJUKUMU YA MTENDAKAZI -->
+            <!-- ========================================================== -->
             <div style="background:#e8daef; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #8e44ad;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">📋 MAJUKUMU YA MTENDAKAZI</div>
                 <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Kagua na thibitisha majukumu yaliyokamilishwa na mtendakazi</div>
-                <div class="checklist-section" style="background:#f8f9fa; border-radius:12px; padding:16px 18px; margin-bottom:16px; border:1px solid #e9ecef;">
-                    <div style="font-weight:600; color:#1a5276; font-size:14px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-                        📋 Majukumu ya Jumla <span style="font-size:12px; color:#7f8c8d; font-weight:400;" id="generalCount">(0/10)</span>
-                    </div>
+                <div class="checklist-section">
+                    <div class="section-title">📋 Majukumu ya Jumla <span class="count" id="generalCount">(0/10)</span></div>
                     <div class="checklist-grid" id="inchargeGeneralChecklist"></div>
                 </div>
-                <div class="checklist-section" style="background:#f8f9fa; border-radius:12px; padding:16px 18px; border:1px solid #e9ecef;">
-                    <div style="font-weight:600; color:#1a5276; font-size:14px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-                        📋 Majukumu Maalum <span style="font-size:12px; color:#7f8c8d; font-weight:400;" id="specialCount">(0/5)</span>
-                    </div>
+                <div class="checklist-section">
+                    <div class="section-title">📋 Majukumu Maalum <span class="count" id="specialCount">(0/5)</span></div>
                     <div class="checklist-grid" id="inchargeSpecialChecklist"></div>
                 </div>
             </div>
 
-            <!-- MUHTASARI -->
+            <!-- ========================================================== -->
+            <!-- SEHEMU 5: MUHTASARI WA TATHMINI -->
+            <!-- ========================================================== -->
             <div style="background:#f8f9fa; padding:16px 20px; border-radius:12px; margin-bottom:16px; border:1px solid #dee2e6;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">📊 MUHTASARI WA TATHMINI</div>
                 <div style="font-weight:600; color:#1a5276; font-size:13px; margin-bottom:6px;">📋 Tathmini ya Mtendakazi</div>
-                <div class="preview-grid">
+                <div class="preview-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:4px 20px; font-size:13px;">
                     <div style="padding:2px 0;"><strong>Jina:</strong> <span id="previewWorkerName">-</span></div>
                     <div style="padding:2px 0;"><strong>Taaluma:</strong> <span id="previewWorkerRole">-</span></div>
                     <div style="padding:2px 0;"><strong>Alama:</strong> <span id="previewWorkerScore">-</span></div>
                     <div style="padding:2px 0;"><strong>Hali:</strong> <span id="previewWorkerStatus">-</span></div>
                 </div>
                 <div style="font-weight:600; color:#1a5276; font-size:13px; margin-top:10px; margin-bottom:6px;">👔 Tathmini ya Msimamizi</div>
-                <div class="preview-grid">
+                <div class="preview-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:4px 20px; font-size:13px;">
                     <div style="padding:2px 0;"><strong>Jina:</strong> <span id="previewSupervisorName">-</span></div>
                     <div style="padding:2px 0;"><strong>Wadhifa:</strong> <span id="previewSupervisorTitle">-</span></div>
                     <div style="padding:2px 0;"><strong>Alama:</strong> <span id="previewSupervisorScore">-</span></div>
@@ -912,10 +1365,12 @@
                 </div>
             </div>
 
-            <!-- COMPARISON TABLE -->
+            <!-- ========================================================== -->
+            <!-- SEHEMU 6: COMPARISON TABLE -->
+            <!-- ========================================================== -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">📊 COMPARISON TABLE</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Linganisha tathmini ya mtendakazi na msimamizi</div>
-            <table class="comparison-table">
+            <table class="comparison-table" id="comparisonTable">
                 <thead>
                     <tr><th>Kipengele</th><th>Mtendakazi</th><th>Msimamizi</th><th>Pengo</th><th>Hali</th></tr>
                 </thead>
@@ -929,7 +1384,9 @@
                 </tbody>
             </table>
 
-            <!-- STAR RATING -->
+            <!-- ========================================================== -->
+            <!-- SEHEMU 7: STAR RATING -->
+            <!-- ========================================================== -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">⭐ TATHMINI YA MGANGA MFAWIDHI</div>
             <div class="form-group">
                 <label>1. Ubora wa Huduma</label>
@@ -998,23 +1455,27 @@
                 <span style="font-size:12px; color:#7f8c8d;" id="starCommunicationLabel">0/5</span>
             </div>
 
-            <!-- UAMUZI -->
+            <!-- ========================================================== -->
+            <!-- SEHEMU 8: UAMUZI WA MWISHO -->
+            <!-- ========================================================== -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">⚖️ UAMUZI WA MWISHO</div>
             <div class="form-group">
                 <label>📝 Maoni ya Mwisho</label>
-                <textarea id="finalComments" placeholder="Andika maoni yako ya mwisho kuhusu mtendakazi..."></textarea>
+                <textarea id="finalComments" placeholder="Andika maoni yako ya mwisho kuhusu mtendakazi..." onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();"></textarea>
             </div>
             <div class="form-group">
                 <label>💡 Mapendekezo ya Mganga Mfawidhi</label>
-                <textarea id="finalRecommendations" placeholder="Mapendekezo yako kwa mtendakazi..."></textarea>
+                <textarea id="finalRecommendations" placeholder="Mapendekezo yako kwa mtendakazi..." onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();"></textarea>
             </div>
 
-            <!-- NOTIFICATION -->
+            <!-- ========================================================== -->
+            <!-- SEHEMU 9: NOTIFICATION -->
+            <!-- ========================================================== -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">🔔 NOTIFICATION</div>
             <div class="notification-box" id="notificationBox">
                 <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
                     <span style="font-weight:600;">📊 Uamuzi wa Mwisho?</span>
-                    <select id="finalDecision" onchange="updateDecisionNotification()">
+                    <select id="finalDecision" onchange="updateDecisionNotification(); autoSave(); updateSectionProgress();">
                         <option value="approved">✅ Idhinisha</option>
                         <option value="rejected">❌ Kata</option>
                         <option value="deferred">⏳ Ahirisha</option>
@@ -1025,7 +1486,9 @@
                 </div>
             </div>
 
-            <!-- DOCUMENT UPLOAD -->
+            <!-- ========================================================== -->
+            <!-- SEHEMU 10: DOCUMENT UPLOAD -->
+            <!-- ========================================================== -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">📎 DOCUMENT UPLOAD</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Pakia nyaraka za usaidizi (ripoti, cheti, n.k.)</div>
             <div class="file-upload" onclick="document.getElementById('fileInput').click()">
@@ -1035,7 +1498,9 @@
             </div>
             <div class="file-list" id="fileList"></div>
 
-            <!-- SCORE BOX -->
+            <!-- ========================================================== -->
+            <!-- SEHEMU 11: MUHTASARI WA HALI -->
+            <!-- ========================================================== -->
             <div class="score-box" style="margin-top:16px;">
                 <h3>📊 MUHTASARI WA HALI</h3>
                 <div class="score-row" id="scoreSummary">
@@ -1061,7 +1526,9 @@
                 </div>
             </div>
 
-            <!-- SAHIHI -->
+            <!-- ========================================================== -->
+            <!-- SEHEMU 12: SAHIHI -->
+            <!-- ========================================================== -->
             <div class="form-group">
                 <label>✍️ Sahihi Yako <span class="required">*</span></label>
                 <div class="signature-pad"><canvas id="inchargeSigCanvas"></canvas></div>
@@ -1072,7 +1539,9 @@
                 </div>
             </div>
 
-            <!-- IDHINI / KATA -->
+            <!-- ========================================================== -->
+            <!-- SEHEMU 13: IDHINI / KATA -->
+            <!-- ========================================================== -->
             <div style="display:flex; gap:12px; flex-wrap:wrap;">
                 <button class="btn btn-success" onclick="approveFinal()" id="approveBtn" style="flex:1;">✅ IDHINI</button>
                 <button class="btn btn-danger" onclick="rejectFinal()" id="rejectBtn" style="flex:1;">❌ KATA</button>
@@ -1084,9 +1553,9 @@
 
         <div class="footer">
             <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
-            <div>Mtwara Performance | Fomu ya Mganga Mfawidhi</div>
+            <div>Mtwara Performance | Fomu ya Mganga Mfawidhi (Maboresho Yote)</div>
             <div style="margin-top:4px; font-size:10px; color:#aab;">
-                ⭐ Star Rating | 📊 Comparison Table | 📎 Document Upload
+                📊 Dashboard | 🔔 Kumbusho | 📅 Kalenda | 🏢 Ripoti za Kikundi | 🎯 Malengo | 📊 CSV
             </div>
         </div>
 
@@ -1095,19 +1564,26 @@
 
 <script>
 // ==============================================================
-// CONFIGURATION - TUMIA LOCAL STORAGE
+// CONFIGURATION
 // ==============================================================
+const API_KEY = "$2a$10$VfPZVlhjWTV.gErIv2yxX.3QmHdrMCgM1evuIR.BJreI7G0jQxGqW";
+const BIN_ID = "6a4b0bc9da38895dfe32cc08";
+const BIN_NAME = "MTWARA PERFORMANCE";
+
 let currentUser = null;
 let currentRole = null;
 let reports = [];
 let signatureData = { incharge: null };
 let uploadedFiles = [];
 let starRatings = {};
+let autoSaveInterval = null;
 let workerContactData = { phone: '', whatsapp: '', email: '' };
 
-// ==============================================================
-// CHECKLIST DATA
-// ==============================================================
+// ===== CALENDAR DATA =====
+let currentDate = new Date();
+let events = JSON.parse(localStorage.getItem('calendarEvents') || '[]');
+
+// ===== CHECKLIST DATA =====
 const GENERAL_CHECKLIST = [
     "Nimewasili kazini mapema kila siku",
     "Nimevaa sare safi na kitambulisho",
@@ -1122,17 +1598,28 @@ const GENERAL_CHECKLIST = [
 ];
 
 const SPECIAL_CHECKLISTS = {
-    "Medical Officer": ["Kufanya uchunguzi kamili wa wagonjwa","Kuandika historia sahihi","Kuagiza dawa sahihi","Kufanya taratibu za kliniki","Kushiriki katika rufaa"],
+    "Medical Officer": ["Kufanya uchunguzi kamili wa wagonjwa","Kuandika historia sahihi za wagonjwa","Kuagiza dawa sahihi","Kufanya taratibu za kliniki kwa ufanisi","Kushiriki katika rufaa za wagonjwa"],
     "Clinical Officer": ["Kufanya mashauriano ya wagonjwa","Kufanya uchunguzi wa kliniki","Kutekeleza mipango ya matibabu","Kushiriki katika elimu ya wagonjwa","Kuhakikisha viwango vya usalama"],
-    "Specialist": ["Kufanya uchunguzi wa kitaalamu","Kutoa ushauri wa kitaalamu","Kusimamia taratibu maalum","Kufanya tathmini za kitaalamu","Kushiriki katika rufaa"],
-    "Nurse": ["Kupima vipimo muhimu","Kusimamia dawa kwa usahihi","Kuandaa wagonjwa kwa taratibu","Kufuatilia hali ya wagonjwa","Kusimamia mipango ya wagonjwa"],
-    "Laboratory Scientist": ["Kuchukua sampuli kwa usahihi","Kufanya vipimo sahihi","Kurekodi na kuthibitisha matokeo","Kudumisha viwango vya usalama","Kuhakikisha udhibiti wa ubora"],
+    "Specialist": ["Kufanya uchunguzi wa kitaalamu","Kutoa ushauri wa kitaalamu","Kusimamia taratibu maalum","Kufanya tathmini za kitaalamu","Kushiriki katika rufaa za kitaalamu"],
+    "Nurse": ["Kupima vipimo muhimu kwa usahihi","Kusimamia dawa kwa usahihi","Kuandaa wagonjwa kwa taratibu","Kufuatilia hali ya wagonjwa","Kusimamia mipango ya wagonjwa"],
+    "Laboratory Scientist": ["Kuchukua sampuli kwa usahihi","Kufanya vipimo sahihi vya maabara","Kurekodi na kuthibitisha matokeo","Kudumisha viwango vya usalama","Kuhakikisha udhibiti wa ubora"],
     "Pharmacist": ["Kuandaa dawa kwa usahihi","Kushauri wagonjwa kuhusu dawa","Kuhifadhi dawa kwa usalama","Kusimamia orodha ya dawa","Kuchakata maagizo kwa usahihi"]
 };
 
-// SAMPLE DATA
 const sampleWorkerData = {punctuality:4,quality:5,teamwork:3,leadership:4,communication:4,decision:3};
 const sampleSupervisorData = {punctuality:4,quality:4,teamwork:5,leadership:4,communication:3,decision:4};
+
+// ==============================================================
+// GENERATE REPORT ID
+// ==============================================================
+function generateReportId() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+    return `MTW-${year}${month}${day}-${random}`;
+}
 
 // ==============================================================
 // CHECKLIST FUNCTIONS
@@ -1151,7 +1638,10 @@ function renderChecklist(containerId, items, storageKey, countId) {
             </div>
         </div>`;
     }).join("");
-    if (countId) updateChecklistCount(countId);
+    
+    if (countId) {
+        updateChecklistCount(countId, containerId, storageKey);
+    }
 }
 
 function toggleChecklist(el, storageKey, index, countId) {
@@ -1159,11 +1649,17 @@ function toggleChecklist(el, storageKey, index, countId) {
     const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
     saved[index] = el.classList.contains("active");
     localStorage.setItem(storageKey, JSON.stringify(saved));
-    if (countId) updateChecklistCount(countId);
+    
+    if (countId) {
+        updateChecklistCount(countId, null, storageKey);
+    }
+    autoSave();
     updateScoreSummary();
+    updateSectionProgress();
+    updateDashboard();
 }
 
-function updateChecklistCount(countId) {
+function updateChecklistCount(countId, containerId, storageKey) {
     const countEl = document.getElementById(countId);
     if (!countEl) return;
     let total = 0, checked = 0;
@@ -1194,8 +1690,45 @@ function loadChecklists() {
 }
 
 // ==============================================================
-// STAR RATING
+// STAR RATING WITH SOUND
 // ==============================================================
+function playStarSound(rating) {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        
+        let frequency = 440;
+        let duration = 0.2;
+        
+        if (rating <= 2) { frequency = 330; duration = 0.15; }
+        else if (rating <= 4) { frequency = 523; duration = 0.2; }
+        else {
+            frequency = 659;
+            duration = 0.35;
+            setTimeout(() => {
+                const osc2 = audioCtx.createOscillator();
+                const gain2 = audioCtx.createGain();
+                osc2.connect(gain2);
+                gain2.connect(audioCtx.destination);
+                osc2.frequency.value = 784;
+                gain2.gain.value = 0.15;
+                osc2.start();
+                osc2.stop(audioCtx.currentTime + 0.2);
+            }, 150);
+        }
+        
+        oscillator.frequency.value = frequency;
+        gainNode.gain.value = 0.15;
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + duration);
+    } catch(e) {
+        console.log("Sauti haipatikani");
+    }
+}
+
 function selectStar(el) {
     const container = el.parentElement;
     const field = container.dataset.field;
@@ -1208,8 +1741,11 @@ function selectStar(el) {
     const label = document.getElementById(`star${field.charAt(0).toUpperCase() + field.slice(1)}Label`);
     if (label) label.textContent = `${value}/5`;
     starRatings[field] = value;
+    autoSave();
     updateScoreSummary();
-    updateDecisionNotification();
+    updateSectionProgress();
+    updateDashboard();
+    playStarSound(value);
 }
 
 function getStarValues() { return starRatings; }
@@ -1233,7 +1769,7 @@ function loadSupervisorData() {
     }
     
     const supervisorReports = reports.filter(r => 
-        r.type === "supervisor_assessment" && 
+        r.type === "supervisor_assessment_international" && 
         r.workerName === workerName
     );
     
@@ -1270,7 +1806,7 @@ function loadSupervisorData() {
         document.getElementById("previewSupervisorScore").textContent = latest.score ? `${latest.score}%` : '-';
         document.getElementById("previewSupervisorComments").textContent = latest.comments || '-';
         
-        updateComparisonTable(sampleWorkerData, sampleSupervisorData);
+        updateDashboard();
     } else {
         section.style.display = 'none';
         document.getElementById("workerPhoneDisplay").textContent = '-';
@@ -1283,7 +1819,7 @@ function loadSupervisorData() {
 }
 
 // ==============================================================
-// CONTACT FUNCTIONS
+// MAWASILIANO FUNCTIONS
 // ==============================================================
 function makeCall() {
     const phone = workerContactData.phone;
@@ -1291,6 +1827,7 @@ function makeCall() {
     let cleanPhone = phone.replace(/[^0-9+]/g, '');
     if (!cleanPhone.startsWith('+')) cleanPhone = '+' + cleanPhone;
     window.location.href = `tel:${cleanPhone}`;
+    showToast(`📞 Inapiga simu ${phone}...`, "info");
 }
 
 function sendWhatsApp() {
@@ -1300,8 +1837,9 @@ function sendWhatsApp() {
     if (cleanWhatsApp.startsWith('0')) cleanWhatsApp = '255' + cleanWhatsApp.substring(1);
     if (!cleanWhatsApp.startsWith('255')) cleanWhatsApp = '255' + cleanWhatsApp;
     const workerName = document.getElementById("workerName").value.trim() || 'Mtendakazi';
-    const message = `Habari ${workerName}, ninakutumia taarifa kuhusu tathmini yako ya utendaji.`;
+    const message = `Habari ${workerName}, ninakutumia taarifa kuhusu tathmini yako ya utendaji. Tafadhali angalia maelezo yaliyotumwa na Mganga Mfawidhi.`;
     window.open(`https://wa.me/${cleanWhatsApp}?text=${encodeURIComponent(message)}`, '_blank');
+    showToast(`💬 Inafungua WhatsApp kwa ${whatsapp}...`, "success");
 }
 
 function sendEmail() {
@@ -1309,8 +1847,537 @@ function sendEmail() {
     if (!email) { showToast("⚠️ Hakuna barua pepe", "warning"); return; }
     const workerName = document.getElementById("workerName").value.trim() || 'Mtendakazi';
     const subject = `Taarifa ya Tathmini - ${workerName}`;
-    const body = `Habari ${workerName},\n\nNinatuma taarifa kuhusu tathmini yako ya utendaji kazi.\n\nAsante.`;
+    const body = `Habari ${workerName},\n\nNinatuma taarifa kuhusu tathmini yako ya utendaji kazi. Tafadhali angalia ripoti iliyotumwa na Mganga Mfawidhi.\n\nAsante.`;
     window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    showToast(`📧 Inafungua email kwa ${email}...`, "success");
+}
+
+// ==============================================================
+// DASHBOARD (VIPENGELE #1)
+// ==============================================================
+function updateDashboard() {
+    // Total assessments
+    const total = reports.length;
+    document.getElementById("totalAssessments").textContent = total;
+    
+    // Approved rate
+    const approved = reports.filter(r => r.finalDecision === 'approved' || r.status === 'Imekubaliwa').length;
+    const rate = total > 0 ? Math.round((approved / total) * 100) : 0;
+    document.getElementById("approvedRate").textContent = rate + '%';
+    
+    // Pending
+    const pending = reports.filter(r => r.finalDecision === 'pending' || r.status === 'Inasubiri Mganga Mfawidhi' || !r.finalDecision).length;
+    document.getElementById("pendingCount").textContent = pending;
+    
+    // Average score
+    let totalScore = 0;
+    let scored = 0;
+    reports.forEach(r => {
+        if (r.score) { totalScore += r.score; scored++; }
+    });
+    const avg = scored > 0 ? Math.round(totalScore / scored) : 0;
+    document.getElementById("avgScore").textContent = avg + '%';
+    
+    // Top worker
+    if (reports.length > 0) {
+        const scores = {};
+        reports.forEach(r => {
+            if (r.workerName && r.score) {
+                if (!scores[r.workerName]) scores[r.workerName] = [];
+                scores[r.workerName].push(r.score);
+            }
+        });
+        let topName = '-';
+        let topScore = 0;
+        Object.keys(scores).forEach(name => {
+            const avgScore = scores[name].reduce((a,b) => a+b, 0) / scores[name].length;
+            if (avgScore > topScore) {
+                topScore = avgScore;
+                topName = name;
+            }
+        });
+        document.getElementById("topWorker").textContent = topName !== '-' ? topName + ` (${Math.round(topScore)}%)` : '-';
+    }
+    
+    // Monthly count
+    const now = new Date();
+    const month = now.getMonth();
+    const year = now.getFullYear();
+    const monthly = reports.filter(r => {
+        if (!r.timestamp) return false;
+        const d = new Date(r.timestamp);
+        return d.getMonth() === month && d.getFullYear() === year;
+    }).length;
+    document.getElementById("monthlyCount").textContent = monthly;
+    
+    // Update reminder count
+    const reminderItems = document.querySelectorAll('#reminderList .reminder-item').length;
+    document.getElementById("reminderCount").textContent = reminderItems;
+}
+
+// ==============================================================
+// REMINDERS (VIPENGELE #2)
+// ==============================================================
+function addReminder() {
+    const title = prompt("📝 Weka kichwa cha kumbusho:", "Tathmini inayokaribia");
+    if (!title) return;
+    const desc = prompt("📝 Weka maelezo ya kumbusho:", "Tafadhali kamilisha tathmini kabla ya tarehe...");
+    if (!desc) return;
+    
+    const list = document.getElementById("reminderList");
+    const item = document.createElement("div");
+    item.className = "reminder-item";
+    item.innerHTML = `
+        <span class="reminder-icon">📌</span>
+        <div class="reminder-info">
+            <div class="title">${title}</div>
+            <div class="desc">${desc}</div>
+        </div>
+        <span class="reminder-status pending" onclick="this.parentElement.remove(); updateDashboard();">❌ Ondoa</span>
+    `;
+    list.appendChild(item);
+    updateDashboard();
+    showToast("✅ Kumbusho limeongezwa!", "success");
+}
+
+// ==============================================================
+// CALENDAR (VIPENGELE #6)
+// ==============================================================
+function renderCalendar() {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    
+    document.getElementById("calendarMonthYear").textContent = 
+        new Date(year, month).toLocaleDateString('sw', { month: 'long', year: 'numeric' });
+    
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const daysInPrevMonth = new Date(year, month, 0).getDate();
+    
+    const grid = document.getElementById("calendarGrid");
+    grid.innerHTML = '';
+    
+    // Day names
+    const dayNames = ['J2', 'J3', 'J4', 'J5', 'J6', 'J7', 'J1'];
+    dayNames.forEach(name => {
+        const div = document.createElement('div');
+        div.className = 'day-name';
+        div.textContent = name;
+        grid.appendChild(div);
+    });
+    
+    // Previous month days
+    for (let i = firstDay - 1; i >= 0; i--) {
+        const div = document.createElement('div');
+        div.className = 'day other-month';
+        div.textContent = daysInPrevMonth - i;
+        grid.appendChild(div);
+    }
+    
+    // Current month days
+    const today = new Date();
+    for (let i = 1; i <= daysInMonth; i++) {
+        const div = document.createElement('div');
+        div.className = 'day';
+        div.textContent = i;
+        
+        if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+            div.classList.add('today');
+        }
+        
+        // Check if has events
+        const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
+        const dayEvents = events.filter(e => e.date === dateStr);
+        if (dayEvents.length > 0) {
+            div.classList.add('has-event', 'event-day');
+        }
+        
+        div.onclick = () => addEvent(dateStr);
+        grid.appendChild(div);
+    }
+    
+    // Next month days
+    const totalDays = firstDay + daysInMonth;
+    const remainingDays = (7 - (totalDays % 7)) % 7;
+    for (let i = 1; i <= remainingDays; i++) {
+        const div = document.createElement('div');
+        div.className = 'day other-month';
+        div.textContent = i;
+        grid.appendChild(div);
+    }
+    
+    // Render events
+    renderEvents();
+}
+
+function changeMonth(delta) {
+    currentDate.setMonth(currentDate.getMonth() + delta);
+    renderCalendar();
+}
+
+function addEvent(dateStr) {
+    const title = prompt("📝 Weka tukio kwa tarehe " + dateStr + ":", "Mkutano wa ufuatiliaji");
+    if (!title) return;
+    
+    const time = prompt("🕐 Weka saa (kwa mfano 14:30):", "10:00");
+    if (time === null) return;
+    
+    events.push({ date: dateStr, title: title, time: time || '10:00' });
+    localStorage.setItem('calendarEvents', JSON.stringify(events));
+    renderCalendar();
+    updateDashboard();
+    showToast("✅ Tukio limeongezwa kwenye kalenda!", "success");
+}
+
+function renderEvents() {
+    const container = document.getElementById("eventList");
+    const today = new Date();
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    
+    // Filter events for current month
+    const monthEvents = events.filter(e => {
+        const parts = e.date.split('-');
+        return parseInt(parts[0]) === year && parseInt(parts[1]) === month + 1;
+    });
+    
+    if (monthEvents.length === 0) {
+        container.innerHTML = `<div style="font-size:12px; color:#7f8c8d; text-align:center;">Hakuna matukio kwa mwezi huu. Bonyeza tarehe kuongeza tukio.</div>`;
+        return;
+    }
+    
+    container.innerHTML = monthEvents.map(e => `
+        <div class="event-item">
+            <span class="event-time">${e.time || '10:00'}</span>
+            <span class="event-title">${e.title}</span>
+            <span class="event-remove" onclick="removeEvent('${e.date}', '${e.title}')">✕</span>
+        </div>
+    `).join('');
+    
+    document.getElementById("eventCount").textContent = monthEvents.length + ' Matukio';
+}
+
+function removeEvent(date, title) {
+    events = events.filter(e => !(e.date === date && e.title === title));
+    localStorage.setItem('calendarEvents', JSON.stringify(events));
+    renderCalendar();
+    updateDashboard();
+    showToast("🗑️ Tukio limeondolewa", "info");
+}
+
+// ==============================================================
+// GROUP REPORTS (VIPENGELE #3)
+// ==============================================================
+function updateGroupReports() {
+    const departments = {};
+    reports.forEach(r => {
+        const dept = r.workerDepartment || 'Idara Nyingine';
+        if (!departments[dept]) {
+            departments[dept] = { total: 0, approved: 0, scores: [] };
+        }
+        departments[dept].total++;
+        if (r.finalDecision === 'approved' || r.status === 'Imekubaliwa') {
+            departments[dept].approved++;
+        }
+        if (r.score) departments[dept].scores.push(r.score);
+    });
+    
+    const container = document.getElementById("departmentReport");
+    const deptNames = Object.keys(departments);
+    
+    if (deptNames.length === 0) {
+        container.innerHTML = `<div style="font-size:12px; color:#7f8c8d; text-align:center;">Hakuna ripoti za kikundi bado</div>`;
+        document.getElementById("deptCount").textContent = '0 Idara';
+        return;
+    }
+    
+    document.getElementById("deptCount").textContent = deptNames.length + ' Idara';
+    
+    container.innerHTML = deptNames.map(dept => {
+        const data = departments[dept];
+        const avgScore = data.scores.length > 0 ? Math.round(data.scores.reduce((a,b) => a+b, 0) / data.scores.length) : 0;
+        const rate = data.total > 0 ? Math.round((data.approved / data.total) * 100) : 0;
+        const scoreClass = avgScore >= 70 ? 'green' : avgScore >= 50 ? 'orange' : 'red';
+        
+        return `
+            <div class="dept-item">
+                <span class="dept-name">🏢 ${dept}</span>
+                <span class="dept-stats">Wafanyakazi: ${data.total} | Waliopendekezwa: ${data.approved}</span>
+                <span class="dept-score ${scoreClass}">${avgScore}%</span>
+            </div>
+        `;
+    }).join('');
+}
+
+// ==============================================================
+// FUTURE GOALS (VIPENGELE #4)
+// ==============================================================
+function addGoal() {
+    const title = prompt("🎯 Weka lengo mpya:", "Kuboresha utendaji kwa 10%");
+    if (!title) return;
+    const desc = prompt("📝 Weka maelezo ya lengo:", "Kuhudhuria mafunzo na kuboresha ujuzi");
+    if (!desc) return;
+    const deadline = prompt("📅 Weka tarehe ya mwisho (DD/MM/YYYY):", "31/12/2025");
+    if (!deadline) return;
+    
+    const container = document.getElementById("futureGoals");
+    const item = document.createElement("div");
+    item.className = "goal-item";
+    item.innerHTML = `
+        <div class="goal-check">
+            <input type="checkbox" onchange="toggleGoal(this)">
+        </div>
+        <div class="goal-info">
+            <div class="goal-title">${title}</div>
+            <div class="goal-desc">${desc}</div>
+            <div class="goal-deadline">📅 Tarehe ya Mwisho: ${deadline}</div>
+        </div>
+    `;
+    container.appendChild(item);
+    updateGoalCount();
+    showToast("✅ Lengo limeongezwa!", "success");
+}
+
+function toggleGoal(checkbox) {
+    const goalItem = checkbox.closest('.goal-item');
+    if (checkbox.checked) {
+        goalItem.style.opacity = '0.6';
+        goalItem.style.textDecoration = 'line-through';
+        showToast("✅ Lengo limekamilika!", "success");
+    } else {
+        goalItem.style.opacity = '1';
+        goalItem.style.textDecoration = 'none';
+    }
+    updateGoalCount();
+}
+
+function updateGoalCount() {
+    const goals = document.querySelectorAll('#futureGoals .goal-item').length;
+    document.getElementById("goalCount").textContent = goals;
+}
+
+// ==============================================================
+// EXPORT CSV (VIPENGELE #5)
+// ==============================================================
+function exportCSV() {
+    if (reports.length === 0) {
+        showToast("⚠️ Hakuna data ya kuweka kwenye CSV", "warning");
+        return;
+    }
+    
+    let csv = 'Nambari,Jina,Taaluma,Idara,Alama,Uamuzi,Tarehe\n';
+    reports.forEach((r, i) => {
+        const row = [
+            i + 1,
+            r.workerName || '-',
+            r.workerRole || '-',
+            r.workerDepartment || '-',
+            r.score || 0,
+            r.finalDecision || r.status || 'Inasubiri',
+            r.timestamp ? new Date(r.timestamp).toLocaleDateString() : '-'
+        ];
+        csv += row.join(',') + '\n';
+    });
+    
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Ripoti_Tathmini_${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast("✅ CSV imepakuliwa!", "success");
+}
+
+// ==============================================================
+// SECTION PROGRESS
+// ==============================================================
+function updateSectionProgress() {
+    const fields = [
+        'workerName', 'workerRole', 'workerDate', 'workerShift', 'workerDepartment',
+        'supervisorName', 'supervisorTitle', 'supervisorDepartment',
+        'finalComments', 'finalRecommendations'
+    ];
+    
+    let filled = 0;
+    let total = fields.length;
+    
+    fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.value && el.value.trim()) filled++;
+    });
+    
+    // Check star ratings
+    const starValues = getStarValues();
+    if (Object.keys(starValues).length >= 3) filled++;
+    total++;
+    
+    // Check signature
+    if (signatureData.incharge) filled++;
+    total++;
+    
+    const progress = Math.min(Math.round((filled / total) * 100), 100);
+    document.getElementById("sectionProgressText").textContent = progress + '%';
+    document.getElementById("sectionProgressBar").style.width = progress + '%';
+}
+
+// ==============================================================
+// AUTO-SAVE
+// ==============================================================
+function autoSave() {
+    try {
+        const data = collectFormData();
+        localStorage.setItem("inchargeDraft", JSON.stringify(data));
+        document.getElementById("lastSaved").textContent = `💾 Imehifadhiwa: ${new Date().toLocaleTimeString()}`;
+    } catch(e) { console.warn("Auto-save error:", e); }
+}
+
+function collectFormData() {
+    return {
+        workerName: document.getElementById("workerName").value,
+        workerRole: document.getElementById("workerRole").value,
+        workerDate: document.getElementById("workerDate").value,
+        workerShift: document.getElementById("workerShift").value,
+        workerDepartment: document.getElementById("workerDepartment").value,
+        supervisorName: document.getElementById("supervisorName").value,
+        supervisorTitle: document.getElementById("supervisorTitle").value,
+        supervisorDepartment: document.getElementById("supervisorDepartment").value,
+        finalComments: document.getElementById("finalComments").value,
+        finalRecommendations: document.getElementById("finalRecommendations").value,
+        finalDecision: document.getElementById("finalDecision").value,
+        starRatings: starRatings,
+        timestamp: new Date().toISOString()
+    };
+}
+
+function restoreDraft() {
+    try {
+        const saved = localStorage.getItem("inchargeDraft");
+        if (saved) {
+            const data = JSON.parse(saved);
+            Object.keys(data).forEach(key => {
+                const el = document.getElementById(key);
+                if (el && data[key] && key !== 'starRatings' && key !== 'timestamp') {
+                    el.value = data[key];
+                }
+            });
+            if (data.starRatings) {
+                starRatings = data.starRatings;
+                Object.keys(starRatings).forEach(field => {
+                    const container = document.querySelector(`[data-field="${field}"]`);
+                    if (container) {
+                        const stars = container.querySelectorAll('.star');
+                        stars.forEach(star => {
+                            const val = parseInt(star.dataset.value);
+                            if (val <= starRatings[field]) star.classList.add('active');
+                            else star.classList.remove('active');
+                        });
+                        const label = document.getElementById(`star${field.charAt(0).toUpperCase() + field.slice(1)}Label`);
+                        if (label) label.textContent = `${starRatings[field]}/5`;
+                    }
+                });
+            }
+            showToast("📂 Rasimu imerejeshwa!", "info");
+            updateSectionProgress();
+            updateScoreSummary();
+            updateDashboard();
+        }
+    } catch(e) { console.warn("Restore draft error:", e); }
+}
+
+// ==============================================================
+// SIGNATURE
+// ==============================================================
+function initSigPad(type) {
+    const canvas = document.getElementById(`${type}SigCanvas`);
+    if (!canvas) return;
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = rect.width || 400;
+    canvas.height = 100;
+    const ctx = canvas.getContext("2d");
+    let drawing = false, lastX = 0, lastY = 0;
+    function getPos(e) {
+        const r = canvas.getBoundingClientRect();
+        const cx = e.touches ? e.touches[0].clientX : e.clientX;
+        const cy = e.touches ? e.touches[0].clientY : e.clientY;
+        return { x: cx - r.left, y: cy - r.top };
+    }
+    function start(e) { e.preventDefault(); drawing = true; const p = getPos(e); lastX = p.x; lastY = p.y; }
+    function draw(e) {
+        e.preventDefault();
+        if (!drawing) return;
+        const p = getPos(e);
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(p.x, p.y);
+        ctx.strokeStyle = "#8e44ad";
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+        lastX = p.x; lastY = p.y;
+    }
+    function end(e) { drawing = false; }
+    canvas.addEventListener("mousedown", start);
+    canvas.addEventListener("mousemove", draw);
+    canvas.addEventListener("mouseup", end);
+    canvas.addEventListener("mouseleave", end);
+    canvas.addEventListener("touchstart", start);
+    canvas.addEventListener("touchmove", draw);
+    canvas.addEventListener("touchend", end);
+}
+
+function clearSig(type) {
+    const canvas = document.getElementById(`${type}SigCanvas`);
+    if (!canvas) return;
+    canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+    document.getElementById(`${type}SigStatus`).textContent = "Imefutwa";
+    signatureData[type] = null;
+    updateSectionProgress();
+}
+
+function saveSig(type) {
+    const canvas = document.getElementById(`${type}SigCanvas`);
+    if (!canvas) return;
+    const dataUrl = canvas.toDataURL("image/png");
+    if (dataUrl === "data:," || canvas.width === 0) {
+        showToast("⚠️ Tafadhali weka sahihi kwanza", "warning");
+        return;
+    }
+    signatureData[type] = dataUrl;
+    document.getElementById(`${type}SigStatus`).textContent = "✅ Imehifadhiwa";
+    showToast("✅ Sahihi imehifadhiwa!", "success");
+    autoSave();
+    updateSectionProgress();
+}
+
+// ==============================================================
+// FILE UPLOAD
+// ==============================================================
+function handleFiles(files) {
+    for (let file of files) {
+        uploadedFiles.push(file);
+        const list = document.getElementById("fileList");
+        const item = document.createElement("div");
+        item.className = "file-item";
+        item.innerHTML = `<span>📄 ${file.name} (${(file.size/1024).toFixed(1)} KB)</span>
+            <span class="remove" onclick="this.parentElement.remove()">✕ Ondoa</span>`;
+        list.appendChild(item);
+    }
+    showToast(`✅ Faili ${files.length} zimepakuliwa!`, "success");
+    autoSave();
+    updateSectionProgress();
+}
+
+// ==============================================================
+// TOAST
+// ==============================================================
+function showToast(msg, type = "info") {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.className = "toast " + type + " show";
+    clearTimeout(t._timeout);
+    t._timeout = setTimeout(() => t.classList.remove("show"), 3500);
 }
 
 // ==============================================================
@@ -1331,6 +2398,8 @@ function updateDecisionNotification() {
         msg.innerHTML = "⏳ Tathmini imeahirishwa. Ufuatiliaji zaidi unahitajika.";
     }
     updateScoreSummary();
+    updateSectionProgress();
+    updateDashboard();
 }
 
 function updateComparisonTable(workerData, supervisorData) {
@@ -1394,239 +2463,228 @@ function updatePreview() {
     document.getElementById("previewWorkerRole").textContent = document.getElementById("workerRole").value || "-";
     document.getElementById("previewSupervisorName").textContent = document.getElementById("supervisorName").value || "-";
     document.getElementById("previewSupervisorTitle").textContent = document.getElementById("supervisorTitle").value || "-";
+    document.getElementById("previewSupervisorScore").textContent = document.getElementById("supervisorScoreDisplay").textContent || "-";
+    document.getElementById("previewSupervisorComments").textContent = document.getElementById("supervisorCommentsDisplay").textContent || "-";
+}
+
+function updateDeadline() {
+    const deadline = new Date();
+    deadline.setDate(deadline.getDate() + 7);
+    document.getElementById("deadlineDate").textContent = deadline.toLocaleDateString();
+    const now = new Date();
+    const daysLeft = Math.ceil((deadline - now) / (1000 * 60 * 60 * 24));
+    const badge = document.getElementById("deadlineBadge");
+    if (daysLeft <= 0) { badge.className = "deadline-badge urgent"; badge.innerHTML = '🚨 TAREHE IMEPITA!'; }
+    else if (daysLeft <= 2) { badge.className = "deadline-badge warning"; badge.innerHTML = `⚠️ Siku ${daysLeft} zimesalia!`; }
+    else { badge.className = "deadline-badge ok"; badge.innerHTML = `📅 Siku ${daysLeft} zimesalia`; }
 }
 
 // ==============================================================
-// TOAST
+// JSONBIN OPERATIONS
 // ==============================================================
-function showToast(msg, type = "info") {
-    const t = document.getElementById("toast");
-    t.textContent = msg;
-    t.className = "toast " + type + " show";
-    clearTimeout(t._timeout);
-    t._timeout = setTimeout(() => t.classList.remove("show"), 3500);
-}
-
-// ==============================================================
-// SIGNATURE
-// ==============================================================
-function initSigPad(type) {
-    const canvas = document.getElementById(`${type}SigCanvas`);
-    if (!canvas) {
-        console.warn(`Canvas ${type}SigCanvas not found`);
-        return;
-    }
-    const rect = canvas.parentElement.getBoundingClientRect();
-    canvas.width = rect.width || 400;
-    canvas.height = 100;
-    const ctx = canvas.getContext("2d");
-    let drawing = false, lastX = 0, lastY = 0;
-    function getPos(e) {
-        const r = canvas.getBoundingClientRect();
-        const cx = e.touches ? e.touches[0].clientX : e.clientX;
-        const cy = e.touches ? e.touches[0].clientY : e.clientY;
-        return { x: cx - r.left, y: cy - r.top };
-    }
-    function start(e) { e.preventDefault(); drawing = true; const p = getPos(e); lastX = p.x; lastY = p.y; }
-    function draw(e) {
-        e.preventDefault();
-        if (!drawing) return;
-        const p = getPos(e);
-        ctx.beginPath();
-        ctx.moveTo(lastX, lastY);
-        ctx.lineTo(p.x, p.y);
-        ctx.strokeStyle = "#8e44ad";
-        ctx.lineWidth = 2.5;
-        ctx.stroke();
-        lastX = p.x; lastY = p.y;
-    }
-    function end(e) { drawing = false; }
-    canvas.addEventListener("mousedown", start);
-    canvas.addEventListener("mousemove", draw);
-    canvas.addEventListener("mouseup", end);
-    canvas.addEventListener("mouseleave", end);
-    canvas.addEventListener("touchstart", start);
-    canvas.addEventListener("touchmove", draw);
-    canvas.addEventListener("touchend", end);
-}
-
-function clearSig(type) {
-    const canvas = document.getElementById(`${type}SigCanvas`);
-    if (!canvas) return;
-    canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-    document.getElementById(`${type}SigStatus`).textContent = "Imefutwa";
-    signatureData[type] = null;
-}
-
-function saveSig(type) {
-    const canvas = document.getElementById(`${type}SigCanvas`);
-    if (!canvas) return;
-    const dataUrl = canvas.toDataURL("image/png");
-    if (dataUrl === "data:," || canvas.width === 0) {
-        showToast("⚠️ Tafadhali weka sahihi kwanza", "warning");
-        return;
-    }
-    signatureData[type] = dataUrl;
-    document.getElementById(`${type}SigStatus`).textContent = "✅ Imehifadhiwa";
-    showToast("✅ Sahihi imehifadhiwa!", "success");
-}
-
-// ==============================================================
-// FILE UPLOAD
-// ==============================================================
-function handleFiles(files) {
-    for (let file of files) {
-        uploadedFiles.push(file);
-        const list = document.getElementById("fileList");
-        const item = document.createElement("div");
-        item.className = "file-item";
-        item.innerHTML = `
-            <span>📄 ${file.name} (${(file.size/1024).toFixed(1)} KB)</span>
-            <span class="remove" onclick="this.parentElement.remove()">✕ Ondoa</span>
-        `;
-        list.appendChild(item);
-    }
-    showToast(`✅ Faili ${files.length} zimepakuliwa!`, "success");
-}
-
-// ==============================================================
-// EXPORT PDF
-// ==============================================================
-function exportPDF() {
-    showToast("📊 Inaandaa ripoti...", "info");
-    setTimeout(() => {
-        try {
-            const content = document.getElementById("formIncharge").cloneNode(true);
-            content.querySelectorAll(".signature-pad, .signature-actions, .toast, .user-tools").forEach(el => el.remove());
-            const win = window.open('', '_blank', 'width=1000,height=800');
-            win.document.write(`
-                <html><head><title>Ripoti ya Mganga Mfawidhi</title>
-                <style>body{font-family:Arial;padding:40px;color:#333;max-width:1000px;margin:auto;}
-                .header{text-align:center;border-bottom:3px solid #8e44ad;padding-bottom:20px;margin-bottom:30px;}
-                .header h1{color:#1a5276;}
-                .score-box{background:#e8daef;padding:16px;border-radius:8px;}
-                .score-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;}
-                .score-item{background:#fff;padding:10px;border-radius:8px;text-align:center;}
-                .score-item .number{font-size:22px;font-weight:800;display:block;}
-                .number.green{color:#27ae60;}
-                .number.orange{color:#f39c12;}
-                .number.red{color:#e74c3c;}
-                .number.purple{color:#8e44ad;}
-                .footer{margin-top:30px;text-align:center;font-size:12px;color:#7f8c8d;border-top:1px solid #ecf0f1;padding-top:20px;}
-</style></head><body>
-                <div class="header">
-                    <h1>🏥 Mtwara SDA Dispensary</h1>
-                    <h2>📊 Ripoti ya Mganga Mfawidhi</h2>
-                    <p style="color:#7f8c8d;">📄 Imetolewa: ${new Date().toLocaleString()}</p>
-                </div>
-                ${content.innerHTML}
-                <div class="footer">
-                    <p>"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</p>
-                    <p>Mtwara Performance | Fomu ya Mganga Mfawidhi</p>
-                </div>
-                <script>window.onload = function(){ window.print(); }</script>
-            
-            `);
-            win.document.close();
-            showToast("✅ Ripoti imeandaliwa!", "success");
-        } catch (e) {
-            showToast("❌ Hitilafu: " + e.message, "error");
+async function getBinData() {
+    try {
+        if (localStorage.getItem("useLocalStorage") === "true") {
+            return JSON.parse(localStorage.getItem("mtwaraData") || '{"reports":[],"users":{}}');
         }
-    }, 500);
+        document.getElementById("connectionStatus").innerHTML = '<span class="loading"></span> Inasoma...';
+        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            method: "GET",
+            headers: { "X-Master-Key": API_KEY }
+        });
+        if (!response.ok) {
+            if (response.status === 404) {
+                showToast("⚠️ BIN haipatikani, itaundwa mpya", "warning");
+                return await createBin();
+            }
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        const result = await response.json();
+        document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
+        return result.record || result;
+    } catch (error) {
+        console.error("❌ Hitilafu:", error);
+        document.getElementById("connectionStatus").textContent = "⚠️ Hitilafu";
+        if (localStorage.getItem("mtwaraData")) return JSON.parse(localStorage.getItem("mtwaraData"));
+        showToast("❌ Imeshindwa kusoma data", "error");
+        return null;
+    }
+}
+
+async function updateBinData(data) {
+    try {
+        if (localStorage.getItem("useLocalStorage") === "true") {
+            localStorage.setItem("mtwaraData", JSON.stringify(data));
+            return { success: true };
+        }
+        document.getElementById("connectionStatus").innerHTML = '<span class="loading"></span> Inahifadhi...';
+        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json", "X-Master-Key": API_KEY },
+            body: JSON.stringify(data)
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        const result = await response.json();
+        document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
+        return result;
+    } catch (error) {
+        console.error("❌ Hitilafu:", error);
+        document.getElementById("connectionStatus").textContent = "⚠️ Hitilafu";
+        try { localStorage.setItem("mtwaraData", JSON.stringify(data)); return { success: true }; }
+        catch (e) { console.error("❌ Hitilafu:", e); }
+        return null;
+    }
+}
+
+async function createBin() {
+    try {
+        const data = { name: BIN_NAME, description: "Mtwara Performance Appraisal System", private: false, reports: [], users: { worker: { password: "1234", role: "worker" }, supervisor: { password: "1234", role: "supervisor" }, incharge: { password: "1234", role: "incharge" } } };
+        const response = await fetch("https://api.jsonbin.io/v3/b", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "X-Master-Key": API_KEY, "X-Bin-Name": BIN_NAME },
+            body: JSON.stringify(data)
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        const result = await response.json();
+        showToast("✅ BIN mpya imeundwa!", "success");
+        return result.record || result;
+    } catch (error) {
+        console.error("❌ Hitilafu:", error);
+        showToast("❌ Imeshindwa kuunda BIN", "error");
+        return null;
+    }
 }
 
 // ==============================================================
 // LOGIN / LOGOUT
 // ==============================================================
-function login() {
+async function login() {
     const username = document.getElementById("loginUsername").value.trim();
     const password = document.getElementById("loginPassword").value.trim();
     if (!username || !password) { showToast("❌ Tafadhali jaza sehemu zote", "error"); return; }
-    
-    const users = {
-        incharge: { password: "1234", role: "incharge" },
-        worker: { password: "1234", role: "worker" },
-        supervisor: { password: "1234", role: "supervisor" }
-    };
-    
+    showToast("⏳ Inaingiza...", "info");
+    const data = await getBinData();
+    if (!data) { showToast("❌ Imeshindwa kuunganisha", "error"); return; }
+    const users = data.users || {};
     const user = users[username];
-    if (!user || user.password !== password) {
-        showToast("❌ Jina au nenosiri si sahihi", "error");
-        return;
-    }
-    
+    if (!user || user.password !== password) { showToast("❌ Jina au nenosiri si sahihi", "error"); return; }
     currentUser = username;
     currentRole = user.role;
-    
-    const savedReports = localStorage.getItem("mtwaraReports");
-    if (savedReports) {
-        reports = JSON.parse(savedReports);
-    }
-    
+    reports = data.reports || [];
     document.getElementById("loginSection").style.display = "none";
     document.getElementById("mainApp").style.display = "block";
-    document.getElementById("mainApp").classList.add("show");
-    
     document.getElementById("currentUserDisplay").textContent = username;
     document.getElementById("userBadge").textContent = `👤 ${username}`;
     document.getElementById("roleDisplay").textContent = "🏥 Mganga Mfawidhi";
-    document.getElementById("binIdDisplay").textContent = "Local Storage";
+    document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
+    document.getElementById("binIdDisplay").textContent = BIN_ID;
+    document.getElementById("reportIdDisplay").textContent = generateReportId();
     document.getElementById("workerDate").value = new Date().toISOString().split("T")[0];
-    
     setTimeout(() => initSigPad("incharge"), 500);
     loadChecklists();
     updateComparisonTable(sampleWorkerData, sampleSupervisorData);
     updatePreview();
     updateDecisionNotification();
     updateScoreSummary();
+    updateDeadline();
+    restoreDraft();
     loadSupervisorData();
+    renderCalendar();
+    updateGroupReports();
+    updateGoalCount();
+    updateDashboard();
+    
+    if (autoSaveInterval) clearInterval(autoSaveInterval);
+    autoSaveInterval = setInterval(autoSave, 30000);
+    
     showToast(`✅ Karibu ${username}!`, "success");
 }
 
 function logout() {
     currentUser = null;
     currentRole = null;
-    document.getElementById("mainApp").style.display = "none";
-    document.getElementById("mainApp").classList.remove("show");
+    if (autoSaveInterval) clearInterval(autoSaveInterval);
     document.getElementById("loginSection").style.display = "block";
+    document.getElementById("mainApp").style.display = "none";
+    document.getElementById("connectionStatus").textContent = "🔄 Tafadhali ingia tena";
     showToast("👋 Umetoka nje", "info");
+}
+
+async function syncData() {
+    showToast("🔄 Inasawazisha...", "info");
+    document.getElementById("syncBtn").innerHTML = '<span class="loading"></span>';
+    const data = await getBinData();
+    if (data) {
+        reports = data.reports || [];
+        showToast(`✅ Data imesawazishwa! Reports: ${reports.length}`, "success");
+        loadSupervisorData();
+        updateGroupReports();
+        updateDashboard();
+    }
+    document.getElementById("syncBtn").innerHTML = '🔄 Sync';
+}
+
+// ==============================================================
+// HISTORY
+// ==============================================================
+function showHistory() {
+    const workerName = document.getElementById("workerName").value.trim();
+    if (!workerName) {
+        showToast("⚠️ Tafadhali weka jina la mtendakazi kwanza", "warning");
+        return;
+    }
+    const history = reports.filter(r => r.workerName === workerName);
+    if (history.length === 0) {
+        showToast("📋 Hakuna rekodi za awali za mtendakazi huyu", "info");
+        return;
+    }
+    let msg = `📋 HISTORIA YA TATHMINI - ${workerName}\n`;
+    msg += '━'.repeat(40) + '\n\n';
+    history.forEach((r, i) => {
+        const date = r.timestamp ? new Date(r.timestamp).toLocaleDateString() : '-';
+        const status = r.finalDecision || r.status || 'Inasubiri';
+        const score = r.score || 0;
+        msg += `${i+1}. 📅 ${date} | ${status} | 🎯 ${score}%\n`;
+    });
+    msg += '\n' + '━'.repeat(40);
+    alert(msg);
 }
 
 // ==============================================================
 // FINAL DECISIONS
 // ==============================================================
-function approveFinal() {
+async function approveFinal() {
     const workerName = document.getElementById("workerName").value.trim();
     if (!workerName) { showToast("⚠️ Tafadhali weka jina la mtendakazi", "warning"); return; }
     if (!signatureData.incharge) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
-    finalizeAssessment("Imekubaliwa");
+    await finalizeAssessment("Imekubaliwa");
 }
 
-function rejectFinal() {
+async function rejectFinal() {
     const workerName = document.getElementById("workerName").value.trim();
     if (!workerName) { showToast("⚠️ Tafadhali weka jina la mtendakazi", "warning"); return; }
     const reason = prompt("❌ Tafadhali weka sababu ya kukata tathmini:", "Haikidhi viwango vinavyotarajiwa");
     if (reason === null) return;
     if (!reason.trim()) { showToast("⚠️ Lazima uweke sababu ya kukata", "warning"); return; }
     if (!signatureData.incharge) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
-    finalizeAssessment("Imekataliwa", reason);
+    await finalizeAssessment("Imekataliwa", reason);
 }
 
-function deferFinal() {
+async function deferFinal() {
     const workerName = document.getElementById("workerName").value.trim();
     if (!workerName) { showToast("⚠️ Tafadhali weka jina la mtendakazi", "warning"); return; }
     const reason = prompt("⏳ Sababu ya kuahirisha:", "Inahitaji ufuatiliaji zaidi");
     if (reason === null) return;
-    if (!reason.trim()) { showToast("⚠️ Lazima uweke sababu ya kuahirisha", "warning"); return; }
     if (!signatureData.incharge) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
-    finalizeAssessment("Imeahirishwa", reason);
+    await finalizeAssessment("Imeahirishwa", reason);
 }
 
-function finalizeAssessment(status, reason = "") {
+async function finalizeAssessment(status, reason = "") {
     const workerName = document.getElementById("workerName").value.trim();
     const report = {
         type: "incharge_final_assessment",
         id: Date.now(),
+        reportId: document.getElementById("reportIdDisplay").textContent,
         workerName: workerName,
         workerRole: document.getElementById("workerRole").value,
         workerDate: document.getElementById("workerDate").value,
@@ -1651,36 +2709,65 @@ function finalizeAssessment(status, reason = "") {
         timestamp: new Date().toISOString()
     };
 
-    if (!reports) reports = [];
-    reports.push(report);
-    localStorage.setItem("mtwaraReports", JSON.stringify(reports));
-    
-    document.getElementById("approveBtn").disabled = true;
-    document.getElementById("rejectBtn").disabled = true;
-    document.getElementById("deferBtn").disabled = true;
-    document.getElementById("inchargeSubmitMsg").style.display = "block";
-    document.getElementById("inchargeSubmitMsg").textContent = `✅ Tathmini ${status}!${reason ? ' Sababu: ' + reason : ''}`;
-    document.getElementById("inchargeSubmitMsg").style.color = status === "Imekubaliwa" ? "#27ae60" : status === "Imekataliwa" ? "#e74c3c" : "#f39c12";
-    document.getElementById("inchargeStatusBadge").textContent = status;
-    document.getElementById("inchargeStatusBadge").className = "status-badge " + (status === "Imekubaliwa" ? "approved" : status === "Imekataliwa" ? "rejected" : "pending");
-    showToast(`✅ Tathmini ${status}!`, status === "Imekubaliwa" ? "success" : status === "Imekataliwa" ? "error" : "warning");
-    updateScoreSummary();
+    try {
+        const data = await getBinData();
+        if (!data) return;
+        if (!data.reports) data.reports = [];
+        data.reports.push(report);
+        const result = await updateBinData(data);
+        if (result) {
+            reports = data.reports;
+            document.getElementById("approveBtn").disabled = true;
+            document.getElementById("rejectBtn").disabled = true;
+            document.getElementById("deferBtn").disabled = true;
+            document.getElementById("inchargeSubmitMsg").style.display = "block";
+            document.getElementById("inchargeSubmitMsg").textContent = `✅ Tathmini ${status}!${reason ? ' Sababu: ' + reason : ''}`;
+            document.getElementById("inchargeSubmitMsg").style.color = status === "Imekubaliwa" ? "#27ae60" : status === "Imekataliwa" ? "#e74c3c" : "#f39c12";
+            document.getElementById("inchargeStatusBadge").textContent = status;
+            document.getElementById("inchargeStatusBadge").className = "status-badge " + (status === "Imekubaliwa" ? "approved" : status === "Imekataliwa" ? "rejected" : "pending");
+            showToast(`✅ Tathmini ${status}!`, status === "Imekubaliwa" ? "success" : status === "Imekataliwa" ? "error" : "warning");
+            updateScoreSummary();
+            updateSectionProgress();
+            updateDashboard();
+            updateGroupReports();
+        }
+    } catch (error) {
+        console.error("❌ Hitilafu:", error);
+        showToast("❌ Hitilafu: " + error.message, "error");
+    }
 }
 
 // ==============================================================
 // INIT
 // ==============================================================
 window.onload = function() {
-    document.getElementById("binIdDisplay").textContent = "Local Storage";
-    document.getElementById("connectionStatus").textContent = "✅ TAYARI";
+    document.getElementById("binIdDisplay").textContent = BIN_ID;
+    document.getElementById("connectionStatus").textContent = "✅ Tayari";
+    document.getElementById("reportIdDisplay").textContent = generateReportId();
     loadChecklists();
     updateComparisonTable(sampleWorkerData, sampleSupervisorData);
     updatePreview();
     updateDecisionNotification();
     updateScoreSummary();
-    console.log("✅ Mtwara Performance - Fomu ya Mganga Mfawidhi");
-    console.log("📦 Hifadhi: Local Storage");
-    console.log("📋 Vipengele: Star Rating, Comparison Table, Document Upload");
+    updateDeadline();
+    updateSectionProgress();
+    renderCalendar();
+    updateGroupReports();
+    updateGoalCount();
+    updateDashboard();
+    console.log("✅ Mtwara Performance - Fomu ya Mganga Mfawidhi (Maboresho Yote)");
+    console.log("📦 BIN ID:", BIN_ID);
+    console.log("📋 Vipengele vipya:");
+    console.log("  1. Dashboard ya Takwimu ✅");
+    console.log("  2. Kumbusho za Ufuatiliaji ✅");
+    console.log("  3. Ripoti za Kikundi ✅");
+    console.log("  4. Malengo ya Baadaye ✅");
+    console.log("  5. Export CSV ✅");
+    console.log("  6. Kalenda ya Matukio ✅");
+    console.log("  7. Mawasiliano (Simu, WhatsApp, Email) ✅");
+    console.log("  8. Auto-Save ✅");
+    console.log("  9. Section Progress ✅");
+    console.log("  10. Mobile Responsive ✅");
 };
 </script>
 
