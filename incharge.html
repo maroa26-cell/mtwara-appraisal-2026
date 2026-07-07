@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -137,7 +136,6 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
-        /* ===== EXPORT TOOLS ===== */
         .export-tools {
             display: flex;
             gap: 10px;
@@ -218,6 +216,10 @@
         .btn-warning:hover { background: #d68910; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(243,156,18,0.3); }
         .btn-purple { background: #8e44ad; color: #fff; }
         .btn-purple:hover { background: #6c3483; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(142,68,173,0.3); }
+        .btn-github { background: #24292e; color: #fff; }
+        .btn-github:hover { background: #1a1e22; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(36,41,46,0.3); }
+        .btn-chat { background: #1abc9c; color: #fff; }
+        .btn-chat:hover { background: #16a085; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(26,188,156,0.3); }
         .btn-sm { padding: 6px 14px; font-size: 12px; }
         .btn-block { width: 100%; justify-content: center; }
         .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
@@ -474,6 +476,8 @@
         .contact-card .action-btn.whatsapp:hover { background: #1da851; }
         .contact-card .action-btn.email { background: #1a5276; color: #fff; }
         .contact-card .action-btn.email:hover { background: #154360; }
+        .contact-card .action-btn.chat { background: #1abc9c; color: #fff; }
+        .contact-card .action-btn.chat:hover { background: #16a085; }
 
         .supervisor-contact-cards {
             display: grid;
@@ -536,6 +540,8 @@
         .supervisor-contact-card .action-btn.whatsapp:hover { background: #1da851; }
         .supervisor-contact-card .action-btn.email { background: #1a5276; color: #fff; }
         .supervisor-contact-card .action-btn.email:hover { background: #154360; }
+        .supervisor-contact-card .action-btn.chat { background: #1abc9c; color: #fff; }
+        .supervisor-contact-card .action-btn.chat:hover { background: #16a085; }
 
         .star-rating {
             display: flex;
@@ -668,6 +674,135 @@
         .preview-grid .item { padding: 2px 0; }
         .preview-grid .item strong { color: #1a5276; }
 
+        .chat-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .chat-modal.show { display: flex; }
+        .chat-modal .chat-box {
+            background: #fff;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .chat-modal .chat-header {
+            padding: 16px 20px;
+            border-bottom: 2px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #8e44ad;
+            color: #fff;
+            border-radius: 16px 16px 0 0;
+        }
+        .chat-modal .chat-header h3 { font-size: 16px; }
+        .chat-modal .chat-header .close-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .chat-modal .chat-messages {
+            flex: 1;
+            padding: 16px 20px;
+            overflow-y: auto;
+            max-height: 400px;
+            background: #f8f9fa;
+        }
+        .chat-modal .chat-message {
+            padding: 8px 14px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .chat-modal .chat-message.sent {
+            background: #8e44ad;
+            color: #fff;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        .chat-modal .chat-message.received {
+            background: #e9ecef;
+            color: #1a1a2e;
+        }
+        .chat-modal .chat-message .time {
+            font-size: 10px;
+            opacity: 0.7;
+            margin-top: 4px;
+            display: block;
+        }
+        .chat-modal .chat-input {
+            display: flex;
+            gap: 10px;
+            padding: 12px 16px;
+            border-top: 1px solid #e9ecef;
+            background: #fff;
+            border-radius: 0 0 16px 16px;
+        }
+        .chat-modal .chat-input input {
+            flex: 1;
+            padding: 10px 14px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .chat-modal .chat-input input:focus {
+            border-color: #8e44ad;
+            outline: none;
+        }
+        .chat-modal .chat-input .btn-send {
+            background: #8e44ad;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .chat-modal .chat-input .btn-send:hover { background: #6c3483; }
+
+        .github-sync-box {
+            background: #f0f6ff;
+            border: 2px solid #24292e;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+        }
+        .github-sync-box .title {
+            font-weight: 700;
+            color: #24292e;
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .github-sync-box .status {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+        }
+        .github-sync-box .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
         @media (max-width: 768px) {
             .form-card { padding: 16px; }
             .form-row { grid-template-columns: 1fr; }
@@ -679,6 +814,7 @@
             .comparison-table th, .comparison-table td { padding: 4px 6px; }
             .export-tools { flex-direction: column; align-items: stretch; }
             .export-tools .btn-group { justify-content: center; }
+            .chat-modal .chat-box { width: 95%; max-height: 90vh; }
         }
         @media (max-width: 400px) {
             .score-row { grid-template-columns: 1fr; }
@@ -726,7 +862,7 @@
                 <span style="margin-left:12px; font-size:11px; color:#8e44ad;">📄 <span id="reportIdDisplay">-</span></span>
             </div>
             <div class="bin-info">
-                📦 Hifadhi: <span id="binIdDisplay">Local Storage</span>
+                📦 Hifadhi: <span id="binIdDisplay">Local Storage + GitHub</span>
             </div>
             <div class="mission"><strong>Dhamira:</strong> "Ubora katika Huduma, Imani katika Vitendo"</div>
             <div id="deadlineContainer" style="margin-top: 10px;">
@@ -744,7 +880,24 @@
             <span id="lastSaved" class="last-saved">💾 Imehifadhiwa: sasa hivi</span>
         </div>
 
-        <!-- ===== EXPORT TOOLS (VIPENGELE VIPYA) ===== -->
+        <!-- ===== GITHUB SYNC ===== -->
+        <div class="github-sync-box">
+            <div class="title">
+                <span>🐙 GitHub Sync</span>
+                <span style="font-size:11px; background:#24292e; color:#fff; padding:2px 12px; border-radius:12px;">Hifadhi na GitHub</span>
+            </div>
+            <div class="status">
+                <span id="githubStatus">📦 Data imehifadhiwa kwenye Local Storage. Bonyeza "Hifadhi GitHub" kuweka kwenye repo yako.</span>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-github btn-sm" onclick="saveToGitHub()">💾 Hifadhi GitHub</button>
+                <button class="btn btn-primary btn-sm" onclick="loadFromGitHub()">📥 Pakia GitHub</button>
+                <button class="btn btn-warning btn-sm" onclick="exportJSON()">📄 Export JSON</button>
+                <button class="btn btn-success btn-sm" onclick="importJSON()">📂 Import JSON</button>
+            </div>
+        </div>
+
+        <!-- ===== EXPORT TOOLS ===== -->
         <div class="export-tools">
             <span class="label">📤 CHAGUA KITENDO:</span>
             <div class="btn-group">
@@ -811,6 +964,40 @@
                     <input type="text" id="workerDepartment" value="Clinical" onchange="autoSave();" oninput="autoSave();">
                 </div>
 
+                <!-- TATHMINI YA MTENDAKAZI (KWA COMPARISON) -->
+                <div style="margin-top:12px; background:#d5f5e3; border-radius:8px; padding:12px 16px; border:2px solid #27ae60;">
+                    <div style="font-weight:700; color:#27ae60; font-size:14px; margin-bottom:8px; display:flex; align-items:center; gap:8px;">
+                        📊 TATHMINI YA MTENDAKAZI
+                        <span style="font-size:10px; background:#27ae60; color:#fff; padding:2px 10px; border-radius:12px;">Kwa Comparison</span>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>⭐ Kuwasili (1-5)</label>
+                            <input type="number" id="workerPunctuality" min="1" max="5" value="4" onchange="updateComparison(); autoSave();">
+                        </div>
+                        <div class="form-group">
+                            <label>⭐ Ubora (1-5)</label>
+                            <input type="number" id="workerQuality" min="1" max="5" value="4" onchange="updateComparison(); autoSave();">
+                        </div>
+                        <div class="form-group">
+                            <label>⭐ Ushirikiano (1-5)</label>
+                            <input type="number" id="workerTeamwork" min="1" max="5" value="4" onchange="updateComparison(); autoSave();">
+                        </div>
+                        <div class="form-group">
+                            <label>⭐ Uongozi (1-5)</label>
+                            <input type="number" id="workerLeadership" min="1" max="5" value="4" onchange="updateComparison(); autoSave();">
+                        </div>
+                        <div class="form-group">
+                            <label>⭐ Mawasiliano (1-5)</label>
+                            <input type="number" id="workerCommunication" min="1" max="5" value="4" onchange="updateComparison(); autoSave();">
+                        </div>
+                        <div class="form-group">
+                            <label>⭐ Uamuzi (1-5)</label>
+                            <input type="number" id="workerDecision" min="1" max="5" value="4" onchange="updateComparison(); autoSave();">
+                        </div>
+                    </div>
+                </div>
+
                 <!-- MAWASILIANO YA MTENDAKAZI -->
                 <div style="margin-top:12px; background:#fff; border-radius:8px; padding:12px 16px; border:2px solid #8e44ad;">
                     <div style="font-weight:700; color:#8e44ad; font-size:14px; margin-bottom:8px; display:flex; align-items:center; gap:8px;">
@@ -842,6 +1029,14 @@
                             </div>
                             <button class="action-btn email" onclick="sendEmail('worker')" id="emailBtn" style="display:none;">📧 Tuma</button>
                         </div>
+                        <div class="contact-card" id="chatCard">
+                            <div class="icon">💬</div>
+                            <div class="info">
+                                <div class="label">Chat</div>
+                                <div class="value" style="font-size:11px;">Tuma ujumbe</div>
+                            </div>
+                            <button class="action-btn chat" onclick="openChat('worker')" id="chatBtn" style="display:none;">💬 Chat</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -862,6 +1057,40 @@
                 <div class="form-group">
                     <label>🏢 Idara ya Msimamizi</label>
                     <input type="text" id="supervisorDepartment" placeholder="Idara ya msimamizi" value="" onchange="autoSave();" oninput="autoSave();">
+                </div>
+
+                <!-- TATHMINI YA MSIMAMIZI (KWA COMPARISON) -->
+                <div style="margin-top:12px; background:#fef9e7; border-radius:8px; padding:12px 16px; border:2px solid #f39c12;">
+                    <div style="font-weight:700; color:#f39c12; font-size:14px; margin-bottom:8px; display:flex; align-items:center; gap:8px;">
+                        📊 TATHMINI YA MSIMAMIZI
+                        <span style="font-size:10px; background:#f39c12; color:#fff; padding:2px 10px; border-radius:12px;">Kwa Comparison</span>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>⭐ Kuwasili (1-5)</label>
+                            <input type="number" id="supervisorPunctuality" min="1" max="5" value="4" onchange="updateComparison(); autoSave();">
+                        </div>
+                        <div class="form-group">
+                            <label>⭐ Ubora (1-5)</label>
+                            <input type="number" id="supervisorQuality" min="1" max="5" value="4" onchange="updateComparison(); autoSave();">
+                        </div>
+                        <div class="form-group">
+                            <label>⭐ Ushirikiano (1-5)</label>
+                            <input type="number" id="supervisorTeamwork" min="1" max="5" value="4" onchange="updateComparison(); autoSave();">
+                        </div>
+                        <div class="form-group">
+                            <label>⭐ Uongozi (1-5)</label>
+                            <input type="number" id="supervisorLeadership" min="1" max="5" value="4" onchange="updateComparison(); autoSave();">
+                        </div>
+                        <div class="form-group">
+                            <label>⭐ Mawasiliano (1-5)</label>
+                            <input type="number" id="supervisorCommunication" min="1" max="5" value="4" onchange="updateComparison(); autoSave();">
+                        </div>
+                        <div class="form-group">
+                            <label>⭐ Uamuzi (1-5)</label>
+                            <input type="number" id="supervisorDecision" min="1" max="5" value="4" onchange="updateComparison(); autoSave();">
+                        </div>
+                    </div>
                 </div>
 
                 <!-- MAWASILIANO YA MSIMAMIZI -->
@@ -895,11 +1124,19 @@
                             </div>
                             <button class="action-btn email" onclick="sendEmail('supervisor')" id="supervisorEmailBtn" style="display:none;">📧 Tuma</button>
                         </div>
+                        <div class="supervisor-contact-card" id="supervisorChatCard">
+                            <div class="icon">💬</div>
+                            <div class="info">
+                                <div class="label">Chat</div>
+                                <div class="value" style="font-size:11px;">Tuma ujumbe</div>
+                            </div>
+                            <button class="action-btn chat" onclick="openChat('supervisor')" id="supervisorChatBtn" style="display:none;">💬 Chat</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- TATHMINI YA MSIMAMIZI -->
+            <!-- TATHMINI YA MSIMAMIZI (ILIYOPAKIWA) -->
             <div id="supervisorSection" style="display:none; background:#d5f5e3; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #27ae60;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:10px;">
                     👔 TATHMINI YA MSIMAMIZI
@@ -959,22 +1196,33 @@
                 </div>
             </div>
 
-            <!-- COMPARISON TABLE -->
+            <!-- COMPARISON TABLE (KWA DATA HALISI) -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">📊 COMPARISON TABLE</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Linganisha tathmini ya mtendakazi na msimamizi</div>
             <table class="comparison-table" id="comparisonTable">
                 <thead>
-                    <tr><th>Kipengele</th><th>Mtendakazi</th><th>Msimamizi</th><th>Pengo</th><th>Hali</th></tr>
+                    <tr>
+                        <th>Kipengele</th>
+                        <th>Mtendakazi</th>
+                        <th>Msimamizi</th>
+                        <th>Pengo</th>
+                        <th>Tofauti (%)</th>
+                        <th>Mapendekezo</th>
+                        <th>Hali</th>
+                    </tr>
                 </thead>
                 <tbody id="comparisonBody">
-                    <tr><td>Kuwasili</td><td id="cWorkerPunctuality">-</td><td id="cSupervisorPunctuality">-</td><td id="cGapPunctuality">-</td><td id="cStatusPunctuality">-</td></tr>
-                    <tr><td>Ubora</td><td id="cWorkerQuality">-</td><td id="cSupervisorQuality">-</td><td id="cGapQuality">-</td><td id="cStatusQuality">-</td></tr>
-                    <tr><td>Ushirikiano</td><td id="cWorkerTeamwork">-</td><td id="cSupervisorTeamwork">-</td><td id="cGapTeamwork">-</td><td id="cStatusTeamwork">-</td></tr>
-                    <tr><td>Uongozi</td><td id="cWorkerLeadership">-</td><td id="cSupervisorLeadership">-</td><td id="cGapLeadership">-</td><td id="cStatusLeadership">-</td></tr>
-                    <tr><td>Mawasiliano</td><td id="cWorkerCommunication">-</td><td id="cSupervisorCommunication">-</td><td id="cGapCommunication">-</td><td id="cStatusCommunication">-</td></tr>
-                    <tr><td>Uamuzi</td><td id="cWorkerDecision">-</td><td id="cSupervisorDecision">-</td><td id="cGapDecision">-</td><td id="cStatusDecision">-</td></tr>
+                    <tr><td>Kuwasili</td><td id="cWorkerPunctuality">-</td><td id="cSupervisorPunctuality">-</td><td id="cGapPunctuality">-</td><td id="cDiffPunctuality">-</td><td id="cRecPunctuality">-</td><td id="cStatusPunctuality">-</td></tr>
+                    <tr><td>Ubora</td><td id="cWorkerQuality">-</td><td id="cSupervisorQuality">-</td><td id="cGapQuality">-</td><td id="cDiffQuality">-</td><td id="cRecQuality">-</td><td id="cStatusQuality">-</td></tr>
+                    <tr><td>Ushirikiano</td><td id="cWorkerTeamwork">-</td><td id="cSupervisorTeamwork">-</td><td id="cGapTeamwork">-</td><td id="cDiffTeamwork">-</td><td id="cRecTeamwork">-</td><td id="cStatusTeamwork">-</td></tr>
+                    <tr><td>Uongozi</td><td id="cWorkerLeadership">-</td><td id="cSupervisorLeadership">-</td><td id="cGapLeadership">-</td><td id="cDiffLeadership">-</td><td id="cRecLeadership">-</td><td id="cStatusLeadership">-</td></tr>
+                    <tr><td>Mawasiliano</td><td id="cWorkerCommunication">-</td><td id="cSupervisorCommunication">-</td><td id="cGapCommunication">-</td><td id="cDiffCommunication">-</td><td id="cRecCommunication">-</td><td id="cStatusCommunication">-</td></tr>
+                    <tr><td>Uamuzi</td><td id="cWorkerDecision">-</td><td id="cSupervisorDecision">-</td><td id="cGapDecision">-</td><td id="cDiffDecision">-</td><td id="cRecDecision">-</td><td id="cStatusDecision">-</td></tr>
                 </tbody>
             </table>
+            <div id="comparisonSummary" style="margin-top:10px; padding:12px 16px; background:#f8f9fa; border-radius:8px; font-size:13px; border-left:4px solid #8e44ad;">
+                <strong>📌 Hitimisho:</strong> <span id="comparisonConclusion">Hakuna data ya kulinganisha.</span>
+            </div>
 
             <!-- STAR RATING -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">⭐ TATHMINI YA MGANGA MFAWIDHI</div>
@@ -1133,10 +1381,29 @@
             <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
             <div>Mtwara Performance | Fomu ya Mganga Mfawidhi</div>
             <div style="margin-top:4px; font-size:10px; color:#aab;">
-                📄 PDF | 🖨️ Print | 💬 WhatsApp | 📋 Nakili | ⭐ Star Rating | 📊 Comparison
+                📄 PDF | 🖨️ Print | 💬 WhatsApp | 📋 Nakili | ⭐ Star Rating | 📊 Comparison | 💬 Chat | 🐙 GitHub Sync
             </div>
         </div>
 
+    </div>
+</div>
+
+<!-- ===== CHAT MODAL ===== -->
+<div id="chatModal" class="chat-modal">
+    <div class="chat-box">
+        <div class="chat-header">
+            <h3 id="chatTitle">💬 Mazungumzo</h3>
+            <button class="close-btn" onclick="closeChat()">✕</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div style="text-align:center; color:#7f8c8d; font-size:13px; padding:20px;">
+                💬 Hakuna ujumbe bado. Andika ujumbe wako wa kwanza.
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Andika ujumbe wako..." onkeypress="if(event.key==='Enter') sendMessage()">
+            <button class="btn-send" onclick="sendMessage()">📤 Tuma</button>
+        </div>
     </div>
 </div>
 
@@ -1152,6 +1419,7 @@ let uploadedFiles = [];
 let starRatings = {};
 let workerContactData = { phone: '', whatsapp: '', email: '' };
 let supervisorContactData = { phone: '', whatsapp: '', email: '' };
+let chatTarget = null;
 
 // ==============================================================
 // CHECKLIST DATA
@@ -1177,9 +1445,6 @@ const SPECIAL_CHECKLISTS = {
     "Laboratory Scientist": ["Kuchukua sampuli kwa usahihi","Kufanya vipimo sahihi","Kurekodi na kuthibitisha matokeo","Kudumisha viwango vya usalama","Kuhakikisha udhibiti wa ubora"],
     "Pharmacist": ["Kuandaa dawa kwa usahihi","Kushauri wagonjwa kuhusu dawa","Kuhifadhi dawa kwa usalama","Kusimamia orodha ya dawa","Kuchakata maagizo kwa usahihi"]
 };
-
-const sampleWorkerData = {punctuality:4,quality:5,teamwork:3,leadership:4,communication:4,decision:3};
-const sampleSupervisorData = {punctuality:4,quality:4,teamwork:5,leadership:4,communication:3,decision:4};
 
 // ==============================================================
 // GENERATE REPORT ID
@@ -1234,18 +1499,6 @@ function updateChecklistCount(countId) {
     countEl.textContent = `(${checked}/${total})`;
 }
 
-function getChecklistData(containerId, storageKey) {
-    const items = [];
-    const container = document.getElementById(containerId);
-    if (!container) return items;
-    const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
-    container.querySelectorAll(".checklist-item").forEach((item, i) => {
-        const text = item.textContent.replace(/[✕]/g, "").trim();
-        items.push({ text, checked: saved[i] || false });
-    });
-    return items;
-}
-
 function loadChecklists() {
     renderChecklist("inchargeGeneralChecklist", GENERAL_CHECKLIST, "inchargeGeneral", "generalCount");
     const role = document.getElementById("workerRole").value;
@@ -1275,6 +1528,100 @@ function selectStar(el) {
 function getStarValues() { return starRatings; }
 
 // ==============================================================
+// GET WORKER AND SUPERVISOR DATA FOR COMPARISON
+// ==============================================================
+function getWorkerData() {
+    return {
+        punctuality: parseInt(document.getElementById("workerPunctuality").value) || 0,
+        quality: parseInt(document.getElementById("workerQuality").value) || 0,
+        teamwork: parseInt(document.getElementById("workerTeamwork").value) || 0,
+        leadership: parseInt(document.getElementById("workerLeadership").value) || 0,
+        communication: parseInt(document.getElementById("workerCommunication").value) || 0,
+        decision: parseInt(document.getElementById("workerDecision").value) || 0
+    };
+}
+
+function getSupervisorData() {
+    return {
+        punctuality: parseInt(document.getElementById("supervisorPunctuality").value) || 0,
+        quality: parseInt(document.getElementById("supervisorQuality").value) || 0,
+        teamwork: parseInt(document.getElementById("supervisorTeamwork").value) || 0,
+        leadership: parseInt(document.getElementById("supervisorLeadership").value) || 0,
+        communication: parseInt(document.getElementById("supervisorCommunication").value) || 0,
+        decision: parseInt(document.getElementById("supervisorDecision").value) || 0
+    };
+}
+
+// ==============================================================
+// UPDATE COMPARISON TABLE (KWA DATA HALISI)
+// ==============================================================
+function updateComparison() {
+    const workerData = getWorkerData();
+    const supervisorData = getSupervisorData();
+    
+    const categories = [
+        { key: 'Punctuality', label: 'Kuwasili' },
+        { key: 'Quality', label: 'Ubora' },
+        { key: 'Teamwork', label: 'Ushirikiano' },
+        { key: 'Leadership', label: 'Uongozi' },
+        { key: 'Communication', label: 'Mawasiliano' },
+        { key: 'Decision', label: 'Uamuzi' }
+    ];
+    
+    let totalGap = 0;
+    let largeGaps = 0;
+    
+    categories.forEach(cat => {
+        const wVal = workerData[cat.key.toLowerCase()] || 0;
+        const sVal = supervisorData[cat.key.toLowerCase()] || 0;
+        const gap = Math.abs(wVal - sVal);
+        const maxVal = Math.max(wVal, sVal, 1);
+        const diffPercent = Math.round((gap / maxVal) * 100);
+        totalGap += gap;
+        if (gap > 2) largeGaps++;
+        
+        let status, statusClass, recommendation;
+        if (gap <= 1) {
+            status = '✅ Sawa';
+            statusClass = 'highlight';
+            recommendation = 'Hakuna hatua';
+        } else if (gap <= 2) {
+            status = '⚠️ Tofauti';
+            statusClass = 'warning';
+            recommendation = 'Fuatilia';
+        } else {
+            status = '❌ Pengo Kubwa';
+            statusClass = 'danger';
+            recommendation = 'Uboreshaji wa haraka';
+        }
+        
+        document.getElementById(`cWorker${cat.key}`).textContent = wVal || '-';
+        document.getElementById(`cSupervisor${cat.key}`).textContent = sVal || '-';
+        document.getElementById(`cGap${cat.key}`).textContent = gap;
+        document.getElementById(`cDiff${cat.key}`).textContent = diffPercent + '%';
+        document.getElementById(`cRec${cat.key}`).textContent = recommendation;
+        document.getElementById(`cStatus${cat.key}`).textContent = status;
+        document.getElementById(`cStatus${cat.key}`).parentElement.className = statusClass;
+    });
+    
+    // Conclusion
+    const conclusion = document.getElementById("comparisonConclusion");
+    if (totalGap === 0) {
+        conclusion.textContent = "✅ Tathmini zinalingana kabisa. Hakuna pengo kati ya mtendakazi na msimamizi.";
+    } else if (largeGaps === 0) {
+        conclusion.textContent = "🟢 Pengo ndogo zimegunduliwa. Mtendakazi na msimamizi wana mtazamo sawa.";
+    } else if (largeGaps <= 2) {
+        conclusion.textContent = `🟡 Pengo ${largeGaps} zimegunduliwa. Inashauriwa kufanya mazungumzo ya ziada.`;
+    } else {
+        conclusion.textContent = `🔴 Pengo kubwa ${largeGaps} zimegunduliwa. Uboreshaji wa haraka unahitajika.`;
+    }
+    
+    // Update score summary
+    updateScoreSummary();
+    autoSave();
+}
+
+// ==============================================================
 // LOAD SUPERVISOR DATA
 // ==============================================================
 function loadSupervisorData() {
@@ -1289,12 +1636,14 @@ function loadSupervisorData() {
         document.getElementById("callBtn").style.display = 'none';
         document.getElementById("whatsappBtn").style.display = 'none';
         document.getElementById("emailBtn").style.display = 'none';
+        document.getElementById("chatBtn").style.display = 'none';
         document.getElementById("supervisorPhoneDisplay").textContent = '-';
         document.getElementById("supervisorWhatsAppDisplay").textContent = '-';
         document.getElementById("supervisorEmailDisplay").textContent = '-';
         document.getElementById("supervisorCallBtn").style.display = 'none';
         document.getElementById("supervisorWhatsAppBtn").style.display = 'none';
         document.getElementById("supervisorEmailBtn").style.display = 'none';
+        document.getElementById("supervisorChatBtn").style.display = 'none';
         return;
     }
     
@@ -1328,6 +1677,7 @@ function loadSupervisorData() {
         document.getElementById("callBtn").style.display = workerContactData.phone ? 'inline-flex' : 'none';
         document.getElementById("whatsappBtn").style.display = workerContactData.whatsapp ? 'inline-flex' : 'none';
         document.getElementById("emailBtn").style.display = workerContactData.email ? 'inline-flex' : 'none';
+        document.getElementById("chatBtn").style.display = 'inline-flex';
         
         supervisorContactData.phone = latest.supervisorPhone || '';
         supervisorContactData.whatsapp = latest.supervisorWhatsApp || '';
@@ -1340,13 +1690,14 @@ function loadSupervisorData() {
         document.getElementById("supervisorCallBtn").style.display = supervisorContactData.phone ? 'inline-flex' : 'none';
         document.getElementById("supervisorWhatsAppBtn").style.display = supervisorContactData.whatsapp ? 'inline-flex' : 'none';
         document.getElementById("supervisorEmailBtn").style.display = supervisorContactData.email ? 'inline-flex' : 'none';
+        document.getElementById("supervisorChatBtn").style.display = 'inline-flex';
         
         document.getElementById("previewSupervisorName").textContent = latest.supervisorName || '-';
         document.getElementById("previewSupervisorTitle").textContent = latest.supervisorTitle || '-';
         document.getElementById("previewSupervisorScore").textContent = latest.score ? `${latest.score}%` : '-';
         document.getElementById("previewSupervisorComments").textContent = latest.comments || '-';
         
-        updateComparisonTable(sampleWorkerData, sampleSupervisorData);
+        updateComparison();
     } else {
         section.style.display = 'none';
         document.getElementById("workerPhoneDisplay").textContent = '-';
@@ -1355,12 +1706,14 @@ function loadSupervisorData() {
         document.getElementById("callBtn").style.display = 'none';
         document.getElementById("whatsappBtn").style.display = 'none';
         document.getElementById("emailBtn").style.display = 'none';
+        document.getElementById("chatBtn").style.display = 'none';
         document.getElementById("supervisorPhoneDisplay").textContent = '-';
         document.getElementById("supervisorWhatsAppDisplay").textContent = '-';
         document.getElementById("supervisorEmailDisplay").textContent = '-';
         document.getElementById("supervisorCallBtn").style.display = 'none';
         document.getElementById("supervisorWhatsAppBtn").style.display = 'none';
         document.getElementById("supervisorEmailBtn").style.display = 'none';
+        document.getElementById("supervisorChatBtn").style.display = 'none';
     }
 }
 
@@ -1405,6 +1758,259 @@ function sendEmail(type) {
 }
 
 // ==============================================================
+// CHAT FUNCTIONS
+// ==============================================================
+function openChat(type) {
+    chatTarget = type;
+    const name = type === 'worker' ? 
+        (document.getElementById("workerName").value.trim() || 'Mtendakazi') : 
+        (document.getElementById("supervisorName").value.trim() || 'Msimamizi');
+    
+    document.getElementById("chatTitle").textContent = `💬 Mazungumzo na ${name}`;
+    document.getElementById("chatModal").classList.add("show");
+    document.getElementById("chatInput").focus();
+    
+    loadChatMessages();
+}
+
+function closeChat() {
+    document.getElementById("chatModal").classList.remove("show");
+}
+
+function loadChatMessages() {
+    const container = document.getElementById("chatMessages");
+    const key = `chat_${chatTarget}_${document.getElementById("workerName").value.trim()}`;
+    const messages = JSON.parse(localStorage.getItem(key) || "[]");
+    
+    if (messages.length === 0) {
+        container.innerHTML = `
+            <div style="text-align:center; color:#7f8c8d; font-size:13px; padding:20px;">
+                💬 Hakuna ujumbe bado. Andika ujumbe wako wa kwanza.
+            </div>
+        `;
+        return;
+    }
+    
+    container.innerHTML = messages.map(msg => {
+        const className = msg.sender === 'incharge' ? 'sent' : 'received';
+        return `<div class="chat-message ${className}">
+            ${msg.text}
+            <span class="time">${msg.time}</span>
+        </div>`;
+    }).join('');
+    
+    container.scrollTop = container.scrollHeight;
+}
+
+function sendMessage() {
+    const input = document.getElementById("chatInput");
+    const text = input.value.trim();
+    if (!text) return;
+    
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString();
+    const key = `chat_${chatTarget}_${document.getElementById("workerName").value.trim()}`;
+    const messages = JSON.parse(localStorage.getItem(key) || "[]");
+    
+    messages.push({
+        sender: 'incharge',
+        text: text,
+        time: timeStr,
+        timestamp: now.toISOString()
+    });
+    
+    localStorage.setItem(key, JSON.stringify(messages));
+    input.value = '';
+    loadChatMessages();
+    
+    showToast(`✅ Ujumbe umetumwa kwa ${chatTarget === 'worker' ? 'mtendakazi' : 'msimamizi'}!`, "success");
+    
+    // Simulate reply
+    simulateReply(key);
+}
+
+function simulateReply(key) {
+    const replies = [
+        "Ahsante kwa ujumbe wako.",
+        "Nimeelewa, nitaangalia.",
+        "Asante sana kwa taarifa.",
+        "Nitakujibu baadaye.",
+        "Sawa, nimekuelewa.",
+        "Nashukuru kwa mawasiliano."
+    ];
+    const randomReply = replies[Math.floor(Math.random() * replies.length)];
+    
+    setTimeout(() => {
+        const messages = JSON.parse(localStorage.getItem(key) || "[]");
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString();
+        
+        messages.push({
+            sender: chatTarget,
+            text: randomReply,
+            time: timeStr,
+            timestamp: now.toISOString()
+        });
+        
+        localStorage.setItem(key, JSON.stringify(messages));
+        loadChatMessages();
+        showToast(`💬 Ujumbe mpya kutoka ${chatTarget === 'worker' ? 'mtendakazi' : 'msimamizi'}!`, "info");
+    }, 2000 + Math.random() * 3000);
+}
+
+// ==============================================================
+// GITHUB SYNC FUNCTIONS
+// ==============================================================
+function saveToGitHub() {
+    showToast("🐙 Inahifadhi kwenye GitHub...", "info");
+    
+    const allData = {
+        formData: collectFormData(),
+        checklists: {
+            general: JSON.parse(localStorage.getItem("inchargeGeneral") || "{}"),
+            special: JSON.parse(localStorage.getItem("inchargeSpecial") || "{}")
+        },
+        starRatings: starRatings,
+        reports: reports,
+        chatMessages: getAllChatMessages(),
+        timestamp: new Date().toISOString(),
+        reportId: document.getElementById("reportIdDisplay").textContent
+    };
+    
+    localStorage.setItem("githubBackup", JSON.stringify(allData));
+    document.getElementById("githubStatus").innerHTML = "✅ Data imehifadhiwa kwenye Local Storage. <br>💡 Ili kuhifadhi kwenye repo yako, tumia Export JSON na uiweke kwenye GitHub.";
+    
+    // Export JSON automatically
+    exportJSON();
+    showToast("✅ Data imehifadhiwa! Angalia faili ya JSON iliyopakuliwa.", "success");
+}
+
+function loadFromGitHub() {
+    showToast("📥 Inapakia kutoka GitHub...", "info");
+    
+    // Create file input for JSON
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.onchange = function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            try {
+                const data = JSON.parse(event.target.result);
+                restoreFromGitHubData(data);
+                showToast("✅ Data imepakiwa kutoka GitHub!", "success");
+                document.getElementById("githubStatus").innerHTML = "✅ Data imepakiwa kutoka GitHub!";
+            } catch (err) {
+                showToast("❌ Hitilafu: Faili si sahihi", "error");
+            }
+        };
+        reader.readAsText(file);
+    };
+    input.click();
+}
+
+function restoreFromGitHubData(data) {
+    // Restore form data
+    if (data.formData) {
+        Object.keys(data.formData).forEach(key => {
+            const el = document.getElementById(key);
+            if (el && data.formData[key] && key !== 'starRatings' && key !== 'timestamp') {
+                el.value = data.formData[key];
+            }
+        });
+        if (data.formData.starRatings) {
+            starRatings = data.formData.starRatings;
+            Object.keys(starRatings).forEach(field => {
+                const container = document.querySelector(`[data-field="${field}"]`);
+                if (container) {
+                    const stars = container.querySelectorAll('.star');
+                    stars.forEach(star => {
+                        const val = parseInt(star.dataset.value);
+                        if (val <= starRatings[field]) star.classList.add('active');
+                        else star.classList.remove('active');
+                    });
+                    const label = document.getElementById(`star${field.charAt(0).toUpperCase() + field.slice(1)}Label`);
+                    if (label) label.textContent = `${starRatings[field]}/5`;
+                }
+            });
+        }
+    }
+    
+    // Restore checklists
+    if (data.checklists) {
+        if (data.checklists.general) {
+            localStorage.setItem("inchargeGeneral", JSON.stringify(data.checklists.general));
+        }
+        if (data.checklists.special) {
+            localStorage.setItem("inchargeSpecial", JSON.stringify(data.checklists.special));
+        }
+        loadChecklists();
+    }
+    
+    // Restore reports
+    if (data.reports) {
+        reports = data.reports;
+    }
+    
+    // Restore chat messages
+    if (data.chatMessages) {
+        data.chatMessages.forEach(msg => {
+            localStorage.setItem(msg.key, JSON.stringify(msg.messages));
+        });
+    }
+    
+    // Update UI
+    updateComparison();
+    updateScoreSummary();
+    updatePreview();
+    loadSupervisorData();
+    document.getElementById("reportIdDisplay").textContent = data.reportId || generateReportId();
+}
+
+function getAllChatMessages() {
+    const messages = [];
+    const keys = Object.keys(localStorage).filter(key => key.startsWith('chat_'));
+    keys.forEach(key => {
+        const msgs = JSON.parse(localStorage.getItem(key) || "[]");
+        messages.push({ key, messages: msgs });
+    });
+    return messages;
+}
+
+function exportJSON() {
+    const allData = {
+        formData: collectFormData(),
+        checklists: {
+            general: JSON.parse(localStorage.getItem("inchargeGeneral") || "{}"),
+            special: JSON.parse(localStorage.getItem("inchargeSpecial") || "{}")
+        },
+        starRatings: starRatings,
+        reports: reports,
+        chatMessages: getAllChatMessages(),
+        timestamp: new Date().toISOString(),
+        reportId: document.getElementById("reportIdDisplay").textContent
+    };
+    
+    const blob = new Blob([JSON.stringify(allData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `mtwara_data_${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast("✅ Faili ya JSON imepakuliwa!", "success");
+}
+
+function importJSON() {
+    loadFromGitHub();
+}
+
+// ==============================================================
 // AUTO-SAVE
 // ==============================================================
 function autoSave() {
@@ -1429,6 +2035,8 @@ function collectFormData() {
         finalRecommendations: document.getElementById("finalRecommendations").value,
         finalDecision: document.getElementById("finalDecision").value,
         starRatings: starRatings,
+        workerData: getWorkerData(),
+        supervisorData: getSupervisorData(),
         timestamp: new Date().toISOString()
     };
 }
@@ -1440,7 +2048,7 @@ function restoreDraft() {
             const data = JSON.parse(saved);
             Object.keys(data).forEach(key => {
                 const el = document.getElementById(key);
-                if (el && data[key] && key !== 'starRatings' && key !== 'timestamp') {
+                if (el && data[key] && key !== 'starRatings' && key !== 'timestamp' && key !== 'workerData' && key !== 'supervisorData') {
                     el.value = data[key];
                 }
             });
@@ -1460,7 +2068,20 @@ function restoreDraft() {
                     }
                 });
             }
+            if (data.workerData) {
+                Object.keys(data.workerData).forEach(key => {
+                    const el = document.getElementById(`worker${key.charAt(0).toUpperCase() + key.slice(1)}`);
+                    if (el) el.value = data.workerData[key];
+                });
+            }
+            if (data.supervisorData) {
+                Object.keys(data.supervisorData).forEach(key => {
+                    const el = document.getElementById(`supervisor${key.charAt(0).toUpperCase() + key.slice(1)}`);
+                    if (el) el.value = data.supervisorData[key];
+                });
+            }
             showToast("📂 Rasimu imerejeshwa!", "info");
+            updateComparison();
             updateScoreSummary();
         }
     } catch(e) { console.warn("Restore draft error:", e); }
@@ -1576,29 +2197,6 @@ function updateDecisionNotification() {
     updateScoreSummary();
 }
 
-function updateComparisonTable(workerData, supervisorData) {
-    const categories = [
-        { key: 'Punctuality', label: 'Kuwasili' },
-        { key: 'Quality', label: 'Ubora' },
-        { key: 'Teamwork', label: 'Ushirikiano' },
-        { key: 'Leadership', label: 'Uongozi' },
-        { key: 'Communication', label: 'Mawasiliano' },
-        { key: 'Decision', label: 'Uamuzi' }
-    ];
-    categories.forEach(cat => {
-        const wVal = workerData[cat.key.toLowerCase()] || 0;
-        const sVal = supervisorData[cat.key.toLowerCase()] || 0;
-        const gap = Math.abs(wVal - sVal);
-        const status = gap <= 1 ? '✅ Sawa' : gap <= 2 ? '⚠️ Tofauti' : '❌ Pengo Kubwa';
-        const statusClass = gap <= 1 ? 'highlight' : gap <= 2 ? 'warning' : 'danger';
-        document.getElementById(`cWorker${cat.key}`).textContent = wVal || '-';
-        document.getElementById(`cSupervisor${cat.key}`).textContent = sVal || '-';
-        document.getElementById(`cGap${cat.key}`).textContent = gap;
-        document.getElementById(`cStatus${cat.key}`).textContent = status;
-        document.getElementById(`cStatus${cat.key}`).parentElement.className = statusClass;
-    });
-}
-
 function updateScoreSummary() {
     const starValues = getStarValues();
     const ratingValues = Object.values(starValues);
@@ -1620,7 +2218,18 @@ function updateScoreSummary() {
     const totalChecked = generalChecked + specialChecked;
     const taskPercentage = totalItems > 0 ? Math.round((totalChecked / totalItems) * 100) : 0;
     
-    const combinedScore = Math.min(Math.round((ratingPercentage * 0.5) + (taskPercentage * 0.3) + 10), 100);
+    // Calculate gap from comparison
+    const workerData = getWorkerData();
+    const supervisorData = getSupervisorData();
+    const categories = ['punctuality', 'quality', 'teamwork', 'leadership', 'communication', 'decision'];
+    let totalGap = 0;
+    categories.forEach(key => {
+        totalGap += Math.abs((workerData[key] || 0) - (supervisorData[key] || 0));
+    });
+    const maxGap = categories.length * 4;
+    const gapScore = maxGap > 0 ? Math.round((1 - totalGap / maxGap) * 100) : 100;
+    
+    const combinedScore = Math.min(Math.round((ratingPercentage * 0.4) + (taskPercentage * 0.3) + (gapScore * 0.3)), 100);
     
     document.getElementById("scoreTotal").textContent = combinedScore + "%";
     document.getElementById("scoreTotal").className = "number " + (combinedScore >= 70 ? "green" : combinedScore >= 50 ? "orange" : "red");
@@ -1628,6 +2237,9 @@ function updateScoreSummary() {
     const statusText = combinedScore >= 70 ? "✅ Nzuri" : combinedScore >= 50 ? "⚠️ Wastani" : "❌ Inahitaji Uboreshaji";
     document.getElementById("scoreStatus").textContent = statusText;
     document.getElementById("scoreStatus").className = "number " + (combinedScore >= 70 ? "green" : combinedScore >= 50 ? "orange" : "red");
+    
+    document.getElementById("scoreGap").textContent = totalGap;
+    document.getElementById("scoreGap").className = "number " + (totalGap <= 3 ? "green" : totalGap <= 6 ? "orange" : "red");
     
     document.getElementById("progressFill").style.width = combinedScore + "%";
 }
@@ -1654,21 +2266,16 @@ function updateDeadline() {
 }
 
 // ==============================================================
-// EXPORT FUNCTIONS (VIPENGELE VIPYA)
+// EXPORT FUNCTIONS
 // ==============================================================
-
-// 1. EXPORT PDF
 function exportPDF() {
     showToast("📄 Inaandaa PDF...", "info");
     setTimeout(() => {
         try {
             const workerName = document.getElementById("workerName").value.trim() || "Hajajazwa";
             const workerRole = document.getElementById("workerRole").value || "Hajajazwa";
-            const workerDate = document.getElementById("workerDate").value || "Hajajazwa";
-            const workerShift = document.getElementById("workerShift").value || "Hajajazwa";
-            const workerDepartment = document.getElementById("workerDepartment").value || "Hajajazwa";
-            const supervisorName = document.getElementById("supervisorName").value.trim() || "Hajajazwa";
-            const supervisorTitle = document.getElementById("supervisorTitle").value || "Hajajazwa";
+            const workerData = getWorkerData();
+            const supervisorData = getSupervisorData();
             const finalDecision = document.getElementById("finalDecision").value;
             const decisionText = finalDecision === "approved" ? "✅ Imekubaliwa" : finalDecision === "rejected" ? "❌ Imekataliwa" : "⏳ Imeahirishwa";
             const starValues = getStarValues();
@@ -1691,7 +2298,6 @@ function exportPDF() {
                 .status-rejected { color: #e74c3c; font-weight: 700; }
                 .status-deferred { color: #f39c12; font-weight: 700; }
                 .footer { margin-top: 30px; padding-top: 20px; border-top: 2px solid #ecf0f1; text-align: center; font-size: 12px; color: #7f8c8d; }
-                .signature-box { background: #f8f9fa; padding: 10px 16px; border-radius: 8px; margin: 8px 0; }
                 .score-box { background: #e8daef; padding: 16px; border-radius: 8px; margin: 14px 0; }
                 .score-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
                 .score-item { background: #fff; padding: 10px; border-radius: 8px; text-align: center; }
@@ -1699,8 +2305,12 @@ function exportPDF() {
                 .number.green { color: #27ae60; }
                 .number.orange { color: #f39c12; }
                 .number.red { color: #e74c3c; }
-                .number.purple { color: #8e44ad; }
-                .contact-info { background: #f8f9fa; padding: 8px 12px; border-radius: 6px; margin: 4px 0; }
+                table { width: 100%; border-collapse: collapse; font-size: 12px; }
+                th, td { padding: 6px 10px; border: 1px solid #dee2e6; text-align: left; }
+                th { background: #e8daef; color: #1a5276; }
+                .highlight { background: #d5f5e3; }
+                .warning { background: #fef9e7; }
+                .danger { background: #fadbd8; }
             </style>
             </head>
             <body>
@@ -1715,29 +2325,6 @@ function exportPDF() {
                     <div class="row">
                         <div><span class="label">Jina:</span> ${workerName}</div>
                         <div><span class="label">Taaluma:</span> ${workerRole}</div>
-                        <div><span class="label">Tarehe:</span> ${workerDate}</div>
-                        <div><span class="label">Zamu:</span> ${workerShift}</div>
-                        <div><span class="label">Idara:</span> ${workerDepartment}</div>
-                    </div>
-                    <div class="contact-info">
-                        <strong>📞 Mawasiliano:</strong>
-                        ${workerContactData.phone ? 'Simu: ' + workerContactData.phone : ''}
-                        ${workerContactData.whatsapp ? ' | WhatsApp: ' + workerContactData.whatsapp : ''}
-                        ${workerContactData.email ? ' | Email: ' + workerContactData.email : ''}
-                    </div>
-                </div>
-                
-                <div class="section">
-                    <h2>👔 Taarifa za Msimamizi</h2>
-                    <div class="row">
-                        <div><span class="label">Jina:</span> ${supervisorName}</div>
-                        <div><span class="label">Wadhifa:</span> ${supervisorTitle}</div>
-                    </div>
-                    <div class="contact-info">
-                        <strong>📞 Mawasiliano ya Msimamizi:</strong>
-                        ${supervisorContactData.phone ? 'Simu: ' + supervisorContactData.phone : ''}
-                        ${supervisorContactData.whatsapp ? ' | WhatsApp: ' + supervisorContactData.whatsapp : ''}
-                        ${supervisorContactData.email ? ' | Email: ' + supervisorContactData.email : ''}
                     </div>
                 </div>
                 
@@ -1749,6 +2336,28 @@ function exportPDF() {
                             return `<div class="item"><span class="label">${label}:</span> <span class="num">${'⭐'.repeat(starValues[key] || 0)} (${starValues[key] || 0}/5)</span></div>`;
                         }).join('')}
                     </div>
+                </div>
+                
+                <div class="section">
+                    <h2>📊 Comparison Table</h2>
+                    <table>
+                        <thead><tr><th>Kipengele</th><th>Mtendakazi</th><th>Msimamizi</th><th>Pengo</th><th>Tofauti (%)</th><th>Hali</th></tr></thead>
+                        <tbody>
+                            ${['Kuwasili','Ubora','Ushirikiano','Uongozi','Mawasiliano','Uamuzi'].map((label, i) => {
+                                const keys = ['punctuality','quality','teamwork','leadership','communication','decision'];
+                                const key = keys[i];
+                                const wVal = workerData[key] || 0;
+                                const sVal = supervisorData[key] || 0;
+                                const gap = Math.abs(wVal - sVal);
+                                const maxVal = Math.max(wVal, sVal, 1);
+                                const diff = Math.round((gap / maxVal) * 100);
+                                const status = gap <= 1 ? '✅ Sawa' : gap <= 2 ? '⚠️ Tofauti' : '❌ Pengo Kubwa';
+                                const cls = gap <= 1 ? 'highlight' : gap <= 2 ? 'warning' : 'danger';
+                                return `<tr class="${cls}"><td>${label}</td><td>${wVal}</td><td>${sVal}</td><td>${gap}</td><td>${diff}%</td><td>${status}</td></tr>`;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                    <p style="margin-top:8px; font-size:12px;">${document.getElementById("comparisonConclusion").textContent}</p>
                 </div>
                 
                 <div class="section">
@@ -1791,13 +2400,12 @@ function exportPDF() {
     }, 500);
 }
 
-// 2. PRINT
 function exportPrint() {
     showToast("🖨️ Inaandaa kuchapisha...", "info");
     setTimeout(() => {
         try {
             const content = document.getElementById("formIncharge").cloneNode(true);
-            content.querySelectorAll(".signature-pad, .signature-actions, .toast, .user-tools, .export-tools").forEach(el => el.remove());
+            content.querySelectorAll(".signature-pad, .signature-actions, .toast, .user-tools, .export-tools, .github-sync-box").forEach(el => el.remove());
             
             const win = window.open('', '_blank', 'width=1000,height=800');
             win.document.write(`
@@ -1816,6 +2424,12 @@ function exportPrint() {
                     .number.red { color: #e74c3c; }
                     .number.purple { color: #8e44ad; }
                     .footer { margin-top: 30px; text-align: center; font-size: 12px; color: #7f8c8d; border-top: 1px solid #ecf0f1; padding-top: 20px; }
+                    .comparison-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+                    .comparison-table th, .comparison-table td { padding: 6px 10px; border: 1px solid #dee2e6; text-align: left; }
+                    .comparison-table th { background: #e8daef; color: #1a5276; }
+                    .highlight { background: #d5f5e3; }
+                    .warning { background: #fef9e7; }
+                    .danger { background: #fadbd8; }
                     @media print { body { padding: 20px; } .no-print { display: none; } }
                 </style>
                 </head>
@@ -1832,7 +2446,6 @@ function exportPrint() {
                     </div>
                     <script>
                         window.onload = function() { 
-                            // Weka checkmarks kwa checklist
                             document.querySelectorAll('.toggle.active').forEach(el => {
                                 const item = el.closest('.checklist-item');
                                 if (item) {
@@ -1842,7 +2455,6 @@ function exportPrint() {
                                     item.appendChild(check);
                                 }
                             });
-                            // Ficha vitufe vya toggle
                             document.querySelectorAll('.toggle').forEach(el => el.style.display = 'none');
                             window.print(); 
                         }
@@ -1858,17 +2470,16 @@ function exportPrint() {
     }, 500);
 }
 
-// 3. WHATSAPP
 function exportWhatsApp() {
     showToast("💬 Inaandaa kwa WhatsApp...", "info");
     setTimeout(() => {
         try {
             const workerName = document.getElementById("workerName").value.trim() || "Hajajazwa";
-            const workerRole = document.getElementById("workerRole").value || "Hajajazwa";
-            const supervisorName = document.getElementById("supervisorName").value.trim() || "Hajajazwa";
             const finalDecision = document.getElementById("finalDecision").value;
             const decisionText = finalDecision === "approved" ? "✅ Imekubaliwa" : finalDecision === "rejected" ? "❌ Imekataliwa" : "⏳ Imeahirishwa";
             const starValues = getStarValues();
+            const workerData = getWorkerData();
+            const supervisorData = getSupervisorData();
             
             const starLines = Object.keys(starValues).map(key => {
                 const label = key.charAt(0).toUpperCase() + key.slice(1);
@@ -1877,22 +2488,29 @@ function exportWhatsApp() {
                 return `   ${label}: ${stars}${emptyStars} (${starValues[key] || 0}/5)`;
             }).join('\n');
             
+            const comparisonLines = [
+                `   Kuwasili: ${workerData.punctuality || 0} → ${supervisorData.punctuality || 0}`,
+                `   Ubora: ${workerData.quality || 0} → ${supervisorData.quality || 0}`,
+                `   Ushirikiano: ${workerData.teamwork || 0} → ${supervisorData.teamwork || 0}`,
+                `   Uongozi: ${workerData.leadership || 0} → ${supervisorData.leadership || 0}`,
+                `   Mawasiliano: ${workerData.communication || 0} → ${supervisorData.communication || 0}`,
+                `   Uamuzi: ${workerData.decision || 0} → ${supervisorData.decision || 0}`
+            ].join('\n');
+            
             const message = `📊 *RIPOTI YA MGANGA MFAWIDHI*
 ━━━━━━━━━━━━━━━━━━━━━
 
 📋 *TAARIFA ZA MTENDAKAZI*
 👤 Jina: ${workerName}
-📋 Taaluma: ${workerRole}
-
-👔 *TAARIFA ZA MSIMAMIZI*
-👔 Jina: ${supervisorName}
 
 ⭐ *TATHMINI YA MGANGA MFAWIDHI*
 ${starLines}
 
+📊 *COMPARISON TABLE*
+${comparisonLines}
+
 ⚖️ *UAMUZI WA MWISHO*
 📝 Maoni: ${document.getElementById("finalComments").value || 'Hakuna'}
-💡 Mapendekezo: ${document.getElementById("finalRecommendations").value || 'Hakuna'}
 📊 Uamuzi: ${decisionText}
 
 📊 *MUHTASARI WA HALI*
@@ -1916,17 +2534,16 @@ ${starLines}
     }, 500);
 }
 
-// 4. COPY
 function exportCopy() {
     showToast("📋 Inanakili...", "info");
     setTimeout(() => {
         try {
             const workerName = document.getElementById("workerName").value.trim() || "Hajajazwa";
-            const workerRole = document.getElementById("workerRole").value || "Hajajazwa";
-            const supervisorName = document.getElementById("supervisorName").value.trim() || "Hajajazwa";
             const finalDecision = document.getElementById("finalDecision").value;
             const decisionText = finalDecision === "approved" ? "✅ Imekubaliwa" : finalDecision === "rejected" ? "❌ Imekataliwa" : "⏳ Imeahirishwa";
             const starValues = getStarValues();
+            const workerData = getWorkerData();
+            const supervisorData = getSupervisorData();
             
             const starLines = Object.keys(starValues).map(key => {
                 const label = key.charAt(0).toUpperCase() + key.slice(1);
@@ -1938,22 +2555,20 @@ function exportCopy() {
 
 📋 TAARIFA ZA MTENDAKAZI
 👤 Jina: ${workerName}
-📋 Taaluma: ${workerRole}
-📅 Tarehe: ${document.getElementById("workerDate").value || '-'}
-🕐 Zamu: ${document.getElementById("workerShift").value || '-'}
-🏢 Idara: ${document.getElementById("workerDepartment").value || '-'}
-
-👔 TAARIFA ZA MSIMAMIZI
-👔 Jina: ${supervisorName}
-📋 Wadhifa: ${document.getElementById("supervisorTitle").value || '-'}
-🏢 Idara: ${document.getElementById("supervisorDepartment").value || '-'}
 
 ⭐ TATHMINI YA MGANGA MFAWIDHI
 ${starLines}
 
+📊 COMPARISON TABLE
+   Kuwasili: ${workerData.punctuality || 0} → ${supervisorData.punctuality || 0}
+   Ubora: ${workerData.quality || 0} → ${supervisorData.quality || 0}
+   Ushirikiano: ${workerData.teamwork || 0} → ${supervisorData.teamwork || 0}
+   Uongozi: ${workerData.leadership || 0} → ${supervisorData.leadership || 0}
+   Mawasiliano: ${workerData.communication || 0} → ${supervisorData.communication || 0}
+   Uamuzi: ${workerData.decision || 0} → ${supervisorData.decision || 0}
+
 ⚖️ UAMUZI WA MWISHO
 📝 Maoni: ${document.getElementById("finalComments").value || 'Hakuna'}
-💡 Mapendekezo: ${document.getElementById("finalRecommendations").value || 'Hakuna'}
 📊 Uamuzi: ${decisionText}
 
 📊 MUHTASARI WA HALI
@@ -1967,7 +2582,6 @@ ${starLines}
             navigator.clipboard.writeText(report).then(() => {
                 showToast("✅ Ripoti imenakiliwa!", "success");
             }).catch(() => {
-                // Fallback
                 const textarea = document.createElement('textarea');
                 textarea.value = report;
                 document.body.appendChild(textarea);
@@ -2015,22 +2629,17 @@ function login() {
     document.getElementById("userBadge").textContent = "👤 " + username;
     document.getElementById("reportIdDisplay").textContent = generateReportId();
     
-    if (username === "incharge") {
-        document.getElementById("formIncharge").style.display = "block";
-    } else {
-        document.getElementById("formIncharge").style.display = "block";
-    }
+    document.getElementById("formIncharge").style.display = "block";
     
-    // Load checklists and restore draft
     loadChecklists();
     restoreDraft();
     updateDeadline();
     updateDecisionNotification();
     updatePreview();
     loadSupervisorData();
+    updateComparison();
     updateScoreSummary();
     
-    // Initialize signature pads
     setTimeout(() => {
         initSigPad("incharge");
     }, 500);
@@ -2053,8 +2662,8 @@ function syncData() {
     btn.innerHTML = "⏳ Inasawazisha...";
     
     setTimeout(() => {
-        // Simulate sync
         loadSupervisorData();
+        updateComparison();
         updateScoreSummary();
         btn.disabled = false;
         btn.innerHTML = "🔄 Sync";
@@ -2088,7 +2697,6 @@ function approveFinal() {
     
     showToast("✅ Tathmini imeidhinishwa!", "success");
     
-    // Send report to reports array
     const report = collectFormData();
     report.type = "incharge_approval";
     report.status = "approved";
@@ -2164,16 +2772,20 @@ function deferFinal() {
 // INIT
 // ==============================================================
 window.onload = function() {
-    // Set default date
     const today = new Date().toISOString().split('T')[0];
     document.getElementById("workerDate").value = today;
     
-    // Load initial checklists
     loadChecklists();
     updateDeadline();
     updateDecisionNotification();
     updatePreview();
+    updateComparison();
     updateScoreSummary();
+    
+    // Close chat modal on outside click
+    document.getElementById("chatModal").addEventListener("click", function(e) {
+        if (e.target === this) closeChat();
+    });
 };
 </script>
 </body>
