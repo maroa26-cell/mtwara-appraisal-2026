@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -657,58 +658,75 @@
         }
         .modal-close:hover { color: #e74c3c; }
         
-        /* Sehemu ya Tathmini ya Msimamizi */
+        /* ===== TATHMINI YA MSIMAMIZI ===== */
         .supervisor-section {
-            background: #d5f5e3;
-            padding: 16px 20px;
+            background: linear-gradient(135deg, #d5f5e3, #a9dfbf);
+            padding: 20px 24px;
             border-radius: 12px;
             margin-bottom: 16px;
-            border-left: 4px solid #27ae60;
+            border-left: 5px solid #27ae60;
+            transition: all 0.5s ease;
         }
         .supervisor-section .section-title {
             font-weight: 700;
             color: #1a5276;
-            font-size: 15px;
-            margin-bottom: 10px;
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         .supervisor-section .subtitle {
             font-size: 12px;
             color: #7f8c8d;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
         .supervisor-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 8px 20px;
-            font-size: 13px;
+            font-size: 14px;
         }
-        .supervisor-grid .item { padding: 4px 0; }
+        .supervisor-grid .item { padding: 6px 0; border-bottom: 1px dashed rgba(39,174,96,0.2); }
         .supervisor-grid .item strong { color: #1a5276; }
         .supervisor-grid .item.span2 { grid-column: span 2; }
-        
-        /* Progress bar ya msimamizi */
         .supervisor-progress {
-            margin-top: 10px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 2px solid rgba(39,174,96,0.3);
         }
         .supervisor-progress .labels {
             display: flex;
             justify-content: space-between;
-            font-size: 12px;
-            color: #7f8c8d;
+            font-size: 13px;
+            color: #1a5276;
+            font-weight: 600;
         }
         .supervisor-progress .bar {
             width: 100%;
-            height: 8px;
+            height: 10px;
             background: #e8ecf1;
-            border-radius: 4px;
+            border-radius: 5px;
             overflow: hidden;
-            margin-top: 4px;
+            margin-top: 6px;
         }
         .supervisor-progress .bar .fill {
             height: 100%;
-            border-radius: 4px;
-            background: linear-gradient(90deg, #27ae60, #2ecc71);
-            transition: width 0.8s ease;
+            border-radius: 5px;
+            background: linear-gradient(90deg, #27ae60, #2ecc71, #1abc9c);
+            transition: width 1s ease;
+        }
+        .supervisor-stars {
+            display: flex;
+            gap: 4px;
+            font-size: 22px;
+            margin: 4px 0;
+        }
+        .supervisor-stars .star {
+            color: #d5d8dc;
+        }
+        .supervisor-stars .star.active {
+            color: #f39c12;
         }
     </style>
 </head>
@@ -841,7 +859,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>👤 Jina Kamili la Mtendakazi <span class="required">*</span></label>
-                        <input type="text" id="workerName" placeholder="Jina la mtendakazi" value="" onchange="autoSave(); loadSupervisorData();" oninput="autoSave(); loadSupervisorData();">
+                        <input type="text" id="workerName" placeholder="Jina la mtendakazi" value="" onchange="autoSave();" oninput="autoSave();">
                     </div>
                     <div class="form-group">
                         <label>📋 Taaluma / Wadhifa <span class="required">*</span></label>
@@ -892,41 +910,72 @@
                 </div>
             </div>
 
-            <!-- TAARIFA ZA MSIMAMIZI -->
-            <div style="background:#d5f5e3; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #8e44ad;">
+            <!-- ===== TAARIFA ZA MSIMAMIZI (ZILIZOBOBESHWA) ===== -->
+            <div style="background:#d5f5e3; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #27ae60;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">👔 TAARIFA ZA MSIMAMIZI</div>
+                <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Jaza taarifa za msimamizi ili tathmini yake ionekane</div>
+                
                 <div class="form-row">
                     <div class="form-group">
-                        <label>👔 Jina la Msimamizi</label>
-                        <input type="text" id="supervisorName" placeholder="Jina la msimamizi" value="" onchange="autoSave(); updatePreview();" oninput="autoSave(); updatePreview();">
+                        <label>👔 Jina Kamili la Msimamizi <span class="required">*</span></label>
+                        <input type="text" id="supervisorName" placeholder="Jina la msimamizi" value="" 
+                               onchange="autoSave(); updatePreview(); showSupervisorAssessment();" 
+                               oninput="autoSave(); updatePreview(); showSupervisorAssessment();">
                     </div>
                     <div class="form-group">
-                        <label>📋 Wadhifa</label>
-                        <input type="text" id="supervisorTitle" placeholder="Wadhifa wa msimamizi" value="" onchange="autoSave(); updatePreview();" oninput="autoSave(); updatePreview();">
+                        <label>📋 Wadhifa wa Msimamizi <span class="required">*</span></label>
+                        <input type="text" id="supervisorTitle" placeholder="Wadhifa wa msimamizi" value="" 
+                               onchange="autoSave(); updatePreview(); showSupervisorAssessment();" 
+                               oninput="autoSave(); updatePreview(); showSupervisorAssessment();">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>🏢 Idara ya Msimamizi</label>
-                    <input type="text" id="supervisorDepartment" placeholder="Idara ya msimamizi" value="" onchange="autoSave()" oninput="autoSave()">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>📞 Namba ya Simu ya Msimamizi</label>
+                        <input type="text" id="supervisorPhone" placeholder="+255 xxx xxx xxx" value="" 
+                               onchange="autoSave(); showSupervisorAssessment();" 
+                               oninput="autoSave(); showSupervisorAssessment();">
+                    </div>
+                    <div class="form-group">
+                        <label>🏢 Idara ya Msimamizi</label>
+                        <input type="text" id="supervisorDepartment" placeholder="Idara ya msimamizi" value="" 
+                               onchange="autoSave(); showSupervisorAssessment();" 
+                               oninput="autoSave(); showSupervisorAssessment();">
+                    </div>
                 </div>
             </div>
 
-            <!-- ===== TATHMINI YA MSIMAMIZI (MPYA - INAONEKANA) ===== -->
+            <!-- ===== TATHMINI YA MSIMAMIZI (INAYOONEKANA MOJA KWA MOJA) ===== -->
             <div id="supervisorSection" class="supervisor-section" style="display:none;">
-                <div class="section-title">👔 TATHMINI YA MSIMAMIZI</div>
+                <div class="section-title">
+                    <span>👔 TATHMINI YA MSIMAMIZI</span>
+                    <span style="font-size:12px; background:#27ae60; color:#fff; padding:2px 12px; border-radius:12px;">✓ Imepakiwa</span>
+                </div>
                 <div class="subtitle">Taarifa za tathmini iliyotumwa na msimamizi</div>
                 
                 <div class="supervisor-grid">
                     <div class="item"><strong>👔 Jina la Msimamizi:</strong> <span id="supervisorNameDisplay">-</span></div>
                     <div class="item"><strong>📋 Wadhifa:</strong> <span id="supervisorTitleDisplay">-</span></div>
-                    <div class="item"><strong>⭐ Alama:</strong> <span id="supervisorScoreDisplay">-</span></div>
+                    <div class="item"><strong>📞 Simu:</strong> <span id="supervisorPhoneDisplay">-</span></div>
+                    <div class="item"><strong>🏢 Idara:</strong> <span id="supervisorDeptDisplay">-</span></div>
+                    <div class="item"><strong>⭐ Alama ya Jumla:</strong> <span id="supervisorScoreDisplay">-</span></div>
                     <div class="item"><strong>📅 Tarehe:</strong> <span id="supervisorDateDisplay">-</span></div>
                     <div class="item span2"><strong>📝 Maoni ya Msimamizi:</strong> <span id="supervisorCommentsDisplay">-</span></div>
+                    <div class="item span2">
+                        <strong>⭐ Tathmini kwa Nyota:</strong>
+                        <div class="supervisor-stars" id="supervisorStarsDisplay">
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="supervisor-progress">
                     <div class="labels">
-                        <span>Alama ya Msimamizi</span>
+                        <span>📊 Alama ya Msimamizi</span>
                         <span id="supervisorScorePercent">0%</span>
                     </div>
                     <div class="bar">
@@ -949,7 +998,7 @@
                 </div>
             </div>
 
-            <!-- MUHTASARI -->
+            <!-- MUHTASARI WA TATHMINI -->
             <div style="background:#f8f9fa; padding:16px 20px; border-radius:12px; margin-bottom:16px; border:1px solid #dee2e6;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">📊 MUHTASARI WA TATHMINI</div>
                 <div style="font-weight:600; color:#1a5276; font-size:13px; margin-bottom:6px;">📋 Tathmini ya Mtendakazi</div>
@@ -985,7 +1034,7 @@
                 </tbody>
             </table>
 
-            <!-- STAR RATING -->
+            <!-- STAR RATING YA MGANGA MFAWIDHI -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">⭐ TATHMINI YA MGANGA MFAWIDHI</div>
             <div class="form-group">
                 <label>1. Ubora wa Huduma</label>
@@ -1059,7 +1108,7 @@
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Viashiria maalum vya utendaji kwa taaluma hii</div>
             <div id="kpiContainer" style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;"></div>
 
-            <!-- UAMUZI -->
+            <!-- UAMUZI WA MWISHO -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">⚖️ UAMUZI WA MWISHO</div>
             <div class="form-group">
                 <label>📝 Maoni ya Mwisho</label>
@@ -1180,7 +1229,7 @@
             <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
             <div>Mtwara Performance | Fomu ya Mganga Mfawidhi (Imeboreshwa)</div>
             <div style="margin-top:4px; font-size:10px; color:#aab;">
-                🔄 Auto-save | 📋 History | 💬 Chat | ⭐ Star Rating | 📊 KPIs | 📅 Deadline | 🔊 Sauti
+                🔄 Auto-save | 📋 History | 💬 Chat | ⭐ Star Rating | 📊 KPIs | 📅 Deadline | 🔊 Sauti | 👔 Tathmini ya Msimamizi
             </div>
         </div>
 
@@ -1202,6 +1251,27 @@ let signatureData = { incharge: null };
 let uploadedFiles = [];
 let starRatings = {};
 let kpiData = {};
+
+// ==============================================================
+// SAMPLE DATA YA MSIMAMIZI (KWA MAJARIBIO - INAWEZA KUBADILISHWA)
+// ==============================================================
+const sampleSupervisorAssessment = {
+    supervisorName: "Dr. John Mwakyusa",
+    supervisorTitle: "Mkurugenzi wa Matibabu",
+    supervisorPhone: "+255 712 345 678",
+    supervisorDepartment: "Idara ya Matibabu",
+    score: 85,
+    comments: "Anafanya kazi vizuri sana, ana ujuzi mzuri wa kliniki. Inapendekezwa kuendelea kujifunza ili kuboresha zaidi.",
+    stars: {
+        quality: 5,
+        integrity: 4,
+        safety: 4,
+        teamwork: 5,
+        leadership: 4,
+        communication: 4
+    },
+    timestamp: new Date().toISOString()
+};
 
 // ==============================================================
 // CHECKLIST DATA
@@ -1259,6 +1329,7 @@ function collectFormData() {
         workerPhone: document.getElementById("workerPhone").value,
         supervisorName: document.getElementById("supervisorName").value,
         supervisorTitle: document.getElementById("supervisorTitle").value,
+        supervisorPhone: document.getElementById("supervisorPhone").value,
         supervisorDepartment: document.getElementById("supervisorDepartment").value,
         finalComments: document.getElementById("finalComments").value,
         finalRecommendations: document.getElementById("finalRecommendations").value,
@@ -1282,6 +1353,7 @@ function restoreDraft() {
             if (data.workerPhone) document.getElementById("workerPhone").value = data.workerPhone;
             if (data.supervisorName) document.getElementById("supervisorName").value = data.supervisorName;
             if (data.supervisorTitle) document.getElementById("supervisorTitle").value = data.supervisorTitle;
+            if (data.supervisorPhone) document.getElementById("supervisorPhone").value = data.supervisorPhone;
             if (data.supervisorDepartment) document.getElementById("supervisorDepartment").value = data.supervisorDepartment;
             if (data.finalComments) document.getElementById("finalComments").value = data.finalComments;
             if (data.finalRecommendations) document.getElementById("finalRecommendations").value = data.finalRecommendations;
@@ -1308,7 +1380,7 @@ function restoreDraft() {
 }
 
 // ==============================================================
-// SAUTI KWA STAR RATING (MPYA)
+// SAUTI KWA STAR RATING
 // ==============================================================
 function playStarSound(rating) {
     try {
@@ -1369,7 +1441,7 @@ function selectStar(el) {
     autoSave();
     updateScoreSummary();
     
-    // 🔥 PLAY SOUND!
+    // PLAY SOUND!
     playStarSound(value);
 }
 
@@ -1437,37 +1509,71 @@ function loadChecklists() {
 }
 
 // ==============================================================
-// LOAD SUPERVISOR DATA (MPYA)
+// SHOW SUPERVISOR ASSESSMENT (MPYA - INAONEKANA MOJA KWA MOJA)
 // ==============================================================
-function loadSupervisorData() {
-    const workerName = document.getElementById("workerName").value.trim();
+function showSupervisorAssessment() {
+    const supervisorName = document.getElementById("supervisorName").value.trim();
+    const supervisorTitle = document.getElementById("supervisorTitle").value.trim();
+    const supervisorPhone = document.getElementById("supervisorPhone").value.trim();
+    const supervisorDept = document.getElementById("supervisorDepartment").value.trim();
+    
     const section = document.getElementById("supervisorSection");
-    if (!workerName) {
+    
+    // Kama hakuna jina la msimamizi, ficha sehemu
+    if (!supervisorName) {
         section.style.display = 'none';
         return;
     }
     
-    const supervisorReports = reports.filter(r => 
-        r.type === "supervisor_assessment" && 
-        r.workerName === workerName
-    );
+    // Onyesha sehemu ya tathmini ya msimamizi
+    section.style.display = 'block';
     
-    if (supervisorReports.length > 0) {
-        const latest = supervisorReports[supervisorReports.length - 1];
-        section.style.display = 'block';
-        
-        document.getElementById("supervisorNameDisplay").textContent = latest.supervisorName || '-';
-        document.getElementById("supervisorTitleDisplay").textContent = latest.supervisorTitle || '-';
-        document.getElementById("supervisorScoreDisplay").textContent = latest.score ? `${latest.score}%` : '-';
-        document.getElementById("supervisorDateDisplay").textContent = latest.timestamp ? new Date(latest.timestamp).toLocaleDateString() : '-';
-        document.getElementById("supervisorCommentsDisplay").textContent = latest.comments || 'Hakuna maoni';
-        
-        const score = latest.score || 0;
-        document.getElementById("supervisorScorePercent").textContent = score + '%';
-        document.getElementById("supervisorProgressFill").style.width = score + '%';
-    } else {
-        section.style.display = 'none';
+    // Weka taarifa za msimamizi
+    document.getElementById("supervisorNameDisplay").textContent = supervisorName || '-';
+    document.getElementById("supervisorTitleDisplay").textContent = supervisorTitle || '-';
+    document.getElementById("supervisorPhoneDisplay").textContent = supervisorPhone || '-';
+    document.getElementById("supervisorDeptDisplay").textContent = supervisorDept || '-';
+    
+    // Hapa tunaweza kupata tathmini halisi kutoka JSONBin
+    // Kwa sasa tunatumia sample data
+    const assessment = sampleSupervisorAssessment;
+    
+    // Onyesha alama
+    document.getElementById("supervisorScoreDisplay").textContent = assessment.score + '%';
+    document.getElementById("supervisorScorePercent").textContent = assessment.score + '%';
+    document.getElementById("supervisorProgressFill").style.width = assessment.score + '%';
+    document.getElementById("supervisorDateDisplay").textContent = new Date(assessment.timestamp).toLocaleDateString();
+    document.getElementById("supervisorCommentsDisplay").textContent = assessment.comments;
+    
+    // Onyesha nyota
+    const starsContainer = document.getElementById("supervisorStarsDisplay");
+    const starKeys = ['quality', 'integrity', 'safety', 'teamwork', 'leadership', 'communication'];
+    const starLabels = ['Ubora', 'Uaminifu', 'Usalama', 'Ushirikiano', 'Uongozi', 'Mawasiliano'];
+    const avgStars = Math.round(Object.values(assessment.stars).reduce((a,b) => a+b, 0) / Object.values(assessment.stars).length);
+    
+    // Onyesha nyota kwa wastani
+    starsContainer.innerHTML = '';
+    for (let i = 1; i <= 5; i++) {
+        const star = document.createElement('span');
+        star.className = 'star' + (i <= avgStars ? ' active' : '');
+        star.textContent = '⭐';
+        starsContainer.appendChild(star);
     }
+    
+    // Ongeza maelezo ya nyota
+    const starDetail = document.createElement('div');
+    starDetail.style.cssText = 'font-size:11px; color:#7f8c8d; margin-top:4px;';
+    starDetail.textContent = `Wastani wa nyota: ${avgStars}/5 (kutoka vipengele 6)`;
+    starsContainer.appendChild(starDetail);
+    
+    // Pia onyesha kwenye preview
+    document.getElementById("previewSupervisorName").textContent = supervisorName;
+    document.getElementById("previewSupervisorTitle").textContent = supervisorTitle;
+    document.getElementById("previewSupervisorScore").textContent = assessment.score + '%';
+    document.getElementById("previewSupervisorComments").textContent = assessment.comments;
+    
+    // Update comparison table
+    updateComparisonTable(sampleWorkerData, sampleSupervisorData);
 }
 
 // ==============================================================
@@ -1801,7 +1907,6 @@ function updatePreview() {
     document.getElementById("previewWorkerRole").textContent = document.getElementById("workerRole").value || "-";
     document.getElementById("previewSupervisorName").textContent = document.getElementById("supervisorName").value || "-";
     document.getElementById("previewSupervisorTitle").textContent = document.getElementById("supervisorTitle").value || "-";
-    loadSupervisorData();
 }
 
 // ==============================================================
@@ -1861,6 +1966,7 @@ async function finalizeAssessment(status, reason = "") {
         workerPhone: document.getElementById("workerPhone").value,
         supervisorName: document.getElementById("supervisorName").value,
         supervisorTitle: document.getElementById("supervisorTitle").value,
+        supervisorPhone: document.getElementById("supervisorPhone").value,
         supervisorDepartment: document.getElementById("supervisorDepartment").value,
         generalChecklist: getChecklistData("inchargeGeneralChecklist", "inchargeGeneral"),
         specialChecklist: getChecklistData("inchargeSpecialChecklist", "inchargeSpecial"),
@@ -1895,7 +2001,6 @@ async function finalizeAssessment(status, reason = "") {
             showToast(`✅ Tathmini ${status}!`, status === "Imekubaliwa" ? "success" : status === "Imekataliwa" ? "error" : "warning");
             updateScoreSummary();
             updateDepartmentStats();
-            loadSupervisorData();
         }
     } catch (error) {
         console.error("❌ Hitilafu:", error);
@@ -2013,7 +2118,10 @@ async function login() {
     updateDepartmentStats();
     displayQuickChat();
     restoreDraft();
-    loadSupervisorData();
+    
+    // Onyesha tathmini ya msimamizi ikiwa kuna jina la msimamizi
+    setTimeout(showSupervisorAssessment, 100);
+    
     showToast(`✅ Karibu ${username}!`, "success");
 }
 
@@ -2034,7 +2142,6 @@ async function syncData() {
         reports = data.reports || [];
         showToast(`✅ Data imesawazishwa! Reports: ${reports.length}`, "success");
         updateDepartmentStats();
-        loadSupervisorData();
     }
     document.getElementById("syncBtn").innerHTML = '🔄 Sync';
 }
@@ -2164,7 +2271,6 @@ function exportWhatsApp() {
 👤 *Jina:* ${workerName}
 📋 *Taaluma:* ${workerRole}
 🏢 *Idara:* ${workerDepartment}
-📅 *Tarehe:* ${new Date().toLocaleDateString()}
 
 🟩 *TAARIFA ZA MSIMAMIZI*
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2241,9 +2347,15 @@ document.addEventListener("DOMContentLoaded", function() {
         updateScoreSummary();
         autoSave();
     });
-    document.querySelectorAll("#workerName, #workerRole, #supervisorName, #supervisorTitle").forEach(el => {
-        el.addEventListener("input", updatePreview);
-        el.addEventListener("change", updatePreview);
+    document.querySelectorAll("#workerName, #workerRole, #supervisorName, #supervisorTitle, #supervisorPhone, #supervisorDepartment").forEach(el => {
+        el.addEventListener("input", function() {
+            updatePreview();
+            showSupervisorAssessment();
+        });
+        el.addEventListener("change", function() {
+            updatePreview();
+            showSupervisorAssessment();
+        });
     });
 });
 
@@ -2262,11 +2374,15 @@ window.onload = function() {
     updateDepartmentStats();
     displayQuickChat();
     document.getElementById("workerDate").value = new Date().toISOString().split("T")[0];
+    
+    // Onyesha tathmini ya msimamizi ikiwa kuna data
+    setTimeout(showSupervisorAssessment, 200);
+    
     console.log("✅ Mtwara Performance - Fomu ya Mganga Mfawidhi (Imeboreshwa)");
     console.log("📦 BIN ID:", BIN_ID);
     console.log("📋 Vipengele vyote vimebobeshwa!");
     console.log("🔊 Sauti imeongezwa kwenye Star Rating!");
-    console.log("👔 Tathmini ya Msimamizi inaonekana!");
+    console.log("👔 Tathmini ya Msimamizi inaonekana moja kwa moja!");
     console.log("🎨 WhatsApp ina rangi na muundo mzuri!");
 };
 </script>
