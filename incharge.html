@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -176,6 +177,59 @@
             margin-top: 1px;
         }
         .likert-btn.selected .sub { color: rgba(255,255,255,0.8); }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 20px;
+            padding: 4px 0;
+        }
+        @media (max-width: 600px) { .checklist-grid { grid-template-columns: 1fr; } }
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 5px 0;
+            border-bottom: 1px solid #f0f2f5;
+            font-size: 13px;
+        }
+        .checklist-item:last-child { border-bottom: none; }
+        .checklist-item .num {
+            width: 22px;
+            height: 22px;
+            background: #ecf0f1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: #7f8c8d;
+            flex-shrink: 0;
+        }
+        .checklist-item .toggle {
+            width: 40px;
+            height: 22px;
+            flex-shrink: 0;
+            background: #d5d8dc;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+        }
+        .checklist-item .toggle.active { background: #8e44ad; }
+        .checklist-item .toggle .thumb {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            border-radius: 50%;
+            transition: 0.3s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+        }
+        .checklist-item .toggle.active .thumb { left: 20px; }
 
         .btn {
             padding: 11px 28px;
@@ -450,6 +504,53 @@
         .comparison-table .highlight { background: #d5f5e3; }
         .comparison-table .warning { background: #fef9e7; }
         .comparison-table .danger { background: #fadbd8; }
+
+        .file-upload {
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .file-upload:hover { border-color: #8e44ad; background: #f8f9fa; }
+        .file-upload input[type="file"] { display: none; }
+        .file-upload .icon { font-size: 30px; }
+        .file-upload .text { font-size: 13px; color: #7f8c8d; margin-top: 4px; }
+        .file-list { margin-top: 8px; }
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            margin-top: 4px;
+            font-size: 12px;
+        }
+        .file-item .remove { color: #e74c3c; cursor: pointer; }
+
+        .rec-card {
+            background: #fff;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .rec-card .icon { font-size: 20px; }
+        .rec-card .text { flex: 1; font-size: 13px; }
+        .rec-card .priority {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 12px;
+        }
+        .rec-card .priority.high { background: #fadbd8; color: #e74c3c; }
+        .rec-card .priority.medium { background: #fdebd0; color: #f39c12; }
+        .rec-card .priority.low { background: #d5f5e3; color: #27ae60; }
     </style>
 </head>
 <body>
@@ -460,7 +561,7 @@
 <!-- ===== LOGIN ===== -->
 <div id="loginSection" class="login-box">
     <h2>🔐 Mtwara Performance</h2>
-    <p class="subtitle">Fomu ya Mganga Mfawidhi - Toleo Bora</p>
+    <p class="subtitle">Fomu ya Mganga Mfawidhi - Toleo Jipya</p>
     <div style="text-align:center; margin-bottom:16px; font-size:12px; color:#7f8c8d;">
         <span id="connectionStatus">🔄 Inaunganisha...</span>
     </div>
@@ -603,7 +704,20 @@
             </div>
 
             <!-- ========================================================== -->
-            <!-- SEHEMU 3: MUHTASARI WA TATHMINI -->
+            <!-- SEHEMU 3: MAJUKUMU YA MTENDAKAZI (KWA MGANGA MFAWIDHI) -->
+            <!-- ========================================================== -->
+            <div style="background:#e8daef; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #8e44ad;">
+                <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">📋 MAJUKUMU YA MTENDAKAZI</div>
+                
+                <div style="font-weight:600; color:#1a5276; font-size:13px; margin-bottom:6px;">Majukumu ya Jumla</div>
+                <div class="checklist-grid" id="inchargeGeneralChecklist"></div>
+                
+                <div style="font-weight:600; color:#1a5276; font-size:13px; margin-top:10px; margin-bottom:6px;">Majukumu Maalum</div>
+                <div class="checklist-grid" id="inchargeSpecialChecklist"></div>
+            </div>
+
+            <!-- ========================================================== -->
+            <!-- SEHEMU 4: MUHTASARI WA TATHMINI -->
             <!-- ========================================================== -->
             <div style="background:#f8f9fa; padding:16px 20px; border-radius:12px; margin-bottom:16px; border:1px solid #dee2e6;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">📊 MUHTASARI WA TATHMINI</div>
@@ -626,7 +740,7 @@
             </div>
 
             <!-- ========================================================== -->
-            <!-- SEHEMU 4: COMPARISON TABLE -->
+            <!-- SEHEMU 5: COMPARISON TABLE -->
             <!-- ========================================================== -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">📊 COMPARISON TABLE</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Linganisha tathmini ya mtendakazi na msimamizi</div>
@@ -651,7 +765,7 @@
             </table>
 
             <!-- ========================================================== -->
-            <!-- SEHEMU 5: TATHMINI YA MGANGA MFAWIDHI -->
+            <!-- SEHEMU 6: TATHMINI YA MGANGA MFAWIDHI -->
             <!-- ========================================================== -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">📊 TATHMINI YA MGANGA MFAWIDHI (1-5)</div>
             
@@ -717,7 +831,7 @@
             </div>
 
             <!-- ========================================================== -->
-            <!-- SEHEMU 6: UAMUZI WA MWISHO -->
+            <!-- SEHEMU 7: UAMUZI WA MWISHO -->
             <!-- ========================================================== -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">⚖️ UAMUZI WA MWISHO</div>
             
@@ -732,7 +846,7 @@
             </div>
 
             <!-- ========================================================== -->
-            <!-- SEHEMU 7: RECOMMENDATION CARDS -->
+            <!-- SEHEMU 8: RECOMMENDATION CARDS -->
             <!-- ========================================================== -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">💡 RECOMMENDATION CARDS</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Mapendekezo ya uboreshaji kwa mtendakazi</div>
@@ -754,7 +868,7 @@
             </div>
 
             <!-- ========================================================== -->
-            <!-- SEHEMU 8: NOTIFICATION -->
+            <!-- SEHEMU 9: NOTIFICATION -->
             <!-- ========================================================== -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">🔔 NOTIFICATION</div>
             
@@ -773,7 +887,7 @@
             </div>
 
             <!-- ========================================================== -->
-            <!-- SEHEMU 9: DOCUMENT UPLOAD -->
+            <!-- SEHEMU 10: DOCUMENT UPLOAD -->
             <!-- ========================================================== -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">📎 DOCUMENT UPLOAD</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Pakia nyaraka za usaidizi (ripoti, cheti, n.k.)</div>
@@ -785,7 +899,7 @@
             <div class="file-list" id="fileList"></div>
 
             <!-- ========================================================== -->
-            <!-- SEHEMU 10: MUHTASARI WA HALI -->
+            <!-- SEHEMU 11: MUHTASARI WA HALI -->
             <!-- ========================================================== -->
             <div class="score-box" style="margin-top:16px;">
                 <h3>📊 MUHTASARI WA HALI</h3>
@@ -813,7 +927,7 @@
             </div>
 
             <!-- ========================================================== -->
-            <!-- SEHEMU 11: SAHIHI -->
+            <!-- SEHEMU 12: SAHIHI -->
             <!-- ========================================================== -->
             <div class="form-group">
                 <label>✍️ Sahihi Yako <span class="required">*</span></label>
@@ -826,7 +940,7 @@
             </div>
 
             <!-- ========================================================== -->
-            <!-- SEHEMU 12: IDHINI AU KATA -->
+            <!-- SEHEMU 13: IDHINI AU KATA -->
             <!-- ========================================================== -->
             <div style="display:flex; gap:12px; flex-wrap:wrap;">
                 <button class="btn btn-success" onclick="approveFinal()" id="approveBtn" style="flex:1;">
@@ -845,7 +959,7 @@
 
         <div class="footer">
             <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
-            <div>Mtwara Performance | Fomu ya Mganga Mfawidhi | Toleo Bora</div>
+            <div>Mtwara Performance | Fomu ya Mganga Mfawidhi | Toleo Jipya</div>
         </div>
 
     </div>
@@ -867,6 +981,116 @@ let currentRole = null;
 let reports = [];
 let signatureData = { incharge: null };
 let uploadedFiles = [];
+
+// ==============================================================
+// CHECKLIST DATA
+// ==============================================================
+const GENERAL_CHECKLIST = [
+    "Nimewasili kazini mapema kila siku",
+    "Nimevaa sare safi na kitambulisho",
+    "Nimejisajili kwenye daftari la hudhurio",
+    "Nimehudhuria ibada ya asubuhi",
+    "Nimeandaa eneo la kazi kabla ya zamu",
+    "Nimekagua vifaa na zana zote",
+    "Nimewaonyesha huruma wagonjwa wote",
+    "Nimewasiliana vizuri na wenzangu",
+    "Nimeweka eneo langu safi na salama",
+    "Nimekamilisha ripoti ya mwisho wa zamu"
+];
+
+const SPECIAL_CHECKLISTS = {
+    "Medical Officer": [
+        "Kufanya uchunguzi kamili wa wagonjwa",
+        "Kuandika historia sahihi za wagonjwa",
+        "Kuagiza dawa sahihi",
+        "Kufanya taratibu za kliniki kwa ufanisi",
+        "Kushiriki katika rufaa za wagonjwa"
+    ],
+    "Clinical Officer": [
+        "Kufanya mashauriano ya wagonjwa",
+        "Kufanya uchunguzi wa kliniki",
+        "Kutekeleza mipango ya matibabu",
+        "Kushiriki katika elimu ya wagonjwa",
+        "Kuhakikisha viwango vya usalama"
+    ],
+    "Specialist": [
+        "Kufanya uchunguzi wa kitaalamu",
+        "Kutoa ushauri wa kitaalamu",
+        "Kusimamia taratibu maalum",
+        "Kufanya tathmini za kitaalamu",
+        "Kushiriki katika rufaa za kitaalamu"
+    ],
+    "Nurse": [
+        "Kupima vipimo muhimu kwa usahihi",
+        "Kusimamia dawa kwa usahihi",
+        "Kuandaa wagonjwa kwa taratibu",
+        "Kufuatilia hali ya wagonjwa",
+        "Kusimamia mipango ya wagonjwa"
+    ],
+    "Laboratory Scientist": [
+        "Kuchukua sampuli kwa usahihi",
+        "Kufanya vipimo sahihi vya maabara",
+        "Kurekodi na kuthibitisha matokeo",
+        "Kudumisha viwango vya usalama",
+        "Kuhakikisha udhibiti wa ubora"
+    ],
+    "Pharmacist": [
+        "Kuandaa dawa kwa usahihi",
+        "Kushauri wagonjwa kuhusu dawa",
+        "Kuhifadhi dawa kwa usalama",
+        "Kusimamia orodha ya dawa",
+        "Kuchakata maagizo kwa usahihi"
+    ],
+    "HR": [
+        "Kusimamia rekodi za wafanyakazi",
+        "Kushiriki katika usajili wa wafanyakazi",
+        "Kusimamia malipo na faida",
+        "Kushiriki katika mafunzo ya wafanyakazi",
+        "Kusimamia sheria na kanuni za kazi"
+    ],
+    "Accountant": [
+        "Kurekodi miamala ya fedha",
+        "Kuandaa ripoti za fedha",
+        "Kusimamia bajeti",
+        "Kushiriki katika ukaguzi wa fedha",
+        "Kusimamia malipo na bili"
+    ],
+    "Cashier": [
+        "Kupokea na kutoa fedha",
+        "Kurekodi miamala ya fedha",
+        "Kusimamia salio la fedha",
+        "Kutoa stakabadhi kwa wateja",
+        "Kushiriki katika hesabu ya fedha"
+    ],
+    "Chef": [
+        "Kuandaa chakula kwa usalama",
+        "Kusimamia usafi wa jikoni",
+        "Kupanga menyu ya chakula",
+        "Kusimamia orodha ya vyakula",
+        "Kuhakikisha ubora wa chakula"
+    ],
+    "Environment Officer": [
+        "Kusimamia usafi wa mazingira",
+        "Kushiriki katika usimamizi wa taka",
+        "Kusimamia usafi wa maji",
+        "Kushiriki katika usimamizi wa mazingira",
+        "Kuhakikisha viwango vya usafi"
+    ],
+    "Data Clerk": [
+        "Kuingiza data kwa usahihi",
+        "Kusimamia rekodi za data",
+        "Kushiriki katika usimamizi wa data",
+        "Kuhakikisha usalama wa data",
+        "Kuandaa ripoti za data"
+    ],
+    "Receptionist": [
+        "Kuwakaribisha wageni kwa heshima",
+        "Kupokea simu na ujumbe",
+        "Kusimamia ratiba ya miadi",
+        "Kushiriki katika usimamizi wa ofisi",
+        "Kuhakikisha usalama wa wageni"
+    ]
+};
 
 // ==============================================================
 // SAMPLE DATA FOR COMPARISON
@@ -892,6 +1116,48 @@ const sampleSupervisorData = {
 // ==============================================================
 // FUNCTIONS
 // ==============================================================
+function renderChecklist(containerId, items, storageKey) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+    container.innerHTML = items.map((text, i) => {
+        const checked = saved[i] || false;
+        return `<div class="checklist-item">
+            <span class="num">${i+1}</span>
+            ${text}
+            <div class="toggle ${checked?'active':''}" onclick="toggleChecklist(this,'${storageKey}',${i})">
+                <div class="thumb"></div>
+            </div>
+        </div>`;
+    }).join("");
+}
+
+function toggleChecklist(el, storageKey, index) {
+    el.classList.toggle("active");
+    const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+    saved[index] = el.classList.contains("active");
+    localStorage.setItem(storageKey, JSON.stringify(saved));
+    updateScoreSummary();
+}
+
+function getChecklistData(containerId, storageKey) {
+    const items = [];
+    const container = document.getElementById(containerId);
+    if (!container) return items;
+    const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+    container.querySelectorAll(".checklist-item").forEach((item, i) => {
+        const text = item.textContent.replace(/[✕]/g, "").trim();
+        items.push({ text, checked: saved[i] || false });
+    });
+    return items;
+}
+
+function updateInchargeChecklist() {
+    const role = document.getElementById("workerRole").value;
+    renderChecklist("inchargeGeneralChecklist", GENERAL_CHECKLIST, "inchargeGeneral");
+    renderChecklist("inchargeSpecialChecklist", SPECIAL_CHECKLISTS[role] || SPECIAL_CHECKLISTS["Medical Officer"], "inchargeSpecial");
+}
+
 function selectLikert(groupId, btn, value) {
     const g = document.getElementById(groupId);
     g.querySelectorAll(".likert-btn").forEach(b => b.classList.remove("selected"));
@@ -1042,18 +1308,31 @@ function updateComparisonTable(workerData, supervisorData) {
 }
 
 function updateScoreSummary() {
+    // Get incharge ratings
     const ratings = getLikertValues("iQuality","iIntegrity","iSafety","iTeamwork","iLeadership","iCommunication");
     const ratingValues = Object.values(ratings);
     const totalRating = ratingValues.reduce((a,b) => a+b, 0);
     const maxRating = ratingValues.length * 5;
     const ratingPercentage = maxRating > 0 ? Math.round((totalRating / maxRating) * 100) : 0;
     
+    // Get checklist completion
+    const generalItems = document.querySelectorAll("#inchargeGeneralChecklist .checklist-item");
+    const specialItems = document.querySelectorAll("#inchargeSpecialChecklist .checklist-item");
+    const totalItems = generalItems.length + specialItems.length;
+    const checkedGeneral = document.querySelectorAll("#inchargeGeneralChecklist .toggle.active").length;
+    const checkedSpecial = document.querySelectorAll("#inchargeSpecialChecklist .toggle.active").length;
+    const totalChecked = checkedGeneral + checkedSpecial;
+    const taskPercentage = totalItems > 0 ? Math.round((totalChecked / totalItems) * 100) : 0;
+    
+    // Combined score: 60% ratings, 40% tasks
+    const combinedScore = Math.round((ratingPercentage * 0.6) + (taskPercentage * 0.4));
+    
     const workerAvg = Object.values(sampleWorkerData).reduce((a,b) => a+b, 0) / Object.values(sampleWorkerData).length;
     const supervisorAvg = Object.values(sampleSupervisorData).reduce((a,b) => a+b, 0) / Object.values(sampleSupervisorData).length;
     const gap = Math.round(Math.abs(workerAvg - supervisorAvg) * 10);
     
-    document.getElementById("scoreTotal").textContent = ratingPercentage + "%";
-    document.getElementById("scoreTotal").className = "number " + (ratingPercentage >= 70 ? "green" : ratingPercentage >= 50 ? "orange" : "red");
+    document.getElementById("scoreTotal").textContent = combinedScore + "%";
+    document.getElementById("scoreTotal").className = "number " + (combinedScore >= 70 ? "green" : combinedScore >= 50 ? "orange" : "red");
     document.getElementById("scoreGap").textContent = gap;
     document.getElementById("scoreGap").className = "number " + (gap <= 10 ? "green" : gap <= 20 ? "orange" : "red");
     
@@ -1062,11 +1341,11 @@ function updateScoreSummary() {
     document.getElementById("scoreDecision").textContent = decisionText;
     document.getElementById("scoreDecision").className = "number " + (decision === "approved" ? "green" : decision === "rejected" ? "red" : "orange");
     
-    const statusText = ratingPercentage >= 70 ? "✅ Nzuri" : ratingPercentage >= 50 ? "⚠️ Wastani" : "❌ Inahitaji Uboreshaji";
+    const statusText = combinedScore >= 70 ? "✅ Nzuri" : combinedScore >= 50 ? "⚠️ Wastani" : "❌ Inahitaji Uboreshaji";
     document.getElementById("scoreStatus").textContent = statusText;
-    document.getElementById("scoreStatus").className = "number " + (ratingPercentage >= 70 ? "green" : ratingPercentage >= 50 ? "orange" : "red");
+    document.getElementById("scoreStatus").className = "number " + (combinedScore >= 70 ? "green" : combinedScore >= 50 ? "orange" : "red");
     
-    document.getElementById("progressFill").style.width = ratingPercentage + "%";
+    document.getElementById("progressFill").style.width = combinedScore + "%";
 }
 
 function updatePreview() {
@@ -1228,7 +1507,7 @@ function exportCopy() {
                           `=============================\n` +
                           `Tarehe: ${new Date().toLocaleString()}\n\n` +
                           text + `\n\n` +
-                          `---\nMtwara Performance | Toleo Bora`;
+                          `---\nMtwara Performance | Toleo Jipya`;
             
             navigator.clipboard.writeText(report).then(() => {
                 showToast("✅ Ripoti imenakiliwa!", "success");
@@ -1399,6 +1678,7 @@ async function login() {
         initSigPad("incharge");
     }, 500);
     
+    updateInchargeChecklist();
     updateComparisonTable(sampleWorkerData, sampleSupervisorData);
     updatePreview();
     updateDecisionNotification();
@@ -1460,6 +1740,9 @@ async function finalizeAssessment(status) {
         supervisorTitle: document.getElementById("supervisorTitle").value,
         supervisorDepartment: document.getElementById("supervisorDepartment").value,
         
+        generalChecklist: getChecklistData("inchargeGeneralChecklist", "inchargeGeneral"),
+        specialChecklist: getChecklistData("inchargeSpecialChecklist", "inchargeSpecial"),
+        
         inchargeRatings: getLikertLabels("iQuality","iIntegrity","iSafety","iTeamwork","iLeadership","iCommunication"),
         inchargeRatingsValues: getLikertValues("iQuality","iIntegrity","iSafety","iTeamwork","iLeadership","iCommunication"),
         
@@ -1517,6 +1800,12 @@ document.addEventListener("DOMContentLoaded", function() {
         el.addEventListener("input", updatePreview);
         el.addEventListener("change", updatePreview);
     });
+    
+    // Update checklist when role changes
+    document.getElementById("workerRole").addEventListener("change", function() {
+        updateInchargeChecklist();
+        updateScoreSummary();
+    });
 });
 
 // ==============================================================
@@ -1525,13 +1814,14 @@ document.addEventListener("DOMContentLoaded", function() {
 window.onload = function() {
     document.getElementById("binIdDisplay").textContent = BIN_ID;
     document.getElementById("connectionStatus").textContent = "✅ Tayari";
+    updateInchargeChecklist();
     updateComparisonTable(sampleWorkerData, sampleSupervisorData);
     updatePreview();
     updateDecisionNotification();
     updateScoreSummary();
-    console.log("✅ Mtwara Performance - Fomu ya Mganga Mfawidhi (Toleo Bora)");
+    console.log("✅ Mtwara Performance - Fomu ya Mganga Mfawidhi (Toleo Jipya)");
     console.log("📦 BIN ID:", BIN_ID);
-    console.log("👤 Taaluma: Medical Officer, Clinical Officer, Specialist, Nurse, Laboratory Scientist, Pharmacist, HR, Accountant, Cashier, Chef, Environment Officer, Data Clerk, Receptionist");
+    console.log("📋 Majukumu ya Jumla na Maalum yameongezwa!");
 };
 </script>
 
