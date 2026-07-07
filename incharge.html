@@ -656,6 +656,60 @@
             color: #7f8c8d;
         }
         .modal-close:hover { color: #e74c3c; }
+        
+        /* Sehemu ya Tathmini ya Msimamizi */
+        .supervisor-section {
+            background: #d5f5e3;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border-left: 4px solid #27ae60;
+        }
+        .supervisor-section .section-title {
+            font-weight: 700;
+            color: #1a5276;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+        .supervisor-section .subtitle {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+        }
+        .supervisor-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 20px;
+            font-size: 13px;
+        }
+        .supervisor-grid .item { padding: 4px 0; }
+        .supervisor-grid .item strong { color: #1a5276; }
+        .supervisor-grid .item.span2 { grid-column: span 2; }
+        
+        /* Progress bar ya msimamizi */
+        .supervisor-progress {
+            margin-top: 10px;
+        }
+        .supervisor-progress .labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        .supervisor-progress .bar {
+            width: 100%;
+            height: 8px;
+            background: #e8ecf1;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+        .supervisor-progress .bar .fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            transition: width 0.8s ease;
+        }
     </style>
 </head>
 <body>
@@ -691,7 +745,7 @@
 <!-- ===== LOGIN ===== -->
 <div id="loginSection" class="login-box">
     <h2>🔐 Mtwara Performance</h2>
-    <p class="subtitle">Fomu ya Mganga Mfawidhi</p>
+    <p class="subtitle">Fomu ya Mganga Mfawidhi (Imeboreshwa)</p>
     <div style="text-align:center; margin-bottom:16px; font-size:12px; color:#7f8c8d;">
         <span id="connectionStatus">🔄 Inaunganisha...</span>
     </div>
@@ -781,12 +835,13 @@
                 <span id="inchargeStatusBadge" class="status-badge pending">⏳ Inasubiri</span>
             </div>
 
+            <!-- TAARIFA ZA MTENDAKAZI -->
             <div style="background:#eaf2f8; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #8e44ad;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">📋 TAARIFA ZA MTENDAKAZI</div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>👤 Jina Kamili la Mtendakazi <span class="required">*</span></label>
-                        <input type="text" id="workerName" placeholder="Jina la mtendakazi" value="" onchange="autoSave()" oninput="autoSave()">
+                        <input type="text" id="workerName" placeholder="Jina la mtendakazi" value="" onchange="autoSave(); loadSupervisorData();" oninput="autoSave(); loadSupervisorData();">
                     </div>
                     <div class="form-group">
                         <label>📋 Taaluma / Wadhifa <span class="required">*</span></label>
@@ -837,6 +892,7 @@
                 </div>
             </div>
 
+            <!-- TAARIFA ZA MSIMAMIZI -->
             <div style="background:#d5f5e3; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #8e44ad;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">👔 TAARIFA ZA MSIMAMIZI</div>
                 <div class="form-row">
@@ -855,6 +911,31 @@
                 </div>
             </div>
 
+            <!-- ===== TATHMINI YA MSIMAMIZI (MPYA - INAONEKANA) ===== -->
+            <div id="supervisorSection" class="supervisor-section" style="display:none;">
+                <div class="section-title">👔 TATHMINI YA MSIMAMIZI</div>
+                <div class="subtitle">Taarifa za tathmini iliyotumwa na msimamizi</div>
+                
+                <div class="supervisor-grid">
+                    <div class="item"><strong>👔 Jina la Msimamizi:</strong> <span id="supervisorNameDisplay">-</span></div>
+                    <div class="item"><strong>📋 Wadhifa:</strong> <span id="supervisorTitleDisplay">-</span></div>
+                    <div class="item"><strong>⭐ Alama:</strong> <span id="supervisorScoreDisplay">-</span></div>
+                    <div class="item"><strong>📅 Tarehe:</strong> <span id="supervisorDateDisplay">-</span></div>
+                    <div class="item span2"><strong>📝 Maoni ya Msimamizi:</strong> <span id="supervisorCommentsDisplay">-</span></div>
+                </div>
+                
+                <div class="supervisor-progress">
+                    <div class="labels">
+                        <span>Alama ya Msimamizi</span>
+                        <span id="supervisorScorePercent">0%</span>
+                    </div>
+                    <div class="bar">
+                        <div class="fill" id="supervisorProgressFill" style="width:0%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAJUKUMU -->
             <div style="background:#e8daef; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #8e44ad;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">📋 MAJUKUMU YA MTENDAKAZI</div>
                 <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Kagua na thibitisha majukumu yaliyokamilishwa na mtendakazi</div>
@@ -868,6 +949,7 @@
                 </div>
             </div>
 
+            <!-- MUHTASARI -->
             <div style="background:#f8f9fa; padding:16px 20px; border-radius:12px; margin-bottom:16px; border:1px solid #dee2e6;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">📊 MUHTASARI WA TATHMINI</div>
                 <div style="font-weight:600; color:#1a5276; font-size:13px; margin-bottom:6px;">📋 Tathmini ya Mtendakazi</div>
@@ -886,6 +968,7 @@
                 </div>
             </div>
 
+            <!-- COMPARISON TABLE -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">📊 COMPARISON TABLE</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Linganisha tathmini ya mtendakazi na msimamizi</div>
             <table class="comparison-table" id="comparisonTable">
@@ -902,6 +985,7 @@
                 </tbody>
             </table>
 
+            <!-- STAR RATING -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">⭐ TATHMINI YA MGANGA MFAWIDHI</div>
             <div class="form-group">
                 <label>1. Ubora wa Huduma</label>
@@ -970,10 +1054,12 @@
                 <span style="font-size:12px; color:#7f8c8d;" id="starCommunicationLabel">0/5</span>
             </div>
 
+            <!-- KPIs -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">📊 KPIs MAALUM</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Viashiria maalum vya utendaji kwa taaluma hii</div>
             <div id="kpiContainer" style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;"></div>
 
+            <!-- UAMUZI -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">⚖️ UAMUZI WA MWISHO</div>
             <div class="form-group">
                 <label>📝 Maoni ya Mwisho</label>
@@ -984,6 +1070,7 @@
                 <textarea id="finalRecommendations" placeholder="Mapendekezo yako kwa mtendakazi..." onchange="autoSave()" oninput="autoSave()"></textarea>
             </div>
 
+            <!-- NOTIFICATION -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">🔔 NOTIFICATION</div>
             <div class="notification-box" id="notificationBox">
                 <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
@@ -999,6 +1086,7 @@
                 </div>
             </div>
 
+            <!-- DOCUMENT UPLOAD -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">📎 DOCUMENT UPLOAD</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Pakia nyaraka za usaidizi (ripoti, cheti, n.k.)</div>
             <div class="file-upload" onclick="document.getElementById('fileInput').click()">
@@ -1008,6 +1096,7 @@
             </div>
             <div class="file-list" id="fileList"></div>
 
+            <!-- SCORE BOX -->
             <div class="score-box" style="margin-top:16px;">
                 <h3>📊 MUHTASARI WA HALI</h3>
                 <div class="score-row" id="scoreSummary">
@@ -1033,6 +1122,7 @@
                 </div>
             </div>
 
+            <!-- SAHIHI -->
             <div class="form-group">
                 <label>✍️ Sahihi Yako <span class="required">*</span></label>
                 <div class="signature-pad"><canvas id="inchargeSigCanvas"></canvas></div>
@@ -1043,6 +1133,7 @@
                 </div>
             </div>
 
+            <!-- IDHINI / KATA -->
             <div style="display:flex; gap:12px; flex-wrap:wrap;">
                 <button class="btn btn-success" onclick="approveFinal()" id="approveBtn" style="flex:1;">✅ IDHINI</button>
                 <button class="btn btn-danger" onclick="rejectFinal()" id="rejectBtn" style="flex:1;">❌ KATA</button>
@@ -1050,6 +1141,7 @@
             </div>
             <div id="inchargeSubmitMsg" style="font-size:12px; color:#7f8c8d; margin-top:8px; display:none;"></div>
 
+            <!-- CHAT -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">💬 MAWASILIANO</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Tuma ujumbe kwa mtendakazi</div>
             <div style="display:flex; gap:8px;">
@@ -1062,6 +1154,7 @@
 
         </div>
 
+        <!-- TATHMINI YA KIKUNDI -->
         <div style="margin-top:20px; background:#f8f9fa; border-radius:12px; padding:16px 20px; border:1px solid #e9ecef;">
             <div style="font-weight:700; color:#8e44ad; font-size:15px; margin-bottom:10px;">🏢 TATHMINI YA KIKUNDI</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Tathmini ya idara nzima</div>
@@ -1087,7 +1180,7 @@
             <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
             <div>Mtwara Performance | Fomu ya Mganga Mfawidhi (Imeboreshwa)</div>
             <div style="margin-top:4px; font-size:10px; color:#aab;">
-                🔄 Auto-save | 📋 History | 💬 Chat | ⭐ Star Rating | 📊 KPIs | 📅 Deadline
+                🔄 Auto-save | 📋 History | 💬 Chat | ⭐ Star Rating | 📊 KPIs | 📅 Deadline | 🔊 Sauti
             </div>
         </div>
 
@@ -1215,6 +1308,50 @@ function restoreDraft() {
 }
 
 // ==============================================================
+// SAUTI KWA STAR RATING (MPYA)
+// ==============================================================
+function playStarSound(rating) {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        
+        let frequency = 440;
+        let duration = 0.2;
+        
+        if (rating <= 2) {
+            frequency = 330;
+            duration = 0.15;
+        } else if (rating <= 4) {
+            frequency = 523;
+            duration = 0.2;
+        } else {
+            frequency = 659;
+            duration = 0.35;
+            setTimeout(() => {
+                const osc2 = audioCtx.createOscillator();
+                const gain2 = audioCtx.createGain();
+                osc2.connect(gain2);
+                gain2.connect(audioCtx.destination);
+                osc2.frequency.value = 784;
+                gain2.gain.value = 0.15;
+                osc2.start();
+                osc2.stop(audioCtx.currentTime + 0.2);
+            }, 150);
+        }
+        
+        oscillator.frequency.value = frequency;
+        gainNode.gain.value = 0.15;
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + duration);
+    } catch(e) {
+        console.log("Sauti haipatikani");
+    }
+}
+
+// ==============================================================
 // STAR RATING
 // ==============================================================
 function selectStar(el) {
@@ -1231,6 +1368,9 @@ function selectStar(el) {
     starRatings[field] = value;
     autoSave();
     updateScoreSummary();
+    
+    // 🔥 PLAY SOUND!
+    playStarSound(value);
 }
 
 function getStarValues() { return starRatings; }
@@ -1294,6 +1434,40 @@ function loadChecklists() {
     const specialItems = SPECIAL_CHECKLISTS[role] || SPECIAL_CHECKLISTS["Medical Officer"];
     renderChecklist("inchargeSpecialChecklist", specialItems, "inchargeSpecial", "specialCount");
     loadKPIs(role);
+}
+
+// ==============================================================
+// LOAD SUPERVISOR DATA (MPYA)
+// ==============================================================
+function loadSupervisorData() {
+    const workerName = document.getElementById("workerName").value.trim();
+    const section = document.getElementById("supervisorSection");
+    if (!workerName) {
+        section.style.display = 'none';
+        return;
+    }
+    
+    const supervisorReports = reports.filter(r => 
+        r.type === "supervisor_assessment" && 
+        r.workerName === workerName
+    );
+    
+    if (supervisorReports.length > 0) {
+        const latest = supervisorReports[supervisorReports.length - 1];
+        section.style.display = 'block';
+        
+        document.getElementById("supervisorNameDisplay").textContent = latest.supervisorName || '-';
+        document.getElementById("supervisorTitleDisplay").textContent = latest.supervisorTitle || '-';
+        document.getElementById("supervisorScoreDisplay").textContent = latest.score ? `${latest.score}%` : '-';
+        document.getElementById("supervisorDateDisplay").textContent = latest.timestamp ? new Date(latest.timestamp).toLocaleDateString() : '-';
+        document.getElementById("supervisorCommentsDisplay").textContent = latest.comments || 'Hakuna maoni';
+        
+        const score = latest.score || 0;
+        document.getElementById("supervisorScorePercent").textContent = score + '%';
+        document.getElementById("supervisorProgressFill").style.width = score + '%';
+    } else {
+        section.style.display = 'none';
+    }
 }
 
 // ==============================================================
@@ -1627,6 +1801,7 @@ function updatePreview() {
     document.getElementById("previewWorkerRole").textContent = document.getElementById("workerRole").value || "-";
     document.getElementById("previewSupervisorName").textContent = document.getElementById("supervisorName").value || "-";
     document.getElementById("previewSupervisorTitle").textContent = document.getElementById("supervisorTitle").value || "-";
+    loadSupervisorData();
 }
 
 // ==============================================================
@@ -1720,6 +1895,7 @@ async function finalizeAssessment(status, reason = "") {
             showToast(`✅ Tathmini ${status}!`, status === "Imekubaliwa" ? "success" : status === "Imekataliwa" ? "error" : "warning");
             updateScoreSummary();
             updateDepartmentStats();
+            loadSupervisorData();
         }
     } catch (error) {
         console.error("❌ Hitilafu:", error);
@@ -1837,6 +2013,7 @@ async function login() {
     updateDepartmentStats();
     displayQuickChat();
     restoreDraft();
+    loadSupervisorData();
     showToast(`✅ Karibu ${username}!`, "success");
 }
 
@@ -1857,6 +2034,7 @@ async function syncData() {
         reports = data.reports || [];
         showToast(`✅ Data imesawazishwa! Reports: ${reports.length}`, "success");
         updateDepartmentStats();
+        loadSupervisorData();
     }
     document.getElementById("syncBtn").innerHTML = '🔄 Sync';
 }
@@ -1948,21 +2126,74 @@ ${content.innerHTML}
     }, 500);
 }
 
+// ==============================================================
+// EXPORT WHATSAPP (RANGI NA MUUNDO)
+// ==============================================================
 function exportWhatsApp() {
     showToast("💬 Inaandaa kwa WhatsApp...", "info");
     setTimeout(() => {
         try {
             const workerName = document.getElementById("workerName").value.trim() || "Hajajazwa";
             const workerRole = document.getElementById("workerRole").value || "Hajajazwa";
+            const workerDepartment = document.getElementById("workerDepartment").value || "Hajajazwa";
             const supervisorName = document.getElementById("supervisorName").value.trim() || "Hajajazwa";
+            const supervisorTitle = document.getElementById("supervisorTitle").value || "Hajajazwa";
+            
             const starValues = getStarValues();
+            
             const starLines = Object.keys(starValues).map(key => {
                 const label = key.charAt(0).toUpperCase() + key.slice(1);
-                return `   ${label}: ${'⭐'.repeat(starValues[key] || 0)} (${starValues[key] || 0}/5)`;
+                const stars = '⭐'.repeat(starValues[key] || 0);
+                const emptyStars = '☆'.repeat(5 - (starValues[key] || 0));
+                const rating = starValues[key] || 0;
+                return `   ${label}: ${stars}${emptyStars} (${rating}/5)`;
             }).join('\n');
+            
             const finalDecision = document.getElementById("finalDecision").value;
             const decisionText = finalDecision === "approved" ? "✅ Imekubaliwa" : finalDecision === "rejected" ? "❌ Imekataliwa" : "⏳ Imeahirishwa";
-            const message = `📊 *RIPOTI YA MGANGA MFAWIDHI*\n━━━━━━━━━━━━━━━━━━━━━\n📋 *TAARIFA ZA MTENDAKAZI*\n👤 Jina: ${workerName}\n📋 Taaluma: ${workerRole}\n👔 *TAARIFA ZA MSIMAMIZI*\n👔 Jina: ${supervisorName}\n⭐ *TATHMINI YA MGANGA MFAWIDHI*\n${starLines}\n⚖️ *UAMUZI WA MWISHO*\n📊 Uamuzi: ${decisionText}\n📊 *MUHTASARI WA HALI*\n🎯 Alama: ${document.getElementById("scoreTotal").textContent}\n📈 Hali: ${document.getElementById("scoreStatus").textContent}\n━━━━━━━━━━━━━━━━━━━━━\n🔄 Imetumwa kutoka Mtwara Performance\n📅 ${new Date().toLocaleDateString()}`;
+            const decisionEmoji = finalDecision === "approved" ? "🟢" : finalDecision === "rejected" ? "🔴" : "🟡";
+            
+            // Muundo wa WhatsApp wenye rangi na mipaka
+            const message = `╔════════════════════════════════════════╗
+║  📊 *RIPOTI YA TATHMINI*  ║
+║  🏥 *MGANGA MFAWIDHI*     ║
+╚════════════════════════════════════════╝
+
+🟦 *TAARIFA ZA MTENDAKAZI*
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+👤 *Jina:* ${workerName}
+📋 *Taaluma:* ${workerRole}
+🏢 *Idara:* ${workerDepartment}
+📅 *Tarehe:* ${new Date().toLocaleDateString()}
+
+🟩 *TAARIFA ZA MSIMAMIZI*
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+👔 *Jina:* ${supervisorName}
+📋 *Wadhifa:* ${supervisorTitle}
+
+🟪 *TATHMINI YA MGANGA MFAWIDHI*
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+${starLines}
+
+⚖️ *UAMUZI WA MWISHO*
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+📝 *Maoni:* ${document.getElementById("finalComments").value || 'Hakuna'}
+💡 *Mapendekezo:* ${document.getElementById("finalRecommendations").value || 'Hakuna'}
+${decisionEmoji} *Uamuzi:* ${decisionText}
+
+📊 *MUHTASARI WA HALI*
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 *Alama:* ${document.getElementById("scoreTotal").textContent}
+📈 *Hali:* ${document.getElementById("scoreStatus").textContent}
+
+╔════════════════════════════════════════╗
+║  🔄 Imetumwa kutoka Mtwara Performance ║
+║  📅 ${new Date().toLocaleDateString()}        ║
+╚════════════════════════════════════════╝
+
+_"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote"_
+_— Wakolosai 3:23_`;
+            
             const encoded = encodeURIComponent(message);
             const phone = prompt("💬 Weka namba ya simu (bila 0 au +255):", "712345678");
             if (phone) {
@@ -1970,7 +2201,9 @@ function exportWhatsApp() {
                 window.open(`https://wa.me/255${cleanPhone}?text=${encoded}`, '_blank');
                 showToast("✅ WhatsApp imefunguliwa!", "success");
             }
-        } catch (e) { showToast("❌ Hitilafu: " + e.message, "error"); }
+        } catch (e) {
+            showToast("❌ Hitilafu: " + e.message, "error");
+        }
     }, 500);
 }
 
@@ -2032,6 +2265,9 @@ window.onload = function() {
     console.log("✅ Mtwara Performance - Fomu ya Mganga Mfawidhi (Imeboreshwa)");
     console.log("📦 BIN ID:", BIN_ID);
     console.log("📋 Vipengele vyote vimebobeshwa!");
+    console.log("🔊 Sauti imeongezwa kwenye Star Rating!");
+    console.log("👔 Tathmini ya Msimamizi inaonekana!");
+    console.log("🎨 WhatsApp ina rangi na muundo mzuri!");
 };
 </script>
 
