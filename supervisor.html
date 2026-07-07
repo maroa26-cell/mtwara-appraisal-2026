@@ -60,6 +60,7 @@
             color: #7f8c8d;
         }
 
+        /* ===== LOGIN ===== */
         .login-box {
             max-width: 420px;
             margin: 60px auto;
@@ -70,12 +71,18 @@
         }
         .login-box h2 { text-align: center; color: #1a5276; margin-bottom: 8px; }
         .login-box .subtitle { text-align: center; color: #7f8c8d; font-size: 13px; margin-bottom: 24px; }
+        .login-box .status-text {
+            text-align: center;
+            margin-bottom: 16px;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
 
-        /* ===== MAIN APP - INAFICHIKA KABLA YA LOGIN ===== */
+        /* ===== MAIN APP ===== */
         #mainApp {
             display: none;
         }
-        #mainApp.visible {
+        #mainApp.show {
             display: block;
         }
 
@@ -86,10 +93,6 @@
             margin-bottom: 24px;
             border: 1px solid #e9ecef;
             border-top: 5px solid #27ae60;
-            transition: all 0.3s ease;
-        }
-        .form-card:hover {
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
         .form-title {
             display: flex;
@@ -116,15 +119,8 @@
             padding: 3px 14px;
             border-radius: 20px;
             margin-left: auto;
-            transition: all 0.3s ease;
         }
-        .status-badge.pending {
-            background: #fef9e7;
-            color: #f39c12;
-            animation: pulse 1.5s infinite;
-        }
-        .status-badge.approved { background: #d5f5e3; color: #27ae60; }
-        .status-badge.rejected { background: #fadbd8; color: #e74c3c; }
+        .status-badge.pending { background: #fef9e7; color: #f39c12; animation: pulse 1.5s infinite; }
         .status-badge.submitted { background: #d6eaf8; color: #1a5276; }
         @keyframes pulse {
             0% { opacity: 1; transform: scale(1); }
@@ -179,16 +175,16 @@
         }
         .btn:active { transform: scale(0.97); }
         .btn-success { background: #27ae60; color: #fff; }
-        .btn-success:hover { background: #1e8449; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(39,174,96,0.3); }
+        .btn-success:hover { background: #1e8449; }
         .btn-primary { background: #1a5276; color: #fff; }
-        .btn-primary:hover { background: #154360; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(26,82,118,0.3); }
+        .btn-primary:hover { background: #154360; }
         .btn-danger { background: #e74c3c; color: #fff; }
-        .btn-danger:hover { background: #c0392b; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(231,76,60,0.3); }
+        .btn-danger:hover { background: #c0392b; }
         .btn-warning { background: #f39c12; color: #fff; }
-        .btn-warning:hover { background: #d68910; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(243,156,18,0.3); }
+        .btn-warning:hover { background: #d68910; }
         .btn-sm { padding: 6px 16px; font-size: 12px; }
         .btn-block { width: 100%; justify-content: center; }
-        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
         .signature-pad {
             border: 2px dashed #27ae60;
@@ -200,9 +196,7 @@
             height: 100px;
             cursor: crosshair;
             margin: 6px 0;
-            transition: 0.3s;
         }
-        .signature-pad:hover { border-color: #1a5276; background: #f0f2f5; }
         .signature-pad canvas { width: 100%; height: 100%; border-radius: 8px; touch-action: none; }
         .signature-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0; }
 
@@ -287,308 +281,10 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        .hidden { display: none !important; }
         .last-saved {
             font-size: 11px;
             color: #7f8c8d;
             margin-left: auto;
-        }
-
-        .section-progress {
-            background: #fff;
-            padding: 12px 16px;
-            border-radius: 10px;
-            margin-bottom: 16px;
-            border: 1px solid #e9ecef;
-        }
-        .section-progress .progress-header {
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            color: #1a5276;
-            margin-bottom: 4px;
-        }
-        .section-progress .progress-bar {
-            height: 6px;
-            background: #e8ecf1;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        .section-progress .progress-bar .fill {
-            height: 100%;
-            background: linear-gradient(90deg, #27ae60, #1a5276);
-            border-radius: 3px;
-            transition: width 0.8s ease;
-            width: 0%;
-        }
-
-        .dashboard-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 14px;
-            margin: 16px 0 20px 0;
-        }
-        .stat-card {
-            background: #fff;
-            padding: 16px 20px;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid #e9ecef;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-            border-color: #27ae60;
-        }
-        .stat-card .stat-number {
-            font-size: 32px;
-            font-weight: 800;
-            color: #1a5276;
-            display: block;
-            line-height: 1.2;
-        }
-        .stat-card .stat-number.green { color: #27ae60; }
-        .stat-card .stat-number.orange { color: #f39c12; }
-        .stat-card .stat-number.red { color: #e74c3c; }
-        .stat-card .stat-number.purple { color: #8e44ad; }
-        .stat-card .stat-number.blue { color: #1a5276; }
-        .stat-card .stat-label {
-            font-size: 11px;
-            color: #7f8c8d;
-            text-transform: uppercase;
-            margin-top: 4px;
-            letter-spacing: 0.5px;
-        }
-        .stat-card .stat-icon {
-            font-size: 20px;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .calendar-container {
-            background: #fff;
-            border-radius: 12px;
-            padding: 16px;
-            border: 1px solid #e9ecef;
-            margin: 12px 0;
-        }
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-        .calendar-header .month-year {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1a5276;
-        }
-        .calendar-header .nav-btn {
-            background: none;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            padding: 4px 12px;
-            border-radius: 6px;
-            transition: 0.3s;
-        }
-        .calendar-header .nav-btn:hover {
-            background: #f0f2f5;
-        }
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
-        }
-        .calendar-grid .day-name {
-            font-size: 11px;
-            font-weight: 600;
-            color: #7f8c8d;
-            text-align: center;
-            padding: 6px 0;
-        }
-        .calendar-grid .day {
-            font-size: 13px;
-            text-align: center;
-            padding: 8px 4px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.3s;
-            border: 1px solid transparent;
-        }
-        .calendar-grid .day:hover {
-            background: #f0f2f5;
-        }
-        .calendar-grid .day.today {
-            background: #d5f5e3;
-            color: #27ae60;
-            font-weight: 700;
-        }
-        .calendar-grid .day.has-event {
-            border-color: #27ae60;
-            position: relative;
-        }
-        .calendar-grid .day.has-event::after {
-            content: '•';
-            color: #27ae60;
-            font-size: 14px;
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .calendar-grid .day.other-month {
-            color: #d5d8dc;
-        }
-        .calendar-grid .day.event-day {
-            background: #d5f5e3;
-            color: #1a7a3a;
-            font-weight: 600;
-        }
-        .event-list {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #e9ecef;
-        }
-        .event-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 6px 10px;
-            background: #f8f9fa;
-            border-radius: 6px;
-            margin-bottom: 4px;
-            font-size: 13px;
-            border-left: 3px solid #27ae60;
-        }
-        .event-item .event-time {
-            font-weight: 600;
-            color: #1a5276;
-            font-size: 11px;
-            min-width: 60px;
-        }
-        .event-item .event-title {
-            flex: 1;
-        }
-        .event-item .event-remove {
-            color: #e74c3c;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .reminder-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 14px;
-            background: #fff;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-            margin-bottom: 6px;
-            transition: 0.3s;
-        }
-        .reminder-item:hover {
-            border-color: #27ae60;
-        }
-        .reminder-item .reminder-icon {
-            font-size: 20px;
-        }
-        .reminder-item .reminder-info {
-            flex: 1;
-        }
-        .reminder-item .reminder-info .title {
-            font-weight: 600;
-            color: #1a5276;
-            font-size: 13px;
-        }
-        .reminder-item .reminder-info .desc {
-            font-size: 12px;
-            color: #7f8c8d;
-        }
-        .reminder-item .reminder-status {
-            font-size: 11px;
-            font-weight: 600;
-            padding: 2px 12px;
-            border-radius: 12px;
-        }
-        .reminder-item .reminder-status.urgent { background: #fadbd8; color: #e74c3c; }
-        .reminder-item .reminder-status.pending { background: #fef9e7; color: #f39c12; }
-        .reminder-item .reminder-status.done { background: #d5f5e3; color: #27ae60; }
-
-        .group-report {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 16px;
-            border: 1px solid #e9ecef;
-            margin: 12px 0;
-        }
-        .group-report .dept-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 8px 12px;
-            background: #fff;
-            border-radius: 6px;
-            margin-bottom: 4px;
-            border-left: 3px solid #27ae60;
-        }
-        .group-report .dept-item .dept-name {
-            flex: 1;
-            font-weight: 600;
-            color: #1a5276;
-        }
-        .group-report .dept-item .dept-stats {
-            font-size: 12px;
-            color: #7f8c8d;
-        }
-        .group-report .dept-item .dept-score {
-            font-weight: 700;
-            font-size: 14px;
-        }
-        .group-report .dept-item .dept-score.green { color: #27ae60; }
-        .group-report .dept-item .dept-score.orange { color: #f39c12; }
-        .group-report .dept-item .dept-score.red { color: #e74c3c; }
-
-        .goal-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 10px 14px;
-            background: #fff;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-            margin-bottom: 6px;
-            transition: 0.3s;
-        }
-        .goal-item:hover {
-            border-color: #27ae60;
-        }
-        .goal-item .goal-check {
-            margin-top: 2px;
-        }
-        .goal-item .goal-check input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-            accent-color: #27ae60;
-        }
-        .goal-item .goal-info {
-            flex: 1;
-        }
-        .goal-item .goal-info .goal-title {
-            font-weight: 600;
-            color: #1a5276;
-            font-size: 13px;
-        }
-        .goal-item .goal-info .goal-desc {
-            font-size: 12px;
-            color: #7f8c8d;
-        }
-        .goal-item .goal-info .goal-deadline {
-            font-size: 11px;
-            color: #e74c3c;
         }
 
         .likert-scale {
@@ -611,13 +307,11 @@
             text-align: center;
             flex: 1;
         }
-        .likert-btn:hover { background: #eaf2f8; border-color: #27ae60; transform: translateY(-2px); }
+        .likert-btn:hover { background: #eaf2f8; border-color: #27ae60; }
         .likert-btn.selected {
             border-color: #27ae60;
             background: #27ae60;
             color: #fff;
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(39,174,96,0.3);
         }
         .likert-btn .sub {
             display: block;
@@ -642,9 +336,7 @@
             padding: 5px 0;
             border-bottom: 1px solid #f0f2f5;
             font-size: 13px;
-            transition: 0.2s;
         }
-        .checklist-item:hover { background: #f8f9fa; padding-left: 4px; }
         .checklist-item:last-child { border-bottom: none; }
         .checklist-item .num {
             width: 22px;
@@ -658,7 +350,6 @@
             font-weight: 700;
             color: #7f8c8d;
             flex-shrink: 0;
-            transition: 0.3s;
         }
         .checklist-item .toggle {
             width: 40px;
@@ -701,59 +392,54 @@
             gap: 8px;
         }
 
-        .matrix-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 8px 0;
+        .score-box {
+            background: #d5f5e3;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 14px 0;
+            border-left: 5px solid #27ae60;
         }
-        @media (max-width: 600px) { .matrix-grid { grid-template-columns: 1fr; } }
-        .matrix-item {
+        .score-box h3 { color: #1a5276; margin-bottom: 6px; font-size: 15px; }
+        .score-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+        }
+        .score-item {
             background: #fff;
             padding: 10px 14px;
             border-radius: 8px;
-            border: 1px solid #e9ecef;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: 0.3s;
-        }
-        .matrix-item:hover { transform: translateX(4px); border-color: #27ae60; }
-        .matrix-item .label { font-size: 12px; color: #1a5276; }
-        .matrix-item .level {
-            font-size: 12px;
-            font-weight: 600;
-            padding: 2px 12px;
-            border-radius: 12px;
-        }
-        .matrix-item .level.high { background: #d5f5e3; color: #27ae60; }
-        .matrix-item .level.medium { background: #fdebd0; color: #f39c12; }
-        .matrix-item .level.low { background: #fadbd8; color: #e74c3c; }
-
-        .file-upload {
-            border: 2px dashed #dee2e6;
-            border-radius: 10px;
-            padding: 20px;
             text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
         }
-        .file-upload:hover { border-color: #27ae60; background: #f8f9fa; }
-        .file-upload input[type="file"] { display: none; }
-        .file-upload .icon { font-size: 30px; }
-        .file-upload .text { font-size: 13px; color: #7f8c8d; margin-top: 4px; }
-        .file-list { margin-top: 8px; }
-        .file-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 4px 10px;
-            background: #f8f9fa;
+        .score-item .number {
+            font-size: 24px;
+            font-weight: 800;
+            color: #1a5276;
+            display: block;
+        }
+        .score-item .label {
+            font-size: 10px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+        }
+        .score-item .number.green { color: #27ae60; }
+        .score-item .number.orange { color: #f39c12; }
+        .score-item .number.red { color: #e74c3c; }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e8ecf1;
             border-radius: 4px;
-            margin-top: 4px;
-            font-size: 12px;
+            overflow: hidden;
+            margin: 4px 0 2px;
         }
-        .file-item .remove { color: #e74c3c; cursor: pointer; }
+        .progress-bar .fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.8s ease;
+            background: linear-gradient(90deg, #27ae60, #1a5276);
+        }
 
         .chart-container {
             background: #fff;
@@ -812,9 +498,7 @@
             border-radius: 8px;
             border: 1px solid #e9ecef;
             text-align: center;
-            transition: 0.3s;
         }
-        .kpi-item:hover { transform: translateY(-4px); box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
         .kpi-item .value {
             font-size: 22px;
             font-weight: 800;
@@ -830,61 +514,57 @@
         .kpi-item .value.orange { color: #f39c12; }
         .kpi-item .value.red { color: #e74c3c; }
 
-        .score-box {
-            background: #d5f5e3;
-            border-radius: 12px;
-            padding: 16px 20px;
-            margin: 14px 0;
-            border-left: 5px solid #27ae60;
-            transition: all 0.5s ease;
-        }
-        .score-box:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(39,174,96,0.15);
-        }
-        .score-box h3 { color: #1a5276; margin-bottom: 6px; font-size: 15px; }
-        .score-row {
+        .matrix-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
+            margin: 8px 0;
         }
-        .score-item {
+        @media (max-width: 600px) { .matrix-grid { grid-template-columns: 1fr; } }
+        .matrix-item {
             background: #fff;
             padding: 10px 14px;
             border-radius: 8px;
+            border: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .matrix-item .label { font-size: 12px; color: #1a5276; }
+        .matrix-item .level {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 12px;
+        }
+        .matrix-item .level.high { background: #d5f5e3; color: #27ae60; }
+        .matrix-item .level.medium { background: #fdebd0; color: #f39c12; }
+        .matrix-item .level.low { background: #fadbd8; color: #e74c3c; }
+
+        .file-upload {
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
             text-align: center;
+            cursor: pointer;
             transition: 0.3s;
         }
-        .score-item:hover { transform: scale(1.02); }
-        .score-item .number {
-            font-size: 24px;
-            font-weight: 800;
-            color: #1a5276;
-            display: block;
-        }
-        .score-item .label {
-            font-size: 10px;
-            color: #7f8c8d;
-            text-transform: uppercase;
-        }
-        .score-item .number.green { color: #27ae60; }
-        .score-item .number.orange { color: #f39c12; }
-        .score-item .number.red { color: #e74c3c; }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e8ecf1;
+        .file-upload:hover { border-color: #27ae60; background: #f8f9fa; }
+        .file-upload input[type="file"] { display: none; }
+        .file-upload .icon { font-size: 30px; }
+        .file-upload .text { font-size: 13px; color: #7f8c8d; margin-top: 4px; }
+        .file-list { margin-top: 8px; }
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 10px;
+            background: #f8f9fa;
             border-radius: 4px;
-            overflow: hidden;
-            margin: 4px 0 2px;
+            margin-top: 4px;
+            font-size: 12px;
         }
-        .progress-bar .fill {
-            height: 100%;
-            border-radius: 4px;
-            transition: width 0.8s ease;
-            background: linear-gradient(90deg, #27ae60, #1a5276);
-        }
+        .file-item .remove { color: #e74c3c; cursor: pointer; }
 
         .notification-box {
             background: #fef9e7;
@@ -892,7 +572,6 @@
             padding: 12px 16px;
             border-radius: 8px;
             margin: 8px 0;
-            transition: 0.3s;
         }
         .notification-box.success { background: #d5f5e3; border-left-color: #27ae60; }
         .notification-box.danger { background: #fadbd8; border-left-color: #e74c3c; }
@@ -904,14 +583,11 @@
             .user-tools .last-saved { margin-left: 0; width: 100%; text-align: center; }
             .matrix-grid { grid-template-columns: 1fr; }
             .kpi-grid { grid-template-columns: 1fr 1fr; }
-            .dashboard-stats { grid-template-columns: 1fr 1fr; }
-            .calendar-grid .day { font-size: 11px; padding: 4px 2px; }
             .likert-scale .likert-btn { font-size: 10px; padding: 4px 8px; min-width: 35px; }
         }
         @media (max-width: 400px) {
             .score-row { grid-template-columns: 1fr; }
             .kpi-grid { grid-template-columns: 1fr; }
-            .dashboard-stats { grid-template-columns: 1fr; }
             .header h1 { font-size: 20px; }
             .header h2 { font-size: 13px; }
         }
@@ -926,8 +602,8 @@
 <div id="loginSection" class="login-box">
     <h2>🔐 Mtwara Performance</h2>
     <p class="subtitle">Fomu ya Msimamizi - Toleo la Kimataifa</p>
-    <div style="text-align:center; margin-bottom:16px; font-size:12px; color:#7f8c8d;">
-        <span id="connectionStatus">🔄 Inaunganisha...</span>
+    <div class="status-text">
+        <span id="connectionStatus">✅ Tayari</span>
     </div>
     <div class="form-group">
         <label>👤 Jina la Mtumiaji</label>
@@ -943,7 +619,7 @@
     </p>
 </div>
 
-<!-- ===== MAIN APP - INAFICHIKA KABLA YA KUINGIA ===== -->
+<!-- ===== MAIN APP ===== -->
 <div id="mainApp">
     <div class="container">
 
@@ -954,10 +630,9 @@
             <div style="font-size:12px; color:#7f8c8d; margin-top:4px;">
                 <span id="userBadge" class="user-badge">👤 Imetoka nje</span>
                 <span style="margin-left:12px; font-size:11px; color:#27ae60;">☁️ Online</span>
-                <span style="margin-left:12px; font-size:11px; color:#8e44ad;">📄 <span id="reportIdDisplay">-</span></span>
             </div>
             <div class="bin-info">
-                📦 BIN: <span id="binIdDisplay">6a4b0bc9da38895dfe32cc08</span>
+                📦 Hifadhi: <span id="binIdDisplay">Local Storage</span>
             </div>
             <div class="mission"><strong>Dhamira:</strong> "Ubora katika Huduma, Imani katika Vitendo"</div>
         </div>
@@ -966,187 +641,10 @@
             <span style="font-weight:600; color:#1a5276;">👤 <span id="currentUserDisplay">Mgeni</span></span>
             <span id="roleDisplay" class="role-badge">👔 Msimamizi</span>
             <button class="btn btn-danger btn-sm" onclick="logout()">🚪 Toka</button>
-            <button class="btn btn-warning btn-sm" onclick="syncData()" id="syncBtn">🔄 Sync</button>
             <button class="btn btn-success btn-sm" onclick="exportReport()">📊 PDF</button>
-            <button class="btn btn-primary btn-sm" onclick="exportCSV()">📊 CSV</button>
             <span id="lastSaved" class="last-saved">💾 Imehifadhiwa: sasa hivi</span>
         </div>
 
-        <!-- ===== SECTION PROGRESS ===== -->
-        <div class="section-progress">
-            <div class="progress-header">
-                <span>📊 Maendeleo ya Fomu</span>
-                <span id="sectionProgressText">0%</span>
-            </div>
-            <div class="progress-bar">
-                <div class="fill" id="sectionProgressBar" style="width:0%;"></div>
-            </div>
-        </div>
-
-        <!-- ===== DASHBOARD STATS ===== -->
-        <div class="dashboard-stats" id="dashboardStats">
-            <div class="stat-card">
-                <span class="stat-icon">📊</span>
-                <span class="stat-number" id="totalAssessments">0</span>
-                <span class="stat-label">Jumla ya Tathmini</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-icon">✅</span>
-                <span class="stat-number green" id="approvedRate">0%</span>
-                <span class="stat-label">Kiwango cha Idhini</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-icon">⏳</span>
-                <span class="stat-number orange" id="pendingCount">0</span>
-                <span class="stat-label">Zinazosubiri</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-icon">⭐</span>
-                <span class="stat-number purple" id="avgScore">0%</span>
-                <span class="stat-label">Wastani wa Alama</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-icon">🏆</span>
-                <span class="stat-number blue" id="topWorker">-</span>
-                <span class="stat-label">Mtendakazi Bora</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-icon">📅</span>
-                <span class="stat-number" id="monthlyCount">0</span>
-                <span class="stat-label">Tathmini Mwezi Huu</span>
-            </div>
-        </div>
-
-        <!-- ===== KUMBUSHO ZA UFUATILIAJI ===== -->
-        <div style="background:#fef9e7; border-radius:12px; padding:16px 20px; margin-bottom:16px; border-left:4px solid #f39c12;">
-            <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-                🔔 KUMBUSHO ZA UFUATILIAJI
-                <span style="font-size:10px; background:#f39c12; color:#fff; padding:2px 12px; border-radius:12px;" id="reminderCount">0</span>
-            </div>
-            <div id="reminderList">
-                <div class="reminder-item">
-                    <span class="reminder-icon">⚠️</span>
-                    <div class="reminder-info">
-                        <div class="title">Tathmini Inakaribia Tarehe ya Mwisho</div>
-                        <div class="desc">Tathmini za mwezi huu zinahitaji kukamilishwa kabla ya tarehe 30</div>
-                    </div>
-                    <span class="reminder-status urgent">Haraka</span>
-                </div>
-                <div class="reminder-item">
-                    <span class="reminder-icon">📋</span>
-                    <div class="reminder-info">
-                        <div class="title">Malengo Yasiyofikiwa</div>
-                        <div class="desc">Wafanyakazi 3 wameshindwa kufikia malengo yao</div>
-                    </div>
-                    <span class="reminder-status pending">Inasubiri</span>
-                </div>
-                <div class="reminder-item">
-                    <span class="reminder-icon">📅</span>
-                    <div class="reminder-info">
-                        <div class="title">Mikutano ya Ufuatiliaji</div>
-                        <div class="desc">Mikutano ya ufuatiliaji imeratibiwa Jumatano wiki hii</div>
-                    </div>
-                    <span class="reminder-status pending">Inasubiri</span>
-                </div>
-            </div>
-            <div style="margin-top:10px;">
-                <button class="btn btn-primary btn-sm" onclick="addReminder()">➕ Ongeza Kumbusho</button>
-            </div>
-        </div>
-
-        <!-- ===== KALENDA ===== -->
-        <div style="background:#f8f9fa; border-radius:12px; padding:16px 20px; margin-bottom:16px; border:1px solid #e9ecef;">
-            <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-                📅 KALENDA YA MATUKIO
-                <span style="font-size:10px; background:#27ae60; color:#fff; padding:2px 12px; border-radius:12px;" id="eventCount">0 Matukio</span>
-            </div>
-            <div class="calendar-container">
-                <div class="calendar-header">
-                    <button class="nav-btn" onclick="changeMonth(-1)">◀</button>
-                    <span class="month-year" id="calendarMonthYear">Januari 2025</span>
-                    <button class="nav-btn" onclick="changeMonth(1)">▶</button>
-                </div>
-                <div class="calendar-grid" id="calendarGrid"></div>
-                <div class="event-list" id="eventList">
-                    <div style="font-size:12px; color:#7f8c8d; text-align:center;">Bonyeza tarehe kuongeza tukio</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===== RIPOTI ZA KIKUNDI ===== -->
-        <div class="group-report">
-            <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-                🏢 RIPOTI ZA KIKUNDI
-                <span style="font-size:10px; background:#27ae60; color:#fff; padding:2px 12px; border-radius:12px;" id="deptCount">0 Idara</span>
-            </div>
-            <div id="departmentReport">
-                <div class="dept-item">
-                    <span class="dept-name">🏥 Idara ya Matibabu</span>
-                    <span class="dept-stats">Wafanyakazi: 12 | Waliopendekezwa: 10</span>
-                    <span class="dept-score green">83%</span>
-                </div>
-                <div class="dept-item">
-                    <span class="dept-name">💊 Idara ya Dawa</span>
-                    <span class="dept-stats">Wafanyakazi: 8 | Waliopendekezwa: 6</span>
-                    <span class="dept-score orange">75%</span>
-                </div>
-                <div class="dept-item">
-                    <span class="dept-name">🔬 Idara ya Maabara</span>
-                    <span class="dept-stats">Wafanyakazi: 6 | Waliopendekezwa: 5</span>
-                    <span class="dept-score green">88%</span>
-                </div>
-                <div class="dept-item">
-                    <span class="dept-name">💉 Idara ya Uuguzi</span>
-                    <span class="dept-stats">Wafanyakazi: 15 | Waliopendekezwa: 12</span>
-                    <span class="dept-score green">80%</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===== MALENGO YA BAADAYE ===== -->
-        <div style="background:#eaf2f8; border-radius:12px; padding:16px 20px; margin-bottom:16px; border-left:4px solid #27ae60;">
-            <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-                🎯 MALENGO YA BAADAYE
-                <span style="font-size:10px; background:#27ae60; color:#fff; padding:2px 12px; border-radius:12px;" id="goalCount">0</span>
-            </div>
-            <div id="futureGoals">
-                <div class="goal-item">
-                    <div class="goal-check">
-                        <input type="checkbox" onchange="toggleGoal(this)">
-                    </div>
-                    <div class="goal-info">
-                        <div class="goal-title">Kupata Cheti cha Uongozi</div>
-                        <div class="goal-desc">Kuhudhuria mafunzo ya uongozi na kupata cheti</div>
-                        <div class="goal-deadline">📅 Tarehe ya Mwisho: 31/12/2025</div>
-                    </div>
-                </div>
-                <div class="goal-item">
-                    <div class="goal-check">
-                        <input type="checkbox" onchange="toggleGoal(this)">
-                    </div>
-                    <div class="goal-info">
-                        <div class="goal-title">Kuboresha Mawasiliano</div>
-                        <div class="goal-desc">Kuhudhuria warsha ya mawasiliano bora</div>
-                        <div class="goal-deadline">📅 Tarehe ya Mwisho: 30/06/2025</div>
-                    </div>
-                </div>
-                <div class="goal-item">
-                    <div class="goal-check">
-                        <input type="checkbox" onchange="toggleGoal(this)">
-                    </div>
-                    <div class="goal-info">
-                        <div class="goal-title">Kufikia Alama 90% katika Tathmini</div>
-                        <div class="goal-desc">Kuboresha utendaji ili kufikia alama za juu</div>
-                        <div class="goal-deadline">📅 Tarehe ya Mwisho: 31/12/2025</div>
-                    </div>
-                </div>
-            </div>
-            <div style="margin-top:10px;">
-                <button class="btn btn-primary btn-sm" onclick="addGoal()">➕ Ongeza Lengo</button>
-            </div>
-        </div>
-
-        <!-- ===== FOMU KUU ===== -->
         <div id="formSupervisor" class="form-card">
             <div class="form-title">
                 <span class="icon">👔</span>
@@ -1166,7 +664,7 @@
                     </div>
                     <div class="form-group">
                         <label>📋 Taaluma <span class="required">*</span></label>
-                        <select id="workerRole">
+                        <select id="workerRole" onchange="updateWorkerChecklist()">
                             <option value="Medical Officer">🩺 Medical Officer (MD)</option>
                             <option value="Clinical Officer">📋 Clinical Officer</option>
                             <option value="Specialist">⭐ Specialist</option>
@@ -1436,7 +934,7 @@
             <div class="notification-box" id="notificationBox">
                 <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
                     <span style="font-weight:600;">📊 Malengo Yamefikiwa?</span>
-                    <select id="goalsAchieved">
+                    <select id="goalsAchieved" onchange="updateNotification()">
                         <option value="yes">✅ Ndiyo, Malengo Yamefikiwa</option>
                         <option value="partially">⚠️ Sehemu tu</option>
                         <option value="no">❌ Hapana, Malengo Hajafikiwa</option>
@@ -1509,9 +1007,6 @@
         <div class="footer">
             <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
             <div>Mtwara Performance | Fomu ya Msimamizi | Toleo la Kimataifa</div>
-            <div style="margin-top:4px; font-size:10px; color:#aab;">
-                📊 Dashboard | 🔔 Kumbusho | 📅 Kalenda | 🏢 Ripoti za Kikundi | 🎯 Malengo | 📊 CSV
-            </div>
         </div>
 
     </div>
@@ -1519,18 +1014,13 @@
 
 <script>
 // ==============================================================
-// CONFIGURATION
+// CONFIGURATION - TUMIA LOCAL STORAGE BADALA YA JSONBIN
 // ==============================================================
-const API_KEY = "$2a$10$VfPZVlhjWTV.gErIv2yxX.3QmHdrMCgM1evuIR.BJreI7G0jQxGqW";
-const BIN_ID = "6a4b0bc9da38895dfe32cc08";
-const BIN_NAME = "MTWARA PERFORMANCE";
-
 let currentUser = null;
 let currentRole = null;
 let reports = [];
 let signatureData = { supervisor: null };
 let uploadedFiles = [];
-let autoSaveInterval = null;
 
 // ==============================================================
 // CHECKLIST DATA
@@ -1558,19 +1048,7 @@ const SPECIAL_CHECKLISTS = {
 };
 
 // ==============================================================
-// GENERATE REPORT ID
-// ==============================================================
-function generateReportId() {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
-    return `MTW-${year}${month}${day}-${random}`;
-}
-
-// ==============================================================
-// CHECKLIST FUNCTIONS
+// FUNCTIONS
 // ==============================================================
 function renderChecklist(containerId, items, storageKey) {
     const container = document.getElementById(containerId);
@@ -1594,8 +1072,6 @@ function toggleChecklist(el, storageKey, index) {
     saved[index] = el.classList.contains("active");
     localStorage.setItem(storageKey, JSON.stringify(saved));
     updateScoreSummary();
-    updateSectionProgress();
-    autoSaveDraft();
 }
 
 function getChecklistData(containerId, storageKey) {
@@ -1616,8 +1092,6 @@ function selectLikert(groupId, btn, value) {
     btn.classList.add("selected");
     btn.dataset.value = value;
     updateScoreSummary();
-    updateSectionProgress();
-    autoSaveDraft();
 }
 
 function getLikertValues(...ids) {
@@ -1644,7 +1118,6 @@ function updateWorkerChecklist() {
     renderChecklist("supervisorGeneralChecklist", GENERAL_CHECKLIST, "supervisorGeneral");
     renderChecklist("supervisorSpecialChecklist", SPECIAL_CHECKLISTS[role] || SPECIAL_CHECKLISTS["Medical Officer"], "supervisorSpecial");
     updateScoreSummary();
-    updateSectionProgress();
 }
 
 function updateNotification() {
@@ -1663,7 +1136,6 @@ function updateNotification() {
         box.classList.add("danger");
     }
     updateScoreSummary();
-    updateSectionProgress();
 }
 
 function handleFiles(files) {
@@ -1679,7 +1151,6 @@ function handleFiles(files) {
         list.appendChild(item);
     }
     showToast(`✅ Faili ${files.length} zimepakuliwa!`, "success");
-    updateSectionProgress();
 }
 
 function showToast(msg, type = "info") {
@@ -1733,7 +1204,6 @@ function clearSig(type) {
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
     document.getElementById(`${type}SigStatus`).textContent = "Imefutwa";
     signatureData[type] = null;
-    updateSectionProgress();
 }
 
 function saveSig(type) {
@@ -1747,587 +1217,6 @@ function saveSig(type) {
     signatureData[type] = dataUrl;
     document.getElementById(`${type}SigStatus`).textContent = "✅ Imehifadhiwa";
     showToast("✅ Sahihi imehifadhiwa!", "success");
-    updateSectionProgress();
-    autoSaveDraft();
-}
-
-// ==============================================================
-// SECTION PROGRESS
-// ==============================================================
-function updateSectionProgress() {
-    const fields = [
-        'workerName', 'workerRole', 'workerDate', 'workerShift', 'workerDepartment',
-        'workerPhone', 'workerWhatsApp', 'workerEmail',
-        'supervisorName', 'supervisorTitle', 'supervisorDepartment',
-        'supervisorPhone', 'supervisorWhatsApp', 'supervisorEmail',
-        'smartGoals', 'actionPlan', 'actionStartDate', 'actionEndDate',
-        'peerFeedback', 'patientFeedback', 'selfReflection',
-        'supervisorComments', 'supervisorRecommendations', 'supervisorFollowUp'
-    ];
-    
-    let filled = 0;
-    let total = fields.length;
-    
-    fields.forEach(id => {
-        const el = document.getElementById(id);
-        if (el && el.value && el.value.trim()) filled++;
-    });
-    
-    const selectFields = ['workerRole', 'workerShift', 'supervisorTitle', 'goalsAchieved'];
-    selectFields.forEach(id => {
-        const el = document.getElementById(id);
-        if (el && el.value) filled++;
-    });
-    total += selectFields.length;
-    
-    const likertFields = ['sPunctuality', 'sQuality', 'sTeamwork', 'sLeadership', 'sCommunication', 'sDecision'];
-    likertFields.forEach(id => {
-        const sel = document.querySelector(`#${id} .likert-btn.selected`);
-        if (sel) filled++;
-    });
-    total += likertFields.length;
-    
-    if (signatureData.supervisor) filled++;
-    total++;
-    
-    const progress = Math.min(Math.round((filled / total) * 100), 100);
-    document.getElementById("sectionProgressText").textContent = progress + '%';
-    document.getElementById("sectionProgressBar").style.width = progress + '%';
-}
-
-// ==============================================================
-// AUTO-SAVE DRAFT
-// ==============================================================
-function autoSaveDraft() {
-    try {
-        const data = collectFormData();
-        localStorage.setItem("supervisorDraft", JSON.stringify(data));
-        document.getElementById("lastSaved").textContent = `💾 Imehifadhiwa: ${new Date().toLocaleTimeString()}`;
-    } catch (e) {
-        console.warn("Auto-save error:", e);
-    }
-}
-
-function collectFormData() {
-    return {
-        workerName: document.getElementById("workerName").value,
-        workerRole: document.getElementById("workerRole").value,
-        workerDate: document.getElementById("workerDate").value,
-        workerShift: document.getElementById("workerShift").value,
-        workerDepartment: document.getElementById("workerDepartment").value,
-        workerPhone: document.getElementById("workerPhone").value,
-        workerWhatsApp: document.getElementById("workerWhatsApp").value,
-        workerEmail: document.getElementById("workerEmail").value,
-        supervisorName: document.getElementById("supervisorName").value,
-        supervisorTitle: document.getElementById("supervisorTitle").value,
-        supervisorDepartment: document.getElementById("supervisorDepartment").value,
-        supervisorPhone: document.getElementById("supervisorPhone").value,
-        supervisorWhatsApp: document.getElementById("supervisorWhatsApp").value,
-        supervisorEmail: document.getElementById("supervisorEmail").value,
-        smartGoals: document.getElementById("smartGoals").value,
-        actionPlan: document.getElementById("actionPlan").value,
-        actionStartDate: document.getElementById("actionStartDate").value,
-        actionEndDate: document.getElementById("actionEndDate").value,
-        peerFeedback: document.getElementById("peerFeedback").value,
-        patientFeedback: document.getElementById("patientFeedback").value,
-        selfReflection: document.getElementById("selfReflection").value,
-        supervisorComments: document.getElementById("supervisorComments").value,
-        supervisorRecommendations: document.getElementById("supervisorRecommendations").value,
-        supervisorFollowUp: document.getElementById("supervisorFollowUp").value,
-        goalsAchieved: document.getElementById("goalsAchieved").value,
-        timestamp: new Date().toISOString()
-    };
-}
-
-function restoreDraft() {
-    try {
-        const saved = localStorage.getItem("supervisorDraft");
-        if (saved) {
-            const data = JSON.parse(saved);
-            Object.keys(data).forEach(key => {
-                const el = document.getElementById(key);
-                if (el && data[key] && key !== 'timestamp') {
-                    el.value = data[key];
-                }
-            });
-            showToast("📂 Rasimu imerejeshwa!", "info");
-            updateSectionProgress();
-            updateScoreSummary();
-            updateDashboard();
-            updateGroupReports();
-        }
-    } catch (e) {
-        console.warn("Restore draft error:", e);
-    }
-}
-
-// ==============================================================
-// DASHBOARD STATS
-// ==============================================================
-function updateDashboard() {
-    const total = reports.length;
-    document.getElementById("totalAssessments").textContent = total;
-    
-    const approved = reports.filter(r => r.finalDecision === 'approved' || r.status === 'Imekubaliwa').length;
-    const rate = total > 0 ? Math.round((approved / total) * 100) : 0;
-    document.getElementById("approvedRate").textContent = rate + '%';
-    
-    const pending = reports.filter(r => r.finalDecision === 'pending' || r.status === 'Inasubiri Mganga Mfawidhi' || !r.finalDecision).length;
-    document.getElementById("pendingCount").textContent = pending;
-    
-    let totalScore = 0;
-    let scored = 0;
-    reports.forEach(r => {
-        if (r.score) { totalScore += r.score; scored++; }
-    });
-    const avg = scored > 0 ? Math.round(totalScore / scored) : 0;
-    document.getElementById("avgScore").textContent = avg + '%';
-    
-    if (reports.length > 0) {
-        const scores = {};
-        reports.forEach(r => {
-            if (r.workerName && r.score) {
-                if (!scores[r.workerName]) scores[r.workerName] = [];
-                scores[r.workerName].push(r.score);
-            }
-        });
-        let topName = '-';
-        let topScore = 0;
-        Object.keys(scores).forEach(name => {
-            const avgScore = scores[name].reduce((a,b) => a+b, 0) / scores[name].length;
-            if (avgScore > topScore) {
-                topScore = avgScore;
-                topName = name;
-            }
-        });
-        document.getElementById("topWorker").textContent = topName !== '-' ? topName + ` (${Math.round(topScore)}%)` : '-';
-    }
-    
-    const now = new Date();
-    const month = now.getMonth();
-    const year = now.getFullYear();
-    const monthly = reports.filter(r => {
-        if (!r.timestamp) return false;
-        const d = new Date(r.timestamp);
-        return d.getMonth() === month && d.getFullYear() === year;
-    }).length;
-    document.getElementById("monthlyCount").textContent = monthly;
-    
-    const reminderItems = document.querySelectorAll('#reminderList .reminder-item').length;
-    document.getElementById("reminderCount").textContent = reminderItems;
-}
-
-// ==============================================================
-// REMINDERS
-// ==============================================================
-function addReminder() {
-    const title = prompt("📝 Weka kichwa cha kumbusho:", "Tathmini inayokaribia");
-    if (!title) return;
-    const desc = prompt("📝 Weka maelezo ya kumbusho:", "Tafadhali kamilisha tathmini kabla ya tarehe...");
-    if (!desc) return;
-    
-    const list = document.getElementById("reminderList");
-    const item = document.createElement("div");
-    item.className = "reminder-item";
-    item.innerHTML = `
-        <span class="reminder-icon">📌</span>
-        <div class="reminder-info">
-            <div class="title">${title}</div>
-            <div class="desc">${desc}</div>
-        </div>
-        <span class="reminder-status pending" onclick="this.parentElement.remove(); updateDashboard();">❌ Ondoa</span>
-    `;
-    list.appendChild(item);
-    updateDashboard();
-    showToast("✅ Kumbusho limeongezwa!", "success");
-}
-
-// ==============================================================
-// CALENDAR
-// ==============================================================
-let currentDate = new Date();
-let events = JSON.parse(localStorage.getItem('calendarEventsSupervisor') || '[]');
-
-function renderCalendar() {
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    
-    document.getElementById("calendarMonthYear").textContent = 
-        new Date(year, month).toLocaleDateString('sw', { month: 'long', year: 'numeric' });
-    
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const daysInPrevMonth = new Date(year, month, 0).getDate();
-    
-    const grid = document.getElementById("calendarGrid");
-    grid.innerHTML = '';
-    
-    const dayNames = ['J2', 'J3', 'J4', 'J5', 'J6', 'J7', 'J1'];
-    dayNames.forEach(name => {
-        const div = document.createElement('div');
-        div.className = 'day-name';
-        div.textContent = name;
-        grid.appendChild(div);
-    });
-    
-    for (let i = firstDay - 1; i >= 0; i--) {
-        const div = document.createElement('div');
-        div.className = 'day other-month';
-        div.textContent = daysInPrevMonth - i;
-        grid.appendChild(div);
-    }
-    
-    const today = new Date();
-    for (let i = 1; i <= daysInMonth; i++) {
-        const div = document.createElement('div');
-        div.className = 'day';
-        div.textContent = i;
-        
-        if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
-            div.classList.add('today');
-        }
-        
-        const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
-        const dayEvents = events.filter(e => e.date === dateStr);
-        if (dayEvents.length > 0) {
-            div.classList.add('has-event', 'event-day');
-        }
-        
-        div.onclick = () => addEvent(dateStr);
-        grid.appendChild(div);
-    }
-    
-    const totalDays = firstDay + daysInMonth;
-    const remainingDays = (7 - (totalDays % 7)) % 7;
-    for (let i = 1; i <= remainingDays; i++) {
-        const div = document.createElement('div');
-        div.className = 'day other-month';
-        div.textContent = i;
-        grid.appendChild(div);
-    }
-    
-    renderEvents();
-}
-
-function changeMonth(delta) {
-    currentDate.setMonth(currentDate.getMonth() + delta);
-    renderCalendar();
-}
-
-function addEvent(dateStr) {
-    const title = prompt("📝 Weka tukio kwa tarehe " + dateStr + ":", "Mkutano wa ufuatiliaji");
-    if (!title) return;
-    const time = prompt("🕐 Weka saa (kwa mfano 14:30):", "10:00");
-    if (time === null) return;
-    events.push({ date: dateStr, title: title, time: time || '10:00' });
-    localStorage.setItem('calendarEventsSupervisor', JSON.stringify(events));
-    renderCalendar();
-    showToast("✅ Tukio limeongezwa kwenye kalenda!", "success");
-}
-
-function renderEvents() {
-    const container = document.getElementById("eventList");
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    
-    const monthEvents = events.filter(e => {
-        const parts = e.date.split('-');
-        return parseInt(parts[0]) === year && parseInt(parts[1]) === month + 1;
-    });
-    
-    if (monthEvents.length === 0) {
-        container.innerHTML = `<div style="font-size:12px; color:#7f8c8d; text-align:center;">Hakuna matukio kwa mwezi huu. Bonyeza tarehe kuongeza tukio.</div>`;
-        return;
-    }
-    
-    container.innerHTML = monthEvents.map(e => `
-        <div class="event-item">
-            <span class="event-time">${e.time || '10:00'}</span>
-            <span class="event-title">${e.title}</span>
-            <span class="event-remove" onclick="removeEvent('${e.date}', '${e.title}')">✕</span>
-        </div>
-    `).join('');
-    document.getElementById("eventCount").textContent = monthEvents.length + ' Matukio';
-}
-
-function removeEvent(date, title) {
-    events = events.filter(e => !(e.date === date && e.title === title));
-    localStorage.setItem('calendarEventsSupervisor', JSON.stringify(events));
-    renderCalendar();
-    showToast("🗑️ Tukio limeondolewa", "info");
-}
-
-// ==============================================================
-// GROUP REPORTS
-// ==============================================================
-function updateGroupReports() {
-    const departments = {};
-    reports.forEach(r => {
-        const dept = r.workerDepartment || 'Idara Nyingine';
-        if (!departments[dept]) {
-            departments[dept] = { total: 0, approved: 0, scores: [] };
-        }
-        departments[dept].total++;
-        if (r.finalDecision === 'approved' || r.status === 'Imekubaliwa') {
-            departments[dept].approved++;
-        }
-        if (r.score) departments[dept].scores.push(r.score);
-    });
-    
-    const container = document.getElementById("departmentReport");
-    const deptNames = Object.keys(departments);
-    
-    if (deptNames.length === 0) {
-        container.innerHTML = `<div style="font-size:12px; color:#7f8c8d; text-align:center;">Hakuna ripoti za kikundi bado</div>`;
-        document.getElementById("deptCount").textContent = '0 Idara';
-        return;
-    }
-    
-    document.getElementById("deptCount").textContent = deptNames.length + ' Idara';
-    
-    container.innerHTML = deptNames.map(dept => {
-        const data = departments[dept];
-        const avgScore = data.scores.length > 0 ? Math.round(data.scores.reduce((a,b) => a+b, 0) / data.scores.length) : 0;
-        const scoreClass = avgScore >= 70 ? 'green' : avgScore >= 50 ? 'orange' : 'red';
-        
-        return `
-            <div class="dept-item">
-                <span class="dept-name">🏢 ${dept}</span>
-                <span class="dept-stats">Wafanyakazi: ${data.total} | Waliopendekezwa: ${data.approved}</span>
-                <span class="dept-score ${scoreClass}">${avgScore}%</span>
-            </div>
-        `;
-    }).join('');
-}
-
-// ==============================================================
-// FUTURE GOALS
-// ==============================================================
-function addGoal() {
-    const title = prompt("🎯 Weka lengo mpya:", "Kuboresha utendaji kwa 10%");
-    if (!title) return;
-    const desc = prompt("📝 Weka maelezo ya lengo:", "Kuhudhuria mafunzo na kuboresha ujuzi");
-    if (!desc) return;
-    const deadline = prompt("📅 Weka tarehe ya mwisho (DD/MM/YYYY):", "31/12/2025");
-    if (!deadline) return;
-    
-    const container = document.getElementById("futureGoals");
-    const item = document.createElement("div");
-    item.className = "goal-item";
-    item.innerHTML = `
-        <div class="goal-check">
-            <input type="checkbox" onchange="toggleGoal(this)">
-        </div>
-        <div class="goal-info">
-            <div class="goal-title">${title}</div>
-            <div class="goal-desc">${desc}</div>
-            <div class="goal-deadline">📅 Tarehe ya Mwisho: ${deadline}</div>
-        </div>
-    `;
-    container.appendChild(item);
-    updateGoalCount();
-    showToast("✅ Lengo limeongezwa!", "success");
-}
-
-function toggleGoal(checkbox) {
-    const goalItem = checkbox.closest('.goal-item');
-    if (checkbox.checked) {
-        goalItem.style.opacity = '0.6';
-        goalItem.style.textDecoration = 'line-through';
-        showToast("✅ Lengo limekamilika!", "success");
-    } else {
-        goalItem.style.opacity = '1';
-        goalItem.style.textDecoration = 'none';
-    }
-    updateGoalCount();
-}
-
-function updateGoalCount() {
-    const goals = document.querySelectorAll('#futureGoals .goal-item').length;
-    document.getElementById("goalCount").textContent = goals;
-}
-
-// ==============================================================
-// EXPORT CSV
-// ==============================================================
-function exportCSV() {
-    if (reports.length === 0) {
-        showToast("⚠️ Hakuna data ya kuweka kwenye CSV", "warning");
-        return;
-    }
-    
-    let csv = 'Nambari,Jina,Taaluma,Idara,Alama,Uamuzi,Tarehe\n';
-    reports.forEach((r, i) => {
-        const row = [
-            i + 1,
-            r.workerName || '-',
-            r.workerRole || '-',
-            r.workerDepartment || '-',
-            r.score || 0,
-            r.finalDecision || r.status || 'Inasubiri',
-            r.timestamp ? new Date(r.timestamp).toLocaleDateString() : '-'
-        ];
-        csv += row.join(',') + '\n';
-    });
-    
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `Ripoti_Tathmini_${new Date().toISOString().split('T')[0]}.csv`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    showToast("✅ CSV imepakuliwa!", "success");
-}
-
-// ==============================================================
-// JSONBIN OPERATIONS
-// ==============================================================
-async function getBinData() {
-    try {
-        if (localStorage.getItem("useLocalStorage") === "true") {
-            return JSON.parse(localStorage.getItem("mtwaraData") || '{"reports":[],"users":{}}');
-        }
-        document.getElementById("connectionStatus").innerHTML = '<span class="loading"></span> Inasoma...';
-        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-            method: "GET",
-            headers: { "X-Master-Key": API_KEY }
-        });
-        if (!response.ok) {
-            if (response.status === 404) {
-                showToast("⚠️ BIN haipatikani, itaundwa mpya", "warning");
-                return await createBin();
-            }
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-        const result = await response.json();
-        document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
-        return result.record || result;
-    } catch (error) {
-        console.error("❌ Hitilafu:", error);
-        document.getElementById("connectionStatus").textContent = "⚠️ Hitilafu";
-        if (localStorage.getItem("mtwaraData")) return JSON.parse(localStorage.getItem("mtwaraData"));
-        showToast("❌ Imeshindwa kusoma data", "error");
-        return null;
-    }
-}
-
-async function updateBinData(data) {
-    try {
-        if (localStorage.getItem("useLocalStorage") === "true") {
-            localStorage.setItem("mtwaraData", JSON.stringify(data));
-            return { success: true };
-        }
-        document.getElementById("connectionStatus").innerHTML = '<span class="loading"></span> Inahifadhi...';
-        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json", "X-Master-Key": API_KEY },
-            body: JSON.stringify(data)
-        });
-        if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        const result = await response.json();
-        document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
-        return result;
-    } catch (error) {
-        console.error("❌ Hitilafu:", error);
-        document.getElementById("connectionStatus").textContent = "⚠️ Hitilafu";
-        try { localStorage.setItem("mtwaraData", JSON.stringify(data)); return { success: true }; }
-        catch (e) { console.error("❌ Hitilafu:", e); }
-        return null;
-    }
-}
-
-async function createBin() {
-    try {
-        const data = { name: BIN_NAME, description: "Mtwara Performance Appraisal System", private: false, reports: [], users: { worker: { password: "1234", role: "worker" }, supervisor: { password: "1234", role: "supervisor" }, incharge: { password: "1234", role: "incharge" } } };
-        const response = await fetch("https://api.jsonbin.io/v3/b", {
-            method: "POST",
-            headers: { "Content-Type": "application/json", "X-Master-Key": API_KEY, "X-Bin-Name": BIN_NAME },
-            body: JSON.stringify(data)
-        });
-        if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        const result = await response.json();
-        showToast("✅ BIN mpya imeundwa!", "success");
-        return result.record || result;
-    } catch (error) {
-        console.error("❌ Hitilafu:", error);
-        showToast("❌ Imeshindwa kuunda BIN", "error");
-        return null;
-    }
-}
-
-// ==============================================================
-// LOGIN / LOGOUT
-// ==============================================================
-async function login() {
-    const username = document.getElementById("loginUsername").value.trim();
-    const password = document.getElementById("loginPassword").value.trim();
-    if (!username || !password) { showToast("❌ Tafadhali jaza sehemu zote", "error"); return; }
-    showToast("⏳ Inaingiza...", "info");
-    const data = await getBinData();
-    if (!data) { showToast("❌ Imeshindwa kuunganisha", "error"); return; }
-    const users = data.users || {};
-    const user = users[username];
-    if (!user || user.password !== password) { showToast("❌ Jina au nenosiri si sahihi", "error"); return; }
-    currentUser = username;
-    currentRole = user.role;
-    reports = data.reports || [];
-    
-    // Onyesha main app
-    document.getElementById("loginSection").style.display = "none";
-    document.getElementById("mainApp").style.display = "block";
-    
-    // Update user info
-    document.getElementById("currentUserDisplay").textContent = username;
-    document.getElementById("userBadge").textContent = `👤 ${username}`;
-    document.getElementById("roleDisplay").textContent = "👔 Msimamizi";
-    document.getElementById("connectionStatus").textContent = "✅ Imeunganishwa";
-    document.getElementById("binIdDisplay").textContent = BIN_ID;
-    document.getElementById("reportIdDisplay").textContent = generateReportId();
-    document.getElementById("workerDate").value = new Date().toISOString().split("T")[0];
-    document.getElementById("actionStartDate").value = new Date().toISOString().split("T")[0];
-    document.getElementById("actionEndDate").value = new Date().toISOString().split("T")[0];
-    
-    setTimeout(() => initSigPad("supervisor"), 500);
-    updateWorkerChecklist();
-    updateNotification();
-    updateScoreSummary();
-    updateSectionProgress();
-    renderCalendar();
-    updateDashboard();
-    updateGroupReports();
-    updateGoalCount();
-    restoreDraft();
-    
-    if (autoSaveInterval) clearInterval(autoSaveInterval);
-    autoSaveInterval = setInterval(autoSaveDraft, 30000);
-    
-    showToast(`✅ Karibu ${username}!`, "success");
-}
-
-function logout() {
-    currentUser = null;
-    currentRole = null;
-    if (autoSaveInterval) clearInterval(autoSaveInterval);
-    document.getElementById("mainApp").style.display = "none";
-    document.getElementById("loginSection").style.display = "block";
-    document.getElementById("connectionStatus").textContent = "🔄 Tafadhali ingia tena";
-    showToast("👋 Umetoka nje", "info");
-}
-
-async function syncData() {
-    showToast("🔄 Inasawazisha...", "info");
-    document.getElementById("syncBtn").innerHTML = '<span class="loading"></span>';
-    const data = await getBinData();
-    if (data) {
-        reports = data.reports || [];
-        showToast(`✅ Data imesawazishwa! Reports: ${reports.length}`, "success");
-        updateDashboard();
-        updateGroupReports();
-    }
-    document.getElementById("syncBtn").innerHTML = '🔄 Sync';
 }
 
 // ==============================================================
@@ -2379,29 +1268,26 @@ function exportReport() {
     setTimeout(() => {
         try {
             const content = document.getElementById("formSupervisor").cloneNode(true);
-            content.querySelectorAll(".signature-pad, .signature-actions, .toast, .user-tools, .export-tools, .section-progress, .dashboard-stats, #reminderList, .calendar-container, .group-report, #futureGoals").forEach(el => el.remove());
-            
+            content.querySelectorAll(".signature-pad, .signature-actions, .toast, .user-tools").forEach(el => el.remove());
             const win = window.open('', '_blank', 'width=1000,height=800');
             win.document.write(`
                 <html><head><title>Ripoti ya Tathmini - Msimamizi</title>
-                <style>
-                    body { font-family: Arial; padding: 40px; color: #333; max-width: 1000px; margin: auto; }
-                    .header { text-align: center; border-bottom: 3px solid #27ae60; padding-bottom: 20px; margin-bottom: 30px; }
-                    .header h1 { color: #1a5276; }
-                    .score-box { background: #d5f5e3; padding: 16px; border-radius: 8px; }
-                    .score-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
-                    .score-item { background: #fff; padding: 10px; border-radius: 8px; text-align: center; }
-                    .score-item .number { font-size: 22px; font-weight: 800; display: block; }
-                    .number.green { color: #27ae60; }
-                    .number.orange { color: #f39c12; }
-                    .number.red { color: #e74c3c; }
-                    .footer { margin-top: 30px; text-align: center; font-size: 12px; color: #7f8c8d; border-top: 1px solid #ecf0f1; padding-top: 20px; }
-                    @media print { body { padding: 20px; } .no-print { display: none; } }
+                <style>body{font-family:Arial;padding:40px;color:#333;max-width:1000px;margin:auto;}
+                .header{text-align:center;border-bottom:3px solid #27ae60;padding-bottom:20px;margin-bottom:30px;}
+                .header h1{color:#1a5276;}
+                .score-box{background:#d5f5e3;padding:16px;border-radius:8px;}
+                .score-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;}
+                .score-item{background:#fff;padding:10px;border-radius:8px;text-align:center;}
+                .score-item .number{font-size:22px;font-weight:800;display:block;}
+                .number.green{color:#27ae60;}
+                .number.orange{color:#f39c12;}
+                .number.red{color:#e74c3c;}
+                .footer{margin-top:30px;text-align:center;font-size:12px;color:#7f8c8d;border-top:1px solid #ecf0f1;padding-top:20px;}
 </style></head><body>
                 <div class="header">
                     <h1>🏥 Mtwara SDA Dispensary</h1>
                     <h2>📊 Ripoti ya Tathmini - Msimamizi</h2>
-                    <p style="color:#7f8c8d;">📄 Nambari: ${document.getElementById("reportIdDisplay").textContent} | ${new Date().toLocaleString()}</p>
+                    <p style="color:#7f8c8d;">📄 Imetolewa: ${new Date().toLocaleString()}</p>
                 </div>
                 ${content.innerHTML}
                 <div class="footer">
@@ -2420,9 +1306,69 @@ function exportReport() {
 }
 
 // ==============================================================
+// LOGIN / LOGOUT
+// ==============================================================
+function login() {
+    const username = document.getElementById("loginUsername").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+    if (!username || !password) { showToast("❌ Tafadhali jaza sehemu zote", "error"); return; }
+    
+    // Users database (local)
+    const users = {
+        supervisor: { password: "1234", role: "supervisor" },
+        worker: { password: "1234", role: "worker" },
+        incharge: { password: "1234", role: "incharge" }
+    };
+    
+    const user = users[username];
+    if (!user || user.password !== password) {
+        showToast("❌ Jina au nenosiri si sahihi", "error");
+        return;
+    }
+    
+    currentUser = username;
+    currentRole = user.role;
+    
+    // Load saved reports
+    const savedReports = localStorage.getItem("mtwaraReports");
+    if (savedReports) {
+        reports = JSON.parse(savedReports);
+    }
+    
+    // Onyesha main app
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("mainApp").style.display = "block";
+    document.getElementById("mainApp").classList.add("show");
+    
+    // Update user info
+    document.getElementById("currentUserDisplay").textContent = username;
+    document.getElementById("userBadge").textContent = `👤 ${username}`;
+    document.getElementById("roleDisplay").textContent = "👔 Msimamizi";
+    document.getElementById("binIdDisplay").textContent = "Local Storage";
+    document.getElementById("workerDate").value = new Date().toISOString().split("T")[0];
+    document.getElementById("actionStartDate").value = new Date().toISOString().split("T")[0];
+    document.getElementById("actionEndDate").value = new Date().toISOString().split("T")[0];
+    
+    setTimeout(() => initSigPad("supervisor"), 500);
+    updateWorkerChecklist();
+    updateNotification();
+    updateScoreSummary();
+    showToast(`✅ Karibu ${username}!`, "success");
+}
+
+function logout() {
+    currentUser = null;
+    currentRole = null;
+    document.getElementById("mainApp").style.display = "none";
+    document.getElementById("mainApp").classList.remove("show");
+    document.getElementById("loginSection").style.display = "block";
+    showToast("👋 Umetoka nje", "info");
+}
+
+// ==============================================================
 // SUBMIT SUPERVISOR
 // ==============================================================
-async function submitSupervisor() {
+function submitSupervisor() {
     const workerName = document.getElementById("workerName").value.trim();
     if (!workerName) { showToast("⚠️ Tafadhali weka jina la mtendakazi", "warning"); return; }
     
@@ -2440,7 +1386,6 @@ async function submitSupervisor() {
     const report = {
         type: "supervisor_assessment_international",
         id: Date.now(),
-        reportId: document.getElementById("reportIdDisplay").textContent,
         workerName: workerName,
         workerRole: document.getElementById("workerRole").value,
         workerDate: document.getElementById("workerDate").value,
@@ -2483,49 +1428,32 @@ async function submitSupervisor() {
         timestamp: new Date().toISOString()
     };
 
-    try {
-        const data = await getBinData();
-        if (!data) return;
-        if (!data.reports) data.reports = [];
-        data.reports.push(report);
-        const result = await updateBinData(data);
-        if (result) {
-            reports = data.reports;
-            document.getElementById("supervisorSubmitBtn").disabled = true;
-            document.getElementById("supervisorSubmitBtn").innerHTML = "✅ Imetumwa!";
-            document.getElementById("supervisorSubmitMsg").style.display = "block";
-            document.getElementById("supervisorSubmitMsg").textContent = "✅ Tathmini imetumwa kwa Mganga Mfawidhi!";
-            document.getElementById("supervisorSubmitMsg").style.color = "#27ae60";
-            document.getElementById("supervisorStatusBadge").textContent = "✅ Imetumwa";
-            document.getElementById("supervisorStatusBadge").className = "status-badge submitted";
-            showToast("✅ Tathmini imetumwa kikamilifu!", "success");
-            updateDashboard();
-            updateGroupReports();
-        }
-    } catch (error) {
-        console.error("❌ Hitilafu:", error);
-        showToast("❌ Hitilafu: " + error.message, "error");
-    }
+    // Save to localStorage
+    if (!reports) reports = [];
+    reports.push(report);
+    localStorage.setItem("mtwaraReports", JSON.stringify(reports));
+    
+    document.getElementById("supervisorSubmitBtn").disabled = true;
+    document.getElementById("supervisorSubmitBtn").innerHTML = "✅ Imetumwa!";
+    document.getElementById("supervisorSubmitMsg").style.display = "block";
+    document.getElementById("supervisorSubmitMsg").textContent = "✅ Tathmini imetumwa kwa Mganga Mfawidhi!";
+    document.getElementById("supervisorSubmitMsg").style.color = "#27ae60";
+    document.getElementById("supervisorStatusBadge").textContent = "✅ Imetumwa";
+    document.getElementById("supervisorStatusBadge").className = "status-badge submitted";
+    showToast("✅ Tathmini imetumwa kikamilifu!", "success");
 }
 
 // ==============================================================
 // INIT
 // ==============================================================
 window.onload = function() {
-    document.getElementById("binIdDisplay").textContent = BIN_ID;
+    document.getElementById("binIdDisplay").textContent = "Local Storage";
     document.getElementById("connectionStatus").textContent = "✅ Tayari";
-    document.getElementById("reportIdDisplay").textContent = generateReportId();
     updateWorkerChecklist();
     updateNotification();
     updateScoreSummary();
-    updateSectionProgress();
-    renderCalendar();
-    updateDashboard();
-    updateGroupReports();
-    updateGoalCount();
     console.log("✅ Mtwara Performance - Fomu ya Msimamizi (Toleo la Kimataifa)");
-    console.log("📦 BIN ID:", BIN_ID);
-    console.log("📋 Vipengele vyote vimebobeshwa!");
+    console.log("📦 Hifadhi: Local Storage");
 };
 </script>
 
