@@ -71,7 +71,7 @@
         .login-box h2 { text-align: center; color: #1a5276; margin-bottom: 8px; }
         .login-box .subtitle { text-align: center; color: #7f8c8d; font-size: 13px; margin-bottom: 24px; }
 
-        /* MAIN APP - INAFICHIKA KABLA YA LOGIN */
+        /* ===== MAIN APP - INAFICHIKA KABLA YA LOGIN ===== */
         #mainApp {
             display: none;
         }
@@ -1162,11 +1162,11 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>👤 Jina Kamili la Mtendakazi <span class="required">*</span></label>
-                        <input type="text" id="workerName" placeholder="Jina la mtendakazi" value="" onchange="autoSave(); updateSectionProgress(); updateDashboard();" oninput="autoSave(); updateSectionProgress(); updateDashboard();">
+                        <input type="text" id="workerName" placeholder="Jina la mtendakazi" value="">
                     </div>
                     <div class="form-group">
                         <label>📋 Taaluma <span class="required">*</span></label>
-                        <select id="workerRole" onchange="updateWorkerChecklist(); autoSave(); updateSectionProgress();">
+                        <select id="workerRole">
                             <option value="Medical Officer">🩺 Medical Officer (MD)</option>
                             <option value="Clinical Officer">📋 Clinical Officer</option>
                             <option value="Specialist">⭐ Specialist</option>
@@ -1179,11 +1179,11 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>📅 Tarehe ya Tathmini</label>
-                        <input type="date" id="workerDate" onchange="autoSave(); updateSectionProgress();">
+                        <input type="date" id="workerDate">
                     </div>
                     <div class="form-group">
                         <label>🕐 Zamu</label>
-                        <select id="workerShift" onchange="autoSave(); updateSectionProgress();">
+                        <select id="workerShift">
                             <option>Mchana</option>
                             <option>Usiku</option>
                         </select>
@@ -1191,7 +1191,7 @@
                 </div>
                 <div class="form-group">
                     <label>🏢 Idara ya Mtendakazi</label>
-                    <input type="text" id="workerDepartment" value="Clinical" onchange="autoSave(); updateSectionProgress(); updateDashboard(); updateGroupReports();" oninput="autoSave(); updateSectionProgress(); updateDashboard(); updateGroupReports();">
+                    <input type="text" id="workerDepartment" value="Clinical">
                 </div>
 
                 <div class="contact-info">
@@ -1199,7 +1199,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>📱 Namba ya Simu ya Mtendakazi <span class="required">*</span></label>
-                            <input type="tel" id="workerPhone" placeholder="+255 xxx xxx xxx" value="" onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();">
+                            <input type="tel" id="workerPhone" placeholder="+255 xxx xxx xxx" value="">
                         </div>
                         <div class="form-group">
                             <label>💬 Namba ya WhatsApp ya Mtendakazi</label>
@@ -1231,11 +1231,11 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>👔 Jina Lako <span class="required">*</span></label>
-                        <input type="text" id="supervisorName" placeholder="Jina lako" value="" onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();">
+                        <input type="text" id="supervisorName" placeholder="Jina lako" value="">
                     </div>
                     <div class="form-group">
                         <label>📋 Wadhifa <span class="required">*</span></label>
-                        <select id="supervisorTitle" onchange="autoSave(); updateSectionProgress();">
+                        <select id="supervisorTitle">
                             <option>Mkuu wa Idara</option>
                             <option>Afisa Mwandamizi</option>
                             <option>Msimamizi</option>
@@ -1245,7 +1245,7 @@
                 </div>
                 <div class="form-group">
                     <label>🏢 Idara Anayosimamia</label>
-                    <input type="text" id="supervisorDepartment" value="Clinical" onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();">
+                    <input type="text" id="supervisorDepartment" value="Clinical">
                 </div>
 
                 <div style="margin-top:12px; background:#fff; border-radius:8px; padding:12px 16px; border:2px solid #27ae60;">
@@ -1256,7 +1256,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>📱 Namba ya Simu ya Msimamizi <span class="required">*</span></label>
-                            <input type="tel" id="supervisorPhone" placeholder="+255 xxx xxx xxx" value="" onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();">
+                            <input type="tel" id="supervisorPhone" placeholder="+255 xxx xxx xxx" value="">
                         </div>
                         <div class="form-group">
                             <label>💬 Namba ya WhatsApp ya Msimamizi</label>
@@ -1374,7 +1374,7 @@
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Malengo mapya ya SMART kwa kipindi kijacho</div>
             <div class="form-group">
                 <label>📝 Malengo Mapya</label>
-                <textarea id="smartGoals" placeholder="Andika malengo mahususi, yanayopimika, yanayoweza kufikiwa, yanayofaa, na yenye muda..." onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();"></textarea>
+                <textarea id="smartGoals" placeholder="Andika malengo mahususi, yanayopimika, yanayoweza kufikiwa, yanayofaa, na yenye muda..."></textarea>
             </div>
 
             <!-- ACTION PLAN -->
@@ -1382,16 +1382,16 @@
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Mpango wa hatua za uboreshaji</div>
             <div class="form-group">
                 <label>📋 Hatua za Kuboresha</label>
-                <textarea id="actionPlan" placeholder="Orodhesha hatua za kuboresha utendaji..." onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();"></textarea>
+                <textarea id="actionPlan" placeholder="Orodhesha hatua za kuboresha utendaji..."></textarea>
             </div>
             <div class="form-row">
                 <div class="form-group">
                     <label>📅 Tarehe ya Kuanza</label>
-                    <input type="date" id="actionStartDate" onchange="autoSave(); updateSectionProgress();">
+                    <input type="date" id="actionStartDate">
                 </div>
                 <div class="form-group">
                     <label>📅 Tarehe ya Kukamilisha</label>
-                    <input type="date" id="actionEndDate" onchange="autoSave(); updateSectionProgress();">
+                    <input type="date" id="actionEndDate">
                 </div>
             </div>
 
@@ -1400,11 +1400,11 @@
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Maoni kutoka pande zote</div>
             <div class="form-group">
                 <label>👥 Maoni kutoka kwa Wenzake</label>
-                <textarea id="peerFeedback" placeholder="Maoni kutoka kwa wafanyakazi wenzake..." onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();"></textarea>
+                <textarea id="peerFeedback" placeholder="Maoni kutoka kwa wafanyakazi wenzake..."></textarea>
             </div>
             <div class="form-group">
                 <label>🩺 Maoni kutoka kwa Wagonjwa</label>
-                <textarea id="patientFeedback" placeholder="Maoni kutoka kwa wagonjwa waliohudumiwa..." onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();"></textarea>
+                <textarea id="patientFeedback" placeholder="Maoni kutoka kwa wagonjwa waliohudumiwa..."></textarea>
             </div>
 
             <!-- SELF-REFLECTION -->
@@ -1412,7 +1412,7 @@
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Tafakari ya mtendakazi kuhusu utendaji wake</div>
             <div class="form-group">
                 <label>💭 Tafakari ya Mtendakazi</label>
-                <textarea id="selfReflection" placeholder="Maoni ya mtendakazi kuhusu utendaji wake..." onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();"></textarea>
+                <textarea id="selfReflection" placeholder="Maoni ya mtendakazi kuhusu utendaji wake..."></textarea>
             </div>
 
             <!-- MAONI, MAPENDEKEZO NA UFUATILIAJI -->
@@ -1420,15 +1420,15 @@
             
             <div class="form-group">
                 <label>📝 Maoni ya Msimamizi</label>
-                <textarea id="supervisorComments" placeholder="Andika maoni yako kuhusu mtendakazi..." onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();"></textarea>
+                <textarea id="supervisorComments" placeholder="Andika maoni yako kuhusu mtendakazi..."></textarea>
             </div>
             <div class="form-group">
                 <label>💡 Mapendekezo ya Msimamizi</label>
-                <textarea id="supervisorRecommendations" placeholder="Mapendekezo yako kwa mtendakazi..." onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();"></textarea>
+                <textarea id="supervisorRecommendations" placeholder="Mapendekezo yako kwa mtendakazi..."></textarea>
             </div>
             <div class="form-group">
                 <label>🔍 Ufuatiliaji wa Msimamizi</label>
-                <textarea id="supervisorFollowUp" placeholder="Mipango yako ya ufuatiliaji..." onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();"></textarea>
+                <textarea id="supervisorFollowUp" placeholder="Mipango yako ya ufuatiliaji..."></textarea>
             </div>
 
             <!-- NOTIFICATION -->
@@ -1436,7 +1436,7 @@
             <div class="notification-box" id="notificationBox">
                 <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
                     <span style="font-weight:600;">📊 Malengo Yamefikiwa?</span>
-                    <select id="goalsAchieved" onchange="updateNotification(); autoSave(); updateSectionProgress();">
+                    <select id="goalsAchieved">
                         <option value="yes">✅ Ndiyo, Malengo Yamefikiwa</option>
                         <option value="partially">⚠️ Sehemu tu</option>
                         <option value="no">❌ Hapana, Malengo Hajafikiwa</option>
@@ -1531,8 +1531,6 @@ let reports = [];
 let signatureData = { supervisor: null };
 let uploadedFiles = [];
 let autoSaveInterval = null;
-let currentDate = new Date();
-let events = JSON.parse(localStorage.getItem('calendarEventsSupervisor') || '[]');
 
 // ==============================================================
 // CHECKLIST DATA
@@ -1551,78 +1549,12 @@ const GENERAL_CHECKLIST = [
 ];
 
 const SPECIAL_CHECKLISTS = {
-    "Medical Officer": [
-        "Kufanya uchunguzi kamili wa wagonjwa",
-        "Kuandika historia sahihi za wagonjwa",
-        "Kuagiza dawa sahihi",
-        "Kufanya taratibu za kliniki kwa ufanisi",
-        "Kushiriki katika rufaa za wagonjwa",
-        "Kuhudhuria doria za wagonjwa",
-        "Kuandaa ripoti za matibabu",
-        "Kushiriki katika mikutano ya idara",
-        "Kuhakikisha usalama wa wagonjwa",
-        "Kutoa elimu kwa wagonjwa"
-    ],
-    "Clinical Officer": [
-        "Kufanya mashauriano ya wagonjwa",
-        "Kufanya uchunguzi wa kliniki",
-        "Kutekeleza mipango ya matibabu",
-        "Kushiriki katika elimu ya wagonjwa",
-        "Kuhakikisha viwango vya usalama",
-        "Kufuatilia hali ya wagonjwa",
-        "Kuandaa ripoti za kliniki",
-        "Kushiriki katika doria za wagonjwa",
-        "Kusimamia taratibu za kliniki",
-        "Kushiriki katika rufaa"
-    ],
-    "Specialist": [
-        "Kufanya uchunguzi wa kitaalamu",
-        "Kutoa ushauri wa kitaalamu",
-        "Kusimamia taratibu maalum",
-        "Kufanya tathmini za kitaalamu",
-        "Kushiriki katika rufaa za kitaalamu",
-        "Kuandaa ripoti za kitaalamu",
-        "Kuhudhuria mikutano ya kitaalamu",
-        "Kutoa elimu ya kitaalamu",
-        "Kusimamia ubora wa huduma",
-        "Kushiriki katika utafiti"
-    ],
-    "Nurse": [
-        "Kupima vipimo muhimu kwa usahihi",
-        "Kusimamia dawa kwa usahihi",
-        "Kuandaa wagonjwa kwa taratibu",
-        "Kufuatilia hali ya wagonjwa",
-        "Kusimamia mipango ya wagonjwa",
-        "Kuhudhuria doria za wagonjwa",
-        "Kuandaa ripoti za uuguzi",
-        "Kushiriki katika elimu ya wagonjwa",
-        "Kuhakikisha usalama wa wagonjwa",
-        "Kushiriki katika mikutano ya idara"
-    ],
-    "Laboratory Scientist": [
-        "Kuchukua sampuli kwa usahihi",
-        "Kufanya vipimo sahihi vya maabara",
-        "Kurekodi na kuthibitisha matokeo",
-        "Kudumisha viwango vya usalama",
-        "Kuhakikisha udhibiti wa ubora",
-        "Kushiriki katika ukaguzi wa maabara",
-        "Kuandaa ripoti za maabara",
-        "Kudumisha vifaa vya maabara",
-        "Kushiriki katika utafiti",
-        "Kutoa elimu kwa wagonjwa"
-    ],
-    "Pharmacist": [
-        "Kuandaa dawa kwa usahihi",
-        "Kushauri wagonjwa kuhusu dawa",
-        "Kuhifadhi dawa kwa usalama",
-        "Kusimamia orodha ya dawa",
-        "Kuchakata maagizo kwa usahihi",
-        "Kuhakikisha usalama wa dawa",
-        "Kuandaa ripoti za dawa",
-        "Kushiriki katika ukaguzi wa dawa",
-        "Kutoa elimu kwa wagonjwa kuhusu dawa",
-        "Kushiriki katika mikutano ya idara"
-    ]
+    "Medical Officer": ["Kufanya uchunguzi kamili wa wagonjwa","Kuandika historia sahihi za wagonjwa","Kuagiza dawa sahihi","Kufanya taratibu za kliniki kwa ufanisi","Kushiriki katika rufaa za wagonjwa"],
+    "Clinical Officer": ["Kufanya mashauriano ya wagonjwa","Kufanya uchunguzi wa kliniki","Kutekeleza mipango ya matibabu","Kushiriki katika elimu ya wagonjwa","Kuhakikisha viwango vya usalama"],
+    "Specialist": ["Kufanya uchunguzi wa kitaalamu","Kutoa ushauri wa kitaalamu","Kusimamia taratibu maalum","Kufanya tathmini za kitaalamu","Kushiriki katika rufaa za kitaalamu"],
+    "Nurse": ["Kupima vipimo muhimu kwa usahihi","Kusimamia dawa kwa usahihi","Kuandaa wagonjwa kwa taratibu","Kufuatilia hali ya wagonjwa","Kusimamia mipango ya wagonjwa"],
+    "Laboratory Scientist": ["Kuchukua sampuli kwa usahihi","Kufanya vipimo sahihi vya maabara","Kurekodi na kuthibitisha matokeo","Kudumisha viwango vya usalama","Kuhakikisha udhibiti wa ubora"],
+    "Pharmacist": ["Kuandaa dawa kwa usahihi","Kushauri wagonjwa kuhusu dawa","Kuhifadhi dawa kwa usalama","Kusimamia orodha ya dawa","Kuchakata maagizo kwa usahihi"]
 };
 
 // ==============================================================
@@ -2013,6 +1945,9 @@ function addReminder() {
 // ==============================================================
 // CALENDAR
 // ==============================================================
+let currentDate = new Date();
+let events = JSON.parse(localStorage.getItem('calendarEventsSupervisor') || '[]');
+
 function renderCalendar() {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
