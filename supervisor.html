@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -60,7 +61,6 @@
             color: #7f8c8d;
         }
 
-        /* ===== LOGIN ===== */
         .login-box {
             max-width: 420px;
             margin: 60px auto;
@@ -78,7 +78,6 @@
             color: #7f8c8d;
         }
 
-        /* ===== MAIN APP ===== */
         #mainApp {
             display: none;
         }
@@ -601,9 +600,9 @@
 <!-- ===== LOGIN ===== -->
 <div id="loginSection" class="login-box">
     <h2>🔐 Mtwara Performance</h2>
-    <p class="subtitle">Fomu ya Msimamizi - Toleo la Kimataifa</p>
+    <p class="subtitle">Fomu ya Msimamizi</p>
     <div class="status-text">
-        <span id="connectionStatus">✅ Tayari</span>
+        <span id="connectionStatus">✅ TAYARI</span>
     </div>
     <div class="form-group">
         <label>👤 Jina la Mtumiaji</label>
@@ -626,7 +625,7 @@
         <div class="header">
             <div class="org-badge">👔 Mtwara SDA Dispensary</div>
             <h1>Fomu ya Msimamizi</h1>
-            <h2>Tathmini ya Utendaji Kazi - Toleo la Kimataifa</h2>
+            <h2>Tathmini ya Utendaji Kazi</h2>
             <div style="font-size:12px; color:#7f8c8d; margin-top:4px;">
                 <span id="userBadge" class="user-badge">👤 Imetoka nje</span>
                 <span style="margin-left:12px; font-size:11px; color:#27ae60;">☁️ Online</span>
@@ -641,10 +640,11 @@
             <span style="font-weight:600; color:#1a5276;">👤 <span id="currentUserDisplay">Mgeni</span></span>
             <span id="roleDisplay" class="role-badge">👔 Msimamizi</span>
             <button class="btn btn-danger btn-sm" onclick="logout()">🚪 Toka</button>
-            <button class="btn btn-success btn-sm" onclick="exportReport()">📊 PDF</button>
+            <button class="btn btn-success btn-sm" onclick="exportPDF()">📊 PDF</button>
             <span id="lastSaved" class="last-saved">💾 Imehifadhiwa: sasa hivi</span>
         </div>
 
+        <!-- ===== FOMU KUU ===== -->
         <div id="formSupervisor" class="form-card">
             <div class="form-title">
                 <span class="icon">👔</span>
@@ -711,7 +711,7 @@
                 </div>
             </div>
 
-            <!-- MAJUKUMU YA MTENDAKAZI -->
+            <!-- MAJUKUMU -->
             <div style="background:#eaf2f8; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #27ae60;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">📋 MAJUKUMU YA MTENDAKAZI</div>
                 
@@ -768,7 +768,7 @@
                 </div>
             </div>
 
-            <!-- TATHMINI YA MSIMAMIZI (LIKERT 1-5) -->
+            <!-- TATHMINI -->
             <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">📊 TATHMINI YA MSIMAMIZI (1-5)</div>
             
             <div class="form-group">
@@ -835,7 +835,7 @@
             <!-- COMPETENCY MATRIX -->
             <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">🏆 COMPETENCY MATRIX</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Tathmini ya uwezo na umahiri wa mtendakazi</div>
-            <div class="matrix-grid" id="competencyMatrix">
+            <div class="matrix-grid">
                 <div class="matrix-item"><span class="label">🩺 Ujuzi wa Kimatibabu</span><span class="level high">Juu</span></div>
                 <div class="matrix-item"><span class="label">🗣️ Mawasiliano</span><span class="level medium">Wastani</span></div>
                 <div class="matrix-item"><span class="label">🤝 Ushirikiano</span><span class="level high">Juu</span></div>
@@ -847,11 +847,11 @@
             <!-- KPI TRACKER -->
             <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">📊 KPI TRACKER</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Viashiria muhimu vya utendaji</div>
-            <div class="kpi-grid" id="kpiTracker">
-                <div class="kpi-item"><span class="value green" id="kpiQuality">92%</span><span class="label">Ubora wa Huduma</span></div>
-                <div class="kpi-item"><span class="value green" id="kpiPunctuality">95%</span><span class="label">Kuwasili</span></div>
-                <div class="kpi-item"><span class="value orange" id="kpiProductivity">78%</span><span class="label">Tija</span></div>
-                <div class="kpi-item"><span class="value green" id="kpiSatisfaction">88%</span><span class="label">Kuridhika kwa Wagonjwa</span></div>
+            <div class="kpi-grid">
+                <div class="kpi-item"><span class="value green">92%</span><span class="label">Ubora wa Huduma</span></div>
+                <div class="kpi-item"><span class="value green">95%</span><span class="label">Kuwasili</span></div>
+                <div class="kpi-item"><span class="value orange">78%</span><span class="label">Tija</span></div>
+                <div class="kpi-item"><span class="value green">88%</span><span class="label">Kuridhika kwa Wagonjwa</span></div>
             </div>
 
             <!-- PERFORMANCE TRENDS -->
@@ -859,7 +859,7 @@
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Mwenendo wa utendaji kwa robo mwaka</div>
             <div class="chart-container">
                 <div class="chart-title">Alama za Utendaji kwa Robo Mwaka</div>
-                <div class="chart-bars" id="trendChart">
+                <div class="chart-bars">
                     <div class="chart-bar"><div class="bar" style="height:65%;"></div><div class="value">65%</div><div class="label">Q1</div></div>
                     <div class="chart-bar"><div class="bar" style="height:72%;"></div><div class="value">72%</div><div class="label">Q2</div></div>
                     <div class="chart-bar"><div class="bar" style="height:80%;"></div><div class="value">80%</div><div class="label">Q3</div></div>
@@ -869,18 +869,18 @@
 
             <!-- GOAL SETTING -->
             <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">🎯 GOAL SETTING (SMART)</div>
-            <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Malengo mapya ya SMART kwa kipindi kijacho</div>
+            <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Malengo mapya ya SMART</div>
             <div class="form-group">
                 <label>📝 Malengo Mapya</label>
-                <textarea id="smartGoals" placeholder="Andika malengo mahususi, yanayopimika, yanayoweza kufikiwa, yanayofaa, na yenye muda..."></textarea>
+                <textarea id="smartGoals" placeholder="Andika malengo mahususi..."></textarea>
             </div>
 
             <!-- ACTION PLAN -->
             <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">📅 ACTION PLAN</div>
-            <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Mpango wa hatua za uboreshaji</div>
+            <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Mpango wa hatua</div>
             <div class="form-group">
                 <label>📋 Hatua za Kuboresha</label>
-                <textarea id="actionPlan" placeholder="Orodhesha hatua za kuboresha utendaji..."></textarea>
+                <textarea id="actionPlan" placeholder="Orodhesha hatua za kuboresha..."></textarea>
             </div>
             <div class="form-row">
                 <div class="form-group">
@@ -898,67 +898,67 @@
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Maoni kutoka pande zote</div>
             <div class="form-group">
                 <label>👥 Maoni kutoka kwa Wenzake</label>
-                <textarea id="peerFeedback" placeholder="Maoni kutoka kwa wafanyakazi wenzake..."></textarea>
+                <textarea id="peerFeedback" placeholder="Maoni kutoka kwa wenzake..."></textarea>
             </div>
             <div class="form-group">
                 <label>🩺 Maoni kutoka kwa Wagonjwa</label>
-                <textarea id="patientFeedback" placeholder="Maoni kutoka kwa wagonjwa waliohudumiwa..."></textarea>
+                <textarea id="patientFeedback" placeholder="Maoni kutoka kwa wagonjwa..."></textarea>
             </div>
 
             <!-- SELF-REFLECTION -->
             <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">📝 SELF-REFLECTION</div>
-            <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Tafakari ya mtendakazi kuhusu utendaji wake</div>
+            <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Tafakari ya mtendakazi</div>
             <div class="form-group">
                 <label>💭 Tafakari ya Mtendakazi</label>
-                <textarea id="selfReflection" placeholder="Maoni ya mtendakazi kuhusu utendaji wake..."></textarea>
+                <textarea id="selfReflection" placeholder="Maoni ya mtendakazi..."></textarea>
             </div>
 
             <!-- MAONI, MAPENDEKEZO NA UFUATILIAJI -->
-            <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">📝 MAONI, MAPENDEKEZO NA UFUATILIAJI</div>
+            <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">📝 MAONI NA MAPENDEKEZO</div>
             
             <div class="form-group">
                 <label>📝 Maoni ya Msimamizi</label>
-                <textarea id="supervisorComments" placeholder="Andika maoni yako kuhusu mtendakazi..."></textarea>
+                <textarea id="supervisorComments" placeholder="Andika maoni yako..."></textarea>
             </div>
             <div class="form-group">
                 <label>💡 Mapendekezo ya Msimamizi</label>
-                <textarea id="supervisorRecommendations" placeholder="Mapendekezo yako kwa mtendakazi..."></textarea>
+                <textarea id="supervisorRecommendations" placeholder="Mapendekezo yako..."></textarea>
             </div>
             <div class="form-group">
                 <label>🔍 Ufuatiliaji wa Msimamizi</label>
-                <textarea id="supervisorFollowUp" placeholder="Mipango yako ya ufuatiliaji..."></textarea>
+                <textarea id="supervisorFollowUp" placeholder="Mipango ya ufuatiliaji..."></textarea>
             </div>
 
             <!-- NOTIFICATION -->
             <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">🔔 NOTIFICATION</div>
-            <div class="notification-box" id="notificationBox">
+            <div class="notification-box">
                 <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
                     <span style="font-weight:600;">📊 Malengo Yamefikiwa?</span>
-                    <select id="goalsAchieved" onchange="updateNotification()">
+                    <select id="goalsAchieved">
                         <option value="yes">✅ Ndiyo, Malengo Yamefikiwa</option>
                         <option value="partially">⚠️ Sehemu tu</option>
-                        <option value="no">❌ Hapana, Malengo Hajafikiwa</option>
+                        <option value="no">❌ Hapana</option>
                     </select>
                 </div>
                 <div id="notificationMessage" style="margin-top:6px; font-size:13px;">
-                    ✅ Mtendakazi amefikia malengo yote yaliyopangwa.
+                    ✅ Mtendakazi amefikia malengo yote.
                 </div>
             </div>
 
             <!-- DOCUMENT UPLOAD -->
             <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">📎 DOCUMENT UPLOAD</div>
-            <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Pakia nyaraka za usaidizi (ripoti, cheti, n.k.)</div>
+            <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Pakia nyaraka</div>
             <div class="file-upload" onclick="document.getElementById('fileInput').click()">
                 <div class="icon">📄</div>
-                <div class="text">Bonyeza hapa kupakia faili au buruta na uachia</div>
+                <div class="text">Bonyeza hapa kupakia faili</div>
                 <input type="file" id="fileInput" multiple onchange="handleFiles(this.files)">
             </div>
             <div class="file-list" id="fileList"></div>
 
-            <!-- MUHTASARI WA HALI YA TATHMINI -->
+            <!-- SCORE BOX -->
             <div class="score-box" style="margin-top:16px;">
-                <h3>📊 MUHTASARI WA HALI YA TATHMINI</h3>
-                <div class="score-row" id="scoreSummary">
+                <h3>📊 MUHTASARI WA HALI</h3>
+                <div class="score-row">
                     <div class="score-item">
                         <span class="number" id="scoreTotal">0%</span>
                         <span class="label">Alama ya Jumla</span>
@@ -974,10 +974,6 @@
                     <div class="score-item">
                         <span class="number" id="scoreTasks">0/0</span>
                         <span class="label">Majukumu</span>
-                    </div>
-                    <div class="score-item">
-                        <span class="number" id="scoreTrend">⏳</span>
-                        <span class="label">Mwenendo</span>
                     </div>
                 </div>
                 <div class="progress-bar">
@@ -1006,7 +1002,7 @@
 
         <div class="footer">
             <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
-            <div>Mtwara Performance | Fomu ya Msimamizi | Toleo la Kimataifa</div>
+            <div>Mtwara Performance | Fomu ya Msimamizi</div>
         </div>
 
     </div>
@@ -1039,11 +1035,11 @@ const GENERAL_CHECKLIST = [
 ];
 
 const SPECIAL_CHECKLISTS = {
-    "Medical Officer": ["Kufanya uchunguzi kamili wa wagonjwa","Kuandika historia sahihi za wagonjwa","Kuagiza dawa sahihi","Kufanya taratibu za kliniki kwa ufanisi","Kushiriki katika rufaa za wagonjwa"],
+    "Medical Officer": ["Kufanya uchunguzi kamili wa wagonjwa","Kuandika historia sahihi","Kuagiza dawa sahihi","Kufanya taratibu za kliniki","Kushiriki katika rufaa"],
     "Clinical Officer": ["Kufanya mashauriano ya wagonjwa","Kufanya uchunguzi wa kliniki","Kutekeleza mipango ya matibabu","Kushiriki katika elimu ya wagonjwa","Kuhakikisha viwango vya usalama"],
-    "Specialist": ["Kufanya uchunguzi wa kitaalamu","Kutoa ushauri wa kitaalamu","Kusimamia taratibu maalum","Kufanya tathmini za kitaalamu","Kushiriki katika rufaa za kitaalamu"],
-    "Nurse": ["Kupima vipimo muhimu kwa usahihi","Kusimamia dawa kwa usahihi","Kuandaa wagonjwa kwa taratibu","Kufuatilia hali ya wagonjwa","Kusimamia mipango ya wagonjwa"],
-    "Laboratory Scientist": ["Kuchukua sampuli kwa usahihi","Kufanya vipimo sahihi vya maabara","Kurekodi na kuthibitisha matokeo","Kudumisha viwango vya usalama","Kuhakikisha udhibiti wa ubora"],
+    "Specialist": ["Kufanya uchunguzi wa kitaalamu","Kutoa ushauri wa kitaalamu","Kusimamia taratibu maalum","Kufanya tathmini za kitaalamu","Kushiriki katika rufaa"],
+    "Nurse": ["Kupima vipimo muhimu","Kusimamia dawa kwa usahihi","Kuandaa wagonjwa kwa taratibu","Kufuatilia hali ya wagonjwa","Kusimamia mipango ya wagonjwa"],
+    "Laboratory Scientist": ["Kuchukua sampuli kwa usahihi","Kufanya vipimo sahihi","Kurekodi na kuthibitisha matokeo","Kudumisha viwango vya usalama","Kuhakikisha udhibiti wa ubora"],
     "Pharmacist": ["Kuandaa dawa kwa usahihi","Kushauri wagonjwa kuhusu dawa","Kuhifadhi dawa kwa usalama","Kusimamia orodha ya dawa","Kuchakata maagizo kwa usahihi"]
 };
 
@@ -1117,24 +1113,6 @@ function updateWorkerChecklist() {
     document.getElementById("workerRoleLabel").textContent = role;
     renderChecklist("supervisorGeneralChecklist", GENERAL_CHECKLIST, "supervisorGeneral");
     renderChecklist("supervisorSpecialChecklist", SPECIAL_CHECKLISTS[role] || SPECIAL_CHECKLISTS["Medical Officer"], "supervisorSpecial");
-    updateScoreSummary();
-}
-
-function updateNotification() {
-    const value = document.getElementById("goalsAchieved").value;
-    const msg = document.getElementById("notificationMessage");
-    const box = document.getElementById("notificationBox");
-    
-    box.className = "notification-box";
-    if (value === "yes") {
-        msg.innerHTML = "✅ Mtendakazi amefikia malengo yote yaliyopangwa. Hali ni nzuri.";
-        box.classList.add("success");
-    } else if (value === "partially") {
-        msg.innerHTML = "⚠️ Mtendakazi amefikia malengo kwa sehemu. Inahitaji ufuatiliaji zaidi.";
-    } else {
-        msg.innerHTML = "❌ Mtendakazi hajafikia malengo yaliyopangwa. Ufuatiliaji wa haraka unahitajika.";
-        box.classList.add("danger");
-    }
     updateScoreSummary();
 }
 
@@ -1248,11 +1226,6 @@ function updateScoreSummary() {
     document.getElementById("scoreGoals").textContent = goalsText;
     document.getElementById("scoreGoals").className = "number " + (goalsValue === "yes" ? "green" : goalsValue === "partially" ? "orange" : "red");
     
-    const trendValues = [65, 72, 80, 88];
-    const lastTrend = trendValues[trendValues.length - 1];
-    document.getElementById("scoreTrend").textContent = lastTrend + "%";
-    document.getElementById("scoreTrend").className = "number " + (lastTrend >= 70 ? "green" : lastTrend >= 50 ? "orange" : "red");
-    
     const statusText = overallScore >= 70 ? "✅ Nzuri" : overallScore >= 50 ? "⚠️ Wastani" : "❌ Inahitaji Uboreshaji";
     document.getElementById("scoreStatus").textContent = statusText;
     document.getElementById("scoreStatus").className = "number " + (overallScore >= 70 ? "green" : overallScore >= 50 ? "orange" : "red");
@@ -1261,9 +1234,9 @@ function updateScoreSummary() {
 }
 
 // ==============================================================
-// EXPORT REPORT (PDF)
+// EXPORT PDF
 // ==============================================================
-function exportReport() {
+function exportPDF() {
     showToast("📊 Inaandaa ripoti...", "info");
     setTimeout(() => {
         try {
@@ -1292,7 +1265,7 @@ function exportReport() {
                 ${content.innerHTML}
                 <div class="footer">
                     <p>"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</p>
-                    <p>Mtwara Performance | Fomu ya Msimamizi | Toleo la Kimataifa</p>
+                    <p>Mtwara Performance | Fomu ya Msimamizi</p>
                 </div>
                 <script>window.onload = function(){ window.print(); }</script>
             </body></html>
@@ -1313,7 +1286,6 @@ function login() {
     const password = document.getElementById("loginPassword").value.trim();
     if (!username || !password) { showToast("❌ Tafadhali jaza sehemu zote", "error"); return; }
     
-    // Users database (local)
     const users = {
         supervisor: { password: "1234", role: "supervisor" },
         worker: { password: "1234", role: "worker" },
@@ -1329,18 +1301,15 @@ function login() {
     currentUser = username;
     currentRole = user.role;
     
-    // Load saved reports
     const savedReports = localStorage.getItem("mtwaraReports");
     if (savedReports) {
         reports = JSON.parse(savedReports);
     }
     
-    // Onyesha main app
     document.getElementById("loginSection").style.display = "none";
     document.getElementById("mainApp").style.display = "block";
     document.getElementById("mainApp").classList.add("show");
     
-    // Update user info
     document.getElementById("currentUserDisplay").textContent = username;
     document.getElementById("userBadge").textContent = `👤 ${username}`;
     document.getElementById("roleDisplay").textContent = "👔 Msimamizi";
@@ -1351,7 +1320,6 @@ function login() {
     
     setTimeout(() => initSigPad("supervisor"), 500);
     updateWorkerChecklist();
-    updateNotification();
     updateScoreSummary();
     showToast(`✅ Karibu ${username}!`, "success");
 }
@@ -1384,7 +1352,7 @@ function submitSupervisor() {
     if (!signatureData.supervisor) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
 
     const report = {
-        type: "supervisor_assessment_international",
+        type: "supervisor_assessment",
         id: Date.now(),
         workerName: workerName,
         workerRole: document.getElementById("workerRole").value,
@@ -1428,7 +1396,6 @@ function submitSupervisor() {
         timestamp: new Date().toISOString()
     };
 
-    // Save to localStorage
     if (!reports) reports = [];
     reports.push(report);
     localStorage.setItem("mtwaraReports", JSON.stringify(reports));
@@ -1448,11 +1415,10 @@ function submitSupervisor() {
 // ==============================================================
 window.onload = function() {
     document.getElementById("binIdDisplay").textContent = "Local Storage";
-    document.getElementById("connectionStatus").textContent = "✅ Tayari";
+    document.getElementById("connectionStatus").textContent = "✅ TAYARI";
     updateWorkerChecklist();
-    updateNotification();
     updateScoreSummary();
-    console.log("✅ Mtwara Performance - Fomu ya Msimamizi (Toleo la Kimataifa)");
+    console.log("✅ Mtwara Performance - Fomu ya Msimamizi");
     console.log("📦 Hifadhi: Local Storage");
 };
 </script>
