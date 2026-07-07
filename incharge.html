@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -1362,7 +1363,7 @@ function updatePreview() {
 }
 
 // ==============================================================
-// EXPORT PDF - ILIYOBORESHA (INACHUKUA DATA ILIYOJAZWA TU)
+// EXPORT PDF - INAONYESHA DATA ZILIZOJAWA TU
 // ==============================================================
 function exportPDF() {
     showToast("📄 Inaandaa PDF...", "info");
@@ -1381,13 +1382,11 @@ function exportPDF() {
             const supervisorTitle = document.getElementById("supervisorTitle").value || "Hajajazwa";
             const supervisorDepartment = document.getElementById("supervisorDepartment").value || "Hajajazwa";
             
-            // Get checklist data
             const generalChecked = document.querySelectorAll("#inchargeGeneralChecklist .toggle.active").length;
             const generalTotal = document.querySelectorAll("#inchargeGeneralChecklist .checklist-item").length;
             const specialChecked = document.querySelectorAll("#inchargeSpecialChecklist .toggle.active").length;
             const specialTotal = document.querySelectorAll("#inchargeSpecialChecklist .checklist-item").length;
             
-            // Get ratings
             const ratings = getLikertLabels("iQuality","iIntegrity","iSafety","iTeamwork","iLeadership","iCommunication");
             const ratingsValues = getLikertValues("iQuality","iIntegrity","iSafety","iTeamwork","iLeadership","iCommunication");
             
@@ -1396,10 +1395,8 @@ function exportPDF() {
             const finalDecision = document.getElementById("finalDecision").value;
             const decisionText = finalDecision === "approved" ? "✅ Imekubaliwa" : finalDecision === "rejected" ? "❌ Imekataliwa" : "⏳ Imeahirishwa";
             
-            // Signature
             const hasSignature = signatureData.incharge ? "✅ Imehifadhiwa" : "❌ Hakuna";
             
-            // Build HTML
             const html = `
             <html>
             <head>
@@ -1414,12 +1411,6 @@ function exportPDF() {
                     .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; margin: 4px 0; }
                     .row .label { font-weight: 600; color: #1a5276; }
                     .row .value { color: #333; }
-                    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; }
-                    .grid .item { padding: 3px 0; border-bottom: 1px solid #f0f2f5; }
-                    .grid .item .label { font-weight: 600; color: #1a5276; }
-                    .checklist-summary { display: flex; gap: 20px; flex-wrap: wrap; margin: 8px 0; }
-                    .checklist-summary .item { background: #f8f9fa; padding: 6px 14px; border-radius: 6px; font-size: 13px; }
-                    .checklist-summary .item .num { font-weight: 700; color: #1a5276; }
                     .rating-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 4px 0; }
                     .rating-row .item { background: #f8f9fa; padding: 4px 12px; border-radius: 4px; font-size: 13px; }
                     .rating-row .item .num { font-weight: 700; color: #8e44ad; }
@@ -1428,6 +1419,9 @@ function exportPDF() {
                     .status-deferred { color: #f39c12; font-weight: 700; }
                     .footer { margin-top: 30px; padding-top: 20px; border-top: 2px solid #ecf0f1; text-align: center; font-size: 12px; color: #7f8c8d; }
                     .signature-box { background: #f8f9fa; padding: 10px 16px; border-radius: 8px; margin: 8px 0; }
+                    .checklist-summary { display: flex; gap: 20px; flex-wrap: wrap; margin: 8px 0; }
+                    .checklist-summary .item { background: #f8f9fa; padding: 6px 14px; border-radius: 6px; font-size: 13px; }
+                    .checklist-summary .item .num { font-weight: 700; color: #1a5276; }
                     @media print { body { padding: 20px; } }
                     .no-data { color: #7f8c8d; font-style: italic; }
                 </style>
@@ -1439,13 +1433,12 @@ function exportPDF() {
                     <p><strong>Mganga Mfawidhi</strong> | ${new Date().toLocaleString()}</p>
                 </div>
 
-                <!-- TAARIFA ZA MTENDAKAZI -->
                 <div class="section">
                     <h2>📋 Taarifa za Mtendakazi</h2>
                     <div class="row">
                         <div><span class="label">Jina Kamili:</span> <span class="value">${workerName}</span></div>
                         <div><span class="label">Taaluma:</span> <span class="value">${workerRole}</span></div>
-                        <div><span class="label">Tarehe ya Tathmini:</span> <span class="value">${workerDate}</span></div>
+                        <div><span class="label">Tarehe:</span> <span class="value">${workerDate}</span></div>
                         <div><span class="label">Zamu:</span> <span class="value">${workerShift}</span></div>
                         <div><span class="label">Idara:</span> <span class="value">${workerDepartment}</span></div>
                         <div><span class="label">Barua Pepe:</span> <span class="value">${workerEmail}</span></div>
@@ -1453,7 +1446,6 @@ function exportPDF() {
                     </div>
                 </div>
 
-                <!-- TAARIFA ZA MSIMAMIZI -->
                 <div class="section">
                     <h2>👔 Taarifa za Msimamizi</h2>
                     <div class="row">
@@ -1463,17 +1455,15 @@ function exportPDF() {
                     </div>
                 </div>
 
-                <!-- MAJUKUMU YA MTENDAKAZI -->
                 <div class="section">
                     <h2>📋 Majukumu ya Mtendakazi</h2>
                     <div class="checklist-summary">
                         <div class="item"><span class="num">${generalChecked}/${generalTotal}</span> Majukumu ya Jumla</div>
                         <div class="item"><span class="num">${specialChecked}/${specialTotal}</span> Majukumu Maalum</div>
-                        <div class="item"><span class="num">${generalChecked + specialChecked}/${generalTotal + specialTotal}</span> Jumla ya Majukumu</div>
+                        <div class="item"><span class="num">${generalChecked + specialChecked}/${generalTotal + specialTotal}</span> Jumla</div>
                     </div>
                 </div>
 
-                <!-- TATHMINI YA MGANGA MFAWIDHI -->
                 <div class="section">
                     <h2>📊 Tathmini ya Mganga Mfawidhi</h2>
                     <div class="rating-row">
@@ -1484,19 +1474,17 @@ function exportPDF() {
                     </div>
                 </div>
 
-                <!-- UAMUZI WA MWISHO -->
                 <div class="section">
                     <h2>⚖️ Uamuzi wa Mwisho</h2>
                     <div class="row">
-                        <div><span class="label">Maoni ya Mwisho:</span> <span class="value">${finalComments}</span></div>
-                        <div><span class="label">Mapendekezo:</span> <span class="value">${finalRecommendations}</span></div>
+                        <div style="grid-column: span 2;"><span class="label">Maoni:</span> <span class="value">${finalComments}</span></div>
+                        <div style="grid-column: span 2;"><span class="label">Mapendekezo:</span> <span class="value">${finalRecommendations}</span></div>
                         <div style="grid-column: span 2;"><span class="label">Uamuzi:</span> 
                             <span class="${finalDecision === 'approved' ? 'status-approved' : finalDecision === 'rejected' ? 'status-rejected' : 'status-deferred'}">${decisionText}</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- SAHIHI -->
                 <div class="section">
                     <h2>✍️ Sahihi</h2>
                     <div class="signature-box">
@@ -1505,7 +1493,6 @@ function exportPDF() {
                     </div>
                 </div>
 
-                <!-- MUHTASARI WA HALI -->
                 <div class="section" style="background:#e8daef; border-color:#8e44ad;">
                     <h2>📊 Muhtasari wa Hali</h2>
                     <div class="row">
@@ -1592,20 +1579,77 @@ function exportPrint() {
     }, 500);
 }
 
+// ==============================================================
+// EXPORT WHATSAPP - ILIYOBORESHA (INAONYESHA DATA ZILIZOJAWA TU)
+// ==============================================================
 function exportWhatsApp() {
     showToast("💬 Inaandaa kwa WhatsApp...", "info");
     setTimeout(() => {
         try {
-            const content = document.getElementById("formIncharge").cloneNode(true);
-            content.querySelectorAll(".signature-pad, .signature-actions, .toast, .user-tools, .export-tools").forEach(el => el.remove());
+            // Kusanya data zilizojazwa
+            const workerName = document.getElementById("workerName").value.trim() || "Hajajazwa";
+            const workerRole = document.getElementById("workerRole").value || "Hajajazwa";
+            const workerDate = document.getElementById("workerDate").value || "Hajajazwa";
+            const workerShift = document.getElementById("workerShift").value || "Hajajazwa";
+            const workerDepartment = document.getElementById("workerDepartment").value || "Hajajazwa";
             
-            const text = content.textContent.replace(/\s+/g, ' ').trim();
-            const workerName = document.getElementById("workerName").value || "Mtendakazi";
-            const message = `📊 *Ripoti ya Tathmini - Mganga Mfawidhi*\n\n` +
-                           `👤 Mtendakazi: ${workerName}\n` +
-                           `📅 Tarehe: ${new Date().toLocaleDateString()}\n` +
-                           `📋 Muhtasari: ${text.substring(0, 1500)}...\n\n` +
-                           `🔄 Imetumwa kutoka Mtwara Performance Appraisal System`;
+            const supervisorName = document.getElementById("supervisorName").value.trim() || "Hajajazwa";
+            const supervisorTitle = document.getElementById("supervisorTitle").value || "Hajajazwa";
+            
+            const generalChecked = document.querySelectorAll("#inchargeGeneralChecklist .toggle.active").length;
+            const generalTotal = document.querySelectorAll("#inchargeGeneralChecklist .checklist-item").length;
+            const specialChecked = document.querySelectorAll("#inchargeSpecialChecklist .toggle.active").length;
+            const specialTotal = document.querySelectorAll("#inchargeSpecialChecklist .checklist-item").length;
+            
+            const ratings = getLikertLabels("iQuality","iIntegrity","iSafety","iTeamwork","iLeadership","iCommunication");
+            const ratingsValues = getLikertValues("iQuality","iIntegrity","iSafety","iTeamwork","iLeadership","iCommunication");
+            
+            const finalComments = document.getElementById("finalComments").value.trim() || "Hakuna maoni";
+            const finalRecommendations = document.getElementById("finalRecommendations").value.trim() || "Hakuna mapendekezo";
+            const finalDecision = document.getElementById("finalDecision").value;
+            const decisionText = finalDecision === "approved" ? "✅ Imekubaliwa" : finalDecision === "rejected" ? "❌ Imekataliwa" : "⏳ Imeahirishwa";
+            
+            // Build message
+            const ratingLines = Object.keys(ratings).map(key => {
+                const label = key.replace('i', '').replace(/([A-Z])/g, ' $1').trim();
+                return `   ${label}: ${ratingsValues[key] || 0}/5`;
+            }).join('\n');
+            
+            const message = `📊 *RIPOTI YA MGANGA MFAWIDHI*
+━━━━━━━━━━━━━━━━━━━━━
+
+📋 *TAARIFA ZA MTENDAKAZI*
+👤 Jina: ${workerName}
+📋 Taaluma: ${workerRole}
+📅 Tarehe: ${workerDate}
+🕐 Zamu: ${workerShift}
+🏢 Idara: ${workerDepartment}
+
+👔 *TAARIFA ZA MSIMAMIZI*
+👔 Jina: ${supervisorName}
+📋 Wadhifa: ${supervisorTitle}
+
+📋 *MAJUKUMU YA MTENDAKAZI*
+📋 Jumla: ${generalChecked}/${generalTotal}
+⭐ Maalum: ${specialChecked}/${specialTotal}
+📊 Jumla: ${generalChecked + specialChecked}/${generalTotal + specialTotal}
+
+📊 *TATHMINI YA MGANGA MFAWIDHI*
+${ratingLines}
+
+⚖️ *UAMUZI WA MWISHO*
+📝 Maoni: ${finalComments}
+💡 Mapendekezo: ${finalRecommendations}
+📊 Uamuzi: ${decisionText}
+
+📊 *MUHTASARI WA HALI*
+🎯 Alama: ${document.getElementById("scoreTotal").textContent}
+📈 Hali: ${document.getElementById("scoreStatus").textContent}
+📉 Pengo: ${document.getElementById("scoreGap").textContent}
+
+━━━━━━━━━━━━━━━━━━━━━
+🔄 Imetumwa kutoka Mtwara Performance
+📅 ${new Date().toLocaleDateString()}`;
             
             const encoded = encodeURIComponent(message);
             const phone = prompt("💬 Weka namba ya simu (bila 0 au +255):", "712345678");
@@ -1943,9 +1987,9 @@ window.onload = function() {
     updatePreview();
     updateDecisionNotification();
     updateScoreSummary();
-    console.log("✅ Mtwara Performance - Fomu ya Mganga Mfawidhi (Toleo Jipya)");
+    console.log("✅ Mtwara Performance - Fomu ya Mganga Mfawidhi");
     console.log("📦 BIN ID:", BIN_ID);
-    console.log("📋 PDF inaonyesha data zilizojazwa tu!");
+    console.log("📋 PDF na WhatsApp zinaonyesha data zilizojazwa tu!");
 };
 </script>
 
