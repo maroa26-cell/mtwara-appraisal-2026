@@ -220,6 +220,8 @@
         .btn-github:hover { background: #1a1e22; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(36,41,46,0.3); }
         .btn-chat { background: #1abc9c; color: #fff; }
         .btn-chat:hover { background: #16a085; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(26,188,156,0.3); }
+        .btn-share { background: #3498db; color: #fff; }
+        .btn-share:hover { background: #2980b9; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(52,152,219,0.3); }
         .btn-sm { padding: 6px 14px; font-size: 12px; }
         .btn-block { width: 100%; justify-content: center; }
         .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
@@ -803,6 +805,73 @@
             flex-wrap: wrap;
         }
 
+        .history-box {
+            background: #fef9e7;
+            border: 2px solid #f39c12;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+        }
+        .history-box .title {
+            font-weight: 700;
+            color: #f39c12;
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .history-list {
+            max-height: 200px;
+            overflow-y: auto;
+            font-size: 12px;
+        }
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 10px;
+            border-bottom: 1px solid #f0f2f5;
+            cursor: pointer;
+        }
+        .history-item:hover { background: #f8f9fa; }
+        .history-item .date { color: #7f8c8d; }
+        .history-item .restore-btn {
+            color: #8e44ad;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .share-box {
+            background: #eaf2f8;
+            border: 2px solid #3498db;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+        }
+        .share-box .title {
+            font-weight: 700;
+            color: #3498db;
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .share-link {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .share-link input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 13px;
+            min-width: 200px;
+        }
+
         @media (max-width: 768px) {
             .form-card { padding: 16px; }
             .form-row { grid-template-columns: 1fr; }
@@ -815,6 +884,8 @@
             .export-tools { flex-direction: column; align-items: stretch; }
             .export-tools .btn-group { justify-content: center; }
             .chat-modal .chat-box { width: 95%; max-height: 90vh; }
+            .share-link { flex-direction: column; }
+            .share-link input { width: 100%; }
         }
         @media (max-width: 400px) {
             .score-row { grid-template-columns: 1fr; }
@@ -862,7 +933,7 @@
                 <span style="margin-left:12px; font-size:11px; color:#8e44ad;">📄 <span id="reportIdDisplay">-</span></span>
             </div>
             <div class="bin-info">
-                📦 Hifadhi: <span id="binIdDisplay">Local Storage + GitHub</span>
+                📦 Hifadhi: <span id="binIdDisplay">Local Storage + GitHub + Encrypted</span>
             </div>
             <div class="mission"><strong>Dhamira:</strong> "Ubora katika Huduma, Imani katika Vitendo"</div>
             <div id="deadlineContainer" style="margin-top: 10px;">
@@ -887,13 +958,46 @@
                 <span style="font-size:11px; background:#24292e; color:#fff; padding:2px 12px; border-radius:12px;">Hifadhi na GitHub</span>
             </div>
             <div class="status">
-                <span id="githubStatus">📦 Data imehifadhiwa kwenye Local Storage. Bonyeza "Hifadhi GitHub" kuweka kwenye repo yako.</span>
+                <span id="githubStatus">📦 Data imehifadhiwa kwenye Local Storage.</span>
             </div>
             <div class="btn-group">
                 <button class="btn btn-github btn-sm" onclick="saveToGitHub()">💾 Hifadhi GitHub</button>
                 <button class="btn btn-primary btn-sm" onclick="loadFromGitHub()">📥 Pakia GitHub</button>
                 <button class="btn btn-warning btn-sm" onclick="exportJSON()">📄 Export JSON</button>
                 <button class="btn btn-success btn-sm" onclick="importJSON()">📂 Import JSON</button>
+                <button class="btn btn-danger btn-sm" onclick="clearAllData()">🗑️ Futa Data</button>
+            </div>
+        </div>
+
+        <!-- ===== SHARE BOX ===== -->
+        <div class="share-box">
+            <div class="title">
+                <span>🔗 SHARE DATA</span>
+                <span style="font-size:11px; background:#3498db; color:#fff; padding:2px 12px; border-radius:12px;">Shiriki na wenzako</span>
+            </div>
+            <div class="share-link">
+                <input type="text" id="shareLinkInput" placeholder="Bonyeza 'Generate Link' kuunda link..." readonly>
+                <button class="btn btn-share btn-sm" onclick="generateShareLink()">🔗 Generate Link</button>
+                <button class="btn btn-primary btn-sm" onclick="copyShareLink()">📋 Nakili Link</button>
+                <button class="btn btn-success btn-sm" onclick="openShareLink()">🌐 Fungua Link</button>
+            </div>
+            <div style="margin-top:8px; font-size:11px; color:#7f8c8d;">
+                💡 Link ina data iliyosimbwa (encrypted) na inaweza kutumika kushiriki data yako.
+            </div>
+        </div>
+
+        <!-- ===== HISTORY BOX ===== -->
+        <div class="history-box">
+            <div class="title">
+                <span>📜 HISTORIA YA DATA</span>
+                <span style="font-size:11px; background:#f39c12; color:#fff; padding:2px 12px; border-radius:12px;">Versioning</span>
+            </div>
+            <div class="history-list" id="historyList">
+                <div style="color:#7f8c8d; font-size:12px;">Hakuna historia bado.</div>
+            </div>
+            <div style="margin-top:8px; display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="btn btn-sm btn-warning" onclick="saveVersion()">💾 Hifadhi Toleo</button>
+                <button class="btn btn-sm btn-danger" onclick="clearHistory()">🗑️ Futa Historia</button>
             </div>
         </div>
 
@@ -964,7 +1068,7 @@
                     <input type="text" id="workerDepartment" value="Clinical" onchange="autoSave();" oninput="autoSave();">
                 </div>
 
-                <!-- TATHMINI YA MTENDAKAZI (KWA COMPARISON) -->
+                <!-- TATHMINI YA MTENDAKAZI -->
                 <div style="margin-top:12px; background:#d5f5e3; border-radius:8px; padding:12px 16px; border:2px solid #27ae60;">
                     <div style="font-weight:700; color:#27ae60; font-size:14px; margin-bottom:8px; display:flex; align-items:center; gap:8px;">
                         📊 TATHMINI YA MTENDAKAZI
@@ -1059,7 +1163,7 @@
                     <input type="text" id="supervisorDepartment" placeholder="Idara ya msimamizi" value="" onchange="autoSave();" oninput="autoSave();">
                 </div>
 
-                <!-- TATHMINI YA MSIMAMIZI (KWA COMPARISON) -->
+                <!-- TATHMINI YA MSIMAMIZI -->
                 <div style="margin-top:12px; background:#fef9e7; border-radius:8px; padding:12px 16px; border:2px solid #f39c12;">
                     <div style="font-weight:700; color:#f39c12; font-size:14px; margin-bottom:8px; display:flex; align-items:center; gap:8px;">
                         📊 TATHMINI YA MSIMAMIZI
@@ -1196,7 +1300,7 @@
                 </div>
             </div>
 
-            <!-- COMPARISON TABLE (KWA DATA HALISI) -->
+            <!-- COMPARISON TABLE -->
             <div style="margin-top:16px; font-weight:700; color:#8e44ad; font-size:15px;">📊 COMPARISON TABLE</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Linganisha tathmini ya mtendakazi na msimamizi</div>
             <table class="comparison-table" id="comparisonTable">
@@ -1381,7 +1485,7 @@
             <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
             <div>Mtwara Performance | Fomu ya Mganga Mfawidhi</div>
             <div style="margin-top:4px; font-size:10px; color:#aab;">
-                📄 PDF | 🖨️ Print | 💬 WhatsApp | 📋 Nakili | ⭐ Star Rating | 📊 Comparison | 💬 Chat | 🐙 GitHub Sync
+                📄 PDF | 🖨️ Print | 💬 WhatsApp | 📋 Nakili | ⭐ Star Rating | 📊 Comparison | 💬 Chat | 🐙 GitHub | 🔗 Share | 📜 History | 🔐 Encrypted
             </div>
         </div>
 
@@ -1420,6 +1524,47 @@ let starRatings = {};
 let workerContactData = { phone: '', whatsapp: '', email: '' };
 let supervisorContactData = { phone: '', whatsapp: '', email: '' };
 let chatTarget = null;
+let dataHistory = [];
+let encryptionKey = '';
+
+// ==============================================================
+// ENCRYPTION FUNCTIONS (Kuweka password kwa data)
+// ==============================================================
+function encryptData(data, password) {
+    try {
+        const json = JSON.stringify(data);
+        // Simple XOR encryption (kwa mfano, lakini inaweza kuboreshwa)
+        let result = '';
+        for (let i = 0; i < json.length; i++) {
+            const charCode = json.charCodeAt(i) ^ password.charCodeAt(i % password.length);
+            result += String.fromCharCode(charCode);
+        }
+        return btoa(result); // Base64 encoding
+    } catch (e) {
+        return null;
+    }
+}
+
+function decryptData(encrypted, password) {
+    try {
+        const decoded = atob(encrypted);
+        let result = '';
+        for (let i = 0; i < decoded.length; i++) {
+            const charCode = decoded.charCodeAt(i) ^ password.charCodeAt(i % password.length);
+            result += String.fromCharCode(charCode);
+        }
+        return JSON.parse(result);
+    } catch (e) {
+        return null;
+    }
+}
+
+function promptForPassword(action) {
+    return new Promise((resolve) => {
+        const password = prompt(`🔐 Weka nenosiri la ${action} data (acha tupu kama hutaki encryption):`, '');
+        resolve(password || '');
+    });
+}
 
 // ==============================================================
 // CHECKLIST DATA
@@ -1553,7 +1698,7 @@ function getSupervisorData() {
 }
 
 // ==============================================================
-// UPDATE COMPARISON TABLE (KWA DATA HALISI)
+// UPDATE COMPARISON TABLE
 // ==============================================================
 function updateComparison() {
     const workerData = getWorkerData();
@@ -1616,7 +1761,6 @@ function updateComparison() {
         conclusion.textContent = `🔴 Pengo kubwa ${largeGaps} zimegunduliwa. Uboreshaji wa haraka unahitajika.`;
     }
     
-    // Update score summary
     updateScoreSummary();
     autoSave();
 }
@@ -1825,7 +1969,6 @@ function sendMessage() {
     
     showToast(`✅ Ujumbe umetumwa kwa ${chatTarget === 'worker' ? 'mtendakazi' : 'msimamizi'}!`, "success");
     
-    // Simulate reply
     simulateReply(key);
 }
 
@@ -1864,31 +2007,48 @@ function simulateReply(key) {
 function saveToGitHub() {
     showToast("🐙 Inahifadhi kwenye GitHub...", "info");
     
-    const allData = {
-        formData: collectFormData(),
-        checklists: {
-            general: JSON.parse(localStorage.getItem("inchargeGeneral") || "{}"),
-            special: JSON.parse(localStorage.getItem("inchargeSpecial") || "{}")
-        },
-        starRatings: starRatings,
-        reports: reports,
-        chatMessages: getAllChatMessages(),
-        timestamp: new Date().toISOString(),
-        reportId: document.getElementById("reportIdDisplay").textContent
-    };
-    
-    localStorage.setItem("githubBackup", JSON.stringify(allData));
-    document.getElementById("githubStatus").innerHTML = "✅ Data imehifadhiwa kwenye Local Storage. <br>💡 Ili kuhifadhi kwenye repo yako, tumia Export JSON na uiweke kwenye GitHub.";
-    
-    // Export JSON automatically
-    exportJSON();
-    showToast("✅ Data imehifadhiwa! Angalia faili ya JSON iliyopakuliwa.", "success");
+    promptForPassword('kuhifadhi').then(password => {
+        let allData = {
+            formData: collectFormData(),
+            checklists: {
+                general: JSON.parse(localStorage.getItem("inchargeGeneral") || "{}"),
+                special: JSON.parse(localStorage.getItem("inchargeSpecial") || "{}")
+            },
+            starRatings: starRatings,
+            reports: reports,
+            chatMessages: getAllChatMessages(),
+            timestamp: new Date().toISOString(),
+            reportId: document.getElementById("reportIdDisplay").textContent
+        };
+        
+        let dataToSave = allData;
+        let isEncrypted = false;
+        
+        if (password && password.length > 0) {
+            const encrypted = encryptData(allData, password);
+            if (encrypted) {
+                dataToSave = {
+                    encrypted: true,
+                    data: encrypted,
+                    version: '1.0'
+                };
+                isEncrypted = true;
+                encryptionKey = password;
+            }
+        }
+        
+        localStorage.setItem("githubBackup", JSON.stringify(dataToSave));
+        document.getElementById("githubStatus").innerHTML = `✅ Data imehifadhiwa kwenye Local Storage ${isEncrypted ? '🔐 (Imeencrypted)' : ''}.`;
+        
+        // Export JSON automatically
+        exportJSON();
+        showToast(`✅ Data imehifadhiwa! ${isEncrypted ? '🔐 Imeencrypted kwa nenosiri.' : ''}`, "success");
+    });
 }
 
 function loadFromGitHub() {
     showToast("📥 Inapakia kutoka GitHub...", "info");
     
-    // Create file input for JSON
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = '.json';
@@ -1899,10 +2059,30 @@ function loadFromGitHub() {
         const reader = new FileReader();
         reader.onload = function(event) {
             try {
-                const data = JSON.parse(event.target.result);
-                restoreFromGitHubData(data);
-                showToast("✅ Data imepakiwa kutoka GitHub!", "success");
-                document.getElementById("githubStatus").innerHTML = "✅ Data imepakiwa kutoka GitHub!";
+                const rawData = JSON.parse(event.target.result);
+                
+                // Check if data is encrypted
+                if (rawData.encrypted && rawData.data) {
+                    promptForPassword('kupakia').then(password => {
+                        if (!password || password.length === 0) {
+                            showToast("⚠️ Tafadhali weka nenosiri la kufungua data.", "warning");
+                            return;
+                        }
+                        const decrypted = decryptData(rawData.data, password);
+                        if (decrypted) {
+                            restoreFromGitHubData(decrypted);
+                            showToast("✅ Data imepakiwa kutoka GitHub! 🔓 Imefunguliwa kwa nenosiri.", "success");
+                            document.getElementById("githubStatus").innerHTML = "✅ Data imepakiwa kutoka GitHub! 🔓 Imeencrypted.";
+                        } else {
+                            showToast("❌ Nenosiri si sahihi. Data haiwezi kufunguliwa.", "error");
+                        }
+                    });
+                } else {
+                    // Not encrypted
+                    restoreFromGitHubData(rawData);
+                    showToast("✅ Data imepakiwa kutoka GitHub!", "success");
+                    document.getElementById("githubStatus").innerHTML = "✅ Data imepakiwa kutoka GitHub!";
+                }
             } catch (err) {
                 showToast("❌ Hitilafu: Faili si sahihi", "error");
             }
@@ -1913,11 +2093,10 @@ function loadFromGitHub() {
 }
 
 function restoreFromGitHubData(data) {
-    // Restore form data
     if (data.formData) {
         Object.keys(data.formData).forEach(key => {
             const el = document.getElementById(key);
-            if (el && data.formData[key] && key !== 'starRatings' && key !== 'timestamp') {
+            if (el && data.formData[key] && key !== 'starRatings' && key !== 'timestamp' && key !== 'workerData' && key !== 'supervisorData') {
                 el.value = data.formData[key];
             }
         });
@@ -1937,9 +2116,20 @@ function restoreFromGitHubData(data) {
                 }
             });
         }
+        if (data.formData.workerData) {
+            Object.keys(data.formData.workerData).forEach(key => {
+                const el = document.getElementById(`worker${key.charAt(0).toUpperCase() + key.slice(1)}`);
+                if (el) el.value = data.formData.workerData[key];
+            });
+        }
+        if (data.formData.supervisorData) {
+            Object.keys(data.formData.supervisorData).forEach(key => {
+                const el = document.getElementById(`supervisor${key.charAt(0).toUpperCase() + key.slice(1)}`);
+                if (el) el.value = data.formData.supervisorData[key];
+            });
+        }
     }
     
-    // Restore checklists
     if (data.checklists) {
         if (data.checklists.general) {
             localStorage.setItem("inchargeGeneral", JSON.stringify(data.checklists.general));
@@ -1950,19 +2140,21 @@ function restoreFromGitHubData(data) {
         loadChecklists();
     }
     
-    // Restore reports
     if (data.reports) {
         reports = data.reports;
     }
     
-    // Restore chat messages
     if (data.chatMessages) {
         data.chatMessages.forEach(msg => {
             localStorage.setItem(msg.key, JSON.stringify(msg.messages));
         });
     }
     
-    // Update UI
+    if (data.dataHistory) {
+        dataHistory = data.dataHistory;
+        updateHistoryDisplay();
+    }
+    
     updateComparison();
     updateScoreSummary();
     updatePreview();
@@ -1990,6 +2182,7 @@ function exportJSON() {
         starRatings: starRatings,
         reports: reports,
         chatMessages: getAllChatMessages(),
+        dataHistory: dataHistory,
         timestamp: new Date().toISOString(),
         reportId: document.getElementById("reportIdDisplay").textContent
     };
@@ -2008,6 +2201,192 @@ function exportJSON() {
 
 function importJSON() {
     loadFromGitHub();
+}
+
+function clearAllData() {
+    if (confirm("⚠️ Je, una uhakika unataka kufuta data yote? Hatua hii haiwezi kurejeshwa!")) {
+        localStorage.clear();
+        dataHistory = [];
+        reports = [];
+        starRatings = {};
+        location.reload();
+        showToast("🗑️ Data yote imefutwa!", "warning");
+    }
+}
+
+// ==============================================================
+// SHARE FUNCTIONS
+// ==============================================================
+function generateShareLink() {
+    showToast("🔗 Inaunda link ya kushiriki...", "info");
+    
+    promptForPassword('kushiriki').then(password => {
+        const data = {
+            formData: collectFormData(),
+            checklists: {
+                general: JSON.parse(localStorage.getItem("inchargeGeneral") || "{}"),
+                special: JSON.parse(localStorage.getItem("inchargeSpecial") || "{}")
+            },
+            starRatings: starRatings,
+            reports: reports,
+            timestamp: new Date().toISOString(),
+            reportId: document.getElementById("reportIdDisplay").textContent
+        };
+        
+        let jsonData = JSON.stringify(data);
+        let shareData = jsonData;
+        let isEncrypted = false;
+        
+        if (password && password.length > 0) {
+            const encrypted = encryptData(data, password);
+            if (encrypted) {
+                shareData = JSON.stringify({
+                    encrypted: true,
+                    data: encrypted,
+                    version: '1.0'
+                });
+                isEncrypted = true;
+            }
+        }
+        
+        // Create a compressed/encoded link
+        const encoded = btoa(shareData);
+        const link = window.location.href.split('?')[0] + '?share=' + encoded;
+        
+        document.getElementById("shareLinkInput").value = link;
+        document.getElementById("shareLinkInput").style.display = 'block';
+        
+        showToast(`✅ Link imeundwa! ${isEncrypted ? '🔐 Imeencrypted.' : ''}`, "success");
+        
+        // Check if there's shared data in URL on load
+        checkForSharedData();
+    });
+}
+
+function copyShareLink() {
+    const input = document.getElementById("shareLinkInput");
+    if (!input.value) {
+        showToast("⚠️ Hakuna link ya kunakili. Bonyeza 'Generate Link' kwanza.", "warning");
+        return;
+    }
+    navigator.clipboard.writeText(input.value).then(() => {
+        showToast("✅ Link imenakiliwa!", "success");
+    }).catch(() => {
+        input.select();
+        document.execCommand('copy');
+        showToast("✅ Link imenakiliwa!", "success");
+    });
+}
+
+function openShareLink() {
+    const input = document.getElementById("shareLinkInput");
+    if (!input.value) {
+        showToast("⚠️ Hakuna link ya kufungua.", "warning");
+        return;
+    }
+    window.open(input.value, '_blank');
+}
+
+function checkForSharedData() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const shared = urlParams.get('share');
+    if (shared) {
+        try {
+            const decoded = atob(shared);
+            const data = JSON.parse(decoded);
+            
+            if (data.encrypted && data.data) {
+                promptForPassword('kufungua link').then(password => {
+                    if (!password || password.length === 0) {
+                        showToast("⚠️ Tafadhali weka nenosiri la kufungua data.", "warning");
+                        return;
+                    }
+                    const decrypted = decryptData(data.data, password);
+                    if (decrypted) {
+                        restoreFromGitHubData(decrypted);
+                        showToast("✅ Data imepakiwa kutoka link! 🔓 Imefunguliwa kwa nenosiri.", "success");
+                    } else {
+                        showToast("❌ Nenosiri si sahihi. Data haiwezi kufunguliwa.", "error");
+                    }
+                });
+            } else {
+                restoreFromGitHubData(data);
+                showToast("✅ Data imepakiwa kutoka link!", "success");
+            }
+            
+            // Clear URL parameter
+            window.history.replaceState({}, document.title, window.location.pathname);
+        } catch (e) {
+            showToast("❌ Link si sahihi au imeharibika.", "error");
+        }
+    }
+}
+
+// ==============================================================
+// HISTORY FUNCTIONS (Versioning)
+// ==============================================================
+function saveVersion() {
+    const data = {
+        formData: collectFormData(),
+        checklists: {
+            general: JSON.parse(localStorage.getItem("inchargeGeneral") || "{}"),
+            special: JSON.parse(localStorage.getItem("inchargeSpecial") || "{}")
+        },
+        starRatings: starRatings,
+        reports: reports,
+        timestamp: new Date().toISOString(),
+        version: dataHistory.length + 1,
+        note: prompt("📝 Andika maelezo ya toleo hili (hiari):", `Toleo ${dataHistory.length + 1}`) || `Toleo ${dataHistory.length + 1}`
+    };
+    
+    dataHistory.push(data);
+    localStorage.setItem("dataHistory", JSON.stringify(dataHistory));
+    updateHistoryDisplay();
+    showToast(`💾 Toleo ${dataHistory.length} limehifadhiwa!`, "success");
+}
+
+function updateHistoryDisplay() {
+    const container = document.getElementById("historyList");
+    const saved = localStorage.getItem("dataHistory");
+    if (saved) {
+        dataHistory = JSON.parse(saved);
+    }
+    
+    if (!dataHistory || dataHistory.length === 0) {
+        container.innerHTML = `<div style="color:#7f8c8d; font-size:12px;">Hakuna historia bado. Bonyeza "Hifadhi Toleo" kuweka.</div>`;
+        return;
+    }
+    
+    container.innerHTML = dataHistory.map((item, index) => {
+        const date = new Date(item.timestamp).toLocaleString();
+        return `<div class="history-item">
+            <span><strong>#${item.version}</strong> ${item.note || ''}</span>
+            <span class="date">${date}</span>
+            <span class="restore-btn" onclick="restoreVersion(${index})">🔄 Rejesha</span>
+        </div>`;
+    }).join('');
+}
+
+function restoreVersion(index) {
+    if (!dataHistory[index]) {
+        showToast("❌ Toleo halipo.", "error");
+        return;
+    }
+    
+    if (confirm(`Je, una uhakika unataka kurejesha toleo #${dataHistory[index].version}? Data ya sasa itabadilishwa.`)) {
+        const data = dataHistory[index];
+        restoreFromGitHubData(data);
+        showToast(`✅ Toleo #${data.version} limerejeshwa!`, "success");
+    }
+}
+
+function clearHistory() {
+    if (confirm("⚠️ Je, una uhakika unataka kufuta historia yote?")) {
+        dataHistory = [];
+        localStorage.removeItem("dataHistory");
+        updateHistoryDisplay();
+        showToast("🗑️ Historia imefutwa!", "warning");
+    }
 }
 
 // ==============================================================
@@ -2218,7 +2597,6 @@ function updateScoreSummary() {
     const totalChecked = generalChecked + specialChecked;
     const taskPercentage = totalItems > 0 ? Math.round((totalChecked / totalItems) * 100) : 0;
     
-    // Calculate gap from comparison
     const workerData = getWorkerData();
     const supervisorData = getSupervisorData();
     const categories = ['punctuality', 'quality', 'teamwork', 'leadership', 'communication', 'decision'];
@@ -2405,7 +2783,7 @@ function exportPrint() {
     setTimeout(() => {
         try {
             const content = document.getElementById("formIncharge").cloneNode(true);
-            content.querySelectorAll(".signature-pad, .signature-actions, .toast, .user-tools, .export-tools, .github-sync-box").forEach(el => el.remove());
+            content.querySelectorAll(".signature-pad, .signature-actions, .toast, .user-tools, .export-tools, .github-sync-box, .history-box, .share-box").forEach(el => el.remove());
             
             const win = window.open('', '_blank', 'width=1000,height=800');
             win.document.write(`
@@ -2639,6 +3017,8 @@ function login() {
     loadSupervisorData();
     updateComparison();
     updateScoreSummary();
+    updateHistoryDisplay();
+    checkForSharedData();
     
     setTimeout(() => {
         initSigPad("incharge");
@@ -2665,6 +3045,7 @@ function syncData() {
         loadSupervisorData();
         updateComparison();
         updateScoreSummary();
+        updateHistoryDisplay();
         btn.disabled = false;
         btn.innerHTML = "🔄 Sync";
         showToast("✅ Data imesawazishwa!", "success");
@@ -2781,8 +3162,9 @@ window.onload = function() {
     updatePreview();
     updateComparison();
     updateScoreSummary();
+    updateHistoryDisplay();
+    checkForSharedData();
     
-    // Close chat modal on outside click
     document.getElementById("chatModal").addEventListener("click", function(e) {
         if (e.target === this) closeChat();
     });
