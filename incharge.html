@@ -661,7 +661,7 @@
                     </div>
                     <div class="form-group">
                         <label>📋 Taaluma / Wadhifa <span class="required">*</span></label>
-                        <select id="workerRole" onchange="updateInchargeChecklist()">
+                        <select id="workerRole">
                             <option value="">-- Chagua Taaluma --</option>
                             <option value="Medical Officer">🩺 Medical Officer (MD)</option>
                             <option value="Clinical Officer">📋 Clinical Officer</option>
@@ -731,10 +731,11 @@
             </div>
 
             <!-- ========================================================== -->
-            <!-- SEHEMU 3: MAJUKUMU YA MTENDAKAZI (KWA MGANGA MFAWIDHI) -->
+            <!-- SEHEMU 3: MAJUKUMU YA MTENDAKAZI - YANAONEKANA WAZI -->
             <!-- ========================================================== -->
-            <div id="checklistSection" style="display:none; background:#e8daef; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #8e44ad;">
+            <div style="background:#e8daef; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #8e44ad;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">📋 MAJUKUMU YA MTENDAKAZI</div>
+                <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Kagua na thibitisha majukumu yaliyokamilishwa na mtendakazi</div>
                 
                 <div class="checklist-section">
                     <div class="section-title">📋 Majukumu ya Jumla <span class="count" id="generalCount">(0/10)</span></div>
@@ -1014,7 +1015,7 @@ let signatureData = { incharge: null };
 let uploadedFiles = [];
 
 // ==============================================================
-// CHECKLIST DATA
+// CHECKLIST DATA - INAONEKANA WAZI KWA MGANGA MFAWIDHI
 // ==============================================================
 const GENERAL_CHECKLIST = [
     "Nimewasili kazini mapema kila siku",
@@ -1162,7 +1163,6 @@ function renderChecklist(containerId, items, storageKey, countId) {
         </div>`;
     }).join("");
     
-    // Update count
     if (countId) {
         updateChecklistCount(countId, containerId, storageKey);
     }
@@ -1187,7 +1187,6 @@ function updateChecklistCount(countId, containerId, storageKey) {
     let total = 0;
     let checked = 0;
     
-    // Find all checklist items for this storage key
     document.querySelectorAll(`.checklist-item`).forEach(item => {
         const toggle = item.querySelector('.toggle');
         if (toggle) {
@@ -1211,21 +1210,13 @@ function getChecklistData(containerId, storageKey) {
     return items;
 }
 
-function updateInchargeChecklist() {
+function loadChecklists() {
+    // Load general checklist
+    renderChecklist("inchargeGeneralChecklist", GENERAL_CHECKLIST, "inchargeGeneral", "generalCount");
+    
+    // Load special checklist based on selected role
     const role = document.getElementById("workerRole").value;
-    const checklistSection = document.getElementById("checklistSection");
-    
-    if (!role) {
-        checklistSection.style.display = "none";
-        return;
-    }
-    
-    checklistSection.style.display = "block";
-    
-    const generalItems = GENERAL_CHECKLIST;
     const specialItems = SPECIAL_CHECKLISTS[role] || SPECIAL_CHECKLISTS["Medical Officer"];
-    
-    renderChecklist("inchargeGeneralChecklist", generalItems, "inchargeGeneral", "generalCount");
     renderChecklist("inchargeSpecialChecklist", specialItems, "inchargeSpecial", "specialCount");
 }
 
@@ -1385,7 +1376,6 @@ function updateScoreSummary() {
     const maxRating = ratingValues.length * 5;
     const ratingPercentage = maxRating > 0 ? Math.round((totalRating / maxRating) * 100) : 0;
     
-    // Get checklist counts
     let generalChecked = 0;
     let generalTotal = 0;
     let specialChecked = 0;
@@ -1932,6 +1922,7 @@ async function login() {
         initSigPad("incharge");
     }, 500);
     
+    loadChecklists();
     updateComparisonTable(sampleWorkerData, sampleSupervisorData);
     updatePreview();
     updateDecisionNotification();
@@ -2055,7 +2046,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     
     document.getElementById("workerRole").addEventListener("change", function() {
-        updateInchargeChecklist();
+        loadChecklists();
         setTimeout(updateScoreSummary, 100);
     });
 });
@@ -2066,13 +2057,14 @@ document.addEventListener("DOMContentLoaded", function() {
 window.onload = function() {
     document.getElementById("binIdDisplay").textContent = BIN_ID;
     document.getElementById("connectionStatus").textContent = "✅ Tayari";
+    loadChecklists();
     updateComparisonTable(sampleWorkerData, sampleSupervisorData);
     updatePreview();
     updateDecisionNotification();
     updateScoreSummary();
     console.log("✅ Mtwara Performance - Fomu ya Mganga Mfawidhi");
     console.log("📦 BIN ID:", BIN_ID);
-    console.log("📋 Majukumu yanaonekana tu baada ya taaluma kuchaguliwa!");
+    console.log("📋 Majukumu yanaonekana wazi kwa Mganga Mfawidhi!");
 };
 </script>
 
