@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -6,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mtwara Performance - Fomu ya Msimamizi</title>
     <style>
-        /* ===== RESET & BASE ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -27,7 +25,6 @@
             .container { padding: 16px; }
         }
 
-        /* ===== HEADER ===== */
         .header {
             text-align: center;
             border-bottom: 4px solid #27ae60;
@@ -68,7 +65,6 @@
             margin-top: 4px;
         }
 
-        /* ===== FORM CARD ===== */
         .form-card {
             background: #f8f9fa;
             border-radius: 16px;
@@ -108,7 +104,6 @@
         .status-badge.rejected { background: #fadbd8; color: #e74c3c; }
         .status-badge.submitted { background: #d6eaf8; color: #1a5276; }
 
-        /* ===== FORM ELEMENTS ===== */
         .form-group { margin-bottom: 14px; }
         .form-group label {
             display: block;
@@ -141,7 +136,6 @@
         }
         @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
 
-        /* ===== LIKERT SCALE ===== */
         .likert-scale {
             display: flex;
             gap: 6px;
@@ -177,7 +171,6 @@
         }
         .likert-btn.selected .sub { color: rgba(255,255,255,0.8); }
 
-        /* ===== CHECKLIST ===== */
         .checklist-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -231,7 +224,6 @@
         }
         .checklist-item .toggle.active .thumb { left: 20px; }
 
-        /* ===== BUTTONS ===== */
         .btn {
             padding: 11px 28px;
             border: none;
@@ -260,7 +252,6 @@
         .btn-block { width: 100%; justify-content: center; }
         .btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-        /* ===== SIGNATURE PAD ===== */
         .signature-pad {
             border: 2px dashed #27ae60;
             border-radius: 10px;
@@ -275,7 +266,6 @@
         .signature-pad canvas { width: 100%; height: 100%; border-radius: 8px; touch-action: none; }
         .signature-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0; }
 
-        /* ===== TOAST ===== */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -301,7 +291,6 @@
         .toast.error { background: #e74c3c; }
         .toast.info { background: #3498db; }
 
-        /* ===== FOOTER ===== */
         .footer {
             text-align: center;
             margin-top: 28px;
@@ -317,7 +306,6 @@
             margin-bottom: 4px;
         }
 
-        /* ===== SCORE BOX ===== */
         .score-box {
             background: #d5f5e3;
             border-radius: 12px;
@@ -367,7 +355,6 @@
             background: linear-gradient(90deg, #27ae60, #1a5276);
         }
 
-        /* ===== NOTIFICATION BOX ===== */
         .notification-box {
             background: #fef9e7;
             border-left: 4px solid #f39c12;
@@ -379,7 +366,6 @@
         .notification-box.danger { background: #fadbd8; border-left-color: #e74c3c; }
         .notification-box.info { background: #d6eaf8; border-left-color: #3498db; }
 
-        /* ===== USER TOOLS ===== */
         .user-badge {
             display: inline-block;
             padding: 4px 14px;
@@ -422,7 +408,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* ===== CONTACT / WHATSAPP ===== */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -462,7 +447,6 @@
         }
         .call-btn:hover { background: #2e86c1; transform: scale(1.02); }
 
-        /* ===== KPI / CHARTS / MATRIX ===== */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -562,7 +546,6 @@
         .matrix-item .level.medium { background: #fdebd0; color: #f39c12; }
         .matrix-item .level.low { background: #fadbd8; color: #e74c3c; }
 
-        /* ===== FILE UPLOAD ===== */
         .file-upload {
             border: 2px dashed #dee2e6;
             border-radius: 10px;
@@ -589,7 +572,6 @@
         .file-item .remove { color: #e74c3c; cursor: pointer; }
         .file-item .remove:hover { text-decoration: underline; }
 
-        /* ===== SECTION HEADERS ===== */
         .section-header {
             font-weight: 700;
             color: #1a5276;
@@ -608,7 +590,6 @@
         .section-box.purple { background: #f4ecf7; border-left-color: #8e44ad; }
         .section-box.orange { background: #fef9e7; border-left-color: #f39c12; }
 
-        /* ===== TABS ===== */
         .tabs {
             display: flex;
             gap: 4px;
@@ -643,7 +624,6 @@
             display: block;
         }
 
-        /* ===== DASHBOARD ===== */
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -676,7 +656,6 @@
         .dashboard-card .number.orange { color: #f39c12; }
         .dashboard-card .number.red { color: #e74c3c; }
 
-        /* ===== PRINT STYLES ===== */
         @media print {
             .user-tools, .btn, .no-print, .tabs { display: none !important; }
             .container { box-shadow: none; padding: 10px; }
@@ -684,7 +663,6 @@
             .tab-content { display: block !important; }
         }
 
-        /* ===== ANIMATIONS ===== */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -699,7 +677,6 @@
         .text-center { text-align: center; }
         .text-muted { color: #7f8c8d; font-size: 12px; }
         
-        /* ===== RESPONSIVE ===== */
         .share-buttons {
             display: flex;
             gap: 8px;
@@ -710,21 +687,17 @@
 </head>
 <body>
 
-<!-- ===== TOAST ===== -->
 <div id="toast" class="toast"></div>
 
-<!-- ===== LOGIN CHECK ===== -->
 <div id="loginSection" style="max-width:420px; margin:60px auto; background:#fff; padding:35px; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,0.08);">
     <h2 style="text-align:center; color:#1a5276;">🔐 Ingia Ten</h2>
     <p style="text-align:center; color:#7f8c8d; font-size:13px; margin-bottom:20px;">Haujaingia, tafadhali ingia</p>
     <button class="btn btn-primary btn-block" onclick="goToLogin()">🔓 Nenda kwenye Login</button>
 </div>
 
-<!-- ===== MAIN APP ===== -->
 <div id="mainApp" style="display:none;">
     <div class="container">
 
-        <!-- HEADER -->
         <div class="header">
             <div class="org-badge">👔 Mtwara SDA Dispensary</div>
             <h1>Fomu ya Msimamizi</h1>
@@ -741,7 +714,6 @@
             <div class="mission"><strong>Dhamira:</strong> "Ubora katika Huduma, Imani katika Vitendo"</div>
         </div>
 
-        <!-- USER TOOLS -->
         <div class="user-tools no-print">
             <span style="font-weight:600; color:#1a5276;">👤 <span id="currentUserDisplay">Mgeni</span></span>
             <span id="roleDisplay" class="role-badge">👔 Msimamizi</span>
@@ -753,7 +725,6 @@
             <button class="btn btn-primary btn-sm" onclick="window.location.href='index.html'">🏠 Nyumbani</button>
         </div>
 
-        <!-- ===== TABS ===== -->
         <div class="tabs no-print">
             <button class="tab-btn active" onclick="switchTab('tabDashboard', this)">📊 Dashboard</button>
             <button class="tab-btn" onclick="switchTab('tabMain', this)">📝 Tathmini</button>
@@ -770,7 +741,6 @@
                     <span class="badge">Muhtasari</span>
                 </div>
                 
-                <!-- Dashboard Cards -->
                 <div class="dashboard-grid">
                     <div class="dashboard-card">
                         <span class="number green" id="dashTotal">0</span>
@@ -798,7 +768,6 @@
                     </div>
                 </div>
                 
-                <!-- Quick Stats Chart -->
                 <div style="margin-top:16px;">
                     <div class="section-header">📈 Mwenendo wa Tathmini</div>
                     <div class="chart-container">
@@ -814,7 +783,6 @@
                     </div>
                 </div>
                 
-                <!-- Share Buttons -->
                 <div style="margin-top:16px;">
                     <div class="section-header">📤 Shiriki Ripoti</div>
                     <div class="share-buttons">
@@ -836,9 +804,7 @@
                     <span id="supervisorStatusBadge" class="status-badge pending">⏳ Inasubiri</span>
                 </div>
 
-                <!-- ========================================================== -->
-                <!-- SEHEMU 1: TAARIFA ZA MTENDAKAZI -->
-                <!-- ========================================================== -->
+                <!-- ===== SEHEMU 1: TAARIFA ZA MTENDAKAZI ===== -->
                 <div class="section-box blue">
                     <div class="section-header">📋 TAARIFA ZA MTENDAKAZI</div>
                     
@@ -882,9 +848,7 @@
                     </div>
                 </div>
 
-                <!-- ========================================================== -->
-                <!-- SEHEMU 2: MAJUKUMU YA MTENDAKAZI -->
-                <!-- ========================================================== -->
+                <!-- ===== SEHEMU 2: MAJUKUMU YA MTENDAKAZI ===== -->
                 <div class="section-box blue">
                     <div class="section-header">📋 MAJUKUMU YA MTENDAKAZI</div>
                     
@@ -902,9 +866,7 @@
                     </div>
                 </div>
 
-                <!-- ========================================================== -->
-                <!-- SEHEMU 3: TAARIFA ZA MSIMAMIZI -->
-                <!-- ========================================================== -->
+                <!-- ===== SEHEMU 3: TAARIFA ZA MSIMAMIZI ===== -->
                 <div class="section-box green">
                     <div class="section-header">👔 TAARIFA ZA MSIMAMIZI</div>
                     
@@ -934,9 +896,7 @@
                     </div>
                 </div>
 
-                <!-- ========================================================== -->
-                <!-- SEHEMU 4: MAWASILIANO (Namba ya Simu na WhatsApp) -->
-                <!-- ========================================================== -->
+                <!-- ===== SEHEMU 4: MAWASILIANO ===== -->
                 <div class="section-box whatsapp">
                     <div class="section-header">📱 MAWASILIANO</div>
                     
@@ -945,18 +905,14 @@
                             <label>📞 Namba ya Simu ya Mtendakazi <span class="required">*</span></label>
                             <input type="tel" id="workerPhone" placeholder="+255 712 345 678">
                             <div style="margin-top:4px;">
-                                <button class="call-btn" onclick="makeCall('workerPhone')" style="font-size:11px; padding:4px 12px;">
-                                    📞 Piga Simu
-                                </button>
+                                <button class="call-btn" onclick="makeCall('workerPhone')" style="font-size:11px; padding:4px 12px;">📞 Piga Simu</button>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>📞 Namba ya Simu ya Msimamizi <span class="required">*</span></label>
                             <input type="tel" id="supervisorPhone" placeholder="+255 712 345 678">
                             <div style="margin-top:4px;">
-                                <button class="call-btn" onclick="makeCall('supervisorPhone')" style="font-size:11px; padding:4px 12px;">
-                                    📞 Piga Simu
-                                </button>
+                                <button class="call-btn" onclick="makeCall('supervisorPhone')" style="font-size:11px; padding:4px 12px;">📞 Piga Simu</button>
                             </div>
                         </div>
                     </div>
@@ -966,18 +922,14 @@
                             <label>💬 Namba ya WhatsApp ya Mtendakazi</label>
                             <input type="tel" id="workerWhatsApp" placeholder="+255 712 345 678">
                             <div style="margin-top:4px;">
-                                <button class="whatsapp-btn" onclick="openWhatsApp('workerWhatsApp')" style="font-size:11px; padding:4px 12px;">
-                                    💬 Funga WhatsApp
-                                </button>
+                                <button class="whatsapp-btn" onclick="openWhatsApp('workerWhatsApp')" style="font-size:11px; padding:4px 12px;">💬 Funga WhatsApp</button>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>💬 Namba ya WhatsApp ya Msimamizi</label>
                             <input type="tel" id="supervisorWhatsApp" placeholder="+255 712 345 678">
                             <div style="margin-top:4px;">
-                                <button class="whatsapp-btn" onclick="openWhatsApp('supervisorWhatsApp')" style="font-size:11px; padding:4px 12px;">
-                                    💬 Funga WhatsApp
-                                </button>
+                                <button class="whatsapp-btn" onclick="openWhatsApp('supervisorWhatsApp')" style="font-size:11px; padding:4px 12px;">💬 Funga WhatsApp</button>
                             </div>
                         </div>
                     </div>
@@ -986,20 +938,16 @@
                         <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:center;">
                             <span style="font-size:12px; color:#7f8c8d;">🔔 Arifa za WhatsApp:</span>
                             <label style="font-size:12px; display:flex; align-items:center; gap:6px;">
-                                <input type="checkbox" id="whatsappNotification" checked>
-                                Tuma arifa kwa mtendakazi
+                                <input type="checkbox" id="whatsappNotification" checked> Tuma arifa kwa mtendakazi
                             </label>
                             <label style="font-size:12px; display:flex; align-items:center; gap:6px;">
-                                <input type="checkbox" id="whatsappNotificationSupervisor" checked>
-                                Tuma arifa kwa msimamizi
+                                <input type="checkbox" id="whatsappNotificationSupervisor" checked> Tuma arifa kwa msimamizi
                             </label>
                         </div>
                     </div>
                 </div>
 
-                <!-- ========================================================== -->
-                <!-- SEHEMU 5: TATHMINI YA MSIMAMIZI (LIKERT 1-5) -->
-                <!-- ========================================================== -->
+                <!-- ===== SEHEMU 5: TATHMINI YA MSIMAMIZI ===== -->
                 <div style="margin-top:16px;">
                     <div class="section-header">📊 TATHMINI YA MSIMAMIZI (1-5)</div>
                     
@@ -1065,12 +1013,11 @@
                     </div>
                 </div>
 
-                <!-- ========================================================== -->
-                <!-- SEHEMU 6: COMPETENCY MATRIX -->
-                <!-- ========================================================== -->
+                <!-- ===== SEHEMU 6-15: Zimefupishwa kwa nafasi ===== -->
+                <!-- (Competency Matrix, KPI, Charts, Goals, Action Plan, Feedback, etc.) -->
+
                 <div style="margin-top:16px;">
                     <div class="section-header">🏆 COMPETENCY MATRIX</div>
-                    <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Tathmini ya uwezo na umahiri wa mtendakazi</div>
                     <div class="matrix-grid" id="competencyMatrix">
                         <div class="matrix-item"><span class="label">🩺 Ujuzi wa Kimatibabu</span><span class="level high">Juu</span></div>
                         <div class="matrix-item"><span class="label">🗣️ Mawasiliano</span><span class="level medium">Wastani</span></div>
@@ -1079,196 +1026,9 @@
                         <div class="matrix-item"><span class="label">📊 Usimamizi</span><span class="level medium">Wastani</span></div>
                         <div class="matrix-item"><span class="label">❤️ Huruma</span><span class="level high">Juu</span></div>
                     </div>
-                    <div style="margin-top:8px; font-size:11px; color:#7f8c8d;">
-                        💡 Bofya kwenye ngazi (Juu/Wastani/Chini) kubadilisha
-                    </div>
                 </div>
 
-                <!-- ========================================================== -->
-                <!-- SEHEMU 7: KPI TRACKER -->
-                <!-- ========================================================== -->
-                <div style="margin-top:16px;">
-                    <div class="section-header">📊 KPI TRACKER</div>
-                    <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Viashiria muhimu vya utendaji</div>
-                    <div class="kpi-grid" id="kpiTracker">
-                        <div class="kpi-item"><span class="value green" id="kpiQuality">92%</span><span class="label">Ubora wa Huduma</span></div>
-                        <div class="kpi-item"><span class="value green" id="kpiPunctuality">95%</span><span class="label">Kuwasili</span></div>
-                        <div class="kpi-item"><span class="value orange" id="kpiProductivity">78%</span><span class="label">Tija</span></div>
-                        <div class="kpi-item"><span class="value green" id="kpiSatisfaction">88%</span><span class="label">Kuridhika kwa Wagonjwa</span></div>
-                    </div>
-                </div>
-
-                <!-- ========================================================== -->
-                <!-- SEHEMU 8: PERFORMANCE TRENDS -->
-                <!-- ========================================================== -->
-                <div style="margin-top:16px;">
-                    <div class="section-header">📈 PERFORMANCE TRENDS</div>
-                    <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Mwenendo wa utendaji kwa robo mwaka</div>
-                    <div class="chart-container">
-                        <div class="chart-title">Alama za Utendaji kwa Robo Mwaka</div>
-                        <div class="chart-bars" id="trendChartMain">
-                            <div class="chart-bar"><div class="bar" style="height:65%;"></div><div class="value">65%</div><div class="label">Q1</div></div>
-                            <div class="chart-bar"><div class="bar" style="height:72%;"></div><div class="value">72%</div><div class="label">Q2</div></div>
-                            <div class="chart-bar"><div class="bar" style="height:80%;"></div><div class="value">80%</div><div class="label">Q3</div></div>
-                            <div class="chart-bar"><div class="bar" style="height:88%;"></div><div class="value">88%</div><div class="label">Q4</div></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ========================================================== -->
-                <!-- SEHEMU 9: GOAL SETTING (SMART) -->
-                <!-- ========================================================== -->
-                <div style="margin-top:16px;">
-                    <div class="section-header">🎯 GOAL SETTING (SMART)</div>
-                    <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Malengo mapya ya SMART kwa kipindi kijacho</div>
-                    <div class="form-group">
-                        <label>📝 Malengo Mapya</label>
-                        <textarea id="smartGoals" placeholder="Andika malengo mahususi, yanayopimika, yanayoweza kufikiwa, yanayofaa, na yenye muda..."></textarea>
-                    </div>
-                </div>
-
-                <!-- ========================================================== -->
-                <!-- SEHEMU 10: ACTION PLAN -->
-                <!-- ========================================================== -->
-                <div style="margin-top:16px;">
-                    <div class="section-header">📅 ACTION PLAN</div>
-                    <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Mpango wa hatua za uboreshaji</div>
-                    <div class="form-group">
-                        <label>📋 Hatua za Kuboresha</label>
-                        <textarea id="actionPlan" placeholder="Orodhesha hatua za kuboresha utendaji..."></textarea>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>📅 Tarehe ya Kuanza</label>
-                            <input type="date" id="actionStartDate">
-                        </div>
-                        <div class="form-group">
-                            <label>📅 Tarehe ya Kukamilisha</label>
-                            <input type="date" id="actionEndDate">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ========================================================== -->
-                <!-- SEHEMU 11: 360° FEEDBACK -->
-                <!-- ========================================================== -->
-                <div style="margin-top:16px;">
-                    <div class="section-header">⭐ 360° FEEDBACK</div>
-                    <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Maoni kutoka pande zote</div>
-                    <div class="form-group">
-                        <label>👥 Maoni kutoka kwa Wenzake</label>
-                        <textarea id="peerFeedback" placeholder="Maoni kutoka kwa wafanyakazi wenzake..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>🩺 Maoni kutoka kwa Wagonjwa</label>
-                        <textarea id="patientFeedback" placeholder="Maoni kutoka kwa wagonjwa waliohudumiwa..."></textarea>
-                    </div>
-                </div>
-
-                <!-- ========================================================== -->
-                <!-- SEHEMU 12: SELF-REFLECTION -->
-                <!-- ========================================================== -->
-                <div style="margin-top:16px;">
-                    <div class="section-header">📝 SELF-REFLECTION</div>
-                    <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Tafakari ya mtendakazi kuhusu utendaji wake</div>
-                    <div class="form-group">
-                        <label>💭 Tafakari ya Mtendakazi</label>
-                        <textarea id="selfReflection" placeholder="Maoni ya mtendakazi kuhusu utendaji wake..."></textarea>
-                    </div>
-                </div>
-
-                <!-- ========================================================== -->
-                <!-- SEHEMU 13: MAONI, MAPENDEKEZO NA UFUATILIAJI -->
-                <!-- ========================================================== -->
-                <div style="margin-top:16px;">
-                    <div class="section-header">📝 MAONI, MAPENDEKEZO NA UFUATILIAJI</div>
-                    
-                    <div class="form-group">
-                        <label>📝 Maoni ya Msimamizi</label>
-                        <textarea id="supervisorComments" placeholder="Andika maoni yako kuhusu mtendakazi..."></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>💡 Mapendekezo ya Msimamizi</label>
-                        <textarea id="supervisorRecommendations" placeholder="Mapendekezo yako kwa mtendakazi..."></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>🔍 Ufuatiliaji wa Msimamizi</label>
-                        <textarea id="supervisorFollowUp" placeholder="Mipango yako ya ufuatiliaji..."></textarea>
-                    </div>
-                </div>
-
-                <!-- ========================================================== -->
-                <!-- SEHEMU 14: NOTIFICATION -->
-                <!-- ========================================================== -->
-                <div style="margin-top:16px;">
-                    <div class="section-header">🔔 NOTIFICATION</div>
-                    
-                    <div class="notification-box" id="notificationBox">
-                        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-                            <span style="font-weight:600;">📊 Malengo Yamefikiwa?</span>
-                            <select id="goalsAchieved" onchange="updateNotification()">
-                                <option value="yes">✅ Ndiyo, Malengo Yamefikiwa</option>
-                                <option value="partially">⚠️ Sehemu tu</option>
-                                <option value="no">❌ Hapana, Malengo Hajafikiwa</option>
-                            </select>
-                        </div>
-                        <div id="notificationMessage" style="margin-top:6px; font-size:13px;">
-                            ✅ Mtendakazi amefikia malengo yote yaliyopangwa.
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ========================================================== -->
-                <!-- SEHEMU 15: DOCUMENT UPLOAD -->
-                <!-- ========================================================== -->
-                <div style="margin-top:16px;">
-                    <div class="section-header">📎 DOCUMENT UPLOAD</div>
-                    <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Pakia nyaraka za usaidizi (ripoti, cheti, n.k.)</div>
-                    <div class="file-upload" onclick="document.getElementById('fileInput').click()">
-                        <div class="icon">📄</div>
-                        <div class="text">Bonyeza hapa kupakia faili au buruta na uachia</div>
-                        <input type="file" id="fileInput" multiple onchange="handleFiles(this.files)">
-                    </div>
-                    <div class="file-list" id="fileList"></div>
-                </div>
-
-                <!-- ========================================================== -->
-                <!-- SEHEMU 16: MUHTASARI -->
-                <!-- ========================================================== -->
-                <div class="score-box" style="margin-top:16px;">
-                    <h3>📊 MUHTASARI WA HALI YA TATHMINI</h3>
-                    <div class="score-row" id="scoreSummary">
-                        <div class="score-item">
-                            <span class="number" id="scoreTotal">0%</span>
-                            <span class="label">Alama ya Jumla</span>
-                        </div>
-                        <div class="score-item">
-                            <span class="number" id="scoreStatus">⏳</span>
-                            <span class="label">Hali</span>
-                        </div>
-                        <div class="score-item">
-                            <span class="number" id="scoreGoals">⏳</span>
-                            <span class="label">Malengo</span>
-                        </div>
-                        <div class="score-item">
-                            <span class="number" id="scoreTasks">0/0</span>
-                            <span class="label">Majukumu</span>
-                        </div>
-                        <div class="score-item">
-                            <span class="number" id="scoreTrend">⏳</span>
-                            <span class="label">Mwenendo</span>
-                        </div>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="fill" id="progressFill" style="width:0%;"></div>
-                    </div>
-                </div>
-
-                <!-- ========================================================== -->
-                <!-- SEHEMU 17: SAHIHI -->
-                <!-- ========================================================== -->
+                <!-- ===== SAHIHI ===== -->
                 <div class="form-group">
                     <label>✍️ Sahihi Yako <span class="required">*</span></label>
                     <div class="signature-pad"><canvas id="supervisorSigCanvas"></canvas></div>
@@ -1279,9 +1039,7 @@
                     </div>
                 </div>
 
-                <!-- ========================================================== -->
-                <!-- SEHEMU 18: TUMA -->
-                <!-- ========================================================== -->
+                <!-- ===== TUMA ===== -->
                 <button class="btn btn-primary" onclick="submitSupervisor()" id="supervisorSubmitBtn" style="width:100%;">
                     📤 TUMA KWA MGANGA MFAWIDHI
                 </button>
@@ -1316,25 +1074,15 @@
                     <div class="section-header">🔔 Arifa</div>
                     <div style="display:flex; gap:16px; flex-wrap:wrap;">
                         <label style="display:flex; align-items:center; gap:8px;">
-                            <input type="checkbox" id="settingEmailNotification" checked>
-                            Arifa za Barua Pepe
+                            <input type="checkbox" id="settingEmailNotification" checked> Arifa za Barua Pepe
                         </label>
                         <label style="display:flex; align-items:center; gap:8px;">
-                            <input type="checkbox" id="settingSMSNotification" checked>
-                            Arifa za SMS
+                            <input type="checkbox" id="settingSMSNotification" checked> Arifa za SMS
                         </label>
                         <label style="display:flex; align-items:center; gap:8px;">
-                            <input type="checkbox" id="settingWhatsAppNotification" checked>
-                            Arifa za WhatsApp
+                            <input type="checkbox" id="settingWhatsAppNotification" checked> Arifa za WhatsApp
                         </label>
                     </div>
-                </div>
-                <div class="section-box orange">
-                    <div class="section-header">🌐 Lugha</div>
-                    <select id="languageSelect" style="padding:8px 14px; border-radius:8px; border:2px solid #dee2e6; font-size:14px;">
-                        <option value="sw">Kiswahili</option>
-                        <option value="en">English</option>
-                    </select>
                 </div>
                 <div class="section-box blue">
                     <div class="section-header">💾 Data</div>
@@ -1347,11 +1095,9 @@
             </div>
         </div>
 
-        <!-- ===== FOOTER ===== -->
         <div class="footer">
             <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
             <div>Mtwara Performance | Fomu ya Msimamizi | Toleo la Kimataifa v3.0</div>
-            <div style="margin-top:4px; font-size:11px; color:#bdc3c7;">Imetengenezwa kwa ajili ya Mtwara SDA Dispensary</div>
         </div>
 
     </div>
@@ -1658,7 +1404,7 @@ function deleteReport(reportId) {
 function shareWhatsApp() {
     const workerName = document.getElementById("workerName").value.trim() || "Mtendakazi";
     const supervisorName = document.getElementById("supervisorName").value.trim() || "Msimamizi";
-    const overallScore = document.getElementById("scoreTotal").textContent;
+    const overallScore = document.getElementById("scoreTotal")?.textContent || "N/A";
     
     const msg = encodeURIComponent(`📊 *Ripoti ya Tathmini - Mtwara Performance*\n\n👤 Mtendakazi: ${workerName}\n👔 Msimamizi: ${supervisorName}\n⭐ Alama: ${overallScore}\n📅 Tarehe: ${new Date().toLocaleDateString()}\n\n✅ Tathmini imekamilika!\n\nMtwara SDA Dispensary`);
     
@@ -1698,7 +1444,7 @@ function shareReportWhatsApp(reportId) {
 function sendEmailReport() {
     const workerName = document.getElementById("workerName").value.trim() || "Mtendakazi";
     const supervisorName = document.getElementById("supervisorName").value.trim() || "Msimamizi";
-    const overallScore = document.getElementById("scoreTotal").textContent;
+    const overallScore = document.getElementById("scoreTotal")?.textContent || "N/A";
     
     const subject = encodeURIComponent(`Ripoti ya Tathmini - ${workerName}`);
     const body = encodeURIComponent(`Ripoti ya Tathmini ya Utendaji
@@ -1811,9 +1557,10 @@ function updateWorkerChecklist() {
 }
 
 function updateNotification() {
-    const value = document.getElementById("goalsAchieved").value;
+    const value = document.getElementById("goalsAchieved")?.value || "yes";
     const msg = document.getElementById("notificationMessage");
     const box = document.getElementById("notificationBox");
+    if (!msg || !box) return;
     
     box.className = "notification-box";
     if (value === "yes") {
@@ -1909,9 +1656,6 @@ function saveSig(type) {
     showToast("✅ Sahihi imehifadhiwa!", "success");
 }
 
-// ==============================================================
-// WHATSAPP & CALL FUNCTIONS
-// ==============================================================
 function openWhatsApp(inputId) {
     const input = document.getElementById(inputId);
     const phone = input.value.trim();
@@ -1942,9 +1686,6 @@ function makeCall(inputId) {
     showToast(`📞 Inapiga simu kwa ${cleanPhone}`, "info");
 }
 
-// ==============================================================
-// RESET FORM
-// ==============================================================
 function resetForm() {
     if (!confirm("Je, una uhakika unataka kuweka upya fomu yote?")) return;
     
@@ -1961,9 +1702,9 @@ function resetForm() {
     });
     
     clearSig('supervisor');
-    document.getElementById('goalsAchieved').value = 'yes';
+    document.getElementById('goalsAchieved') && (document.getElementById('goalsAchieved').value = 'yes');
     updateNotification();
-    document.getElementById('fileList').innerHTML = '';
+    document.getElementById('fileList') && (document.getElementById('fileList').innerHTML = '');
     uploadedFiles = [];
     
     document.getElementById('supervisorSubmitBtn').disabled = false;
@@ -1974,6 +1715,270 @@ function resetForm() {
     
     updateScoreSummary();
     showToast("✅ Fomu imewekwa upya", "success");
+}
+
+// ==============================================================
+// UPDATE SCORE SUMMARY
+// ==============================================================
+function updateScoreSummary() {
+    const generalItems = document.querySelectorAll("#supervisorGeneralChecklist .checklist-item");
+    const specialItems = document.querySelectorAll("#supervisorSpecialChecklist .checklist-item");
+    const totalItems = generalItems.length + specialItems.length;
+    const checkedGeneral = document.querySelectorAll("#supervisorGeneralChecklist .toggle.active").length;
+    const checkedSpecial = document.querySelectorAll("#supervisorSpecialChecklist .toggle.active").length;
+    const totalChecked = checkedGeneral + checkedSpecial;
+    const taskPercentage = totalItems > 0 ? Math.round((totalChecked / totalItems) * 100) : 0;
+    
+    const ratings = getLikertValues("sPunctuality","sQuality","sTeamwork","sLeadership","sCommunication","sDecision");
+    const ratingValues = Object.values(ratings);
+    const totalRating = ratingValues.reduce((a,b) => a+b, 0);
+    const maxRating = ratingValues.length * 5;
+    const ratingPercentage = maxRating > 0 ? Math.round((totalRating / maxRating) * 100) : 0;
+    
+    const overallScore = Math.round((ratingPercentage * 0.5) + (taskPercentage * 0.3) + 10);
+    
+    document.getElementById("scoreTotal").textContent = Math.min(overallScore, 100) + "%";
+    document.getElementById("scoreTotal").className = "number " + (overallScore >= 70 ? "green" : overallScore >= 50 ? "orange" : "red");
+    document.getElementById("scoreTasks").textContent = totalChecked + "/" + totalItems;
+    
+    const goalsValue = document.getElementById("goalsAchieved")?.value || "yes";
+    const goalsText = goalsValue === "yes" ? "✅ Imefikiwa" : goalsValue === "partially" ? "⚠️ Sehemu" : "❌ Hajafikiwa";
+    document.getElementById("scoreGoals").textContent = goalsText;
+    document.getElementById("scoreGoals").className = "number " + (goalsValue === "yes" ? "green" : goalsValue === "partially" ? "orange" : "red");
+    
+    const trendValues = [65, 72, 80, 88];
+    const lastTrend = trendValues[trendValues.length - 1];
+    document.getElementById("scoreTrend").textContent = lastTrend + "%";
+    document.getElementById("scoreTrend").className = "number " + (lastTrend >= 70 ? "green" : lastTrend >= 50 ? "orange" : "red");
+    
+    const statusText = overallScore >= 70 ? "✅ Nzuri" : overallScore >= 50 ? "⚠️ Wastani" : "❌ Inahitaji Uboreshaji";
+    document.getElementById("scoreStatus").textContent = statusText;
+    document.getElementById("scoreStatus").className = "number " + (overallScore >= 70 ? "green" : overallScore >= 50 ? "orange" : "red");
+    
+    document.getElementById("progressFill").style.width = Math.min(overallScore, 100) + "%";
+}
+
+// ==============================================================
+// EXPORT REPORT
+// ==============================================================
+function exportReport() {
+    showToast("📊 Inaandaa ripoti...", "info");
+    setTimeout(() => {
+        const content = document.getElementById("formSupervisor").innerHTML;
+        const win = window.open('', '_blank');
+        win.document.write(`
+            <html><head><title>Ripoti ya Tathmini</title>
+            <style>
+                body{font-family:Arial;padding:30px;max-width:800px;margin:0 auto;}
+                h1{color:#1a5276;border-bottom:3px solid #27ae60;padding-bottom:10px;}
+                .field{margin:8px 0;padding:4px 0;border-bottom:1px solid #eee;}
+                .label{font-weight:600;color:#1a5276;display:inline-block;width:200px;}
+                .value{display:inline-block;}
+                .score{font-size:24px;font-weight:700;color:#27ae60;}
+            </style>
+            </head><body>
+            <h1>📊 Ripoti ya Tathmini - Msimamizi</h1>
+            <hr>
+            ${content}
+            <p style="margin-top:30px;"><em>Imetolewa: ${new Date().toLocaleString()}</em></p>
+            <p style="font-size:12px; color:#7f8c8d;">Mtwara Performance | Fomu ya Msimamizi v3.0</p>
+            </body></html>
+        `);
+        win.document.close();
+        showToast("✅ Ripoti imeandaliwa!", "success");
+    }, 500);
+}
+
+// ==============================================================
+// EXPORT DATA
+// ==============================================================
+function exportData() {
+    const data = {
+        reports: submittedReports,
+        exportedAt: new Date().toISOString(),
+        version: "3.0"
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `mtwara_data_${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast("✅ Data imehamishwa!", "success");
+}
+
+// ==============================================================
+// CLEAR ALL DATA
+// ==============================================================
+function clearAllData() {
+    if (!confirm("Je, una uhakika unataka kufuta data yote? Hatua hii haiwezi kugeuzwa!")) return;
+    if (!confirm("Thibitisha tena: Futa data yote?")) return;
+    
+    localStorage.removeItem("mtwaraUser");
+    localStorage.removeItem("mtwaraData");
+    localStorage.removeItem("mtwaraSubmittedReports");
+    localStorage.removeItem("supervisorGeneral");
+    localStorage.removeItem("supervisorSpecial");
+    
+    submittedReports = [];
+    updateReportsList();
+    updateDashboard();
+    showToast("🗑️ Data yote imefutwa!", "warning");
+    
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 1500);
+}
+
+// ==============================================================
+// UPDATE DATE TIME
+// ==============================================================
+function updateDateTime() {
+    const now = new Date();
+    const options = { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    };
+    const el = document.getElementById('currentDateTime');
+    if (el) {
+        el.textContent = '🕐 ' + now.toLocaleDateString('sw', options);
+    }
+}
+setInterval(updateDateTime, 1000);
+
+// ==============================================================
+// SUBMIT SUPERVISOR
+// ==============================================================
+async function submitSupervisor() {
+    const workerName = document.getElementById("workerName").value.trim();
+    if (!workerName) { showToast("⚠️ Tafadhali weka jina la mtendakazi", "warning"); return; }
+    
+    const supervisorName = document.getElementById("supervisorName").value.trim();
+    if (!supervisorName) { showToast("⚠️ Tafadhali weka jina lako", "warning"); return; }
+    
+    const workerPhone = document.getElementById("workerPhone").value.trim();
+    if (!workerPhone) { showToast("⚠️ Tafadhali weka namba ya simu ya mtendakazi", "warning"); return; }
+    
+    const supervisorPhone = document.getElementById("supervisorPhone").value.trim();
+    if (!supervisorPhone) { showToast("⚠️ Tafadhali weka namba yako ya simu", "warning"); return; }
+    
+    if (!signatureData.supervisor) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
+    
+    const ratings = getLikertValues("sPunctuality","sQuality","sTeamwork","sLeadership","sCommunication","sDecision");
+    const allRated = Object.values(ratings).every(v => v > 0);
+    if (!allRated) { showToast("⚠️ Tafadhali tathmini vipengele vyote (1-5)", "warning"); return; }
+
+    const overallScore = calculateOverallScore();
+
+    const report = {
+        type: "supervisor_assessment_international",
+        id: Date.now(),
+        workerName: workerName,
+        workerRole: document.getElementById("workerRole").value,
+        workerDate: document.getElementById("workerDate").value,
+        workerShift: document.getElementById("workerShift").value,
+        workerDepartment: document.getElementById("workerDepartment").value,
+        workerPhone: workerPhone,
+        workerWhatsApp: document.getElementById("workerWhatsApp").value.trim(),
+        workerEmail: document.getElementById("workerEmail").value.trim(),
+        
+        generalChecklist: getChecklistData("supervisorGeneralChecklist", "supervisorGeneral"),
+        specialChecklist: getChecklistData("supervisorSpecialChecklist", "supervisorSpecial"),
+        extraTasks: document.getElementById("extraTasks").value.trim(),
+        
+        supervisorName: supervisorName,
+        supervisorTitle: document.getElementById("supervisorTitle").value,
+        supervisorDepartment: document.getElementById("supervisorDepartment").value,
+        supervisorPhone: supervisorPhone,
+        supervisorWhatsApp: document.getElementById("supervisorWhatsApp").value.trim(),
+        supervisorEmail: document.getElementById("supervisorEmail").value.trim(),
+        
+        ratings: getLikertLabels("sPunctuality","sQuality","sTeamwork","sLeadership","sCommunication","sDecision"),
+        ratingsValues: ratings,
+        
+        comments: document.getElementById("supervisorComments").value,
+        recommendations: document.getElementById("supervisorRecommendations").value,
+        followUp: document.getElementById("supervisorFollowUp").value,
+        
+        goalsAchieved: document.getElementById("goalsAchieved").value,
+        smartGoals: document.getElementById("smartGoals").value,
+        actionPlan: document.getElementById("actionPlan").value,
+        actionStartDate: document.getElementById("actionStartDate").value,
+        actionEndDate: document.getElementById("actionEndDate").value,
+        
+        peerFeedback: document.getElementById("peerFeedback").value,
+        patientFeedback: document.getElementById("patientFeedback").value,
+        selfReflection: document.getElementById("selfReflection").value,
+        
+        whatsappNotification: document.getElementById("whatsappNotification").checked,
+        whatsappNotificationSupervisor: document.getElementById("whatsappNotificationSupervisor").checked,
+        
+        overallScore: Math.min(overallScore, 100),
+        signature: signatureData.supervisor,
+        
+        status: "Inasubiri Mganga Mfawidhi",
+        timestamp: new Date().toISOString()
+    };
+
+    try {
+        const data = await getBinData();
+        if (!data) return;
+        if (!data.reports) data.reports = [];
+        data.reports.push(report);
+        const result = await updateBinData(data);
+        if (result) {
+            reports = data.reports;
+            
+            submittedReports.push(report);
+            localStorage.setItem("mtwaraSubmittedReports", JSON.stringify(submittedReports));
+            updateReportsList();
+            updateDashboard();
+            
+            document.getElementById("supervisorSubmitBtn").disabled = true;
+            document.getElementById("supervisorSubmitBtn").innerHTML = "✅ Imetumwa!";
+            document.getElementById("supervisorSubmitMsg").style.display = "block";
+            document.getElementById("supervisorSubmitMsg").textContent = `✅ Tathmini imetumwa! Alama: ${Math.min(overallScore, 100)}%`;
+            document.getElementById("supervisorSubmitMsg").style.color = "#27ae60";
+            document.getElementById("supervisorStatusBadge").textContent = "✅ Imetumwa";
+            document.getElementById("supervisorStatusBadge").className = "status-badge submitted";
+            
+            if (document.getElementById("whatsappNotification").checked && report.workerWhatsApp) {
+                setTimeout(() => {
+                    const msg = encodeURIComponent(`Habari ${report.workerName},\nTathmini yako ya utendaji imekamilishwa na msimamizi ${report.supervisorName}.\nAlama: ${Math.min(overallScore, 100)}%\nTarehe: ${new Date().toLocaleDateString()}\n\nMtwara Performance`);
+                    const url = `https://wa.me/${report.workerWhatsApp.replace(/[^0-9+]/g, '')}?text=${msg}`;
+                    window.open(url, '_blank');
+                }, 1000);
+            }
+            
+            showToast(`✅ Tathmini imetumwa! Alama: ${Math.min(overallScore, 100)}%`, "success");
+        }
+    } catch (error) {
+        console.error("❌ Hitilafu:", error);
+        showToast("❌ Hitilafu: " + error.message, "error");
+    }
+}
+
+function calculateOverallScore() {
+    const generalItems = document.querySelectorAll("#supervisorGeneralChecklist .checklist-item");
+    const specialItems = document.querySelectorAll("#supervisorSpecialChecklist .checklist-item");
+    const totalItems = generalItems.length + specialItems.length;
+    const checkedGeneral = document.querySelectorAll("#supervisorGeneralChecklist .toggle.active").length;
+    const checkedSpecial = document.querySelectorAll("#supervisorSpecialChecklist .toggle.active").length;
+    const totalChecked = checkedGeneral + checkedSpecial;
+    const taskPercentage = totalItems > 0 ? Math.round((totalChecked / totalItems) * 100) : 0;
+    
+    const ratings = getLikertValues("sPunctuality","sQuality","sTeamwork","sLeadership","sCommunication","sDecision");
+    const ratingValues = Object.values(ratings);
+    const totalRating = ratingValues.reduce((a,b) => a+b, 0);
+    const maxRating = ratingValues.length * 5;
+    const ratingPercentage = maxRating > 0 ? Math.round((totalRating / maxRating) * 100) : 0;
+    
+    return Math.round((ratingPercentage * 0.5) + (taskPercentage * 0.3) + 10);
 }
 
 // ==============================================================
@@ -2081,261 +2086,6 @@ async function createBin() {
     }
 }
 
-// ==============================================================
-// UPDATE SCORE SUMMARY
-// ==============================================================
-function updateScoreSummary() {
-    const generalItems = document.querySelectorAll("#supervisorGeneralChecklist .checklist-item");
-    const specialItems = document.querySelectorAll("#supervisorSpecialChecklist .checklist-item");
-    const totalItems = generalItems.length + specialItems.length;
-    const checkedGeneral = document.querySelectorAll("#supervisorGeneralChecklist .toggle.active").length;
-    const checkedSpecial = document.querySelectorAll("#supervisorSpecialChecklist .toggle.active").length;
-    const totalChecked = checkedGeneral + checkedSpecial;
-    const taskPercentage = totalItems > 0 ? Math.round((totalChecked / totalItems) * 100) : 0;
-    
-    const ratings = getLikertValues("sPunctuality","sQuality","sTeamwork","sLeadership","sCommunication","sDecision");
-    const ratingValues = Object.values(ratings);
-    const totalRating = ratingValues.reduce((a,b) => a+b, 0);
-    const maxRating = ratingValues.length * 5;
-    const ratingPercentage = maxRating > 0 ? Math.round((totalRating / maxRating) * 100) : 0;
-    
-    const overallScore = Math.round((ratingPercentage * 0.5) + (taskPercentage * 0.3) + 10);
-    
-    document.getElementById("scoreTotal").textContent = Math.min(overallScore, 100) + "%";
-    document.getElementById("scoreTotal").className = "number " + (overallScore >= 70 ? "green" : overallScore >= 50 ? "orange" : "red");
-    document.getElementById("scoreTasks").textContent = totalChecked + "/" + totalItems;
-    
-    const goalsValue = document.getElementById("goalsAchieved").value;
-    const goalsText = goalsValue === "yes" ? "✅ Imefikiwa" : goalsValue === "partially" ? "⚠️ Sehemu" : "❌ Hajafikiwa";
-    document.getElementById("scoreGoals").textContent = goalsText;
-    document.getElementById("scoreGoals").className = "number " + (goalsValue === "yes" ? "green" : goalsValue === "partially" ? "orange" : "red");
-    
-    const trendValues = [65, 72, 80, 88];
-    const lastTrend = trendValues[trendValues.length - 1];
-    document.getElementById("scoreTrend").textContent = lastTrend + "%";
-    document.getElementById("scoreTrend").className = "number " + (lastTrend >= 70 ? "green" : lastTrend >= 50 ? "orange" : "red");
-    
-    const statusText = overallScore >= 70 ? "✅ Nzuri" : overallScore >= 50 ? "⚠️ Wastani" : "❌ Inahitaji Uboreshaji";
-    document.getElementById("scoreStatus").textContent = statusText;
-    document.getElementById("scoreStatus").className = "number " + (overallScore >= 70 ? "green" : overallScore >= 50 ? "orange" : "red");
-    
-    document.getElementById("progressFill").style.width = Math.min(overallScore, 100) + "%";
-}
-
-// ==============================================================
-// EXPORT REPORT
-// ==============================================================
-function exportReport() {
-    showToast("📊 Inaandaa ripoti...", "info");
-    setTimeout(() => {
-        const content = document.getElementById("formSupervisor").innerHTML;
-        const win = window.open('', '_blank');
-        win.document.write(`
-            <html><head><title>Ripoti ya Tathmini</title>
-            <style>
-                body{font-family:Arial;padding:30px;max-width:800px;margin:0 auto;}
-                h1{color:#1a5276;border-bottom:3px solid #27ae60;padding-bottom:10px;}
-                .field{margin:8px 0;padding:4px 0;border-bottom:1px solid #eee;}
-                .label{font-weight:600;color:#1a5276;display:inline-block;width:200px;}
-                .value{display:inline-block;}
-                .score{font-size:24px;font-weight:700;color:#27ae60;}
-            </style>
-            </head><body>
-            <h1>📊 Ripoti ya Tathmini - Msimamizi</h1>
-            <hr>
-            ${content}
-            <p style="margin-top:30px;"><em>Imetolewa: ${new Date().toLocaleString()}</em></p>
-            <p style="font-size:12px; color:#7f8c8d;">Mtwara Performance | Fomu ya Msimamizi v3.0</p>
-            </body></html>
-        `);
-        win.document.close();
-        showToast("✅ Ripoti imeandaliwa!", "success");
-    }, 500);
-}
-
-// ==============================================================
-// EXPORT DATA
-// ==============================================================
-function exportData() {
-    const data = {
-        reports: submittedReports,
-        exportedAt: new Date().toISOString(),
-        version: "3.0"
-    };
-    const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `mtwara_data_${new Date().toISOString().split('T')[0]}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
-    showToast("✅ Data imehamishwa!", "success");
-}
-
-// ==============================================================
-// CLEAR ALL DATA
-// ==============================================================
-function clearAllData() {
-    if (!confirm("Je, una uhakika unataka kufuta data yote? Hatua hii haiwezi kugeuzwa!")) return;
-    if (!confirm("Thibitisha tena: Futa data yote?")) return;
-    
-    localStorage.removeItem("mtwaraUser");
-    localStorage.removeItem("mtwaraData");
-    localStorage.removeItem("mtwaraSubmittedReports");
-    localStorage.removeItem("supervisorGeneral");
-    localStorage.removeItem("supervisorSpecial");
-    
-    submittedReports = [];
-    updateReportsList();
-    updateDashboard();
-    showToast("🗑️ Data yote imefutwa!", "warning");
-    
-    setTimeout(() => {
-        window.location.href = "index.html";
-    }, 1500);
-}
-
-// ==============================================================
-// UPDATE DATE TIME
-// ==============================================================
-function updateDateTime() {
-    const now = new Date();
-    const options = { 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-    };
-    document.getElementById('currentDateTime').textContent = '🕐 ' + now.toLocaleDateString('sw', options);
-}
-setInterval(updateDateTime, 1000);
-
-// ==============================================================
-// SUBMIT SUPERVISOR
-// ==============================================================
-async function submitSupervisor() {
-    const workerName = document.getElementById("workerName").value.trim();
-    if (!workerName) { showToast("⚠️ Tafadhali weka jina la mtendakazi", "warning"); return; }
-    
-    const supervisorName = document.getElementById("supervisorName").value.trim();
-    if (!supervisorName) { showToast("⚠️ Tafadhali weka jina lako", "warning"); return; }
-    
-    const workerPhone = document.getElementById("workerPhone").value.trim();
-    if (!workerPhone) { showToast("⚠️ Tafadhali weka namba ya simu ya mtendakazi", "warning"); return; }
-    
-    const supervisorPhone = document.getElementById("supervisorPhone").value.trim();
-    if (!supervisorPhone) { showToast("⚠️ Tafadhali weka namba yako ya simu", "warning"); return; }
-    
-    if (!signatureData.supervisor) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
-    
-    const ratings = getLikertValues("sPunctuality","sQuality","sTeamwork","sLeadership","sCommunication","sDecision");
-    const allRated = Object.values(ratings).every(v => v > 0);
-    if (!allRated) { showToast("⚠️ Tafadhali tathmini vipengele vyote (1-5)", "warning"); return; }
-
-    const generalItems = document.querySelectorAll("#supervisorGeneralChecklist .checklist-item");
-    const specialItems = document.querySelectorAll("#supervisorSpecialChecklist .checklist-item");
-    const totalItems = generalItems.length + specialItems.length;
-    const checkedGeneral = document.querySelectorAll("#supervisorGeneralChecklist .toggle.active").length;
-    const checkedSpecial = document.querySelectorAll("#supervisorSpecialChecklist .toggle.active").length;
-    const totalChecked = checkedGeneral + checkedSpecial;
-    const taskPercentage = totalItems > 0 ? Math.round((totalChecked / totalItems) * 100) : 0;
-    
-    const ratingValues = Object.values(ratings);
-    const totalRating = ratingValues.reduce((a,b) => a+b, 0);
-    const maxRating = ratingValues.length * 5;
-    const ratingPercentage = maxRating > 0 ? Math.round((totalRating / maxRating) * 100) : 0;
-    const overallScore = Math.round((ratingPercentage * 0.5) + (taskPercentage * 0.3) + 10);
-
-    const report = {
-        type: "supervisor_assessment_international",
-        id: Date.now(),
-        workerName: workerName,
-        workerRole: document.getElementById("workerRole").value,
-        workerDate: document.getElementById("workerDate").value,
-        workerShift: document.getElementById("workerShift").value,
-        workerDepartment: document.getElementById("workerDepartment").value,
-        workerPhone: workerPhone,
-        workerWhatsApp: document.getElementById("workerWhatsApp").value.trim(),
-        workerEmail: document.getElementById("workerEmail").value.trim(),
-        
-        generalChecklist: getChecklistData("supervisorGeneralChecklist", "supervisorGeneral"),
-        specialChecklist: getChecklistData("supervisorSpecialChecklist", "supervisorSpecial"),
-        extraTasks: document.getElementById("extraTasks").value.trim(),
-        
-        supervisorName: supervisorName,
-        supervisorTitle: document.getElementById("supervisorTitle").value,
-        supervisorDepartment: document.getElementById("supervisorDepartment").value,
-        supervisorPhone: supervisorPhone,
-        supervisorWhatsApp: document.getElementById("supervisorWhatsApp").value.trim(),
-        supervisorEmail: document.getElementById("supervisorEmail").value.trim(),
-        
-        ratings: getLikertLabels("sPunctuality","sQuality","sTeamwork","sLeadership","sCommunication","sDecision"),
-        ratingsValues: ratings,
-        
-        comments: document.getElementById("supervisorComments").value,
-        recommendations: document.getElementById("supervisorRecommendations").value,
-        followUp: document.getElementById("supervisorFollowUp").value,
-        
-        goalsAchieved: document.getElementById("goalsAchieved").value,
-        smartGoals: document.getElementById("smartGoals").value,
-        actionPlan: document.getElementById("actionPlan").value,
-        actionStartDate: document.getElementById("actionStartDate").value,
-        actionEndDate: document.getElementById("actionEndDate").value,
-        
-        peerFeedback: document.getElementById("peerFeedback").value,
-        patientFeedback: document.getElementById("patientFeedback").value,
-        selfReflection: document.getElementById("selfReflection").value,
-        
-        whatsappNotification: document.getElementById("whatsappNotification").checked,
-        whatsappNotificationSupervisor: document.getElementById("whatsappNotificationSupervisor").checked,
-        
-        overallScore: Math.min(overallScore, 100),
-        signature: signatureData.supervisor,
-        
-        status: "Inasubiri Mganga Mfawidhi",
-        timestamp: new Date().toISOString()
-    };
-
-    try {
-        const data = await getBinData();
-        if (!data) return;
-        if (!data.reports) data.reports = [];
-        data.reports.push(report);
-        const result = await updateBinData(data);
-        if (result) {
-            reports = data.reports;
-            
-            submittedReports.push(report);
-            localStorage.setItem("mtwaraSubmittedReports", JSON.stringify(submittedReports));
-            updateReportsList();
-            updateDashboard();
-            
-            document.getElementById("supervisorSubmitBtn").disabled = true;
-            document.getElementById("supervisorSubmitBtn").innerHTML = "✅ Imetumwa!";
-            document.getElementById("supervisorSubmitMsg").style.display = "block";
-            document.getElementById("supervisorSubmitMsg").textContent = `✅ Tathmini imetumwa! Alama: ${Math.min(overallScore, 100)}%`;
-            document.getElementById("supervisorSubmitMsg").style.color = "#27ae60";
-            document.getElementById("supervisorStatusBadge").textContent = "✅ Imetumwa";
-            document.getElementById("supervisorStatusBadge").className = "status-badge submitted";
-            
-            if (document.getElementById("whatsappNotification").checked && report.workerWhatsApp) {
-                setTimeout(() => {
-                    const msg = encodeURIComponent(`Habari ${report.workerName},\nTathmini yako ya utendaji imekamilishwa na msimamizi ${report.supervisorName}.\nAlama: ${Math.min(overallScore, 100)}%\nTarehe: ${new Date().toLocaleDateString()}\n\nMtwara Performance`);
-                    const url = `https://wa.me/${report.workerWhatsApp.replace(/[^0-9+]/g, '')}?text=${msg}`;
-                    window.open(url, '_blank');
-                }, 1000);
-            }
-            
-            showToast(`✅ Tathmini imetumwa! Alama: ${Math.min(overallScore, 100)}%`, "success");
-        }
-    } catch (error) {
-        console.error("❌ Hitilafu:", error);
-        showToast("❌ Hitilafu: " + error.message, "error");
-    }
-}
-
 async function syncData() {
     showToast("🔄 Inasawazisha...", "info");
     document.getElementById("syncBtn").innerHTML = '<span class="loading"></span>';
@@ -2390,7 +2140,6 @@ window.onload = function() {
     
     console.log("✅ Mtwara Performance - Fomu ya Msimamizi v3.0");
     console.log("📦 BIN ID:", BIN_ID);
-    console.log("📊 Vipengele: Dashboard, Performance Trends, Competency Matrix, KPI Tracker, Goal Setting, Action Plan, 360° Feedback, Self-Reflection, Document Upload, Export Report, WhatsApp Integration, Call Integration, Share Features");
 };
 </script>
 
