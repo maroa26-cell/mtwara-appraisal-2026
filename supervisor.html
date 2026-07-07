@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -26,7 +25,6 @@
             .container { padding: 16px; }
         }
 
-        /* ===== HEADER ===== */
         .header {
             text-align: center;
             border-bottom: 4px solid #27ae60;
@@ -62,7 +60,6 @@
             color: #7f8c8d;
         }
 
-        /* ===== LOGIN ===== */
         .login-box {
             max-width: 420px;
             margin: 60px auto;
@@ -74,7 +71,7 @@
         .login-box h2 { text-align: center; color: #1a5276; margin-bottom: 8px; }
         .login-box .subtitle { text-align: center; color: #7f8c8d; font-size: 13px; margin-bottom: 24px; }
 
-        /* ===== MAIN APP - INAFICHIKA KABLA YA LOGIN ===== */
+        /* MAIN APP - INAFICHIKA KABLA YA LOGIN */
         #mainApp {
             display: none;
         }
@@ -82,7 +79,6 @@
             display: block;
         }
 
-        /* ===== FORM CARD ===== */
         .form-card {
             background: #f8f9fa;
             border-radius: 16px;
@@ -298,7 +294,6 @@
             margin-left: auto;
         }
 
-        /* ===== SECTION PROGRESS ===== */
         .section-progress {
             background: #fff;
             padding: 12px 16px;
@@ -327,7 +322,6 @@
             width: 0%;
         }
 
-        /* ===== DASHBOARD STATS ===== */
         .dashboard-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -373,7 +367,6 @@
             margin-bottom: 4px;
         }
 
-        /* ===== CALENDAR ===== */
         .calendar-container {
             background: #fff;
             border-radius: 12px;
@@ -485,7 +478,6 @@
             font-size: 14px;
         }
 
-        /* ===== REMINDERS ===== */
         .reminder-item {
             display: flex;
             align-items: center;
@@ -525,7 +517,6 @@
         .reminder-item .reminder-status.pending { background: #fef9e7; color: #f39c12; }
         .reminder-item .reminder-status.done { background: #d5f5e3; color: #27ae60; }
 
-        /* ===== GROUP REPORTS ===== */
         .group-report {
             background: #f8f9fa;
             border-radius: 12px;
@@ -560,7 +551,6 @@
         .group-report .dept-item .dept-score.orange { color: #f39c12; }
         .group-report .dept-item .dept-score.red { color: #e74c3c; }
 
-        /* ===== FUTURE GOALS ===== */
         .goal-item {
             display: flex;
             align-items: flex-start;
@@ -601,7 +591,6 @@
             color: #e74c3c;
         }
 
-        /* ===== LIKERT SCALE ===== */
         .likert-scale {
             display: flex;
             gap: 6px;
@@ -639,7 +628,6 @@
         }
         .likert-btn.selected .sub { color: rgba(255,255,255,0.8); }
 
-        /* ===== CHECKLIST ===== */
         .checklist-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -696,7 +684,6 @@
         }
         .checklist-item .toggle.active .thumb { left: 20px; }
 
-        /* ===== CONTACT INFO ===== */
         .contact-info {
             background: #fef9e7;
             border: 2px solid #f39c12;
@@ -714,7 +701,6 @@
             gap: 8px;
         }
 
-        /* ===== MATRIX ===== */
         .matrix-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -744,7 +730,6 @@
         .matrix-item .level.medium { background: #fdebd0; color: #f39c12; }
         .matrix-item .level.low { background: #fadbd8; color: #e74c3c; }
 
-        /* ===== FILE UPLOAD ===== */
         .file-upload {
             border: 2px dashed #dee2e6;
             border-radius: 10px;
@@ -770,7 +755,6 @@
         }
         .file-item .remove { color: #e74c3c; cursor: pointer; }
 
-        /* ===== CHART ===== */
         .chart-container {
             background: #fff;
             border-radius: 10px;
@@ -817,7 +801,6 @@
             color: #1a5276;
         }
 
-        /* ===== KPI ===== */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -847,7 +830,6 @@
         .kpi-item .value.orange { color: #f39c12; }
         .kpi-item .value.red { color: #e74c3c; }
 
-        /* ===== SCORE BOX ===== */
         .score-box {
             background: #d5f5e3;
             border-radius: 12px;
@@ -904,7 +886,6 @@
             background: linear-gradient(90deg, #27ae60, #1a5276);
         }
 
-        /* ===== NOTIFICATION ===== */
         .notification-box {
             background: #fef9e7;
             border-left: 4px solid #f39c12;
@@ -916,7 +897,6 @@
         .notification-box.success { background: #d5f5e3; border-left-color: #27ae60; }
         .notification-box.danger { background: #fadbd8; border-left-color: #e74c3c; }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .form-card { padding: 16px; }
             .form-row { grid-template-columns: 1fr; }
@@ -945,7 +925,7 @@
 <!-- ===== LOGIN ===== -->
 <div id="loginSection" class="login-box">
     <h2>🔐 Mtwara Performance</h2>
-    <p class="subtitle">Fomu ya Msimamizi - Maboresho Yote</p>
+    <p class="subtitle">Fomu ya Msimamizi - Toleo la Kimataifa</p>
     <div style="text-align:center; margin-bottom:16px; font-size:12px; color:#7f8c8d;">
         <span id="connectionStatus">🔄 Inaunganisha...</span>
     </div>
@@ -970,7 +950,7 @@
         <div class="header">
             <div class="org-badge">👔 Mtwara SDA Dispensary</div>
             <h1>Fomu ya Msimamizi</h1>
-            <h2>Tathmini ya Utendaji Kazi - Maboresho Yote</h2>
+            <h2>Tathmini ya Utendaji Kazi - Toleo la Kimataifa</h2>
             <div style="font-size:12px; color:#7f8c8d; margin-top:4px;">
                 <span id="userBadge" class="user-badge">👤 Imetoka nje</span>
                 <span style="margin-left:12px; font-size:11px; color:#27ae60;">☁️ Online</span>
@@ -1175,7 +1155,7 @@
                 <span id="supervisorStatusBadge" class="status-badge pending">⏳ Inasubiri</span>
             </div>
 
-            <!-- SEHEMU 1: TAARIFA ZA MTENDAKAZI -->
+            <!-- TAARIFA ZA MTENDAKAZI -->
             <div style="background:#eaf2f8; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #27ae60;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">📋 TAARIFA ZA MTENDAKAZI</div>
                 
@@ -1233,7 +1213,7 @@
                 </div>
             </div>
 
-            <!-- SEHEMU 2: MAJUKUMU YA MTENDAKAZI -->
+            <!-- MAJUKUMU YA MTENDAKAZI -->
             <div style="background:#eaf2f8; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #27ae60;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">📋 MAJUKUMU YA MTENDAKAZI</div>
                 
@@ -1244,7 +1224,7 @@
                 <div class="checklist-grid" id="supervisorSpecialChecklist"></div>
             </div>
 
-            <!-- SEHEMU 3: TAARIFA ZA MSIMAMIZI -->
+            <!-- TAARIFA ZA MSIMAMIZI -->
             <div style="background:#d5f5e3; padding:16px 20px; border-radius:12px; margin-bottom:16px; border-left:4px solid #27ae60;">
                 <div style="font-weight:700; color:#1a5276; font-size:15px; margin-bottom:10px;">👔 TAARIFA ZA MSIMAMIZI</div>
                 
@@ -1290,7 +1270,7 @@
                 </div>
             </div>
 
-            <!-- SEHEMU 4: TATHMINI YA MSIMAMIZI (LIKERT 1-5) -->
+            <!-- TATHMINI YA MSIMAMIZI (LIKERT 1-5) -->
             <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">📊 TATHMINI YA MSIMAMIZI (1-5)</div>
             
             <div class="form-group">
@@ -1354,7 +1334,7 @@
                 </div>
             </div>
 
-            <!-- SEHEMU 5: COMPETENCY MATRIX -->
+            <!-- COMPETENCY MATRIX -->
             <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">🏆 COMPETENCY MATRIX</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Tathmini ya uwezo na umahiri wa mtendakazi</div>
             <div class="matrix-grid" id="competencyMatrix">
@@ -1366,7 +1346,7 @@
                 <div class="matrix-item"><span class="label">❤️ Huruma</span><span class="level high">Juu</span></div>
             </div>
 
-            <!-- SEHEMU 6: KPI TRACKER -->
+            <!-- KPI TRACKER -->
             <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">📊 KPI TRACKER</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Viashiria muhimu vya utendaji</div>
             <div class="kpi-grid" id="kpiTracker">
@@ -1376,7 +1356,7 @@
                 <div class="kpi-item"><span class="value green" id="kpiSatisfaction">88%</span><span class="label">Kuridhika kwa Wagonjwa</span></div>
             </div>
 
-            <!-- SEHEMU 7: PERFORMANCE TRENDS -->
+            <!-- PERFORMANCE TRENDS -->
             <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">📈 PERFORMANCE TRENDS</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Mwenendo wa utendaji kwa robo mwaka</div>
             <div class="chart-container">
@@ -1389,7 +1369,7 @@
                 </div>
             </div>
 
-            <!-- SEHEMU 8: GOAL SETTING (SMART) -->
+            <!-- GOAL SETTING -->
             <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">🎯 GOAL SETTING (SMART)</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Malengo mapya ya SMART kwa kipindi kijacho</div>
             <div class="form-group">
@@ -1397,7 +1377,7 @@
                 <textarea id="smartGoals" placeholder="Andika malengo mahususi, yanayopimika, yanayoweza kufikiwa, yanayofaa, na yenye muda..." onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();"></textarea>
             </div>
 
-            <!-- SEHEMU 9: ACTION PLAN -->
+            <!-- ACTION PLAN -->
             <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">📅 ACTION PLAN</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Mpango wa hatua za uboreshaji</div>
             <div class="form-group">
@@ -1415,7 +1395,7 @@
                 </div>
             </div>
 
-            <!-- SEHEMU 10: 360° FEEDBACK -->
+            <!-- 360° FEEDBACK -->
             <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">⭐ 360° FEEDBACK</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Maoni kutoka pande zote</div>
             <div class="form-group">
@@ -1427,7 +1407,7 @@
                 <textarea id="patientFeedback" placeholder="Maoni kutoka kwa wagonjwa waliohudumiwa..." onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();"></textarea>
             </div>
 
-            <!-- SEHEMU 11: SELF-REFLECTION -->
+            <!-- SELF-REFLECTION -->
             <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">📝 SELF-REFLECTION</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Tafakari ya mtendakazi kuhusu utendaji wake</div>
             <div class="form-group">
@@ -1435,7 +1415,7 @@
                 <textarea id="selfReflection" placeholder="Maoni ya mtendakazi kuhusu utendaji wake..." onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();"></textarea>
             </div>
 
-            <!-- SEHEMU 12: MAONI, MAPENDEKEZO NA UFUATILIAJI -->
+            <!-- MAONI, MAPENDEKEZO NA UFUATILIAJI -->
             <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">📝 MAONI, MAPENDEKEZO NA UFUATILIAJI</div>
             
             <div class="form-group">
@@ -1451,7 +1431,7 @@
                 <textarea id="supervisorFollowUp" placeholder="Mipango yako ya ufuatiliaji..." onchange="autoSave(); updateSectionProgress();" oninput="autoSave(); updateSectionProgress();"></textarea>
             </div>
 
-            <!-- SEHEMU 13: NOTIFICATION -->
+            <!-- NOTIFICATION -->
             <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">🔔 NOTIFICATION</div>
             <div class="notification-box" id="notificationBox">
                 <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
@@ -1467,7 +1447,7 @@
                 </div>
             </div>
 
-            <!-- SEHEMU 14: DOCUMENT UPLOAD -->
+            <!-- DOCUMENT UPLOAD -->
             <div style="margin-top:16px; font-weight:700; color:#27ae60; font-size:15px;">📎 DOCUMENT UPLOAD</div>
             <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">Pakia nyaraka za usaidizi (ripoti, cheti, n.k.)</div>
             <div class="file-upload" onclick="document.getElementById('fileInput').click()">
@@ -1477,7 +1457,7 @@
             </div>
             <div class="file-list" id="fileList"></div>
 
-            <!-- SEHEMU 15: MUHTASARI WA HALI YA TATHMINI -->
+            <!-- MUHTASARI WA HALI YA TATHMINI -->
             <div class="score-box" style="margin-top:16px;">
                 <h3>📊 MUHTASARI WA HALI YA TATHMINI</h3>
                 <div class="score-row" id="scoreSummary">
@@ -1507,7 +1487,7 @@
                 </div>
             </div>
 
-            <!-- SEHEMU 16: SAHIHI -->
+            <!-- SAHIHI -->
             <div class="form-group">
                 <label>✍️ Sahihi Yako <span class="required">*</span></label>
                 <div class="signature-pad"><canvas id="supervisorSigCanvas"></canvas></div>
@@ -1518,7 +1498,7 @@
                 </div>
             </div>
 
-            <!-- SEHEMU 17: TUMA -->
+            <!-- TUMA -->
             <button class="btn btn-primary" onclick="submitSupervisor()" id="supervisorSubmitBtn" style="width:100%;">
                 📤 TUMA KWA MGANGA MFAWIDHI
             </button>
@@ -1528,7 +1508,7 @@
 
         <div class="footer">
             <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
-            <div>Mtwara Performance | Fomu ya Msimamizi | Maboresho Yote</div>
+            <div>Mtwara Performance | Fomu ya Msimamizi | Toleo la Kimataifa</div>
             <div style="margin-top:4px; font-size:10px; color:#aab;">
                 📊 Dashboard | 🔔 Kumbusho | 📅 Kalenda | 🏢 Ripoti za Kikundi | 🎯 Malengo | 📊 CSV
             </div>
@@ -2491,7 +2471,7 @@ function exportReport() {
                 ${content.innerHTML}
                 <div class="footer">
                     <p>"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</p>
-                    <p>Mtwara Performance | Fomu ya Msimamizi | Maboresho Yote</p>
+                    <p>Mtwara Performance | Fomu ya Msimamizi | Toleo la Kimataifa</p>
                 </div>
                 <script>window.onload = function(){ window.print(); }</script>
             </body></html>
@@ -2608,7 +2588,7 @@ window.onload = function() {
     updateDashboard();
     updateGroupReports();
     updateGoalCount();
-    console.log("✅ Mtwara Performance - Fomu ya Msimamizi (Maboresho Yote)");
+    console.log("✅ Mtwara Performance - Fomu ya Msimamizi (Toleo la Kimataifa)");
     console.log("📦 BIN ID:", BIN_ID);
     console.log("📋 Vipengele vyote vimebobeshwa!");
 };
