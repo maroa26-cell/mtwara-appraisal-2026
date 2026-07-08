@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -1283,7 +1282,6 @@ function checkAuth() {
         document.getElementById("userBadge").textContent = `👤 ${currentUser}`;
         document.getElementById("roleDisplay").textContent = "👔 " + (currentRole === "supervisor" ? "Msimamizi" : currentRole);
         
-        // Load reports
         loadReports();
         
         return true;
@@ -1328,7 +1326,7 @@ async function loadReports() {
             updateDashboard();
             updateReportsList();
         } else {
-            console.warn("⚠️ Imeshindwa kupata data, unaweza kuwa na reports 0");
+            console.warn("⚠️ Imeshindwa kupata data");
             allReports = [];
         }
     } catch (error) {
@@ -2014,7 +2012,7 @@ window.onload = function() {
     updateNotification();
     updateScoreSummary();
     
-    console.log("✅ Mtwara Performance - Fomu ya Msimamizi v4.0 (Imerekebishwa)");
+    console.log("✅ Mtwara Performance - Fomu ya Msimamizi v4.0");
     console.log("📦 BIN ID:", BIN_ID);
 };
 </script>
