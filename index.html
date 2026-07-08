@@ -180,7 +180,7 @@
     <div class="login-header">
         <div class="logo">🏥</div>
         <h1>Mtwara Performance</h1>
-        <p>Fomu ya Msimamizi</p>
+        <p>Mfumo wa Tathmini ya Utendaji</p>
         <span class="badge">Toleo la Kimataifa v4.0</span>
     </div>
 
@@ -190,7 +190,7 @@
 
     <div class="form-group">
         <label>👤 Jina la Mtumiaji</label>
-        <input type="text" id="loginUsername" placeholder="Weka username" value="supervisor">
+        <input type="text" id="loginUsername" placeholder="Weka username" value="worker">
     </div>
     <div class="form-group">
         <label>🔑 Nenosiri</label>
@@ -201,9 +201,9 @@
 
     <div class="users-hint">
         <strong>Watumiaji:</strong><br>
-        <code>supervisor / 1234</code> &nbsp;|&nbsp;
-        <code>worker / 1234</code> &nbsp;|&nbsp;
-        <code>incharge / 1234</code>
+        <code>worker / 1234</code> 👤 Mtendakazi &nbsp;|&nbsp;
+        <code>supervisor / 1234</code> 👔 Msimamizi &nbsp;|&nbsp;
+        <code>incharge / 1234</code> 🏥 Mganga Mfawidhi
     </div>
 
     <div class="login-footer">
@@ -269,6 +269,19 @@ async function login() {
             return;
         }
         
+        // ==========================================================
+        // ELEKEZA KWENYE UKURASA SAHIHI KULINGANA NA JUKUMU
+        // ==========================================================
+        let redirectPage = 'supervisor.html'; // default
+        
+        if (user.role === 'worker') {
+            redirectPage = 'worker.html';
+        } else if (user.role === 'supervisor') {
+            redirectPage = 'supervisor.html';
+        } else if (user.role === 'incharge') {
+            redirectPage = 'incharge.html';
+        }
+        
         const userData = encodeURIComponent(JSON.stringify({
             username: username,
             role: user.role
@@ -277,7 +290,7 @@ async function login() {
         showToast(`✅ Karibu ${username}!`, "success");
         
         setTimeout(() => {
-            window.location.href = `supervisor.html?user=${userData}`;
+            window.location.href = `${redirectPage}?user=${userData}`;
         }, 500);
         
     } catch (error) {
@@ -308,12 +321,18 @@ async function checkConnection() {
     }
 }
 
+// ==============================================================
+// KEYBOARD SHORTCUT - Bonyeza Enter kuingia
+// ==============================================================
 document.addEventListener("keydown", function(e) {
     if (e.key === "Enter") {
         login();
     }
 });
 
+// ==============================================================
+// INIT
+// ==============================================================
 window.onload = function() {
     checkConnection();
     console.log("✅ Mtwara Performance Login Page v4.0");
