@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -5,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mtwara Performance - Fomu ya Mtendakazi</title>
     <style>
+        /* ===== RESET & BASE ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -25,6 +27,7 @@
             .container { padding: 16px; }
         }
 
+        /* ===== HEADER ===== */
         .header {
             text-align: center;
             border-bottom: 4px solid #2980b9;
@@ -64,29 +67,8 @@
             color: #7f8c8d;
             margin-top: 4px;
         }
-        .header .lang-switch {
-            margin-top: 8px;
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-        }
-        .header .lang-switch button {
-            padding: 4px 16px;
-            border: 2px solid #2980b9;
-            border-radius: 20px;
-            background: transparent;
-            color: #2980b9;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 12px;
-            transition: 0.3s;
-        }
-        .header .lang-switch button:hover,
-        .header .lang-switch button.active {
-            background: #2980b9;
-            color: #fff;
-        }
 
+        /* ===== TOAST ===== */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -112,6 +94,7 @@
         .toast.error { background: #e74c3c; }
         .toast.info { background: #2980b9; }
 
+        /* ===== FOOTER ===== */
         .footer {
             text-align: center;
             margin-top: 28px;
@@ -132,6 +115,7 @@
             margin-top: 4px;
         }
 
+        /* ===== LOGIN CHECK ===== */
         #loginSection {
             max-width: 420px;
             margin: 60px auto;
@@ -144,6 +128,7 @@
         #loginSection h2 { color: #1a5276; margin-bottom: 8px; }
         #loginSection p { color: #7f8c8d; font-size: 13px; margin-bottom: 20px; }
 
+        /* ===== BUTTONS ===== */
         .btn {
             padding: 11px 28px;
             border: none;
@@ -171,6 +156,7 @@
         .btn-block { width: 100%; justify-content: center; }
         .btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
+        /* ===== USER TOOLS ===== */
         .user-badge {
             display: inline-block;
             padding: 4px 14px;
@@ -200,6 +186,7 @@
             align-items: center;
         }
 
+        /* ===== FORM CARD ===== */
         .form-card {
             background: #f8f9fa;
             border-radius: 16px;
@@ -237,6 +224,7 @@
         .status-badge.pending { background: #fef9e7; color: #f39c12; }
         .status-badge.submitted { background: #d6eaf8; color: #1a5276; }
 
+        /* ===== FORM ELEMENTS ===== */
         .form-group { margin-bottom: 14px; }
         .form-group label {
             display: block;
@@ -275,6 +263,7 @@
         }
         @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
 
+        /* ===== SECTION HEADERS ===== */
         .section-header {
             font-weight: 700;
             color: #1a5276;
@@ -288,13 +277,14 @@
             background: #2980b9;
             color: #fff;
             border-radius: 50%;
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 700;
+            flex-shrink: 0;
         }
         .section-box {
             padding: 16px 20px;
@@ -308,6 +298,7 @@
         .section-box.purple { background: #f4ecf7; border-left-color: #8e44ad; }
         .section-box.orange { background: #fef9e7; border-left-color: #f39c12; }
 
+        /* ===== CONTACT GRID ===== */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -315,6 +306,7 @@
         }
         @media (max-width: 600px) { .contact-grid { grid-template-columns: 1fr; } }
 
+        /* ===== LIKERT SCALE ===== */
         .likert-scale {
             display: flex;
             gap: 6px;
@@ -350,6 +342,7 @@
         }
         .likert-btn.selected .sub { color: rgba(255,255,255,0.8); }
 
+        /* ===== CHECKLIST ===== */
         .checklist-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -403,6 +396,7 @@
         }
         .checklist-item .toggle.active .thumb { left: 20px; }
 
+        /* ===== SIGNATURE PAD ===== */
         .signature-pad {
             border: 2px dashed #2980b9;
             border-radius: 10px;
@@ -417,6 +411,7 @@
         .signature-pad canvas { width: 100%; height: 100%; border-radius: 8px; touch-action: none; }
         .signature-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0; }
 
+        /* ===== SCORE BOX ===== */
         .score-box {
             background: #d5f5e3;
             border-radius: 12px;
@@ -466,6 +461,7 @@
             background: linear-gradient(90deg, #2980b9, #1a5276);
         }
 
+        /* ===== NOTIFICATION BOX ===== */
         .notification-box {
             background: #fef9e7;
             border-left: 4px solid #f39c12;
@@ -477,6 +473,7 @@
         .notification-box.danger { background: #fadbd8; border-left-color: #e74c3c; }
         .notification-box.info { background: #d6eaf8; border-left-color: #2980b9; }
 
+        /* ===== FILE UPLOAD ===== */
         .file-upload {
             border: 2px dashed #dee2e6;
             border-radius: 10px;
@@ -502,6 +499,7 @@
         }
         .file-item .remove { color: #e74c3c; cursor: pointer; }
 
+        /* ===== WHATSAPP & CALL ===== */
         .whatsapp-btn {
             background: #25D366;
             color: #fff;
@@ -523,6 +521,7 @@
         }
         .call-btn:hover { background: #2e86c1; }
 
+        /* ===== TABS ===== */
         .tabs {
             display: flex;
             gap: 4px;
@@ -553,6 +552,65 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
+        /* ===== REPORT ITEM ===== */
+        .report-item {
+            background: #fff;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+            border-left: 4px solid #27ae60;
+            margin-bottom: 10px;
+        }
+        .report-item .report-header {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .report-item .report-header strong { color: #1a5276; }
+        .report-item .report-meta {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 4px;
+        }
+        .report-item .report-actions {
+            margin-top: 6px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        /* ===== MATRIX GRID ===== */
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 8px 0;
+        }
+        @media (max-width: 600px) { .matrix-grid { grid-template-columns: 1fr; } }
+        .matrix-item {
+            background: #fff;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .matrix-item .label { font-size: 12px; color: #1a5276; }
+        .matrix-item .level {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .matrix-item .level.high { background: #d5f5e3; color: #27ae60; }
+        .matrix-item .level.medium { background: #fdebd0; color: #f39c12; }
+        .matrix-item .level.low { background: #fadbd8; color: #e74c3c; }
+
+        /* ===== SPINNER ===== */
         .spinner-overlay {
             display: none;
             position: fixed;
@@ -588,6 +646,7 @@
         }
         .spinner-box p { color: #1a5276; font-weight: 600; font-size: 16px; }
 
+        /* ===== UTILITY ===== */
         .hidden { display: none !important; }
         .text-muted { color: #7f8c8d; font-size: 12px; }
         .mt-10 { margin-top: 10px; }
@@ -599,26 +658,6 @@
             .form-card { border: 1px solid #ddd; }
             .tab-content { display: block !important; }
             .signature-pad canvas { border: 1px solid #ddd; }
-        }
-
-        .share-buttons {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin: 8px 0;
-        }
-
-        .language-selector {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-        .language-selector select {
-            padding: 6px 12px;
-            border-radius: 6px;
-            border: 2px solid #dee2e6;
-            font-size: 13px;
-            background: #fff;
         }
     </style>
 </head>
@@ -646,6 +685,7 @@
 <div id="mainApp" style="display:none;">
     <div class="container">
 
+        <!-- ===== HEADER ===== -->
         <div class="header">
             <div class="org-badge">👤 Mtwara SDA Dispensary</div>
             <h1>Fomu ya Mtendakazi</h1>
@@ -658,12 +698,9 @@
             <div class="bin-info">📦 BIN: <span id="binIdDisplay">6a4b0bc9da38895dfe32cc08</span></div>
             <div class="datetime" id="currentDateTime"></div>
             <div class="mission"><strong>Dhamira:</strong> "Ubora katika Huduma, Imani katika Vitendo"</div>
-            <div class="lang-switch">
-                <button class="active" onclick="setLanguage('sw')">🇹🇿 Kiswahili</button>
-                <button onclick="setLanguage('en')">🇬🇧 English</button>
-            </div>
         </div>
 
+        <!-- ===== USER TOOLS ===== -->
         <div class="user-tools no-print">
             <span style="font-weight:600; color:#1a5276;">👤 <span id="currentUserDisplay">Mgeni</span></span>
             <span id="roleDisplay" class="role-badge">👤 Mtendakazi</span>
@@ -671,12 +708,6 @@
             <button class="btn btn-warning btn-sm" onclick="syncData()" id="syncBtn">🔄 Sync</button>
             <button class="btn btn-success btn-sm" onclick="window.print()">🖨️ Chapisha</button>
             <button class="btn btn-primary btn-sm" onclick="window.location.href='index.html'">🏠 Nyumbani</button>
-            <div class="language-selector">
-                <select onchange="setLanguage(this.value)" style="padding:4px 10px; border-radius:6px; border:2px solid #dee2e6; font-size:12px;">
-                    <option value="sw">🇹🇿 Kiswahili</option>
-                    <option value="en">🇬🇧 English</option>
-                </select>
-            </div>
         </div>
 
         <!-- ===== TABS ===== -->
@@ -710,7 +741,7 @@
                         </div>
                         <div class="form-group">
                             <label>📋 Taaluma <span class="required">*</span></label>
-                            <select id="workerRole">
+                            <select id="workerRole" onchange="updateWorkerChecklist()">
                                 <option value="Medical Officer">🩺 Medical Officer (MD)</option>
                                 <option value="Clinical Officer">📋 Clinical Officer</option>
                                 <option value="Specialist">⭐ Specialist</option>
@@ -737,7 +768,7 @@
                     </div>
                     <div class="form-group">
                         <label>🏢 Idara <span class="required">*</span></label>
-                        <input type="text" id="workerDepartment" placeholder="Idara yako">
+                        <input type="text" id="workerDepartment" placeholder="Idara yako" value="Clinical">
                     </div>
                     <div class="form-row">
                         <div class="form-group">
@@ -855,36 +886,36 @@
                         <span>COMPETENCY MATRIX</span>
                     </div>
                     <p style="font-size:12px; color:#7f8c8d; margin-bottom:12px;">Tathmini uwezo wako katika maeneo haya</p>
-                    <div class="matrix-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:8px 0;">
-                        <div class="matrix-item" style="background:#fff; padding:10px 14px; border-radius:8px; border:1px solid #e9ecef; display:flex; justify-content:space-between; align-items:center;">
-                            <span class="label" style="font-size:12px; color:#1a5276;">🩺 Ujuzi wa Kimatibabu</span>
-                            <span class="level high" style="font-size:12px; font-weight:600; padding:2px 12px; border-radius:12px; background:#d5f5e3; color:#27ae60; cursor:pointer;" onclick="cycleLevel(this)">Juu</span>
+                    <div class="matrix-grid">
+                        <div class="matrix-item">
+                            <span class="label">🩺 Ujuzi wa Kimatibabu</span>
+                            <span class="level high" onclick="cycleLevel(this)">Juu</span>
                         </div>
-                        <div class="matrix-item" style="background:#fff; padding:10px 14px; border-radius:8px; border:1px solid #e9ecef; display:flex; justify-content:space-between; align-items:center;">
-                            <span class="label" style="font-size:12px; color:#1a5276;">🗣️ Mawasiliano</span>
-                            <span class="level medium" style="font-size:12px; font-weight:600; padding:2px 12px; border-radius:12px; background:#fdebd0; color:#f39c12; cursor:pointer;" onclick="cycleLevel(this)">Wastani</span>
+                        <div class="matrix-item">
+                            <span class="label">🗣️ Mawasiliano</span>
+                            <span class="level medium" onclick="cycleLevel(this)">Wastani</span>
                         </div>
-                        <div class="matrix-item" style="background:#fff; padding:10px 14px; border-radius:8px; border:1px solid #e9ecef; display:flex; justify-content:space-between; align-items:center;">
-                            <span class="label" style="font-size:12px; color:#1a5276;">🤝 Ushirikiano</span>
-                            <span class="level high" style="font-size:12px; font-weight:600; padding:2px 12px; border-radius:12px; background:#d5f5e3; color:#27ae60; cursor:pointer;" onclick="cycleLevel(this)">Juu</span>
+                        <div class="matrix-item">
+                            <span class="label">🤝 Ushirikiano</span>
+                            <span class="level high" onclick="cycleLevel(this)">Juu</span>
                         </div>
-                        <div class="matrix-item" style="background:#fff; padding:10px 14px; border-radius:8px; border:1px solid #e9ecef; display:flex; justify-content:space-between; align-items:center;">
-                            <span class="label" style="font-size:12px; color:#1a5276;">💡 Uvumbuzi</span>
-                            <span class="level low" style="font-size:12px; font-weight:600; padding:2px 12px; border-radius:12px; background:#fadbd8; color:#e74c3c; cursor:pointer;" onclick="cycleLevel(this)">Chini</span>
+                        <div class="matrix-item">
+                            <span class="label">💡 Uvumbuzi</span>
+                            <span class="level low" onclick="cycleLevel(this)">Chini</span>
                         </div>
-                        <div class="matrix-item" style="background:#fff; padding:10px 14px; border-radius:8px; border:1px solid #e9ecef; display:flex; justify-content:space-between; align-items:center;">
-                            <span class="label" style="font-size:12px; color:#1a5276;">📊 Usimamizi</span>
-                            <span class="level medium" style="font-size:12px; font-weight:600; padding:2px 12px; border-radius:12px; background:#fdebd0; color:#f39c12; cursor:pointer;" onclick="cycleLevel(this)">Wastani</span>
+                        <div class="matrix-item">
+                            <span class="label">📊 Usimamizi</span>
+                            <span class="level medium" onclick="cycleLevel(this)">Wastani</span>
                         </div>
-                        <div class="matrix-item" style="background:#fff; padding:10px 14px; border-radius:8px; border:1px solid #e9ecef; display:flex; justify-content:space-between; align-items:center;">
-                            <span class="label" style="font-size:12px; color:#1a5276;">❤️ Huruma</span>
-                            <span class="level high" style="font-size:12px; font-weight:600; padding:2px 12px; border-radius:12px; background:#d5f5e3; color:#27ae60; cursor:pointer;" onclick="cycleLevel(this)">Juu</span>
+                        <div class="matrix-item">
+                            <span class="label">❤️ Huruma</span>
+                            <span class="level high" onclick="cycleLevel(this)">Juu</span>
                         </div>
                     </div>
                     <p style="font-size:11px; color:#7f8c8d; margin-top:4px;">💡 Bofya kwenye ngazi (Juu/Wastani/Chini) kubadilisha</p>
                 </div>
 
-                <!-- ===== SEHEMU 5: TAFKARI NA MAONI ===== -->
+                <!-- ===== SEHEMU 5: TAFAKARI NA MAONI ===== -->
                 <div class="section-box green">
                     <div class="section-header">
                         <span class="step">5</span>
@@ -1000,7 +1031,7 @@
                 </div>
                 <div class="section-box orange">
                     <div class="section-header">🌐 Lugha</div>
-                    <select id="languageSelect" style="padding:8px 14px; border-radius:8px; border:2px solid #dee2e6; font-size:14px;" onchange="setLanguage(this.value)">
+                    <select id="languageSelect" style="padding:8px 14px; border-radius:8px; border:2px solid #dee2e6; font-size:14px;">
                         <option value="sw">🇹🇿 Kiswahili</option>
                         <option value="en">🇬🇧 English</option>
                     </select>
@@ -1020,6 +1051,7 @@
             </div>
         </div>
 
+        <!-- ===== FOOTER ===== -->
         <div class="footer">
             <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote, kama kwa Bwana." — Wakolosai 3:23</div>
             <div>Mtwara Performance | Fomu ya Mtendakazi | Toleo la Kimataifa 4.0</div>
@@ -1042,47 +1074,6 @@ let currentRole = null;
 let signatureData = { worker: null };
 let uploadedFiles = [];
 let allReports = [];
-let currentLanguage = 'sw';
-
-// ==============================================================
-// TRANSLATIONS
-// ==============================================================
-const translations = {
-    sw: {
-        title: 'Fomu ya Mtendakazi',
-        subtitle: 'Tathmini ya Kujitathmini - Toleo la Kimataifa',
-        workerName: 'Jina Kamili',
-        workerRole: 'Taaluma',
-        workerDate: 'Tarehe ya Tathmini',
-        workerShift: 'Zamu',
-        workerDepartment: 'Idara',
-        workerEmail: 'Barua Pepe',
-        workerPhone: 'Namba ya Simu',
-        workerWhatsApp: 'Namba ya WhatsApp',
-        submit: 'TUMA TATHMINI KWA MSIMAMIZI',
-        tasks: 'Majukumu',
-        rating: 'Tathmini',
-        status: 'Hali',
-        score: 'Alama'
-    },
-    en: {
-        title: 'Worker Form',
-        subtitle: 'Self-Assessment - International Edition',
-        workerName: 'Full Name',
-        workerRole: 'Profession',
-        workerDate: 'Assessment Date',
-        workerShift: 'Shift',
-        workerDepartment: 'Department',
-        workerEmail: 'Email',
-        workerPhone: 'Phone Number',
-        workerWhatsApp: 'WhatsApp Number',
-        submit: 'SUBMIT TO SUPERVISOR',
-        tasks: 'Tasks',
-        rating: 'Rating',
-        status: 'Status',
-        score: 'Score'
-    }
-};
 
 // ==============================================================
 // CHECKLIST DATA
@@ -1188,7 +1179,7 @@ const SPECIAL_CHECKLISTS = {
 };
 
 // ==============================================================
-// AUTH CHECK
+// AUTH CHECK - HAKUNA LOCALSTORAGE
 // ==============================================================
 function checkAuth() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -1205,6 +1196,16 @@ function checkAuth() {
         if (!user || !user.username) {
             document.getElementById("loginSection").style.display = "block";
             document.getElementById("mainApp").style.display = "none";
+            return false;
+        }
+        
+        // KUHIMU: Angalia kama mtumiaji ni worker
+        if (user.role !== 'worker') {
+            showToast("⚠️ Tafadhali ingia kama Mtendakazi (worker)", "warning");
+            // Redirect to login with worker role
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 2000);
             return false;
         }
         
@@ -1276,7 +1277,8 @@ function updateReportsList() {
     const container = document.getElementById('reportsList');
     if (!container) return;
     
-    const userReports = allReports.filter(r => r.workerName === document.getElementById('workerName').value || r.workerName === currentUser);
+    const userName = document.getElementById('workerName').value.trim() || currentUser;
+    const userReports = allReports.filter(r => r.workerName === userName || r.workerName === currentUser);
     
     if (userReports.length === 0) {
         container.innerHTML = '<p class="text-muted">Hakuna ripoti zilizotumwa bado.</p>';
@@ -1288,19 +1290,19 @@ function updateReportsList() {
         const statusColor = report.status === 'Imeidhinishwa' ? '#27ae60' : 
                            report.status === 'Imekataliwa' ? '#e74c3c' : '#f39c12';
         html += `
-            <div class="report-item" style="background:#fff; padding:14px 18px; border-radius:10px; border:1px solid #e9ecef; border-left:4px solid ${statusColor}; margin-bottom:10px;">
-                <div class="report-header" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+            <div class="report-item" style="border-left-color:${statusColor};">
+                <div class="report-header">
                     <div>
                         <strong>👤 ${report.workerName || 'Mtendakazi'}</strong>
                         <span style="font-size:12px; color:#7f8c8d; margin-left:10px;">${report.workerRole || ''}</span>
                     </div>
                     <span style="font-size:12px; color:#7f8c8d;">${new Date(report.timestamp).toLocaleDateString()}</span>
                 </div>
-                <div style="font-size:12px; color:#7f8c8d; margin-top:4px;">
+                <div class="report-meta">
                     📋 ${report.status || 'Imetumwa'} | 
                     ⭐ Alama: ${report.overallScore || 'N/A'}%
                 </div>
-                <div style="margin-top:6px; display:flex; gap:8px; flex-wrap:wrap;">
+                <div class="report-actions">
                     <button class="btn btn-info btn-sm" onclick="viewReport('${report.id}')">👁️ Angalia</button>
                     <button class="btn btn-danger btn-sm" onclick="deleteReport('${report.id}')">🗑️ Futa</button>
                 </div>
@@ -1604,29 +1606,6 @@ function updateScoreSummary() {
 }
 
 // ==============================================================
-// SET LANGUAGE
-// ==============================================================
-function setLanguage(lang) {
-    currentLanguage = lang;
-    document.querySelectorAll('.lang-switch button').forEach(b => b.classList.remove('active'));
-    if (lang === 'sw') {
-        document.querySelector('.lang-switch button:first-child')?.classList.add('active');
-    } else {
-        document.querySelector('.lang-switch button:last-child')?.classList.add('active');
-    }
-    document.getElementById('languageSelect').value = lang;
-    
-    // Update UI text
-    const t = translations[lang] || translations.sw;
-    document.querySelector('.header h1').textContent = t.title;
-    document.querySelector('.header h2').textContent = t.subtitle;
-    document.querySelector('#submitBtn').innerHTML = `📤 ${t.submit}`;
-    document.querySelector('.form-title .title-text').textContent = t.title;
-    
-    showToast(`🌐 Lugha imebadilishwa kuwa ${lang === 'sw' ? 'Kiswahili' : 'English'}`, 'info');
-}
-
-// ==============================================================
 // SUBMIT WORKER
 // ==============================================================
 async function submitWorker() {
@@ -1746,7 +1725,8 @@ function calculateOverallScore() {
 // EXPORT ALL REPORTS
 // ==============================================================
 function exportAllReports() {
-    const userReports = allReports.filter(r => r.workerName === document.getElementById('workerName').value || r.workerName === currentUser);
+    const userName = document.getElementById('workerName').value.trim() || currentUser;
+    const userReports = allReports.filter(r => r.workerName === userName || r.workerName === currentUser);
     if (userReports.length === 0) {
         showToast("⚠️ Hakuna ripoti za kuhamisha", "warning");
         return;
@@ -1789,7 +1769,8 @@ async function syncData() {
 }
 
 function exportData() {
-    const userReports = allReports.filter(r => r.workerName === document.getElementById('workerName').value || r.workerName === currentUser);
+    const userName = document.getElementById('workerName').value.trim() || currentUser;
+    const userReports = allReports.filter(r => r.workerName === userName || r.workerName === currentUser);
     if (userReports.length === 0) {
         showToast("⚠️ Hakuna data ya kuhamisha", "warning");
         return;
@@ -1809,8 +1790,8 @@ async function clearAllData() {
     if (!confirm("Je, una uhakika unataka kufuta data yote?")) return;
     if (!confirm("Thibitisha tena: Futa data yote?")) return;
     
-    const userReports = allReports.filter(r => r.workerName === document.getElementById('workerName').value || r.workerName === currentUser);
-    allReports = allReports.filter(r => !userReports.includes(r));
+    const userName = document.getElementById('workerName').value.trim() || currentUser;
+    allReports = allReports.filter(r => r.workerName !== userName && r.workerName !== currentUser);
     await saveReportsToJSONBin();
     updateReportsList();
     showToast("🗑️ Data yako imefutwa!", "warning");
