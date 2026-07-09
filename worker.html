@@ -650,6 +650,14 @@
             vertical-align: middle;
             margin-right: 8px;
         }
+        .status-badge-submitted {
+            background: #d6eaf8;
+            color: #1a5276;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -977,7 +985,7 @@
                     </div>
                 </div>
 
-                <!-- ===== SEHEMU 9: TUMA ===== -->
+                <!-- ===== SEHEMU 9: TUMA KWA MSIMAMIZI ===== -->
                 <button class="btn btn-primary" onclick="submitWorker()" id="submitBtn" style="width:100%;">
                     📤 TUMA TATHMINI KWA MSIMAMIZI
                 </button>
@@ -1052,7 +1060,7 @@
 
 <script>
 // ==============================================================
-// JSONBIN CONFIGURATION - API KEY MPYA
+// JSONBIN CONFIGURATION
 // ==============================================================
 const API_KEY = "$2a$10$vIFUhTkQcgnktbliqnebWOXXy.rSlJY/2YkZ0lh/D8dwhg2mDyxAe";
 const BIN_ID = "6a4b0bc9da38895dfe32cc08";
@@ -1554,7 +1562,7 @@ function updateScoreSummary() {
 }
 
 // ==============================================================
-// SUBMIT WORKER - IMARISHWA
+// SUBMIT WORKER - INATUMA KWA MSIMAMIZI
 // ==============================================================
 async function submitWorker() {
     const workerName = document.getElementById("workerName").value.trim();
@@ -1592,6 +1600,7 @@ async function submitWorker() {
         overallScore: Math.min(overallScore, 100),
         signature: signatureData.worker,
         status: "Inasubiri Msimamizi",
+        stage: "worker", // Inaonyesha hatua ya sasa
         timestamp: new Date().toISOString()
     };
 
@@ -1614,7 +1623,7 @@ async function submitWorker() {
         
         if (!data.reports) data.reports = [];
         data.reports.push(report);
-        console.log(`📝 Ripoti mpya imeongezwa (ID: ${report.id})`);
+        console.log(`📝 Ripoti mpya imeongezwa (ID: ${report.id}) - Inasubiri Msimamizi`);
         
         console.log("💾 Inahifadhi kwenye JSONBin...");
         const updateResponse = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
@@ -1641,13 +1650,13 @@ async function submitWorker() {
         document.getElementById("submitMsg").style.display = "block";
         document.getElementById("submitMsg").textContent = `✅ Tathmini imetumwa kwa Msimamizi! Alama: ${Math.min(overallScore, 100)}%`;
         document.getElementById("submitMsg").style.color = "#27ae60";
-        document.getElementById("workerStatusBadge").textContent = "✅ Imetumwa";
+        document.getElementById("workerStatusBadge").textContent = "✅ Imetumwa kwa Msimamizi";
         document.getElementById("workerStatusBadge").className = "status-badge submitted";
         
         allReports.push(report);
         updateReportsList();
         
-        showToast(`✅ Tathmini imetumwa! Alama: ${Math.min(overallScore, 100)}%`, "success");
+        showToast(`✅ Tathmini imetumwa kwa Msimamizi! Alama: ${Math.min(overallScore, 100)}%`, "success");
         
     } catch (error) {
         hideSpinner();
@@ -1753,8 +1762,9 @@ window.onload = function() {
     setTimeout(() => { initSigPad("worker"); }, 500);
     updateWorkerChecklist();
     updateScoreSummary();
-    console.log("✅ Mtwara Performance - Fomu ya Mtendakazi v4.0 (API Key Mpya)");
+    console.log("✅ Mtwara Performance - Fomu ya Mtendakazi v4.0");
     console.log("📦 BIN ID:", BIN_ID);
+    console.log("📋 Hatua: Mtendakazi → Msimamizi");
 };
 </script>
 
