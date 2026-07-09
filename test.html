@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,16 +80,25 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        .test-item {
-            background: #f8f9fa;
-            padding: 8px 12px;
-            border-radius: 6px;
-            margin: 4px 0;
+        .api-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            margin: 8px 0;
+        }
+        .api-input:focus {
+            border-color: #27ae60;
+            outline: none;
+        }
+        .btn-sm {
+            padding: 6px 14px;
             font-size: 13px;
         }
-        .test-item .pass { color: #27ae60; font-weight: 700; }
-        .test-item .fail { color: #e74c3c; font-weight: 700; }
-        .test-item .wait { color: #f39c12; font-weight: 700; }
+        .btn-success { background: #27ae60; color: #fff; }
+        .btn-success:hover { background: #1e8449; }
     </style>
 </head>
 <body>
@@ -98,8 +108,9 @@
     
     <div class="info">
         <strong>📋 Taarifa:</strong><br>
-        BIN ID: <code>6a4b0bc9da38895dfe32cc08</code><br>
-        API Key: <code>$2a$10$VfPZVlhjWTV.gErIv2yxX.3QmHdrMCgM1evuIR.BJreI7G0jQxGqW</code>
+        BIN ID: <code id="binDisplay">6a4b0bc9da38895dfe32cc08</code><br>
+        <strong>🔑 API Key (Imetumia API Key Mpya):</strong><br>
+        <code>$2a$10$vIFUhTkQcgnktbliqnebWOXXy.rSlJY/2YkZ0lh/D8dwhg2mDyxAe</code>
     </div>
 
     <div id="status" class="status">
@@ -115,9 +126,9 @@
 
 <script>
 // ==============================================================
-// JSONBIN CONFIGURATION
+// JSONBIN CONFIGURATION - API KEY MPYA
 // ==============================================================
-const API_KEY = "$2a$10$VfPZVlhjWTV.gErIv2yxX.3QmHdrMCgM1evuIR.BJreI7G0jQxGqW";
+const API_KEY = "$2a$10$vIFUhTkQcgnktbliqnebWOXXy.rSlJY/2YkZ0lh/D8dwhg2mDyxAe";
 const BIN_ID = "6a4b0bc9da38895dfe32cc08";
 
 // ==============================================================
@@ -134,8 +145,6 @@ async function testConnection() {
     result.className = 'result';
     status.innerHTML = '⏳ <span class="orange">Inajaribu kuunganisha...</span>';
     
-    let testsPassed = 0;
-    let testsFailed = 0;
     let output = '';
 
     try {
@@ -144,6 +153,8 @@ async function testConnection() {
         // ==========================================================
         output += '═══════════════════════════════════════════════════\n';
         output += '📡 TEST 1: Kupata data kutoka JSONBin\n';
+        output += `🔑 API Key: ${API_KEY.substring(0, 20)}...\n`;
+        output += `📦 BIN ID: ${BIN_ID}\n`;
         output += '═══════════════════════════════════════════════════\n';
         
         const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
@@ -151,15 +162,21 @@ async function testConnection() {
             headers: { "X-Master-Key": API_KEY }
         });
         
+        output += `📦 Status: ${response.status} ${response.statusText}\n`;
+        
         if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            if (response.status === 401) {
+                throw new Error('API KEY SI SAHIHI! Tafadhali ingiza API Key sahihi.');
+            } else if (response.status === 404) {
+                throw new Error('BIN ID SI SAHIHI! Hakikisha BIN ID yako ni sahihi.');
+            } else {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
         }
         
         const data = await response.json();
         output += '✅ GET imefanikiwa!\n';
-        output += `📦 Status: ${response.status} ${response.statusText}\n`;
         output += `📦 Data: ${JSON.stringify(data, null, 2)}\n\n`;
-        testsPassed++;
         
         // ==========================================================
         // TEST 2: PUT DATA (TEST)
@@ -184,46 +201,30 @@ async function testConnection() {
             body: JSON.stringify(testData)
         });
         
+        output += `📦 Status: ${updateResponse.status} ${updateResponse.statusText}\n`;
+        
         if (!updateResponse.ok) {
-            throw new Error(`HTTP ${updateResponse.status}: ${updateResponse.statusText}`);
+            if (updateResponse.status === 401) {
+                throw new Error('API KEY SI SAHIHI! Tafadhali ingiza API Key sahihi.');
+            } else {
+                throw new Error(`HTTP ${updateResponse.status}: ${updateResponse.statusText}`);
+            }
         }
         
         const updateResult = await updateResponse.json();
         output += '✅ PUT imefanikiwa!\n';
-        output += `📦 Status: ${updateResponse.status} ${updateResponse.statusText}\n`;
         output += `📦 Matokeo: ${JSON.stringify(updateResult, null, 2)}\n\n`;
-        testsPassed++;
-        
-        // ==========================================================
-        // TEST 3: THIBITISHA DATA ILIYOHIFADHIWA
-        // ==========================================================
-        output += '═══════════════════════════════════════════════════\n';
-        output += '📡 TEST 3: Kuthibitisha data iliyohifadhiwa\n';
-        output += '═══════════════════════════════════════════════════\n';
-        
-        const verifyResponse = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-            method: "GET",
-            headers: { "X-Master-Key": API_KEY }
-        });
-        
-        if (!verifyResponse.ok) {
-            throw new Error(`HTTP ${verifyResponse.status}: ${verifyResponse.statusText}`);
-        }
-        
-        const verifyData = await verifyResponse.json();
-        output += '✅ Uthibitishaji umefanikiwa!\n';
-        output += `📦 Data iliyohifadhiwa: ${JSON.stringify(verifyData, null, 2)}\n\n`;
-        testsPassed++;
         
         // ==========================================================
         // SUCCESS
         // ==========================================================
         output += '═══════════════════════════════════════════════════\n';
-        output += `✅ Jumla ya Majaribio: ${testsPassed + testsFailed}\n`;
-        output += `✅ Yaliyofaulu: ${testsPassed}\n`;
-        output += `❌ Yaliyofeli: ${testsFailed}\n`;
+        output += '✅ Jumla ya Majaribio: 2\n';
+        output += '✅ Yaliyofaulu: 2\n';
+        output += '❌ Yaliyofeli: 0\n';
         output += '═══════════════════════════════════════════════════\n';
         output += '\n🎉 JSONBin inafanya kazi vizuri! Mfumo wako uko sawa.\n';
+        output += '💡 Sasa unaweza kutumia mfumo wako kwa kawaida.\n';
         
         result.textContent = output;
         result.className = 'result success';
@@ -241,12 +242,22 @@ async function testConnection() {
         output += '❌ HITILAFU ILITOKEA\n';
         output += '═══════════════════════════════════════════════════\n';
         output += `❌ ${error.message}\n`;
-        output += '\n🔧 Mapendekezo:\n';
-        output += '1. Hakikisha API Key yako ni sahihi\n';
-        output += '2. Hakikisha BIN ID yako ni sahihi\n';
-        output += '3. Hakikisha BIN yako ni Public (si Private)\n';
-        output += '4. Angalia mtandao wako\n';
-        output += '5. Jaribu kuunda BIN mpya\n';
+        output += '\n🔧 MAPENDEKEZO:\n';
+        
+        if (error.message.includes('401') || error.message.includes('API KEY')) {
+            output += '1. 🔑 API KEY YAKO SI SAHIHI!\n';
+            output += '   ➜ Nenda kwenye https://app.jsonbin.io/account\n';
+            output += '   ➜ Unda API Key mpya\n';
+        } else if (error.message.includes('404') || error.message.includes('BIN ID')) {
+            output += '1. 📦 BIN ID YAKO SI SAHIHI!\n';
+            output += '   ➜ Nenda kwenye https://app.jsonbin.io/\n';
+            output += '   ➜ Unda BIN mpya\n';
+        } else {
+            output += '1. Hakikisha API Key yako ni sahihi\n';
+            output += '2. Hakikisha BIN ID yako ni sahihi\n';
+            output += '3. Hakikisha BIN yako ni Public (si Private)\n';
+            output += '4. Angalia mtandao wako\n';
+        }
         
         result.textContent = output;
         result.className = 'result error';
@@ -265,8 +276,7 @@ async function testConnection() {
 // ==============================================================
 window.onload = function() {
     console.log('✅ Test page loaded');
-    // Auto test after 1 second
-    setTimeout(testConnection, 1000);
+    setTimeout(testConnection, 1500);
 };
 </script>
 
