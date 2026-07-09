@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -366,9 +367,9 @@
 
 <script>
 // ==============================================================
-// JSONBIN CONFIGURATION
+// JSONBIN CONFIGURATION - API KEY MPYA
 // ==============================================================
-const API_KEY = "$2a$10$VfPZVlhjWTV.gErIv2yxX.3QmHdrMCgM1evuIR.BJreI7G0jQxGqW";
+const API_KEY = "$2a$10$vIFUhTkQcgnktbliqnebWOXXy.rSlJY/2YkZ0lh/D8dwhg2mDyxAe";
 const BIN_ID = "6a4b0bc9da38895dfe32cc08";
 
 // ==============================================================
@@ -483,7 +484,6 @@ async function signup() {
     const role = document.getElementById('signupRole').value;
     const btn = document.getElementById('signupBtn');
 
-    // Validate fields
     if (!username) { showToast("❌ Tafadhali weka username", "error"); return; }
     if (username.length < 3) { showToast("❌ Username lazima iwe na herufi 3 au zaidi", "error"); return; }
     if (!password) { showToast("❌ Tafadhali weka nenosiri", "error"); return; }
@@ -495,7 +495,6 @@ async function signup() {
     showToast("⏳ Inajisajili...", "info");
 
     try {
-        // Check if username exists
         const checkResponse = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
             method: "GET",
             headers: { "X-Master-Key": API_KEY }
@@ -512,13 +511,11 @@ async function signup() {
             return;
         }
 
-        // Add new user
         data.users[username] = {
             password: password,
             role: role
         };
 
-        // Save to JSONBin
         const updateResponse = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
             method: "PUT",
             headers: {
@@ -532,12 +529,10 @@ async function signup() {
 
         showToast(`✅ Akaunti imeundwa! Karibu ${username}!`, "success");
 
-        // Clear signup form
         document.getElementById('signupUsername').value = '';
         document.getElementById('signupPassword').value = '';
         document.getElementById('signupPasswordConfirm').value = '';
 
-        // Switch to login tab after 1 second
         setTimeout(() => {
             document.getElementById('loginUsername').value = username;
             switchTab('login');
@@ -641,10 +636,9 @@ async function checkConnection() {
 }
 
 // ==============================================================
-// EVENT LISTENERS FOR REAL-TIME VALIDATION
+// EVENT LISTENERS
 // ==============================================================
 document.addEventListener('DOMContentLoaded', function() {
-    // Username validation on input
     document.getElementById('signupUsername').addEventListener('input', function() {
         const username = this.value.trim();
         if (username.length >= 3) {
@@ -655,7 +649,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Password match validation
     document.getElementById('signupPassword').addEventListener('input', checkPasswordMatch);
     document.getElementById('signupPasswordConfirm').addEventListener('input', checkPasswordMatch);
 });
@@ -679,7 +672,7 @@ document.addEventListener("keydown", function(e) {
 // ==============================================================
 window.onload = function() {
     checkConnection();
-    console.log("✅ Mtwara Performance Login Page v4.0 (Login + Sign Up)");
+    console.log("✅ Mtwara Performance Login Page v4.0 (API Key Mpya)");
 };
 </script>
 
