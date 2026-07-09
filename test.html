@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test JSONBin Connection</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 4px 60px rgba(0,0,0,0.08);
+        }
+        h1 { color: #1a5276; border-bottom: 4px solid #27ae60; padding-bottom: 12px; margin-bottom: 20px; }
+        .btn {
+            background: #27ae60;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn:hover { background: #1e8449; transform: translateY(-2px); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .result {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 16px;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            max-height: 400px;
+            overflow: auto;
+            border: 1px solid #dee2e6;
+        }
+        .result.success { border-left: 4px solid #27ae60; }
+        .result.error { border-left: 4px solid #e74c3c; }
+        .info {
+            background: #eaf2f8;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+            font-size: 14px;
+            color: #1a5276;
+        }
+        .info code { background: #fff; padding: 2px 8px; border-radius: 4px; }
+        .status { font-weight: 600; margin: 8px 0; font-size: 16px; }
+        .status .green { color: #27ae60; }
+        .status .red { color: #e74c3c; }
+        .status .orange { color: #f39c12; }
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid #ecf0f1;
+            border-top: 3px solid #27ae60;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .test-item {
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin: 4px 0;
+            font-size: 13px;
+        }
+        .test-item .pass { color: #27ae60; font-weight: 700; }
+        .test-item .fail { color: #e74c3c; font-weight: 700; }
+        .test-item .wait { color: #f39c12; font-weight: 700; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🔌 Test JSONBin Connection</h1>
+    
+    <div class="info">
+        <strong>📋 Taarifa:</strong><br>
+        BIN ID: <code>6a4b0bc9da38895dfe32cc08</code><br>
+        API Key: <code>$2a$10$VfPZVlhjWTV.gErIv2yxX.3QmHdrMCgM1evuIR.BJreI7G0jQxGqW</code>
+    </div>
+
+    <div id="status" class="status">
+        ⏳ Tafadhali bonyeza kitufe cha "Test Connection"
+    </div>
+
+    <button class="btn" onclick="testConnection()" id="testBtn">
+        🔗 Test Connection
+    </button>
+    
+    <div class="result" id="result">Matokeo yataonekana hapa...</div>
+</div>
+
+<script>
+// ==============================================================
+// JSONBIN CONFIGURATION
+// ==============================================================
+const API_KEY = "$2a$10$VfPZVlhjWTV.gErIv2yxX.3QmHdrMCgM1evuIR.BJreI7G0jQxGqW";
+const BIN_ID = "6a4b0bc9da38895dfe32cc08";
+
+// ==============================================================
+// TEST CONNECTION
+// ==============================================================
+async function testConnection() {
+    const btn = document.getElementById('testBtn');
+    const result = document.getElementById('result');
+    const status = document.getElementById('status');
+    
+    btn.disabled = true;
+    btn.innerHTML = '<span class="loading-spinner"></span> Inaunganisha...';
+    result.textContent = '⏳ Inaunganisha na JSONBin...';
+    result.className = 'result';
+    status.innerHTML = '⏳ <span class="orange">Inajaribu kuunganisha...</span>';
+    
+    let testsPassed = 0;
+    let testsFailed = 0;
+    let output = '';
+
+    try {
+        // ==========================================================
+        // TEST 1: GET DATA
+        // ==========================================================
+        output += '═══════════════════════════════════════════════════\n';
+        output += '📡 TEST 1: Kupata data kutoka JSONBin\n';
+        output += '═══════════════════════════════════════════════════\n';
+        
+        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            method: "GET",
+            headers: { "X-Master-Key": API_KEY }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        output += '✅ GET imefanikiwa!\n';
+        output += `📦 Status: ${response.status} ${response.statusText}\n`;
+        output += `📦 Data: ${JSON.stringify(data, null, 2)}\n\n`;
+        testsPassed++;
+        
+        // ==========================================================
+        // TEST 2: PUT DATA (TEST)
+        // ==========================================================
+        output += '═══════════════════════════════════════════════════\n';
+        output += '📡 TEST 2: Kuhifadhi data kwenye JSONBin\n';
+        output += '═══════════════════════════════════════════════════\n';
+        
+        const testData = {
+            test: 'Hello from Mtwara Performance Test',
+            timestamp: new Date().toISOString(),
+            message: 'Ikiwa unaona hii, JSONBin inafanya kazi vizuri!',
+            testId: Date.now()
+        };
+        
+        const updateResponse = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "X-Master-Key": API_KEY
+            },
+            body: JSON.stringify(testData)
+        });
+        
+        if (!updateResponse.ok) {
+            throw new Error(`HTTP ${updateResponse.status}: ${updateResponse.statusText}`);
+        }
+        
+        const updateResult = await updateResponse.json();
+        output += '✅ PUT imefanikiwa!\n';
+        output += `📦 Status: ${updateResponse.status} ${updateResponse.statusText}\n`;
+        output += `📦 Matokeo: ${JSON.stringify(updateResult, null, 2)}\n\n`;
+        testsPassed++;
+        
+        // ==========================================================
+        // TEST 3: THIBITISHA DATA ILIYOHIFADHIWA
+        // ==========================================================
+        output += '═══════════════════════════════════════════════════\n';
+        output += '📡 TEST 3: Kuthibitisha data iliyohifadhiwa\n';
+        output += '═══════════════════════════════════════════════════\n';
+        
+        const verifyResponse = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            method: "GET",
+            headers: { "X-Master-Key": API_KEY }
+        });
+        
+        if (!verifyResponse.ok) {
+            throw new Error(`HTTP ${verifyResponse.status}: ${verifyResponse.statusText}`);
+        }
+        
+        const verifyData = await verifyResponse.json();
+        output += '✅ Uthibitishaji umefanikiwa!\n';
+        output += `📦 Data iliyohifadhiwa: ${JSON.stringify(verifyData, null, 2)}\n\n`;
+        testsPassed++;
+        
+        // ==========================================================
+        // SUCCESS
+        // ==========================================================
+        output += '═══════════════════════════════════════════════════\n';
+        output += `✅ Jumla ya Majaribio: ${testsPassed + testsFailed}\n`;
+        output += `✅ Yaliyofaulu: ${testsPassed}\n`;
+        output += `❌ Yaliyofeli: ${testsFailed}\n`;
+        output += '═══════════════════════════════════════════════════\n';
+        output += '\n🎉 JSONBin inafanya kazi vizuri! Mfumo wako uko sawa.\n';
+        
+        result.textContent = output;
+        result.className = 'result success';
+        status.innerHTML = '✅ <span class="green">JSONBin inafanya kazi vizuri! Majaribio yote yamefaulu.</span>';
+        btn.innerHTML = '✅ Imefanikiwa!';
+        btn.style.background = '#27ae60';
+        
+        console.log('✅ JSONBin Test Passed!');
+        
+    } catch (error) {
+        // ==========================================================
+        // ERROR
+        // ==========================================================
+        output += '\n═══════════════════════════════════════════════════\n';
+        output += '❌ HITILAFU ILITOKEA\n';
+        output += '═══════════════════════════════════════════════════\n';
+        output += `❌ ${error.message}\n`;
+        output += '\n🔧 Mapendekezo:\n';
+        output += '1. Hakikisha API Key yako ni sahihi\n';
+        output += '2. Hakikisha BIN ID yako ni sahihi\n';
+        output += '3. Hakikisha BIN yako ni Public (si Private)\n';
+        output += '4. Angalia mtandao wako\n';
+        output += '5. Jaribu kuunda BIN mpya\n';
+        
+        result.textContent = output;
+        result.className = 'result error';
+        status.innerHTML = '❌ <span class="red">JSONBin haifanyi kazi: ' + error.message + '</span>';
+        btn.innerHTML = '❌ Jaribu Tena';
+        btn.style.background = '#e74c3c';
+        
+        console.error('❌ JSONBin Test Failed:', error);
+    }
+    
+    btn.disabled = false;
+}
+
+// ==============================================================
+// AUTO TEST ON LOAD
+// ==============================================================
+window.onload = function() {
+    console.log('✅ Test page loaded');
+    // Auto test after 1 second
+    setTimeout(testConnection, 1000);
+};
+</script>
+
+</body>
+</html>
