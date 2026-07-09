@@ -1052,7 +1052,7 @@
 
 <script>
 // ==============================================================
-// JSONBIN CONFIGURATION
+// JSONBIN CONFIGURATION - BADILISHA HAPA
 // ==============================================================
 const API_KEY = "$2a$10$VfPZVlhjWTV.gErIv2yxX.3QmHdrMCgM1evuIR.BJreI7G0jQxGqW";
 const BIN_ID = "6a4b0bc9da38895dfe32cc08";
@@ -1255,6 +1255,7 @@ async function loadReports() {
         }
     } catch (error) {
         console.error("❌ Hitilafu:", error);
+        allReports = [];
     }
 }
 
@@ -1327,23 +1328,35 @@ async function deleteReport(reportId) {
 
 async function saveReportsToJSONBin() {
     try {
+        // Pata data ya sasa kutoka JSONBin
         const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
             method: "GET",
             headers: { "X-Master-Key": API_KEY }
         });
         if (!response.ok) throw new Error("Imeshindwa kupata data");
+        
         const result = await response.json();
         const data = result.record || result;
         data.reports = allReports;
-        await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+        
+        // Hifadhi data kwenye JSONBin
+        const updateResponse = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
             method: "PUT",
-            headers: { "Content-Type": "application/json", "X-Master-Key": API_KEY },
+            headers: {
+                "Content-Type": "application/json",
+                "X-Master-Key": API_KEY
+            },
             body: JSON.stringify(data)
         });
+        
+        if (!updateResponse.ok) {
+            throw new Error(`HTTP ${updateResponse.status}: ${updateResponse.statusText}`);
+        }
+        
         return true;
     } catch (error) {
         console.error("❌ Hitilafu:", error);
-        return false;
+        throw error;
     }
 }
 
@@ -1543,13 +1556,15 @@ function updateScoreSummary() {
 }
 
 // ==============================================================
-// SUBMIT WORKER - HAKUNA LOCALSTORAGE
+// SUBMIT WORKER - IMARISHWA KABISA
 // ==============================================================
 async function submitWorker() {
     const workerName = document.getElementById("workerName").value.trim();
     if (!workerName) { showToast("⚠️ Tafadhali weka jina lako", "warning"); return; }
+    
     const workerPhone = document.getElementById("workerPhone").value.trim();
     if (!workerPhone) { showToast("⚠️ Tafadhali weka namba ya simu", "warning"); return; }
+    
     if (!signatureData.worker) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
     
     const ratings = getLikertValues("wPunctuality","wQuality","wTeamwork","wLeadership","wCommunication","wDecision");
@@ -1557,6 +1572,7 @@ async function submitWorker() {
     if (!allRated) { showToast("⚠️ Tafadhali tathmini vipengele vyote (1-5)", "warning"); return; }
 
     const overallScore = calculateOverallScore();
+
     const report = {
         type: "worker_self_assessment",
         id: Date.now(),
@@ -1583,20 +1599,54 @@ async function submitWorker() {
 
     try {
         showSpinner("Inatuma tathmini...");
-        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { method: "GET", headers: { "X-Master-Key": API_KEY } });
-        if (!response.ok) throw new Error("Imeshindwa kuunganisha na server");
+        
+        // ==========================================================
+        // HATUA 1: PATA DATA YA SASA KUTOKA JSONBIN
+        // ==========================================================
+        console.log("📡 Inaunganisha na JSONBin...");
+        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            method: "GET",
+            headers: { "X-Master-Key": API_KEY }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
         const result = await response.json();
-        const data = result.record || result;
+        let data = result.record || result;
+        console.log("✅ Data imepakiwa kutoka JSONBin");
+        
+        // ==========================================================
+        // HATUA 2: ONGEZA RIPOTI MPYA
+        // ==========================================================
         if (!data.reports) data.reports = [];
         data.reports.push(report);
-        allReports = data.reports;
+        console.log(`📝 Ripoti mpya imeongezwa (ID: ${report.id})`);
+        
+        // ==========================================================
+        // HATUA 3: HIFADHI KWA JSONBIN
+        // ==========================================================
+        console.log("💾 Inahifadhi kwenye JSONBin...");
         const updateResponse = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
             method: "PUT",
-            headers: { "Content-Type": "application/json", "X-Master-Key": API_KEY },
+            headers: {
+                "Content-Type": "application/json",
+                "X-Master-Key": API_KEY
+            },
             body: JSON.stringify(data)
         });
-        if (!updateResponse.ok) throw new Error("Imeshindwa kuhifadhi data");
+        
+        if (!updateResponse.ok) {
+            const errorText = await updateResponse.text();
+            throw new Error(`HTTP ${updateResponse.status}: ${errorText}`);
+        }
+        
+        const updateResult = await updateResponse.json();
+        console.log("✅ Data imehifadhiwa kwenye JSONBin!", updateResult);
+        
         hideSpinner();
+        
         document.getElementById("submitBtn").disabled = true;
         document.getElementById("submitBtn").innerHTML = "✅ Imetumwa!";
         document.getElementById("submitMsg").style.display = "block";
@@ -1604,12 +1654,17 @@ async function submitWorker() {
         document.getElementById("submitMsg").style.color = "#27ae60";
         document.getElementById("workerStatusBadge").textContent = "✅ Imetumwa";
         document.getElementById("workerStatusBadge").className = "status-badge submitted";
+        
+        // Ongeza ripoti kwenye orodha ya ndani
+        allReports.push(report);
         updateReportsList();
+        
         showToast(`✅ Tathmini imetumwa! Alama: ${Math.min(overallScore, 100)}%`, "success");
+        
     } catch (error) {
         hideSpinner();
         console.error("❌ Hitilafu:", error);
-        showToast("❌ Hitilafu: " + error.message, "error");
+        showToast(`❌ Hitilafu: ${error.message}`, "error");
     }
 }
 
