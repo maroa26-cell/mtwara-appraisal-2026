@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,25 +80,6 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        .api-input {
-            width: 100%;
-            padding: 10px 14px;
-            border: 2px solid #dee2e6;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: 'Courier New', monospace;
-            margin: 8px 0;
-        }
-        .api-input:focus {
-            border-color: #27ae60;
-            outline: none;
-        }
-        .btn-sm {
-            padding: 6px 14px;
-            font-size: 13px;
-        }
-        .btn-success { background: #27ae60; color: #fff; }
-        .btn-success:hover { background: #1e8449; }
     </style>
 </head>
 <body>
@@ -107,13 +89,13 @@
     
     <div class="info">
         <strong>📋 Taarifa:</strong><br>
-        BIN ID: <code id="binDisplay">6a4b0bc9da38895dfe32cc08</code><br>
-        <strong>🔑 API Key (Imetumia API Key Mpya):</strong><br>
-        <code>$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDot5L9hRGRQfa21/Mw/B0UcS</code>
+        BIN ID: <code>6a4b0bc9da38895dfe32cc08</code><br>
+        <strong>🔑 API Key:</strong><br>
+        <code>$2a$10$j5d6miifjeYiycqukcxwh.XPnNcmXFFXoB9H4wuAe3hzbAHApzIwK</code>
     </div>
 
     <div id="status" class="status">
-        ⏳ Tafadhali bonyeza kitufe cha "Test Connection"
+        ⏳ Bonyeza kitufe cha "Test Connection"
     </div>
 
     <button class="btn" onclick="testConnection()" id="testBtn">
@@ -127,7 +109,7 @@
 // ==============================================================
 // JSONBIN CONFIGURATION - API KEY MPYA
 // ==============================================================
-const API_KEY = "$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDot5L9hRGRQfa21/Mw/B0UcS";
+const API_KEY = "$2a$10$j5d6miifjeYiycqukcxwh.XPnNcmXFFXoB9H4wuAe3hzbAHApzIwK";
 const BIN_ID = "6a4b0bc9da38895dfe32cc08";
 
 // ==============================================================
@@ -165,7 +147,7 @@ async function testConnection() {
         
         if (!response.ok) {
             if (response.status === 401) {
-                throw new Error('API KEY SI SAHIHI! Tafadhali ingiza API Key sahihi.');
+                throw new Error('API KEY SI SAHIHI! Nenda kwenye https://app.jsonbin.io/account na uunde API Key mpya.');
             } else if (response.status === 404) {
                 throw new Error('BIN ID SI SAHIHI! Hakikisha BIN ID yako ni sahihi.');
             } else {
@@ -204,7 +186,7 @@ async function testConnection() {
         
         if (!updateResponse.ok) {
             if (updateResponse.status === 401) {
-                throw new Error('API KEY SI SAHIHI! Tafadhali ingiza API Key sahihi.');
+                throw new Error('API KEY SI SAHIHI! Nenda kwenye https://app.jsonbin.io/account na uunde API Key mpya.');
             } else {
                 throw new Error(`HTTP ${updateResponse.status}: ${updateResponse.statusText}`);
             }
@@ -232,6 +214,8 @@ async function testConnection() {
         btn.style.background = '#27ae60';
         
         console.log('✅ JSONBin Test Passed!');
+        console.log('✅ API Key:', API_KEY);
+        console.log('✅ BIN ID:', BIN_ID);
         
     } catch (error) {
         // ==========================================================
@@ -245,12 +229,16 @@ async function testConnection() {
         
         if (error.message.includes('401') || error.message.includes('API KEY')) {
             output += '1. 🔑 API KEY YAKO SI SAHIHI!\n';
-            output += '   ➜ Nenda kwenye https://app.jsonbin.io/account\n';
-            output += '   ➜ Unda API Key mpya\n';
+            output += '   ➜ Nenda kwenye https://app.jsonbin.io/\n';
+            output += '   ➜ Ingia kwenye akaunti yako\n';
+            output += '   ➜ Bonyeza Account → API Keys\n';
+            output += '   ➜ Bonyeza "Generate New Key"\n';
+            output += '   ➜ Nakili API Key mpya na uibandike kwenye msimbo\n';
         } else if (error.message.includes('404') || error.message.includes('BIN ID')) {
             output += '1. 📦 BIN ID YAKO SI SAHIHI!\n';
             output += '   ➜ Nenda kwenye https://app.jsonbin.io/\n';
             output += '   ➜ Unda BIN mpya\n';
+            output += '   ➜ Nakili BIN ID mpya\n';
         } else {
             output += '1. Hakikisha API Key yako ni sahihi\n';
             output += '2. Hakikisha BIN ID yako ni sahihi\n';
@@ -275,6 +263,8 @@ async function testConnection() {
 // ==============================================================
 window.onload = function() {
     console.log('✅ Test page loaded');
+    console.log('📋 API Key:', API_KEY.substring(0, 20) + '...');
+    console.log('📦 BIN ID:', BIN_ID);
     setTimeout(testConnection, 1500);
 };
 </script>
