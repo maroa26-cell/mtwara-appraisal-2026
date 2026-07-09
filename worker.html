@@ -1052,9 +1052,9 @@
 
 <script>
 // ==============================================================
-// JSONBIN CONFIGURATION - BADILISHA HAPA
+// JSONBIN CONFIGURATION - API KEY MPYA
 // ==============================================================
-const API_KEY = "$2a$10$VfPZVlhjWTV.gErIv2yxX.3QmHdrMCgM1evuIR.BJreI7G0jQxGqW";
+const API_KEY = "$2a$10$vIFUhTkQcgnktbliqnebWOXXy.rSlJY/2YkZ0lh/D8dwhg2mDyxAe";
 const BIN_ID = "6a4b0bc9da38895dfe32cc08";
 const BIN_NAME = "MTWARA PERFORMANCE";
 
@@ -1328,7 +1328,6 @@ async function deleteReport(reportId) {
 
 async function saveReportsToJSONBin() {
     try {
-        // Pata data ya sasa kutoka JSONBin
         const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
             method: "GET",
             headers: { "X-Master-Key": API_KEY }
@@ -1339,7 +1338,6 @@ async function saveReportsToJSONBin() {
         const data = result.record || result;
         data.reports = allReports;
         
-        // Hifadhi data kwenye JSONBin
         const updateResponse = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
             method: "PUT",
             headers: {
@@ -1556,7 +1554,7 @@ function updateScoreSummary() {
 }
 
 // ==============================================================
-// SUBMIT WORKER - IMARISHWA KABISA
+// SUBMIT WORKER - IMARISHWA
 // ==============================================================
 async function submitWorker() {
     const workerName = document.getElementById("workerName").value.trim();
@@ -1600,9 +1598,6 @@ async function submitWorker() {
     try {
         showSpinner("Inatuma tathmini...");
         
-        // ==========================================================
-        // HATUA 1: PATA DATA YA SASA KUTOKA JSONBIN
-        // ==========================================================
         console.log("📡 Inaunganisha na JSONBin...");
         const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
             method: "GET",
@@ -1617,16 +1612,10 @@ async function submitWorker() {
         let data = result.record || result;
         console.log("✅ Data imepakiwa kutoka JSONBin");
         
-        // ==========================================================
-        // HATUA 2: ONGEZA RIPOTI MPYA
-        // ==========================================================
         if (!data.reports) data.reports = [];
         data.reports.push(report);
         console.log(`📝 Ripoti mpya imeongezwa (ID: ${report.id})`);
         
-        // ==========================================================
-        // HATUA 3: HIFADHI KWA JSONBIN
-        // ==========================================================
         console.log("💾 Inahifadhi kwenye JSONBin...");
         const updateResponse = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
             method: "PUT",
@@ -1655,7 +1644,6 @@ async function submitWorker() {
         document.getElementById("workerStatusBadge").textContent = "✅ Imetumwa";
         document.getElementById("workerStatusBadge").className = "status-badge submitted";
         
-        // Ongeza ripoti kwenye orodha ya ndani
         allReports.push(report);
         updateReportsList();
         
@@ -1765,7 +1753,7 @@ window.onload = function() {
     setTimeout(() => { initSigPad("worker"); }, 500);
     updateWorkerChecklist();
     updateScoreSummary();
-    console.log("✅ Mtwara Performance - Fomu ya Mtendakazi v4.0 (Bila LocalStorage)");
+    console.log("✅ Mtwara Performance - Fomu ya Mtendakazi v4.0 (API Key Mpya)");
     console.log("📦 BIN ID:", BIN_ID);
 };
 </script>
