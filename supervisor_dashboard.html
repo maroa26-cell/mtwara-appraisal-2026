@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashibodi ya Msimamizi</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a5276, #27ae60); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .dashboard-container { background: #fff; border-radius: 20px; padding: 40px 35px; max-width: 800px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.6s ease; }
+        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        h2 { color: #1a5276; text-align: center; margin-bottom: 8px; }
+        .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 24px; font-size: 14px; }
+        .card { background: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border-left: 4px solid #27ae60; }
+        .card h3 { color: #1a5276; margin-bottom: 8px; }
+        .btn { padding: 12px 24px; border: none; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; transition: 0.3s; }
+        .btn-primary { background: #27ae60; color: #fff; }
+        .btn-primary:hover { background: #1e8449; transform: translateY(-2px); }
+        .btn-danger { background: #e74c3c; color: #fff; }
+        .btn-danger:hover { background: #c0392b; }
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); max-width: 400px; width: 90%; background: #1a1a2e; color: #fff; padding: 14px 22px; border-radius: 12px; font-size: 14px; text-align: center; z-index: 999; opacity: 0; transition: all 0.4s ease; pointer-events: none; box-shadow: 0 8px 40px rgba(0,0,0,0.2); }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast.success { background: #27ae60; }
+        .toast.error { background: #e74c3c; }
+    </style>
+</head>
+<body>
+
+<div id="toast" class="toast"></div>
+
+<div class="dashboard-container">
+    <h2>👔 Dashibodi ya Msimamizi</h2>
+    <p class="subtitle">Karibu kwenye tathmini ya utendaji</p>
+
+    <div class="card">
+        <h3>📋 Tathmini ya Wafanyakazi</h3>
+        <p>Hapa unaweza kuona orodha ya wafanyakazi na kufanya tathmini yao.</p>
+        <button class="btn btn-primary" onclick="alert('Hapa utaweza kuona wafanyakazi')">Tazama Wafanyakazi</button>
+    </div>
+
+    <div class="card">
+        <h3>📊 Ripoti</h3>
+        <p>Angalia ripoti za tathmini zilizopita.</p>
+        <button class="btn btn-primary" onclick="alert('Hapa utaweza kuona ripoti')">Angalia Ripoti</button>
+    </div>
+
+    <button class="btn btn-danger" onclick="logout()" style="margin-top: 8px;">🚪 Toka</button>
+</div>
+
+<script>
+function showToast(msg, type = 'info') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast ' + type + ' show';
+    setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+function logout() {
+    window.location.href = 'index.html';
+}
+
+// Get username from URL
+function getUsername() {
+    const params = new URLSearchParams(window.location.search);
+    const userData = params.get('user');
+    if (!userData) return null;
+    try {
+        const parsed = JSON.parse(decodeURIComponent(userData));
+        return parsed.username;
+    } catch (e) { return null; }
+}
+
+window.onload = function() {
+    const username = getUsername();
+    if (username) {
+        document.querySelector('.subtitle').textContent = `Karibu ${username} - Tathmini ya Utendaji`;
+    } else {
+        showToast('❌ Hitilafu: Hakuna mtumiaji', 'error');
+    }
+    console.log('✅ Supervisor Dashboard loaded');
+};
+</script>
+</body>
+</html>
