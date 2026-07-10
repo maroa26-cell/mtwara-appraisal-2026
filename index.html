@@ -57,7 +57,7 @@
         <div class="logo">🏥</div>
         <h1>MTWARA PERFORMANCE</h1>
         <p>Mfumo wa Tathmini ya Utendaji</p>
-        <span class="badge">Toleo la Kimataifa v5.0</span>
+        <span class="badge">Toleo la Msingi v3.0</span>
     </div>
 
     <div class="connection-status" id="connectionStatus">
@@ -73,7 +73,7 @@
     <div id="loginTab" class="tab-content active">
         <div class="form-group">
             <label>👤 Jina la Mtumiaji</label>
-            <input type="text" id="loginUsername" placeholder="Weka username" value="supervisor">
+            <input type="text" id="loginUsername" placeholder="Weka username" value="incharge">
         </div>
         <div class="form-group">
             <label>🔑 Nenosiri</label>
@@ -122,7 +122,7 @@
         <button class="btn btn-secondary" onclick="switchTab('login')">🔐 Ingia kwenye Akaunti</button>
     </div>
 
-    <div class="version">Toleo 5.0 - Profile kwa Supervisor</div>
+    <div class="version">Toleo 3.0 - Fomu zilizoboreshwa</div>
 </div>
 
 <script>
@@ -201,9 +201,10 @@ async function signup() {
         if (!record.users) record.users = {};
         if (record.users[username]) { showToast('❌ Username tayari imechukuliwa', 'error'); btn.disabled = false; btn.innerHTML = '📝 Jisajili'; return; }
         record.users[username] = { password, role };
-        // Also create empty profile entry for supervisor
-        if (role === 'supervisor' && !record.supervisor_profiles) record.supervisor_profiles = {};
-        if (role === 'supervisor') record.supervisor_profiles[username] = {};
+        if (!record.appraisals) record.appraisals = {};
+        if (!record.appraisals.worker) record.appraisals.worker = {};
+        if (!record.appraisals.supervisor) record.appraisals.supervisor = {};
+        if (!record.appraisals.incharge) record.appraisals.incharge = {};
         const update = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
@@ -234,7 +235,7 @@ async function login() {
         const userData = encodeURIComponent(JSON.stringify({ username, role: user.role }));
         let redirect = '';
         if (user.role === 'worker') redirect = 'worker.html';
-        else if (user.role === 'supervisor') redirect = 'supervisor_profile.html';  // ← Supervisor anaelekezwa kwenye profile
+        else if (user.role === 'supervisor') redirect = 'supervisor.html';
         else if (user.role === 'incharge') redirect = 'incharge.html';
         showToast(`✅ Karibu ${username}`, 'success');
         setTimeout(() => { window.location.href = `${redirect}?user=${userData}`; }, 500);
@@ -261,7 +262,7 @@ document.addEventListener('keydown', (e) => {
 
 window.onload = function() {
     checkConnection();
-    console.log(`✅ ${APP_NAME} - Login Page v5.0`);
+    console.log(`✅ ${APP_NAME} - Login Page v3.0`);
 };
 </script>
 </body>
