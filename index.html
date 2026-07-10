@@ -5,268 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MTWARA PERFORMANCE - Ingia</title>
     <style>
+        /* Stili zilizorahisishwa */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a5276 0%, #27ae60 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .login-container {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 40px 35px;
-            max-width: 440px;
-            width: 100%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            animation: slideUp 0.6s ease;
-        }
-        @keyframes slideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .login-header {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-        .login-header .logo { font-size: 48px; margin-bottom: 6px; }
-        .login-header h1 { color: #1a5276; font-size: 24px; font-weight: 700; }
-        .login-header p { color: #7f8c8d; font-size: 14px; margin-top: 4px; }
-        .login-header .badge {
-            display: inline-block;
-            background: #27ae60;
-            color: #fff;
-            padding: 4px 16px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-top: 6px;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a5276, #27ae60); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .login-container { background: #fff; border-radius: 20px; padding: 40px 35px; max-width: 440px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.6s ease; }
+        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .login-header { text-align: center; margin-bottom: 24px; }
+        .login-header .logo { font-size: 48px; }
+        .login-header h1 { color: #1a5276; font-size: 24px; }
+        .login-header p { color: #7f8c8d; font-size: 14px; }
+        .login-header .badge { display: inline-block; background: #27ae60; color: #fff; padding: 4px 16px; border-radius: 20px; font-size: 11px; margin-top: 6px; }
         .form-group { margin-bottom: 16px; }
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            color: #1a5276;
-            margin-bottom: 4px;
-            font-size: 13px;
-        }
-        .form-group label .required { color: #e74c3c; margin-left: 2px; }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #dee2e6;
-            border-radius: 10px;
-            font-size: 14px;
-            transition: 0.3s;
-            font-family: inherit;
-            background: #fff;
-        }
-        .form-group input:focus, .form-group select:focus {
-            border-color: #27ae60;
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(39,174,96,0.1);
-        }
-        .btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: inherit;
-        }
+        .form-group label { display: block; font-weight: 600; color: #1a5276; margin-bottom: 4px; font-size: 13px; }
+        .form-group input, .form-group select { width: 100%; padding: 12px 16px; border: 2px solid #dee2e6; border-radius: 10px; font-size: 14px; }
+        .form-group input:focus { border-color: #27ae60; outline: none; }
+        .btn { width: 100%; padding: 14px; border: none; border-radius: 10px; font-weight: 700; font-size: 16px; cursor: pointer; transition: 0.3s; }
         .btn-primary { background: #27ae60; color: #fff; }
-        .btn-primary:hover { background: #1e8449; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(39,174,96,0.3); }
+        .btn-primary:hover { background: #1e8449; transform: translateY(-2px); }
         .btn-secondary { background: #3498db; color: #fff; }
-        .btn-secondary:hover { background: #2e86c1; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(52,152,219,0.3); }
-        .btn:active { transform: scale(0.97); }
-        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-        .login-footer {
-            text-align: center;
-            margin-top: 16px;
-            font-size: 12px;
-            color: #95a5a6;
-        }
-        .login-footer .verse {
-            color: #1a5276;
-            font-style: italic;
-            font-size: 13px;
-            margin-bottom: 4px;
-        }
-        .connection-status {
-            text-align: center;
-            font-size: 12px;
-            color: #7f8c8d;
-            margin-bottom: 16px;
-            padding: 8px;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-        .connection-status .loading {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 3px solid #ecf0f1;
-            border-top: 3px solid #27ae60;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            vertical-align: middle;
-            margin-right: 6px;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            max-width: 400px;
-            width: 90%;
-            background: #1a1a2e;
-            color: #fff;
-            padding: 14px 22px;
-            border-radius: 12px;
-            font-size: 14px;
-            text-align: center;
-            z-index: 999;
-            opacity: 0;
-            transition: all 0.4s ease;
-            pointer-events: none;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.20);
-        }
-        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-        .toast.success { background: #27ae60; }
-        .toast.warning { background: #f39c12; color: #1a1a2e; }
-        .toast.error { background: #e74c3c; }
-        .toast.info { background: #3498db; }
-
-        .password-wrapper {
-            position: relative;
-        }
-        .password-wrapper input {
-            padding-right: 50px;
-        }
-        .toggle-password {
-            position: absolute;
-            right: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: transparent;
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            color: #7f8c8d;
-            padding: 4px 8px;
-            border-radius: 6px;
-            transition: 0.3s;
-        }
-        .toggle-password:hover {
-            background: #ecf0f1;
-            color: #1a5276;
-        }
-
-        .tab-buttons {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-        .tab-buttons .btn {
-            flex: 1;
-            padding: 10px;
-            font-size: 14px;
-            border-radius: 10px;
-        }
-        .tab-buttons .btn.active {
-            background: #27ae60;
-            color: #fff;
-        }
-        .tab-buttons .btn.inactive {
-            background: #ecf0f1;
-            color: #7f8c8d;
-        }
-        .tab-buttons .btn.inactive:hover {
-            background: #d5d8dc;
-        }
-
+        .btn-secondary:hover { background: #2e86c1; transform: translateY(-2px); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .tab-buttons { display: flex; gap: 8px; margin-bottom: 20px; }
+        .tab-buttons .btn { flex: 1; padding: 10px; font-size: 14px; border-radius: 10px; }
+        .tab-buttons .btn.active { background: #27ae60; color: #fff; }
+        .tab-buttons .btn.inactive { background: #ecf0f1; color: #7f8c8d; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-
-        .form-hint {
-            font-size: 11px;
-            color: #7f8c8d;
-            margin-top: 4px;
-        }
-        .form-hint .error { color: #e74c3c; }
-        .form-hint .success { color: #27ae60; }
-
-        .loading-spinner {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 3px solid #ecf0f1;
-            border-top: 3px solid #27ae60;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            vertical-align: middle;
-            margin-right: 8px;
-        }
-        .btn .loading-spinner { border-top-color: #fff; }
-
-        .role-selector select {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #dee2e6;
-            border-radius: 10px;
-            font-size: 14px;
-            font-family: inherit;
-            background: #fff;
-        }
-        .role-selector select:focus {
-            border-color: #27ae60;
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(39,174,96,0.1);
-        }
-
-        .divider {
-            text-align: center;
-            margin: 16px 0;
-            color: #bdc3c7;
-            font-size: 12px;
-            position: relative;
-        }
-        .divider::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            width: 45%;
-            height: 1px;
-            background: #ecf0f1;
-        }
-        .divider::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 50%;
-            width: 45%;
-            height: 1px;
-            background: #ecf0f1;
-        }
-        .version {
-            text-align: center;
-            font-size: 10px;
-            color: #bdc3c7;
-            margin-top: 8px;
-        }
+        .password-wrapper { position: relative; }
+        .password-wrapper input { padding-right: 50px; }
+        .toggle-password { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: transparent; border: none; font-size: 18px; cursor: pointer; }
+        .divider { text-align: center; margin: 16px 0; color: #bdc3c7; font-size: 12px; position: relative; }
+        .divider::before, .divider::after { content: ''; position: absolute; top: 50%; width: 45%; height: 1px; background: #ecf0f1; }
+        .divider::before { left: 0; }
+        .divider::after { right: 0; }
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); max-width: 400px; width: 90%; background: #1a1a2e; color: #fff; padding: 14px 22px; border-radius: 12px; font-size: 14px; text-align: center; z-index: 999; opacity: 0; transition: all 0.4s ease; pointer-events: none; box-shadow: 0 8px 40px rgba(0,0,0,0.2); }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast.success { background: #27ae60; }
+        .toast.error { background: #e74c3c; }
+        .connection-status { text-align: center; font-size: 12px; color: #7f8c8d; margin-bottom: 16px; padding: 8px; background: #f8f9fa; border-radius: 8px; }
+        .loading-spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid #ecf0f1; border-top: 3px solid #27ae60; border-radius: 50%; animation: spin 1s linear infinite; vertical-align: middle; margin-right: 8px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .version { text-align: center; font-size: 10px; color: #bdc3c7; margin-top: 8px; }
     </style>
 </head>
 <body>
@@ -282,83 +61,68 @@
     </div>
 
     <div class="connection-status" id="connectionStatus">
-        <span class="loading"></span> Inaunganisha...
+        <span class="loading-spinner"></span> Inaunganisha...
     </div>
 
-    <!-- TABS: Login / Sign Up -->
     <div class="tab-buttons">
         <button class="btn active" id="loginTabBtn" onclick="switchTab('login')">🔐 Ingia</button>
         <button class="btn inactive" id="signupTabBtn" onclick="switchTab('signup')">📝 Jisajili</button>
     </div>
 
-    <!-- ===== TAB 1: LOGIN ===== -->
+    <!-- Login Tab -->
     <div id="loginTab" class="tab-content active">
         <div class="form-group">
-            <label>👤 Jina la Mtumiaji <span class="required">*</span></label>
+            <label>👤 Jina la Mtumiaji</label>
             <input type="text" id="loginUsername" placeholder="Weka username" value="worker">
         </div>
         <div class="form-group">
-            <label>🔑 Nenosiri <span class="required">*</span></label>
+            <label>🔑 Nenosiri</label>
             <div class="password-wrapper">
                 <input type="password" id="loginPassword" placeholder="Weka nenosiri" value="1234">
-                <button class="toggle-password" onclick="togglePasswordVisibility('loginPassword', this)" type="button">👁️</button>
+                <button class="toggle-password" onclick="togglePasswordVisibility('loginPassword', this)">👁️</button>
             </div>
         </div>
-
         <button class="btn btn-primary" onclick="login()" id="loginBtn">🔓 Ingia</button>
-
         <div class="divider">Au</div>
-
         <button class="btn btn-secondary" onclick="switchTab('signup')">📝 Jisajili Sasa</button>
     </div>
 
-    <!-- ===== TAB 2: SIGN UP ===== -->
+    <!-- Signup Tab -->
     <div id="signupTab" class="tab-content">
         <div class="form-group">
-            <label>👤 Jina la Mtumiaji <span class="required">*</span></label>
+            <label>👤 Jina la Mtumiaji</label>
             <input type="text" id="signupUsername" placeholder="Chagua username">
-            <div class="form-hint" id="usernameHint">Angalia upatikanaji wa username</div>
+            <div class="form-hint" id="usernameHint" style="font-size:11px; color:#7f8c8d; margin-top:4px;">Angalia upatikanaji</div>
         </div>
-
         <div class="form-group">
-            <label>🔑 Nenosiri <span class="required">*</span></label>
+            <label>🔑 Nenosiri</label>
             <div class="password-wrapper">
                 <input type="password" id="signupPassword" placeholder="Weka nenosiri">
-                <button class="toggle-password" onclick="togglePasswordVisibility('signupPassword', this)" type="button">👁️</button>
+                <button class="toggle-password" onclick="togglePasswordVisibility('signupPassword', this)">👁️</button>
             </div>
-            <div class="form-hint">Nenosiri lazima iwe na angalau herufi 4</div>
         </div>
-
         <div class="form-group">
-            <label>🔑 Thibitisha Nenosiri <span class="required">*</span></label>
+            <label>🔑 Thibitisha Nenosiri</label>
             <div class="password-wrapper">
-                <input type="password" id="signupPasswordConfirm" placeholder="Andika nenosiri tena">
-                <button class="toggle-password" onclick="togglePasswordVisibility('signupPasswordConfirm', this)" type="button">👁️</button>
+                <input type="password" id="signupPasswordConfirm" placeholder="Andika tena">
+                <button class="toggle-password" onclick="togglePasswordVisibility('signupPasswordConfirm', this)">👁️</button>
             </div>
-            <div class="form-hint" id="passwordMatchHint">Nenosiri lazima zilandane</div>
+            <div id="passwordMatchHint" style="font-size:11px; color:#7f8c8d; margin-top:4px;">Nenosiri lazima zilandane</div>
         </div>
-
-        <div class="form-group role-selector">
-            <label>📋 Jukumu <span class="required">*</span></label>
+        <div class="form-group">
+            <label>📋 Jukumu</label>
             <select id="signupRole">
                 <option value="worker">👤 Mtendakazi</option>
                 <option value="supervisor">👔 Msimamizi</option>
                 <option value="incharge">🏥 Mganga Mfawidhi</option>
             </select>
         </div>
-
         <button class="btn btn-primary" onclick="signup()" id="signupBtn">📝 Jisajili</button>
-
         <div class="divider">Au</div>
-
         <button class="btn btn-secondary" onclick="switchTab('login')">🔐 Ingia kwenye Akaunti</button>
     </div>
 
-    <div class="login-footer">
-        <div class="verse">"Lo, lolote mlifanyalo, lifanyeni kwa moyo wenu wote" — Wakolosai 3:23</div>
-        <div style="margin-top:6px;">Mtwara SDA Dispensary &copy; 2026</div>
-        <div class="version">Toleo 4.0 - Imeboreshwa</div>
-    </div>
+    <div class="version">Toleo 4.0 - Imeboreshwa</div>
 </div>
 
 <script>
@@ -370,311 +134,129 @@ const ACCESS_KEY = "$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K
 const BIN_ID = "6a4b0bc9da38895dfe32cc08";
 const APP_NAME = "MTWARA PERFORMANCE";
 
-// ==============================================================
-// TOAST FUNCTION
-// ==============================================================
-function showToast(msg, type = "info") {
-    const t = document.getElementById("toast");
+function showToast(msg, type = 'info') {
+    const t = document.getElementById('toast');
     t.textContent = msg;
-    t.className = "toast " + type + " show";
-    setTimeout(() => t.classList.remove("show"), 3500);
+    t.className = 'toast ' + type + ' show';
+    setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-// ==============================================================
-// TOGGLE PASSWORD VISIBILITY
-// ==============================================================
-function togglePasswordVisibility(inputId, btn) {
-    const input = document.getElementById(inputId);
-    if (!input) return;
-    if (input.type === "password") {
-        input.type = "text";
-        btn.textContent = "🙈";
-    } else {
-        input.type = "password";
-        btn.textContent = "👁️";
-    }
+function togglePasswordVisibility(id, btn) {
+    const input = document.getElementById(id);
+    if (input.type === 'password') { input.type = 'text'; btn.textContent = '🙈'; }
+    else { input.type = 'password'; btn.textContent = '👁️'; }
 }
 
-// ==============================================================
-// SWITCH TABS
-// ==============================================================
 function switchTab(tab) {
-    const loginTab = document.getElementById('loginTab');
-    const signupTab = document.getElementById('signupTab');
-    const loginBtn = document.getElementById('loginTabBtn');
-    const signupBtn = document.getElementById('signupTabBtn');
-
-    if (tab === 'login') {
-        loginTab.classList.add('active');
-        signupTab.classList.remove('active');
-        loginBtn.className = 'btn active';
-        signupBtn.className = 'btn inactive';
-    } else {
-        loginTab.classList.remove('active');
-        signupTab.classList.add('active');
-        loginBtn.className = 'btn inactive';
-        signupBtn.className = 'btn active';
-    }
+    document.getElementById('loginTab').classList.toggle('active', tab === 'login');
+    document.getElementById('signupTab').classList.toggle('active', tab === 'signup');
+    document.getElementById('loginTabBtn').className = 'btn ' + (tab === 'login' ? 'active' : 'inactive');
+    document.getElementById('signupTabBtn').className = 'btn ' + (tab === 'signup' ? 'active' : 'inactive');
 }
 
-// ==============================================================
-// CHECK USERNAME AVAILABILITY
-// ==============================================================
-async function checkUsername(username) {
-    if (!username || username.length < 3) {
-        document.getElementById('usernameHint').innerHTML = '⚠️ Username lazima iwe na herufi 3 au zaidi';
-        document.getElementById('usernameHint').className = 'form-hint error';
-        return false;
-    }
+// Check username availability
+document.getElementById('signupUsername').addEventListener('input', async function() {
+    const username = this.value.trim();
+    const hint = document.getElementById('usernameHint');
+    if (username.length < 3) { hint.innerHTML = '⚠️ Username lazima iwe na herufi 3 au zaidi'; hint.style.color = '#f39c12'; return; }
     try {
-        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-            method: "GET",
-            headers: { "X-Master-Key": API_KEY }
-        });
-        if (!response.ok) throw new Error("Imeshindwa kuunganisha");
-        const result = await response.json();
-        const data = result.record || result;
-        const users = data.users || {};
-        if (users[username]) {
-            document.getElementById('usernameHint').innerHTML = '❌ Username hii tayari imechukuliwa';
-            document.getElementById('usernameHint').className = 'form-hint error';
-            return false;
-        } else {
-            document.getElementById('usernameHint').innerHTML = '✅ Username inapatikana';
-            document.getElementById('usernameHint').className = 'form-hint success';
-            return true;
-        }
-    } catch (error) {
-        document.getElementById('usernameHint').innerHTML = '⚠️ Hitilafu ya muunganisho';
-        document.getElementById('usernameHint').className = 'form-hint error';
-        return false;
-    }
-}
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
+        if (!res.ok) throw new Error('Network error');
+        const data = await res.json();
+        const users = data.record?.users || {};
+        if (users[username]) { hint.innerHTML = '❌ Username tayari imechukuliwa'; hint.style.color = '#e74c3c'; }
+        else { hint.innerHTML = '✅ Username inapatikana'; hint.style.color = '#27ae60'; }
+    } catch (e) { hint.innerHTML = '⚠️ Hitilafu ya muunganisho'; hint.style.color = '#f39c12'; }
+});
 
-// ==============================================================
-// CHECK PASSWORD MATCH
-// ==============================================================
+// Password match
+document.getElementById('signupPassword').addEventListener('input', checkPasswordMatch);
+document.getElementById('signupPasswordConfirm').addEventListener('input', checkPasswordMatch);
 function checkPasswordMatch() {
-    const password = document.getElementById('signupPassword').value;
-    const confirm = document.getElementById('signupPasswordConfirm').value;
+    const p1 = document.getElementById('signupPassword').value;
+    const p2 = document.getElementById('signupPasswordConfirm').value;
     const hint = document.getElementById('passwordMatchHint');
-    if (password && confirm) {
-        if (password === confirm) {
-            hint.innerHTML = '✅ Nenosiri zinalingana';
-            hint.className = 'form-hint success';
-            return true;
-        } else {
-            hint.innerHTML = '❌ Nenosiri hazilingani';
-            hint.className = 'form-hint error';
-            return false;
-        }
-    }
-    return false;
+    if (p1 && p2) {
+        if (p1 === p2) { hint.innerHTML = '✅ Nenosiri zinalingana'; hint.style.color = '#27ae60'; }
+        else { hint.innerHTML = '❌ Nenosiri hazilingani'; hint.style.color = '#e74c3c'; }
+    } else { hint.innerHTML = 'Nenosiri lazima zilandane'; hint.style.color = '#7f8c8d'; }
 }
 
-// ==============================================================
-// SIGN UP FUNCTION
-// ==============================================================
+// Signup
 async function signup() {
     const username = document.getElementById('signupUsername').value.trim();
-    const password = document.getElementById('signupPassword').value.trim();
-    const passwordConfirm = document.getElementById('signupPasswordConfirm').value.trim();
+    const password = document.getElementById('signupPassword').value;
+    const confirm = document.getElementById('signupPasswordConfirm').value;
     const role = document.getElementById('signupRole').value;
     const btn = document.getElementById('signupBtn');
-
-    if (!username) { showToast("❌ Tafadhali weka username", "error"); return; }
-    if (username.length < 3) { showToast("❌ Username lazima iwe na herufi 3 au zaidi", "error"); return; }
-    if (!password) { showToast("❌ Tafadhali weka nenosiri", "error"); return; }
-    if (password.length < 4) { showToast("❌ Nenosiri lazima iwe na herufi 4 au zaidi", "error"); return; }
-    if (password !== passwordConfirm) { showToast("❌ Nenosiri hazilingani", "error"); return; }
-
-    btn.disabled = true;
-    btn.innerHTML = '<span class="loading-spinner"></span> Inajisajili...';
-    showToast("⏳ Inajisajili...", "info");
-
+    if (!username || username.length < 3) return showToast('❌ Username lazima iwe na herufi 3 au zaidi', 'error');
+    if (!password || password.length < 4) return showToast('❌ Nenosiri lazima iwe na herufi 4 au zaidi', 'error');
+    if (password !== confirm) return showToast('❌ Nenosiri hazilingani', 'error');
+    btn.disabled = true; btn.innerHTML = '<span class="loading-spinner"></span> Inajisajili...';
     try {
-        const checkResponse = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-            method: "GET",
-            headers: { "X-Master-Key": API_KEY }
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
+        if (!res.ok) throw new Error('Network error');
+        const data = await res.json();
+        const record = data.record || {};
+        if (!record.users) record.users = {};
+        if (record.users[username]) { showToast('❌ Username tayari imechukuliwa', 'error'); btn.disabled = false; btn.innerHTML = '📝 Jisajili'; return; }
+        record.users[username] = { password, role };
+        const update = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+            body: JSON.stringify(record)
         });
-        if (!checkResponse.ok) throw new Error("Imeshindwa kuunganisha");
-        const result = await checkResponse.json();
-        const data = result.record || result;
-        if (!data.users) data.users = {};
-
-        if (data.users[username]) {
-            showToast("❌ Username hii tayari imechukuliwa", "error");
-            btn.disabled = false;
-            btn.innerHTML = "📝 Jisajili";
-            return;
-        }
-
-        data.users[username] = {
-            password: password,
-            role: role
-        };
-
-        const updateResponse = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "X-Master-Key": API_KEY
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (!updateResponse.ok) throw new Error("Imeshindwa kuhifadhi");
-
-        showToast(`✅ Akaunti imeundwa! Karibu ${username}!`, "success");
-
-        document.getElementById('signupUsername').value = '';
-        document.getElementById('signupPassword').value = '';
-        document.getElementById('signupPasswordConfirm').value = '';
-
-        setTimeout(() => {
-            document.getElementById('loginUsername').value = username;
-            switchTab('login');
-            btn.disabled = false;
-            btn.innerHTML = "📝 Jisajili";
-        }, 1000);
-
-    } catch (error) {
-        console.error("❌ Hitilafu:", error);
-        showToast("❌ " + error.message, "error");
-        btn.disabled = false;
-        btn.innerHTML = "📝 Jisajili";
-    }
+        if (!update.ok) throw new Error('Imeshindwa kuhifadhi');
+        showToast(`✅ Akaunti imeundwa! Karibu ${username}`, 'success');
+        document.getElementById('loginUsername').value = username;
+        switchTab('login');
+        btn.disabled = false; btn.innerHTML = '📝 Jisajili';
+    } catch (e) { showToast('❌ ' + e.message, 'error'); btn.disabled = false; btn.innerHTML = '📝 Jisajili'; }
 }
 
-// ==============================================================
-// LOGIN FUNCTION
-// ==============================================================
+// Login
 async function login() {
-    const username = document.getElementById("loginUsername").value.trim();
-    const password = document.getElementById("loginPassword").value.trim();
-    const btn = document.getElementById("loginBtn");
-
-    if (!username || !password) {
-        showToast("❌ Tafadhali jaza sehemu zote", "error");
-        return;
-    }
-
-    btn.disabled = true;
-    btn.innerHTML = '<span class="loading-spinner"></span> Inaingiza...';
-    showToast("⏳ Inaingiza...", "info");
-
+    const username = document.getElementById('loginUsername').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
+    const btn = document.getElementById('loginBtn');
+    if (!username || !password) return showToast('❌ Tafadhali jaza sehemu zote', 'error');
+    btn.disabled = true; btn.innerHTML = '<span class="loading-spinner"></span> Inaingiza...';
     try {
-        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-            method: "GET",
-            headers: { "X-Master-Key": API_KEY }
-        });
-
-        if (!response.ok) {
-            throw new Error("Imeshindwa kuunganisha na server.");
-        }
-
-        const result = await response.json();
-        const data = result.record || result;
-        const users = data.users || {};
-
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
+        if (!res.ok) throw new Error('Network error');
+        const data = await res.json();
+        const users = data.record?.users || {};
         const user = users[username];
-        if (!user || user.password !== password) {
-            showToast("❌ Jina au nenosiri si sahihi", "error");
-            btn.disabled = false;
-            btn.innerHTML = "🔓 Ingia";
-            return;
-        }
-
-        let redirectPage = 'supervisor.html';
-        if (user.role === 'worker') {
-            redirectPage = 'worker.html';
-        } else if (user.role === 'supervisor') {
-            redirectPage = 'supervisor.html';
-        } else if (user.role === 'incharge') {
-            redirectPage = 'incharge.html';
-        }
-
-        const userData = encodeURIComponent(JSON.stringify({
-            username: username,
-            role: user.role
-        }));
-
-        showToast(`✅ Karibu ${username}!`, "success");
-
-        setTimeout(() => {
-            window.location.href = `${redirectPage}?user=${userData}`;
-        }, 500);
-
-    } catch (error) {
-        console.error("❌ Hitilafu:", error);
-        showToast("❌ " + error.message, "error");
-        btn.disabled = false;
-        btn.innerHTML = "🔓 Ingia";
-    }
+        if (!user || user.password !== password) { showToast('❌ Jina au nenosiri si sahihi', 'error'); btn.disabled = false; btn.innerHTML = '🔓 Ingia'; return; }
+        const redirect = user.role === 'worker' ? 'worker.html' : user.role === 'supervisor' ? 'supervisor.html' : 'incharge.html';
+        const userData = encodeURIComponent(JSON.stringify({ username, role: user.role }));
+        showToast(`✅ Karibu ${username}`, 'success');
+        setTimeout(() => { window.location.href = `${redirect}?user=${userData}`; }, 500);
+    } catch (e) { showToast('❌ ' + e.message, 'error'); btn.disabled = false; btn.innerHTML = '🔓 Ingia'; }
 }
 
-// ==============================================================
-// CHECK CONNECTION TO JSONBIN
-// ==============================================================
+// Check connection
 async function checkConnection() {
-    const status = document.getElementById("connectionStatus");
+    const status = document.getElementById('connectionStatus');
     try {
-        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-            method: "GET",
-            headers: { "X-Master-Key": API_KEY }
-        });
-        if (response.ok) {
-            status.innerHTML = "✅ Imeunganishwa";
-        } else {
-            status.innerHTML = "⚠️ Hitilafu ya muunganisho";
-        }
-    } catch (error) {
-        status.innerHTML = "⚠️ Hakuna mtandao";
-    }
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
+        status.innerHTML = res.ok ? '✅ Imeunganishwa' : '⚠️ Hitilafu ya muunganisho';
+    } catch (e) { status.innerHTML = '⚠️ Hakuna mtandao'; }
 }
 
-// ==============================================================
-// EVENT LISTENERS
-// ==============================================================
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('signupUsername').addEventListener('input', function() {
-        const username = this.value.trim();
-        if (username.length >= 3) {
-            checkUsername(username);
-        } else {
-            document.getElementById('usernameHint').innerHTML = '⚠️ Username lazima iwe na herufi 3 au zaidi';
-            document.getElementById('usernameHint').className = 'form-hint error';
-        }
-    });
-
-    document.getElementById('signupPassword').addEventListener('input', checkPasswordMatch);
-    document.getElementById('signupPasswordConfirm').addEventListener('input', checkPasswordMatch);
-});
-
-// ==============================================================
-// KEYBOARD SHORTCUT - Bonyeza Enter kuingia
-// ==============================================================
-document.addEventListener("keydown", function(e) {
-    if (e.key === "Enter") {
-        const activeTab = document.querySelector('.tab-content.active');
-        if (activeTab && activeTab.id === 'loginTab') {
-            login();
-        } else if (activeTab && activeTab.id === 'signupTab') {
-            signup();
-        }
+// Enter key to login/signup
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        const active = document.querySelector('.tab-content.active');
+        if (active.id === 'loginTab') login();
+        else if (active.id === 'signupTab') signup();
     }
 });
 
-// ==============================================================
-// INIT
-// ==============================================================
 window.onload = function() {
     checkConnection();
     console.log(`✅ ${APP_NAME} - Login Page v4.0`);
-    console.log(`📦 BIN ID: ${BIN_ID}`);
-    console.log(`🔑 ACCESS KEY: ${ACCESS_KEY}`);
 };
 </script>
-
 </body>
 </html>
