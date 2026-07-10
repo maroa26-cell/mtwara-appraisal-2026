@@ -4,171 +4,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fomu ya Mganga Mfawidhi</title>
+    <title>MTWARA PERFORMANCE - Ingia</title>
     <style>
-        /* Stili sawa lakini rangi tofauti */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a5276, #e74c3c); min-height: 100vh; padding: 20px; display: flex; justify-content: center; align-items: center; }
-        .form-container { background: #fff; border-radius: 20px; padding: 40px 35px; max-width: 1000px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.6s ease; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a5276, #27ae60); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .login-container { background: #fff; border-radius: 20px; padding: 40px 35px; max-width: 440px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.6s ease; }
         @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        h2 { color: #1a5276; text-align: center; margin-bottom: 8px; }
-        .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 24px; font-size: 14px; }
-        .section { background: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 20px; border-left: 4px solid #e74c3c; }
-        .section h3 { color: #1a5276; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-        .section h3 .badge { background: #e74c3c; color: #fff; padding: 2px 10px; border-radius: 20px; font-size: 11px; margin-left: 8px; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .form-group { margin-bottom: 12px; }
-        .form-group.full-width { grid-column: 1 / -1; }
+        .login-header { text-align: center; margin-bottom: 24px; }
+        .login-header .logo { font-size: 48px; }
+        .login-header h1 { color: #1a5276; font-size: 24px; }
+        .login-header p { color: #7f8c8d; font-size: 14px; }
+        .login-header .badge { display: inline-block; background: #27ae60; color: #fff; padding: 4px 16px; border-radius: 20px; font-size: 11px; margin-top: 6px; }
+        .form-group { margin-bottom: 16px; }
         .form-group label { display: block; font-weight: 600; color: #1a5276; margin-bottom: 4px; font-size: 13px; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 14px; border: 2px solid #dee2e6; border-radius: 8px; font-size: 14px; }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #e74c3c; outline: none; }
-        .form-group textarea { min-height: 80px; resize: vertical; }
-        .btn { padding: 14px 30px; border: none; border-radius: 10px; font-weight: 700; font-size: 16px; cursor: pointer; transition: 0.3s; }
-        .btn-primary { background: #e74c3c; color: #fff; }
-        .btn-primary:hover { background: #c0392b; transform: translateY(-2px); }
-        .btn-secondary { background: #95a5a6; color: #fff; }
-        .btn-secondary:hover { background: #7f8c8d; }
-        .btn-danger { background: #e74c3c; color: #fff; }
-        .btn-danger:hover { background: #c0392b; }
+        .form-group input, .form-group select { width: 100%; padding: 12px 16px; border: 2px solid #dee2e6; border-radius: 10px; font-size: 14px; }
+        .form-group input:focus { border-color: #27ae60; outline: none; }
+        .btn { width: 100%; padding: 14px; border: none; border-radius: 10px; font-weight: 700; font-size: 16px; cursor: pointer; transition: 0.3s; }
+        .btn-primary { background: #27ae60; color: #fff; }
+        .btn-primary:hover { background: #1e8449; transform: translateY(-2px); }
+        .btn-secondary { background: #3498db; color: #fff; }
+        .btn-secondary:hover { background: #2e86c1; transform: translateY(-2px); }
         .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        .button-group { display: flex; gap: 12px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+        .tab-buttons { display: flex; gap: 8px; margin-bottom: 20px; }
+        .tab-buttons .btn { flex: 1; padding: 10px; font-size: 14px; border-radius: 10px; }
+        .tab-buttons .btn.active { background: #27ae60; color: #fff; }
+        .tab-buttons .btn.inactive { background: #ecf0f1; color: #7f8c8d; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .password-wrapper { position: relative; }
+        .password-wrapper input { padding-right: 50px; }
+        .toggle-password { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: transparent; border: none; font-size: 18px; cursor: pointer; }
+        .divider { text-align: center; margin: 16px 0; color: #bdc3c7; font-size: 12px; position: relative; }
+        .divider::before, .divider::after { content: ''; position: absolute; top: 50%; width: 45%; height: 1px; background: #ecf0f1; }
+        .divider::before { left: 0; }
+        .divider::after { right: 0; }
         .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); max-width: 400px; width: 90%; background: #1a1a2e; color: #fff; padding: 14px 22px; border-radius: 12px; font-size: 14px; text-align: center; z-index: 999; opacity: 0; transition: all 0.4s ease; pointer-events: none; box-shadow: 0 8px 40px rgba(0,0,0,0.2); }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
         .toast.success { background: #27ae60; }
         .toast.error { background: #e74c3c; }
-        .loading-spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid #ecf0f1; border-top: 3px solid #e74c3c; border-radius: 50%; animation: spin 1s linear infinite; vertical-align: middle; margin-right: 8px; }
+        .connection-status { text-align: center; font-size: 12px; color: #7f8c8d; margin-bottom: 16px; padding: 8px; background: #f8f9fa; border-radius: 8px; }
+        .loading-spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid #ecf0f1; border-top: 3px solid #27ae60; border-radius: 50%; animation: spin 1s linear infinite; vertical-align: middle; margin-right: 8px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .status-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
-        .status-badge.saved { background: #d4edda; color: #155724; }
-        .status-badge.pending { background: #fff3cd; color: #856404; }
+        .version { text-align: center; font-size: 10px; color: #bdc3c7; margin-top: 8px; }
     </style>
 </head>
 <body>
 
 <div id="toast" class="toast"></div>
 
-<div class="form-container">
-    <h2>🏥 Fomu ya Tathmini - Mganga Mfawidhi</h2>
-    <p class="subtitle" id="userGreeting">Karibu mganga mfawidhi</p>
-
-    <!-- Section 1: KPI -->
-    <div class="section">
-        <h3>📊 KPI (Key Performance Indicators) <span class="badge">WHO Standard</span></h3>
-        <div class="form-grid">
-            <div class="form-group">
-                <label>1. Uongozi wa Kliniki (Rating 1-5)</label>
-                <input type="number" id="kpi_leadership" placeholder="1-5" min="1" max="5">
-            </div>
-            <div class="form-group">
-                <label>2. Ubora wa Huduma za Afya (%)</label>
-                <input type="number" id="kpi_quality" placeholder="Mfano: 92" min="0" max="100">
-            </div>
-            <div class="form-group">
-                <label>3. Idadi ya Wagonjwa kwa Mwezi</label>
-                <input type="number" id="kpi_patients" placeholder="Mfano: 200">
-            </div>
-            <div class="form-group">
-                <label>4. Uwiano wa Vifo (%)</label>
-                <input type="number" id="kpi_mortality" placeholder="Mfano: 2.5" step="0.1">
-            </div>
-            <div class="form-group full-width">
-                <label>5. Maelezo ya KPI</label>
-                <textarea id="kpi_notes" placeholder="Andika maelezo..."></textarea>
-            </div>
-        </div>
+<div class="login-container">
+    <div class="login-header">
+        <div class="logo">🏥</div>
+        <h1>MTWARA PERFORMANCE</h1>
+        <p>Mfumo wa Tathmini ya Utendaji</p>
+        <span class="badge">Toleo la Kimataifa v6.0</span>
     </div>
 
-    <!-- Section 2: Strategic Goals -->
-    <div class="section">
-        <h3>🎯 Malengo ya Kimkakati (Strategic Goals)</h3>
-        <div class="form-grid">
-            <div class="form-group full-width">
-                <label>1. Malengo ya Hospitali</label>
-                <textarea id="strategic_goals" placeholder="Andika malengo ya hospitali..."></textarea>
-            </div>
-            <div class="form-group">
-                <label>2. Kiwango cha Mafanikio (%)</label>
-                <input type="number" id="strategic_achievement" placeholder="Mfano: 80" min="0" max="100">
-            </div>
-            <div class="form-group">
-                <label>3. Muda (miezi)</label>
-                <input type="number" id="strategic_timeline" placeholder="Mfano: 12">
-            </div>
-        </div>
+    <div class="connection-status" id="connectionStatus">
+        <span class="loading-spinner"></span> Inaunganisha...
     </div>
 
-    <!-- Section 3: Skills & Competencies -->
-    <div class="section">
-        <h3>🧠 Ujuzi na Kompetensi (Skills & Competencies)</h3>
-        <div class="form-grid">
-            <div class="form-group">
-                <label>Ujuzi wa Udhibiti (1-5)</label>
-                <input type="number" id="skill_governance" placeholder="1-5" min="1" max="5">
-            </div>
-            <div class="form-group">
-                <label>Ujuzi wa Sera na Mipango (1-5)</label>
-                <input type="number" id="skill_policy" placeholder="1-5" min="1" max="5">
-            </div>
-            <div class="form-group">
-                <label>Ujuzi wa Uhusiano (1-5)</label>
-                <input type="number" id="skill_relations" placeholder="1-5" min="1" max="5">
-            </div>
-            <div class="form-group">
-                <label>Ujuzi wa Uhakiki (1-5)</label>
-                <input type="number" id="skill_audit" placeholder="1-5" min="1" max="5">
-            </div>
-            <div class="form-group full-width">
-                <label>Maelezo ya Ujuzi</label>
-                <textarea id="skill_notes" placeholder="Eleza ujuzi wako..."></textarea>
-            </div>
-        </div>
+    <div class="tab-buttons">
+        <button class="btn active" id="loginTabBtn" onclick="switchTab('login')">🔐 Ingia</button>
+        <button class="btn inactive" id="signupTabBtn" onclick="switchTab('signup')">📝 Jisajili</button>
     </div>
 
-    <!-- Section 4: Training & Development -->
-    <div class="section">
-        <h3>📚 Mafunzo na Maendeleo (Training & Development)</h3>
-        <div class="form-grid">
-            <div class="form-group full-width">
-                <label>Mafunzo yaliyofuata</label>
-                <textarea id="training_attended" placeholder="Orodhesha mafunzo..."></textarea>
-            </div>
-            <div class="form-group full-width">
-                <label>Mafunzo yanayohitajika</label>
-                <textarea id="training_needed" placeholder="Mapendekezo..."></textarea>
-            </div>
-            <div class="form-group">
-                <label>Saa za Mafunzo</label>
-                <input type="number" id="training_hours" placeholder="Mfano: 40">
-            </div>
-            <div class="form-group">
-                <label>Tarehe ya Mwisho</label>
-                <input type="date" id="training_last_date">
-            </div>
-        </div>
-    </div>
-
-    <!-- Section 5: Overall Comments -->
-    <div class="section">
-        <h3>💬 Maoni ya Jumla</h3>
+    <!-- Login Tab -->
+    <div id="loginTab" class="tab-content active">
         <div class="form-group">
-            <textarea id="overall_comments" placeholder="Andika maoni ya jumla..." rows="3"></textarea>
+            <label>👤 Jina la Mtumiaji</label>
+            <input type="text" id="loginUsername" placeholder="Weka username" value="supervisor">
         </div>
+        <div class="form-group">
+            <label>🔑 Nenosiri</label>
+            <div class="password-wrapper">
+                <input type="password" id="loginPassword" placeholder="Weka nenosiri" value="1234">
+                <button class="toggle-password" onclick="togglePasswordVisibility('loginPassword', this)">👁️</button>
+            </div>
+        </div>
+        <button class="btn btn-primary" onclick="login()" id="loginBtn">🔓 Ingia</button>
+        <div class="divider">Au</div>
+        <button class="btn btn-secondary" onclick="switchTab('signup')">📝 Jisajili Sasa</button>
     </div>
 
-    <div class="button-group">
-        <button class="btn btn-primary" onclick="saveAppraisal()" id="saveBtn">💾 Hifadhi Tathmini</button>
-        <button class="btn btn-secondary" onclick="loadAppraisal()">📂 Pakia Tathmini</button>
-        <button class="btn btn-danger" onclick="logout()">🚪 Toka</button>
+    <!-- Signup Tab -->
+    <div id="signupTab" class="tab-content">
+        <div class="form-group">
+            <label>👤 Jina la Mtumiaji</label>
+            <input type="text" id="signupUsername" placeholder="Chagua username">
+            <div class="form-hint" id="usernameHint" style="font-size:11px; color:#7f8c8d; margin-top:4px;">Angalia upatikanaji</div>
+        </div>
+        <div class="form-group">
+            <label>🔑 Nenosiri</label>
+            <div class="password-wrapper">
+                <input type="password" id="signupPassword" placeholder="Weka nenosiri">
+                <button class="toggle-password" onclick="togglePasswordVisibility('signupPassword', this)">👁️</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>🔑 Thibitisha Nenosiri</label>
+            <div class="password-wrapper">
+                <input type="password" id="signupPasswordConfirm" placeholder="Andika tena">
+                <button class="toggle-password" onclick="togglePasswordVisibility('signupPasswordConfirm', this)">👁️</button>
+            </div>
+            <div id="passwordMatchHint" style="font-size:11px; color:#7f8c8d; margin-top:4px;">Nenosiri lazima zilandane</div>
+        </div>
+        <div class="form-group">
+            <label>📋 Jukumu</label>
+            <select id="signupRole">
+                <option value="worker">👤 Mtendakazi</option>
+                <option value="supervisor">👔 Msimamizi</option>
+                <option value="incharge">🏥 Mganga Mfawidhi</option>
+            </select>
+        </div>
+        <button class="btn btn-primary" onclick="signup()" id="signupBtn">📝 Jisajili</button>
+        <div class="divider">Au</div>
+        <button class="btn btn-secondary" onclick="switchTab('login')">🔐 Ingia kwenye Akaunti</button>
     </div>
-    <div style="text-align: center; margin-top: 12px;">
-        <span id="saveStatus" class="status-badge pending">Hajahifadhiwa</span>
-    </div>
+
+    <div class="version">Toleo 6.0 - Fomu za Kimataifa (KPI, WHO, Malengo, Ujuzi, Mafunzo)</div>
 </div>
 
 <script>
-// Same structure, different fields
+// ==============================================================
+// MTWARA PERFORMANCE - CONFIGURATION
+// ==============================================================
 const API_KEY = "$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDot5L9hRGRQfa21/Mw/B0UcS";
+const ACCESS_KEY = "$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K";
 const BIN_ID = "6a4b0bc9da38895dfe32cc08";
+const APP_NAME = "MTWARA PERFORMANCE";
 
 function showToast(msg, type = 'info') {
     const t = document.getElementById('toast');
@@ -177,120 +141,128 @@ function showToast(msg, type = 'info') {
     setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-function getUsername() {
-    const params = new URLSearchParams(window.location.search);
-    const userData = params.get('user');
-    if (!userData) return null;
-    try {
-        const parsed = JSON.parse(decodeURIComponent(userData));
-        return parsed.username;
-    } catch (e) { return null; }
+function togglePasswordVisibility(id, btn) {
+    const input = document.getElementById(id);
+    if (input.type === 'password') { input.type = 'text'; btn.textContent = '🙈'; }
+    else { input.type = 'password'; btn.textContent = '👁️'; }
 }
 
-const username = getUsername();
-if (!username) {
-    showToast('❌ Hitilafu: Hakuna mtumiaji', 'error');
-    setTimeout(() => window.location.href = 'index.html', 2000);
-}
-document.getElementById('userGreeting').textContent = `Karibu ${username} - Tathmini ya Mganga Mfawidhi`;
-
-function getFormData() {
-    return {
-        username: username,
-        kpi_leadership: document.getElementById('kpi_leadership').value || 0,
-        kpi_quality: document.getElementById('kpi_quality').value || 0,
-        kpi_patients: document.getElementById('kpi_patients').value || 0,
-        kpi_mortality: document.getElementById('kpi_mortality').value || 0,
-        kpi_notes: document.getElementById('kpi_notes').value,
-        strategic_goals: document.getElementById('strategic_goals').value,
-        strategic_achievement: document.getElementById('strategic_achievement').value || 0,
-        strategic_timeline: document.getElementById('strategic_timeline').value || 0,
-        skill_governance: document.getElementById('skill_governance').value || 0,
-        skill_policy: document.getElementById('skill_policy').value || 0,
-        skill_relations: document.getElementById('skill_relations').value || 0,
-        skill_audit: document.getElementById('skill_audit').value || 0,
-        skill_notes: document.getElementById('skill_notes').value,
-        training_attended: document.getElementById('training_attended').value,
-        training_needed: document.getElementById('training_needed').value,
-        training_hours: document.getElementById('training_hours').value || 0,
-        training_last_date: document.getElementById('training_last_date').value,
-        overall_comments: document.getElementById('overall_comments').value,
-        timestamp: new Date().toISOString()
-    };
+function switchTab(tab) {
+    document.getElementById('loginTab').classList.toggle('active', tab === 'login');
+    document.getElementById('signupTab').classList.toggle('active', tab === 'signup');
+    document.getElementById('loginTabBtn').className = 'btn ' + (tab === 'login' ? 'active' : 'inactive');
+    document.getElementById('signupTabBtn').className = 'btn ' + (tab === 'signup' ? 'active' : 'inactive');
 }
 
-function setFormData(data) {
-    document.getElementById('kpi_leadership').value = data.kpi_leadership || '';
-    document.getElementById('kpi_quality').value = data.kpi_quality || '';
-    document.getElementById('kpi_patients').value = data.kpi_patients || '';
-    document.getElementById('kpi_mortality').value = data.kpi_mortality || '';
-    document.getElementById('kpi_notes').value = data.kpi_notes || '';
-    document.getElementById('strategic_goals').value = data.strategic_goals || '';
-    document.getElementById('strategic_achievement').value = data.strategic_achievement || '';
-    document.getElementById('strategic_timeline').value = data.strategic_timeline || '';
-    document.getElementById('skill_governance').value = data.skill_governance || '';
-    document.getElementById('skill_policy').value = data.skill_policy || '';
-    document.getElementById('skill_relations').value = data.skill_relations || '';
-    document.getElementById('skill_audit').value = data.skill_audit || '';
-    document.getElementById('skill_notes').value = data.skill_notes || '';
-    document.getElementById('training_attended').value = data.training_attended || '';
-    document.getElementById('training_needed').value = data.training_needed || '';
-    document.getElementById('training_hours').value = data.training_hours || '';
-    document.getElementById('training_last_date').value = data.training_last_date || '';
-    document.getElementById('overall_comments').value = data.overall_comments || '';
-    document.getElementById('saveStatus').className = 'status-badge saved';
-    document.getElementById('saveStatus').textContent = 'Imehifadhiwa: ' + new Date(data.timestamp).toLocaleString();
-}
-
-async function saveAppraisal() {
-    const btn = document.getElementById('saveBtn');
-    btn.disabled = true;
-    btn.innerHTML = '<span class="loading-spinner"></span> Inahifadhi...';
-    const data = getFormData();
+// Check username availability
+document.getElementById('signupUsername').addEventListener('input', async function() {
+    const username = this.value.trim();
+    const hint = document.getElementById('usernameHint');
+    if (username.length < 3) { hint.innerHTML = '⚠️ Username lazima iwe na herufi 3 au zaidi'; hint.style.color = '#f39c12'; return; }
     try {
         const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
         if (!res.ok) throw new Error('Network error');
-        const result = await res.json();
-        const record = result.record || {};
-        if (!record.appraisals) record.appraisals = {};
-        if (!record.appraisals.incharge) record.appraisals.incharge = {};
-        record.appraisals.incharge[username] = data;
+        const data = await res.json();
+        const users = data.record?.users || {};
+        if (users[username]) { hint.innerHTML = '❌ Username tayari imechukuliwa'; hint.style.color = '#e74c3c'; }
+        else { hint.innerHTML = '✅ Username inapatikana'; hint.style.color = '#27ae60'; }
+    } catch (e) { hint.innerHTML = '⚠️ Hitilafu ya muunganisho'; hint.style.color = '#f39c12'; }
+});
+
+// Password match
+document.getElementById('signupPassword').addEventListener('input', checkPasswordMatch);
+document.getElementById('signupPasswordConfirm').addEventListener('input', checkPasswordMatch);
+function checkPasswordMatch() {
+    const p1 = document.getElementById('signupPassword').value;
+    const p2 = document.getElementById('signupPasswordConfirm').value;
+    const hint = document.getElementById('passwordMatchHint');
+    if (p1 && p2) {
+        if (p1 === p2) { hint.innerHTML = '✅ Nenosiri zinalingana'; hint.style.color = '#27ae60'; }
+        else { hint.innerHTML = '❌ Nenosiri hazilingani'; hint.style.color = '#e74c3c'; }
+    } else { hint.innerHTML = 'Nenosiri lazima zilandane'; hint.style.color = '#7f8c8d'; }
+}
+
+// Signup
+async function signup() {
+    const username = document.getElementById('signupUsername').value.trim();
+    const password = document.getElementById('signupPassword').value;
+    const confirm = document.getElementById('signupPasswordConfirm').value;
+    const role = document.getElementById('signupRole').value;
+    const btn = document.getElementById('signupBtn');
+    if (!username || username.length < 3) return showToast('❌ Username lazima iwe na herufi 3 au zaidi', 'error');
+    if (!password || password.length < 4) return showToast('❌ Nenosiri lazima iwe na herufi 4 au zaidi', 'error');
+    if (password !== confirm) return showToast('❌ Nenosiri hazilingani', 'error');
+    btn.disabled = true; btn.innerHTML = '<span class="loading-spinner"></span> Inajisajili...';
+    try {
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
+        if (!res.ok) throw new Error('Network error');
+        const data = await res.json();
+        const record = data.record || {};
+        if (!record.users) record.users = {};
+        if (record.users[username]) { showToast('❌ Username tayari imechukuliwa', 'error'); btn.disabled = false; btn.innerHTML = '📝 Jisajili'; return; }
+        record.users[username] = { password, role };
+        // Also create empty profile entries
+        if (!record.profiles) record.profiles = {};
+        record.profiles[username] = {};
         const update = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
             body: JSON.stringify(record)
         });
         if (!update.ok) throw new Error('Imeshindwa kuhifadhi');
-        showToast('✅ Tathmini imehifadhiwa!', 'success');
-        document.getElementById('saveStatus').className = 'status-badge saved';
-        document.getElementById('saveStatus').textContent = 'Imehifadhiwa: ' + new Date().toLocaleString();
-    } catch (e) {
-        showToast('❌ ' + e.message, 'error');
-    }
-    btn.disabled = false;
-    btn.innerHTML = '💾 Hifadhi Tathmini';
+        showToast(`✅ Akaunti imeundwa! Karibu ${username}`, 'success');
+        document.getElementById('loginUsername').value = username;
+        switchTab('login');
+        btn.disabled = false; btn.innerHTML = '📝 Jisajili';
+    } catch (e) { showToast('❌ ' + e.message, 'error'); btn.disabled = false; btn.innerHTML = '📝 Jisajili'; }
 }
 
-async function loadAppraisal() {
+// Login
+async function login() {
+    const username = document.getElementById('loginUsername').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
+    const btn = document.getElementById('loginBtn');
+    if (!username || !password) return showToast('❌ Tafadhali jaza sehemu zote', 'error');
+    btn.disabled = true; btn.innerHTML = '<span class="loading-spinner"></span> Inaingiza...';
     try {
         const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
         if (!res.ok) throw new Error('Network error');
-        const result = await res.json();
-        const record = result.record || {};
-        const data = record.appraisals?.incharge?.[username];
-        if (!data) return showToast('❌ Hakuna tathmini iliyohifadhiwa', 'error');
-        setFormData(data);
-        showToast('✅ Tathmini imepakiwa', 'success');
-    } catch (e) {
-        showToast('❌ ' + e.message, 'error');
+        const data = await res.json();
+        const users = data.record?.users || {};
+        const user = users[username];
+        if (!user || user.password !== password) { showToast('❌ Jina au nenosiri si sahihi', 'error'); btn.disabled = false; btn.innerHTML = '🔓 Ingia'; return; }
+        const userData = encodeURIComponent(JSON.stringify({ username, role: user.role }));
+        let redirect = '';
+        if (user.role === 'worker') redirect = 'worker.html';
+        else if (user.role === 'supervisor') redirect = 'supervisor.html';  // Supervisor anaelekezwa moja kwa moja kwenye fomu (tayari profile imejazwa)
+        else if (user.role === 'incharge') redirect = 'incharge.html';
+        showToast(`✅ Karibu ${username}`, 'success');
+        setTimeout(() => { window.location.href = `${redirect}?user=${userData}`; }, 500);
+    } catch (e) { showToast('❌ ' + e.message, 'error'); btn.disabled = false; btn.innerHTML = '🔓 Ingia'; }
+}
+
+// Check connection
+async function checkConnection() {
+    const status = document.getElementById('connectionStatus');
+    try {
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
+        status.innerHTML = res.ok ? '✅ Imeunganishwa' : '⚠️ Hitilafu ya muunganisho';
+    } catch (e) { status.innerHTML = '⚠️ Hakuna mtandao'; }
+}
+
+// Enter key to login/signup
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        const active = document.querySelector('.tab-content.active');
+        if (active.id === 'loginTab') login();
+        else if (active.id === 'signupTab') signup();
     }
-}
+});
 
-function logout() {
-    window.location.href = 'index.html';
-}
-
-window.onload = loadAppraisal;
+window.onload = function() {
+    checkConnection();
+    console.log(`✅ ${APP_NAME} - Login Page v6.0`);
+};
 </script>
 </body>
 </html>
