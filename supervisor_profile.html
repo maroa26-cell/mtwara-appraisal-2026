@@ -1,78 +1,231 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile ya Msimamizi</title>
+    <title>Fomu ya Msimamizi</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a5276, #27ae60); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
-        .profile-container { background: #fff; border-radius: 20px; padding: 40px 35px; max-width: 600px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.6s ease; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a5276, #f39c12); min-height: 100vh; padding: 20px; display: flex; justify-content: center; align-items: center; }
+        .form-container { background: #fff; border-radius: 20px; padding: 40px 35px; max-width: 1000px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.6s ease; }
         @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         h2 { color: #1a5276; text-align: center; margin-bottom: 8px; }
         .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 24px; font-size: 14px; }
-        .form-group { margin-bottom: 16px; }
+        .section { background: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 20px; border-left: 4px solid #f39c12; }
+        .section h3 { color: #1a5276; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .section h3 .step { background: #f39c12; color: #fff; border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
+        .section h3 .badge { background: #f39c12; color: #fff; padding: 2px 10px; border-radius: 20px; font-size: 11px; margin-left: 8px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .form-group { margin-bottom: 12px; }
+        .form-group.full-width { grid-column: 1 / -1; }
         .form-group label { display: block; font-weight: 600; color: #1a5276; margin-bottom: 4px; font-size: 13px; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border: 2px solid #dee2e6; border-radius: 10px; font-size: 14px; }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #27ae60; outline: none; }
-        .btn { width: 100%; padding: 14px; border: none; border-radius: 10px; font-weight: 700; font-size: 16px; cursor: pointer; transition: 0.3s; }
-        .btn-primary { background: #27ae60; color: #fff; }
-        .btn-primary:hover { background: #1e8449; transform: translateY(-2px); }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 14px; border: 2px solid #dee2e6; border-radius: 8px; font-size: 14px; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #f39c12; outline: none; }
+        .form-group textarea { min-height: 80px; resize: vertical; }
+        .btn { padding: 14px 30px; border: none; border-radius: 10px; font-weight: 700; font-size: 16px; cursor: pointer; transition: 0.3s; }
+        .btn-primary { background: #f39c12; color: #fff; }
+        .btn-primary:hover { background: #d68910; transform: translateY(-2px); }
         .btn-secondary { background: #95a5a6; color: #fff; }
         .btn-secondary:hover { background: #7f8c8d; }
+        .btn-danger { background: #e74c3c; color: #fff; }
+        .btn-danger:hover { background: #c0392b; }
+        .btn-info { background: #3498db; color: #fff; }
+        .btn-info:hover { background: #2e86c1; }
         .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .button-group { display: flex; gap: 12px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
         .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); max-width: 400px; width: 90%; background: #1a1a2e; color: #fff; padding: 14px 22px; border-radius: 12px; font-size: 14px; text-align: center; z-index: 999; opacity: 0; transition: all 0.4s ease; pointer-events: none; box-shadow: 0 8px 40px rgba(0,0,0,0.2); }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
         .toast.success { background: #27ae60; }
         .toast.error { background: #e74c3c; }
-        .loading-spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid #ecf0f1; border-top: 3px solid #27ae60; border-radius: 50%; animation: spin 1s linear infinite; vertical-align: middle; margin-right: 8px; }
+        .loading-spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid #ecf0f1; border-top: 3px solid #f39c12; border-radius: 50%; animation: spin 1s linear infinite; vertical-align: middle; margin-right: 8px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .profile-preview { background: #f8f9fa; padding: 16px; border-radius: 10px; margin-top: 16px; border-left: 4px solid #27ae60; }
+        .status-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .status-badge.saved { background: #d4edda; color: #155724; }
+        .status-badge.pending { background: #fff3cd; color: #856404; }
+        .status-badge.submitted { background: #cce5ff; color: #004085; }
+        .worker-list { background: #fff; border-radius: 8px; padding: 12px; border: 1px solid #dee2e6; max-height: 200px; overflow-y: auto; }
+        .worker-list-item { padding: 8px 12px; border-bottom: 1px solid #eee; cursor: pointer; }
+        .worker-list-item:hover { background: #f1f9ff; }
+        .worker-list-item .badge-role { background: #f39c12; color: #fff; padding: 2px 8px; border-radius: 12px; font-size: 11px; }
+        .star-rating { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+        .star-rating input { display: none; }
+        .star-rating label { font-size: 28px; color: #ccc; cursor: pointer; transition: 0.2s; }
+        .star-rating label:hover, .star-rating label.active { color: #f1c40f; }
     </style>
 </head>
 <body>
 
 <div id="toast" class="toast"></div>
 
-<div class="profile-container">
-    <h2>👔 Profile ya Msimamizi</h2>
-    <p class="subtitle">Tafadhali jaza maelezo yako kabla ya kuanza tathmini</p>
+<div class="form-container">
+    <h2>👔 Fomu ya Tathmini - Msimamizi</h2>
+    <p class="subtitle" id="userGreeting">Karibu msimamizi</p>
 
-    <div class="form-group">
-        <label>Jina Kamili</label>
-        <input type="text" id="fullname" placeholder="Mfano: Ali Juma">
-    </div>
-    <div class="form-group">
-        <label>Idara</label>
-        <input type="text" id="department" placeholder="Mfano: Wodi ya Wanaume">
-    </div>
-    <div class="form-group">
-        <label>Cheo / Wadhifa</label>
-        <input type="text" id="position" placeholder="Mfano: Msimamizi wa Wodi">
-    </div>
-    <div class="form-group">
-        <label>Nambari ya Simu</label>
-        <input type="tel" id="phone" placeholder="Mfano: 0712345678">
-    </div>
-    <div class="form-group">
-        <label>Barua Pepe</label>
-        <input type="email" id="email" placeholder="Mfano: ali@mtwara.go.tz">
-    </div>
-    <div class="form-group">
-        <label>Uzoefu (miaka)</label>
-        <input type="number" id="experience" placeholder="Mfano: 5">
+    <!-- SEHEMU 1: Taarifa za Msingi -->
+    <div class="section">
+        <h3><span class="step">1</span> Taarifa za Msingi</h3>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Jina Kamili</label>
+                <input type="text" id="fullname" placeholder="Mfano: Fatma Hassan">
+            </div>
+            <div class="form-group">
+                <label>Idara</label>
+                <input type="text" id="department" placeholder="Mfano: Idara ya Wodi">
+            </div>
+            <div class="form-group">
+                <label>Cheo / Wadhifa</label>
+                <input type="text" id="position" placeholder="Mfano: Msimamizi Mkuu">
+            </div>
+            <div class="form-group">
+                <label>Nambari ya Simu</label>
+                <input type="tel" id="phone" placeholder="Mfano: 0712345678">
+            </div>
+            <div class="form-group full-width">
+                <label>Barua Pepe</label>
+                <input type="email" id="email" placeholder="Mfano: fatma@mtwara.go.tz">
+            </div>
+        </div>
     </div>
 
-    <button class="btn btn-primary" onclick="saveProfile()" id="saveBtn">💾 Hifadhi Profile na Endelea</button>
-    <button class="btn btn-secondary" onclick="logout()" style="margin-top: 8px;">🚪 Toka</button>
+    <!-- SEHEMU 2: KPI (Key Performance Indicators) -->
+    <div class="section">
+        <h3><span class="step">2</span> KPI (Key Performance Indicators) <span class="badge">WHO Standard</span></h3>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>1. Uongozi na Usimamizi (Rating 1-5)</label>
+                <input type="number" id="kpi_leadership" placeholder="1-5" min="1" max="5">
+            </div>
+            <div class="form-group">
+                <label>2. Ufanisi wa Timu (%)</label>
+                <input type="number" id="kpi_team_efficiency" placeholder="Mfano: 80" min="0" max="100">
+            </div>
+            <div class="form-group">
+                <label>3. Idadi ya Taarifa za Kila Mwezi</label>
+                <input type="number" id="kpi_reports" placeholder="Mfano: 4">
+            </div>
+            <div class="form-group">
+                <label>4. Kuridhika kwa Wafanyakazi (Rating 1-5)</label>
+                <input type="number" id="kpi_staff_satisfaction" placeholder="1-5" min="1" max="5">
+            </div>
+            <div class="form-group full-width">
+                <label>5. Maelezo ya KPI</label>
+                <textarea id="kpi_notes" placeholder="Andika maelezo..."></textarea>
+            </div>
+        </div>
+    </div>
 
-    <div id="profilePreview" class="profile-preview" style="display:none;">
-        <strong>✅ Profile imehifadhiwa:</strong>
-        <p id="previewText"></p>
+    <!-- SEHEMU 3: Malengo ya Kimkakati -->
+    <div class="section">
+        <h3><span class="step">3</span> Malengo ya Kimkakati (Strategic Goals)</h3>
+        <div class="form-grid">
+            <div class="form-group full-width">
+                <label>1. Malengo ya Idara</label>
+                <textarea id="strategic_goals" placeholder="Andika malengo ya idara..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>2. Kiwango cha Mafanikio (%)</label>
+                <input type="number" id="strategic_achievement" placeholder="Mfano: 75" min="0" max="100">
+            </div>
+            <div class="form-group">
+                <label>3. Muda (miezi)</label>
+                <input type="number" id="strategic_timeline" placeholder="Mfano: 8">
+            </div>
+        </div>
+    </div>
+
+    <!-- SEHEMU 4: Ujuzi na Kompetensi -->
+    <div class="section">
+        <h3><span class="step">4</span> Ujuzi na Kompetensi (Skills & Competencies)</h3>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Ujuzi wa Usimamizi (1-5)</label>
+                <input type="number" id="skill_management" placeholder="1-5" min="1" max="5">
+            </div>
+            <div class="form-group">
+                <label>Ujuzi wa Mipango (1-5)</label>
+                <input type="number" id="skill_planning" placeholder="1-5" min="1" max="5">
+            </div>
+            <div class="form-group">
+                <label>Ujuzi wa Uwakilishi (1-5)</label>
+                <input type="number" id="skill_representation" placeholder="1-5" min="1" max="5">
+            </div>
+            <div class="form-group">
+                <label>Ujuzi wa Ufuatiliaji (1-5)</label>
+                <input type="number" id="skill_monitoring" placeholder="1-5" min="1" max="5">
+            </div>
+            <div class="form-group full-width">
+                <label>Maelezo ya Ujuzi</label>
+                <textarea id="skill_notes" placeholder="Eleza ujuzi wako..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEHEMU 5: Mafunzo na Maendeleo -->
+    <div class="section">
+        <h3><span class="step">5</span> Mafunzo na Maendeleo (Training & Development)</h3>
+        <div class="form-grid">
+            <div class="form-group full-width">
+                <label>Mafunzo yaliyofuata</label>
+                <textarea id="training_attended" placeholder="Orodhesha mafunzo..."></textarea>
+            </div>
+            <div class="form-group full-width">
+                <label>Mafunzo yanayohitajika</label>
+                <textarea id="training_needed" placeholder="Mapendekezo..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Saa za Mafunzo</label>
+                <input type="number" id="training_hours" placeholder="Mfano: 30">
+            </div>
+            <div class="form-group">
+                <label>Tarehe ya Mwisho</label>
+                <input type="date" id="training_last_date">
+            </div>
+        </div>
+    </div>
+
+    <!-- SEHEMU 6: Maoni, Mapendekezo na Mawasiliano -->
+    <div class="section">
+        <h3><span class="step">6</span> Maoni, Mapendekezo na Mawasiliano</h3>
+        <div class="form-group">
+            <label>Nguvu zako (Strengths)</label>
+            <textarea id="strengths" placeholder="Andika nguvu zako..."></textarea>
+        </div>
+        <div class="form-group">
+            <label>Maeneo ya Kuboresha (Weaknesses)</label>
+            <textarea id="weaknesses" placeholder="Andika maeneo ya kuboresha..."></textarea>
+        </div>
+        <div class="form-group">
+            <label>Mapendekezo ya Maendeleo</label>
+            <textarea id="recommendations" placeholder="Andika mapendekezo yako..."></textarea>
+        </div>
+        <div class="form-group">
+            <label>Maoni ya Jumla</label>
+            <textarea id="overall_comments" placeholder="Andika maoni yako ya jumla..." rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Mawasiliano na Wafanyakazi (Tazama data za mtendakazi)</label>
+            <button class="btn btn-info" onclick="loadWorkerData()" style="width: auto; padding: 8px 16px; font-size: 13px;">📋 Tazama Wafanyakazi</button>
+            <div id="workerListContainer" style="margin-top: 8px;"></div>
+        </div>
+    </div>
+
+    <div class="button-group">
+        <button class="btn btn-primary" onclick="saveAppraisal()" id="saveBtn">💾 Hifadhi</button>
+        <button class="btn btn-info" onclick="submitAppraisal()" id="submitBtn">📤 Tuma</button>
+        <button class="btn btn-secondary" onclick="loadAppraisal()">📂 Pakia</button>
+        <button class="btn btn-danger" onclick="logout()">🚪 Toka</button>
+    </div>
+    <div style="text-align: center; margin-top: 12px;">
+        <span id="saveStatus" class="status-badge pending">Hajahifadhiwa</span>
     </div>
 </div>
 
 <script>
+// ==============================================================
+// MTWARA PERFORMANCE - SUPERVISOR FORM (v4.0 - Improved)
+// ==============================================================
 const API_KEY = "$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDot5L9hRGRQfa21/Mw/B0UcS";
 const BIN_ID = "6a4b0bc9da38895dfe32cc08";
 
@@ -83,7 +236,6 @@ function showToast(msg, type = 'info') {
     setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-// Get username from URL
 function getUsername() {
     const params = new URLSearchParams(window.location.search);
     const userData = params.get('user');
@@ -96,88 +248,197 @@ function getUsername() {
 
 const username = getUsername();
 if (!username) {
-    showToast('❌ Hitilafu: Hakuna mtumiaji aliyebainishwa', 'error');
+    showToast('❌ Hitilafu: Hakuna mtumiaji', 'error');
     setTimeout(() => window.location.href = 'index.html', 2000);
 }
+document.getElementById('userGreeting').textContent = `Karibu ${username} - Tathmini ya Msimamizi`;
 
-// Load existing profile if any
-async function loadProfile() {
-    try {
-        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
-        if (!res.ok) throw new Error('Network error');
-        const data = await res.json();
-        const profiles = data.record?.supervisor_profiles || {};
-        const profile = profiles[username] || {};
-        if (profile.fullname) {
-            document.getElementById('fullname').value = profile.fullname || '';
-            document.getElementById('department').value = profile.department || '';
-            document.getElementById('position').value = profile.position || '';
-            document.getElementById('phone').value = profile.phone || '';
-            document.getElementById('email').value = profile.email || '';
-            document.getElementById('experience').value = profile.experience || '';
-            // Show preview
-            document.getElementById('profilePreview').style.display = 'block';
-            document.getElementById('previewText').innerHTML = `
-                <strong>${profile.fullname}</strong> | ${profile.department} | ${profile.position}
-            `;
-        }
-    } catch (e) { console.error(e); }
+function getFormData() {
+    return {
+        username: username,
+        role: 'supervisor',
+        fullname: document.getElementById('fullname').value,
+        department: document.getElementById('department').value,
+        position: document.getElementById('position').value,
+        phone: document.getElementById('phone').value,
+        email: document.getElementById('email').value,
+        kpi_leadership: document.getElementById('kpi_leadership').value || 0,
+        kpi_team_efficiency: document.getElementById('kpi_team_efficiency').value || 0,
+        kpi_reports: document.getElementById('kpi_reports').value || 0,
+        kpi_staff_satisfaction: document.getElementById('kpi_staff_satisfaction').value || 0,
+        kpi_notes: document.getElementById('kpi_notes').value,
+        strategic_goals: document.getElementById('strategic_goals').value,
+        strategic_achievement: document.getElementById('strategic_achievement').value || 0,
+        strategic_timeline: document.getElementById('strategic_timeline').value || 0,
+        skill_management: document.getElementById('skill_management').value || 0,
+        skill_planning: document.getElementById('skill_planning').value || 0,
+        skill_representation: document.getElementById('skill_representation').value || 0,
+        skill_monitoring: document.getElementById('skill_monitoring').value || 0,
+        skill_notes: document.getElementById('skill_notes').value,
+        training_attended: document.getElementById('training_attended').value,
+        training_needed: document.getElementById('training_needed').value,
+        training_hours: document.getElementById('training_hours').value || 0,
+        training_last_date: document.getElementById('training_last_date').value,
+        strengths: document.getElementById('strengths').value,
+        weaknesses: document.getElementById('weaknesses').value,
+        recommendations: document.getElementById('recommendations').value,
+        overall_comments: document.getElementById('overall_comments').value,
+        status: 'saved',
+        timestamp: new Date().toISOString()
+    };
 }
 
-async function saveProfile() {
-    const fullname = document.getElementById('fullname').value.trim();
-    const department = document.getElementById('department').value.trim();
-    const position = document.getElementById('position').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const experience = document.getElementById('experience').value.trim();
+function setFormData(data) {
+    document.getElementById('fullname').value = data.fullname || '';
+    document.getElementById('department').value = data.department || '';
+    document.getElementById('position').value = data.position || '';
+    document.getElementById('phone').value = data.phone || '';
+    document.getElementById('email').value = data.email || '';
+    document.getElementById('kpi_leadership').value = data.kpi_leadership || '';
+    document.getElementById('kpi_team_efficiency').value = data.kpi_team_efficiency || '';
+    document.getElementById('kpi_reports').value = data.kpi_reports || '';
+    document.getElementById('kpi_staff_satisfaction').value = data.kpi_staff_satisfaction || '';
+    document.getElementById('kpi_notes').value = data.kpi_notes || '';
+    document.getElementById('strategic_goals').value = data.strategic_goals || '';
+    document.getElementById('strategic_achievement').value = data.strategic_achievement || '';
+    document.getElementById('strategic_timeline').value = data.strategic_timeline || '';
+    document.getElementById('skill_management').value = data.skill_management || '';
+    document.getElementById('skill_planning').value = data.skill_planning || '';
+    document.getElementById('skill_representation').value = data.skill_representation || '';
+    document.getElementById('skill_monitoring').value = data.skill_monitoring || '';
+    document.getElementById('skill_notes').value = data.skill_notes || '';
+    document.getElementById('training_attended').value = data.training_attended || '';
+    document.getElementById('training_needed').value = data.training_needed || '';
+    document.getElementById('training_hours').value = data.training_hours || '';
+    document.getElementById('training_last_date').value = data.training_last_date || '';
+    document.getElementById('strengths').value = data.strengths || '';
+    document.getElementById('weaknesses').value = data.weaknesses || '';
+    document.getElementById('recommendations').value = data.recommendations || '';
+    document.getElementById('overall_comments').value = data.overall_comments || '';
+    const status = data.status || 'saved';
+    updateStatus(status);
+}
 
-    if (!fullname || !department || !position) {
-        return showToast('❌ Tafadhali jaza sehemu muhimu (Jina, Idara, Cheo)', 'error');
+function updateStatus(status) {
+    const badge = document.getElementById('saveStatus');
+    if (status === 'saved') {
+        badge.className = 'status-badge saved';
+        badge.textContent = 'Imehifadhiwa';
+    } else if (status === 'submitted') {
+        badge.className = 'status-badge submitted';
+        badge.textContent = 'Imetumwa';
+    } else {
+        badge.className = 'status-badge pending';
+        badge.textContent = 'Hajahifadhiwa';
     }
+}
 
+async function saveAppraisal() {
     const btn = document.getElementById('saveBtn');
     btn.disabled = true;
     btn.innerHTML = '<span class="loading-spinner"></span> Inahifadhi...';
-
+    const data = getFormData();
+    data.status = 'saved';
     try {
-        // Get current data
         const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
         if (!res.ok) throw new Error('Network error');
-        const data = await res.json();
-        const record = data.record || {};
-        if (!record.supervisor_profiles) record.supervisor_profiles = {};
-
-        // Save profile
-        record.supervisor_profiles[username] = {
-            fullname, department, position, phone, email, experience,
-            updatedAt: new Date().toISOString()
-        };
-
+        const result = await res.json();
+        const record = result.record || {};
+        if (!record.appraisals) record.appraisals = {};
+        if (!record.appraisals.supervisor) record.appraisals.supervisor = {};
+        record.appraisals.supervisor[username] = data;
         const update = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
             body: JSON.stringify(record)
         });
         if (!update.ok) throw new Error('Imeshindwa kuhifadhi');
-
-        showToast('✅ Profile imehifadhiwa! Unaendelea na tathmini...', 'success');
-        document.getElementById('profilePreview').style.display = 'block';
-        document.getElementById('previewText').innerHTML = `
-            <strong>${fullname}</strong> | ${department} | ${position}
-        `;
-
-        // Redirect to supervisor dashboard after short delay
-        setTimeout(() => {
-            const userData = encodeURIComponent(JSON.stringify({ username, role: 'supervisor' }));
-            window.location.href = `supervisor_dashboard.html?user=${userData}`;
-        }, 1500);
-
+        showToast('✅ Tathmini imehifadhiwa!', 'success');
+        updateStatus('saved');
     } catch (e) {
         showToast('❌ ' + e.message, 'error');
-        btn.disabled = false;
-        btn.innerHTML = '💾 Hifadhi Profile na Endelea';
     }
+    btn.disabled = false;
+    btn.innerHTML = '💾 Hifadhi';
+}
+
+async function submitAppraisal() {
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="loading-spinner"></span> Inatuma...';
+    const data = getFormData();
+    data.status = 'submitted';
+    try {
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
+        if (!res.ok) throw new Error('Network error');
+        const result = await res.json();
+        const record = result.record || {};
+        if (!record.appraisals) record.appraisals = {};
+        if (!record.appraisals.supervisor) record.appraisals.supervisor = {};
+        record.appraisals.supervisor[username] = data;
+        const update = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+            body: JSON.stringify(record)
+        });
+        if (!update.ok) throw new Error('Imeshindwa kutuma');
+        showToast('✅ Tathmini imetumwa!', 'success');
+        updateStatus('submitted');
+    } catch (e) {
+        showToast('❌ ' + e.message, 'error');
+    }
+    btn.disabled = false;
+    btn.innerHTML = '📤 Tuma';
+}
+
+async function loadAppraisal() {
+    try {
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
+        if (!res.ok) throw new Error('Network error');
+        const result = await res.json();
+        const record = result.record || {};
+        const data = record.appraisals?.supervisor?.[username];
+        if (!data) return showToast('❌ Hakuna tathmini iliyohifadhiwa', 'error');
+        setFormData(data);
+        showToast('✅ Tathmini imepakiwa', 'success');
+    } catch (e) {
+        showToast('❌ ' + e.message, 'error');
+    }
+}
+
+async function loadWorkerData() {
+    const container = document.getElementById('workerListContainer');
+    container.innerHTML = '<span class="loading-spinner"></span> Inapakia...';
+    try {
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
+        if (!res.ok) throw new Error('Network error');
+        const result = await res.json();
+        const record = result.record || {};
+        const workers = record.appraisals?.worker || {};
+        const usernames = Object.keys(workers);
+        if (usernames.length === 0) {
+            container.innerHTML = '<p style="color: #7f8c8d;">Hakuna wafanyakazi waliohifadhi data.</p>';
+            return;
+        }
+        let html = '<div class="worker-list">';
+        usernames.forEach(w => {
+            const data = workers[w];
+            html += `<div class="worker-list-item" onclick="viewWorkerData('${w}')">
+                <strong>${data.fullname || w}</strong>
+                <span class="badge-role">${data.department || 'Idara'}</span>
+                <span style="float: right; font-size: 12px; color: #7f8c8d;">${data.status || 'saved'}</span>
+            </div>`;
+        });
+        html += '</div>';
+        container.innerHTML = html;
+    } catch (e) {
+        container.innerHTML = '<p style="color: #e74c3c;">Hitilafu: ' + e.message + '</p>';
+    }
+}
+
+function viewWorkerData(username) {
+    showToast(`👤 Tazama data ya ${username}`, 'info');
+    // Hapa unaweza kuongeza popup au kuelekeza kwenye ukurasa mwingine
 }
 
 function logout() {
@@ -185,8 +446,8 @@ function logout() {
 }
 
 window.onload = function() {
-    loadProfile();
-    console.log('✅ Supervisor Profile Page loaded');
+    loadAppraisal();
+    loadWorkerData();
 };
 </script>
 </body>
