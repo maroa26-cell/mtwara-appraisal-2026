@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -8,7 +9,7 @@
         :root { --primary-color: #8e44ad; --primary-dark: #6c3483; --primary-light: #f4ecf7; --primary-bg: #f4ecf7; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; padding: 16px; color: #1a1a2e; }
-        .container { max-width: 1200px; margin: 0 auto; background: #ffffff; border-radius: 16px; box-shadow: 0 4px 60px rgba(0,0,0,0.08); padding: 30px 35px 40px; }
+        .container { max-width: 1200px; margin: 0 auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 60px rgba(0,0,0,0.08); padding: 30px 35px 40px; }
         @media (max-width: 768px) { body { padding: 8px; } .container { padding: 16px; } }
         .header { text-align: center; border-bottom: 4px solid var(--primary-color); padding-bottom: 18px; margin-bottom: 20px; }
         .header .org-badge { display: inline-block; background: var(--primary-color); color: #fff; padding: 4px 20px; border-radius: 20px; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
@@ -17,7 +18,7 @@
         .header .mission { margin-top: 8px; padding: 8px 20px; background: var(--primary-bg); border-radius: 8px; font-size: 13px; color: var(--primary-dark); border-left: 4px solid var(--primary-color); }
         .header .bin-info { margin-top: 6px; font-size: 11px; color: #7f8c8d; }
         .header .datetime { font-size: 12px; color: #7f8c8d; margin-top: 4px; }
-        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); max-width: 450px; width: 92%; background: #1a1a2e; color: #fff; padding: 14px 22px; border-radius: 12px; font-size: 14px; text-align: center; z-index: 999; opacity: 0; transition: all 0.4s ease; pointer-events: none; box-shadow: 0 8px 40px rgba(0,0,0,0.20); }
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); max-width: 450px; width: 92%; background: #1a1a2e; color: #fff; padding: 14px 22px; border-radius: 12px; font-size: 14px; text-align: center; z-index: 999; opacity: 0; transition: all 0.4s ease; pointer-events: none; box-shadow: 0 8px 40px rgba(0,0,0,0.2); }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
         .toast.success { background: #27ae60; }
         .toast.warning { background: #f39c12; color: #1a1a2e; }
@@ -79,15 +80,6 @@
         .likert-btn.selected { border-color: var(--primary-color); background: var(--primary-color); color: #fff; }
         .likert-btn .sub { display: block; font-weight: 400; font-size: 9px; color: #7f8c8d; margin-top: 1px; }
         .likert-btn.selected .sub { color: rgba(255,255,255,0.8); }
-        .checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 20px; padding: 4px 0; }
-        @media (max-width: 600px) { .checklist-grid { grid-template-columns: 1fr; } }
-        .checklist-item { display: flex; align-items: center; gap: 10px; padding: 5px 0; border-bottom: 1px solid #f0f2f5; font-size: 13px; }
-        .checklist-item:last-child { border-bottom: none; }
-        .checklist-item .num { width: 22px; height: 22px; background: #ecf0f1; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #7f8c8d; flex-shrink: 0; }
-        .checklist-item .toggle { width: 40px; height: 22px; flex-shrink: 0; background: #d5d8dc; border-radius: 12px; cursor: pointer; transition: 0.3s; position: relative; }
-        .checklist-item .toggle.active { background: #27ae60; }
-        .checklist-item .toggle .thumb { position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: #fff; border-radius: 50%; transition: 0.3s; box-shadow: 0 2px 6px rgba(0,0,0,0.12); }
-        .checklist-item .toggle.active .thumb { left: 20px; }
         .signature-pad { border: 2px dashed var(--primary-color); border-radius: 10px; background: #fafbfc; touch-action: none; width: 100%; max-width: 400px; height: 100px; cursor: crosshair; margin: 6px 0; }
         .signature-pad canvas { width: 100%; height: 100%; border-radius: 8px; touch-action: none; }
         .signature-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0; }
@@ -120,11 +112,11 @@
         .tab-btn.active { background: var(--primary-color); color: #fff; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        .report-item { background: #fff; padding: 14px 18px; border-radius: 10px; border: 1px solid #e9ecef; border-left: 4px solid #27ae60; margin-bottom: 10px; }
+        .report-item { background: #fff; padding: 14px 18px; border-radius: 10px; border: 1px solid #e9ecef; border-left: 4px solid #27ae60; margin-bottom: 10px; cursor: pointer; transition: 0.3s; }
+        .report-item:hover { background: #f0f2f5; }
         .report-item .report-header { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
         .report-item .report-header strong { color: var(--primary-dark); }
         .report-item .report-meta { font-size: 12px; color: #7f8c8d; margin-top: 4px; }
-        .report-item .report-actions { margin-top: 6px; display: flex; gap: 8px; flex-wrap: wrap; }
         .spinner-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; }
         .spinner-overlay.active { display: flex; }
         .spinner-box { background: #fff; padding: 30px 40px; border-radius: 16px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
@@ -140,6 +132,10 @@
         .btn-htmlcom { background: #E44D26; color: #fff; }
         .btn-htmlcom:hover { background: #C7351A; }
         .loading-spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid #ecf0f1; border-top: 3px solid var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite; vertical-align: middle; margin-right: 8px; }
+        .nav-links { display: flex; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+        .nav-links a { color: var(--primary-dark); text-decoration: none; font-weight: 600; font-size: 14px; }
+        .nav-links a:hover { text-decoration: underline; }
+        .selected-report { border-left-color: var(--primary-color) !important; border-left-width: 6px !important; background: #f4ecf7; }
         .incharge-decision { padding: 16px 20px; border-radius: 12px; margin: 8px 0; border-left: 4px solid var(--primary-color); background: var(--primary-bg); }
         .incharge-decision h4 { color: var(--primary-dark); margin-bottom: 4px; }
     </style>
@@ -178,21 +174,42 @@
             <button class="btn btn-warning btn-sm" onclick="syncData()" id="syncBtn">🔄 Sync</button>
             <button class="btn btn-success btn-sm" onclick="window.print()">🖨️ Chapisha</button>
             <button class="btn btn-primary btn-sm" onclick="window.location.href='index.html'">🏠 Nyumbani</button>
+            <span class="nav-links">
+                <a href="#" onclick="loadPendingReports()">🔄 Onyesha Ripoti Zinazosubiri</a>
+                <a href="#" onclick="alert('Nenda kwenye fomu ya mtendakazi.')">⬅️ Fomu ya Mtendakazi</a>
+                <a href="#" onclick="alert('Nenda kwenye fomu ya msimamizi.')">⬅️ Fomu ya Msimamizi</a>
+            </span>
         </div>
 
         <div class="tabs no-print">
-            <button class="tab-btn active" onclick="switchTab('tabMain', this)">📝 Tathmini</button>
+            <button class="tab-btn active" onclick="switchTab('tabList', this)">📋 Orodha</button>
+            <button class="tab-btn" onclick="switchTab('tabForm', this)">📝 Tathmini</button>
             <button class="tab-btn" onclick="switchTab('tabReports', this)">📊 Ripoti</button>
-            <button class="tab-btn" onclick="switchTab('tabSettings', this)">⚙️ Mipangilio</button>
         </div>
 
-        <div id="tabMain" class="tab-content active">
+        <!-- ===== TAB 1: ORODHA ===== -->
+        <div id="tabList" class="tab-content active">
+            <div class="form-card fade-in">
+                <div class="form-title">
+                    <span class="icon">📋</span>
+                    <span class="title-text">Ripoti Zinazosubiri Uamuzi</span>
+                    <span class="badge">Bofya kuchagua</span>
+                </div>
+                <div id="pendingList">
+                    <p class="text-muted">Inapakia...</p>
+                </div>
+                <button class="btn btn-success btn-sm mt-10" onclick="loadPendingReports()">🔄 Pakia Upya</button>
+            </div>
+        </div>
+
+        <!-- ===== TAB 2: TATHMINI ===== -->
+        <div id="tabForm" class="tab-content">
             <div id="formIncharge" class="form-card fade-in">
                 <div class="form-title">
                     <span class="icon">🏥</span>
                     <span class="title-text">Fomu ya Mganga Mfawidhi</span>
                     <span class="badge">Kagua na Idhinisha</span>
-                    <span id="inchargeStatusBadge" class="status-badge pending">⏳ Inasubiri</span>
+                    <span id="inchargeStatusBadge" class="status-badge pending">⏳ Hakuna ripoti iliyochaguliwa</span>
                 </div>
 
                 <!-- ===== TAARIFA ZA MTENDAKAZI ===== -->
@@ -207,6 +224,9 @@
                         <div class="form-group"><label>🕐 Zamu</label><input type="text" id="workerShift" readonly style="background:#f8f9fa;"></div>
                     </div>
                     <div class="form-group"><label>🏢 Idara</label><input type="text" id="workerDepartment" readonly style="background:#f8f9fa;"></div>
+                    <div class="form-group"><label>📧 Barua Pepe</label><input type="text" id="workerEmail" readonly style="background:#f8f9fa;"></div>
+                    <div class="form-group"><label>📞 Simu</label><input type="text" id="workerPhone" readonly style="background:#f8f9fa;"></div>
+                    <div class="form-group"><label>💬 WhatsApp</label><input type="text" id="workerWhatsApp" readonly style="background:#f8f9fa;"></div>
                 </div>
 
                 <!-- ===== TATHMINI ZOTE ===== -->
@@ -217,6 +237,20 @@
                         <div class="form-group"><label>⭐ Msimamizi</label><input type="text" id="supervisorScore" readonly style="background:#f8f9fa; font-weight:700;"></div>
                     </div>
                     <div class="form-group"><label>📊 Pengo la Tathmini</label><input type="text" id="scoreGap" readonly style="background:#f8f9fa; font-weight:700; color:#8e44ad;"></div>
+                </div>
+
+                <!-- ===== MAJUKUMU (Kwa Taarifa) ===== -->
+                <div class="section-box green">
+                    <div class="section-header">📋 MAJUKUMU YA MTENDAKAZI</div>
+                    <div id="inchargeGeneralChecklist"></div>
+                    <div id="inchargeSpecialChecklist"></div>
+                </div>
+
+                <!-- ===== MAONI YA MSIMAMIZI ===== -->
+                <div class="section-box green">
+                    <div class="section-header">📝 MAONI YA MSIMAMIZI</div>
+                    <div class="form-group"><label>Maoni</label><textarea id="supervisorComments" readonly style="background:#f8f9fa;" rows="3"></textarea></div>
+                    <div class="form-group"><label>Mapendekezo</label><textarea id="supervisorRecommendations" readonly style="background:#f8f9fa;" rows="3"></textarea></div>
                 </div>
 
                 <!-- ===== TATHMINI YA MGANGA MFAWIDHI (LIKERT) ===== -->
@@ -314,36 +348,12 @@
             </div>
         </div>
 
+        <!-- ===== TAB 3: RIPOTI ===== -->
         <div id="tabReports" class="tab-content">
             <div class="form-card fade-in">
                 <div class="form-title"><span class="icon">📊</span><span class="title-text">Ripoti Zilizotumwa</span><span class="badge">Historia</span></div>
                 <div id="reportsList"><p class="text-muted">Hakuna ripoti zilizotumwa bado.</p></div>
                 <div style="margin-top:16px;"><button class="btn btn-success" onclick="exportAllReports()">📤 Hamisha Ripoti Zote</button></div>
-            </div>
-        </div>
-
-        <div id="tabSettings" class="tab-content">
-            <div class="form-card fade-in">
-                <div class="form-title"><span class="icon">⚙️</span><span class="title-text">Mipangilio</span><span class="badge">Chaguo</span></div>
-                <div class="section-box purple"><div class="section-header">🔔 Arifa</div>
-                    <div style="display:flex; gap:16px; flex-wrap:wrap;"><label><input type="checkbox" id="settingEmail" checked> Barua Pepe</label><label><input type="checkbox" id="settingSMS" checked> SMS</label><label><input type="checkbox" id="settingWhatsApp" checked> WhatsApp</label></div>
-                </div>
-                <div class="section-box orange"><div class="section-header">🌐 Lugha</div>
-                    <select id="languageSelect" style="padding:8px 14px; border-radius:8px; border:2px solid #dee2e6; font-size:14px;">
-                        <option value="sw">🇹🇿 Kiswahili</option><option value="en">🇬🇧 English</option>
-                    </select>
-                </div>
-                <div class="section-box blue"><div class="section-header">💾 Data</div>
-                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                        <button class="btn btn-success btn-sm" onclick="syncData()">🔄 Sawazisha</button>
-                        <button class="btn btn-warning btn-sm" onclick="exportData()">📤 Hamisha</button>
-                        <button class="btn btn-danger btn-sm" onclick="clearAllData()">🗑️ Futa Yote</button>
-                    </div>
-                </div>
-                <div class="section-box" style="border-left-color:var(--primary-color); background:var(--primary-bg);">
-                    <div class="section-header">ℹ️ Mfumo</div>
-                    <p style="font-size:13px; color:#7f8c8d;">Toleo: 4.0 | MTWARA PERFORMANCE</p>
-                </div>
             </div>
         </div>
 
@@ -386,7 +396,7 @@ function checkAuth() {
         document.getElementById("loginSection").style.display = "none"; document.getElementById("mainApp").style.display = "block";
         document.getElementById("currentUserDisplay").textContent = currentUser; document.getElementById("userBadge").textContent = `👤 ${currentUser}`;
         document.getElementById("roleDisplay").textContent = "🏥 Mganga Mfawidhi";
-        loadReports(); loadPendingReport();
+        loadReports();
         return true;
     } catch(e) { document.getElementById("loginSection").style.display = "block"; document.getElementById("mainApp").style.display = "none"; return false; }
 }
@@ -397,6 +407,7 @@ function switchTab(tabId, btn) {
     const target = document.getElementById(tabId); if (target) target.classList.add('active');
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); if (btn) btn.classList.add('active');
     if (tabId === 'tabReports') updateReportsList();
+    if (tabId === 'tabList') loadPendingReports();
 }
 
 // ==============================================================
@@ -405,40 +416,90 @@ function switchTab(tabId, btn) {
 async function loadReports() {
     try {
         const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { method: "GET", headers: { "X-Master-Key": API_KEY } });
-        if (response.ok) { const result = await response.json(); const data = result.record || result; allReports = data.reports || []; updateReportsList(); }
+        if (response.ok) { const result = await response.json(); const data = result.record || result; allReports = data.reports || []; updateReportsList(); loadPendingReports(); }
     } catch (error) { console.error("❌ Hitilafu:", error); allReports = []; }
 }
 
-function loadPendingReport() {
-    const pendingReports = allReports.filter(r => r.status === "Inasubiri Mganga Mfawidhi" && r.stage === "supervisor");
-    if (pendingReports.length > 0) {
-        const report = pendingReports[pendingReports.length - 1];
+function loadPendingReports() {
+    const container = document.getElementById('pendingList');
+    if (!container) return;
+    const pending = allReports.filter(r => r.status === "Inasubiri Mganga Mfawidhi" && r.stage === "supervisor");
+    if (pending.length === 0) {
+        container.innerHTML = '<p class="text-muted">Hakuna ripoti zinazosubiri uamuzi wako.</p>';
+        return;
+    }
+    let html = '';
+    pending.forEach((report) => {
+        const isSelected = (report.id === selectedReportId);
+        html += `<div class="report-item ${isSelected ? 'selected-report' : ''}" onclick="selectReport(${report.id})">
+            <div class="report-header">
+                <div><strong>👤 ${report.workerName || 'Mtendakazi'}</strong>
+                <span style="font-size:12px; color:#7f8c8d; margin-left:10px;">${report.workerRole || ''}</span></div>
+                <span style="font-size:12px; color:#7f8c8d;">${new Date(report.timestamp).toLocaleDateString()}</span>
+            </div>
+            <div class="report-meta">⭐ Alama: ${report.overallScore || 'N/A'}%</div>
+        </div>`;
+    });
+    container.innerHTML = html;
+    if (!selectedReportId && pending.length > 0) {
+        selectReport(pending[0].id);
+    }
+}
+
+function selectReport(id) {
+    selectedReportId = id;
+    const report = allReports.find(r => r.id === id);
+    if (report) {
         fillReportData(report);
-        selectedReportId = report.id;
-    } else {
-        showToast("ℹ️ Hakuna ripoti zinazosubiri uamuzi wako", "info");
+        const tabBtn = document.querySelector('#tabForm');
+        if (tabBtn) switchTab('tabForm', tabBtn);
+        loadPendingReports();
     }
 }
 
 function fillReportData(report) {
+    // Worker info
     document.getElementById('workerName').value = report.workerName || '';
     document.getElementById('workerRole').value = report.workerRole || '';
     document.getElementById('workerDate').value = report.workerDate || '';
     document.getElementById('workerShift').value = report.workerShift || '';
     document.getElementById('workerDepartment').value = report.workerDepartment || '';
+    document.getElementById('workerEmail').value = report.workerEmail || '';
+    document.getElementById('workerPhone').value = report.workerPhone || '';
+    document.getElementById('workerWhatsApp').value = report.workerWhatsApp || '';
     document.getElementById('workerScore').value = (report.overallScore || 0) + '%';
     
-    // Supervisor score (if exists)
+    // Supervisor score
     const supervisorScore = report.supervisorScore || report.overallScore || 0;
     document.getElementById('supervisorScore').value = supervisorScore + '%';
-    
-    // Calculate gap
-    const workerScore = report.overallScore || 0;
-    const gap = Math.abs(workerScore - supervisorScore);
+    const gap = Math.abs((report.overallScore || 0) - supervisorScore);
     document.getElementById('scoreGap').value = gap + '%';
     document.getElementById('scoreGapDisplay').textContent = gap + '%';
     
+    // Checklists
+    renderChecklist('inchargeGeneralChecklist', report.generalChecklist || [], true);
+    renderChecklist('inchargeSpecialChecklist', report.specialChecklist || [], true);
+    
+    // Supervisor comments
+    document.getElementById('supervisorComments').value = report.supervisorComments || '';
+    document.getElementById('supervisorRecommendations').value = report.supervisorRecommendations || '';
+    
+    document.getElementById('inchargeStatusBadge').textContent = '⏳ Ripoti imechaguliwa';
+    document.getElementById('inchargeStatusBadge').className = 'status-badge pending';
     updateScoreSummary(report);
+}
+
+function renderChecklist(containerId, items, readonly = false) {
+    const container = document.getElementById(containerId); if (!container) return;
+    container.innerHTML = items.map((item, i) => `
+        <div class="checklist-item">
+            <span class="num">${i+1}</span>
+            ${item.text || ''}
+            <div class="toggle ${item.checked ? 'active' : ''}" style="${readonly ? 'pointer-events:none;' : ''}">
+                <div class="thumb"></div>
+            </div>
+        </div>
+    `).join("");
 }
 
 function updateReportsList() {
@@ -452,8 +513,6 @@ function updateReportsList() {
             <div class="report-header"><div><strong>👤 ${report.workerName || 'Mtendakazi'}</strong><span style="font-size:12px; color:#7f8c8d; margin-left:10px;">${report.workerRole || ''}</span></div>
             <span style="font-size:12px; color:#7f8c8d;">${new Date(report.timestamp).toLocaleDateString()}</span></div>
             <div class="report-meta">📋 ${report.status || 'Imetumwa'} | ⭐ Alama: ${report.overallScore || 'N/A'}% | 🏥 ${report.inchargeDecision || 'Inasubiri'}</div>
-            <div class="report-actions"><button class="btn btn-info btn-sm" onclick="viewReport('${report.id}')">👁️ Angalia</button>
-            <button class="btn btn-danger btn-sm" onclick="deleteReport('${report.id}')">🗑️ Futa</button></div>
         </div>`;
     });
     container.innerHTML = html;
@@ -509,7 +568,7 @@ function updateScoreSummary(report) {
 // SUBMIT INCHARGE - UAMUZI WA MWISHO
 // ==============================================================
 async function submitIncharge() {
-    if (!selectedReportId) { showToast("⚠️ Tafadhali chagua ripoti", "warning"); return; }
+    if (!selectedReportId) { showToast("⚠️ Tafadhali chagua ripoti kutoka kwenye orodha", "warning"); return; }
     if (!signatureData.incharge) { showToast("⚠️ Tafadhali weka sahihi yako", "warning"); return; }
     const decision = document.querySelector('input[name="inchargeDecision"]:checked');
     if (!decision) { showToast("⚠️ Tafadhali chagua uamuzi", "warning"); return; }
@@ -544,7 +603,7 @@ async function submitIncharge() {
         document.getElementById("submitMsg").style.color = "#27ae60";
         document.getElementById("inchargeStatusBadge").textContent = "✅ Imetumwa";
         document.getElementById("inchargeStatusBadge").className = "status-badge submitted";
-        allReports = data.reports; updateReportsList();
+        allReports = data.reports; updateReportsList(); loadPendingReports();
         showToast(`✅ Uamuzi umetumwa! Hali: ${decisionText}`, "success");
     } catch (error) { hideSpinner(); console.error("❌ Hitilafu:", error); showToast(`❌ Hitilafu: ${error.message}`, "error"); }
 }
@@ -553,7 +612,7 @@ async function syncData() {
     showToast("🔄 Inasawazisha...", "info"); showSpinner("Inasawazisha data...");
     try {
         const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { method: "GET", headers: { "X-Master-Key": API_KEY } });
-        if (response.ok) { const result = await response.json(); const data = result.record || result; allReports = data.reports || []; updateReportsList(); showToast(`✅ Data imesawazishwa! Reports: ${allReports.length}`, "success"); }
+        if (response.ok) { const result = await response.json(); const data = result.record || result; allReports = data.reports || []; updateReportsList(); loadPendingReports(); showToast(`✅ Data imesawazishwa! Reports: ${allReports.length}`, "success"); }
         else { showToast("⚠️ Imeshindwa kusawazisha", "warning"); }
     } catch (error) { showToast("❌ Hitilafu: " + error.message, "error"); }
     hideSpinner();
