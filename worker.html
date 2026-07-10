@@ -7,13 +7,14 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a5276, #27ae60); min-height: 100vh; padding: 20px; display: flex; justify-content: center; align-items: center; }
-        .form-container { background: #fff; border-radius: 20px; padding: 40px 35px; max-width: 900px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.6s ease; }
+        .form-container { background: #fff; border-radius: 20px; padding: 40px 35px; max-width: 1000px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.6s ease; }
         @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         h2 { color: #1a5276; text-align: center; margin-bottom: 8px; }
         .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 24px; font-size: 14px; }
         .section { background: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 20px; border-left: 4px solid #27ae60; }
         .section h3 { color: #1a5276; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
         .section h3 .step { background: #27ae60; color: #fff; border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
+        .section h3 .badge { background: #27ae60; color: #fff; padding: 2px 10px; border-radius: 20px; font-size: 11px; margin-left: 8px; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
         .form-group { margin-bottom: 12px; }
         .form-group.full-width { grid-column: 1 / -1; }
@@ -42,7 +43,11 @@
         .status-badge.saved { background: #d4edda; color: #155724; }
         .status-badge.pending { background: #fff3cd; color: #856404; }
         .status-badge.submitted { background: #cce5ff; color: #004085; }
-        .rating-group { display: flex; gap: 12px; align-items: center; }
+        .star-rating { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+        .star-rating input { display: none; }
+        .star-rating label { font-size: 28px; color: #ccc; cursor: pointer; transition: 0.2s; }
+        .star-rating label:hover, .star-rating label.active { color: #f1c40f; }
+        .rating-group { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
         .rating-group input { width: 60px; }
     </style>
 </head>
@@ -81,32 +86,111 @@
         </div>
     </div>
 
-    <!-- SEHEMU 2: Tathmini ya Utendaji (Hatua 1-3) -->
+    <!-- SEHEMU 2: KPI (Key Performance Indicators) -->
     <div class="section">
-        <h3><span class="step">2</span> Tathmini ya Utendaji</h3>
+        <h3><span class="step">2</span> KPI (Key Performance Indicators) <span class="badge">WHO Standard</span></h3>
         <div class="form-grid">
             <div class="form-group">
-                <label>Hatua ya 1: Uzalishaji wa Kazi (1-5)</label>
-                <input type="number" id="step1_productivity" placeholder="1-5" min="1" max="5">
+                <label>1. Uzalishaji wa Kazi (%)</label>
+                <input type="number" id="kpi_productivity" placeholder="Mfano: 85" min="0" max="100">
             </div>
             <div class="form-group">
-                <label>Hatua ya 2: Ubora wa Kazi (1-5)</label>
-                <input type="number" id="step2_quality" placeholder="1-5" min="1" max="5">
+                <label>2. Ubora wa Huduma (Rating 1-5)</label>
+                <div class="star-rating" id="kpi_quality">
+                    <input type="radio" name="kpi_quality" value="1" id="kq1"><label for="kq1">⭐</label>
+                    <input type="radio" name="kpi_quality" value="2" id="kq2"><label for="kq2">⭐⭐</label>
+                    <input type="radio" name="kpi_quality" value="3" id="kq3"><label for="kq3">⭐⭐⭐</label>
+                    <input type="radio" name="kpi_quality" value="4" id="kq4"><label for="kq4">⭐⭐⭐⭐</label>
+                    <input type="radio" name="kpi_quality" value="5" id="kq5"><label for="kq5">⭐⭐⭐⭐⭐</label>
+                </div>
             </div>
             <div class="form-group">
-                <label>Hatua ya 3: Uwajibikaji (1-5)</label>
-                <input type="number" id="step3_accountability" placeholder="1-5" min="1" max="5">
+                <label>3. Idadi ya Wagonjwa Waliotembelewa (kwa wiki)</label>
+                <input type="number" id="kpi_patients" placeholder="Mfano: 50">
+            </div>
+            <div class="form-group">
+                <label>4. Uwiano wa Kuridhika kwa Wateja (%)</label>
+                <input type="number" id="kpi_satisfaction" placeholder="Mfano: 90" min="0" max="100">
             </div>
             <div class="form-group full-width">
-                <label>Maelezo ya Tathmini</label>
-                <textarea id="step_notes" placeholder="Andika maelezo ya tathmini yako..."></textarea>
+                <label>5. Maelezo ya Ziada kuhusu KPI</label>
+                <textarea id="kpi_notes" placeholder="Andika maelezo yoyote..."></textarea>
             </div>
         </div>
     </div>
 
-    <!-- SEHEMU 3: Maoni na Mapendekezo -->
+    <!-- SEHEMU 3: Malengo ya Kimkakati -->
     <div class="section">
-        <h3><span class="step">3</span> Maoni na Mapendekezo</h3>
+        <h3><span class="step">3</span> Malengo ya Kimkakati (Strategic Goals)</h3>
+        <div class="form-grid">
+            <div class="form-group full-width">
+                <label>1. Malengo ya Mwaka</label>
+                <textarea id="strategic_goals" placeholder="Andika malengo yako kwa mwaka..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>2. Kiwango cha Mafanikio (%)</label>
+                <input type="number" id="strategic_achievement" placeholder="Mfano: 70" min="0" max="100">
+            </div>
+            <div class="form-group">
+                <label>3. Muda uliopangwa (miezi)</label>
+                <input type="number" id="strategic_timeline" placeholder="Mfano: 6">
+            </div>
+        </div>
+    </div>
+
+    <!-- SEHEMU 4: Ujuzi na Kompetensi -->
+    <div class="section">
+        <h3><span class="step">4</span> Ujuzi na Kompetensi (Skills & Competencies)</h3>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Ujuzi wa Kiufundi (1-5)</label>
+                <input type="number" id="skill_technical" placeholder="1-5" min="1" max="5">
+            </div>
+            <div class="form-group">
+                <label>Ujuzi wa Mawasiliano (1-5)</label>
+                <input type="number" id="skill_communication" placeholder="1-5" min="1" max="5">
+            </div>
+            <div class="form-group">
+                <label>Ujuzi wa Uongozi (1-5)</label>
+                <input type="number" id="skill_leadership" placeholder="1-5" min="1" max="5">
+            </div>
+            <div class="form-group">
+                <label>Ujuzi wa Ufumbuzi wa Matatizo (1-5)</label>
+                <input type="number" id="skill_problem" placeholder="1-5" min="1" max="5">
+            </div>
+            <div class="form-group full-width">
+                <label>Maelezo ya Ujuzi</label>
+                <textarea id="skill_notes" placeholder="Eleza ujuzi wako..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEHEMU 5: Mafunzo na Maendeleo -->
+    <div class="section">
+        <h3><span class="step">5</span> Mafunzo na Maendeleo (Training & Development)</h3>
+        <div class="form-grid">
+            <div class="form-group full-width">
+                <label>Mafunzo yaliyofuata (orodhesha)</label>
+                <textarea id="training_attended" placeholder="Mfano: Mafunzo ya Huduma kwa Wateja, Semina ya Uongozi..."></textarea>
+            </div>
+            <div class="form-group full-width">
+                <label>Mafunzo yanayohitajika (mapendekezo)</label>
+                <textarea id="training_needed" placeholder="Mafunzo unayotaka..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Idadi ya Saa za Mafunzo</label>
+                <input type="number" id="training_hours" placeholder="Mfano: 20">
+            </div>
+            <div class="form-group">
+                <label>Tarehe ya Mafunzo ya Mwisho</label>
+                <input type="date" id="training_last_date">
+            </div>
+        </div>
+    </div>
+
+    <!-- SEHEMU 6: Maoni na Mapendekezo -->
+    <div class="section">
+        <h3><span class="step">6</span> Maoni na Mapendekezo</h3>
         <div class="form-group">
             <label>Nguvu zako (Strengths)</label>
             <textarea id="strengths" placeholder="Andika nguvu zako..."></textarea>
@@ -118,6 +202,10 @@
         <div class="form-group">
             <label>Mapendekezo ya Maendeleo</label>
             <textarea id="recommendations" placeholder="Andika mapendekezo yako..."></textarea>
+        </div>
+        <div class="form-group">
+            <label>Maoni ya Jumla</label>
+            <textarea id="overall_comments" placeholder="Andika maoni yako ya jumla..." rows="3"></textarea>
         </div>
     </div>
 
@@ -134,7 +222,7 @@
 
 <script>
 // ==============================================================
-// MTWARA PERFORMANCE - WORKER FORM (v3.0)
+// MTWARA PERFORMANCE - WORKER FORM (v4.0 - Improved)
 // ==============================================================
 const API_KEY = "$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDot5L9hRGRQfa21/Mw/B0UcS";
 const BIN_ID = "6a4b0bc9da38895dfe32cc08";
@@ -164,6 +252,8 @@ if (!username) {
 document.getElementById('userGreeting').textContent = `Karibu ${username} - Tathmini ya Mtendakazi`;
 
 function getFormData() {
+    // KPI Quality - get selected star
+    const kpi_quality = document.querySelector('input[name="kpi_quality"]:checked');
     return {
         username: username,
         role: 'worker',
@@ -172,13 +262,27 @@ function getFormData() {
         position: document.getElementById('position').value,
         phone: document.getElementById('phone').value,
         email: document.getElementById('email').value,
-        step1_productivity: document.getElementById('step1_productivity').value || 0,
-        step2_quality: document.getElementById('step2_quality').value || 0,
-        step3_accountability: document.getElementById('step3_accountability').value || 0,
-        step_notes: document.getElementById('step_notes').value,
+        kpi_productivity: document.getElementById('kpi_productivity').value || 0,
+        kpi_quality: kpi_quality ? kpi_quality.value : 0,
+        kpi_patients: document.getElementById('kpi_patients').value || 0,
+        kpi_satisfaction: document.getElementById('kpi_satisfaction').value || 0,
+        kpi_notes: document.getElementById('kpi_notes').value,
+        strategic_goals: document.getElementById('strategic_goals').value,
+        strategic_achievement: document.getElementById('strategic_achievement').value || 0,
+        strategic_timeline: document.getElementById('strategic_timeline').value || 0,
+        skill_technical: document.getElementById('skill_technical').value || 0,
+        skill_communication: document.getElementById('skill_communication').value || 0,
+        skill_leadership: document.getElementById('skill_leadership').value || 0,
+        skill_problem: document.getElementById('skill_problem').value || 0,
+        skill_notes: document.getElementById('skill_notes').value,
+        training_attended: document.getElementById('training_attended').value,
+        training_needed: document.getElementById('training_needed').value,
+        training_hours: document.getElementById('training_hours').value || 0,
+        training_last_date: document.getElementById('training_last_date').value,
         strengths: document.getElementById('strengths').value,
         weaknesses: document.getElementById('weaknesses').value,
         recommendations: document.getElementById('recommendations').value,
+        overall_comments: document.getElementById('overall_comments').value,
         status: 'saved',
         timestamp: new Date().toISOString()
     };
@@ -190,13 +294,31 @@ function setFormData(data) {
     document.getElementById('position').value = data.position || '';
     document.getElementById('phone').value = data.phone || '';
     document.getElementById('email').value = data.email || '';
-    document.getElementById('step1_productivity').value = data.step1_productivity || '';
-    document.getElementById('step2_quality').value = data.step2_quality || '';
-    document.getElementById('step3_accountability').value = data.step3_accountability || '';
-    document.getElementById('step_notes').value = data.step_notes || '';
+    document.getElementById('kpi_productivity').value = data.kpi_productivity || '';
+    // Star rating
+    const stars = document.querySelectorAll('input[name="kpi_quality"]');
+    stars.forEach(star => {
+        if (star.value == data.kpi_quality) star.checked = true;
+    });
+    document.getElementById('kpi_patients').value = data.kpi_patients || '';
+    document.getElementById('kpi_satisfaction').value = data.kpi_satisfaction || '';
+    document.getElementById('kpi_notes').value = data.kpi_notes || '';
+    document.getElementById('strategic_goals').value = data.strategic_goals || '';
+    document.getElementById('strategic_achievement').value = data.strategic_achievement || '';
+    document.getElementById('strategic_timeline').value = data.strategic_timeline || '';
+    document.getElementById('skill_technical').value = data.skill_technical || '';
+    document.getElementById('skill_communication').value = data.skill_communication || '';
+    document.getElementById('skill_leadership').value = data.skill_leadership || '';
+    document.getElementById('skill_problem').value = data.skill_problem || '';
+    document.getElementById('skill_notes').value = data.skill_notes || '';
+    document.getElementById('training_attended').value = data.training_attended || '';
+    document.getElementById('training_needed').value = data.training_needed || '';
+    document.getElementById('training_hours').value = data.training_hours || '';
+    document.getElementById('training_last_date').value = data.training_last_date || '';
     document.getElementById('strengths').value = data.strengths || '';
     document.getElementById('weaknesses').value = data.weaknesses || '';
     document.getElementById('recommendations').value = data.recommendations || '';
+    document.getElementById('overall_comments').value = data.overall_comments || '';
     const status = data.status || 'saved';
     updateStatus(status);
 }
