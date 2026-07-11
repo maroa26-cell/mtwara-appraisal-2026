@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -6,71 +7,85 @@
     <title>Fomu ya Msimamizi</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a5276, #f39c12); min-height: 100vh; padding: 20px; display: flex; justify-content: center; align-items: flex-start; }
-        .form-container { background: #fff; border-radius: 20px; padding: 40px 35px; max-width: 1100px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.6s ease; margin-top: 20px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #4a2f0a, #f39c12); min-height: 100vh; padding: 20px; display: flex; justify-content: center; align-items: flex-start; }
+        .form-container { background: #fff; border-radius: 25px; padding: 40px 35px; max-width: 1200px; width: 100%; box-shadow: 0 25px 80px rgba(0,0,0,0.25); animation: slideUp 0.6s ease; margin-top: 20px; }
         @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        h2 { color: #1a5276; text-align: center; margin-bottom: 8px; }
-        .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 24px; font-size: 14px; }
-        .section { background: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 20px; border-left: 4px solid #f39c12; }
-        .section h3 { color: #1a5276; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-        .section h3 .step { background: #f39c12; color: #fff; border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
-        .section h3 .badge { background: #f39c12; color: #fff; padding: 2px 12px; border-radius: 20px; font-size: 11px; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .form-group { margin-bottom: 12px; }
+        h2 { color: #4a2f0a; text-align: center; font-size: 28px; margin-bottom: 4px; }
+        .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 24px; font-size: 15px; }
+        .section { background: #f8f9fa; border-radius: 15px; padding: 22px 24px; margin-bottom: 22px; border-left: 5px solid #f39c12; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: 0.3s; }
+        .section:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .section h3 { color: #4a2f0a; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 18px; }
+        .section h3 .step { background: #f39c12; color: #fff; border-radius: 50%; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; flex-shrink: 0; }
+        .section h3 .badge { background: #f39c12; color: #fff; padding: 3px 14px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .form-group { margin-bottom: 6px; }
         .form-group.full-width { grid-column: 1 / -1; }
-        .form-group label { display: block; font-weight: 600; color: #1a5276; margin-bottom: 4px; font-size: 13px; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 14px; border: 2px solid #dee2e6; border-radius: 8px; font-size: 14px; }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #f39c12; outline: none; }
-        .form-group textarea { min-height: 60px; resize: vertical; }
-        .btn { padding: 12px 20px; border: none; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 6px; }
+        .form-group label { display: block; font-weight: 600; color: #4a2f0a; margin-bottom: 5px; font-size: 14px; }
+        .form-group label .required { color: #e74c3c; margin-left: 4px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 11px 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; transition: 0.3s; background: #fff; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #f39c12; outline: none; box-shadow: 0 0 0 3px rgba(243,156,18,0.15); }
+        .form-group textarea { min-height: 70px; resize: vertical; }
+        .form-group .hint { font-size: 12px; color: #7f8c8d; margin-top: 4px; font-style: italic; }
+        .btn { padding: 12px 24px; border: none; border-radius: 10px; font-weight: 600; font-size: 14px; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; }
         .btn-primary { background: #f39c12; color: #fff; }
-        .btn-primary:hover { background: #d68910; transform: translateY(-2px); }
+        .btn-primary:hover { background: #d68910; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(243,156,18,0.3); }
         .btn-secondary { background: #95a5a6; color: #fff; }
-        .btn-secondary:hover { background: #7f8c8d; }
+        .btn-secondary:hover { background: #7f8c8d; transform: translateY(-2px); }
         .btn-danger { background: #e74c3c; color: #fff; }
-        .btn-danger:hover { background: #c0392b; }
+        .btn-danger:hover { background: #c0392b; transform: translateY(-2px); }
         .btn-info { background: #3498db; color: #fff; }
-        .btn-info:hover { background: #2e86c1; }
+        .btn-info:hover { background: #2e86c1; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(52,152,219,0.3); }
         .btn-success { background: #27ae60; color: #fff; }
-        .btn-success:hover { background: #1e8449; }
+        .btn-success:hover { background: #1e8449; transform: translateY(-2px); }
         .btn-warning { background: #f39c12; color: #fff; }
-        .btn-warning:hover { background: #d68910; }
+        .btn-warning:hover { background: #d68910; transform: translateY(-2px); }
         .btn-purple { background: #8e44ad; color: #fff; }
-        .btn-purple:hover { background: #7d3c98; }
+        .btn-purple:hover { background: #7d3c98; transform: translateY(-2px); }
         .btn-whatsapp { background: #25D366; color: #fff; }
-        .btn-whatsapp:hover { background: #1da851; }
+        .btn-whatsapp:hover { background: #1da851; transform: scale(1.05); }
         .btn-phone { background: #34B7F1; color: #fff; }
-        .btn-phone:hover { background: #1a9fd8; }
-        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        .button-group { display: flex; gap: 10px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+        .btn-phone:hover { background: #1a9fd8; transform: scale(1.05); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
+        .button-group { display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
         .button-group .btn { flex: 0 1 auto; }
-        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
-        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); max-width: 400px; width: 90%; background: #1a1a2e; color: #fff; padding: 14px 22px; border-radius: 12px; font-size: 14px; text-align: center; z-index: 999; opacity: 0; transition: all 0.4s ease; pointer-events: none; box-shadow: 0 8px 40px rgba(0,0,0,0.2); }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); max-width: 450px; width: 90%; background: #1a1a2e; color: #fff; padding: 16px 24px; border-radius: 14px; font-size: 14px; text-align: center; z-index: 999; opacity: 0; transition: all 0.4s ease; pointer-events: none; box-shadow: 0 8px 40px rgba(0,0,0,0.25); }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
         .toast.success { background: #27ae60; }
         .toast.error { background: #e74c3c; }
-        .loading-spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid #ecf0f1; border-top: 3px solid #f39c12; border-radius: 50%; animation: spin 1s linear infinite; vertical-align: middle; margin-right: 8px; }
+        .toast.info { background: #3498db; }
+        .loading-spinner { display: inline-block; width: 18px; height: 18px; border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid #fff; border-radius: 50%; animation: spin 1s linear infinite; vertical-align: middle; margin-right: 10px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .status-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .status-badge { display: inline-block; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; }
         .status-badge.saved { background: #d4edda; color: #155724; }
         .status-badge.pending { background: #fff3cd; color: #856404; }
         .status-badge.submitted { background: #cce5ff; color: #004085; }
         .status-badge.reviewed { background: #d1ecf1; color: #0c5460; }
-        .communication-bar { background: #f8f9fa; padding: 12px 16px; border-radius: 10px; margin-bottom: 16px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; border: 1px solid #dee2e6; }
-        .communication-bar span { font-weight: 600; color: #1a5276; margin-right: 8px; }
-        .worker-list { background: #fff; border-radius: 8px; padding: 12px; border: 1px solid #dee2e6; max-height: 200px; overflow-y: auto; }
-        .worker-list-item { padding: 8px 12px; border-bottom: 1px solid #eee; cursor: pointer; }
-        .worker-list-item:hover { background: #f1f9ff; }
-        .worker-list-item .badge-role { background: #f39c12; color: #fff; padding: 2px 8px; border-radius: 12px; font-size: 11px; }
-        .chart-container { background: #fff; border-radius: 8px; padding: 16px; border: 1px solid #dee2e6; margin-top: 8px; }
-        .chart-bar { display: flex; align-items: center; gap: 12px; margin: 6px 0; }
-        .chart-bar .label { width: 120px; font-size: 13px; color: #1a5276; }
-        .chart-bar .bar { height: 20px; border-radius: 10px; background: linear-gradient(90deg, #f39c12, #f1c40f); transition: width 0.5s; }
-        .chart-bar .value { font-size: 13px; font-weight: 600; color: #1a5276; min-width: 30px; }
+        .communication-bar { background: #f8f9fa; padding: 12px 20px; border-radius: 12px; margin-bottom: 18px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; border: 1px solid #e0e0e0; }
+        .communication-bar span { font-weight: 600; color: #4a2f0a; margin-right: 6px; }
+        .worker-list { background: #fff; border-radius: 12px; padding: 12px; border: 1px solid #e0e0e0; max-height: 220px; overflow-y: auto; }
+        .worker-list-item { padding: 10px 14px; border-bottom: 1px solid #eee; cursor: pointer; transition: 0.2s; display: flex; justify-content: space-between; align-items: center; }
+        .worker-list-item:hover { background: #fef9e7; }
+        .worker-list-item .badge-role { background: #f39c12; color: #fff; padding: 2px 10px; border-radius: 12px; font-size: 11px; }
+        .chart-container { background: #fff; border-radius: 12px; padding: 18px; border: 1px solid #e0e0e0; margin-top: 6px; }
+        .chart-bar { display: flex; align-items: center; gap: 14px; margin: 8px 0; }
+        .chart-bar .label { width: 130px; font-size: 13px; color: #4a2f0a; font-weight: 500; }
+        .chart-bar .bar-track { flex: 1; height: 22px; background: #ecf0f1; border-radius: 12px; overflow: hidden; }
+        .chart-bar .bar-fill { height: 100%; border-radius: 12px; background: linear-gradient(90deg, #f39c12, #f1c40f); transition: width 0.6s ease; }
+        .chart-bar .value { font-size: 14px; font-weight: 600; color: #4a2f0a; min-width: 40px; text-align: right; }
+        .duties-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        @media (max-width: 768px) {
+            .form-grid, .duties-grid { grid-template-columns: 1fr; }
+            .top-bar { flex-direction: column; align-items: stretch; text-align: center; }
+            .top-bar h2 { font-size: 22px; }
+            .button-group .btn { flex: 1; }
+            .section { padding: 16px; }
+        }
         @media print {
             .no-print { display: none !important; }
             .form-container { box-shadow: none !important; }
             body { background: #fff !important; }
+            .section { break-inside: avoid; }
         }
     </style>
 </head>
@@ -93,25 +108,25 @@
     <div class="communication-bar no-print">
         <span>📞 Mawasiliano:</span>
         <a href="tel:+255742710697" class="btn btn-phone" style="text-decoration: none; padding: 6px 14px; font-size: 13px;">📱 Simu</a>
-        <a href="https://wa.me/255742710697" target="_blank" class="btn btn-whatsapp" style="text-decoration: none; padding: 6px 14px; font-size: 13px;">💬 WhatsApp</a>
+        <a href="https://wa.me/255742710697?text=Nimekamilisha%20tathmini%20yangu%20ya%20MTWARA%20PERFORMANCE.%20Tafadhali%20iangalie." target="_blank" class="btn btn-whatsapp" style="text-decoration: none; padding: 6px 14px; font-size: 13px;">💬 WhatsApp</a>
         <span style="font-size: 12px; color: #7f8c8d; margin-left: 4px;">(Nambari +255742710697)</span>
-        <span style="margin-left: auto; font-size: 12px; color: #7f8c8d;" id="submissionStatus">📤 Hujatumwa</span>
+        <span style="margin-left: auto; font-size: 13px; font-weight: 600;" id="submissionStatus">📤 Hujatumwa</span>
     </div>
 
-    <!-- SEHEMU 1: Taarifa za Msingi -->
+    <!-- SEHEMU 1: Taarifa -->
     <div class="section">
         <h3><span class="step">1</span> Taarifa zako</h3>
         <div class="form-grid">
             <div class="form-group">
-                <label>Jina Kamili</label>
+                <label>Jina Kamili <span class="required">*</span></label>
                 <input type="text" id="fullname" placeholder="Mfano: Fatma Hassan">
             </div>
             <div class="form-group">
-                <label>Idara</label>
+                <label>Idara <span class="required">*</span></label>
                 <input type="text" id="department" placeholder="Mfano: Idara ya Wodi">
             </div>
             <div class="form-group">
-                <label>Cheo / Wadhifa</label>
+                <label>Cheo / Wadhifa <span class="required">*</span></label>
                 <input type="text" id="position" placeholder="Mfano: Msimamizi Mkuu">
             </div>
             <div class="form-group">
@@ -152,12 +167,12 @@
         </div>
     </div>
 
-    <!-- SEHEMU 3: Malengo ya Kimkakati -->
+    <!-- SEHEMU 3: Malengo -->
     <div class="section">
-        <h3><span class="step">3</span> Malengo ya Kimkakati (Strategic Goals)</h3>
+        <h3><span class="step">3</span> Malengo ya Kimkakati</h3>
         <div class="form-grid">
             <div class="form-group full-width">
-                <label>Malengo ya Idara</label>
+                <label>Malengo ya Idara <span class="required">*</span></label>
                 <textarea id="strategic_goals" placeholder="Andika malengo ya idara..."></textarea>
             </div>
             <div class="form-group">
@@ -171,9 +186,9 @@
         </div>
     </div>
 
-    <!-- SEHEMU 4: Ujuzi na Kompetensi -->
+    <!-- SEHEMU 4: Ujuzi -->
     <div class="section">
-        <h3><span class="step">4</span> Ujuzi na Kompetensi (Skills)</h3>
+        <h3><span class="step">4</span> Ujuzi na Kompetensi</h3>
         <div class="form-grid">
             <div class="form-group">
                 <label>Ujuzi wa Usimamizi (1-5)</label>
@@ -198,9 +213,9 @@
         </div>
     </div>
 
-    <!-- SEHEMU 5: Mafunzo na Maendeleo -->
+    <!-- SEHEMU 5: Mafunzo -->
     <div class="section">
-        <h3><span class="step">5</span> Mafunzo na Maendeleo (Training)</h3>
+        <h3><span class="step">5</span> Mafunzo na Maendeleo</h3>
         <div class="form-grid">
             <div class="form-group full-width">
                 <label>Mafunzo yaliyofuata</label>
@@ -223,20 +238,22 @@
 
     <!-- SEHEMU 6: Majukumu -->
     <div class="section">
-        <h3><span class="step">6</span> Majukumu (Duties)</h3>
-        <div class="form-grid">
-            <div class="form-group full-width">
-                <label>📋 Majukumu ya Jumla (General Duties)</label>
-                <textarea id="general_duties" placeholder="Mfano: Kusimamia wafanyakazi, kuratibu shughuli za idara..."></textarea>
+        <h3><span class="step">6</span> Majukumu (Duties) <span class="badge">Jaza kwa uangalifu</span></h3>
+        <div class="duties-grid">
+            <div class="form-group">
+                <label>📋 Majukumu ya Jumla <span class="required">*</span></label>
+                <textarea id="general_duties" placeholder="Mfano:&#10;1. Kuwahi kazini dakika 10 kabla ya zamu kuanza.&#10;2. Kuandaa ratiba ya kazi kwa wafanyakazi.&#10;3. Kuhakikisha usalama na usafi wa mazingira ya kazi.&#10;4. Kushirikiana na idara nyingine." rows="6"></textarea>
+                <div class="hint">Orodhesha majukumu yako ya kawaida (General Duties) kwa mpangilio.</div>
             </div>
-            <div class="form-group full-width">
-                <label>🎯 Majukumu Maalumu (Specific Duties)</label>
-                <textarea id="specific_duties" placeholder="Mfano: Kufanya tathmini ya wafanyakazi, kuandaa ripoti za utendaji..."></textarea>
+            <div class="form-group">
+                <label>🎯 Majukumu Maalumu <span class="required">*</span></label>
+                <textarea id="specific_duties" placeholder="Mfano:&#10;1. Kufanya tathmini ya utendaji kwa wafanyakazi.&#10;2. Kuandaa ripoti za utendaji kwa mwezi.&#10;3. Kusimamia mafunzo ya wafanyakazi.&#10;4. Kutatua migogoro inayojitokeza." rows="6"></textarea>
+                <div class="hint">Orodhesha majukumu yako maalumu (Specific Duties) kulingana na wadhifa wako.</div>
             </div>
         </div>
     </div>
 
-    <!-- SEHEMU 7: Maoni na Mapendekezo + Orodha -->
+    <!-- SEHEMU 7: Maoni na Orodha -->
     <div class="section">
         <h3><span class="step">7</span> Maoni, Mapendekezo na Mawasiliano</h3>
         <div class="form-group">
@@ -266,11 +283,11 @@
     <div class="section">
         <h3><span class="step">8</span> 📊 Muhtasari wa Tathmini</h3>
         <div class="chart-container" id="chartContainer">
-            <div class="chart-bar"><span class="label">Uongozi</span><div class="bar" id="chartLeadership" style="width:0%;"></div><span class="value" id="valLeadership">0/5</span></div>
-            <div class="chart-bar"><span class="label">Ufanisi Timu</span><div class="bar" id="chartTeam" style="width:0%;"></div><span class="value" id="valTeam">0%</span></div>
-            <div class="chart-bar"><span class="label">Taarifa</span><div class="bar" id="chartReports" style="width:0%;"></div><span class="value" id="valReports">0</span></div>
-            <div class="chart-bar"><span class="label">Kuridhika</span><div class="bar" id="chartStaffSat" style="width:0%;"></div><span class="value" id="valStaffSat">0/5</span></div>
-            <div class="chart-bar"><span class="label">Ujuzi (Wastani)</span><div class="bar" id="chartSkills" style="width:0%;"></div><span class="value" id="valSkills">0/5</span></div>
+            <div class="chart-bar"><span class="label">Uongozi</span><div class="bar-track"><div class="bar-fill" id="chartLeadership" style="width:0%;"></div></div><span class="value" id="valLeadership">0/5</span></div>
+            <div class="chart-bar"><span class="label">Ufanisi Timu</span><div class="bar-track"><div class="bar-fill" id="chartTeam" style="width:0%;"></div></div><span class="value" id="valTeam">0%</span></div>
+            <div class="chart-bar"><span class="label">Taarifa</span><div class="bar-track"><div class="bar-fill" id="chartReports" style="width:0%;"></div></div><span class="value" id="valReports">0</span></div>
+            <div class="chart-bar"><span class="label">Kuridhika</span><div class="bar-track"><div class="bar-fill" id="chartStaffSat" style="width:0%;"></div></div><span class="value" id="valStaffSat">0/5</span></div>
+            <div class="chart-bar"><span class="label">Ujuzi (Wastani)</span><div class="bar-track"><div class="bar-fill" id="chartSkills" style="width:0%;"></div></div><span class="value" id="valSkills">0/5</span></div>
         </div>
     </div>
 
@@ -283,17 +300,17 @@
         <button class="btn btn-purple" onclick="showSpecific()">🎯 Tathmini Maalumu</button>
         <button class="btn btn-danger" onclick="logout()">🚪 Toka</button>
     </div>
-    <div style="text-align: center; margin-top: 12px;">
-        <span id="saveStatus" class="status-badge pending">Hajahifadhiwa</span>
+    <div style="text-align: center; margin-top: 14px;">
+        <span id="saveStatus" class="status-badge pending">📝 Hajahifadhiwa</span>
     </div>
 </div>
 
 <script>
 // ==============================================================
-// MTWARA PERFORMANCE - SUPERVISOR FORM (BIN MPYA)
+// MTWARA PERFORMANCE - SUPERVISOR FORM (v8.1 - WhatsApp + Uhifadhi)
 // ==============================================================
 const API_KEY = "$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K";
-const BIN_ID = "6a52a4d3f5f4af5e2981fd2e";
+const BIN_ID = "6a4b0bc9da38895dfe32cc08";
 
 function showToast(msg, type = 'info') {
     const t = document.getElementById('toast');
@@ -328,22 +345,22 @@ function getFormData() {
         position: document.getElementById('position').value,
         phone: document.getElementById('phone').value,
         email: document.getElementById('email').value,
-        kpi_leadership: document.getElementById('kpi_leadership').value || 0,
-        kpi_team_efficiency: document.getElementById('kpi_team_efficiency').value || 0,
-        kpi_reports: document.getElementById('kpi_reports').value || 0,
-        kpi_staff_satisfaction: document.getElementById('kpi_staff_satisfaction').value || 0,
+        kpi_leadership: parseInt(document.getElementById('kpi_leadership').value) || 0,
+        kpi_team_efficiency: parseInt(document.getElementById('kpi_team_efficiency').value) || 0,
+        kpi_reports: parseInt(document.getElementById('kpi_reports').value) || 0,
+        kpi_staff_satisfaction: parseInt(document.getElementById('kpi_staff_satisfaction').value) || 0,
         kpi_notes: document.getElementById('kpi_notes').value,
         strategic_goals: document.getElementById('strategic_goals').value,
-        strategic_achievement: document.getElementById('strategic_achievement').value || 0,
-        strategic_timeline: document.getElementById('strategic_timeline').value || 0,
-        skill_management: document.getElementById('skill_management').value || 0,
-        skill_planning: document.getElementById('skill_planning').value || 0,
-        skill_representation: document.getElementById('skill_representation').value || 0,
-        skill_monitoring: document.getElementById('skill_monitoring').value || 0,
+        strategic_achievement: parseInt(document.getElementById('strategic_achievement').value) || 0,
+        strategic_timeline: parseInt(document.getElementById('strategic_timeline').value) || 0,
+        skill_management: parseInt(document.getElementById('skill_management').value) || 0,
+        skill_planning: parseInt(document.getElementById('skill_planning').value) || 0,
+        skill_representation: parseInt(document.getElementById('skill_representation').value) || 0,
+        skill_monitoring: parseInt(document.getElementById('skill_monitoring').value) || 0,
         skill_notes: document.getElementById('skill_notes').value,
         training_attended: document.getElementById('training_attended').value,
         training_needed: document.getElementById('training_needed').value,
-        training_hours: document.getElementById('training_hours').value || 0,
+        training_hours: parseInt(document.getElementById('training_hours').value) || 0,
         training_last_date: document.getElementById('training_last_date').value,
         general_duties: document.getElementById('general_duties').value,
         specific_duties: document.getElementById('specific_duties').value,
@@ -393,10 +410,15 @@ function setFormData(data) {
 
 function updateStatus(status) {
     const badge = document.getElementById('saveStatus');
-    if (status === 'saved') { badge.className = 'status-badge saved'; badge.textContent = '💾 Imehifadhiwa'; }
-    else if (status === 'submitted') { badge.className = 'status-badge submitted'; badge.textContent = '📤 Imetumwa kwa Mganga Mfawidhi'; }
-    else if (status === 'reviewed') { badge.className = 'status-badge reviewed'; badge.textContent = '✅ Imeidhinishwa'; }
-    else { badge.className = 'status-badge pending'; badge.textContent = '📝 Hajahifadhiwa'; }
+    const statusMap = {
+        'saved': { class: 'saved', text: '💾 Imehifadhiwa' },
+        'submitted': { class: 'submitted', text: '📤 Imetumwa kwa Mganga Mfawidhi' },
+        'reviewed': { class: 'reviewed', text: '✅ Imeidhinishwa' },
+        'pending': { class: 'pending', text: '📝 Hajahifadhiwa' }
+    };
+    const s = statusMap[status] || statusMap.pending;
+    badge.className = 'status-badge ' + s.class;
+    badge.textContent = s.text;
 }
 
 function updateSubmissionStatus(submittedTo) {
@@ -446,7 +468,7 @@ async function saveAppraisal() {
     data.status = 'saved';
     try {
         const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
-        if (!res.ok) throw new Error('Network error');
+        if (!res.ok) throw new Error('Network error - Hakuna mtandao au server');
         const result = await res.json();
         const record = result.record || {};
         if (!record.appraisals) record.appraisals = {};
@@ -460,7 +482,10 @@ async function saveAppraisal() {
         if (!update.ok) throw new Error('Imeshindwa kuhifadhi');
         showToast('✅ Tathmini imehifadhiwa!', 'success');
         updateStatus('saved');
-    } catch (e) { showToast('❌ ' + e.message, 'error'); }
+    } catch (e) {
+        showToast('❌ ' + e.message, 'error');
+        console.error('Save Error:', e);
+    }
     btn.disabled = false;
     btn.innerHTML = '💾 Hifadhi';
 }
@@ -473,8 +498,14 @@ async function submitToIncharge() {
     data.status = 'submitted';
     data.submitted_to = 'incharge';
     try {
+        if (!data.fullname || !data.department || !data.position) {
+            showToast('❌ Tafadhali jaza Jina, Idara na Cheo (sehemu muhimu)', 'error');
+            btn.disabled = false;
+            btn.innerHTML = '📤 Tuma kwa Mganga Mfawidhi';
+            return;
+        }
         const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
-        if (!res.ok) throw new Error('Network error');
+        if (!res.ok) throw new Error('Network error - Hakuna mtandao');
         const result = await res.json();
         const record = result.record || {};
         if (!record.appraisals) record.appraisals = {};
@@ -489,7 +520,10 @@ async function submitToIncharge() {
         showToast('✅ Tathmini imetumwa kwa Mganga Mfawidhi!', 'success');
         updateStatus('submitted');
         updateSubmissionStatus('incharge');
-    } catch (e) { showToast('❌ ' + e.message, 'error'); }
+    } catch (e) {
+        showToast('❌ ' + e.message + '. Hakikisha una mtandao mzuri.', 'error');
+        console.error('Submit Error:', e);
+    }
     btn.disabled = false;
     btn.innerHTML = '📤 Tuma kwa Mganga Mfawidhi';
 }
@@ -504,7 +538,10 @@ async function loadAppraisal() {
         if (!data) return showToast('❌ Hakuna tathmini iliyohifadhiwa', 'error');
         setFormData(data);
         showToast('✅ Tathmini imepakiwa', 'success');
-    } catch (e) { showToast('❌ ' + e.message, 'error'); }
+    } catch (e) {
+        showToast('❌ ' + e.message, 'error');
+        console.error('Load Error:', e);
+    }
 }
 
 async function loadWorkerData() {
@@ -526,9 +563,8 @@ async function loadWorkerData() {
             const data = workers[w];
             const statusIcon = data.status === 'submitted' ? '📤' : data.status === 'reviewed' ? '✅' : '💾';
             html += `<div class="worker-list-item" onclick="viewWorkerData('${w}')">
-                <strong>${data.fullname || w}</strong>
-                <span class="badge-role">${data.department || 'Idara'}</span>
-                <span style="float: right; font-size: 12px; color: #7f8c8d;">${statusIcon} ${data.status || 'saved'}</span>
+                <span><strong>${data.fullname || w}</strong> <span class="badge-role">${data.department || 'Idara'}</span></span>
+                <span style="font-size: 12px; color: #7f8c8d;">${statusIcon} ${data.status || 'saved'}</span>
             </div>`;
         });
         html += '</div>';
@@ -540,6 +576,7 @@ async function loadWorkerData() {
 
 function viewWorkerData(username) {
     showToast(`👤 Tazama data ya ${username} - Angalia console`, 'info');
+    console.log(`📋 Data ya ${username}:`, 'Tazama kwenye JSONBin');
 }
 
 function showOverall() {
