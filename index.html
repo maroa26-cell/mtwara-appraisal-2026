@@ -4,7 +4,7 @@
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>MTWARA - Ingia</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#1a5276,#8e44ad);min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px}
-.login-container{background:#fff;border-radius:20px;padding:40px 35px;max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:slideUp 0.6s}
+.login-container{background:#fff;border-radius:20px;padding:40px 35px;max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:slideUp .6s}
 @keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
 .login-header{text-align:center;margin-bottom:24px}.login-header .logo{font-size:48px}.login-header h1{color:#1a5276;font-size:24px}.login-header p{color:#7f8c8d;font-size:14px}.login-header .badge{display:inline-block;background:#8e44ad;color:#fff;padding:4px 16px;border-radius:20px;font-size:11px;margin-top:6px}
 .form-group{margin-bottom:16px}.form-group label{display:block;font-weight:600;color:#1a5276;margin-bottom:4px;font-size:13px}.form-group input,.form-group select{width:100%;padding:12px 16px;border:2px solid #dee2e6;border-radius:10px;font-size:14px}.form-group input:focus{border-color:#8e44ad;outline:none}
@@ -20,7 +20,7 @@
 <body>
 <div id="toast" class="toast"></div>
 <div class="login-container">
-  <div class="login-header"><div class="logo">🏥</div><h1>MTWARA PERFORMANCE</h1><p>Mfumo wa Tathmini ya Utendaji</p><span class="badge">Toleo v8.1</span></div>
+  <div class="login-header"><div class="logo">🏥</div><h1>MTWARA PERFORMANCE</h1><p>Mfumo wa Tathmini ya Utendaji</p><span class="badge">Toleo v9.0</span></div>
   <div class="connection-status" id="connectionStatus"><span class="loading-spinner"></span> Inaunganisha...</div>
   <div class="tab-buttons"><button class="btn active" id="loginTabBtn" onclick="switchTab('login')">🔐 Ingia</button><button class="btn inactive" id="signupTabBtn" onclick="switchTab('signup')">📝 Jisajili</button></div>
   <div id="loginTab" class="tab-content active">
@@ -37,7 +37,7 @@
     <button class="btn btn-primary" onclick="signup()" id="signupBtn">📝 Jisajili</button>
     <div class="divider">Au</div><button class="btn btn-secondary" onclick="switchTab('login')">🔐 Ingia kwenye Akaunti</button>
   </div>
-  <div class="version">Toleo 8.1 - WhatsApp + Uhifadhi</div>
+  <div class="version">Toleo 9.0 - Uhifadhi + Tick + Upload + Logo</div>
 </div>
 <script>
 const API_KEY="$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K",BIN_ID="6a4b0bc9da38895dfe32cc08";
@@ -51,7 +51,7 @@ async function signup(){const u=document.getElementById('signupUsername').value.
 async function login(){const u=document.getElementById('loginUsername').value.trim(),p=document.getElementById('loginPassword').value.trim(),b=document.getElementById('loginBtn');if(!u||!p)return showToast('❌ Tafadhali jaza sehemu zote','error');b.disabled=true;b.innerHTML='<span class="loading-spinner"></span> Inaingiza...';try{const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}});if(!r.ok)throw new Error('Network error');const d=await r.json(),us=d.record?.users||{},user=us[u];if(!user||user.password!==p){showToast('❌ Jina au nenosiri si sahihi','error');b.disabled=false;b.innerHTML='🔓 Ingia';return}const ud=encodeURIComponent(JSON.stringify({username:u,role:user.role})),red=user.role==='worker'?'worker.html':user.role==='supervisor'?'supervisor.html':'incharge.html';showToast(`✅ Karibu ${u}`,'success');setTimeout(()=>{window.location.href=`${red}?user=${ud}`},500)}catch(e){showToast('❌ '+e.message,'error');b.disabled=false;b.innerHTML='🔓 Ingia'}}
 async function checkConnection(){const s=document.getElementById('connectionStatus');try{const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}});s.innerHTML=r.ok?'✅ Imeunganishwa':'⚠️ Hitilafu ya muunganisho'}catch(e){s.innerHTML='⚠️ Hakuna mtandao'}}
 document.addEventListener('keydown',e=>{if(e.key==='Enter'){const a=document.querySelector('.tab-content.active');if(a.id==='loginTab')login();else if(a.id==='signupTab')signup()}});
-window.onload=function(){checkConnection();console.log('✅ MTWARA PERFORMANCE - Login v8.1')};
+window.onload=function(){checkConnection();console.log('✅ MTWARA PERFORMANCE - v9.0')};
 </script>
 </body>
 </html>
