@@ -1,269 +1,57 @@
 
 <!DOCTYPE html>
 <html lang="sw">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MTWARA PERFORMANCE - Ingia</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a5276, #8e44ad); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
-        .login-container { background: #fff; border-radius: 20px; padding: 40px 35px; max-width: 440px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.6s ease; }
-        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .login-header { text-align: center; margin-bottom: 24px; }
-        .login-header .logo { font-size: 48px; }
-        .login-header h1 { color: #1a5276; font-size: 24px; }
-        .login-header p { color: #7f8c8d; font-size: 14px; }
-        .login-header .badge { display: inline-block; background: #8e44ad; color: #fff; padding: 4px 16px; border-radius: 20px; font-size: 11px; margin-top: 6px; }
-        .form-group { margin-bottom: 16px; }
-        .form-group label { display: block; font-weight: 600; color: #1a5276; margin-bottom: 4px; font-size: 13px; }
-        .form-group input, .form-group select { width: 100%; padding: 12px 16px; border: 2px solid #dee2e6; border-radius: 10px; font-size: 14px; }
-        .form-group input:focus { border-color: #8e44ad; outline: none; }
-        .btn { width: 100%; padding: 14px; border: none; border-radius: 10px; font-weight: 700; font-size: 16px; cursor: pointer; transition: 0.3s; }
-        .btn-primary { background: #8e44ad; color: #fff; }
-        .btn-primary:hover { background: #7d3c98; transform: translateY(-2px); }
-        .btn-secondary { background: #3498db; color: #fff; }
-        .btn-secondary:hover { background: #2e86c1; transform: translateY(-2px); }
-        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        .tab-buttons { display: flex; gap: 8px; margin-bottom: 20px; }
-        .tab-buttons .btn { flex: 1; padding: 10px; font-size: 14px; border-radius: 10px; }
-        .tab-buttons .btn.active { background: #8e44ad; color: #fff; }
-        .tab-buttons .btn.inactive { background: #ecf0f1; color: #7f8c8d; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        .password-wrapper { position: relative; }
-        .password-wrapper input { padding-right: 50px; }
-        .toggle-password { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: transparent; border: none; font-size: 18px; cursor: pointer; }
-        .divider { text-align: center; margin: 16px 0; color: #bdc3c7; font-size: 12px; position: relative; }
-        .divider::before, .divider::after { content: ''; position: absolute; top: 50%; width: 45%; height: 1px; background: #ecf0f1; }
-        .divider::before { left: 0; }
-        .divider::after { right: 0; }
-        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); max-width: 400px; width: 90%; background: #1a1a2e; color: #fff; padding: 14px 22px; border-radius: 12px; font-size: 14px; text-align: center; z-index: 999; opacity: 0; transition: all 0.4s ease; pointer-events: none; box-shadow: 0 8px 40px rgba(0,0,0,0.2); }
-        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-        .toast.success { background: #27ae60; }
-        .toast.error { background: #e74c3c; }
-        .connection-status { text-align: center; font-size: 12px; color: #7f8c8d; margin-bottom: 16px; padding: 8px; background: #f8f9fa; border-radius: 8px; }
-        .loading-spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid #ecf0f1; border-top: 3px solid #8e44ad; border-radius: 50%; animation: spin 1s linear infinite; vertical-align: middle; margin-right: 8px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .version { text-align: center; font-size: 10px; color: #bdc3c7; margin-top: 8px; }
-    </style>
-</head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>MTWARA - Ingia</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#1a5276,#8e44ad);min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px}
+.login-container{background:#fff;border-radius:20px;padding:40px 35px;max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:slideUp 0.6s}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+.login-header{text-align:center;margin-bottom:24px}.login-header .logo{font-size:48px}.login-header h1{color:#1a5276;font-size:24px}.login-header p{color:#7f8c8d;font-size:14px}.login-header .badge{display:inline-block;background:#8e44ad;color:#fff;padding:4px 16px;border-radius:20px;font-size:11px;margin-top:6px}
+.form-group{margin-bottom:16px}.form-group label{display:block;font-weight:600;color:#1a5276;margin-bottom:4px;font-size:13px}.form-group input,.form-group select{width:100%;padding:12px 16px;border:2px solid #dee2e6;border-radius:10px;font-size:14px}.form-group input:focus{border-color:#8e44ad;outline:none}
+.btn{width:100%;padding:14px;border:none;border-radius:10px;font-weight:700;font-size:16px;cursor:pointer;transition:.3s}.btn-primary{background:#8e44ad;color:#fff}.btn-primary:hover{background:#7d3c98;transform:translateY(-2px)}.btn-secondary{background:#3498db;color:#fff}.btn-secondary:hover{background:#2e86c1}.btn:disabled{opacity:.6;cursor:not-allowed}
+.tab-buttons{display:flex;gap:8px;margin-bottom:20px}.tab-buttons .btn{flex:1;padding:10px;font-size:14px}.tab-buttons .btn.active{background:#8e44ad;color:#fff}.tab-buttons .btn.inactive{background:#ecf0f1;color:#7f8c8d}.tab-content{display:none}.tab-content.active{display:block}
+.password-wrapper{position:relative}.password-wrapper input{padding-right:50px}.toggle-password{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:0;border:none;font-size:18px;cursor:pointer}
+.divider{text-align:center;margin:16px 0;color:#bdc3c7;font-size:12px;position:relative}.divider::before,.divider::after{content:'';position:absolute;top:50%;width:45%;height:1px;background:#ecf0f1}.divider::before{left:0}.divider::after{right:0}
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);max-width:400px;width:90%;background:#1a1a2e;color:#fff;padding:14px 22px;border-radius:12px;font-size:14px;text-align:center;z-index:999;opacity:0;transition:all .4s;pointer-events:none;box-shadow:0 8px 40px rgba(0,0,0,0.2)}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.toast.success{background:#27ae60}.toast.error{background:#e74c3c}
+.connection-status{text-align:center;font-size:12px;color:#7f8c8d;margin-bottom:16px;padding:8px;background:#f8f9fa;border-radius:8px}
+.loading-spinner{display:inline-block;width:16px;height:16px;border:3px solid #ecf0f1;border-top:3px solid #8e44ad;border-radius:50%;animation:spin 1s linear infinite;vertical-align:middle;margin-right:8px}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+.version{text-align:center;font-size:10px;color:#bdc3c7;margin-top:8px}
+</style></head>
 <body>
-
 <div id="toast" class="toast"></div>
-
 <div class="login-container">
-    <div class="login-header">
-        <div class="logo">🏥</div>
-        <h1>MTWARA PERFORMANCE</h1>
-        <p>Mfumo wa Tathmini ya Utendaji</p>
-        <span class="badge">Toleo la Kimataifa v7.0</span>
-    </div>
-
-    <div class="connection-status" id="connectionStatus">
-        <span class="loading-spinner"></span> Inaunganisha...
-    </div>
-
-    <div class="tab-buttons">
-        <button class="btn active" id="loginTabBtn" onclick="switchTab('login')">🔐 Ingia</button>
-        <button class="btn inactive" id="signupTabBtn" onclick="switchTab('signup')">📝 Jisajili</button>
-    </div>
-
-    <!-- Login Tab -->
-    <div id="loginTab" class="tab-content active">
-        <div class="form-group">
-            <label>👤 Jina la Mtumiaji</label>
-            <input type="text" id="loginUsername" placeholder="Weka username" value="worker">
-        </div>
-        <div class="form-group">
-            <label>🔑 Nenosiri</label>
-            <div class="password-wrapper">
-                <input type="password" id="loginPassword" placeholder="Weka nenosiri" value="1234">
-                <button class="toggle-password" onclick="togglePasswordVisibility('loginPassword', this)">👁️</button>
-            </div>
-        </div>
-        <button class="btn btn-primary" onclick="login()" id="loginBtn">🔓 Ingia</button>
-        <div class="divider">Au</div>
-        <button class="btn btn-secondary" onclick="switchTab('signup')">📝 Jisajili Sasa</button>
-    </div>
-
-    <!-- Signup Tab -->
-    <div id="signupTab" class="tab-content">
-        <div class="form-group">
-            <label>👤 Jina la Mtumiaji</label>
-            <input type="text" id="signupUsername" placeholder="Chagua username">
-            <div class="form-hint" id="usernameHint" style="font-size:11px; color:#7f8c8d; margin-top:4px;">Angalia upatikanaji</div>
-        </div>
-        <div class="form-group">
-            <label>🔑 Nenosiri</label>
-            <div class="password-wrapper">
-                <input type="password" id="signupPassword" placeholder="Weka nenosiri">
-                <button class="toggle-password" onclick="togglePasswordVisibility('signupPassword', this)">👁️</button>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>🔑 Thibitisha Nenosiri</label>
-            <div class="password-wrapper">
-                <input type="password" id="signupPasswordConfirm" placeholder="Andika tena">
-                <button class="toggle-password" onclick="togglePasswordVisibility('signupPasswordConfirm', this)">👁️</button>
-            </div>
-            <div id="passwordMatchHint" style="font-size:11px; color:#7f8c8d; margin-top:4px;">Nenosiri lazima zilandane</div>
-        </div>
-        <div class="form-group">
-            <label>📋 Jukumu</label>
-            <select id="signupRole">
-                <option value="worker">👤 Mtendakazi</option>
-                <option value="supervisor">👔 Msimamizi</option>
-                <option value="incharge">🏥 Mganga Mfawidhi</option>
-            </select>
-        </div>
-        <button class="btn btn-primary" onclick="signup()" id="signupBtn">📝 Jisajili</button>
-        <div class="divider">Au</div>
-        <button class="btn btn-secondary" onclick="switchTab('login')">🔐 Ingia kwenye Akaunti</button>
-    </div>
-
-    <div class="version">Toleo 7.0 - BIN ID: 6a4b0bc9da38895dfe32cc08</div>
+  <div class="login-header"><div class="logo">🏥</div><h1>MTWARA PERFORMANCE</h1><p>Mfumo wa Tathmini ya Utendaji</p><span class="badge">Toleo v8.1</span></div>
+  <div class="connection-status" id="connectionStatus"><span class="loading-spinner"></span> Inaunganisha...</div>
+  <div class="tab-buttons"><button class="btn active" id="loginTabBtn" onclick="switchTab('login')">🔐 Ingia</button><button class="btn inactive" id="signupTabBtn" onclick="switchTab('signup')">📝 Jisajili</button></div>
+  <div id="loginTab" class="tab-content active">
+    <div class="form-group"><label>👤 Jina la Mtumiaji</label><input type="text" id="loginUsername" placeholder="Weka username" value="worker"></div>
+    <div class="form-group"><label>🔑 Nenosiri</label><div class="password-wrapper"><input type="password" id="loginPassword" placeholder="Weka nenosiri" value="1234"><button class="toggle-password" onclick="togglePasswordVisibility('loginPassword',this)">👁️</button></div></div>
+    <button class="btn btn-primary" onclick="login()" id="loginBtn">🔓 Ingia</button>
+    <div class="divider">Au</div><button class="btn btn-secondary" onclick="switchTab('signup')">📝 Jisajili Sasa</button>
+  </div>
+  <div id="signupTab" class="tab-content">
+    <div class="form-group"><label>👤 Jina la Mtumiaji</label><input type="text" id="signupUsername" placeholder="Chagua username"><div class="form-hint" id="usernameHint" style="font-size:11px;color:#7f8c8d;margin-top:4px;">Angalia upatikanaji</div></div>
+    <div class="form-group"><label>🔑 Nenosiri</label><div class="password-wrapper"><input type="password" id="signupPassword" placeholder="Weka nenosiri"><button class="toggle-password" onclick="togglePasswordVisibility('signupPassword',this)">👁️</button></div></div>
+    <div class="form-group"><label>🔑 Thibitisha Nenosiri</label><div class="password-wrapper"><input type="password" id="signupPasswordConfirm" placeholder="Andika tena"><button class="toggle-password" onclick="togglePasswordVisibility('signupPasswordConfirm',this)">👁️</button></div><div id="passwordMatchHint" style="font-size:11px;color:#7f8c8d;margin-top:4px;">Nenosiri lazima zilandane</div></div>
+    <div class="form-group"><label>📋 Jukumu</label><select id="signupRole"><option value="worker">👤 Mtendakazi</option><option value="supervisor">👔 Msimamizi</option><option value="incharge">🏥 Mganga Mfawidhi</option></select></div>
+    <button class="btn btn-primary" onclick="signup()" id="signupBtn">📝 Jisajili</button>
+    <div class="divider">Au</div><button class="btn btn-secondary" onclick="switchTab('login')">🔐 Ingia kwenye Akaunti</button>
+  </div>
+  <div class="version">Toleo 8.1 - WhatsApp + Uhifadhi</div>
 </div>
-
 <script>
-// ==============================================================
-// MTWARA PERFORMANCE - CONFIGURATION (BIN ID YA ZAMANI, ACCESS KEY MPYA)
-// ==============================================================
-const API_KEY = "$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K";
-const ACCESS_KEY = "$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K";
-const BIN_ID = "6a4b0bc9da38895dfe32cc08";
-const APP_NAME = "MTWARA PERFORMANCE";
-
-function showToast(msg, type = 'info') {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.className = 'toast ' + type + ' show';
-    setTimeout(() => t.classList.remove('show'), 3500);
-}
-
-function togglePasswordVisibility(id, btn) {
-    const input = document.getElementById(id);
-    if (input.type === 'password') { input.type = 'text'; btn.textContent = '🙈'; }
-    else { input.type = 'password'; btn.textContent = '👁️'; }
-}
-
-function switchTab(tab) {
-    document.getElementById('loginTab').classList.toggle('active', tab === 'login');
-    document.getElementById('signupTab').classList.toggle('active', tab === 'signup');
-    document.getElementById('loginTabBtn').className = 'btn ' + (tab === 'login' ? 'active' : 'inactive');
-    document.getElementById('signupTabBtn').className = 'btn ' + (tab === 'signup' ? 'active' : 'inactive');
-}
-
-// Check username availability
-document.getElementById('signupUsername').addEventListener('input', async function() {
-    const username = this.value.trim();
-    const hint = document.getElementById('usernameHint');
-    if (username.length < 3) { hint.innerHTML = '⚠️ Username lazima iwe na herufi 3 au zaidi'; hint.style.color = '#f39c12'; return; }
-    try {
-        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
-        if (!res.ok) throw new Error('Network error');
-        const data = await res.json();
-        const users = data.record?.users || {};
-        if (users[username]) { hint.innerHTML = '❌ Username tayari imechukuliwa'; hint.style.color = '#e74c3c'; }
-        else { hint.innerHTML = '✅ Username inapatikana'; hint.style.color = '#27ae60'; }
-    } catch (e) { hint.innerHTML = '⚠️ Hitilafu ya muunganisho'; hint.style.color = '#f39c12'; }
-});
-
-// Password match
-document.getElementById('signupPassword').addEventListener('input', checkPasswordMatch);
-document.getElementById('signupPasswordConfirm').addEventListener('input', checkPasswordMatch);
-function checkPasswordMatch() {
-    const p1 = document.getElementById('signupPassword').value;
-    const p2 = document.getElementById('signupPasswordConfirm').value;
-    const hint = document.getElementById('passwordMatchHint');
-    if (p1 && p2) {
-        if (p1 === p2) { hint.innerHTML = '✅ Nenosiri zinalingana'; hint.style.color = '#27ae60'; }
-        else { hint.innerHTML = '❌ Nenosiri hazilingani'; hint.style.color = '#e74c3c'; }
-    } else { hint.innerHTML = 'Nenosiri lazima zilandane'; hint.style.color = '#7f8c8d'; }
-}
-
-// Signup
-async function signup() {
-    const username = document.getElementById('signupUsername').value.trim();
-    const password = document.getElementById('signupPassword').value;
-    const confirm = document.getElementById('signupPasswordConfirm').value;
-    const role = document.getElementById('signupRole').value;
-    const btn = document.getElementById('signupBtn');
-    if (!username || username.length < 3) return showToast('❌ Username lazima iwe na herufi 3 au zaidi', 'error');
-    if (!password || password.length < 4) return showToast('❌ Nenosiri lazima iwe na herufi 4 au zaidi', 'error');
-    if (password !== confirm) return showToast('❌ Nenosiri hazilingani', 'error');
-    btn.disabled = true; btn.innerHTML = '<span class="loading-spinner"></span> Inajisajili...';
-    try {
-        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
-        if (!res.ok) throw new Error('Network error');
-        const data = await res.json();
-        const record = data.record || {};
-        if (!record.users) record.users = {};
-        if (record.users[username]) { showToast('❌ Username tayari imechukuliwa', 'error'); btn.disabled = false; btn.innerHTML = '📝 Jisajili'; return; }
-        record.users[username] = { password, role };
-        if (!record.appraisals) record.appraisals = {};
-        if (!record.appraisals.worker) record.appraisals.worker = {};
-        if (!record.appraisals.supervisor) record.appraisals.supervisor = {};
-        if (!record.appraisals.incharge) record.appraisals.incharge = {};
-        const update = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
-            body: JSON.stringify(record)
-        });
-        if (!update.ok) throw new Error('Imeshindwa kuhifadhi');
-        showToast(`✅ Akaunti imeundwa! Karibu ${username}`, 'success');
-        document.getElementById('loginUsername').value = username;
-        switchTab('login');
-        btn.disabled = false; btn.innerHTML = '📝 Jisajili';
-    } catch (e) { showToast('❌ ' + e.message, 'error'); btn.disabled = false; btn.innerHTML = '📝 Jisajili'; }
-}
-
-// Login
-async function login() {
-    const username = document.getElementById('loginUsername').value.trim();
-    const password = document.getElementById('loginPassword').value.trim();
-    const btn = document.getElementById('loginBtn');
-    if (!username || !password) return showToast('❌ Tafadhali jaza sehemu zote', 'error');
-    btn.disabled = true; btn.innerHTML = '<span class="loading-spinner"></span> Inaingiza...';
-    try {
-        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
-        if (!res.ok) throw new Error('Network error');
-        const data = await res.json();
-        const users = data.record?.users || {};
-        const user = users[username];
-        if (!user || user.password !== password) { showToast('❌ Jina au nenosiri si sahihi', 'error'); btn.disabled = false; btn.innerHTML = '🔓 Ingia'; return; }
-        const userData = encodeURIComponent(JSON.stringify({ username, role: user.role }));
-        let redirect = '';
-        if (user.role === 'worker') redirect = 'worker.html';
-        else if (user.role === 'supervisor') redirect = 'supervisor.html';
-        else if (user.role === 'incharge') redirect = 'incharge.html';
-        showToast(`✅ Karibu ${username}`, 'success');
-        setTimeout(() => { window.location.href = `${redirect}?user=${userData}`; }, 500);
-    } catch (e) { showToast('❌ ' + e.message, 'error'); btn.disabled = false; btn.innerHTML = '🔓 Ingia'; }
-}
-
-// Check connection
-async function checkConnection() {
-    const status = document.getElementById('connectionStatus');
-    try {
-        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
-        status.innerHTML = res.ok ? '✅ Imeunganishwa' : '⚠️ Hitilafu ya muunganisho';
-    } catch (e) { status.innerHTML = '⚠️ Hakuna mtandao'; }
-}
-
-// Enter key to login/signup
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        const active = document.querySelector('.tab-content.active');
-        if (active.id === 'loginTab') login();
-        else if (active.id === 'signupTab') signup();
-    }
-});
-
-window.onload = function() {
-    checkConnection();
-    console.log(`✅ ${APP_NAME} - Login Page v7.0 - BIN ID: ${BIN_ID}`);
-};
+const API_KEY="$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K",BIN_ID="6a4b0bc9da38895dfe32cc08";
+function showToast(m,t){const e=document.getElementById('toast');e.textContent=m;e.className='toast '+t+' show';setTimeout(()=>e.classList.remove('show'),3500)}
+function togglePasswordVisibility(i,b){const e=document.getElementById(i);e.type==='password'?(e.type='text',b.textContent='🙈'):(e.type='password',b.textContent='👁️')}
+function switchTab(t){document.getElementById('loginTab').classList.toggle('active',t==='login');document.getElementById('signupTab').classList.toggle('active',t==='signup');document.getElementById('loginTabBtn').className='btn '+(t==='login'?'active':'inactive');document.getElementById('signupTabBtn').className='btn '+(t==='signup'?'active':'inactive')}
+document.getElementById('signupUsername').addEventListener('input',async function(){const u=this.value.trim(),h=document.getElementById('usernameHint');if(u.length<3){h.innerHTML='⚠️ Username lazima iwe na herufi 3 au zaidi';h.style.color='#f39c12';return}try{const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}});if(!r.ok)throw new Error;const d=await r.json(),us=d.record?.users||{};us[u]?(h.innerHTML='❌ Username tayari imechukuliwa',h.style.color='#e74c3c'):(h.innerHTML='✅ Username inapatikana',h.style.color='#27ae60')}catch(e){h.innerHTML='⚠️ Hitilafu ya muunganisho';h.style.color='#f39c12'}});
+document.getElementById('signupPassword').addEventListener('input',checkPasswordMatch);document.getElementById('signupPasswordConfirm').addEventListener('input',checkPasswordMatch);
+function checkPasswordMatch(){const p1=document.getElementById('signupPassword').value,p2=document.getElementById('signupPasswordConfirm').value,h=document.getElementById('passwordMatchHint');if(p1&&p2){if(p1===p2){h.innerHTML='✅ Nenosiri zinalingana';h.style.color='#27ae60'}else{h.innerHTML='❌ Nenosiri hazilingani';h.style.color='#e74c3c'}}else{h.innerHTML='Nenosiri lazima zilandane';h.style.color='#7f8c8d'}}
+async function signup(){const u=document.getElementById('signupUsername').value.trim(),p=document.getElementById('signupPassword').value,c=document.getElementById('signupPasswordConfirm').value,r=document.getElementById('signupRole').value,b=document.getElementById('signupBtn');if(!u||u.length<3)return showToast('❌ Username lazima iwe na herufi 3 au zaidi','error');if(!p||p.length<4)return showToast('❌ Nenosiri lazima iwe na herufi 4 au zaidi','error');if(p!==c)return showToast('❌ Nenosiri hazilingani','error');b.disabled=true;b.innerHTML='<span class="loading-spinner"></span> Inajisajili...';try{const r1=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}});if(!r1.ok)throw new Error('Network error');const d=await r1.json(),rec=d.record||{};if(!rec.users)rec.users={};if(rec.users[u]){showToast('❌ Username tayari imechukuliwa','error');b.disabled=false;b.innerHTML='📝 Jisajili';return}rec.users[u]={password:p,role:r};if(!rec.appraisals)rec.appraisals={};['worker','supervisor','incharge'].forEach(ro=>{if(!rec.appraisals[ro])rec.appraisals[ro]={}});const up=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(rec)});if(!up.ok)throw new Error('Imeshindwa kuhifadhi');showToast(`✅ Akaunti imeundwa! Karibu ${u}`,'success');document.getElementById('loginUsername').value=u;switchTab('login');b.disabled=false;b.innerHTML='📝 Jisajili'}catch(e){showToast('❌ '+e.message,'error');b.disabled=false;b.innerHTML='📝 Jisajili'}}
+async function login(){const u=document.getElementById('loginUsername').value.trim(),p=document.getElementById('loginPassword').value.trim(),b=document.getElementById('loginBtn');if(!u||!p)return showToast('❌ Tafadhali jaza sehemu zote','error');b.disabled=true;b.innerHTML='<span class="loading-spinner"></span> Inaingiza...';try{const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}});if(!r.ok)throw new Error('Network error');const d=await r.json(),us=d.record?.users||{},user=us[u];if(!user||user.password!==p){showToast('❌ Jina au nenosiri si sahihi','error');b.disabled=false;b.innerHTML='🔓 Ingia';return}const ud=encodeURIComponent(JSON.stringify({username:u,role:user.role})),red=user.role==='worker'?'worker.html':user.role==='supervisor'?'supervisor.html':'incharge.html';showToast(`✅ Karibu ${u}`,'success');setTimeout(()=>{window.location.href=`${red}?user=${ud}`},500)}catch(e){showToast('❌ '+e.message,'error');b.disabled=false;b.innerHTML='🔓 Ingia'}}
+async function checkConnection(){const s=document.getElementById('connectionStatus');try{const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}});s.innerHTML=r.ok?'✅ Imeunganishwa':'⚠️ Hitilafu ya muunganisho'}catch(e){s.innerHTML='⚠️ Hakuna mtandao'}}
+document.addEventListener('keydown',e=>{if(e.key==='Enter'){const a=document.querySelector('.tab-content.active');if(a.id==='loginTab')login();else if(a.id==='signupTab')signup()}});
+window.onload=function(){checkConnection();console.log('✅ MTWARA PERFORMANCE - Login v8.1')};
 </script>
 </body>
 </html>
