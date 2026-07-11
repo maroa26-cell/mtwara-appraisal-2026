@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -5,46 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MTWARA PERFORMANCE - Ingia</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a5276, #8e44ad); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
-        .login-container { background: #fff; border-radius: 20px; padding: 40px 35px; max-width: 440px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.6s ease; }
-        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .login-header { text-align: center; margin-bottom: 24px; }
-        .login-header .logo { font-size: 48px; }
-        .login-header h1 { color: #1a5276; font-size: 24px; }
-        .login-header p { color: #7f8c8d; font-size: 14px; }
-        .login-header .badge { display: inline-block; background: #8e44ad; color: #fff; padding: 4px 16px; border-radius: 20px; font-size: 11px; margin-top: 6px; }
-        .form-group { margin-bottom: 16px; }
-        .form-group label { display: block; font-weight: 600; color: #1a5276; margin-bottom: 4px; font-size: 13px; }
-        .form-group input, .form-group select { width: 100%; padding: 12px 16px; border: 2px solid #dee2e6; border-radius: 10px; font-size: 14px; }
-        .form-group input:focus { border-color: #8e44ad; outline: none; }
-        .btn { width: 100%; padding: 14px; border: none; border-radius: 10px; font-weight: 700; font-size: 16px; cursor: pointer; transition: 0.3s; }
-        .btn-primary { background: #8e44ad; color: #fff; }
-        .btn-primary:hover { background: #7d3c98; transform: translateY(-2px); }
-        .btn-secondary { background: #3498db; color: #fff; }
-        .btn-secondary:hover { background: #2e86c1; transform: translateY(-2px); }
-        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        .tab-buttons { display: flex; gap: 8px; margin-bottom: 20px; }
-        .tab-buttons .btn { flex: 1; padding: 10px; font-size: 14px; border-radius: 10px; }
-        .tab-buttons .btn.active { background: #8e44ad; color: #fff; }
-        .tab-buttons .btn.inactive { background: #ecf0f1; color: #7f8c8d; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        .password-wrapper { position: relative; }
-        .password-wrapper input { padding-right: 50px; }
-        .toggle-password { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: transparent; border: none; font-size: 18px; cursor: pointer; }
-        .divider { text-align: center; margin: 16px 0; color: #bdc3c7; font-size: 12px; position: relative; }
-        .divider::before, .divider::after { content: ''; position: absolute; top: 50%; width: 45%; height: 1px; background: #ecf0f1; }
-        .divider::before { left: 0; }
-        .divider::after { right: 0; }
-        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); max-width: 400px; width: 90%; background: #1a1a2e; color: #fff; padding: 14px 22px; border-radius: 12px; font-size: 14px; text-align: center; z-index: 999; opacity: 0; transition: all 0.4s ease; pointer-events: none; box-shadow: 0 8px 40px rgba(0,0,0,0.2); }
-        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-        .toast.success { background: #27ae60; }
-        .toast.error { background: #e74c3c; }
-        .connection-status { text-align: center; font-size: 12px; color: #7f8c8d; margin-bottom: 16px; padding: 8px; background: #f8f9fa; border-radius: 8px; }
-        .loading-spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid #ecf0f1; border-top: 3px solid #8e44ad; border-radius: 50%; animation: spin 1s linear infinite; vertical-align: middle; margin-right: 8px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .version { text-align: center; font-size: 10px; color: #bdc3c7; margin-top: 8px; }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#1a5276,#8e44ad);min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px}
+        .login-container{background:#fff;border-radius:20px;padding:40px 35px;max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:slideUp 0.6s ease}
+        @keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+        .login-header{text-align:center;margin-bottom:24px}
+        .login-header .logo{font-size:48px}
+        .login-header h1{color:#1a5276;font-size:24px}
+        .login-header p{color:#7f8c8d;font-size:14px}
+        .login-header .badge{display:inline-block;background:#8e44ad;color:#fff;padding:4px 16px;border-radius:20px;font-size:11px;margin-top:6px}
+        .form-group{margin-bottom:16px}
+        .form-group label{display:block;font-weight:600;color:#1a5276;margin-bottom:4px;font-size:13px}
+        .form-group input,.form-group select{width:100%;padding:12px 16px;border:2px solid #dee2e6;border-radius:10px;font-size:14px}
+        .form-group input:focus{border-color:#8e44ad;outline:none}
+        .btn{width:100%;padding:14px;border:none;border-radius:10px;font-weight:700;font-size:16px;cursor:pointer;transition:0.3s}
+        .btn-primary{background:#8e44ad;color:#fff}
+        .btn-primary:hover{background:#7d3c98;transform:translateY(-2px)}
+        .btn-secondary{background:#3498db;color:#fff}
+        .btn-secondary:hover{background:#2e86c1;transform:translateY(-2px)}
+        .btn:disabled{opacity:0.6;cursor:not-allowed}
+        .tab-buttons{display:flex;gap:8px;margin-bottom:20px}
+        .tab-buttons .btn{flex:1;padding:10px;font-size:14px;border-radius:10px}
+        .tab-buttons .btn.active{background:#8e44ad;color:#fff}
+        .tab-buttons .btn.inactive{background:#ecf0f1;color:#7f8c8d}
+        .tab-content{display:none}
+        .tab-content.active{display:block}
+        .password-wrapper{position:relative}
+        .password-wrapper input{padding-right:50px}
+        .toggle-password{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:transparent;border:none;font-size:18px;cursor:pointer}
+        .divider{text-align:center;margin:16px 0;color:#bdc3c7;font-size:12px;position:relative}
+        .divider::before,.divider::after{content:'';position:absolute;top:50%;width:45%;height:1px;background:#ecf0f1}
+        .divider::before{left:0}
+        .divider::after{right:0}
+        .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);max-width:400px;width:90%;background:#1a1a2e;color:#fff;padding:14px 22px;border-radius:12px;font-size:14px;text-align:center;z-index:999;opacity:0;transition:all 0.4s ease;pointer-events:none;box-shadow:0 8px 40px rgba(0,0,0,0.2)}
+        .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+        .toast.success{background:#27ae60}
+        .toast.error{background:#e74c3c}
+        .connection-status{text-align:center;font-size:12px;color:#7f8c8d;margin-bottom:16px;padding:8px;background:#f8f9fa;border-radius:8px}
+        .loading-spinner{display:inline-block;width:16px;height:16px;border:3px solid #ecf0f1;border-top:3px solid #8e44ad;border-radius:50%;animation:spin 1s linear infinite;vertical-align:middle;margin-right:8px}
+        @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+        .version{text-align:center;font-size:10px;color:#bdc3c7;margin-top:8px}
     </style>
 </head>
 <body>
@@ -68,7 +69,6 @@
         <button class="btn inactive" id="signupTabBtn" onclick="switchTab('signup')">📝 Jisajili</button>
     </div>
 
-    <!-- Login Tab -->
     <div id="loginTab" class="tab-content active">
         <div class="form-group">
             <label>👤 Jina la Mtumiaji</label>
@@ -86,7 +86,6 @@
         <button class="btn btn-secondary" onclick="switchTab('signup')">📝 Jisajili Sasa</button>
     </div>
 
-    <!-- Signup Tab -->
     <div id="signupTab" class="tab-content">
         <div class="form-group">
             <label>👤 Jina la Mtumiaji</label>
@@ -125,18 +124,13 @@
 </div>
 
 <script>
-// ==============================================================
-// MTWARA PERFORMANCE - CONFIGURATION (JSONBin)
-// ==============================================================
 const API_KEY = "$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDot5L9hRGRQfa21/Mw/B0UcS";
-const ACCESS_KEY = "$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K";
 const BIN_ID = "6a4b0bc9da38895dfe32cc08";
-const APP_NAME = "MTWARA PERFORMANCE";
 
-function showToast(msg, type = 'info') {
+function showToast(msg, type) {
     const t = document.getElementById('toast');
     t.textContent = msg;
-    t.className = 'toast ' + type + ' show';
+    t.className = 'toast ' + (type || 'info') + ' show';
     setTimeout(() => t.classList.remove('show'), 3500);
 }
 
@@ -153,14 +147,13 @@ function switchTab(tab) {
     document.getElementById('signupTabBtn').className = 'btn ' + (tab === 'signup' ? 'active' : 'inactive');
 }
 
-// Check username availability
 document.getElementById('signupUsername').addEventListener('input', async function() {
     const username = this.value.trim();
     const hint = document.getElementById('usernameHint');
     if (username.length < 3) { hint.innerHTML = '⚠️ Username lazima iwe na herufi 3 au zaidi'; hint.style.color = '#f39c12'; return; }
     try {
         const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
-        if (!res.ok) throw new Error('Network error');
+        if (!res.ok) throw new Error();
         const data = await res.json();
         const users = data.record?.users || {};
         if (users[username]) { hint.innerHTML = '❌ Username tayari imechukuliwa'; hint.style.color = '#e74c3c'; }
@@ -168,7 +161,6 @@ document.getElementById('signupUsername').addEventListener('input', async functi
     } catch (e) { hint.innerHTML = '⚠️ Hitilafu ya muunganisho'; hint.style.color = '#f39c12'; }
 });
 
-// Password match
 document.getElementById('signupPassword').addEventListener('input', checkPasswordMatch);
 document.getElementById('signupPasswordConfirm').addEventListener('input', checkPasswordMatch);
 function checkPasswordMatch() {
@@ -181,7 +173,6 @@ function checkPasswordMatch() {
     } else { hint.innerHTML = 'Nenosiri lazima zilandane'; hint.style.color = '#7f8c8d'; }
 }
 
-// Signup
 async function signup() {
     const username = document.getElementById('signupUsername').value.trim();
     const password = document.getElementById('signupPassword').value;
@@ -194,31 +185,28 @@ async function signup() {
     btn.disabled = true; btn.innerHTML = '<span class="loading-spinner"></span> Inajisajili...';
     try {
         const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
-        if (!res.ok) throw new Error('Network error');
+        if (!res.ok) throw new Error();
         const data = await res.json();
         const record = data.record || {};
         if (!record.users) record.users = {};
         if (record.users[username]) { showToast('❌ Username tayari imechukuliwa', 'error'); btn.disabled = false; btn.innerHTML = '📝 Jisajili'; return; }
         record.users[username] = { password, role };
-        // Also create empty appraisals structure if not exists
         if (!record.appraisals) record.appraisals = {};
         if (!record.appraisals.worker) record.appraisals.worker = {};
         if (!record.appraisals.supervisor) record.appraisals.supervisor = {};
         if (!record.appraisals.incharge) record.appraisals.incharge = {};
-        const update = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+        await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
             body: JSON.stringify(record)
         });
-        if (!update.ok) throw new Error('Imeshindwa kuhifadhi');
         showToast(`✅ Akaunti imeundwa! Karibu ${username}`, 'success');
         document.getElementById('loginUsername').value = username;
         switchTab('login');
-        btn.disabled = false; btn.innerHTML = '📝 Jisajili';
-    } catch (e) { showToast('❌ ' + e.message, 'error'); btn.disabled = false; btn.innerHTML = '📝 Jisajili'; }
+    } catch (e) { showToast('❌ ' + e.message, 'error'); }
+    btn.disabled = false; btn.innerHTML = '📝 Jisajili';
 }
 
-// Login
 async function login() {
     const username = document.getElementById('loginUsername').value.trim();
     const password = document.getElementById('loginPassword').value.trim();
@@ -227,7 +215,7 @@ async function login() {
     btn.disabled = true; btn.innerHTML = '<span class="loading-spinner"></span> Inaingiza...';
     try {
         const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
-        if (!res.ok) throw new Error('Network error');
+        if (!res.ok) throw new Error();
         const data = await res.json();
         const users = data.record?.users || {};
         const user = users[username];
@@ -239,10 +227,10 @@ async function login() {
         else if (user.role === 'incharge') redirect = 'incharge.html';
         showToast(`✅ Karibu ${username}`, 'success');
         setTimeout(() => { window.location.href = `${redirect}?user=${userData}`; }, 500);
-    } catch (e) { showToast('❌ ' + e.message, 'error'); btn.disabled = false; btn.innerHTML = '🔓 Ingia'; }
+    } catch (e) { showToast('❌ ' + e.message, 'error'); }
+    btn.disabled = false; btn.innerHTML = '🔓 Ingia';
 }
 
-// Check connection
 async function checkConnection() {
     const status = document.getElementById('connectionStatus');
     try {
@@ -251,7 +239,6 @@ async function checkConnection() {
     } catch (e) { status.innerHTML = '⚠️ Hakuna mtandao'; }
 }
 
-// Enter key to login/signup
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         const active = document.querySelector('.tab-content.active');
@@ -262,7 +249,7 @@ document.addEventListener('keydown', (e) => {
 
 window.onload = function() {
     checkConnection();
-    console.log(`✅ ${APP_NAME} - Login Page v6.0`);
+    console.log('✅ MTWARA PERFORMANCE - Login v6.0');
 };
 </script>
 </body>
