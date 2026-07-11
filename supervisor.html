@@ -6,8 +6,8 @@
     <title>Fomu ya Msimamizi</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a5276, #f39c12); min-height: 100vh; padding: 20px; display: flex; justify-content: center; align-items: center; }
-        .form-container { background: #fff; border-radius: 20px; padding: 40px 35px; max-width: 1000px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.6s ease; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a5276, #f39c12); min-height: 100vh; padding: 20px; display: flex; justify-content: center; align-items: flex-start; }
+        .form-container { background: #fff; border-radius: 20px; padding: 40px 35px; max-width: 1000px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.6s ease; margin-top: 20px; }
         @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         h2 { color: #1a5276; text-align: center; margin-bottom: 8px; }
         .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 24px; font-size: 14px; }
@@ -43,7 +43,7 @@
         .btn:disabled { opacity: 0.6; cursor: not-allowed; }
         .button-group { display: flex; gap: 10px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
         .button-group .btn { flex: 0 1 auto; }
-        .button-group-top { display: flex; gap: 10px; justify-content: flex-end; margin-bottom: 16px; flex-wrap: wrap; }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
         .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); max-width: 400px; width: 90%; background: #1a1a2e; color: #fff; padding: 14px 22px; border-radius: 12px; font-size: 14px; text-align: center; z-index: 999; opacity: 0; transition: all 0.4s ease; pointer-events: none; box-shadow: 0 8px 40px rgba(0,0,0,0.2); }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
         .toast.success { background: #27ae60; }
@@ -72,7 +72,7 @@
 <div id="toast" class="toast"></div>
 
 <div class="form-container">
-    <div class="no-print" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap;">
+    <div class="top-bar no-print">
         <h2 style="margin:0;">👔 Fomu ya Msimamizi</h2>
         <div style="display: flex; gap: 8px; flex-wrap: wrap;">
             <button class="btn btn-secondary" onclick="window.location.href='index.html'">🏠 Nyumbani</button>
@@ -80,19 +80,19 @@
             <button class="btn btn-warning" onclick="window.print()">📄 PDF</button>
         </div>
     </div>
-    <p class="subtitle" id="userGreeting">Karibu msimamizi</p>
+    <p class="subtitle" id="userGreeting">Karibu msimamizi - Jaza tathmini yako</p>
 
-    <!-- Mawasiliano -->
+    <!-- Mawasiliano - Nambari +255742710697 -->
     <div class="communication-bar no-print">
         <span>📞 Mawasiliano:</span>
-        <a href="tel:+255712345678" class="btn btn-phone" style="text-decoration: none; padding: 6px 14px; font-size: 13px;">📱 Simu</a>
-        <a href="https://wa.me/255712345678" target="_blank" class="btn btn-whatsapp" style="text-decoration: none; padding: 6px 14px; font-size: 13px;">💬 WhatsApp</a>
-        <span style="font-size: 12px; color: #7f8c8d; margin-left: 4px;">(Nambari za mfano - badilisha)</span>
+        <a href="tel:+255742710697" class="btn btn-phone" style="text-decoration: none; padding: 6px 14px; font-size: 13px;">📱 Simu</a>
+        <a href="https://wa.me/255742710697" target="_blank" class="btn btn-whatsapp" style="text-decoration: none; padding: 6px 14px; font-size: 13px;">💬 WhatsApp</a>
+        <span style="font-size: 12px; color: #7f8c8d; margin-left: 4px;">(Nambari +255742710697)</span>
     </div>
 
     <!-- SEHEMU 1: Taarifa za Msingi -->
     <div class="section">
-        <h3><span class="step">1</span> Taarifa za Msingi</h3>
+        <h3><span class="step">1</span> Taarifa zako</h3>
         <div class="form-grid">
             <div class="form-group">
                 <label>Jina Kamili</label>
@@ -140,7 +140,7 @@
         </div>
     </div>
 
-    <!-- SEHEMU 3: Maoni na Mapendekezo -->
+    <!-- SEHEMU 3: Maoni na Mapendekezo + Mawasiliano -->
     <div class="section">
         <h3><span class="step">3</span> Maoni, Mapendekezo na Mawasiliano</h3>
         <div class="form-group">
@@ -160,13 +160,13 @@
             <textarea id="overall_comments" placeholder="Andika maoni yako ya jumla..." rows="3"></textarea>
         </div>
         <div class="form-group">
-            <label>Mawasiliano na Wafanyakazi</label>
+            <label>📋 Wafanyakazi waliotuma tathmini</label>
             <button class="btn btn-info" onclick="loadWorkerData()" style="width: auto; padding: 8px 16px; font-size: 13px;">📋 Tazama Wafanyakazi</button>
             <div id="workerListContainer" style="margin-top: 8px;"></div>
         </div>
     </div>
 
-    <!-- Vitufe vya chini -->
+    <!-- Vitufe -->
     <div class="button-group no-print">
         <button class="btn btn-primary" onclick="saveAppraisal()" id="saveBtn">💾 Hifadhi</button>
         <button class="btn btn-info" onclick="submitAppraisal()" id="submitBtn">📤 Tuma</button>
@@ -182,7 +182,7 @@
 
 <script>
 // ==============================================================
-// MTWARA PERFORMANCE - SUPERVISOR FORM (v5.0)
+// MTWARA PERFORMANCE - SUPERVISOR FORM (v6.0 - Nambari +255742710697)
 // ==============================================================
 const API_KEY = "$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDot5L9hRGRQfa21/Mw/B0UcS";
 const BIN_ID = "6a4b0bc9da38895dfe32cc08";
@@ -247,22 +247,14 @@ function setFormData(data) {
     document.getElementById('weaknesses').value = data.weaknesses || '';
     document.getElementById('recommendations').value = data.recommendations || '';
     document.getElementById('overall_comments').value = data.overall_comments || '';
-    const status = data.status || 'saved';
-    updateStatus(status);
+    updateStatus(data.status || 'saved');
 }
 
 function updateStatus(status) {
     const badge = document.getElementById('saveStatus');
-    if (status === 'saved') {
-        badge.className = 'status-badge saved';
-        badge.textContent = 'Imehifadhiwa';
-    } else if (status === 'submitted') {
-        badge.className = 'status-badge submitted';
-        badge.textContent = 'Imetumwa';
-    } else {
-        badge.className = 'status-badge pending';
-        badge.textContent = 'Hajahifadhiwa';
-    }
+    if (status === 'saved') { badge.className = 'status-badge saved'; badge.textContent = 'Imehifadhiwa'; }
+    else if (status === 'submitted') { badge.className = 'status-badge submitted'; badge.textContent = 'Imetumwa'; }
+    else { badge.className = 'status-badge pending'; badge.textContent = 'Hajahifadhiwa'; }
 }
 
 async function saveAppraisal() {
@@ -287,9 +279,7 @@ async function saveAppraisal() {
         if (!update.ok) throw new Error('Imeshindwa kuhifadhi');
         showToast('✅ Tathmini imehifadhiwa!', 'success');
         updateStatus('saved');
-    } catch (e) {
-        showToast('❌ ' + e.message, 'error');
-    }
+    } catch (e) { showToast('❌ ' + e.message, 'error'); }
     btn.disabled = false;
     btn.innerHTML = '💾 Hifadhi';
 }
@@ -316,9 +306,7 @@ async function submitAppraisal() {
         if (!update.ok) throw new Error('Imeshindwa kutuma');
         showToast('✅ Tathmini imetumwa!', 'success');
         updateStatus('submitted');
-    } catch (e) {
-        showToast('❌ ' + e.message, 'error');
-    }
+    } catch (e) { showToast('❌ ' + e.message, 'error'); }
     btn.disabled = false;
     btn.innerHTML = '📤 Tuma';
 }
@@ -333,9 +321,7 @@ async function loadAppraisal() {
         if (!data) return showToast('❌ Hakuna tathmini iliyohifadhiwa', 'error');
         setFormData(data);
         showToast('✅ Tathmini imepakiwa', 'success');
-    } catch (e) {
-        showToast('❌ ' + e.message, 'error');
-    }
+    } catch (e) { showToast('❌ ' + e.message, 'error'); }
 }
 
 async function loadWorkerData() {
@@ -400,14 +386,9 @@ function showSpecific() {
     alert(msg);
 }
 
-function logout() {
-    window.location.href = 'index.html';
-}
+function logout() { window.location.href = 'index.html'; }
 
-window.onload = function() {
-    loadAppraisal();
-    loadWorkerData();
-};
+window.onload = function() { loadAppraisal(); loadWorkerData(); };
 </script>
 </body>
 </html>
