@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -122,7 +121,7 @@
         <button class="btn btn-secondary" onclick="switchTab('login')">🔐 Ingia kwenye Akaunti</button>
     </div>
 
-    <div class="version">Toleo 6.0 - Dashibodi ya Msimamizi</div>
+    <div class="version">Toleo 6.0 - Nambari +255742710697</div>
 </div>
 
 <script>
@@ -201,6 +200,7 @@ async function signup() {
         if (!record.users) record.users = {};
         if (record.users[username]) { showToast('❌ Username tayari imechukuliwa', 'error'); btn.disabled = false; btn.innerHTML = '📝 Jisajili'; return; }
         record.users[username] = { password, role };
+        // Also create empty appraisals structure if not exists
         if (!record.appraisals) record.appraisals = {};
         if (!record.appraisals.worker) record.appraisals.worker = {};
         if (!record.appraisals.supervisor) record.appraisals.supervisor = {};
@@ -235,7 +235,7 @@ async function login() {
         const userData = encodeURIComponent(JSON.stringify({ username, role: user.role }));
         let redirect = '';
         if (user.role === 'worker') redirect = 'worker.html';
-        else if (user.role === 'supervisor') redirect = 'supervisor_dash.html';
+        else if (user.role === 'supervisor') redirect = 'supervisor.html';
         else if (user.role === 'incharge') redirect = 'incharge.html';
         showToast(`✅ Karibu ${username}`, 'success');
         setTimeout(() => { window.location.href = `${redirect}?user=${userData}`; }, 500);
