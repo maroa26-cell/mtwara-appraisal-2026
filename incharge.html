@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -8,20 +7,21 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a5276, #8e44ad); min-height: 100vh; padding: 20px; display: flex; justify-content: center; align-items: flex-start; }
-        .form-container { background: #fff; border-radius: 20px; padding: 40px 35px; max-width: 1000px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.6s ease; margin-top: 20px; }
+        .form-container { background: #fff; border-radius: 20px; padding: 40px 35px; max-width: 1100px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.6s ease; margin-top: 20px; }
         @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         h2 { color: #1a5276; text-align: center; margin-bottom: 8px; }
         .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 24px; font-size: 14px; }
         .section { background: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 20px; border-left: 4px solid #8e44ad; }
-        .section h3 { color: #1a5276; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-        .section h3 .step { background: #8e44ad; color: #fff; border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
+        .section h3 { color: #1a5276; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .section h3 .step { background: #8e44ad; color: #fff; border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+        .section h3 .badge { background: #8e44ad; color: #fff; padding: 2px 12px; border-radius: 20px; font-size: 11px; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
         .form-group { margin-bottom: 12px; }
         .form-group.full-width { grid-column: 1 / -1; }
         .form-group label { display: block; font-weight: 600; color: #1a5276; margin-bottom: 4px; font-size: 13px; }
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 14px; border: 2px solid #dee2e6; border-radius: 8px; font-size: 14px; }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #8e44ad; outline: none; }
-        .form-group textarea { min-height: 80px; resize: vertical; }
+        .form-group textarea { min-height: 60px; resize: vertical; }
         .btn { padding: 12px 20px; border: none; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 6px; }
         .btn-primary { background: #8e44ad; color: #fff; }
         .btn-primary:hover { background: #7d3c98; transform: translateY(-2px); }
@@ -55,19 +55,26 @@
         .status-badge.saved { background: #d4edda; color: #155724; }
         .status-badge.pending { background: #fff3cd; color: #856404; }
         .status-badge.submitted { background: #cce5ff; color: #004085; }
+        .status-badge.reviewed { background: #d1ecf1; color: #0c5460; }
         .communication-bar { background: #f8f9fa; padding: 12px 16px; border-radius: 10px; margin-bottom: 16px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; border: 1px solid #dee2e6; }
         .communication-bar span { font-weight: 600; color: #1a5276; margin-right: 8px; }
         .data-tabs { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
         .data-tabs .tab-btn { padding: 6px 16px; border: none; border-radius: 20px; cursor: pointer; font-size: 13px; background: #ecf0f1; color: #7f8c8d; }
         .data-tabs .tab-btn.active { background: #8e44ad; color: #fff; }
         .data-tabs .tab-btn:hover { background: #d5d8dc; }
-        .data-container { background: #fff; border-radius: 8px; padding: 12px; border: 1px solid #dee2e6; max-height: 250px; overflow-y: auto; }
+        .data-container { background: #fff; border-radius: 8px; padding: 12px; border: 1px solid #dee2e6; max-height: 300px; overflow-y: auto; }
         .data-item { padding: 8px 12px; border-bottom: 1px solid #eee; }
         .data-item:last-child { border-bottom: none; }
         .data-item .badge-role { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: 600; margin-left: 6px; }
         .badge-role.worker { background: #27ae60; color: #fff; }
         .badge-role.supervisor { background: #f39c12; color: #fff; }
         .badge-role.incharge { background: #8e44ad; color: #fff; }
+        .data-item .status-badge-sm { font-size: 10px; padding: 2px 8px; border-radius: 12px; background: #e8f0fe; }
+        .chart-container { background: #fff; border-radius: 8px; padding: 16px; border: 1px solid #dee2e6; margin-top: 8px; }
+        .chart-bar { display: flex; align-items: center; gap: 12px; margin: 6px 0; }
+        .chart-bar .label { width: 120px; font-size: 13px; color: #1a5276; }
+        .chart-bar .bar { height: 20px; border-radius: 10px; background: linear-gradient(90deg, #8e44ad, #a569bd); transition: width 0.5s; }
+        .chart-bar .value { font-size: 13px; font-weight: 600; color: #1a5276; min-width: 30px; }
         @media print {
             .no-print { display: none !important; }
             .form-container { box-shadow: none !important; }
@@ -88,9 +95,9 @@
             <button class="btn btn-warning" onclick="window.print()">📄 PDF</button>
         </div>
     </div>
-    <p class="subtitle" id="userGreeting">Karibu mganga mfawidhi - Jaza tathmini yako</p>
+    <p class="subtitle" id="userGreeting">Karibu mganga mfawidhi - Tathmini zote zilizotumwa zinaonekana hapa</p>
 
-    <!-- Mawasiliano - Nambari +255742710697 -->
+    <!-- Mawasiliano -->
     <div class="communication-bar no-print">
         <span>📞 Mawasiliano:</span>
         <a href="tel:+255742710697" class="btn btn-phone" style="text-decoration: none; padding: 6px 14px; font-size: 13px;">📱 Simu</a>
@@ -98,7 +105,7 @@
         <span style="font-size: 12px; color: #7f8c8d; margin-left: 4px;">(Nambari +255742710697)</span>
     </div>
 
-    <!-- SEHEMU 1: Taarifa za Msingi -->
+    <!-- SEHEMU 1: Taarifa za Msingi za Mganga Mfawidhi -->
     <div class="section">
         <h3><span class="step">1</span> Taarifa zako</h3>
         <div class="form-grid">
@@ -127,7 +134,7 @@
 
     <!-- SEHEMU 2: Tathmini ya Utendaji -->
     <div class="section">
-        <h3><span class="step">2</span> Tathmini ya Utendaji</h3>
+        <h3><span class="step">2</span> Tathmini yako</h3>
         <div class="form-grid">
             <div class="form-group">
                 <label>Hatua ya 1: Uongozi wa Kliniki (1-5)</label>
@@ -148,9 +155,9 @@
         </div>
     </div>
 
-    <!-- SEHEMU 3: Maoni na Mapendekezo + Mawasiliano -->
+    <!-- SEHEMU 3: Maoni na Mapendekezo -->
     <div class="section">
-        <h3><span class="step">3</span> Maoni, Mapendekezo na Mawasiliano</h3>
+        <h3><span class="step">3</span> Maoni na Mapendekezo</h3>
         <div class="form-group">
             <label>Nguvu zako (Strengths)</label>
             <textarea id="strengths" placeholder="Andika nguvu zako..."></textarea>
@@ -167,26 +174,38 @@
             <label>Maoni ya Jumla</label>
             <textarea id="overall_comments" placeholder="Andika maoni yako ya jumla..." rows="3"></textarea>
         </div>
-        <div class="form-group">
-            <label>📋 Data za wafanyakazi wote</label>
-            <div class="data-tabs">
-                <button class="tab-btn active" onclick="loadAllData('all')">📋 Wote</button>
-                <button class="tab-btn" onclick="loadAllData('worker')">👤 Mtendakazi</button>
-                <button class="tab-btn" onclick="loadAllData('supervisor')">👔 Msimamizi</button>
-                <button class="tab-btn" onclick="loadAllData('incharge')">🏥 Mganga Mfawidhi</button>
-            </div>
-            <div id="allDataContainer" class="data-container">
-                <p style="color: #7f8c8d; text-align: center;">Bonyeza kituo cha juu kuona data</p>
-            </div>
+    </div>
+
+    <!-- SEHEMU 4: Grafu -->
+    <div class="section">
+        <h3><span class="step">4</span> 📊 Muhtasari wa Tathmini Yako</h3>
+        <div class="chart-container" id="chartContainer">
+            <div class="chart-bar"><span class="label">Uongozi Kliniki</span><div class="bar" id="chartLead" style="width:0%;"></div><span class="value" id="valLead">0/5</span></div>
+            <div class="chart-bar"><span class="label">Ubora Huduma</span><div class="bar" id="chartQual" style="width:0%;"></div><span class="value" id="valQual">0/5</span></div>
+            <div class="chart-bar"><span class="label">Uwajibikaji</span><div class="bar" id="chartAcc" style="width:0%;"></div><span class="value" id="valAcc">0/5</span></div>
+        </div>
+    </div>
+
+    <!-- SEHEMU 5: Tathmini Zilizotumwa (Worker na Supervisor) -->
+    <div class="section">
+        <h3><span class="step">5</span> 📋 Tathmini Zilizotumwa kwako</h3>
+        <div class="data-tabs">
+            <button class="tab-btn active" onclick="loadAllData('all')">📋 Zote</button>
+            <button class="tab-btn" onclick="loadAllData('worker')">👤 Mtendakazi</button>
+            <button class="tab-btn" onclick="loadAllData('supervisor')">👔 Msimamizi</button>
+            <button class="tab-btn" onclick="loadAllData('incharge')">🏥 Yangu</button>
+        </div>
+        <div id="allDataContainer" class="data-container">
+            <p style="color: #7f8c8d; text-align: center;">Bonyeza kituo cha juu kuona data</p>
         </div>
     </div>
 
     <!-- Vitufe -->
     <div class="button-group no-print">
-        <button class="btn btn-primary" onclick="saveAppraisal()" id="saveBtn">💾 Hifadhi</button>
-        <button class="btn btn-info" onclick="submitAppraisal()" id="submitBtn">📤 Tuma</button>
+        <button class="btn btn-success" onclick="saveAppraisal()" id="saveBtn">💾 Hifadhi</button>
+        <button class="btn btn-info" onclick="submitAppraisal()" id="submitBtn">📤 Tuma (Hifadhi)</button>
         <button class="btn btn-secondary" onclick="loadAppraisal()">📂 Pakia</button>
-        <button class="btn btn-success" onclick="showOverall()">📊 Tathmini Jumla</button>
+        <button class="btn btn-primary" onclick="showOverall()">📊 Tathmini Jumla</button>
         <button class="btn btn-purple" onclick="showSpecific()">🎯 Tathmini Maalumu</button>
         <button class="btn btn-danger" onclick="logout()">🚪 Toka</button>
     </div>
@@ -197,7 +216,7 @@
 
 <script>
 // ==============================================================
-// MTWARA PERFORMANCE - INCHARGE FORM (v6.0 - Nambari +255742710697)
+// MTWARA PERFORMANCE - INCHARGE FORM (v7.0 - Kamili)
 // ==============================================================
 const API_KEY = "$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDot5L9hRGRQfa21/Mw/B0UcS";
 const BIN_ID = "6a4b0bc9da38895dfe32cc08";
@@ -224,7 +243,7 @@ if (!username) {
     showToast('❌ Hitilafu: Hakuna mtumiaji', 'error');
     setTimeout(() => window.location.href = 'index.html', 2000);
 }
-document.getElementById('userGreeting').textContent = `Karibu ${username} - Tathmini ya Mganga Mfawidhi`;
+document.getElementById('userGreeting').textContent = `Karibu ${username} - Tathmini zote zilizotumwa zinaonekana hapa`;
 
 function getFormData() {
     return {
@@ -244,6 +263,7 @@ function getFormData() {
         recommendations: document.getElementById('recommendations').value,
         overall_comments: document.getElementById('overall_comments').value,
         status: 'saved',
+        submitted_to: null,
         timestamp: new Date().toISOString()
     };
 }
@@ -263,14 +283,34 @@ function setFormData(data) {
     document.getElementById('recommendations').value = data.recommendations || '';
     document.getElementById('overall_comments').value = data.overall_comments || '';
     updateStatus(data.status || 'saved');
+    updateChart();
 }
 
 function updateStatus(status) {
     const badge = document.getElementById('saveStatus');
-    if (status === 'saved') { badge.className = 'status-badge saved'; badge.textContent = 'Imehifadhiwa'; }
-    else if (status === 'submitted') { badge.className = 'status-badge submitted'; badge.textContent = 'Imetumwa'; }
-    else { badge.className = 'status-badge pending'; badge.textContent = 'Hajahifadhiwa'; }
+    if (status === 'saved') { badge.className = 'status-badge saved'; badge.textContent = '💾 Imehifadhiwa'; }
+    else if (status === 'submitted') { badge.className = 'status-badge submitted'; badge.textContent = '📤 Imetumwa'; }
+    else if (status === 'reviewed') { badge.className = 'status-badge reviewed'; badge.textContent = '✅ Imeidhinishwa'; }
+    else { badge.className = 'status-badge pending'; badge.textContent = '📝 Hajahifadhiwa'; }
 }
+
+function updateChart() {
+    const lead = parseInt(document.getElementById('step1_leadership').value) || 0;
+    const qual = parseInt(document.getElementById('step2_quality').value) || 0;
+    const acc = parseInt(document.getElementById('step3_accountability').value) || 0;
+
+    document.getElementById('chartLead').style.width = (Math.min(lead, 5) / 5 * 100) + '%';
+    document.getElementById('valLead').textContent = lead + '/5';
+    document.getElementById('chartQual').style.width = (Math.min(qual, 5) / 5 * 100) + '%';
+    document.getElementById('valQual').textContent = qual + '/5';
+    document.getElementById('chartAcc').style.width = (Math.min(acc, 5) / 5 * 100) + '%';
+    document.getElementById('valAcc').textContent = acc + '/5';
+}
+
+document.querySelectorAll('input, textarea, select').forEach(el => {
+    el.addEventListener('input', updateChart);
+    el.addEventListener('change', updateChart);
+});
 
 async function saveAppraisal() {
     const btn = document.getElementById('saveBtn');
@@ -370,18 +410,28 @@ async function loadAllData(role = 'all') {
             const data = appraisals[r] || {};
             Object.keys(data).forEach(u => {
                 const item = data[u];
+                // Skip if not submitted to incharge (except incharge's own data)
+                if (r !== 'incharge' && item.submitted_to !== 'incharge' && item.status !== 'submitted') return;
+                const statusIcon = item.status === 'submitted' ? '📤' : item.status === 'reviewed' ? '✅' : '💾';
                 html += `<div class="data-item">
                     <strong>${item.fullname || u}</strong>
                     <span class="badge-role ${roleBadges[r]}">${roleLabels[r]}</span>
                     <span style="float: right; font-size: 12px; color: #7f8c8d;">
-                        ${item.department || ''} | ${item.status || 'saved'}
+                        ${item.department || ''} 
+                        <span class="status-badge-sm">${statusIcon} ${item.status || 'saved'}</span>
                     </span>
+                    ${r !== 'incharge' ? `<div style="font-size: 11px; color: #7f8c8d; margin-top: 2px;">
+                        📋 Majukumu: ${item.general_duties ? 'Jumla ✅' : ''} ${item.specific_duties ? 'Maalumu ✅' : ''}
+                    </div>` : ''}
                 </div>`;
                 count++;
             });
         });
 
-        container.innerHTML = count === 0 ? '<p style="color: #7f8c8d; text-align: center;">Hakuna data.</p>' : html;
+        if (count === 0) {
+            html = '<p style="color: #7f8c8d; text-align: center;">Hakuna tathmini zilizotumwa kwako.</p>';
+        }
+        container.innerHTML = html;
     } catch (e) {
         container.innerHTML = '<p style="color: #e74c3c;">Hitilafu: ' + e.message + '</p>';
     }
