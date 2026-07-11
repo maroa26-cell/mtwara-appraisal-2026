@@ -121,7 +121,7 @@
         </div>
     </div>
 
-    <!-- SEHEMU 2: KPI (Key Performance Indicators) -->
+    <!-- SEHEMU 2: KPI -->
     <div class="section">
         <h3><span class="step">2</span> KPI (Key Performance Indicators) <span class="badge">WHO Standard</span></h3>
         <div class="form-grid">
@@ -253,7 +253,7 @@
         </div>
     </div>
 
-    <!-- SEHEMU 8: Grafu (Chart) -->
+    <!-- SEHEMU 8: Grafu -->
     <div class="section">
         <h3><span class="step">8</span> 📊 Muhtasari wa Tathmini</h3>
         <div class="chart-container" id="chartContainer">
@@ -281,10 +281,10 @@
 
 <script>
 // ==============================================================
-// MTWARA PERFORMANCE - WORKER FORM (v7.0 - Kamili)
+// MTWARA PERFORMANCE - WORKER FORM (BIN MPYA)
 // ==============================================================
-const API_KEY = "$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDot5L9hRGRQfa21/Mw/B0UcS";
-const BIN_ID = "6a4b0bc9da38895dfe32cc08";
+const API_KEY = "$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K";
+const BIN_ID = "6a52a4d3f5f4af5e2981fd2e";
 
 function showToast(msg, type = 'info') {
     const t = document.getElementById('toast');
@@ -424,7 +424,6 @@ function updateChart() {
     document.getElementById('valSkills').textContent = avgSkill.toFixed(1) + '/5';
 }
 
-// Auto-update chart on input change
 document.querySelectorAll('input, textarea, select').forEach(el => {
     el.addEventListener('input', updateChart);
     el.addEventListener('change', updateChart);
