@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -8,20 +7,21 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a5276, #27ae60); min-height: 100vh; padding: 20px; display: flex; justify-content: center; align-items: flex-start; }
-        .form-container { background: #fff; border-radius: 20px; padding: 40px 35px; max-width: 1000px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.6s ease; margin-top: 20px; }
+        .form-container { background: #fff; border-radius: 20px; padding: 40px 35px; max-width: 1100px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.6s ease; margin-top: 20px; }
         @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         h2 { color: #1a5276; text-align: center; margin-bottom: 8px; }
         .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 24px; font-size: 14px; }
         .section { background: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 20px; border-left: 4px solid #27ae60; }
-        .section h3 { color: #1a5276; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-        .section h3 .step { background: #27ae60; color: #fff; border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
+        .section h3 { color: #1a5276; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .section h3 .step { background: #27ae60; color: #fff; border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+        .section h3 .badge { background: #27ae60; color: #fff; padding: 2px 12px; border-radius: 20px; font-size: 11px; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
         .form-group { margin-bottom: 12px; }
         .form-group.full-width { grid-column: 1 / -1; }
         .form-group label { display: block; font-weight: 600; color: #1a5276; margin-bottom: 4px; font-size: 13px; }
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 14px; border: 2px solid #dee2e6; border-radius: 8px; font-size: 14px; }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #27ae60; outline: none; }
-        .form-group textarea { min-height: 80px; resize: vertical; }
+        .form-group textarea { min-height: 60px; resize: vertical; }
         .btn { padding: 12px 20px; border: none; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 6px; }
         .btn-primary { background: #27ae60; color: #fff; }
         .btn-primary:hover { background: #1e8449; transform: translateY(-2px); }
@@ -55,8 +55,14 @@
         .status-badge.saved { background: #d4edda; color: #155724; }
         .status-badge.pending { background: #fff3cd; color: #856404; }
         .status-badge.submitted { background: #cce5ff; color: #004085; }
+        .status-badge.reviewed { background: #d1ecf1; color: #0c5460; }
         .communication-bar { background: #f8f9fa; padding: 12px 16px; border-radius: 10px; margin-bottom: 16px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; border: 1px solid #dee2e6; }
         .communication-bar span { font-weight: 600; color: #1a5276; margin-right: 8px; }
+        .chart-container { background: #fff; border-radius: 8px; padding: 16px; border: 1px solid #dee2e6; margin-top: 8px; }
+        .chart-bar { display: flex; align-items: center; gap: 12px; margin: 6px 0; }
+        .chart-bar .label { width: 120px; font-size: 13px; color: #1a5276; }
+        .chart-bar .bar { height: 20px; border-radius: 10px; background: linear-gradient(90deg, #27ae60, #2ecc71); transition: width 0.5s; }
+        .chart-bar .value { font-size: 13px; font-weight: 600; color: #1a5276; min-width: 30px; }
         @media print {
             .no-print { display: none !important; }
             .form-container { box-shadow: none !important; }
@@ -77,14 +83,15 @@
             <button class="btn btn-warning" onclick="window.print()">📄 PDF</button>
         </div>
     </div>
-    <p class="subtitle" id="userGreeting">Karibu mtendakazi - Jaza tathmini yako</p>
+    <p class="subtitle" id="userGreeting">Karibu mtendakazi - Jaza tathmini yako kisha tuma kwa Mganga Mfawidhi</p>
 
-    <!-- Mawasiliano - Nambari +255742710697 -->
+    <!-- Mawasiliano -->
     <div class="communication-bar no-print">
         <span>📞 Mawasiliano:</span>
         <a href="tel:+255742710697" class="btn btn-phone" style="text-decoration: none; padding: 6px 14px; font-size: 13px;">📱 Simu</a>
         <a href="https://wa.me/255742710697" target="_blank" class="btn btn-whatsapp" style="text-decoration: none; padding: 6px 14px; font-size: 13px;">💬 WhatsApp</a>
         <span style="font-size: 12px; color: #7f8c8d; margin-left: 4px;">(Nambari +255742710697)</span>
+        <span style="margin-left: auto; font-size: 12px; color: #7f8c8d;" id="submissionStatus">📤 Hujatumwa</span>
     </div>
 
     <!-- SEHEMU 1: Taarifa za Msingi -->
@@ -114,32 +121,120 @@
         </div>
     </div>
 
-    <!-- SEHEMU 2: Tathmini ya Utendaji -->
+    <!-- SEHEMU 2: KPI (Key Performance Indicators) -->
     <div class="section">
-        <h3><span class="step">2</span> Tathmini ya Utendaji</h3>
+        <h3><span class="step">2</span> KPI (Key Performance Indicators) <span class="badge">WHO Standard</span></h3>
         <div class="form-grid">
             <div class="form-group">
-                <label>Hatua ya 1: Uzalishaji wa Kazi (1-5)</label>
-                <input type="number" id="step1_productivity" placeholder="1-5" min="1" max="5">
+                <label>1. Uzalishaji wa Kazi (%)</label>
+                <input type="number" id="kpi_productivity" placeholder="Mfano: 85" min="0" max="100">
             </div>
             <div class="form-group">
-                <label>Hatua ya 2: Ubora wa Kazi (1-5)</label>
-                <input type="number" id="step2_quality" placeholder="1-5" min="1" max="5">
+                <label>2. Ubora wa Huduma (1-5)</label>
+                <input type="number" id="kpi_quality" placeholder="1-5" min="1" max="5">
             </div>
             <div class="form-group">
-                <label>Hatua ya 3: Uwajibikaji (1-5)</label>
-                <input type="number" id="step3_accountability" placeholder="1-5" min="1" max="5">
+                <label>3. Idadi ya Wagonjwa (kwa wiki)</label>
+                <input type="number" id="kpi_patients" placeholder="Mfano: 50">
+            </div>
+            <div class="form-group">
+                <label>4. Kuridhika kwa Wateja (%)</label>
+                <input type="number" id="kpi_satisfaction" placeholder="Mfano: 90" min="0" max="100">
             </div>
             <div class="form-group full-width">
-                <label>Maelezo ya Tathmini</label>
-                <textarea id="step_notes" placeholder="Andika maelezo ya tathmini yako..."></textarea>
+                <label>5. Maelezo ya KPI</label>
+                <textarea id="kpi_notes" placeholder="Andika maelezo..."></textarea>
             </div>
         </div>
     </div>
 
-    <!-- SEHEMU 3: Maoni na Mapendekezo -->
+    <!-- SEHEMU 3: Malengo ya Kimkakati -->
     <div class="section">
-        <h3><span class="step">3</span> Maoni na Mapendekezo</h3>
+        <h3><span class="step">3</span> Malengo ya Kimkakati (Strategic Goals)</h3>
+        <div class="form-grid">
+            <div class="form-group full-width">
+                <label>Malengo ya Mwaka</label>
+                <textarea id="strategic_goals" placeholder="Andika malengo yako..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Kiwango cha Mafanikio (%)</label>
+                <input type="number" id="strategic_achievement" placeholder="Mfano: 70" min="0" max="100">
+            </div>
+            <div class="form-group">
+                <label>Muda (miezi)</label>
+                <input type="number" id="strategic_timeline" placeholder="Mfano: 6">
+            </div>
+        </div>
+    </div>
+
+    <!-- SEHEMU 4: Ujuzi na Kompetensi -->
+    <div class="section">
+        <h3><span class="step">4</span> Ujuzi na Kompetensi (Skills)</h3>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Ujuzi wa Kiufundi (1-5)</label>
+                <input type="number" id="skill_technical" placeholder="1-5" min="1" max="5">
+            </div>
+            <div class="form-group">
+                <label>Ujuzi wa Mawasiliano (1-5)</label>
+                <input type="number" id="skill_communication" placeholder="1-5" min="1" max="5">
+            </div>
+            <div class="form-group">
+                <label>Ujuzi wa Uongozi (1-5)</label>
+                <input type="number" id="skill_leadership" placeholder="1-5" min="1" max="5">
+            </div>
+            <div class="form-group">
+                <label>Ujuzi wa Ufumbuzi (1-5)</label>
+                <input type="number" id="skill_problem" placeholder="1-5" min="1" max="5">
+            </div>
+            <div class="form-group full-width">
+                <label>Maelezo ya Ujuzi</label>
+                <textarea id="skill_notes" placeholder="Eleza ujuzi wako..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEHEMU 5: Mafunzo na Maendeleo -->
+    <div class="section">
+        <h3><span class="step">5</span> Mafunzo na Maendeleo (Training)</h3>
+        <div class="form-grid">
+            <div class="form-group full-width">
+                <label>Mafunzo yaliyofuata</label>
+                <textarea id="training_attended" placeholder="Orodhesha mafunzo..."></textarea>
+            </div>
+            <div class="form-group full-width">
+                <label>Mafunzo yanayohitajika</label>
+                <textarea id="training_needed" placeholder="Mapendekezo..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Saa za Mafunzo</label>
+                <input type="number" id="training_hours" placeholder="Mfano: 20">
+            </div>
+            <div class="form-group">
+                <label>Tarehe ya Mwisho</label>
+                <input type="date" id="training_last_date">
+            </div>
+        </div>
+    </div>
+
+    <!-- SEHEMU 6: Majukumu (Jumla na Maalumu) -->
+    <div class="section">
+        <h3><span class="step">6</span> Majukumu (Duties)</h3>
+        <div class="form-grid">
+            <div class="form-group full-width">
+                <label>📋 Majukumu ya Jumla (General Duties)</label>
+                <textarea id="general_duties" placeholder="Mfano: Kuhudumia wagonjwa, kusimamia dawa, kusaidia katika upasuaji..."></textarea>
+            </div>
+            <div class="form-group full-width">
+                <label>🎯 Majukumu Maalumu (Specific Duties)</label>
+                <textarea id="specific_duties" placeholder="Mfano: Kufanya uchunguzi, kutoa huduma za dharura, kufuatilia wagonjwa mahututi..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEHEMU 7: Maoni na Mapendekezo -->
+    <div class="section">
+        <h3><span class="step">7</span> Maoni na Mapendekezo</h3>
         <div class="form-group">
             <label>Nguvu zako (Strengths)</label>
             <textarea id="strengths" placeholder="Andika nguvu zako..."></textarea>
@@ -158,12 +253,24 @@
         </div>
     </div>
 
+    <!-- SEHEMU 8: Grafu (Chart) -->
+    <div class="section">
+        <h3><span class="step">8</span> 📊 Muhtasari wa Tathmini</h3>
+        <div class="chart-container" id="chartContainer">
+            <div class="chart-bar"><span class="label">Uzalishaji</span><div class="bar" id="chartProductivity" style="width:0%;"></div><span class="value" id="valProductivity">0%</span></div>
+            <div class="chart-bar"><span class="label">Ubora</span><div class="bar" id="chartQuality" style="width:0%;"></div><span class="value" id="valQuality">0/5</span></div>
+            <div class="chart-bar"><span class="label">Wagonjwa</span><div class="bar" id="chartPatients" style="width:0%;"></div><span class="value" id="valPatients">0</span></div>
+            <div class="chart-bar"><span class="label">Kuridhika</span><div class="bar" id="chartSatisfaction" style="width:0%;"></div><span class="value" id="valSatisfaction">0%</span></div>
+            <div class="chart-bar"><span class="label">Ujuzi (Wastani)</span><div class="bar" id="chartSkills" style="width:0%;"></div><span class="value" id="valSkills">0/5</span></div>
+        </div>
+    </div>
+
     <!-- Vitufe -->
     <div class="button-group no-print">
-        <button class="btn btn-primary" onclick="saveAppraisal()" id="saveBtn">💾 Hifadhi</button>
-        <button class="btn btn-info" onclick="submitAppraisal()" id="submitBtn">📤 Tuma</button>
+        <button class="btn btn-success" onclick="saveAppraisal()" id="saveBtn">💾 Hifadhi</button>
+        <button class="btn btn-info" onclick="submitToIncharge()" id="submitBtn">📤 Tuma kwa Mganga Mfawidhi</button>
         <button class="btn btn-secondary" onclick="loadAppraisal()">📂 Pakia</button>
-        <button class="btn btn-success" onclick="showOverall()">📊 Tathmini Jumla</button>
+        <button class="btn btn-primary" onclick="showOverall()">📊 Tathmini Jumla</button>
         <button class="btn btn-purple" onclick="showSpecific()">🎯 Tathmini Maalumu</button>
         <button class="btn btn-danger" onclick="logout()">🚪 Toka</button>
     </div>
@@ -174,7 +281,7 @@
 
 <script>
 // ==============================================================
-// MTWARA PERFORMANCE - WORKER FORM (v6.0 - Nambari +255742710697)
+// MTWARA PERFORMANCE - WORKER FORM (v7.0 - Kamili)
 // ==============================================================
 const API_KEY = "$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDot5L9hRGRQfa21/Mw/B0UcS";
 const BIN_ID = "6a4b0bc9da38895dfe32cc08";
@@ -201,7 +308,7 @@ if (!username) {
     showToast('❌ Hitilafu: Hakuna mtumiaji', 'error');
     setTimeout(() => window.location.href = 'index.html', 2000);
 }
-document.getElementById('userGreeting').textContent = `Karibu ${username} - Tathmini ya Mtendakazi`;
+document.getElementById('userGreeting').textContent = `Karibu ${username} - Jaza tathmini yako kisha tuma kwa Mganga Mfawidhi`;
 
 function getFormData() {
     return {
@@ -212,15 +319,31 @@ function getFormData() {
         position: document.getElementById('position').value,
         phone: document.getElementById('phone').value,
         email: document.getElementById('email').value,
-        step1_productivity: document.getElementById('step1_productivity').value || 0,
-        step2_quality: document.getElementById('step2_quality').value || 0,
-        step3_accountability: document.getElementById('step3_accountability').value || 0,
-        step_notes: document.getElementById('step_notes').value,
+        kpi_productivity: document.getElementById('kpi_productivity').value || 0,
+        kpi_quality: document.getElementById('kpi_quality').value || 0,
+        kpi_patients: document.getElementById('kpi_patients').value || 0,
+        kpi_satisfaction: document.getElementById('kpi_satisfaction').value || 0,
+        kpi_notes: document.getElementById('kpi_notes').value,
+        strategic_goals: document.getElementById('strategic_goals').value,
+        strategic_achievement: document.getElementById('strategic_achievement').value || 0,
+        strategic_timeline: document.getElementById('strategic_timeline').value || 0,
+        skill_technical: document.getElementById('skill_technical').value || 0,
+        skill_communication: document.getElementById('skill_communication').value || 0,
+        skill_leadership: document.getElementById('skill_leadership').value || 0,
+        skill_problem: document.getElementById('skill_problem').value || 0,
+        skill_notes: document.getElementById('skill_notes').value,
+        training_attended: document.getElementById('training_attended').value,
+        training_needed: document.getElementById('training_needed').value,
+        training_hours: document.getElementById('training_hours').value || 0,
+        training_last_date: document.getElementById('training_last_date').value,
+        general_duties: document.getElementById('general_duties').value,
+        specific_duties: document.getElementById('specific_duties').value,
         strengths: document.getElementById('strengths').value,
         weaknesses: document.getElementById('weaknesses').value,
         recommendations: document.getElementById('recommendations').value,
         overall_comments: document.getElementById('overall_comments').value,
         status: 'saved',
+        submitted_to: null,
         timestamp: new Date().toISOString()
     };
 }
@@ -231,23 +354,81 @@ function setFormData(data) {
     document.getElementById('position').value = data.position || '';
     document.getElementById('phone').value = data.phone || '';
     document.getElementById('email').value = data.email || '';
-    document.getElementById('step1_productivity').value = data.step1_productivity || '';
-    document.getElementById('step2_quality').value = data.step2_quality || '';
-    document.getElementById('step3_accountability').value = data.step3_accountability || '';
-    document.getElementById('step_notes').value = data.step_notes || '';
+    document.getElementById('kpi_productivity').value = data.kpi_productivity || '';
+    document.getElementById('kpi_quality').value = data.kpi_quality || '';
+    document.getElementById('kpi_patients').value = data.kpi_patients || '';
+    document.getElementById('kpi_satisfaction').value = data.kpi_satisfaction || '';
+    document.getElementById('kpi_notes').value = data.kpi_notes || '';
+    document.getElementById('strategic_goals').value = data.strategic_goals || '';
+    document.getElementById('strategic_achievement').value = data.strategic_achievement || '';
+    document.getElementById('strategic_timeline').value = data.strategic_timeline || '';
+    document.getElementById('skill_technical').value = data.skill_technical || '';
+    document.getElementById('skill_communication').value = data.skill_communication || '';
+    document.getElementById('skill_leadership').value = data.skill_leadership || '';
+    document.getElementById('skill_problem').value = data.skill_problem || '';
+    document.getElementById('skill_notes').value = data.skill_notes || '';
+    document.getElementById('training_attended').value = data.training_attended || '';
+    document.getElementById('training_needed').value = data.training_needed || '';
+    document.getElementById('training_hours').value = data.training_hours || '';
+    document.getElementById('training_last_date').value = data.training_last_date || '';
+    document.getElementById('general_duties').value = data.general_duties || '';
+    document.getElementById('specific_duties').value = data.specific_duties || '';
     document.getElementById('strengths').value = data.strengths || '';
     document.getElementById('weaknesses').value = data.weaknesses || '';
     document.getElementById('recommendations').value = data.recommendations || '';
     document.getElementById('overall_comments').value = data.overall_comments || '';
     updateStatus(data.status || 'saved');
+    updateSubmissionStatus(data.submitted_to || null);
+    updateChart();
 }
 
 function updateStatus(status) {
     const badge = document.getElementById('saveStatus');
-    if (status === 'saved') { badge.className = 'status-badge saved'; badge.textContent = 'Imehifadhiwa'; }
-    else if (status === 'submitted') { badge.className = 'status-badge submitted'; badge.textContent = 'Imetumwa'; }
-    else { badge.className = 'status-badge pending'; badge.textContent = 'Hajahifadhiwa'; }
+    if (status === 'saved') { badge.className = 'status-badge saved'; badge.textContent = '💾 Imehifadhiwa'; }
+    else if (status === 'submitted') { badge.className = 'status-badge submitted'; badge.textContent = '📤 Imetumwa kwa Mganga Mfawidhi'; }
+    else if (status === 'reviewed') { badge.className = 'status-badge reviewed'; badge.textContent = '✅ Imeidhinishwa'; }
+    else { badge.className = 'status-badge pending'; badge.textContent = '📝 Hajahifadhiwa'; }
 }
+
+function updateSubmissionStatus(submittedTo) {
+    const el = document.getElementById('submissionStatus');
+    if (submittedTo === 'incharge') {
+        el.innerHTML = '✅ Imetumwa kwa Mganga Mfawidhi';
+        el.style.color = '#27ae60';
+    } else {
+        el.innerHTML = '📤 Hujatumwa';
+        el.style.color = '#7f8c8d';
+    }
+}
+
+function updateChart() {
+    const prod = parseInt(document.getElementById('kpi_productivity').value) || 0;
+    const qual = parseInt(document.getElementById('kpi_quality').value) || 0;
+    const pat = parseInt(document.getElementById('kpi_patients').value) || 0;
+    const sat = parseInt(document.getElementById('kpi_satisfaction').value) || 0;
+    const tech = parseInt(document.getElementById('skill_technical').value) || 0;
+    const comm = parseInt(document.getElementById('skill_communication').value) || 0;
+    const lead = parseInt(document.getElementById('skill_leadership').value) || 0;
+    const prob = parseInt(document.getElementById('skill_problem').value) || 0;
+    const avgSkill = (tech + comm + lead + prob) / 4;
+
+    document.getElementById('chartProductivity').style.width = Math.min(prod, 100) + '%';
+    document.getElementById('valProductivity').textContent = prod + '%';
+    document.getElementById('chartQuality').style.width = (Math.min(qual, 5) / 5 * 100) + '%';
+    document.getElementById('valQuality').textContent = qual + '/5';
+    document.getElementById('chartPatients').style.width = Math.min(pat, 200) + '%';
+    document.getElementById('valPatients').textContent = pat;
+    document.getElementById('chartSatisfaction').style.width = Math.min(sat, 100) + '%';
+    document.getElementById('valSatisfaction').textContent = sat + '%';
+    document.getElementById('chartSkills').style.width = (Math.min(avgSkill, 5) / 5 * 100) + '%';
+    document.getElementById('valSkills').textContent = avgSkill.toFixed(1) + '/5';
+}
+
+// Auto-update chart on input change
+document.querySelectorAll('input, textarea, select').forEach(el => {
+    el.addEventListener('input', updateChart);
+    el.addEventListener('change', updateChart);
+});
 
 async function saveAppraisal() {
     const btn = document.getElementById('saveBtn');
@@ -276,12 +457,13 @@ async function saveAppraisal() {
     btn.innerHTML = '💾 Hifadhi';
 }
 
-async function submitAppraisal() {
+async function submitToIncharge() {
     const btn = document.getElementById('submitBtn');
     btn.disabled = true;
-    btn.innerHTML = '<span class="loading-spinner"></span> Inatuma...';
+    btn.innerHTML = '<span class="loading-spinner"></span> Inatuma kwa Mganga Mfawidhi...';
     const data = getFormData();
     data.status = 'submitted';
+    data.submitted_to = 'incharge';
     try {
         const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
         if (!res.ok) throw new Error('Network error');
@@ -296,11 +478,12 @@ async function submitAppraisal() {
             body: JSON.stringify(record)
         });
         if (!update.ok) throw new Error('Imeshindwa kutuma');
-        showToast('✅ Tathmini imetumwa!', 'success');
+        showToast('✅ Tathmini imetumwa kwa Mganga Mfawidhi!', 'success');
         updateStatus('submitted');
+        updateSubmissionStatus('incharge');
     } catch (e) { showToast('❌ ' + e.message, 'error'); }
     btn.disabled = false;
-    btn.innerHTML = '📤 Tuma';
+    btn.innerHTML = '📤 Tuma kwa Mganga Mfawidhi';
 }
 
 async function loadAppraisal() {
@@ -322,25 +505,55 @@ function showOverall() {
                 `👤 Jina: ${data.fullname || 'Hajajazwa'}\n` +
                 `🏢 Idara: ${data.department || 'Hajajazwa'}\n` +
                 `📋 Cheo: ${data.position || 'Hajajazwa'}\n` +
-                `⭐ Hatua 1: ${data.step1_productivity}\n` +
-                `⭐ Hatua 2: ${data.step2_quality}\n` +
-                `⭐ Hatua 3: ${data.step3_accountability}\n` +
-                `📝 Maelezo: ${data.step_notes || 'Hakuna'}\n` +
-                `💪 Nguvu: ${data.strengths || 'Hakuna'}\n` +
-                `🔧 Kuboresha: ${data.weaknesses || 'Hakuna'}\n` +
-                `📌 Mapendekezo: ${data.recommendations || 'Hakuna'}`;
+                `📞 Simu: ${data.phone || 'Hajajazwa'}\n` +
+                `📧 Barua Pepe: ${data.email || 'Hajajazwa'}\n` +
+                `\n📊 KPI:\n` +
+                `   Uzalishaji: ${data.kpi_productivity}%\n` +
+                `   Ubora: ${data.kpi_quality}/5\n` +
+                `   Wagonjwa: ${data.kpi_patients}\n` +
+                `   Kuridhika: ${data.kpi_satisfaction}%\n` +
+                `   Maelezo: ${data.kpi_notes || 'Hakuna'}\n` +
+                `\n🎯 Malengo:\n` +
+                `   Malengo: ${data.strategic_goals || 'Hakuna'}\n` +
+                `   Mafanikio: ${data.strategic_achievement}%\n` +
+                `   Muda: ${data.strategic_timeline} miezi\n` +
+                `\n🧠 Ujuzi:\n` +
+                `   Kiufundi: ${data.skill_technical}/5\n` +
+                `   Mawasiliano: ${data.skill_communication}/5\n` +
+                `   Uongozi: ${data.skill_leadership}/5\n` +
+                `   Ufumbuzi: ${data.skill_problem}/5\n` +
+                `   Maelezo: ${data.skill_notes || 'Hakuna'}\n` +
+                `\n📚 Mafunzo:\n` +
+                `   Yaliyofuata: ${data.training_attended || 'Hakuna'}\n` +
+                `   Yanayohitajika: ${data.training_needed || 'Hakuna'}\n` +
+                `   Saa: ${data.training_hours}\n` +
+                `   Tarehe: ${data.training_last_date || 'Hakuna'}\n` +
+                `\n📋 Majukumu:\n` +
+                `   Jumla: ${data.general_duties || 'Hakuna'}\n` +
+                `   Maalumu: ${data.specific_duties || 'Hakuna'}\n` +
+                `\n💬 Maoni:\n` +
+                `   Nguvu: ${data.strengths || 'Hakuna'}\n` +
+                `   Kuboresha: ${data.weaknesses || 'Hakuna'}\n` +
+                `   Mapendekezo: ${data.recommendations || 'Hakuna'}\n` +
+                `   Jumla: ${data.overall_comments || 'Hakuna'}`;
     alert(msg);
 }
 
 function showSpecific() {
     const data = getFormData();
     let msg = '🎯 TATHMINI MAALUMU\n\n';
-    msg += `📌 Uzalishaji: ${data.step1_productivity}/5\n`;
-    msg += `📌 Ubora: ${data.step2_quality}/5\n`;
-    msg += `📌 Uwajibikaji: ${data.step3_accountability}/5\n`;
-    const avg = (Number(data.step1_productivity) + Number(data.step2_quality) + Number(data.step3_accountability)) / 3;
-    msg += `\n📊 Wastani: ${avg.toFixed(1)}/5\n`;
-    msg += `📈 Kiwango: ${avg >= 4 ? '🌟 Bora' : avg >= 3 ? '✅ Nzuri' : avg >= 2 ? '⚠️ Inahitajika Kuboresha' : '❌ Dhaifu'}`;
+    msg += `📌 Uzalishaji: ${data.kpi_productivity}/100\n`;
+    msg += `📌 Ubora: ${data.kpi_quality}/5\n`;
+    msg += `📌 Wagonjwa: ${data.kpi_patients}\n`;
+    msg += `📌 Kuridhika: ${data.kpi_satisfaction}/100\n`;
+    const avgKPI = (Number(data.kpi_productivity) + Number(data.kpi_quality)*20 + Number(data.kpi_satisfaction)) / 3;
+    msg += `\n📊 Wastani wa KPI: ${avgKPI.toFixed(1)}/100\n`;
+    const skills = [data.skill_technical, data.skill_communication, data.skill_leadership, data.skill_problem];
+    const avgSkill = skills.reduce((a,b) => a + Number(b), 0) / 4;
+    msg += `📊 Wastani wa Ujuzi: ${avgSkill.toFixed(1)}/5\n`;
+    const total = (avgKPI / 20 + avgSkill) / 2;
+    msg += `\n📈 Kiwango cha Jumla: ${total.toFixed(1)}/5\n`;
+    msg += `📈 Tafsiri: ${total >= 4 ? '🌟 Bora' : total >= 3 ? '✅ Nzuri' : total >= 2 ? '⚠️ Inahitajika Kuboresha' : '❌ Dhaifu'}`;
     alert(msg);
 }
 
