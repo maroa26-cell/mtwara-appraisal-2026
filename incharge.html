@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -7,7 +8,7 @@
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:'Segoe UI', Tahoma, sans-serif; background:linear-gradient(135deg,#2c0a3e,#8e44ad); min-height:100vh; padding:20px; display:flex; justify-content:center; align-items:flex-start; }
-    .container { background:#fff; border-radius:28px; padding:35px 30px; max-width:1100px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,0.2); margin-top:20px; }
+    .container { background:#fff; border-radius:28px; padding:35px 30px; max-width:1200px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,0.2); margin-top:20px; }
     h2 { color:#2c0a3e; text-align:center; font-size:28px; margin-bottom:6px; }
     .sub { text-align:center; color:#7f8c8d; font-size:14px; margin-bottom:25px; }
     .logo-area { text-align:center; margin-bottom:16px; }
@@ -25,6 +26,8 @@
     .btn-info:hover { background:#2e86c1; }
     .btn-warning { background:#f39c12; color:#fff; }
     .btn-warning:hover { background:#d68910; }
+    .btn-success { background:#27ae60; color:#fff; }
+    .btn-success:hover { background:#1e8449; }
     .btn-purple { background:#8e44ad; color:#fff; }
     .btn-purple:hover { background:#7d3c98; }
     .btn-whatsapp { background:#25D366; color:#fff; }
@@ -35,9 +38,12 @@
     .btn-email:hover { background:#b03a2e; }
     .btn-pdf { background:#e74c3c; color:#fff; }
     .btn-pdf:hover { background:#c0392b; }
+    .btn-drive { background:#4285F4; color:#fff; }
+    .btn-drive:hover { background:#3367D6; }
     .section { background:#f8f9fa; border-radius:16px; padding:20px 22px; margin-bottom:20px; border-left:5px solid #8e44ad; }
     .section h3 { color:#2c0a3e; font-size:18px; margin-bottom:14px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
     .section h3 .step { background:#8e44ad; color:#fff; border-radius:50%; width:28px; height:28px; display:inline-flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex-shrink:0; }
+    .section h3 .badge-new { background:#4285F4; color:#fff; padding:2px 12px; border-radius:20px; font-size:11px; font-weight:600; }
     .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
     .form-group { margin-bottom:6px; }
     .form-group.full { grid-column:1/-1; }
@@ -70,6 +76,9 @@
     .badge-role.worker { background:#27ae60; color:#fff; }
     .badge-role.supervisor { background:#f39c12; color:#fff; }
     .badge-role.incharge { background:#8e44ad; color:#fff; }
+    .history-list { max-height:200px; overflow-y:auto; background:#fff; border-radius:10px; border:1px solid #e0e0e0; padding:6px; }
+    .history-item { padding:8px 12px; border-bottom:1px solid #eee; display:flex; justify-content:space-between; align-items:center; font-size:13px; }
+    .history-item .date { color:#7f8c8d; font-size:12px; }
     .toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(20px); max-width:450px; width:90%; padding:14px 22px; border-radius:14px; color:#fff; text-align:center; z-index:999; opacity:0; transition:0.4s; box-shadow:0 8px 40px rgba(0,0,0,0.2); }
     .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
     .toast.success { background:#27ae60; }
@@ -77,6 +86,10 @@
     .toast.info { background:#3498db; }
     .loading { display:inline-block; width:16px; height:16px; border:3px solid rgba(255,255,255,0.3); border-top-color:#fff; border-radius:50%; animation:spin 0.8s linear infinite; vertical-align:middle; margin-right:8px; }
     @keyframes spin { to { transform:rotate(360deg); } }
+    .drive-container { background:#e8f0fe; border:2px solid #4285F4; border-radius:12px; padding:16px; margin-top:12px; }
+    .drive-container h4 { color:#2c0a3e; margin-bottom:8px; }
+    .share-link-container { background:#f0f0f0; border-radius:10px; padding:10px; margin-top:8px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    .share-link-container input { flex:1; padding:8px 12px; border:2px solid #e0e0e0; border-radius:8px; font-size:13px; min-width:200px; }
     @media(max-width:768px){ .form-grid { grid-template-columns:1fr; } .top-bar { flex-direction:column; align-items:stretch; } .button-group .btn { flex:1; } }
     @media print { .no-print { display:none !important; } .container { box-shadow:none !important; } body { background:#fff !important; } }
   </style>
@@ -89,6 +102,8 @@
         <button class="btn btn-secondary" onclick="window.location.href='index.html'">🏠 Nyumbani</button>
         <button class="btn btn-info" onclick="window.print()">🖨️ Chapisha</button>
         <button class="btn btn-pdf" onclick="generatePDF()">📄 PDF</button>
+        <button class="btn btn-drive" onclick="saveToDrive()">☁️ Hifadhi Drive</button>
+        <button class="btn btn-email" onclick="sendEmailData()">📧 Tuma Email</button>
       </div>
     </div>
     <div class="logo-area"><img src="SDA_CHURCH_LOGO.webp" alt="SDA Logo"><br><small style="color:#7f8c8d;">Logo ya SDA Church</small></div>
@@ -155,6 +170,7 @@
           <div class="radio-group">
             <label><input type="radio" name="saveMethod" value="jsonbin" checked> ☁️ JSONBin</label>
             <label><input type="radio" name="saveMethod" value="download"> 💾 Pakua (JSON)</label>
+            <label><input type="radio" name="saveMethod" value="drive"> ☁️ Google Drive</label>
           </div>
         </div>
       </div>
@@ -172,6 +188,29 @@
       <div id="allDataContainer" class="data-container"><p style="color:#7f8c8d;text-align:center;">Bonyeza kituo cha juu</p></div>
     </div>
 
+    <!-- Sehemu 5: Historia -->
+    <div class="section">
+      <h3><span class="step">5</span> 📜 Historia ya Tathmini</h3>
+      <div id="historyList" class="history-list"><p style="color:#7f8c8d;text-align:center;">Hakuna historia.</p></div>
+    </div>
+
+    <!-- Sehemu 6: Kushiriki Data -->
+    <div class="section no-print">
+      <h3><span class="step">6</span> 🔗 Kushiriki Data <span class="badge-new">NEW</span></h3>
+      <div class="drive-container">
+        <h4>Unda link ya kushiriki data yako</h4>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
+          <input type="password" id="sharePassword" placeholder="Weka nenosiri (hiari)" style="flex:1;padding:8px 12px;border:2px solid #e0e0e0;border-radius:8px;">
+          <button class="btn btn-primary" onclick="generateShareLink()" style="padding:10px 20px;">🔗 Generate Link</button>
+        </div>
+        <div id="shareLinkContainer" class="share-link-container" style="display:none;">
+          <input type="text" id="shareLinkOutput" readonly>
+          <button class="btn btn-info" onclick="copyShareLink()">📋 Copy</button>
+          <button class="btn btn-success" onclick="openShareLink()">🔗 Fungua</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Vitufe -->
     <div class="button-group no-print">
       <button class="btn btn-primary" onclick="saveAppraisal()" id="saveBtn">💾 Hifadhi</button>
@@ -185,9 +224,8 @@
     <div style="text-align:center;margin-top:12px;"><span id="saveStatus" class="status-badge pending">📝 Hajahifadhiwa</span></div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
+    // ========================= CONFIG =========================
     const API_KEY = "$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K";
     const BIN_ID = "6a4b0bc9da38895dfe32cc08";
 
@@ -221,6 +259,7 @@
     function getSignatureData() { if (!hasSignature) return ''; return canvas.toDataURL('image/png'); }
     function setSignatureData(dataUrl) { if (!dataUrl) { clearSignature(); return; } const img = new Image(); img.onload = function() { ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.drawImage(img, 0, 0, canvas.width, canvas.height); hasSignature = true; }; img.src = dataUrl; }
 
+    // ========================= RECIPIENT =========================
     document.querySelectorAll('input[name="sendMethod"]').forEach(radio => {
       radio.addEventListener('change', function() {
         const label = document.querySelector('#recipientField label');
@@ -234,6 +273,7 @@
       });
     });
 
+    // ========================= GET/SET DATA =========================
     function getFormData(){ return {
       username, role:'incharge',
       fullname:document.getElementById('fullname').value,
@@ -262,45 +302,52 @@
 
     function updateStatus(s){ const map={'saved':['saved','💾 Imehifadhiwa'],'submitted':['submitted','📤 Imetumwa'],'pending':['pending','📝 Hajahifadhiwa']}; const c=map[s]||map.pending; const b=document.getElementById('saveStatus'); b.className='status-badge '+c[0]; b.textContent=c[1]; }
 
-    async function saveAppraisal(){ const b=document.getElementById('saveBtn'); b.disabled=true; b.innerHTML='<span class="loading"></span> Inahifadhi...'; const d=getFormData(); d.status='saved'; try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); if(!res.record) res.record={}; const rec=res.record; if(!rec.appraisals) rec.appraisals={}; if(!rec.appraisals.incharge) rec.appraisals.incharge={}; rec.appraisals.incharge[username]=d; const up=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(rec)}); if(!up.ok) throw new Error('Imeshindwa kuhifadhi'); showToast('✅ Imehifadhiwa!','success'); updateStatus('saved'); } catch(e){ showToast('❌ '+e.message,'error'); console.error(e); } b.disabled=false; b.innerHTML='💾 Hifadhi'; }
+    // ========================= SAVE =========================
+    async function saveAppraisal(){ const b=document.getElementById('saveBtn'); b.disabled=true; b.innerHTML='<span class="loading"></span> Inahifadhi...'; const d=getFormData(); d.status='saved'; try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); if(!res.record) res.record={}; const rec=res.record; if(!rec.incharge_appraisals) rec.incharge_appraisals={}; rec.incharge_appraisals[username]=d; if(!rec.history) rec.history={}; if(!rec.history[username]) rec.history[username]=[]; rec.history[username].push({...d, version: rec.history[username].length + 1, savedAt: new Date().toISOString()}); const up=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(rec)}); if(!up.ok) throw new Error('Imeshindwa kuhifadhi'); showToast('✅ Imehifadhiwa!','success'); updateStatus('saved'); updateHistory(); } catch(e){ showToast('❌ '+e.message,'error'); console.error(e); } b.disabled=false; b.innerHTML='💾 Hifadhi'; }
 
-    async function submitAppraisal(){ const b=document.getElementById('submitBtn'); b.disabled=true; b.innerHTML='<span class="loading"></span> Inatuma...'; const d=getFormData(); if(!d.fullname||!d.department||!d.position){ showToast('❌ Jaza Jina, Idara na Cheo','error'); b.disabled=false; b.innerHTML='📤 Tuma'; return; } if(!d.signature_name||!d.signature_date){ showToast('❌ Jaza Sahihi (Jina na Tarehe)','error'); b.disabled=false; b.innerHTML='📤 Tuma'; return; } if(!hasSignature){ showToast('❌ Tafadhali chora sahihi yako','error'); b.disabled=false; b.innerHTML='📤 Tuma'; return; } if(!d.recipient){ showToast('❌ Jaza namba ya WhatsApp au Barua Pepe ya mpokeaji','error'); b.disabled=false; b.innerHTML='📤 Tuma'; return; } d.status='submitted'; try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); if(!res.record) res.record={}; const rec=res.record; if(!rec.appraisals) rec.appraisals={}; if(!rec.appraisals.incharge) rec.appraisals.incharge={}; rec.appraisals.incharge[username]=d; const up=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(rec)}); if(!up.ok) throw new Error('Imeshindwa kutuma'); showToast(`✅ Imetumwa!`,'success'); updateStatus('submitted'); } catch(e){ showToast('❌ '+e.message,'error'); console.error(e); } b.disabled=false; b.innerHTML='📤 Tuma'; }
+    // ========================= SUBMIT =========================
+    async function submitAppraisal(){ const b=document.getElementById('submitBtn'); b.disabled=true; b.innerHTML='<span class="loading"></span> Inatuma...'; const d=getFormData(); if(!d.fullname||!d.department||!d.position){ showToast('❌ Jaza Jina, Idara na Cheo','error'); b.disabled=false; b.innerHTML='📤 Tuma'; return; } if(!d.signature_name||!d.signature_date){ showToast('❌ Jaza Sahihi (Jina na Tarehe)','error'); b.disabled=false; b.innerHTML='📤 Tuma'; return; } if(!hasSignature){ showToast('❌ Tafadhali chora sahihi yako','error'); b.disabled=false; b.innerHTML='📤 Tuma'; return; } if(!d.recipient){ showToast('❌ Jaza namba ya WhatsApp au Barua Pepe ya mpokeaji','error'); b.disabled=false; b.innerHTML='📤 Tuma'; return; } d.status='submitted'; try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); if(!res.record) res.record={}; const rec=res.record; if(!rec.incharge_appraisals) rec.incharge_appraisals={}; rec.incharge_appraisals[username]=d; const up=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(rec)}); if(!up.ok) throw new Error('Imeshindwa kutuma'); showToast(`✅ Imetumwa kwa ${d.send_method.toUpperCase()} kwa ${d.recipient}!`,'success'); updateStatus('submitted'); } catch(e){ showToast('❌ '+e.message,'error'); console.error(e); } b.disabled=false; b.innerHTML='📤 Tuma'; }
 
-    async function loadAppraisal(){ try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); const rec=res.record||{}; const d=rec.appraisals?.incharge?.[username]; if(!d){ updateStatus('pending'); return; } setFormData(d); showToast('✅ Imepakiwa','success'); } catch(e){ showToast('❌ '+e.message,'error'); console.error(e); } }
+    // ========================= LOAD =========================
+    async function loadAppraisal(){ try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); const rec=res.record||{}; const d=rec.incharge_appraisals?.[username]; if(!d){ updateStatus('pending'); return; } setFormData(d); showToast('✅ Imepakiwa','success'); updateHistory(); } catch(e){ showToast('❌ '+e.message,'error'); console.error(e); } }
 
-    async function deleteAppraisal(){ if(!confirm('Futa tathmini hii?')) return; try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); const rec=res.record||{}; if(rec.appraisals?.incharge?.[username]){ delete rec.appraisals.incharge[username]; const up=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(rec)}); if(!up.ok) throw new Error('Imeshindwa kufuta'); showToast('✅ Imehifadhiwa','success'); updateStatus('pending'); } else { showToast('❌ Hakuna tathmini','error'); } } catch(e){ showToast('❌ '+e.message,'error'); console.error(e); } }
+    // ========================= DELETE =========================
+    async function deleteAppraisal(){ if(!confirm('Futa tathmini hii?')) return; try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); const rec=res.record||{}; if(rec.incharge_appraisals?.[username]){ delete rec.incharge_appraisals[username]; const up=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(rec)}); if(!up.ok) throw new Error('Imeshindwa kufuta'); showToast('✅ Imehifadhiwa','success'); updateStatus('pending'); } else { showToast('❌ Hakuna tathmini','error'); } } catch(e){ showToast('❌ '+e.message,'error'); console.error(e); } }
 
-    async function generatePDF() {
-      showToast('⏳ Inatengeneza PDF...', 'info');
-      try {
-        const element = document.getElementById('printArea');
-        const canvas = await html2canvas(element, { scale: 2, useCORS: true, backgroundColor: '#ffffff', logging: false });
-        const imgData = canvas.toDataURL('image/png');
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF('p', 'mm', 'a4');
-        const pdfWidth = doc.internal.pageSize.getWidth();
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-        let heightLeft = pdfHeight, position = 0;
-        doc.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
-        heightLeft -= doc.internal.pageSize.getHeight();
-        while (heightLeft > 0) {
-          position = heightLeft - pdfHeight;
-          doc.addPage();
-          doc.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
-          heightLeft -= doc.internal.pageSize.getHeight();
-        }
-        doc.save(`Tathmini_${username}_${new Date().toISOString().slice(0,10)}.pdf`);
-        showToast('✅ PDF imehifadhiwa!', 'success');
-      } catch(e){ showToast('❌ Hitilafu: '+e.message,'error'); console.error(e); }
-    }
+    // ========================= HISTORY =========================
+    async function updateHistory(){ try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); const rec=res.record||{}; const history = rec.history?.[username] || []; const container = document.getElementById('historyList'); if(history.length === 0){ container.innerHTML = '<p style="color:#7f8c8d;text-align:center;">Hakuna historia.</p>'; return; } container.innerHTML = history.slice().reverse().map(h => `<div class="history-item"><span><strong>v${h.version}</strong> - ${h.fullname||h.username}</span><span class="date">${new Date(h.savedAt||h.timestamp).toLocaleString()}</span></div>`).join(''); } catch(e){ console.error(e); } }
 
+    // ========================= SHARE LINK =========================
+    function generateShareLink(){ const d=getFormData(); const password = document.getElementById('sharePassword').value; try{ const dataStr = JSON.stringify(d); const encoded = btoa(encodeURIComponent(dataStr)); const link = `${window.location.origin}${window.location.pathname}?shared=${encoded}`; document.getElementById('shareLinkOutput').value = link; document.getElementById('shareLinkContainer').style.display = 'flex'; showToast('✅ Link imeundwa!','success'); } catch(e){ showToast('❌ Hitilafu: '+e.message,'error'); } }
+
+    function copyShareLink(){ const input = document.getElementById('shareLinkOutput'); input.select(); document.execCommand('copy'); showToast('✅ Link imenakiliwa!','success'); }
+
+    function openShareLink(){ const link = document.getElementById('shareLinkOutput').value; if(link) window.open(link, '_blank'); }
+
+    // ========================= LOAD SHARED DATA =========================
+    function loadSharedData(){ const params = new URLSearchParams(window.location.search); const shared = params.get('shared'); if(shared){ try{ const decoded = decodeURIComponent(atob(shared)); const data = JSON.parse(decoded); setFormData(data); showToast('✅ Data imepakiwa kutoka link!','success'); } catch(e){ showToast('❌ Hitilafu ya kupakia link','error'); } } }
+
+    // ========================= PDF =========================
+    function generatePDF(){ showToast('⏳ Inatengeneza PDF...','info'); try{ window.print(); showToast('✅ PDF imefunguliwa!','success'); } catch(e){ showToast('❌ Hitilafu: '+e.message,'error'); } }
+
+    // ========================= SAVE TO DRIVE =========================
+    function saveToDrive(){ const d=getFormData(); const dataStr = JSON.stringify(d, null, 2); const blob = new Blob([dataStr], {type: 'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `tathmini_incharge_${username}_${new Date().toISOString().slice(0,10)}.json`; a.click(); URL.revokeObjectURL(url); showToast('✅ Faili imeshuka! Pakia kwenye Google Drive','success'); }
+
+    // ========================= SEND EMAIL =========================
+    function sendEmailData(){ const d=getFormData(); const subject = encodeURIComponent('TATHMINI YA MGANGA MFAWIDHI - MTWARA PERFORMANCE'); const body = encodeURIComponent(`📋 TATHMINI YA MGANGA MFAWIDHI 📋\n\n👤 Jina: ${d.fullname||'Hajajazwa'}\n🏢 Idara: ${d.department||'Hajajazwa'}\n📋 Cheo: ${d.position||'Hajajazwa'}\n⭐ Uongozi: ${d.step1_leadership}/5\n⭐ Ubora: ${d.step2_quality}/5\n⭐ Uwajibikaji: ${d.step3_accountability}/5\n✍️ Sahihi: ${d.signature_name||'Hajajazwa'} - ${d.signature_date||''}\n💬 Maoni: ${d.overall_comments||'Hakuna'}\n📅 Imetolewa: ${new Date().toLocaleString()}\n\n--\nMTWARA PERFORMANCE - Tathmini ya Mganga Mfawidhi`); const recipient = d.recipient || ''; if(recipient){ window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`; showToast('✅ Email imefunguliwa!','success'); } else { showToast('❌ Jaza barua pepe ya mpokeaji','error'); } }
+
+    // ========================= OVERALL / SPECIFIC =========================
     function showOverall(){ const d=getFormData(); alert(`📊 TATHMINI JUMLA\n\n👤 ${d.fullname||'Hajajazwa'}\n🏢 ${d.department||'Hajajazwa'}\n📋 ${d.position||'Hajajazwa'}\n⭐ Uongozi: ${d.step1_leadership}/5\n⭐ Ubora: ${d.step2_quality}/5\n⭐ Uwajibikaji: ${d.step3_accountability}/5\n✍️ Sahihi: ${d.signature_name||'Hajajazwa'} - ${d.signature_date||''}\n💬 Maoni: ${d.overall_comments||'Hakuna'}`); }
     function showSpecific(){ const d=getFormData(); const avg=(+d.step1_leadership+ +d.step2_quality+ +d.step3_accountability)/3; alert(`🎯 TATHMINI MAALUMU\n\n📌 Uongozi: ${d.step1_leadership}/5\n📌 Ubora: ${d.step2_quality}/5\n📌 Uwajibikaji: ${d.step3_accountability}/5\n📊 Wastani: ${avg.toFixed(1)}/5\n📈 Kiwango: ${avg>=4?'🌟 Bora':avg>=3?'✅ Nzuri':avg>=2?'⚠️ Inahitajika Kuboresha':'❌ Dhaifu'}`); }
 
-    async function loadAllData(role='all'){ const c=document.getElementById('allDataContainer'); c.innerHTML='<span class="loading"></span> Inapakia...'; try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); const rec=res.record||{}; const app=rec.appraisals||{}; document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active')); document.querySelector(`.tab-btn[onclick="loadAllData('${role}')"]`)?.classList.add('active'); let html='', count=0; const arr = role==='all' ? ['worker','supervisor','incharge'] : [role]; const labels={worker:'👤 Mtendakazi', supervisor:'👔 Msimamizi', incharge:'🏥 Mganga Mfawidhi'}; const badges={worker:'worker', supervisor:'supervisor', incharge:'incharge'}; arr.forEach(r=>{ const data=app[r]||{}; Object.keys(data).forEach(u=>{ const item=data[u]; if(r!=='incharge' && item.submitted_to!=='incharge' && item.status!=='submitted') return; const icon=item.status==='submitted'?'📤':'💾'; html+=`<div class="data-item"><span><strong>${item.fullname||u}</strong> <span class="badge-role ${badges[r]}">${labels[r]}</span></span><span style="font-size:12px;color:#7f8c8d;">${item.department||''} ${icon} ${item.status||'saved'}</span></div>`; count++; }); }); c.innerHTML = count===0 ? '<p style="color:#7f8c8d;text-align:center;">Hakuna tathmini zilizotumwa.</p>' : html; } catch(e){ c.innerHTML='<p style="color:#e74c3c;">Hitilafu: '+e.message+'</p>'; console.error(e); } }
+    // ========================= LOAD ALL DATA =========================
+    async function loadAllData(role='all'){ const c=document.getElementById('allDataContainer'); c.innerHTML='<span class="loading"></span> Inapakia...'; try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); const rec=res.record||{}; const app=rec.incharge_appraisals||{}; const submitted = rec.submitted_appraisals||{}; document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active')); document.querySelector(`.tab-btn[onclick="loadAllData('${role}')"]`)?.classList.add('active'); let html='', count=0; const arr = role==='all' ? ['worker','supervisor','incharge'] : [role]; const labels={worker:'👤 Mtendakazi', supervisor:'👔 Msimamizi', incharge:'🏥 Mganga Mfawidhi'}; const badges={worker:'worker', supervisor:'supervisor', incharge:'incharge'}; if(role==='all' || role==='incharge'){ Object.keys(app).forEach(u=>{ const item=app[u]; const icon=item.status==='submitted'?'📤':'💾'; html+=`<div class="data-item"><span><strong>${item.fullname||u}</strong> <span class="badge-role incharge">🏥 Mganga Mfawidhi</span></span><span style="font-size:12px;color:#7f8c8d;">${item.department||''} ${icon} ${item.status||'saved'}</span></div>`; count++; }); } if(role==='all' || role==='worker'){ Object.keys(submitted.worker||{}).forEach(u=>{ const item=submitted.worker[u]; html+=`<div class="data-item"><span><strong>${item.fullname||u}</strong> <span class="badge-role worker">👤 Mtendakazi</span></span><span style="font-size:12px;color:#7f8c8d;">${item.department||''} 📤 Imetumwa</span></div>`; count++; }); } if(role==='all' || role==='supervisor'){ Object.keys(submitted.supervisor||{}).forEach(u=>{ const item=submitted.supervisor[u]; html+=`<div class="data-item"><span><strong>${item.fullname||u}</strong> <span class="badge-role supervisor">👔 Msimamizi</span></span><span style="font-size:12px;color:#7f8c8d;">${item.department||''} 📤 Imetumwa</span></div>`; count++; }); } c.innerHTML = count===0 ? '<p style="color:#7f8c8d;text-align:center;">Hakuna tathmini zilizotumwa.</p>' : html; } catch(e){ c.innerHTML='<p style="color:#e74c3c;">Hitilafu: '+e.message+'</p>'; console.error(e); } }
 
+    // ========================= LOGOUT =========================
     function logout(){ window.location.href='index.html'; }
-    window.onload = function(){ initSignature(); loadAppraisal(); loadAllData('all'); };
+
+    // ========================= INIT =========================
+    window.onload = function(){ initSignature(); loadAppraisal(); loadAllData('all'); loadSharedData(); };
   </script>
 </body>
 </html>
