@@ -73,6 +73,8 @@
     .badge-role.worker { background:#27ae60; color:#fff; }
     .badge-role.supervisor { background:#f39c12; color:#fff; }
     .badge-role.incharge { background:#8e44ad; color:#fff; }
+    .download-section { background:#e8f0fe; border:2px solid #8e44ad; border-radius:12px; padding:16px; margin-top:12px; }
+    .download-section h4 { color:#2c0a3e; margin-bottom:8px; }
     .toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(20px); max-width:450px; width:90%; padding:14px 22px; border-radius:14px; color:#fff; text-align:center; z-index:999; opacity:0; transition:0.4s; box-shadow:0 8px 40px rgba(0,0,0,0.2); }
     .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
     .toast.success { background:#27ae60; }
@@ -90,25 +92,16 @@
       <h2 style="margin:0;">🏥 Mganga Mfawidhi</h2>
       <div class="btn-group">
         <button class="btn btn-secondary" onclick="window.location.href='index.html'">🏠 Nyumbani</button>
+        <button class="btn btn-pdf" onclick="downloadPDF()">📄 Pakua PDF</button>
         <button class="btn btn-info" onclick="window.print()">🖨️ Chapisha</button>
-        <button class="btn btn-pdf" onclick="generatePDF()">📄 PDF</button>
         <button class="btn btn-email" onclick="sendEmailData()">📧 Tuma Email</button>
       </div>
     </div>
     <div class="logo-area"><img src="SDA_CHURCH_LOGO.webp" alt="SDA Logo"><br><small style="color:#7f8c8d;">Logo ya SDA Church</small></div>
-    <div class="sub">Karibu mganga mfawidhi</div>
-
+    <div class="sub" id="greeting">Karibu mganga mfawidhi</div>
     <div class="comms no-print">
       <span>📞 Mawasiliano:</span>
       <a href="tel:+255742710697" class="btn btn-phone" style="padding:4px 14px;font-size:13px;">📱 Simu</a>
-    </div>
-
-    <!-- Sehemu: Jina la Mtumiaji -->
-    <div class="section">
-      <h3><span class="step">0</span> Jina la Mtumiaji</h3>
-      <div class="form-grid">
-        <div class="form-group"><label>Jina la Mtumiaji <span style="color:#e74c3c;">*</span></label><input type="text" id="usernameInput" placeholder="Weka username yako" value="incharge"></div>
-      </div>
     </div>
 
     <!-- Sehemu 1: Tathmini -->
@@ -185,6 +178,19 @@
       <div id="allDataContainer" class="data-container"><p style="color:#7f8c8d;text-align:center;">Bonyeza kituo cha juu</p></div>
     </div>
 
+    <!-- Sehemu 5: Download PDF -->
+    <div class="section no-print">
+      <h3><span class="step">5</span> 📄 Pakua Fomu kama PDF</h3>
+      <div class="download-section">
+        <h4>Chagua mtindo wa PDF:</h4>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
+          <button class="btn btn-pdf" onclick="downloadPDF()" style="flex:1;justify-content:center;">📄 Pakua PDF</button>
+          <button class="btn btn-info" onclick="window.print()" style="flex:1;justify-content:center;">🖨️ Chapisha</button>
+        </div>
+        <p style="font-size:12px;color:#7f8c8d;margin-top:8px;">PDF itajumuisha tathmini yako, sahihi, na maoni yote.</p>
+      </div>
+    </div>
+
     <!-- Vitufe -->
     <div class="button-group no-print">
       <button class="btn btn-primary" onclick="saveAppraisal()" id="saveBtn">💾 Hifadhi</button>
@@ -198,31 +204,38 @@
     <div style="text-align:center;margin-top:12px;"><span id="saveStatus" class="status-badge pending">📝 Hajahifadhiwa</span></div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
-    // ============================================================
-    // MTWARA PERFORMANCE - INCHARGE FORM (SIMPLIFIED & FIXED)
-    // ============================================================
     const API_KEY = "$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K";
     const BIN_ID = "6a4b0bc9da38895dfe32cc08";
 
     function showToast(msg, type) {
       const t = document.getElementById('toast');
-      if (!t) { alert(msg); return; }
       t.textContent = msg;
       t.className = 'toast ' + type + ' show';
       setTimeout(() => t.classList.remove('show'), 3500);
     }
 
     function getUsername() {
-      return document.getElementById('usernameInput').value.trim() || 'incharge';
+      const params = new URLSearchParams(window.location.search);
+      const userData = params.get('user');
+      if (!userData) return null;
+      try { return JSON.parse(decodeURIComponent(userData)).username; } catch (e) { return null; }
     }
+
+    const username = getUsername();
+    if (!username) {
+      showToast('❌ Hakuna mtumiaji', 'error');
+      setTimeout(() => window.location.href = 'index.html', 2000);
+    }
+    document.getElementById('greeting').textContent = `Karibu ${username}`;
 
     // ========================= SIGNATURE =========================
     let canvas, ctx, isDrawing = false, hasSignature = false;
 
     function initSignature() {
       canvas = document.getElementById('signatureCanvas');
-      if (!canvas) return;
       ctx = canvas.getContext('2d');
       canvas.width = canvas.parentElement.clientWidth - 20;
       canvas.height = 150;
@@ -235,7 +248,6 @@
       canvas.addEventListener('mousemove', draw);
       canvas.addEventListener('mouseup', stopDraw);
       canvas.addEventListener('mouseleave', stopDraw);
-      
       canvas.addEventListener('touchstart', handleTouch, { passive: false });
       canvas.addEventListener('touchmove', handleTouch, { passive: false });
       canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
@@ -303,11 +315,9 @@
       img.src = dataUrl;
     }
 
-    // ========================= RECIPIENT =========================
     document.querySelectorAll('input[name="sendMethod"]').forEach(radio => {
       radio.addEventListener('change', function() {
         const label = document.querySelector('#recipientField label');
-        if (!label) return;
         if (this.value === 'whatsapp') {
           label.innerHTML = 'Namba ya WhatsApp ya mpokeaji <span style="color:#e74c3c;">*</span>';
           document.getElementById('recipient').placeholder = 'Mfano: 255742710697';
@@ -318,9 +328,7 @@
       });
     });
 
-    // ========================= GET/SET DATA =========================
     function getFormData() {
-      const username = getUsername();
       return {
         username: username,
         role: 'incharge',
@@ -350,8 +358,7 @@
     }
 
     function setFormData(d) {
-      const fields = ['fullname', 'department', 'position', 'phone', 'email', 'step1_leadership', 'step2_quality', 'step3_accountability', 'step_notes', 'strengths', 'weaknesses', 'overall_comments', 'signature_name', 'signature_date', 'signature_notes', 'recipient', 'usernameInput'];
-      fields.forEach(id => {
+      ['fullname', 'department', 'position', 'phone', 'email', 'step1_leadership', 'step2_quality', 'step3_accountability', 'step_notes', 'strengths', 'weaknesses', 'overall_comments', 'signature_name', 'signature_date', 'signature_notes', 'recipient'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.value = d[id] || '';
       });
@@ -375,7 +382,8 @@
       };
       const c = map[s] || map.pending;
       const b = document.getElementById('saveStatus');
-      if (b) { b.className = 'status-badge ' + c[0]; b.textContent = c[1]; }
+      b.className = 'status-badge ' + c[0];
+      b.textContent = c[1];
     }
 
     // ========================= SAVE =========================
@@ -383,34 +391,17 @@
       const btn = document.getElementById('saveBtn');
       btn.disabled = true;
       btn.innerHTML = '<span class="loading"></span> Inahifadhi...';
-      
-      const username = getUsername();
-      if (!username) {
-        showToast('❌ Tafadhali weka jina la mtumiaji', 'error');
-        btn.disabled = false;
-        btn.innerHTML = '💾 Hifadhi';
-        return;
-      }
-      
       const data = getFormData();
       data.status = 'saved';
-      
       try {
-        console.log('📤 Saving data for user:', username);
-        
-        // Get current data
         const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-          method: 'GET',
           headers: { 'X-Master-Key': API_KEY }
         });
-        if (!res.ok) throw new Error(`GET failed: ${res.status}`);
-        
+        if (!res.ok) throw new Error('Network error');
         const result = await res.json();
         const rec = result.record || {};
         if (!rec.incharge_appraisals) rec.incharge_appraisals = {};
         rec.incharge_appraisals[username] = data;
-        
-        // Save
         const update = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
           method: 'PUT',
           headers: {
@@ -419,17 +410,13 @@
           },
           body: JSON.stringify(rec)
         });
-        if (!update.ok) throw new Error(`PUT failed: ${update.status}`);
-        
-        showToast('✅ Imehifadhiwa kwenye JSONBin!', 'success');
+        if (!update.ok) throw new Error('Imeshindwa kuhifadhi');
+        showToast('✅ Imehifadhiwa!', 'success');
         updateStatus('saved');
-        console.log('✅ Save successful!');
-        
       } catch (e) {
-        showToast('❌ Hitilafu: ' + e.message, 'error');
-        console.error('❌ Save Error:', e);
+        showToast('❌ ' + e.message, 'error');
+        console.error('Save Error:', e);
       }
-      
       btn.disabled = false;
       btn.innerHTML = '💾 Hifadhi';
     }
@@ -439,17 +426,7 @@
       const btn = document.getElementById('submitBtn');
       btn.disabled = true;
       btn.innerHTML = '<span class="loading"></span> Inatuma...';
-      
-      const username = getUsername();
-      if (!username) {
-        showToast('❌ Tafadhali weka jina la mtumiaji', 'error');
-        btn.disabled = false;
-        btn.innerHTML = '📤 Tuma';
-        return;
-      }
-      
       const data = getFormData();
-      
       if (!data.fullname || !data.department || !data.position) {
         showToast('❌ Jaza Jina, Idara na Cheo', 'error');
         btn.disabled = false;
@@ -474,23 +451,16 @@
         btn.innerHTML = '📤 Tuma';
         return;
       }
-      
       data.status = 'submitted';
-      
       try {
-        console.log('📤 Submitting data for user:', username);
-        
         const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-          method: 'GET',
           headers: { 'X-Master-Key': API_KEY }
         });
-        if (!res.ok) throw new Error(`GET failed: ${res.status}`);
-        
+        if (!res.ok) throw new Error('Network error');
         const result = await res.json();
         const rec = result.record || {};
         if (!rec.incharge_appraisals) rec.incharge_appraisals = {};
         rec.incharge_appraisals[username] = data;
-        
         const update = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
           method: 'PUT',
           headers: {
@@ -499,81 +469,51 @@
           },
           body: JSON.stringify(rec)
         });
-        if (!update.ok) throw new Error(`PUT failed: ${update.status}`);
-        
-        showToast(`✅ Imetumwa kwa ${data.send_method.toUpperCase()} kwa ${data.recipient}!`, 'success');
+        if (!update.ok) throw new Error('Imeshindwa kutuma');
+        showToast('✅ Imetumwa!', 'success');
         updateStatus('submitted');
-        console.log('✅ Submit successful!');
-        
       } catch (e) {
-        showToast('❌ Hitilafu: ' + e.message, 'error');
-        console.error('❌ Submit Error:', e);
+        showToast('❌ ' + e.message, 'error');
+        console.error('Submit Error:', e);
       }
-      
       btn.disabled = false;
       btn.innerHTML = '📤 Tuma';
     }
 
     // ========================= LOAD =========================
     async function loadAppraisal() {
-      const username = getUsername();
-      if (!username) {
-        updateStatus('pending');
-        return;
-      }
-      
       try {
-        console.log('📥 Loading data for user:', username);
-        
         const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-          method: 'GET',
           headers: { 'X-Master-Key': API_KEY }
         });
-        if (!res.ok) throw new Error(`GET failed: ${res.status}`);
-        
+        if (!res.ok) throw new Error('Network error');
         const result = await res.json();
         const rec = result.record || {};
         const data = rec.incharge_appraisals?.[username];
-        
         if (!data) {
           updateStatus('pending');
-          console.log('📭 No data found for user:', username);
           return;
         }
-        
         setFormData(data);
         showToast('✅ Imepakiwa', 'success');
-        console.log('✅ Load successful!');
-        
       } catch (e) {
-        showToast('❌ Hitilafu: ' + e.message, 'error');
-        console.error('❌ Load Error:', e);
+        showToast('❌ ' + e.message, 'error');
+        console.error('Load Error:', e);
       }
     }
 
     // ========================= DELETE =========================
     async function deleteAppraisal() {
-      const username = getUsername();
-      if (!username) {
-        showToast('❌ Tafadhali weka jina la mtumiaji', 'error');
-        return;
-      }
-      
       if (!confirm('Futa tathmini hii?')) return;
-      
       try {
         const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-          method: 'GET',
           headers: { 'X-Master-Key': API_KEY }
         });
         if (!res.ok) throw new Error('Network error');
-        
         const result = await res.json();
         const rec = result.record || {};
-        
         if (rec.incharge_appraisals?.[username]) {
           delete rec.incharge_appraisals[username];
-          
           const update = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
             method: 'PUT',
             headers: {
@@ -583,7 +523,6 @@
             body: JSON.stringify(rec)
           });
           if (!update.ok) throw new Error('Imeshindwa kufuta');
-          
           showToast('✅ Imehifadhiwa', 'success');
           updateStatus('pending');
         } else {
@@ -595,14 +534,38 @@
       }
     }
 
-    // ========================= PDF =========================
-    function generatePDF() {
+    // ========================= PDF DOWNLOAD =========================
+    async function downloadPDF() {
       showToast('⏳ Inatengeneza PDF...', 'info');
       try {
-        window.print();
-        showToast('✅ PDF imefunguliwa!', 'success');
+        const element = document.getElementById('printArea');
+        const canvas = await html2canvas(element, {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: '#ffffff',
+          logging: false,
+          allowTaint: true
+        });
+        const imgData = canvas.toDataURL('image/png');
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF('p', 'mm', 'a4');
+        const pdfWidth = doc.internal.pageSize.getWidth();
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+        let heightLeft = pdfHeight;
+        let position = 0;
+        doc.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+        heightLeft -= doc.internal.pageSize.getHeight();
+        while (heightLeft > 0) {
+          position = heightLeft - pdfHeight;
+          doc.addPage();
+          doc.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+          heightLeft -= doc.internal.pageSize.getHeight();
+        }
+        doc.save(`Tathmini_Incharge_${username}_${new Date().toISOString().slice(0,10)}.pdf`);
+        showToast('✅ PDF imehifadhiwa!', 'success');
       } catch (e) {
-        showToast('❌ Hitilafu: ' + e.message, 'error');
+        showToast('❌ Hitilafu: ' + e.message + '. Jaribu kutumia "Chapisha" badala yake.', 'error');
+        console.error('PDF Error:', e);
       }
     }
 
@@ -623,7 +586,6 @@
         `📅 Imetolewa: ${new Date().toLocaleString()}\n\n` +
         `--\nMTWARA PERFORMANCE - Tathmini ya Mganga Mfawidhi`
       );
-      
       const recipient = data.recipient || '';
       if (recipient) {
         window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
@@ -660,31 +622,24 @@
       );
     }
 
-    // ========================= LOAD ALL DATA =========================
     async function loadAllData(role = 'all') {
       const container = document.getElementById('allDataContainer');
       container.innerHTML = '<span class="loading"></span> Inapakia...';
-      
       try {
         const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-          method: 'GET',
           headers: { 'X-Master-Key': API_KEY }
         });
         if (!res.ok) throw new Error('Network error');
-        
         const result = await res.json();
         const rec = result.record || {};
         const app = rec.incharge_appraisals || {};
-        
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.querySelector(`.tab-btn[onclick="loadAllData('${role}')"]`)?.classList.add('active');
-        
         let html = '';
         let count = 0;
         const arr = role === 'all' ? ['worker', 'supervisor', 'incharge'] : [role];
         const labels = { worker: '👤 Mtendakazi', supervisor: '👔 Msimamizi', incharge: '🏥 Mganga Mfawidhi' };
         const badges = { worker: 'worker', supervisor: 'supervisor', incharge: 'incharge' };
-        
         if (role === 'all' || role === 'incharge') {
           Object.keys(app).forEach(u => {
             const item = app[u];
@@ -696,7 +651,6 @@
             count++;
           });
         }
-        
         container.innerHTML = count === 0 ? '<p style="color:#7f8c8d;text-align:center;">Hakuna tathmini zilizotumwa.</p>' : html;
       } catch (e) {
         container.innerHTML = '<p style="color:#e74c3c;">Hitilafu: ' + e.message + '</p>';
@@ -704,27 +658,14 @@
       }
     }
 
-    // ========================= LOGOUT =========================
     function logout() {
       window.location.href = 'index.html';
     }
 
-    // ========================= INIT =========================
     window.onload = function() {
-      console.log('🚀 Incharge page loading...');
       initSignature();
       loadAppraisal();
       loadAllData('all');
-      
-      // Auto-load when username changes
-      document.getElementById('usernameInput').addEventListener('change', function() {
-        loadAppraisal();
-        loadAllData('all');
-      });
-      
-      console.log('✅ Incharge page loaded successfully!');
-      console.log('📌 API_KEY:', API_KEY);
-      console.log('📌 BIN_ID:', BIN_ID);
     };
   </script>
 </body>
