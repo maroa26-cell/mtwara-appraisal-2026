@@ -7,7 +7,7 @@
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:'Segoe UI', Tahoma, sans-serif; background:linear-gradient(135deg,#1a5276,#8e44ad); min-height:100vh; display:flex; justify-content:center; align-items:center; padding:20px; }
-    .login-container { background:#fff; border-radius:24px; padding:40px 35px; max-width:440px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,0.25); animation:slideUp 0.5s ease; }
+    .login-container { background:#fff; border-radius:24px; padding:40px 35px; max-width:440px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,0.25); animation:slideUp 0.5s; }
     @keyframes slideUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
     .login-header { text-align:center; margin-bottom:24px; }
     .login-header .logo { font-size:52px; }
@@ -54,212 +54,52 @@
       <div class="logo">🏥</div>
       <h1>MTWARA PERFORMANCE</h1>
       <p>Mfumo wa Tathmini ya Utendaji</p>
-      <span class="badge">Toleo v12.0</span>
+      <span class="badge">Toleo v13.0</span>
     </div>
     <div class="connection-status" id="connectionStatus"><span class="loading-spinner"></span> Inaunganisha...</div>
     <div class="tab-buttons">
       <button class="btn active" id="loginTabBtn" onclick="switchTab('login')">🔐 Ingia</button>
       <button class="btn inactive" id="signupTabBtn" onclick="switchTab('signup')">📝 Jisajili</button>
     </div>
-    <!-- Login Tab -->
     <div id="loginTab" class="tab-content active">
-      <div class="form-group">
-        <label>👤 Jina la Mtumiaji au Barua Pepe</label>
-        <input type="text" id="loginUsername" placeholder="Weka username au email" value="worker">
-      </div>
-      <div class="form-group">
-        <label>🔑 Nenosiri</label>
-        <div class="password-wrapper">
-          <input type="password" id="loginPassword" placeholder="Weka nenosiri" value="1234">
-          <button class="toggle-password" onclick="togglePasswordVisibility('loginPassword',this)">👁️</button>
-        </div>
-      </div>
+      <div class="form-group"><label>👤 Jina la Mtumiaji au Barua Pepe</label><input type="text" id="loginUsername" placeholder="Weka username au email" value="worker"></div>
+      <div class="form-group"><label>🔑 Nenosiri</label><div class="password-wrapper"><input type="password" id="loginPassword" placeholder="Weka nenosiri" value="1234"><button class="toggle-password" onclick="togglePasswordVisibility('loginPassword',this)">👁️</button></div></div>
       <button class="btn btn-primary" onclick="login()" id="loginBtn">🔓 Ingia</button>
-      <div class="divider">Au</div>
-      <button class="btn btn-secondary" onclick="switchTab('signup')">📝 Jisajili Sasa</button>
+      <div class="divider">Au</div><button class="btn btn-secondary" onclick="switchTab('signup')">📝 Jisajili Sasa</button>
     </div>
-    <!-- Signup Tab -->
     <div id="signupTab" class="tab-content">
-      <div class="form-group">
-        <label>👤 Jina la Mtumiaji</label>
-        <input type="text" id="signupUsername" placeholder="Chagua username">
-        <div class="form-hint" id="usernameHint" style="font-size:11px;color:#7f8c8d;margin-top:4px;">Angalia upatikanaji</div>
-      </div>
-      <div class="form-group">
-        <label>📧 Barua Pepe</label>
-        <input type="email" id="signupEmail" placeholder="Weka barua pepe">
-      </div>
-      <div class="form-group">
-        <label>🔑 Nenosiri</label>
-        <div class="password-wrapper">
-          <input type="password" id="signupPassword" placeholder="Weka nenosiri (angalau 4)">
-          <button class="toggle-password" onclick="togglePasswordVisibility('signupPassword',this)">👁️</button>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>🔑 Thibitisha Nenosiri</label>
-        <div class="password-wrapper">
-          <input type="password" id="signupPasswordConfirm" placeholder="Andika tena">
-          <button class="toggle-password" onclick="togglePasswordVisibility('signupPasswordConfirm',this)">👁️</button>
-        </div>
-        <div id="passwordMatchHint" style="font-size:11px;color:#7f8c8d;margin-top:4px;">Nenosiri lazima zilandane</div>
-      </div>
-      <div class="form-group">
-        <label>📋 Jukumu</label>
-        <select id="signupRole">
-          <option value="worker">👤 Mtendakazi</option>
-          <option value="supervisor">👔 Msimamizi</option>
-          <option value="incharge">🏥 Mganga Mfawidhi</option>
-        </select>
-      </div>
+      <div class="form-group"><label>👤 Jina la Mtumiaji</label><input type="text" id="signupUsername" placeholder="Chagua username"><div class="form-hint" id="usernameHint" style="font-size:11px;color:#7f8c8d;margin-top:4px;">Angalia upatikanaji</div></div>
+      <div class="form-group"><label>📧 Barua Pepe</label><input type="email" id="signupEmail" placeholder="Weka barua pepe"></div>
+      <div class="form-group"><label>🔑 Nenosiri</label><div class="password-wrapper"><input type="password" id="signupPassword" placeholder="Weka nenosiri (angalau 4)"><button class="toggle-password" onclick="togglePasswordVisibility('signupPassword',this)">👁️</button></div></div>
+      <div class="form-group"><label>🔑 Thibitisha Nenosiri</label><div class="password-wrapper"><input type="password" id="signupPasswordConfirm" placeholder="Andika tena"><button class="toggle-password" onclick="togglePasswordVisibility('signupPasswordConfirm',this)">👁️</button></div><div id="passwordMatchHint" style="font-size:11px;color:#7f8c8d;margin-top:4px;">Nenosiri lazima zilandane</div></div>
+      <div class="form-group"><label>📋 Jukumu</label><select id="signupRole"><option value="worker">👤 Mtendakazi</option><option value="supervisor">👔 Msimamizi</option><option value="incharge">🏥 Mganga Mfawidhi</option></select></div>
       <button class="btn btn-primary" onclick="signup()" id="signupBtn">📝 Jisajili</button>
-      <div class="divider">Au</div>
-      <button class="btn btn-secondary" onclick="switchTab('login')">🔐 Ingia kwenye Akaunti</button>
+      <div class="divider">Au</div><button class="btn btn-secondary" onclick="switchTab('login')">🔐 Ingia kwenye Akaunti</button>
     </div>
-    <div class="version">Toleo 12.0 - Imeboreshwa</div>
+    <div class="version">Toleo 13.0 - JSONBin pekee</div>
   </div>
 
   <script>
-    // ========================= CONFIG =========================
     const API_KEY = "$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K";
     const BIN_ID = "6a4b0bc9da38895dfe32cc08";
 
-    function showToast(msg, type) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.className = 'toast ' + type + ' show';
-      setTimeout(() => t.classList.remove('show'), 3500);
-    }
+    function showToast(m,t){ const e=document.getElementById('toast'); e.textContent=m; e.className='toast '+t+' show'; setTimeout(()=>e.classList.remove('show'),3500); }
+    function togglePasswordVisibility(id,btn){ const e=document.getElementById(id); if(e.type==='password'){ e.type='text'; btn.textContent='🙈'; } else { e.type='password'; btn.textContent='👁️'; } }
+    function switchTab(tab){ document.getElementById('loginTab').classList.toggle('active', tab==='login'); document.getElementById('signupTab').classList.toggle('active', tab==='signup'); document.getElementById('loginTabBtn').className='btn '+(tab==='login'?'active':'inactive'); document.getElementById('signupTabBtn').className='btn '+(tab==='signup'?'active':'inactive'); }
 
-    function togglePasswordVisibility(id, btn) {
-      const input = document.getElementById(id);
-      if (input.type === 'password') { input.type = 'text'; btn.textContent = '🙈'; }
-      else { input.type = 'password'; btn.textContent = '👁️'; }
-    }
+    document.getElementById('signupUsername').addEventListener('input', async function(){ const u=this.value.trim(); const h=document.getElementById('usernameHint'); if(u.length<3){ h.innerHTML='⚠️ Username lazima iwe na herufi 3 au zaidi'; h.style.color='#f39c12'; return; } try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error(); const d=await r.json(); const users=d.record?.users||{}; if(users[u]){ h.innerHTML='❌ Username tayari imechukuliwa'; h.style.color='#e74c3c'; } else { h.innerHTML='✅ Username inapatikana'; h.style.color='#27ae60'; } } catch(e){ h.innerHTML='⚠️ Hitilafu ya muunganisho'; h.style.color='#f39c12'; } });
 
-    function switchTab(tab) {
-      document.getElementById('loginTab').classList.toggle('active', tab === 'login');
-      document.getElementById('signupTab').classList.toggle('active', tab === 'signup');
-      document.getElementById('loginTabBtn').className = 'btn ' + (tab === 'login' ? 'active' : 'inactive');
-      document.getElementById('signupTabBtn').className = 'btn ' + (tab === 'signup' ? 'active' : 'inactive');
-    }
-
-    // ========================= CHECK USERNAME =========================
-    document.getElementById('signupUsername').addEventListener('input', async function() {
-      const u = this.value.trim();
-      const h = document.getElementById('usernameHint');
-      if (u.length < 3) { h.innerHTML = '⚠️ Username lazima iwe na herufi 3 au zaidi'; h.style.color = '#f39c12'; return; }
-      try {
-        const r = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
-        if (!r.ok) throw new Error();
-        const d = await r.json();
-        const users = d.record?.users || {};
-        if (users[u]) { h.innerHTML = '❌ Username tayari imechukuliwa'; h.style.color = '#e74c3c'; }
-        else { h.innerHTML = '✅ Username inapatikana'; h.style.color = '#27ae60'; }
-      } catch (e) { h.innerHTML = '⚠️ Hitilafu ya muunganisho'; h.style.color = '#f39c12'; }
-    });
-
-    // ========================= PASSWORD MATCH =========================
     document.getElementById('signupPassword').addEventListener('input', checkMatch);
     document.getElementById('signupPasswordConfirm').addEventListener('input', checkMatch);
-    function checkMatch() {
-      const p1 = document.getElementById('signupPassword').value;
-      const p2 = document.getElementById('signupPasswordConfirm').value;
-      const h = document.getElementById('passwordMatchHint');
-      if (p1 && p2) {
-        if (p1 === p2) { h.innerHTML = '✅ Nenosiri zinalingana'; h.style.color = '#27ae60'; }
-        else { h.innerHTML = '❌ Nenosiri hazilingani'; h.style.color = '#e74c3c'; }
-      } else { h.innerHTML = 'Nenosiri lazima zilandane'; h.style.color = '#7f8c8d'; }
-    }
+    function checkMatch(){ const p1=document.getElementById('signupPassword').value; const p2=document.getElementById('signupPasswordConfirm').value; const h=document.getElementById('passwordMatchHint'); if(p1&&p2){ if(p1===p2){ h.innerHTML='✅ Nenosiri zinalingana'; h.style.color='#27ae60'; } else { h.innerHTML='❌ Nenosiri hazilingani'; h.style.color='#e74c3c'; } } else { h.innerHTML='Nenosiri lazima zilandane'; h.style.color='#7f8c8d'; } }
 
-    // ========================= SIGNUP =========================
-    async function signup() {
-      const u = document.getElementById('signupUsername').value.trim();
-      const e = document.getElementById('signupEmail').value.trim();
-      const p = document.getElementById('signupPassword').value;
-      const c = document.getElementById('signupPasswordConfirm').value;
-      const r = document.getElementById('signupRole').value;
-      const btn = document.getElementById('signupBtn');
-      if (!u || u.length < 3) return showToast('❌ Username lazima iwe na herufi 3 au zaidi', 'error');
-      if (!e || !e.includes('@')) return showToast('❌ Tafadhali ingiza barua pepe sahihi', 'error');
-      if (!p || p.length < 4) return showToast('❌ Nenosiri lazima iwe na herufi 4 au zaidi', 'error');
-      if (p !== c) return showToast('❌ Nenosiri hazilingani', 'error');
-      btn.disabled = true;
-      btn.innerHTML = '<span class="loading-spinner"></span> Inajisajili...';
-      try {
-        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
-        if (!res.ok) throw new Error('Network error');
-        const data = await res.json();
-        const record = data.record || {};
-        if (!record.users) record.users = {};
-        if (record.users[u]) { showToast('❌ Username tayari imechukuliwa', 'error'); btn.disabled = false; btn.innerHTML = '📝 Jisajili'; return; }
-        if (Object.values(record.users).find(x => x.email === e)) { showToast('❌ Barua pepe tayari inatumika', 'error'); btn.disabled = false; btn.innerHTML = '📝 Jisajili'; return; }
-        record.users[u] = { password: p, role: r, email: e };
-        if (!record.appraisals) record.appraisals = {};
-        ['worker', 'supervisor', 'incharge'].forEach(ro => { if (!record.appraisals[ro]) record.appraisals[ro] = {}; });
-        if (!record.supervisor_evals) record.supervisor_evals = {};
-        if (!record.settings) record.settings = {};
-        const update = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
-          body: JSON.stringify(record)
-        });
-        if (!update.ok) throw new Error('Imeshindwa kuhifadhi');
-        showToast(`✅ Akaunti imeundwa! Karibu ${u}`, 'success');
-        document.getElementById('loginUsername').value = u;
-        switchTab('login');
-        btn.disabled = false;
-        btn.innerHTML = '📝 Jisajili';
-      } catch (e) { showToast('❌ ' + e.message, 'error'); btn.disabled = false; btn.innerHTML = '📝 Jisajili'; }
-    }
+    async function signup(){ const u=document.getElementById('signupUsername').value.trim(); const e=document.getElementById('signupEmail').value.trim(); const p=document.getElementById('signupPassword').value; const c=document.getElementById('signupPasswordConfirm').value; const r=document.getElementById('signupRole').value; const btn=document.getElementById('signupBtn'); if(!u||u.length<3) return showToast('❌ Username lazima iwe na herufi 3 au zaidi','error'); if(!e||!e.includes('@')) return showToast('❌ Tafadhali ingiza barua pepe sahihi','error'); if(!p||p.length<4) return showToast('❌ Nenosiri lazima iwe na herufi 4 au zaidi','error'); if(p!==c) return showToast('❌ Nenosiri hazilingani','error'); btn.disabled=true; btn.innerHTML='<span class="loading-spinner"></span> Inajisajili...'; try{ const res=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!res.ok) throw new Error('Network error'); const data=await res.json(); const record=data.record||{}; if(!record.users) record.users={}; if(record.users[u]){ showToast('❌ Username tayari imechukuliwa','error'); btn.disabled=false; btn.innerHTML='📝 Jisajili'; return; } if(Object.values(record.users).find(x=>x.email===e)){ showToast('❌ Barua pepe tayari inatumika','error'); btn.disabled=false; btn.innerHTML='📝 Jisajili'; return; } record.users[u]={password:p, role:r, email:e}; if(!record.appraisals) record.appraisals={}; ['worker','supervisor','incharge'].forEach(ro=>{ if(!record.appraisals[ro]) record.appraisals[ro]={}; }); if(!record.supervisor_evals) record.supervisor_evals={}; if(!record.settings) record.settings={}; const update=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{ method:'PUT', headers:{'Content-Type':'application/json','X-Master-Key':API_KEY}, body:JSON.stringify(record)}); if(!update.ok) throw new Error('Imeshindwa kuhifadhi'); showToast(`✅ Akaunti imeundwa! Karibu ${u}`,'success'); document.getElementById('loginUsername').value=u; switchTab('login'); btn.disabled=false; btn.innerHTML='📝 Jisajili'; } catch(e){ showToast('❌ '+e.message,'error'); btn.disabled=false; btn.innerHTML='📝 Jisajili'; } }
 
-    // ========================= LOGIN =========================
-    async function login() {
-      const u = document.getElementById('loginUsername').value.trim();
-      const p = document.getElementById('loginPassword').value.trim();
-      const btn = document.getElementById('loginBtn');
-      if (!u || !p) return showToast('❌ Tafadhali jaza sehemu zote', 'error');
-      btn.disabled = true;
-      btn.innerHTML = '<span class="loading-spinner"></span> Inaingiza...';
-      try {
-        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
-        if (!res.ok) throw new Error('Network error');
-        const data = await res.json();
-        const users = data.record?.users || {};
-        let user = null, username = null;
-        for (const [key, val] of Object.entries(users)) {
-          if (key === u || val.email === u) { user = val; username = key; break; }
-        }
-        if (!user || user.password !== p) { showToast('❌ Jina/Barua pepe au nenosiri si sahihi', 'error'); btn.disabled = false; btn.innerHTML = '🔓 Ingia'; return; }
-        const userData = encodeURIComponent(JSON.stringify({ username, role: user.role }));
-        let redirect = '';
-        if (user.role === 'worker') redirect = 'worker.html';
-        else if (user.role === 'supervisor') redirect = 'supervisor.html';
-        else if (user.role === 'incharge') redirect = 'incharge.html';
-        showToast(`✅ Karibu ${username}`, 'success');
-        setTimeout(() => { window.location.href = `${redirect}?user=${userData}`; }, 500);
-      } catch (e) { showToast('❌ ' + e.message, 'error'); btn.disabled = false; btn.innerHTML = '🔓 Ingia'; }
-    }
+    async function login(){ const u=document.getElementById('loginUsername').value.trim(); const p=document.getElementById('loginPassword').value.trim(); const btn=document.getElementById('loginBtn'); if(!u||!p) return showToast('❌ Tafadhali jaza sehemu zote','error'); btn.disabled=true; btn.innerHTML='<span class="loading-spinner"></span> Inaingiza...'; try{ const res=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!res.ok) throw new Error('Network error'); const data=await res.json(); const users=data.record?.users||{}; let user=null, username=null; for(const [key,val] of Object.entries(users)){ if(key===u||val.email===u){ user=val; username=key; break; } } if(!user||user.password!==p){ showToast('❌ Jina/Barua pepe au nenosiri si sahihi','error'); btn.disabled=false; btn.innerHTML='🔓 Ingia'; return; } const userData=encodeURIComponent(JSON.stringify({username, role:user.role})); let redirect=''; if(user.role==='worker') redirect='worker.html'; else if(user.role==='supervisor') redirect='supervisor.html'; else if(user.role==='incharge') redirect='incharge.html'; showToast(`✅ Karibu ${username}`,'success'); setTimeout(()=>{ window.location.href=`${redirect}?user=${userData}`; },500); } catch(e){ showToast('❌ '+e.message,'error'); btn.disabled=false; btn.innerHTML='🔓 Ingia'; } }
 
-    // ========================= CHECK CONNECTION =========================
-    async function checkConnection() {
-      const s = document.getElementById('connectionStatus');
-      try {
-        const r = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, { headers: { 'X-Master-Key': API_KEY } });
-        s.innerHTML = r.ok ? '✅ Imeunganishwa' : '⚠️ Hitilafu ya muunganisho';
-      } catch (e) { s.innerHTML = '⚠️ Hakuna mtandao'; }
-    }
-
-    // ========================= ENTER KEY =========================
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const active = document.querySelector('.tab-content.active');
-        if (active.id === 'loginTab') login();
-        else if (active.id === 'signupTab') signup();
-      }
-    });
-
-    window.onload = function() { checkConnection(); };
+    async function checkConnection(){ const s=document.getElementById('connectionStatus'); try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); s.innerHTML=r.ok?'✅ Imeunganishwa':'⚠️ Hitilafu ya muunganisho'; } catch(e){ s.innerHTML='⚠️ Hakuna mtandao'; } }
+    document.addEventListener('keydown',(e)=>{ if(e.key==='Enter'){ const active=document.querySelector('.tab-content.active'); if(active.id==='loginTab') login(); else if(active.id==='signupTab') signup(); } });
+    window.onload=function(){ checkConnection(); };
   </script>
 </body>
 </html>
