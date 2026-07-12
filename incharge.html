@@ -33,8 +33,8 @@
     .btn-phone { background:#34B7F1; color:#fff; }
     .btn-phone:hover { background:#1a9fd8; }
     .section { background:#f8f9fa; border-radius:16px; padding:20px 22px; margin-bottom:20px; border-left:5px solid #8e44ad; }
-    .section h3 { color:#2c0a3e; font-size:18px; margin-bottom:14px; display:flex; align-items:center; gap:10px; }
-    .section h3 .step { background:#8e44ad; color:#fff; border-radius:50%; width:28px; height:28px; display:inline-flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; }
+    .section h3 { color:#2c0a3e; font-size:18px; margin-bottom:14px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .section h3 .step { background:#8e44ad; color:#fff; border-radius:50%; width:28px; height:28px; display:inline-flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex-shrink:0; }
     .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
     .form-group { margin-bottom:6px; }
     .form-group.full { grid-column:1/-1; }
@@ -42,6 +42,8 @@
     .form-group input, .form-group textarea { width:100%; padding:10px 14px; border:2px solid #e0e0e0; border-radius:10px; font-size:14px; transition:0.3s; background:#fff; }
     .form-group input:focus, .form-group textarea:focus { border-color:#8e44ad; outline:none; box-shadow:0 0 0 3px rgba(142,68,173,0.15); }
     .form-group textarea { min-height:60px; resize:vertical; }
+    .logo-area { text-align:center; margin-bottom:16px; }
+    .logo-area img { max-height:80px; max-width:100%; border-radius:8px; }
     .comms { background:#f8f9fa; padding:12px 18px; border-radius:12px; display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-bottom:20px; border:1px solid #e0e0e0; }
     .comms span { font-weight:600; color:#2c0a3e; }
     .status-badge { display:inline-block; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:600; }
@@ -80,16 +82,16 @@
         <button class="btn btn-info" onclick="window.print()">🖨️ Chapisha</button>
       </div>
     </div>
+    <div class="logo-area"><img src="SDA_CHURCH_LOGO.webp" alt="SDA Logo" id="logoPreview"><br><small style="color:#7f8c8d;">Logo ya SDA Church</small></div>
     <div class="sub" id="greeting">Karibu mganga mfawidhi</div>
 
     <div class="comms no-print">
       <span>📞 Mawasiliano:</span>
       <a href="tel:+255742710697" class="btn btn-phone" style="padding:4px 14px;font-size:13px;">📱 Simu</a>
       <a href="#" onclick="sendWhatsApp()" class="btn btn-whatsapp" style="padding:4px 14px;font-size:13px;">💬 WhatsApp</a>
-      <span style="font-size:13px;color:#7f8c8d;margin-left:auto;" id="submissionStatus">📤 Hujatumwa</span>
     </div>
 
-    <!-- Tathmini za Mganga Mfawidhi -->
+    <!-- Tathmini ya Mganga Mfawidhi -->
     <div class="section">
       <h3><span class="step">1</span> Tathmini yako</h3>
       <div class="form-grid">
@@ -110,7 +112,7 @@
 
     <!-- Tathmini Zilizotumwa -->
     <div class="section">
-      <h3><span class="step">2</span> 📋 Tathmini Zilizotumwa</h3>
+      <h3><span class="step">2</span> 📋 Tathmini Zilizotumwa kwako</h3>
       <div class="data-tabs">
         <button class="tab-btn active" onclick="loadAllData('all')">📋 Zote</button>
         <button class="tab-btn" onclick="loadAllData('worker')">👤 Mtendakazi</button>
@@ -135,14 +137,12 @@
   </div>
 
   <script>
-    // ========================= CONFIG =========================
     const API_KEY = "$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K";
     const BIN_ID = "6a4b0bc9da38895dfe32cc08";
 
     function showToast(m,t){ const e=document.getElementById('toast'); e.textContent=m; e.className='toast '+t+' show'; setTimeout(()=>e.classList.remove('show'),3500); }
     function getUsername(){ const p=new URLSearchParams(window.location.search).get('user'); if(!p) return null; try{ return JSON.parse(decodeURIComponent(p)).username; } catch(e){ return null; } }
-    const username = getUsername();
-    if(!username){ showToast('❌ Hakuna mtumiaji','error'); setTimeout(()=>window.location.href='index.html',2000); }
+    const username = getUsername(); if(!username){ showToast('❌ Hakuna mtumiaji','error'); setTimeout(()=>window.location.href='index.html',2000); }
     document.getElementById('greeting').textContent = `Karibu ${username}`;
 
     function sendWhatsApp(){ const d=getFormData(); const msg=`Nimekamilisha tathmini yangu ya MTWARA PERFORMANCE.%0A%0A👤 Jina: ${d.fullname}%0A🏢 Idara: ${d.department}%0A📋 Cheo: ${d.position}%0A⭐ Uongozi: ${d.step1_leadership}, Ubora: ${d.step2_quality}, Uwajibikaji: ${d.step3_accountability}%0A💬 Maoni: ${d.overall_comments||'Hakuna'}%0A%0ATafadhali iangalie.`; window.open(`https://wa.me/255742710697?text=${msg}`,'_blank'); }
@@ -178,17 +178,7 @@
     function showOverall(){ const d=getFormData(); alert(`📊 TATHMINI JUMLA\n\n👤 ${d.fullname||'Hajajazwa'}\n🏢 ${d.department||'Hajajazwa'}\n📋 ${d.position||'Hajajazwa'}\n⭐ Uongozi: ${d.step1_leadership}/5\n⭐ Ubora: ${d.step2_quality}/5\n⭐ Uwajibikaji: ${d.step3_accountability}/5\n💬 Maoni: ${d.overall_comments||'Hakuna'}`); }
     function showSpecific(){ const d=getFormData(); const avg=(+d.step1_leadership+ +d.step2_quality+ +d.step3_accountability)/3; alert(`🎯 TATHMINI MAALUMU\n\n📌 Uongozi: ${d.step1_leadership}/5\n📌 Ubora: ${d.step2_quality}/5\n📌 Uwajibikaji: ${d.step3_accountability}/5\n📊 Wastani: ${avg.toFixed(1)}/5\n📈 Kiwango: ${avg>=4?'🌟 Bora':avg>=3?'✅ Nzuri':avg>=2?'⚠️ Inahitajika Kuboresha':'❌ Dhaifu'}`); }
 
-    async function loadAllData(role='all'){ const c=document.getElementById('allDataContainer'); c.innerHTML='<span class="loading"></span> Inapakia...'; try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); const rec=res.record||{}; const app=rec.appraisals||{}; const evals=rec.supervisor_evals||{}; document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active')); document.querySelector(`.tab-btn[onclick="loadAllData('${role}')"]`)?.classList.add('active'); let html='', count=0; const roles = role==='all' ? ['worker','supervisor','incharge'] : (role==='supervisor_eval' ? [] : [role]); if(role==='all' || role==='supervisor_eval'){ // Add supervisor_evals
-        const data = evals; Object.keys(data).forEach(u=>{ const item=data[u]; const icon=item.status==='submitted'?'📤':'💾'; html+=`<div class="data-item"><span><strong>${item.supervisor||u}</strong> <span class="badge-role eval">⭐ Tathmini ya Msimamizi</span></span><span style="font-size:12px;color:#7f8c8d;">${item.department||''} ${icon} ${item.status||'saved'}</span></div>`; count++; });
-      }
-      if(role!=='supervisor_eval'){
-        const arr = role==='all' ? ['worker','supervisor','incharge'] : [role];
-        const labels={worker:'👤 Mtendakazi', supervisor:'👔 Msimamizi', incharge:'🏥 Mganga Mfawidhi'};
-        const badges={worker:'worker', supervisor:'supervisor', incharge:'incharge'};
-        arr.forEach(r=>{ const data=app[r]||{}; Object.keys(data).forEach(u=>{ const item=data[u]; if(r!=='incharge' && item.submitted_to!=='incharge' && item.status!=='submitted') return; const icon=item.status==='submitted'?'📤':item.status==='reviewed'?'📋':item.status==='approved'?'✅':'💾'; html+=`<div class="data-item"><span><strong>${item.fullname||u}</strong> <span class="badge-role ${badges[r]}">${labels[r]}</span></span><span style="font-size:12px;color:#7f8c8d;">${item.department||''} ${icon} ${item.status||'saved'}</span></div>`; count++; }); });
-      }
-      c.innerHTML = count===0 ? '<p style="color:#7f8c8d;text-align:center;">Hakuna tathmini zilizotumwa.</p>' : html;
-    } catch(e){ c.innerHTML='<p style="color:#e74c3c;">Hitilafu: '+e.message+'</p>'; } }
+    async function loadAllData(role='all'){ const c=document.getElementById('allDataContainer'); c.innerHTML='<span class="loading"></span> Inapakia...'; try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); const rec=res.record||{}; const app=rec.appraisals||{}; const evals=rec.supervisor_evals||{}; document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active')); document.querySelector(`.tab-btn[onclick="loadAllData('${role}')"]`)?.classList.add('active'); let html='', count=0; const roles = role==='all' ? ['worker','supervisor','incharge'] : (role==='supervisor_eval' ? [] : [role]); if(role==='all' || role==='supervisor_eval'){ const data=evals; Object.keys(data).forEach(u=>{ const item=data[u]; if(item.status!=='submitted') return; html+=`<div class="data-item"><span><strong>${item.supervisor||u}</strong> <span class="badge-role eval">⭐ Tathmini ya Msimamizi</span></span><span style="font-size:12px;color:#7f8c8d;">${item.department||''} 📤 Imetumwa</span></div>`; count++; }); } if(role!=='supervisor_eval'){ const arr = role==='all' ? ['worker','supervisor','incharge'] : [role]; const labels={worker:'👤 Mtendakazi', supervisor:'👔 Msimamizi', incharge:'🏥 Mganga Mfawidhi'}; const badges={worker:'worker', supervisor:'supervisor', incharge:'incharge'}; arr.forEach(r=>{ const data=app[r]||{}; Object.keys(data).forEach(u=>{ const item=data[u]; if(r!=='incharge' && item.submitted_to!=='incharge' && item.status!=='submitted') return; const icon=item.status==='submitted'?'📤':item.status==='reviewed'?'📋':item.status==='approved'?'✅':'💾'; html+=`<div class="data-item"><span><strong>${item.fullname||u}</strong> <span class="badge-role ${badges[r]}">${labels[r]}</span></span><span style="font-size:12px;color:#7f8c8d;">${item.department||''} ${icon} ${item.status||'saved'}</span></div>`; count++; }); }); } c.innerHTML = count===0 ? '<p style="color:#7f8c8d;text-align:center;">Hakuna tathmini zilizotumwa.</p>' : html; } catch(e){ c.innerHTML='<p style="color:#e74c3c;">Hitilafu: '+e.message+'</p>'; } }
 
     function logout(){ window.location.href='index.html'; }
     window.onload=function(){ loadAppraisal(); loadAllData('all'); };
