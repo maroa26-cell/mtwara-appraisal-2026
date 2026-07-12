@@ -8,7 +8,7 @@
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:'Segoe UI', Tahoma, sans-serif; background:linear-gradient(135deg,#2c0a3e,#8e44ad); min-height:100vh; padding:20px; display:flex; justify-content:center; align-items:flex-start; }
-    .container { background:#fff; border-radius:28px; padding:35px 30px; max-width:1200px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,0.2); margin-top:20px; }
+    .container { background:#fff; border-radius:28px; padding:35px 30px; max-width:1100px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,0.2); margin-top:20px; }
     h2 { color:#2c0a3e; text-align:center; font-size:28px; margin-bottom:6px; }
     .sub { text-align:center; color:#7f8c8d; font-size:14px; margin-bottom:25px; }
     .logo-area { text-align:center; margin-bottom:16px; }
@@ -38,12 +38,9 @@
     .btn-email:hover { background:#b03a2e; }
     .btn-pdf { background:#e74c3c; color:#fff; }
     .btn-pdf:hover { background:#c0392b; }
-    .btn-drive { background:#4285F4; color:#fff; }
-    .btn-drive:hover { background:#3367D6; }
     .section { background:#f8f9fa; border-radius:16px; padding:20px 22px; margin-bottom:20px; border-left:5px solid #8e44ad; }
     .section h3 { color:#2c0a3e; font-size:18px; margin-bottom:14px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
     .section h3 .step { background:#8e44ad; color:#fff; border-radius:50%; width:28px; height:28px; display:inline-flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex-shrink:0; }
-    .section h3 .badge-new { background:#4285F4; color:#fff; padding:2px 12px; border-radius:20px; font-size:11px; font-weight:600; }
     .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
     .form-group { margin-bottom:6px; }
     .form-group.full { grid-column:1/-1; }
@@ -76,9 +73,6 @@
     .badge-role.worker { background:#27ae60; color:#fff; }
     .badge-role.supervisor { background:#f39c12; color:#fff; }
     .badge-role.incharge { background:#8e44ad; color:#fff; }
-    .history-list { max-height:200px; overflow-y:auto; background:#fff; border-radius:10px; border:1px solid #e0e0e0; padding:6px; }
-    .history-item { padding:8px 12px; border-bottom:1px solid #eee; display:flex; justify-content:space-between; align-items:center; font-size:13px; }
-    .history-item .date { color:#7f8c8d; font-size:12px; }
     .toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(20px); max-width:450px; width:90%; padding:14px 22px; border-radius:14px; color:#fff; text-align:center; z-index:999; opacity:0; transition:0.4s; box-shadow:0 8px 40px rgba(0,0,0,0.2); }
     .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
     .toast.success { background:#27ae60; }
@@ -86,10 +80,6 @@
     .toast.info { background:#3498db; }
     .loading { display:inline-block; width:16px; height:16px; border:3px solid rgba(255,255,255,0.3); border-top-color:#fff; border-radius:50%; animation:spin 0.8s linear infinite; vertical-align:middle; margin-right:8px; }
     @keyframes spin { to { transform:rotate(360deg); } }
-    .drive-container { background:#e8f0fe; border:2px solid #4285F4; border-radius:12px; padding:16px; margin-top:12px; }
-    .drive-container h4 { color:#2c0a3e; margin-bottom:8px; }
-    .share-link-container { background:#f0f0f0; border-radius:10px; padding:10px; margin-top:8px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
-    .share-link-container input { flex:1; padding:8px 12px; border:2px solid #e0e0e0; border-radius:8px; font-size:13px; min-width:200px; }
     @media(max-width:768px){ .form-grid { grid-template-columns:1fr; } .top-bar { flex-direction:column; align-items:stretch; } .button-group .btn { flex:1; } }
     @media print { .no-print { display:none !important; } .container { box-shadow:none !important; } body { background:#fff !important; } }
   </style>
@@ -102,15 +92,23 @@
         <button class="btn btn-secondary" onclick="window.location.href='index.html'">🏠 Nyumbani</button>
         <button class="btn btn-info" onclick="window.print()">🖨️ Chapisha</button>
         <button class="btn btn-pdf" onclick="generatePDF()">📄 PDF</button>
-        <button class="btn btn-drive" onclick="saveToDrive()">☁️ Hifadhi Drive</button>
         <button class="btn btn-email" onclick="sendEmailData()">📧 Tuma Email</button>
       </div>
     </div>
     <div class="logo-area"><img src="SDA_CHURCH_LOGO.webp" alt="SDA Logo"><br><small style="color:#7f8c8d;">Logo ya SDA Church</small></div>
-    <div class="sub" id="greeting">Karibu mganga mfawidhi</div>
+    <div class="sub">Karibu mganga mfawidhi</div>
+
     <div class="comms no-print">
       <span>📞 Mawasiliano:</span>
       <a href="tel:+255742710697" class="btn btn-phone" style="padding:4px 14px;font-size:13px;">📱 Simu</a>
+    </div>
+
+    <!-- Sehemu: Jina la Mtumiaji -->
+    <div class="section">
+      <h3><span class="step">0</span> Jina la Mtumiaji</h3>
+      <div class="form-grid">
+        <div class="form-group"><label>Jina la Mtumiaji <span style="color:#e74c3c;">*</span></label><input type="text" id="usernameInput" placeholder="Weka username yako" value="incharge"></div>
+      </div>
     </div>
 
     <!-- Sehemu 1: Tathmini -->
@@ -170,7 +168,6 @@
           <div class="radio-group">
             <label><input type="radio" name="saveMethod" value="jsonbin" checked> ☁️ JSONBin</label>
             <label><input type="radio" name="saveMethod" value="download"> 💾 Pakua (JSON)</label>
-            <label><input type="radio" name="saveMethod" value="drive"> ☁️ Google Drive</label>
           </div>
         </div>
       </div>
@@ -188,29 +185,6 @@
       <div id="allDataContainer" class="data-container"><p style="color:#7f8c8d;text-align:center;">Bonyeza kituo cha juu</p></div>
     </div>
 
-    <!-- Sehemu 5: Historia -->
-    <div class="section">
-      <h3><span class="step">5</span> 📜 Historia ya Tathmini</h3>
-      <div id="historyList" class="history-list"><p style="color:#7f8c8d;text-align:center;">Hakuna historia.</p></div>
-    </div>
-
-    <!-- Sehemu 6: Kushiriki Data -->
-    <div class="section no-print">
-      <h3><span class="step">6</span> 🔗 Kushiriki Data <span class="badge-new">NEW</span></h3>
-      <div class="drive-container">
-        <h4>Unda link ya kushiriki data yako</h4>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
-          <input type="password" id="sharePassword" placeholder="Weka nenosiri (hiari)" style="flex:1;padding:8px 12px;border:2px solid #e0e0e0;border-radius:8px;">
-          <button class="btn btn-primary" onclick="generateShareLink()" style="padding:10px 20px;">🔗 Generate Link</button>
-        </div>
-        <div id="shareLinkContainer" class="share-link-container" style="display:none;">
-          <input type="text" id="shareLinkOutput" readonly>
-          <button class="btn btn-info" onclick="copyShareLink()">📋 Copy</button>
-          <button class="btn btn-success" onclick="openShareLink()">🔗 Fungua</button>
-        </div>
-      </div>
-    </div>
-
     <!-- Vitufe -->
     <div class="button-group no-print">
       <button class="btn btn-primary" onclick="saveAppraisal()" id="saveBtn">💾 Hifadhi</button>
@@ -225,44 +199,115 @@
   </div>
 
   <script>
-    // ========================= CONFIG =========================
+    // ============================================================
+    // MTWARA PERFORMANCE - INCHARGE FORM (SIMPLIFIED & FIXED)
+    // ============================================================
     const API_KEY = "$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K";
     const BIN_ID = "6a4b0bc9da38895dfe32cc08";
 
-    function showToast(m,t){ const e=document.getElementById('toast'); e.textContent=m; e.className='toast '+t+' show'; setTimeout(()=>e.classList.remove('show'),3500); }
-    function getUsername(){ const p=new URLSearchParams(window.location.search).get('user'); if(!p) return null; try{ return JSON.parse(decodeURIComponent(p)).username; } catch(e){ return null; } }
-    const username = getUsername();
-    if(!username){ showToast('❌ Hakuna mtumiaji','error'); setTimeout(()=>window.location.href='index.html',2000); }
-    document.getElementById('greeting').textContent = `Karibu ${username}`;
+    function showToast(msg, type) {
+      const t = document.getElementById('toast');
+      if (!t) { alert(msg); return; }
+      t.textContent = msg;
+      t.className = 'toast ' + type + ' show';
+      setTimeout(() => t.classList.remove('show'), 3500);
+    }
+
+    function getUsername() {
+      return document.getElementById('usernameInput').value.trim() || 'incharge';
+    }
 
     // ========================= SIGNATURE =========================
     let canvas, ctx, isDrawing = false, hasSignature = false;
+
     function initSignature() {
       canvas = document.getElementById('signatureCanvas');
+      if (!canvas) return;
       ctx = canvas.getContext('2d');
       canvas.width = canvas.parentElement.clientWidth - 20;
       canvas.height = 150;
-      ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#2c0a3e';
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.strokeStyle = '#2c0a3e';
+
       canvas.addEventListener('mousedown', startDraw);
       canvas.addEventListener('mousemove', draw);
       canvas.addEventListener('mouseup', stopDraw);
       canvas.addEventListener('mouseleave', stopDraw);
-      canvas.addEventListener('touchstart', e => { e.preventDefault(); const t = e.touches[0]; canvas.dispatchEvent(new MouseEvent('mousedown', { clientX: t.clientX, clientY: t.clientY })); }, { passive: false });
-      canvas.addEventListener('touchmove', e => { e.preventDefault(); const t = e.touches[0]; canvas.dispatchEvent(new MouseEvent('mousemove', { clientX: t.clientX, clientY: t.clientY })); }, { passive: false });
-      canvas.addEventListener('touchend', e => { e.preventDefault(); canvas.dispatchEvent(new MouseEvent('mouseup', {})); }, { passive: false });
+      
+      canvas.addEventListener('touchstart', handleTouch, { passive: false });
+      canvas.addEventListener('touchmove', handleTouch, { passive: false });
+      canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
     }
-    function getPos(e) { const rect = canvas.getBoundingClientRect(); return { x: (e.clientX - rect.left) * (canvas.width / rect.width), y: (e.clientY - rect.top) * (canvas.height / rect.height) }; }
-    function startDraw(e) { isDrawing = true; hasSignature = true; const pos = getPos(e); ctx.beginPath(); ctx.moveTo(pos.x, pos.y); }
-    function draw(e) { if (!isDrawing) return; const pos = getPos(e); ctx.lineTo(pos.x, pos.y); ctx.stroke(); }
+
+    function getPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: (e.clientX - rect.left) * (canvas.width / rect.width),
+        y: (e.clientY - rect.top) * (canvas.height / rect.height)
+      };
+    }
+
+    function startDraw(e) {
+      isDrawing = true;
+      hasSignature = true;
+      const pos = getPos(e);
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      const pos = getPos(e);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+    }
+
     function stopDraw() { isDrawing = false; }
-    function clearSignature() { ctx.clearRect(0, 0, canvas.width, canvas.height); hasSignature = false; showToast('🗑️ Sahihi imefutwa', 'info'); }
-    function getSignatureData() { if (!hasSignature) return ''; return canvas.toDataURL('image/png'); }
-    function setSignatureData(dataUrl) { if (!dataUrl) { clearSignature(); return; } const img = new Image(); img.onload = function() { ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.drawImage(img, 0, 0, canvas.width, canvas.height); hasSignature = true; }; img.src = dataUrl; }
+
+    function handleTouch(e) {
+      e.preventDefault();
+      const t = e.touches[0];
+      const me = new MouseEvent(e.type === 'touchstart' ? 'mousedown' : 'mousemove', {
+        clientX: t.clientX,
+        clientY: t.clientY
+      });
+      canvas.dispatchEvent(me);
+    }
+
+    function handleTouchEnd(e) {
+      e.preventDefault();
+      canvas.dispatchEvent(new MouseEvent('mouseup', {}));
+    }
+
+    function clearSignature() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      hasSignature = false;
+      showToast('🗑️ Sahihi imefutwa', 'info');
+    }
+
+    function getSignatureData() {
+      if (!hasSignature) return '';
+      return canvas.toDataURL('image/png');
+    }
+
+    function setSignatureData(dataUrl) {
+      if (!dataUrl) { clearSignature(); return; }
+      const img = new Image();
+      img.onload = function() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        hasSignature = true;
+      };
+      img.src = dataUrl;
+    }
 
     // ========================= RECIPIENT =========================
     document.querySelectorAll('input[name="sendMethod"]').forEach(radio => {
       radio.addEventListener('change', function() {
         const label = document.querySelector('#recipientField label');
+        if (!label) return;
         if (this.value === 'whatsapp') {
           label.innerHTML = 'Namba ya WhatsApp ya mpokeaji <span style="color:#e74c3c;">*</span>';
           document.getElementById('recipient').placeholder = 'Mfano: 255742710697';
@@ -274,80 +319,413 @@
     });
 
     // ========================= GET/SET DATA =========================
-    function getFormData(){ return {
-      username, role:'incharge',
-      fullname:document.getElementById('fullname').value,
-      department:document.getElementById('department').value,
-      position:document.getElementById('position').value,
-      phone:document.getElementById('phone').value,
-      email:document.getElementById('email').value,
-      step1_leadership:+document.getElementById('step1_leadership').value||0,
-      step2_quality:+document.getElementById('step2_quality').value||0,
-      step3_accountability:+document.getElementById('step3_accountability').value||0,
-      step_notes:document.getElementById('step_notes').value,
-      strengths:document.getElementById('strengths').value,
-      weaknesses:document.getElementById('weaknesses').value,
-      overall_comments:document.getElementById('overall_comments').value,
-      signature_name:document.getElementById('signature_name').value,
-      signature_date:document.getElementById('signature_date').value,
-      signature_data:getSignatureData(),
-      signature_notes:document.getElementById('signature_notes').value,
-      send_method:document.querySelector('input[name="sendMethod"]:checked')?.value||'whatsapp',
-      recipient:document.getElementById('recipient').value.trim(),
-      save_method:document.querySelector('input[name="saveMethod"]:checked')?.value||'jsonbin',
-      status:'pending', submitted_to:null, timestamp:new Date().toISOString()
-    }}
+    function getFormData() {
+      const username = getUsername();
+      return {
+        username: username,
+        role: 'incharge',
+        fullname: document.getElementById('fullname').value,
+        department: document.getElementById('department').value,
+        position: document.getElementById('position').value,
+        phone: document.getElementById('phone').value,
+        email: document.getElementById('email').value,
+        step1_leadership: parseInt(document.getElementById('step1_leadership').value) || 0,
+        step2_quality: parseInt(document.getElementById('step2_quality').value) || 0,
+        step3_accountability: parseInt(document.getElementById('step3_accountability').value) || 0,
+        step_notes: document.getElementById('step_notes').value,
+        strengths: document.getElementById('strengths').value,
+        weaknesses: document.getElementById('weaknesses').value,
+        overall_comments: document.getElementById('overall_comments').value,
+        signature_name: document.getElementById('signature_name').value,
+        signature_date: document.getElementById('signature_date').value,
+        signature_data: getSignatureData(),
+        signature_notes: document.getElementById('signature_notes').value,
+        send_method: document.querySelector('input[name="sendMethod"]:checked')?.value || 'whatsapp',
+        recipient: document.getElementById('recipient').value.trim(),
+        save_method: document.querySelector('input[name="saveMethod"]:checked')?.value || 'jsonbin',
+        status: 'pending',
+        submitted_to: null,
+        timestamp: new Date().toISOString()
+      };
+    }
 
-    function setFormData(d){ ['fullname','department','position','phone','email','step1_leadership','step2_quality','step3_accountability','step_notes','strengths','weaknesses','overall_comments','signature_name','signature_date','signature_notes','recipient'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=d[id]||''; }); if(d.signature_data) setSignatureData(d.signature_data); if(d.send_method){ const radio=document.querySelector(`input[name="sendMethod"][value="${d.send_method}"]`); if(radio) radio.checked=true; } if(d.save_method){ const radio=document.querySelector(`input[name="saveMethod"][value="${d.save_method}"]`); if(radio) radio.checked=true; } updateStatus(d.status||'pending'); }
+    function setFormData(d) {
+      const fields = ['fullname', 'department', 'position', 'phone', 'email', 'step1_leadership', 'step2_quality', 'step3_accountability', 'step_notes', 'strengths', 'weaknesses', 'overall_comments', 'signature_name', 'signature_date', 'signature_notes', 'recipient', 'usernameInput'];
+      fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = d[id] || '';
+      });
+      if (d.signature_data) setSignatureData(d.signature_data);
+      if (d.send_method) {
+        const radio = document.querySelector(`input[name="sendMethod"][value="${d.send_method}"]`);
+        if (radio) radio.checked = true;
+      }
+      if (d.save_method) {
+        const radio = document.querySelector(`input[name="saveMethod"][value="${d.save_method}"]`);
+        if (radio) radio.checked = true;
+      }
+      updateStatus(d.status || 'pending');
+    }
 
-    function updateStatus(s){ const map={'saved':['saved','💾 Imehifadhiwa'],'submitted':['submitted','📤 Imetumwa'],'pending':['pending','📝 Hajahifadhiwa']}; const c=map[s]||map.pending; const b=document.getElementById('saveStatus'); b.className='status-badge '+c[0]; b.textContent=c[1]; }
+    function updateStatus(s) {
+      const map = {
+        'saved': ['saved', '💾 Imehifadhiwa'],
+        'submitted': ['submitted', '📤 Imetumwa'],
+        'pending': ['pending', '📝 Hajahifadhiwa']
+      };
+      const c = map[s] || map.pending;
+      const b = document.getElementById('saveStatus');
+      if (b) { b.className = 'status-badge ' + c[0]; b.textContent = c[1]; }
+    }
 
     // ========================= SAVE =========================
-    async function saveAppraisal(){ const b=document.getElementById('saveBtn'); b.disabled=true; b.innerHTML='<span class="loading"></span> Inahifadhi...'; const d=getFormData(); d.status='saved'; try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); if(!res.record) res.record={}; const rec=res.record; if(!rec.incharge_appraisals) rec.incharge_appraisals={}; rec.incharge_appraisals[username]=d; if(!rec.history) rec.history={}; if(!rec.history[username]) rec.history[username]=[]; rec.history[username].push({...d, version: rec.history[username].length + 1, savedAt: new Date().toISOString()}); const up=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(rec)}); if(!up.ok) throw new Error('Imeshindwa kuhifadhi'); showToast('✅ Imehifadhiwa!','success'); updateStatus('saved'); updateHistory(); } catch(e){ showToast('❌ '+e.message,'error'); console.error(e); } b.disabled=false; b.innerHTML='💾 Hifadhi'; }
+    async function saveAppraisal() {
+      const btn = document.getElementById('saveBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="loading"></span> Inahifadhi...';
+      
+      const username = getUsername();
+      if (!username) {
+        showToast('❌ Tafadhali weka jina la mtumiaji', 'error');
+        btn.disabled = false;
+        btn.innerHTML = '💾 Hifadhi';
+        return;
+      }
+      
+      const data = getFormData();
+      data.status = 'saved';
+      
+      try {
+        console.log('📤 Saving data for user:', username);
+        
+        // Get current data
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+          method: 'GET',
+          headers: { 'X-Master-Key': API_KEY }
+        });
+        if (!res.ok) throw new Error(`GET failed: ${res.status}`);
+        
+        const result = await res.json();
+        const rec = result.record || {};
+        if (!rec.incharge_appraisals) rec.incharge_appraisals = {};
+        rec.incharge_appraisals[username] = data;
+        
+        // Save
+        const update = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Master-Key': API_KEY
+          },
+          body: JSON.stringify(rec)
+        });
+        if (!update.ok) throw new Error(`PUT failed: ${update.status}`);
+        
+        showToast('✅ Imehifadhiwa kwenye JSONBin!', 'success');
+        updateStatus('saved');
+        console.log('✅ Save successful!');
+        
+      } catch (e) {
+        showToast('❌ Hitilafu: ' + e.message, 'error');
+        console.error('❌ Save Error:', e);
+      }
+      
+      btn.disabled = false;
+      btn.innerHTML = '💾 Hifadhi';
+    }
 
     // ========================= SUBMIT =========================
-    async function submitAppraisal(){ const b=document.getElementById('submitBtn'); b.disabled=true; b.innerHTML='<span class="loading"></span> Inatuma...'; const d=getFormData(); if(!d.fullname||!d.department||!d.position){ showToast('❌ Jaza Jina, Idara na Cheo','error'); b.disabled=false; b.innerHTML='📤 Tuma'; return; } if(!d.signature_name||!d.signature_date){ showToast('❌ Jaza Sahihi (Jina na Tarehe)','error'); b.disabled=false; b.innerHTML='📤 Tuma'; return; } if(!hasSignature){ showToast('❌ Tafadhali chora sahihi yako','error'); b.disabled=false; b.innerHTML='📤 Tuma'; return; } if(!d.recipient){ showToast('❌ Jaza namba ya WhatsApp au Barua Pepe ya mpokeaji','error'); b.disabled=false; b.innerHTML='📤 Tuma'; return; } d.status='submitted'; try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); if(!res.record) res.record={}; const rec=res.record; if(!rec.incharge_appraisals) rec.incharge_appraisals={}; rec.incharge_appraisals[username]=d; const up=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(rec)}); if(!up.ok) throw new Error('Imeshindwa kutuma'); showToast(`✅ Imetumwa kwa ${d.send_method.toUpperCase()} kwa ${d.recipient}!`,'success'); updateStatus('submitted'); } catch(e){ showToast('❌ '+e.message,'error'); console.error(e); } b.disabled=false; b.innerHTML='📤 Tuma'; }
+    async function submitAppraisal() {
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="loading"></span> Inatuma...';
+      
+      const username = getUsername();
+      if (!username) {
+        showToast('❌ Tafadhali weka jina la mtumiaji', 'error');
+        btn.disabled = false;
+        btn.innerHTML = '📤 Tuma';
+        return;
+      }
+      
+      const data = getFormData();
+      
+      if (!data.fullname || !data.department || !data.position) {
+        showToast('❌ Jaza Jina, Idara na Cheo', 'error');
+        btn.disabled = false;
+        btn.innerHTML = '📤 Tuma';
+        return;
+      }
+      if (!data.signature_name || !data.signature_date) {
+        showToast('❌ Jaza Sahihi (Jina na Tarehe)', 'error');
+        btn.disabled = false;
+        btn.innerHTML = '📤 Tuma';
+        return;
+      }
+      if (!hasSignature) {
+        showToast('❌ Tafadhali chora sahihi yako', 'error');
+        btn.disabled = false;
+        btn.innerHTML = '📤 Tuma';
+        return;
+      }
+      if (!data.recipient) {
+        showToast('❌ Jaza namba ya WhatsApp au Barua Pepe ya mpokeaji', 'error');
+        btn.disabled = false;
+        btn.innerHTML = '📤 Tuma';
+        return;
+      }
+      
+      data.status = 'submitted';
+      
+      try {
+        console.log('📤 Submitting data for user:', username);
+        
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+          method: 'GET',
+          headers: { 'X-Master-Key': API_KEY }
+        });
+        if (!res.ok) throw new Error(`GET failed: ${res.status}`);
+        
+        const result = await res.json();
+        const rec = result.record || {};
+        if (!rec.incharge_appraisals) rec.incharge_appraisals = {};
+        rec.incharge_appraisals[username] = data;
+        
+        const update = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Master-Key': API_KEY
+          },
+          body: JSON.stringify(rec)
+        });
+        if (!update.ok) throw new Error(`PUT failed: ${update.status}`);
+        
+        showToast(`✅ Imetumwa kwa ${data.send_method.toUpperCase()} kwa ${data.recipient}!`, 'success');
+        updateStatus('submitted');
+        console.log('✅ Submit successful!');
+        
+      } catch (e) {
+        showToast('❌ Hitilafu: ' + e.message, 'error');
+        console.error('❌ Submit Error:', e);
+      }
+      
+      btn.disabled = false;
+      btn.innerHTML = '📤 Tuma';
+    }
 
     // ========================= LOAD =========================
-    async function loadAppraisal(){ try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); const rec=res.record||{}; const d=rec.incharge_appraisals?.[username]; if(!d){ updateStatus('pending'); return; } setFormData(d); showToast('✅ Imepakiwa','success'); updateHistory(); } catch(e){ showToast('❌ '+e.message,'error'); console.error(e); } }
+    async function loadAppraisal() {
+      const username = getUsername();
+      if (!username) {
+        updateStatus('pending');
+        return;
+      }
+      
+      try {
+        console.log('📥 Loading data for user:', username);
+        
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+          method: 'GET',
+          headers: { 'X-Master-Key': API_KEY }
+        });
+        if (!res.ok) throw new Error(`GET failed: ${res.status}`);
+        
+        const result = await res.json();
+        const rec = result.record || {};
+        const data = rec.incharge_appraisals?.[username];
+        
+        if (!data) {
+          updateStatus('pending');
+          console.log('📭 No data found for user:', username);
+          return;
+        }
+        
+        setFormData(data);
+        showToast('✅ Imepakiwa', 'success');
+        console.log('✅ Load successful!');
+        
+      } catch (e) {
+        showToast('❌ Hitilafu: ' + e.message, 'error');
+        console.error('❌ Load Error:', e);
+      }
+    }
 
     // ========================= DELETE =========================
-    async function deleteAppraisal(){ if(!confirm('Futa tathmini hii?')) return; try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); const rec=res.record||{}; if(rec.incharge_appraisals?.[username]){ delete rec.incharge_appraisals[username]; const up=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(rec)}); if(!up.ok) throw new Error('Imeshindwa kufuta'); showToast('✅ Imehifadhiwa','success'); updateStatus('pending'); } else { showToast('❌ Hakuna tathmini','error'); } } catch(e){ showToast('❌ '+e.message,'error'); console.error(e); } }
-
-    // ========================= HISTORY =========================
-    async function updateHistory(){ try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); const rec=res.record||{}; const history = rec.history?.[username] || []; const container = document.getElementById('historyList'); if(history.length === 0){ container.innerHTML = '<p style="color:#7f8c8d;text-align:center;">Hakuna historia.</p>'; return; } container.innerHTML = history.slice().reverse().map(h => `<div class="history-item"><span><strong>v${h.version}</strong> - ${h.fullname||h.username}</span><span class="date">${new Date(h.savedAt||h.timestamp).toLocaleString()}</span></div>`).join(''); } catch(e){ console.error(e); } }
-
-    // ========================= SHARE LINK =========================
-    function generateShareLink(){ const d=getFormData(); const password = document.getElementById('sharePassword').value; try{ const dataStr = JSON.stringify(d); const encoded = btoa(encodeURIComponent(dataStr)); const link = `${window.location.origin}${window.location.pathname}?shared=${encoded}`; document.getElementById('shareLinkOutput').value = link; document.getElementById('shareLinkContainer').style.display = 'flex'; showToast('✅ Link imeundwa!','success'); } catch(e){ showToast('❌ Hitilafu: '+e.message,'error'); } }
-
-    function copyShareLink(){ const input = document.getElementById('shareLinkOutput'); input.select(); document.execCommand('copy'); showToast('✅ Link imenakiliwa!','success'); }
-
-    function openShareLink(){ const link = document.getElementById('shareLinkOutput').value; if(link) window.open(link, '_blank'); }
-
-    // ========================= LOAD SHARED DATA =========================
-    function loadSharedData(){ const params = new URLSearchParams(window.location.search); const shared = params.get('shared'); if(shared){ try{ const decoded = decodeURIComponent(atob(shared)); const data = JSON.parse(decoded); setFormData(data); showToast('✅ Data imepakiwa kutoka link!','success'); } catch(e){ showToast('❌ Hitilafu ya kupakia link','error'); } } }
+    async function deleteAppraisal() {
+      const username = getUsername();
+      if (!username) {
+        showToast('❌ Tafadhali weka jina la mtumiaji', 'error');
+        return;
+      }
+      
+      if (!confirm('Futa tathmini hii?')) return;
+      
+      try {
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+          method: 'GET',
+          headers: { 'X-Master-Key': API_KEY }
+        });
+        if (!res.ok) throw new Error('Network error');
+        
+        const result = await res.json();
+        const rec = result.record || {};
+        
+        if (rec.incharge_appraisals?.[username]) {
+          delete rec.incharge_appraisals[username];
+          
+          const update = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Master-Key': API_KEY
+            },
+            body: JSON.stringify(rec)
+          });
+          if (!update.ok) throw new Error('Imeshindwa kufuta');
+          
+          showToast('✅ Imehifadhiwa', 'success');
+          updateStatus('pending');
+        } else {
+          showToast('❌ Hakuna tathmini', 'error');
+        }
+      } catch (e) {
+        showToast('❌ ' + e.message, 'error');
+        console.error(e);
+      }
+    }
 
     // ========================= PDF =========================
-    function generatePDF(){ showToast('⏳ Inatengeneza PDF...','info'); try{ window.print(); showToast('✅ PDF imefunguliwa!','success'); } catch(e){ showToast('❌ Hitilafu: '+e.message,'error'); } }
-
-    // ========================= SAVE TO DRIVE =========================
-    function saveToDrive(){ const d=getFormData(); const dataStr = JSON.stringify(d, null, 2); const blob = new Blob([dataStr], {type: 'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `tathmini_incharge_${username}_${new Date().toISOString().slice(0,10)}.json`; a.click(); URL.revokeObjectURL(url); showToast('✅ Faili imeshuka! Pakia kwenye Google Drive','success'); }
+    function generatePDF() {
+      showToast('⏳ Inatengeneza PDF...', 'info');
+      try {
+        window.print();
+        showToast('✅ PDF imefunguliwa!', 'success');
+      } catch (e) {
+        showToast('❌ Hitilafu: ' + e.message, 'error');
+      }
+    }
 
     // ========================= SEND EMAIL =========================
-    function sendEmailData(){ const d=getFormData(); const subject = encodeURIComponent('TATHMINI YA MGANGA MFAWIDHI - MTWARA PERFORMANCE'); const body = encodeURIComponent(`📋 TATHMINI YA MGANGA MFAWIDHI 📋\n\n👤 Jina: ${d.fullname||'Hajajazwa'}\n🏢 Idara: ${d.department||'Hajajazwa'}\n📋 Cheo: ${d.position||'Hajajazwa'}\n⭐ Uongozi: ${d.step1_leadership}/5\n⭐ Ubora: ${d.step2_quality}/5\n⭐ Uwajibikaji: ${d.step3_accountability}/5\n✍️ Sahihi: ${d.signature_name||'Hajajazwa'} - ${d.signature_date||''}\n💬 Maoni: ${d.overall_comments||'Hakuna'}\n📅 Imetolewa: ${new Date().toLocaleString()}\n\n--\nMTWARA PERFORMANCE - Tathmini ya Mganga Mfawidhi`); const recipient = d.recipient || ''; if(recipient){ window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`; showToast('✅ Email imefunguliwa!','success'); } else { showToast('❌ Jaza barua pepe ya mpokeaji','error'); } }
+    function sendEmailData() {
+      const data = getFormData();
+      const subject = encodeURIComponent('TATHMINI YA MGANGA MFAWIDHI - MTWARA PERFORMANCE');
+      const body = encodeURIComponent(
+        `📋 TATHMINI YA MGANGA MFAWIDHI 📋\n\n` +
+        `👤 Jina: ${data.fullname || 'Hajajazwa'}\n` +
+        `🏢 Idara: ${data.department || 'Hajajazwa'}\n` +
+        `📋 Cheo: ${data.position || 'Hajajazwa'}\n` +
+        `⭐ Uongozi: ${data.step1_leadership}/5\n` +
+        `⭐ Ubora: ${data.step2_quality}/5\n` +
+        `⭐ Uwajibikaji: ${data.step3_accountability}/5\n` +
+        `✍️ Sahihi: ${data.signature_name || 'Hajajazwa'} - ${data.signature_date || ''}\n` +
+        `💬 Maoni: ${data.overall_comments || 'Hakuna'}\n` +
+        `📅 Imetolewa: ${new Date().toLocaleString()}\n\n` +
+        `--\nMTWARA PERFORMANCE - Tathmini ya Mganga Mfawidhi`
+      );
+      
+      const recipient = data.recipient || '';
+      if (recipient) {
+        window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+        showToast('✅ Email imefunguliwa!', 'success');
+      } else {
+        showToast('❌ Jaza barua pepe ya mpokeaji', 'error');
+      }
+    }
 
     // ========================= OVERALL / SPECIFIC =========================
-    function showOverall(){ const d=getFormData(); alert(`📊 TATHMINI JUMLA\n\n👤 ${d.fullname||'Hajajazwa'}\n🏢 ${d.department||'Hajajazwa'}\n📋 ${d.position||'Hajajazwa'}\n⭐ Uongozi: ${d.step1_leadership}/5\n⭐ Ubora: ${d.step2_quality}/5\n⭐ Uwajibikaji: ${d.step3_accountability}/5\n✍️ Sahihi: ${d.signature_name||'Hajajazwa'} - ${d.signature_date||''}\n💬 Maoni: ${d.overall_comments||'Hakuna'}`); }
-    function showSpecific(){ const d=getFormData(); const avg=(+d.step1_leadership+ +d.step2_quality+ +d.step3_accountability)/3; alert(`🎯 TATHMINI MAALUMU\n\n📌 Uongozi: ${d.step1_leadership}/5\n📌 Ubora: ${d.step2_quality}/5\n📌 Uwajibikaji: ${d.step3_accountability}/5\n📊 Wastani: ${avg.toFixed(1)}/5\n📈 Kiwango: ${avg>=4?'🌟 Bora':avg>=3?'✅ Nzuri':avg>=2?'⚠️ Inahitajika Kuboresha':'❌ Dhaifu'}`); }
+    function showOverall() {
+      const data = getFormData();
+      alert(`📊 TATHMINI JUMLA\n\n` +
+        `👤 ${data.fullname || 'Hajajazwa'}\n` +
+        `🏢 ${data.department || 'Hajajazwa'}\n` +
+        `📋 ${data.position || 'Hajajazwa'}\n` +
+        `⭐ Uongozi: ${data.step1_leadership}/5\n` +
+        `⭐ Ubora: ${data.step2_quality}/5\n` +
+        `⭐ Uwajibikaji: ${data.step3_accountability}/5\n` +
+        `✍️ Sahihi: ${data.signature_name || 'Hajajazwa'} - ${data.signature_date || ''}\n` +
+        `💬 Maoni: ${data.overall_comments || 'Hakuna'}`
+      );
+    }
+
+    function showSpecific() {
+      const data = getFormData();
+      const avg = (Number(data.step1_leadership) + Number(data.step2_quality) + Number(data.step3_accountability)) / 3;
+      alert(`🎯 TATHMINI MAALUMU\n\n` +
+        `📌 Uongozi: ${data.step1_leadership}/5\n` +
+        `📌 Ubora: ${data.step2_quality}/5\n` +
+        `📌 Uwajibikaji: ${data.step3_accountability}/5\n` +
+        `📊 Wastani: ${avg.toFixed(1)}/5\n` +
+        `📈 Kiwango: ${avg >= 4 ? '🌟 Bora' : avg >= 3 ? '✅ Nzuri' : avg >= 2 ? '⚠️ Inahitajika Kuboresha' : '❌ Dhaifu'}`
+      );
+    }
 
     // ========================= LOAD ALL DATA =========================
-    async function loadAllData(role='all'){ const c=document.getElementById('allDataContainer'); c.innerHTML='<span class="loading"></span> Inapakia...'; try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); const rec=res.record||{}; const app=rec.incharge_appraisals||{}; const submitted = rec.submitted_appraisals||{}; document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active')); document.querySelector(`.tab-btn[onclick="loadAllData('${role}')"]`)?.classList.add('active'); let html='', count=0; const arr = role==='all' ? ['worker','supervisor','incharge'] : [role]; const labels={worker:'👤 Mtendakazi', supervisor:'👔 Msimamizi', incharge:'🏥 Mganga Mfawidhi'}; const badges={worker:'worker', supervisor:'supervisor', incharge:'incharge'}; if(role==='all' || role==='incharge'){ Object.keys(app).forEach(u=>{ const item=app[u]; const icon=item.status==='submitted'?'📤':'💾'; html+=`<div class="data-item"><span><strong>${item.fullname||u}</strong> <span class="badge-role incharge">🏥 Mganga Mfawidhi</span></span><span style="font-size:12px;color:#7f8c8d;">${item.department||''} ${icon} ${item.status||'saved'}</span></div>`; count++; }); } if(role==='all' || role==='worker'){ Object.keys(submitted.worker||{}).forEach(u=>{ const item=submitted.worker[u]; html+=`<div class="data-item"><span><strong>${item.fullname||u}</strong> <span class="badge-role worker">👤 Mtendakazi</span></span><span style="font-size:12px;color:#7f8c8d;">${item.department||''} 📤 Imetumwa</span></div>`; count++; }); } if(role==='all' || role==='supervisor'){ Object.keys(submitted.supervisor||{}).forEach(u=>{ const item=submitted.supervisor[u]; html+=`<div class="data-item"><span><strong>${item.fullname||u}</strong> <span class="badge-role supervisor">👔 Msimamizi</span></span><span style="font-size:12px;color:#7f8c8d;">${item.department||''} 📤 Imetumwa</span></div>`; count++; }); } c.innerHTML = count===0 ? '<p style="color:#7f8c8d;text-align:center;">Hakuna tathmini zilizotumwa.</p>' : html; } catch(e){ c.innerHTML='<p style="color:#e74c3c;">Hitilafu: '+e.message+'</p>'; console.error(e); } }
+    async function loadAllData(role = 'all') {
+      const container = document.getElementById('allDataContainer');
+      container.innerHTML = '<span class="loading"></span> Inapakia...';
+      
+      try {
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+          method: 'GET',
+          headers: { 'X-Master-Key': API_KEY }
+        });
+        if (!res.ok) throw new Error('Network error');
+        
+        const result = await res.json();
+        const rec = result.record || {};
+        const app = rec.incharge_appraisals || {};
+        
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector(`.tab-btn[onclick="loadAllData('${role}')"]`)?.classList.add('active');
+        
+        let html = '';
+        let count = 0;
+        const arr = role === 'all' ? ['worker', 'supervisor', 'incharge'] : [role];
+        const labels = { worker: '👤 Mtendakazi', supervisor: '👔 Msimamizi', incharge: '🏥 Mganga Mfawidhi' };
+        const badges = { worker: 'worker', supervisor: 'supervisor', incharge: 'incharge' };
+        
+        if (role === 'all' || role === 'incharge') {
+          Object.keys(app).forEach(u => {
+            const item = app[u];
+            const icon = item.status === 'submitted' ? '📤' : '💾';
+            html += `<div class="data-item">
+              <span><strong>${item.fullname || u}</strong> <span class="badge-role incharge">🏥 Mganga Mfawidhi</span></span>
+              <span style="font-size:12px;color:#7f8c8d;">${item.department || ''} ${icon} ${item.status || 'saved'}</span>
+            </div>`;
+            count++;
+          });
+        }
+        
+        container.innerHTML = count === 0 ? '<p style="color:#7f8c8d;text-align:center;">Hakuna tathmini zilizotumwa.</p>' : html;
+      } catch (e) {
+        container.innerHTML = '<p style="color:#e74c3c;">Hitilafu: ' + e.message + '</p>';
+        console.error(e);
+      }
+    }
 
     // ========================= LOGOUT =========================
-    function logout(){ window.location.href='index.html'; }
+    function logout() {
+      window.location.href = 'index.html';
+    }
 
     // ========================= INIT =========================
-    window.onload = function(){ initSignature(); loadAppraisal(); loadAllData('all'); loadSharedData(); };
+    window.onload = function() {
+      console.log('🚀 Incharge page loading...');
+      initSignature();
+      loadAppraisal();
+      loadAllData('all');
+      
+      // Auto-load when username changes
+      document.getElementById('usernameInput').addEventListener('change', function() {
+        loadAppraisal();
+        loadAllData('all');
+      });
+      
+      console.log('✅ Incharge page loaded successfully!');
+      console.log('📌 API_KEY:', API_KEY);
+      console.log('📌 BIN_ID:', BIN_ID);
+    };
   </script>
 </body>
 </html>
