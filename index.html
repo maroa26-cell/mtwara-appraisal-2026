@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -55,7 +54,7 @@
       <div class="logo">🏥</div>
       <h1>MTWARA PERFORMANCE</h1>
       <p>Mfumo wa Tathmini ya Utendaji</p>
-      <span class="badge">Toleo v13.0</span>
+      <span class="badge">Toleo v14.0 - Kimataifa</span>
     </div>
     <div class="connection-status" id="connectionStatus"><span class="loading-spinner"></span> Inaunganisha...</div>
     <div class="tab-buttons">
@@ -115,11 +114,10 @@
       <div class="divider">Au</div>
       <button class="btn btn-secondary" onclick="switchTab('login')">🔐 Ingia kwenye Akaunti</button>
     </div>
-    <div class="version">Toleo 13.0 - Imeboreshwa</div>
+    <div class="version">Toleo 14.0 - Imeboreshwa</div>
   </div>
 
   <script>
-    // ========================= CONFIG =========================
     const API_KEY = "$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K";
     const BIN_ID = "6a4b0bc9da38895dfe32cc08";
 
@@ -143,7 +141,6 @@
       document.getElementById('signupTabBtn').className = 'btn ' + (tab === 'signup' ? 'active' : 'inactive');
     }
 
-    // ========================= CHECK USERNAME =========================
     document.getElementById('signupUsername').addEventListener('input', async function() {
       const u = this.value.trim();
       const h = document.getElementById('usernameHint');
@@ -158,7 +155,6 @@
       } catch (e) { h.innerHTML = '⚠️ Hitilafu ya muunganisho'; h.style.color = '#f39c12'; }
     });
 
-    // ========================= PASSWORD MATCH =========================
     document.getElementById('signupPassword').addEventListener('input', checkMatch);
     document.getElementById('signupPasswordConfirm').addEventListener('input', checkMatch);
     function checkMatch() {
@@ -171,7 +167,6 @@
       } else { h.innerHTML = 'Nenosiri lazima zilandane'; h.style.color = '#7f8c8d'; }
     }
 
-    // ========================= SIGNUP =========================
     async function signup() {
       const u = document.getElementById('signupUsername').value.trim();
       const e = document.getElementById('signupEmail').value.trim();
@@ -196,6 +191,7 @@
         record.users[u] = { password: p, role: r, email: e };
         if (!record.appraisals) record.appraisals = {};
         ['worker', 'supervisor', 'incharge'].forEach(ro => { if (!record.appraisals[ro]) record.appraisals[ro] = {}; });
+        if (!record.global_appraisals) record.global_appraisals = {};
         if (!record.settings) record.settings = {};
         const update = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
           method: 'PUT',
@@ -211,7 +207,6 @@
       } catch (e) { showToast('❌ ' + e.message, 'error'); btn.disabled = false; btn.innerHTML = '📝 Jisajili'; }
     }
 
-    // ========================= LOGIN =========================
     async function login() {
       const u = document.getElementById('loginUsername').value.trim();
       const p = document.getElementById('loginPassword').value.trim();
@@ -239,7 +234,6 @@
       } catch (e) { showToast('❌ ' + e.message, 'error'); btn.disabled = false; btn.innerHTML = '🔓 Ingia'; }
     }
 
-    // ========================= CHECK CONNECTION =========================
     async function checkConnection() {
       const s = document.getElementById('connectionStatus');
       try {
