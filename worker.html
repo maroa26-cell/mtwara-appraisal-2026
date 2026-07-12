@@ -64,6 +64,8 @@
     .send-container h4 { color:#0f3b2c; margin-bottom:8px; }
     .send-container .radio-group { display:flex; gap:15px; flex-wrap:wrap; margin-top:8px; }
     .send-container .radio-group label { font-size:14px; cursor:pointer; }
+    .download-section { background:#eaf2f8; border:2px solid #27ae60; border-radius:12px; padding:16px; margin-top:12px; }
+    .download-section h4 { color:#0f3b2c; margin-bottom:8px; }
     .toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(20px); max-width:450px; width:90%; padding:14px 22px; border-radius:14px; color:#fff; text-align:center; z-index:999; opacity:0; transition:0.4s; box-shadow:0 8px 40px rgba(0,0,0,0.2); }
     .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
     .toast.success { background:#27ae60; }
@@ -71,8 +73,6 @@
     .toast.info { background:#3498db; }
     .loading { display:inline-block; width:16px; height:16px; border:3px solid rgba(255,255,255,0.3); border-top-color:#fff; border-radius:50%; animation:spin 0.8s linear infinite; vertical-align:middle; margin-right:8px; }
     @keyframes spin { to { transform:rotate(360deg); } }
-    .download-section { background:#eaf2f8; border:2px solid #27ae60; border-radius:12px; padding:16px; margin-top:12px; }
-    .download-section h4 { color:#0f3b2c; margin-bottom:8px; }
     @media(max-width:768px){ .form-grid { grid-template-columns:1fr; } .checkbox-group { grid-template-columns:1fr; } .top-bar { flex-direction:column; align-items:stretch; } .button-group .btn { flex:1; } }
     @media print { .no-print { display:none !important; } .container { box-shadow:none !important; } body { background:#fff !important; } }
   </style>
@@ -87,7 +87,7 @@
         <button class="btn btn-info" onclick="window.print()">🖨️ Chapisha</button>
       </div>
     </div>
-    <div class="logo-area"><img src="SDA_CHURCH_LOGO.webp" alt="SDA Logo"><br><small style="color:#7f8c8d;">Logo ya SDA Church</small></div>
+    <div class="logo-area"><img src="SDA_CHURCH_LOGO.webp" alt="SDA Logo" id="logoPreview"><br><small style="color:#7f8c8d;">Logo ya SDA Church</small></div>
     <div class="sub" id="greeting">Karibu mtendakazi</div>
     <div class="comms no-print">
       <span>📞 Mawasiliano:</span>
@@ -251,7 +251,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
-    // ========================= CONFIG =========================
     const API_KEY = "$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K";
     const BIN_ID = "6a4b0bc9da38895dfe32cc08";
 
@@ -674,35 +673,138 @@
       }
     }
 
-    // ========================= PDF DOWNLOAD =========================
-    async function downloadPDF() {
+    // ========================= PDF DOWNLOAD (FIXED - HAIJARU HTML2CANVAS) =========================
+    function downloadPDF() {
       showToast('⏳ Inatengeneza PDF...', 'info');
+      
       try {
-        const element = document.getElementById('printArea');
-        const canvas = await html2canvas(element, {
-          scale: 2,
-          useCORS: true,
-          backgroundColor: '#ffffff',
-          logging: false,
-          allowTaint: true
-        });
-        const imgData = canvas.toDataURL('image/png');
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF('p', 'mm', 'a4');
-        const pdfWidth = doc.internal.pageSize.getWidth();
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-        let heightLeft = pdfHeight;
-        let position = 0;
-        doc.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
-        heightLeft -= doc.internal.pageSize.getHeight();
-        while (heightLeft > 0) {
-          position = heightLeft - pdfHeight;
-          doc.addPage();
-          doc.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
-          heightLeft -= doc.internal.pageSize.getHeight();
+        const pageWidth = doc.internal.pageSize.getWidth();
+        const data = getFormData();
+        
+        // HEADER
+        doc.setFontSize(20);
+        doc.setTextColor(26, 82, 118);
+        doc.text('MTWARA PERFORMANCE', pageWidth / 2, 20, { align: 'center' });
+        
+        doc.setFontSize(14);
+        doc.setTextColor(39, 174, 96);
+        doc.text('TATHMINI YA MTENDAKAZI', pageWidth / 2, 30, { align: 'center' });
+        
+        doc.setDrawColor(39, 174, 96);
+        doc.line(20, 35, pageWidth - 20, 35);
+        
+        let y = 45;
+        
+        // TAARIFA
+        doc.setFontSize(11);
+        doc.setTextColor(44, 62, 80);
+        
+        const fields = [
+          ['Jina', data.fullname || 'Hajajazwa'],
+          ['Idara', data.department || 'Hajajazwa'],
+          ['Cheo', data.position || 'Hajajazwa'],
+          ['Simu', data.phone || 'Hajajazwa'],
+          ['Barua Pepe', data.email || 'Hajajazwa'],
+          ['Tarehe', data.signature_date || new Date().toLocaleDateString()],
+          ['Sahihi', data.signature_name || 'Hajajazwa'],
+        ];
+        
+        fields.forEach(([label, value]) => {
+          doc.setFont('helvetica', 'bold');
+          doc.text(label + ':', 20, y);
+          doc.setFont('helvetica', 'normal');
+          doc.text(String(value), 60, y);
+          y += 7;
+        });
+        
+        // MALENGO
+        if (data.strategic_goals) {
+          y += 4;
+          doc.setFont('helvetica', 'bold');
+          doc.text('🎯 Malengo ya Kimkakati', 20, y);
+          y += 6;
+          doc.setFont('helvetica', 'normal');
+          const lines = doc.splitTextToSize(data.strategic_goals, pageWidth - 40);
+          lines.forEach(line => {
+            doc.text('  ' + line, 20, y);
+            y += 5;
+          });
+          doc.text('  Mafanikio: ' + (data.strategic_achievement || 0) + '%', 20, y);
+          y += 5;
+          doc.text('  Muda: ' + (data.strategic_timeline || 0) + ' miezi', 20, y);
+          y += 7;
         }
-        doc.save(`Tathmini_${username}_${new Date().toISOString().slice(0,10)}.pdf`);
+        
+        // UJUZI
+        y += 4;
+        doc.setFont('helvetica', 'bold');
+        doc.text('🧠 Ujuzi na Kompetensi', 20, y);
+        y += 6;
+        doc.setFont('helvetica', 'normal');
+        doc.text('  Kiufundi: ' + (data.skill_technical || 0) + '/5', 20, y);
+        y += 5;
+        doc.text('  Mawasiliano: ' + (data.skill_communication || 0) + '/5', 20, y);
+        y += 5;
+        doc.text('  Uongozi: ' + (data.skill_leadership || 0) + '/5', 20, y);
+        y += 5;
+        doc.text('  Ufumbuzi: ' + (data.skill_problem || 0) + '/5', 20, y);
+        y += 7;
+        
+        // MAJUKUMU
+        if (data.general_duties || data.specific_duties) {
+          y += 4;
+          doc.setFont('helvetica', 'bold');
+          doc.text('📋 Majukumu', 20, y);
+          y += 6;
+          doc.setFont('helvetica', 'normal');
+          doc.text('  Jumla: ' + (data.general_duties || 'Hakuna'), 20, y);
+          y += 5;
+          doc.text('  Maalumu: ' + (data.specific_duties || 'Hakuna'), 20, y);
+          y += 7;
+        }
+        
+        // MAONI
+        if (data.overall_comments) {
+          y += 4;
+          doc.setFont('helvetica', 'bold');
+          doc.text('💬 Maoni ya Jumla', 20, y);
+          y += 6;
+          doc.setFont('helvetica', 'normal');
+          const lines = doc.splitTextToSize(data.overall_comments, pageWidth - 40);
+          lines.forEach(line => {
+            doc.text('  ' + line, 20, y);
+            y += 5;
+          });
+          y += 4;
+        }
+        
+        // SAHIHI
+        if (data.signature_data && data.signature_data.startsWith('data:image')) {
+          y += 4;
+          doc.setFont('helvetica', 'bold');
+          doc.text('✍️ Sahihi', 20, y);
+          y += 6;
+          try {
+            doc.addImage(data.signature_data, 'PNG', 20, y, 60, 25);
+            y += 30;
+          } catch (e) {
+            doc.text('  (Sahihi imechorwa)', 20, y);
+            y += 6;
+          }
+        }
+        
+        // FOOTER
+        doc.setFontSize(8);
+        doc.setTextColor(150, 150, 150);
+        doc.text('Imetolewa: ' + new Date().toLocaleString(), pageWidth / 2, 280, { align: 'center' });
+        doc.text('© MTWARA PERFORMANCE - Tathmini ya Utendaji', pageWidth / 2, 285, { align: 'center' });
+        
+        const filename = `Tathmini_${data.username || 'mtumiaji'}_${new Date().toISOString().slice(0,10)}.pdf`;
+        doc.save(filename);
         showToast('✅ PDF imehifadhiwa!', 'success');
+        
       } catch (e) {
         showToast('❌ Hitilafu: ' + e.message + '. Jaribu kutumia "Chapisha" badala yake.', 'error');
         console.error('PDF Error:', e);
