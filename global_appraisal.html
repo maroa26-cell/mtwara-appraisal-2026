@@ -1,0 +1,384 @@
+
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tathmini ya Kimataifa - MTWARA</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Segoe UI', Tahoma, sans-serif; background:linear-gradient(135deg,#1a5276,#2980b9); min-height:100vh; padding:20px; display:flex; justify-content:center; align-items:flex-start; }
+    .container { background:#fff; border-radius:28px; padding:35px 30px; max-width:1200px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,0.2); margin-top:20px; }
+    h2 { color:#1a5276; text-align:center; font-size:28px; margin-bottom:4px; }
+    .sub { text-align:center; color:#7f8c8d; font-size:14px; margin-bottom:25px; }
+    .logo-area { text-align:center; margin-bottom:16px; }
+    .logo-area img { max-height:80px; max-width:100%; border-radius:8px; }
+    .lang-toggle { display:flex; justify-content:center; gap:12px; margin-bottom:20px; }
+    .lang-toggle button { padding:6px 20px; border:2px solid #1a5276; border-radius:20px; background:transparent; color:#1a5276; font-weight:600; cursor:pointer; transition:0.3s; }
+    .lang-toggle button.active { background:#1a5276; color:#fff; }
+    .lang-toggle button:hover { background:#1a5276; color:#fff; }
+    .top-bar { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:20px; }
+    .top-bar .btn-group { display:flex; gap:8px; flex-wrap:wrap; }
+    .btn { padding:8px 18px; border:none; border-radius:10px; font-weight:600; font-size:13px; cursor:pointer; transition:0.3s; display:inline-flex; align-items:center; gap:6px; }
+    .btn-primary { background:#1a5276; color:#fff; }
+    .btn-primary:hover { background:#154360; transform:translateY(-2px); }
+    .btn-secondary { background:#95a5a6; color:#fff; }
+    .btn-secondary:hover { background:#7f8c8d; }
+    .btn-danger { background:#e74c3c; color:#fff; }
+    .btn-danger:hover { background:#c0392b; }
+    .btn-info { background:#3498db; color:#fff; }
+    .btn-info:hover { background:#2e86c1; }
+    .btn-warning { background:#f39c12; color:#fff; }
+    .btn-warning:hover { background:#d68910; }
+    .btn-success { background:#27ae60; color:#fff; }
+    .btn-success:hover { background:#1e8449; }
+    .btn-purple { background:#8e44ad; color:#fff; }
+    .btn-purple:hover { background:#7d3c98; }
+    .btn-whatsapp { background:#25D366; color:#fff; }
+    .btn-whatsapp:hover { background:#1da851; }
+    .btn-email { background:#D44638; color:#fff; }
+    .btn-email:hover { background:#b03a2e; }
+    .section { background:#f8f9fa; border-radius:16px; padding:20px 22px; margin-bottom:20px; border-left:5px solid #1a5276; }
+    .section h3 { color:#1a5276; font-size:18px; margin-bottom:14px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .section h3 .step { background:#1a5276; color:#fff; border-radius:50%; width:28px; height:28px; display:inline-flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex-shrink:0; }
+    .section h3 .badge-global { background:#2980b9; color:#fff; padding:2px 12px; border-radius:20px; font-size:11px; font-weight:600; }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .form-group { margin-bottom:6px; }
+    .form-group.full { grid-column:1/-1; }
+    .form-group label { display:block; font-weight:600; color:#1a5276; margin-bottom:4px; font-size:13px; }
+    .form-group input, .form-group textarea, .form-group select { width:100%; padding:10px 14px; border:2px solid #e0e0e0; border-radius:10px; font-size:14px; transition:0.3s; background:#fff; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color:#1a5276; outline:none; box-shadow:0 0 0 3px rgba(26,82,118,0.15); }
+    .form-group textarea { min-height:70px; resize:vertical; }
+    .checkbox-group { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px; }
+    .checkbox-item { display:flex; align-items:center; gap:10px; padding:8px 12px; background:#fff; border-radius:8px; border:1px solid #e0e0e0; cursor:pointer; transition:0.2s; }
+    .checkbox-item:hover { background:#eaf2f8; }
+    .checkbox-item input[type="checkbox"] { width:18px; height:18px; accent-color:#1a5276; cursor:pointer; }
+    .comms { background:#f8f9fa; padding:12px 18px; border-radius:12px; display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-bottom:20px; border:1px solid #e0e0e0; }
+    .comms span { font-weight:600; color:#1a5276; }
+    .status-badge { display:inline-block; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:600; }
+    .status-badge.saved { background:#d4edda; color:#155724; }
+    .status-badge.pending { background:#fff3cd; color:#856404; }
+    .status-badge.submitted { background:#cce5ff; color:#004085; }
+    .button-group { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:20px; }
+    .button-group .btn { padding:12px 24px; font-size:14px; }
+    .signature-area { border:2px solid #1a5276; border-radius:12px; padding:10px; background:#fff; margin-top:8px; }
+    .signature-area canvas { width:100%; height:150px; border-radius:8px; background:#fff; cursor:crosshair; touch-action:none; }
+    .signature-area .sig-actions { display:flex; gap:10px; margin-top:8px; flex-wrap:wrap; }
+    .send-container { background:#eaf2f8; border:2px dashed #1a5276; border-radius:12px; padding:16px; margin-top:12px; }
+    .send-container h4 { color:#1a5276; margin-bottom:8px; }
+    .toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(20px); max-width:450px; width:90%; padding:14px 22px; border-radius:14px; color:#fff; text-align:center; z-index:999; opacity:0; transition:0.4s; box-shadow:0 8px 40px rgba(0,0,0,0.2); }
+    .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+    .toast.success { background:#27ae60; }
+    .toast.error { background:#e74c3c; }
+    .toast.info { background:#3498db; }
+    .loading { display:inline-block; width:16px; height:16px; border:3px solid rgba(255,255,255,0.3); border-top-color:#fff; border-radius:50%; animation:spin 0.8s linear infinite; vertical-align:middle; margin-right:8px; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .global-badge { background:linear-gradient(135deg,#1a5276,#2980b9); color:#fff; padding:2px 14px; border-radius:20px; font-size:11px; font-weight:600; display:inline-block; }
+    @media(max-width:768px){ .form-grid { grid-template-columns:1fr; } .checkbox-group { grid-template-columns:1fr; } .top-bar { flex-direction:column; align-items:stretch; } .button-group .btn { flex:1; } }
+  </style>
+</head>
+<body>
+  <div id="toast" class="toast"></div>
+  <div class="container">
+    <div class="top-bar no-print">
+      <h2 style="margin:0;">🌍 Tathmini ya Kimataifa</h2>
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="window.location.href='index.html'">🏠 Nyumbani</button>
+        <button class="btn btn-info" onclick="window.print()">🖨️ Chapisha</button>
+        <button class="btn btn-success" onclick="exportPDFGlobal()">📄 PDF</button>
+        <button class="btn btn-whatsapp" onclick="sendWhatsAppGlobal()">💬 WhatsApp</button>
+        <button class="btn btn-email" onclick="sendEmailGlobal()">📧 Email</button>
+      </div>
+    </div>
+    <div class="logo-area"><img src="SDA_CHURCH_LOGO.webp" alt="SDA Logo"><br><small style="color:#7f8c8d;">Logo ya SDA Church</small></div>
+    <div class="sub" id="greeting">Karibu katika Tathmini ya Kimataifa</div>
+
+    <div class="lang-toggle no-print">
+      <button class="active" onclick="setLanguage('sw')">🇹🇿 Kiswahili</button>
+      <button onclick="setLanguage('en')">🇬🇧 English</button>
+    </div>
+
+    <div class="comms no-print">
+      <span>📞 Mawasiliano:</span>
+      <a href="tel:+255742710697" class="btn btn-phone" style="padding:4px 14px;font-size:13px;">📱 Simu</a>
+      <span style="font-size:13px;color:#7f8c8d;margin-left:auto;" id="submissionStatus">📤 Hujatumwa</span>
+    </div>
+
+    <!-- Sehemu 1: Taarifa -->
+    <div class="section">
+      <h3><span class="step">1</span> <span class="lang-sw">Taarifa za Msingi</span> <span class="badge-global">🌍 Global</span></h3>
+      <div class="form-grid">
+        <div class="form-group"><label>Jina <span style="color:#e74c3c;">*</span></label><input type="text" id="fullname" placeholder="Ali Juma"></div>
+        <div class="form-group"><label>Idara <span style="color:#e74c3c;">*</span></label><input type="text" id="department" placeholder="Wodi ya Wanaume"></div>
+        <div class="form-group"><label>Cheo <span style="color:#e74c3c;">*</span></label><input type="text" id="position" placeholder="Muuguzi"></div>
+        <div class="form-group"><label>Simu</label><input type="tel" id="phone" placeholder="0712345678"></div>
+        <div class="form-group full"><label>Barua Pepe</label><input type="email" id="email" placeholder="ali@mtwara.go.tz"></div>
+      </div>
+    </div>
+
+    <!-- Sehemu 2: KPI -->
+    <div class="section">
+      <h3><span class="step">2</span> <span class="lang-sw">KPI za Kimataifa</span> <span class="badge-global">🌍 WHO Standard</span></h3>
+      <div class="form-grid">
+        <div class="form-group"><label>Uzalishaji wa Kazi (%)</label><input type="number" id="kpi_productivity" min="0" max="100" placeholder="85"></div>
+        <div class="form-group"><label>Ubora wa Huduma (1-5)</label><input type="number" id="kpi_quality" min="1" max="5" placeholder="4"></div>
+        <div class="form-group"><label>Idadi ya Wagonjwa (kwa wiki)</label><input type="number" id="kpi_patients" placeholder="50"></div>
+        <div class="form-group"><label>Kuridhika kwa Wateja (%)</label><input type="number" id="kpi_satisfaction" min="0" max="100" placeholder="90"></div>
+        <div class="form-group full"><label>Maelezo ya KPI</label><textarea id="kpi_notes" placeholder="Maelezo ya ziada..."></textarea></div>
+      </div>
+    </div>
+
+    <!-- Sehemu 3: Malengo -->
+    <div class="section">
+      <h3><span class="step">3</span> <span class="lang-sw">Malengo ya Kimataifa</span> <span class="badge-global">🌍 SDGs</span></h3>
+      <div class="form-grid">
+        <div class="form-group full"><label>Malengo ya Kimataifa <span style="color:#e74c3c;">*</span></label><textarea id="strategic_goals" placeholder="Malengo yako kulingana na SDGs..."></textarea></div>
+        <div class="form-group"><label>Kiwango cha Mafanikio (%)</label><input type="number" id="strategic_achievement" min="0" max="100" placeholder="70"></div>
+        <div class="form-group"><label>Muda uliopangwa (miezi)</label><input type="number" id="strategic_timeline" placeholder="6"></div>
+      </div>
+    </div>
+
+    <!-- Sehemu 4: Ujuzi -->
+    <div class="section">
+      <h3><span class="step">4</span> <span class="lang-sw">Ujuzi na Kompetensi</span></h3>
+      <div class="form-grid">
+        <div class="form-group"><label>Kiufundi (1-5)</label><input type="number" id="skill_technical" min="1" max="5" placeholder="4"></div>
+        <div class="form-group"><label>Mawasiliano</label><input type="number" id="skill_communication" min="1" max="5" placeholder="5"></div>
+        <div class="form-group"><label>Uongozi</label><input type="number" id="skill_leadership" min="1" max="5" placeholder="3"></div>
+        <div class="form-group"><label>Ufumbuzi</label><input type="number" id="skill_problem" min="1" max="5" placeholder="4"></div>
+        <div class="form-group full"><label>Maelezo</label><textarea id="skill_notes" placeholder="Maelezo ya ujuzi..."></textarea></div>
+      </div>
+    </div>
+
+    <!-- Sehemu 5: Mafunzo -->
+    <div class="section">
+      <h3><span class="step">5</span> <span class="lang-sw">Mafunzo na Maendeleo</span></h3>
+      <div class="form-grid">
+        <div class="form-group full"><label>Mafunzo yaliyofuata</label><textarea id="training_attended" placeholder="Orodhesha mafunzo..."></textarea></div>
+        <div class="form-group full"><label>Mafunzo yanayohitajika</label><textarea id="training_needed" placeholder="Mafunzo unayohitaji..."></textarea></div>
+        <div class="form-group"><label>Saa (mwaka)</label><input type="number" id="training_hours" placeholder="20"></div>
+        <div class="form-group"><label>Tarehe ya Mwisho</label><input type="date" id="training_last_date"></div>
+      </div>
+    </div>
+
+    <!-- Sehemu 6: Majukumu -->
+    <div class="section">
+      <h3><span class="step">6</span> <span class="lang-sw">Majukumu</span></h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>📋 Majukumu ya Jumla</label>
+          <div class="checkbox-group" id="generalDutiesContainer">
+            <label class="checkbox-item"><input type="checkbox" value="Kuwahi kazini dakika 10 kabla ya zamu"> Kuwahi dakika 10</label>
+            <label class="checkbox-item"><input type="checkbox" value="Kusafisha vifaa vya kazi"> Kusafisha vifaa</label>
+            <label class="checkbox-item"><input type="checkbox" value="Kuhudumia wagonjwa kwa weledi"> Kuhudumia wagonjwa</label>
+            <label class="checkbox-item"><input type="checkbox" value="Kushirikiana na timu"> Kushirikiana na timu</label>
+          </div>
+          <input type="text" id="generalDutiesOther" placeholder="Nyingine (andika)" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:8px;margin-top:6px;">
+        </div>
+        <div class="form-group">
+          <label>🎯 Majukumu Maalumu</label>
+          <div class="checkbox-group" id="specificDutiesContainer">
+            <label class="checkbox-item"><input type="checkbox" value="Kufanya uchunguzi wa awali"> Uchunguzi wa awali</label>
+            <label class="checkbox-item"><input type="checkbox" value="Kutoa huduma za dharura"> Huduma za dharura</label>
+            <label class="checkbox-item"><input type="checkbox" value="Kufuatilia wagonjwa mahututi"> Kufuatilia wagonjwa</label>
+            <label class="checkbox-item"><input type="checkbox" value="Kusimamia usambazaji wa dawa"> Usambazaji wa dawa</label>
+          </div>
+          <input type="text" id="specificDutiesOther" placeholder="Nyingine (andika)" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:8px;margin-top:6px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Sehemu 7: Maoni -->
+    <div class="section">
+      <h3><span class="step">7</span> <span class="lang-sw">Maoni na Mapendekezo</span></h3>
+      <div class="form-grid">
+        <div class="form-group"><label>Nguvu</label><textarea id="strengths" placeholder="Nguvu zako..."></textarea></div>
+        <div class="form-group"><label>Kuboresha</label><textarea id="weaknesses" placeholder="Maeneo ya kuboresha..."></textarea></div>
+        <div class="form-group"><label>Mapendekezo</label><textarea id="recommendations" placeholder="Mapendekezo..."></textarea></div>
+        <div class="form-group full"><label>Maoni Jumla</label><textarea id="overall_comments" rows="2" placeholder="Maoni ya jumla..."></textarea></div>
+      </div>
+    </div>
+
+    <!-- Sehemu 8: Sahihi -->
+    <div class="section">
+      <h3><span class="step">8</span> ✍️ <span class="lang-sw">Sahihi ya Kidijitali</span></h3>
+      <div class="form-grid">
+        <div class="form-group full">
+          <label>Jina la Sahihi <span style="color:#e74c3c;">*</span></label>
+          <input type="text" id="signature_name" placeholder="Andika jina lako">
+        </div>
+        <div class="form-group">
+          <label>Tarehe <span style="color:#e74c3c;">*</span></label>
+          <input type="date" id="signature_date">
+        </div>
+        <div class="form-group full">
+          <label>Chora Sahihi Yako Hapa <span style="color:#e74c3c;">*</span></label>
+          <div class="signature-area">
+            <canvas id="signatureCanvas"></canvas>
+            <div class="sig-actions">
+              <button class="btn btn-danger" onclick="clearSignature()" style="padding:6px 14px;font-size:12px;">🗑️ Futa Sahihi</button>
+              <span style="font-size:12px;color:#7f8c8d;">Tumia panya au kidole chako kuchora</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group full">
+          <label>Maelezo ya Sahihi (hiari)</label>
+          <textarea id="signature_notes" placeholder="Maelezo ya ziada..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sehemu 9: Njia za Kutuma -->
+    <div class="section">
+      <h3><span class="step">9</span> 📤 <span class="lang-sw">Njia za Kutuma</span></h3>
+      <div class="send-container">
+        <h4>Chagua njia ya kutuma taarifa:</h4>
+        <div style="display:flex;gap:15px;flex-wrap:wrap;margin-top:8px;">
+          <label><input type="radio" name="sendMethod" value="whatsapp" checked> 💬 WhatsApp</label>
+          <label><input type="radio" name="sendMethod" value="email"> 📧 Barua Pepe</label>
+          <label><input type="radio" name="sendMethod" value="direct"> 📤 Hifadhi kwa JSONBin</label>
+        </div>
+        <div style="margin-top:8px;font-size:13px;color:#7f8c8d;">Taarifa zitatumwa kwa njia uliyochagua.</div>
+      </div>
+    </div>
+
+    <!-- Vitufe -->
+    <div class="button-group no-print">
+      <button class="btn btn-primary" onclick="saveGlobalAppraisal()" id="saveBtn">💾 Hifadhi</button>
+      <button class="btn btn-info" onclick="submitGlobalAppraisal()" id="submitBtn">📤 Tuma</button>
+      <button class="btn btn-secondary" onclick="loadGlobalAppraisal()">📂 Pakia</button>
+      <button class="btn btn-danger" onclick="deleteGlobalAppraisal()">🗑️ Futa</button>
+      <button class="btn btn-success" onclick="exportPDFGlobal()">📄 PDF</button>
+      <button class="btn btn-whatsapp" onclick="sendWhatsAppGlobal()">💬 WhatsApp</button>
+      <button class="btn btn-email" onclick="sendEmailGlobal()">📧 Email</button>
+      <button class="btn btn-danger" onclick="logout()">🚪 Toka</button>
+    </div>
+    <div style="text-align:center;margin-top:12px;"><span id="saveStatus" class="status-badge pending">📝 Hajahifadhiwa</span></div>
+  </div>
+
+  <!-- ============ LIBRARIES (CDN) ============ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script>
+    // ========================= CONFIG =========================
+    const API_KEY = "$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K";
+    const BIN_ID = "6a4b0bc9da38895dfe32cc08";
+
+    function showToast(m,t){ const e=document.getElementById('toast'); e.textContent=m; e.className='toast '+t+' show'; setTimeout(()=>e.classList.remove('show'),3500); }
+    function getUsername(){ const p=new URLSearchParams(window.location.search).get('user'); if(!p) return null; try{ return JSON.parse(decodeURIComponent(p)).username; } catch(e){ return null; } }
+    const username = getUsername() || 'global_user';
+    document.getElementById('greeting').textContent = `Karibu ${username} - Tathmini ya Kimataifa`;
+
+    // ========================= LANGUAGE =========================
+    let currentLang = 'sw';
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.remove('active'));
+      if (lang === 'sw') document.querySelector('.lang-toggle button:first-child').classList.add('active');
+      else document.querySelector('.lang-toggle button:last-child').classList.add('active');
+      const elements = document.querySelectorAll('.lang-sw');
+      const texts = {
+        sw: ['Taarifa za Msingi', 'KPI za Kimataifa', 'Malengo ya Kimataifa', 'Ujuzi na Kompetensi', 'Mafunzo na Maendeleo', 'Majukumu', 'Maoni na Mapendekezo', 'Sahihi ya Kidijitali', 'Njia za Kutuma'],
+        en: ['Basic Information', 'Global KPIs', 'Global Goals (SDGs)', 'Skills & Competencies', 'Training & Development', 'Duties', 'Comments & Recommendations', 'Digital Signature', 'Send Methods']
+      };
+      elements.forEach((el, i) => { if (el) el.textContent = texts[lang][i] || el.textContent; });
+    }
+
+    // ========================= SIGNATURE =========================
+    let canvas, ctx, isDrawing = false, hasSignature = false;
+    function initSignature() {
+      canvas = document.getElementById('signatureCanvas');
+      ctx = canvas.getContext('2d');
+      canvas.width = canvas.parentElement.clientWidth - 20;
+      canvas.height = 150;
+      ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#1a5276';
+      canvas.addEventListener('mousedown', startDraw);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', stopDraw);
+      canvas.addEventListener('mouseleave', stopDraw);
+      canvas.addEventListener('touchstart', e => { e.preventDefault(); const t = e.touches[0]; canvas.dispatchEvent(new MouseEvent('mousedown', { clientX: t.clientX, clientY: t.clientY })); }, { passive: false });
+      canvas.addEventListener('touchmove', e => { e.preventDefault(); const t = e.touches[0]; canvas.dispatchEvent(new MouseEvent('mousemove', { clientX: t.clientX, clientY: t.clientY })); }, { passive: false });
+      canvas.addEventListener('touchend', e => { e.preventDefault(); canvas.dispatchEvent(new MouseEvent('mouseup', {})); }, { passive: false });
+    }
+    function getPos(e) { const rect = canvas.getBoundingClientRect(); return { x: (e.clientX - rect.left) * (canvas.width / rect.width), y: (e.clientY - rect.top) * (canvas.height / rect.height) }; }
+    function startDraw(e) { isDrawing = true; hasSignature = true; const pos = getPos(e); ctx.beginPath(); ctx.moveTo(pos.x, pos.y); }
+    function draw(e) { if (!isDrawing) return; const pos = getPos(e); ctx.lineTo(pos.x, pos.y); ctx.stroke(); }
+    function stopDraw() { isDrawing = false; }
+    function clearSignature() { ctx.clearRect(0, 0, canvas.width, canvas.height); hasSignature = false; showToast('🗑️ Sahihi imefutwa', 'info'); }
+    function getSignatureData() { if (!hasSignature) return ''; return canvas.toDataURL('image/png'); }
+    function setSignatureData(dataUrl) { if (!dataUrl) { clearSignature(); return; } const img = new Image(); img.onload = function() { ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.drawImage(img, 0, 0, canvas.width, canvas.height); hasSignature = true; }; img.src = dataUrl; }
+
+    // ========================= CHECKBOX HELPERS =========================
+    function getCheckedValues(c){ return Array.from(document.querySelectorAll(`#${c} input[type="checkbox"]:checked`)).map(x=>x.value); }
+    function setCheckboxes(c,v){ document.querySelectorAll(`#${c} input[type="checkbox"]`).forEach(x=>x.checked=v.includes(x.value)); }
+
+    // ========================= GET/SET DATA =========================
+    function getFormData(){ return {
+      username, role:'global',
+      fullname:document.getElementById('fullname').value,
+      department:document.getElementById('department').value,
+      position:document.getElementById('position').value,
+      phone:document.getElementById('phone').value,
+      email:document.getElementById('email').value,
+      kpi_productivity:+document.getElementById('kpi_productivity').value||0,
+      kpi_quality:+document.getElementById('kpi_quality').value||0,
+      kpi_patients:+document.getElementById('kpi_patients').value||0,
+      kpi_satisfaction:+document.getElementById('kpi_satisfaction').value||0,
+      kpi_notes:document.getElementById('kpi_notes').value,
+      strategic_goals:document.getElementById('strategic_goals').value,
+      strategic_achievement:+document.getElementById('strategic_achievement').value||0,
+      strategic_timeline:+document.getElementById('strategic_timeline').value||0,
+      skill_technical:+document.getElementById('skill_technical').value||0,
+      skill_communication:+document.getElementById('skill_communication').value||0,
+      skill_leadership:+document.getElementById('skill_leadership').value||0,
+      skill_problem:+document.getElementById('skill_problem').value||0,
+      skill_notes:document.getElementById('skill_notes').value,
+      training_attended:document.getElementById('training_attended').value,
+      training_needed:document.getElementById('training_needed').value,
+      training_hours:+document.getElementById('training_hours').value||0,
+      training_last_date:document.getElementById('training_last_date').value,
+      general_duties:getCheckedValues('generalDutiesContainer').concat(document.getElementById('generalDutiesOther').value).filter(Boolean).join(', '),
+      specific_duties:getCheckedValues('specificDutiesContainer').concat(document.getElementById('specificDutiesOther').value).filter(Boolean).join(', '),
+      strengths:document.getElementById('strengths').value,
+      weaknesses:document.getElementById('weaknesses').value,
+      recommendations:document.getElementById('recommendations').value,
+      overall_comments:document.getElementById('overall_comments').value,
+      signature_name:document.getElementById('signature_name').value,
+      signature_date:document.getElementById('signature_date').value,
+      signature_data:getSignatureData(),
+      signature_notes:document.getElementById('signature_notes').value,
+      send_method:document.querySelector('input[name="sendMethod"]:checked')?.value||'whatsapp',
+      status:'saved', submitted_to:null, timestamp:new Date().toISOString()
+    }}
+
+    function setFormData(d){ ['fullname','department','position','phone','email','kpi_productivity','kpi_quality','kpi_patients','kpi_satisfaction','kpi_notes','strategic_goals','strategic_achievement','strategic_timeline','skill_technical','skill_communication','skill_leadership','skill_problem','skill_notes','training_attended','training_needed','training_hours','training_last_date','strengths','weaknesses','recommendations','overall_comments','signature_name','signature_date','signature_notes'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=d[id]||''; }); setCheckboxes('generalDutiesContainer', d.general_duties ? d.general_duties.split(', ') : []); setCheckboxes('specificDutiesContainer', d.specific_duties ? d.specific_duties.split(', ') : []); document.getElementById('generalDutiesOther').value=''; document.getElementById('specificDutiesOther').value=''; if(d.signature_data) setSignatureData(d.signature_data); if(d.send_method){ const radio=document.querySelector(`input[name="sendMethod"][value="${d.send_method}"]`); if(radio) radio.checked=true; } updateStatus(d.status||'saved'); }
+
+    function updateStatus(s){ const map={'saved':['saved','💾 Imehifadhiwa'],'submitted':['submitted','📤 Imetumwa'],'pending':['pending','📝 Hajahifadhiwa']}; const c=map[s]||map.pending; const b=document.getElementById('saveStatus'); b.className='status-badge '+c[0]; b.textContent=c[1]; }
+
+    // ========================= SAVE =========================
+    async function saveGlobalAppraisal(){ const b=document.getElementById('saveBtn'); b.disabled=true; b.innerHTML='<span class="loading"></span> Inahifadhi...'; const d=getFormData(); d.status='saved'; try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); if(!res.record) res.record={}; const rec=res.record; if(!rec.global_appraisals) rec.global_appraisals={}; rec.global_appraisals[username]=d; const up=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(rec)}); if(!up.ok) throw new Error('Imeshindwa kuhifadhi'); showToast('✅ Imehifadhiwa!','success'); updateStatus('saved'); } catch(e){ showToast('❌ '+e.message,'error'); console.error(e); } b.disabled=false; b.innerHTML='💾 Hifadhi'; }
+
+    // ========================= SUBMIT =========================
+    async function submitGlobalAppraisal(){ const b=document.getElementById('submitBtn'); b.disabled=true; b.innerHTML='<span class="loading"></span> Inatuma...'; const d=getFormData(); if(!d.fullname||!d.department||!d.position){ showToast('❌ Jaza Jina, Idara na Cheo','error'); b.disabled=false; b.innerHTML='📤 Tuma'; return; } if(!d.signature_name||!d.signature_date){ showToast('❌ Jaza Sahihi (Jina na Tarehe)','error'); b.disabled=false; b.innerHTML='📤 Tuma'; return; } if(!hasSignature){ showToast('❌ Tafadhali chora sahihi yako','error'); b.disabled=false; b.innerHTML='📤 Tuma'; return; } d.status='submitted'; try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); if(!res.record) res.record={}; const rec=res.record; if(!rec.global_appraisals) rec.global_appraisals={}; rec.global_appraisals[username]=d; const up=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(rec)}); if(!up.ok) throw new Error('Imeshindwa kutuma'); const method = d.send_method.toUpperCase(); showToast(`✅ Imetumwa kwa ${method}!`,'success'); updateStatus('submitted'); } catch(e){ showToast('❌ '+e.message,'error'); console.error(e); } b.disabled=false; b.innerHTML='📤 Tuma'; }
+
+    // ========================= LOAD =========================
+    async function loadGlobalAppraisal(){ try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); const rec=res.record||{}; const d=rec.global_appraisals?.[username]; if(!d) return showToast('❌ Hakuna tathmini','error'); setFormData(d); showToast('✅ Imepakiwa','success'); } catch(e){ showToast('❌ '+e.message,'error'); console.error(e); } }
+
+    // ========================= DELETE =========================
+    async function deleteGlobalAppraisal(){ if(!confirm('Futa tathmini hii?')) return; try{ const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}}); if(!r.ok) throw new Error('Network error'); const res=await r.json(); const rec=res.record||{}; if(rec.global_appraisals?.[username]){ delete rec.global_appraisals[username]; const up=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(rec)}); if(!up.ok) throw new Error('Imeshindwa kufuta'); showToast('✅ Imehifadhiwa','success'); updateStatus('pending'); } else { showToast('❌ Hakuna tathmini','error'); } } catch(e){ showToast('❌ '+e.message,'error'); console.error(e); } }
+
+    // ========================= PDF =========================
+    async function exportPDFGlobal(){ const d=getFormData(); try { const { jsPDF } = window.jspdf; const doc = new jsPDF('p', 'mm', 'a4'); const pageWidth = doc.internal.pageSize.getWidth(); doc.setFontSize(20); doc.setTextColor(26,82,118); doc.text('MTWARA PERFORMANCE - GLOBAL APPRAISAL', pageWidth/2, 20, { align: 'center' }); doc.setFontSize(14); doc.setTextColor(39,174,96); doc.text('TATHMINI YA KIMATAIFA', pageWidth/2, 30, { align: 'center' }); doc.setDrawColor(39,174,96); doc.line(20,35,pageWidth-20,35); let y=45; doc.setFontSize(11); doc.setTextColor(44,62,80); const fields=[['Jina',d.fullname],['Idara',d.department],['Cheo',d.position],['Simu',d.phone],['Barua Pepe',d.email],['Tarehe',d.signature_date||new Date().toLocaleDateString()],['Sahihi',d.signature_name]]; fields.forEach(([l,v])=>{ doc.setFont('helvetica','bold'); doc.text(l+':',20,y); doc.setFont('helvetica','normal'); doc.text(String(v||'Hajajazwa'),70,y); y+=8; }); if(d.kpi_productivity!==undefined){ y+=4; doc.setFont('helvetica','bold'); doc.text('📊 KPI',20,y); y+=6; doc.setFont('helvetica','normal'); const kpis=[['Uzalishaji',d.kpi_productivity+'%'],['Ubora',d.kpi_quality+'/5'],['Wagonjwa',d.kpi_patients],['Kuridhika',d.kpi_satisfaction+'%']]; kpis.forEach(([l,v])=>{ doc.text('  '+l+': '+v,20,y); y+=6; }); } if(d.general_duties||d.specific_duties){ y+=4; doc.setFont('helvetica','bold'); doc.text('📋 Majukumu',20,y); y+=6; doc.setFont('helvetica','normal'); doc.text('  Jumla: '+(d.general_duties||'Hakuna'),20,y); y+=6; doc.text('  Maalumu: '+(d.specific_duties||'Hakuna'),20,y); y+=6; } if(d.overall_comments){ y+=4; doc.setFont('helvetica','bold'); doc.text('💬 Maoni',20,y); y+=6; doc.setFont('helvetica','normal'); const lines=doc.splitTextToSize(d.overall_comments,pageWidth-40); lines.forEach(line=>{ doc.text('  '+line,20,y); y+=5; }); } if(d.signature_data){ y+=4; doc.setFont('helvetica','bold'); doc.text('✍️ Sahihi',20,y); y+=6; try{ doc.addImage(d.signature_data,'PNG',20,y,60,25); y+=30; }catch(e){ doc.text('  (Sahihi haipatikani)',20,y); y+=6; } } doc.setFontSize(8); doc.setTextColor(150,150,150); doc.text('Imetolewa: '+new Date().toLocaleString(), pageWidth/2, 280, { align: 'center' }); doc.text('© MTWARA PERFORMANCE - Global Appraisal', pageWidth/2, 285, { align: 'center' }); const filename=`tathmini_global_${username}_${new Date().toISOString().slice(0,10)}.pdf`; doc.save(filename); showToast('✅ PDF imehifadhiwa!','success'); } catch(e){ showToast('❌ Hitilafu: '+e.message,'error'); console.error(e); } }
+
+    // ========================= WHATSAPP =========================
+    function sendWhatsAppGlobal(){ const d=getFormData(); const msg=`📋 *MTWARA PERFORMANCE - GLOBAL APPRAISAL* 📋%0A%0A👤 *Jina:* ${d.fullname||'Hajajazwa'}%0A🏢 *Idara:* ${d.department||'Hajajazwa'}%0A📋 *Cheo:* ${d.position||'Hajajazwa'}%0A📞 *Simu:* ${d.phone||'Hajajazwa'}%0A📧 *Barua Pepe:* ${d.email||'Hajajazwa'}%0A%0A📊 *KPI:*%0A  Uzalishaji: ${d.kpi_productivity||0}%%0A  Ubora: ${d.kpi_quality||0}/5%0A  Wagonjwa: ${d.kpi_patients||0}%0A  Kuridhika: ${d.kpi_satisfaction||0}%%0A%0A📋 *Majukumu Jumla:* ${d.general_duties||'Hakuna'}%0A🎯 *Majukumu Maalumu:* ${d.specific_duties||'Hakuna'}%0A💬 *Maoni:* ${d.overall_comments||'Hakuna'}%0A✍️ *Sahihi:* ${d.signature_name||'Hajajazwa'} - ${d.signature_date||''}%0A📅 *Imetolewa:* ${new Date().toLocaleString()}%0A%0A_Tathmini ya Kimataifa imetumwa_`; window.open(`https://wa.me/255742710697?text=${msg}`,'_blank'); showToast('✅ Ujumbe wa WhatsApp umefunguliwa','success'); }
+
+    // ========================= EMAIL =========================
+    function sendEmailGlobal(){ const d=getFormData(); const subject=encodeURIComponent('TATHMINI YA KIMATAIFA - MTWARA PERFORMANCE'); const body=encodeURIComponent(`📋 TATHMINI YA KIMATAIFA 📋\n\n👤 Jina: ${d.fullname||'Hajajazwa'}\n🏢 Idara: ${d.department||'Hajajazwa'}\n📋 Cheo: ${d.position||'Hajajazwa'}\n📞 Simu: ${d.phone||'Hajajazwa'}\n📧 Barua Pepe: ${d.email||'Hajajazwa'}\n\n📊 KPI:\n  Uzalishaji: ${d.kpi_productivity||0}%\n  Ubora: ${d.kpi_quality||0}/5\n  Wagonjwa: ${d.kpi_patients||0}\n  Kuridhika: ${d.kpi_satisfaction||0}%\n\n📋 Majukumu Jumla: ${d.general_duties||'Hakuna'}\n🎯 Majukumu Maalumu: ${d.specific_duties||'Hakuna'}\n💬 Maoni: ${d.overall_comments||'Hakuna'}\n✍️ Sahihi: ${d.signature_name||'Hajajazwa'} - ${d.signature_date||''}\n📅 Imetolewa: ${new Date().toLocaleString()}\n\n--\nMTWARA PERFORMANCE - Global Appraisal`); window.location.href=`mailto:?subject=${subject}&body=${body}`; showToast('✅ Email imefunguliwa','success'); }
+
+    function logout(){ window.location.href='index.html'; }
+    window.onload = function(){ initSignature(); loadGlobalAppraisal(); };
+  </script>
+</body>
+</html>
