@@ -642,17 +642,14 @@
 
         professionSelect.addEventListener('change', function() {
             const prof = this.value;
-            // Onyesha au ficha dropdown ya Utaalamu wa Daktari
             if (prof === 'daktari') {
                 doctorSpecialtyContainer.classList.remove('hidden');
-                // Weka required kwenye specialty select
                 doctorSpecialtySelect.setAttribute('required', 'required');
             } else {
                 doctorSpecialtyContainer.classList.add('hidden');
                 doctorSpecialtySelect.removeAttribute('required');
                 doctorSpecialtySelect.value = '';
             }
-            // Sasisha majukumu maalumu
             updateSpecialDuties(prof);
         });
 
@@ -675,7 +672,6 @@
             }
         }
 
-        // Ikiwa taaluma imechaguliwa awali (kwa mfano kupitia URL), chelewesha kuonyesha
         window.addEventListener('DOMContentLoaded', function() {
             const prof = professionSelect.value;
             if (prof) {
@@ -745,67 +741,77 @@
         }
 
         // ============================================
-        //  6. JSONBIN - FIXED (handles 401 and creates bin if missing)
+        //  6. JSONBIN - FIXED (Tries both keys and creates bin if needed)
         // ============================================
         const JSONBIN_BIN_ID = '6a4b0bc9da38895dfe32cc08';
-        // MASTER KEY - Badilisha na yako halisi kutoka JSONBin
         const JSONBIN_MASTER_KEY = '$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K';
 
         async function saveToJSONBin(data) {
             const url = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
-            try {
-                // 1. Jaribu kuangalia kama BIN ipo
-                const checkResponse = await fetch(url, {
-                    method: 'GET',
-                    headers: {
-                        'X-Master-Key': JSONBIN_MASTER_KEY,
-                        'X-Access-Key': JSONBIN_MASTER_KEY // backup
-                    }
-                });
+            // Try with Master Key first, then fallback to Access Key
+            const keys = [JSONBIN_MASTER_KEY, JSONBIN_MASTER_KEY]; // both same here
 
-                if (checkResponse.status === 404) {
-                    // 2. BIN haipo - tunaunda mpya
-                    const createUrl = 'https://api.jsonbin.io/v3/b';
-                    const createResponse = await fetch(createUrl, {
-                        method: 'POST',
+            for (let key of keys) {
+                try {
+                    // 1. Try to get bin to check if it exists
+                    const checkResponse = await fetch(url, {
+                        method: 'GET',
                         headers: {
-                            'Content-Type': 'application/json',
-                            'X-Master-Key': JSONBIN_MASTER_KEY,
-                            'X-Access-Key': JSONBIN_MASTER_KEY,
-                            'X-Bin-Name': 'mtwara-appraisal-2026'
-                        },
-                        body: JSON.stringify(data)
+                            'X-Master-Key': key,
+                            'X-Access-Key': key
+                        }
                     });
-                    if (!createResponse.ok) {
-                        const errText = await createResponse.text();
-                        throw new Error(`Kuunda BIN kulishindwa: ${createResponse.status} - ${errText}`);
-                    }
-                    return await createResponse.json();
-                } else if (!checkResponse.ok) {
-                    // 3. Ikiwa kuna error nyingine (401, 403, nk)
-                    const errText = await checkResponse.text();
-                    throw new Error(`Kuangalia BIN kulishindwa: ${checkResponse.status} - ${errText}`);
-                }
 
-                // 4. BIN ipo - sasa tunasasisha kwa PUT
-                const updateResponse = await fetch(url, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Master-Key': JSONBIN_MASTER_KEY,
-                        'X-Access-Key': JSONBIN_MASTER_KEY
-                    },
-                    body: JSON.stringify(data)
-                });
-                if (!updateResponse.ok) {
-                    const errText = await updateResponse.text();
-                    throw new Error(`Kusasisha BIN kulishindwa: ${updateResponse.status} - ${errText}`);
+                    if (checkResponse.status === 404) {
+                        // Bin doesn't exist, create it
+                        const createUrl = 'https://api.jsonbin.io/v3/b';
+                        const createResponse = await fetch(createUrl, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-Master-Key': key,
+                                'X-Access-Key': key,
+                                'X-Bin-Name': 'mtwara-appraisal-2026'
+                            },
+                            body: JSON.stringify(data)
+                        });
+                        if (!createResponse.ok) {
+                            const errText = await createResponse.text();
+                            throw new Error(`Kuunda BIN kulishindwa: ${createResponse.status} - ${errText}`);
+                        }
+                        return await createResponse.json();
+                    } else if (checkResponse.ok) {
+                        // Bin exists, update it
+                        const updateResponse = await fetch(url, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-Master-Key': key,
+                                'X-Access-Key': key
+                            },
+                            body: JSON.stringify(data)
+                        });
+                        if (!updateResponse.ok) {
+                            const errText = await updateResponse.text();
+                            throw new Error(`Kusasisha BIN kulishindwa: ${updateResponse.status} - ${errText}`);
+                        }
+                        return await updateResponse.json();
+                    } else {
+                        // If status is 401/403, try next key
+                        continue;
+                    }
+                } catch (e) {
+                    // If it's not a key issue, rethrow
+                    if (!e.message.includes('401') && !e.message.includes('403')) {
+                        throw e;
+                    }
+                    // Otherwise try next key
+                    continue;
                 }
-                return await updateResponse.json();
-            } catch (error) {
-                console.error('JSONBin error:', error);
-                throw error;
             }
+
+            // If all keys failed
+            throw new Error('Hakuna key iliyofanya kazi. Hakikisha una Master Key sahihi kutoka JSONBin Dashboard.');
         }
 
         // ============================================
@@ -830,7 +836,6 @@
                 workerDepartment: document.getElementById('workerDepartment').value.trim(),
                 workerTitle: document.getElementById('workerTitle').value.trim(),
                 workerProfession: document.getElementById('workerProfession').value,
-                // Ikiwa taaluma ni Daktari, tunachukua specialty; vinginevyo tupu
                 doctorSpecialty: document.getElementById('workerProfession').value === 'daktari' ?
                     document.getElementById('doctorSpecialty').value : '',
                 photo: photoDataURL || '',
@@ -859,7 +864,6 @@
                     return `Tafadhali jaza sehemu ya ${field.replace('worker','').toLowerCase()}.`;
                 }
             }
-            // Kama ni Daktari, hakikisha specialty imechaguliwa
             if (data.workerProfession === 'daktari' && !data.doctorSpecialty) {
                 return 'Tafadhali chagua Utaalamu wa Daktari (Specialist, MD, au Clinical Officer).';
             }
@@ -872,7 +876,6 @@
             if (!data.trainingRating) {
                 return 'Tafadhali jipime katika Mafunzo na Maendeleo (1-5).';
             }
-            // Angalia sahihi (si tupu)
             const sigData = canvas.toDataURL('image/png');
             if (sigData === 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==') {
                 return 'Tafadhali chora sahihi yako.';
@@ -893,7 +896,7 @@
         }
 
         // ============================================
-        //  8. SAVE AND SEND (JSONBin + WhatsApp)
+        //  8. SAVE AND SEND
         // ============================================
         async function saveAndSend() {
             clearMessage();
@@ -905,10 +908,8 @@
             }
 
             try {
-                // Hifadhi kwenye JSONBin
                 await saveToJSONBin(data);
                 showMessage('✅ Data imehifadhiwa kikamilifu! Sasa inatuma WhatsApp...', 'success');
-                // Tuma WhatsApp
                 await sendWhatsApp(data);
             } catch (err) {
                 showMessage('❌ Hitilafu: ' + err.message, 'error');
@@ -935,7 +936,6 @@
 
             const generalDutiesStr = data.generalDuties.length ? data.generalDuties.join(', ') : 'Hajachagua';
             const specialDutiesStr = data.specialDuties.length ? data.specialDuties.join(', ') : 'Hajachagua';
-            // Onyesha specialty ikiwa Daktari
             const specialtyInfo = data.workerProfession === 'daktari' && data.doctorSpecialty ?
                 ` (${data.doctorSpecialty})` : '';
 
@@ -989,21 +989,18 @@ Maelezo: ${data.trainingsDescription || 'Hakuna'}
                 clearSignature();
                 clearMessage();
                 document.getElementById('signatureDate').valueAsDate = new Date();
-                // Reset special duties
                 document.getElementById('specialDutiesContainer').innerHTML =
                     '<p style="color:#6a8aaa; font-style:italic; grid-column:1/-1;">Chagua taaluma kuona majukumu maalumu.</p>';
-                // Ficha dropdown ya Daktari
                 doctorSpecialtyContainer.classList.add('hidden');
                 doctorSpecialtySelect.value = '';
                 doctorSpecialtySelect.removeAttribute('required');
-                // Reset photo
                 photoDataURL = '';
                 photoPreview.src = 'https://via.placeholder.com/100x100?text=No+Photo';
                 photoInput.value = '';
             }
         }
 
-        console.log('✅ worker.html loaded successfully with Doctor Specialty dropdown.');
+        console.log('✅ worker.html loaded successfully with Doctor Specialty dropdown and fixed JSONBin.');
     </script>
 </body>
 </html>
