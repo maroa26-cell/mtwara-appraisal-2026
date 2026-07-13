@@ -13,42 +13,76 @@
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #eef4fa;
+            background: #f0f6fc;
             padding: 20px;
         }
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             background: #ffffff;
             border-radius: 32px;
-            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.12);
+            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.10);
             padding: 30px 35px;
         }
         .header {
             display: flex;
             align-items: center;
-            gap: 20px;
+            justify-content: space-between;
             border-bottom: 3px solid #1a73e8;
             padding-bottom: 16px;
             margin-bottom: 28px;
             flex-wrap: wrap;
+            gap: 16px;
         }
-        .header img {
-            max-height: 70px;
-            width: auto;
-            border-radius: 12px;
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
         }
-        .header h1 {
+        .header-left .logo-text {
+            font-size: 20px;
+            font-weight: 800;
             color: #0b2b4a;
-            font-size: 28px;
-            margin: 0;
-            flex: 1;
+            letter-spacing: 1px;
+            line-height: 1.2;
         }
-        .header h1 small {
-            font-size: 16px;
+        .header-left .logo-text span {
+            color: #1a73e8;
+        }
+        .header-left .logo-sub {
+            font-size: 10px;
+            color: #4a6a85;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            display: block;
+        }
+        .header-left h1 {
+            color: #0b2b4a;
+            font-size: 24px;
+            margin-left: 8px;
+        }
+        .header-left h1 small {
+            display: block;
+            font-size: 14px;
             font-weight: 400;
             color: #4a6a85;
-            display: block;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .header-right .user-photo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #1a73e8;
+            background: #eef4fa;
+        }
+        .header-right .user-name {
+            font-weight: 600;
+            color: #0b2b4a;
         }
         .section {
             background: #f8fafe;
@@ -121,7 +155,6 @@
         .hidden {
             display: none !important;
         }
-
         .photo-upload {
             display: flex;
             align-items: center;
@@ -129,8 +162,8 @@
             flex-wrap: wrap;
         }
         .photo-upload .preview {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid #1a73e8;
@@ -143,7 +176,6 @@
             border-radius: 12px;
             background: #f8fafe;
         }
-
         .checkbox-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -165,7 +197,6 @@
             accent-color: #1a73e8;
             cursor: pointer;
         }
-
         .rating-group {
             display: flex;
             gap: 14px;
@@ -187,7 +218,6 @@
             accent-color: #1a73e8;
             cursor: pointer;
         }
-
         .signature-area {
             border: 2px dashed #b0c7db;
             border-radius: 16px;
@@ -202,8 +232,8 @@
             background: white;
             touch-action: none;
             width: 100%;
-            max-width: 450px;
-            height: 150px;
+            max-width: 400px;
+            height: 120px;
         }
         .signature-actions {
             display: flex;
@@ -225,7 +255,6 @@
         .signature-actions button:hover {
             background: #cbd5e1;
         }
-
         .btn-group {
             display: flex;
             gap: 16px;
@@ -279,7 +308,6 @@
             color: white;
             transform: translateY(-3px);
         }
-
         .message-box {
             padding: 14px 20px;
             border-radius: 14px;
@@ -299,7 +327,6 @@
             border-left: 6px solid #d93025;
             display: block;
         }
-
         @media (max-width: 640px) {
             .container {
                 padding: 16px;
@@ -320,6 +347,10 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
+            .header-right {
+                width: 100%;
+                justify-content: flex-start;
+            }
             .photo-upload {
                 flex-direction: column;
                 align-items: flex-start;
@@ -330,17 +361,25 @@
 <body>
     <div class="container">
         <div class="header">
-            <!-- Badilisha src na logo yako halisi -->
-            <img src="https://via.placeholder.com/200x80?text=MTWARA+SDA" alt="Mtwara SDA Dispensary" />
-            <h1>
-                📋 Tathmini ya Mtendakazi
-                <small id="userDisplay"></small>
-            </h1>
+            <div class="header-left">
+                <div>
+                    <div class="logo-text">🕊️ <span>Adventist</span> Health</div>
+                    <span class="logo-sub">Ministries • Mtwara 2026</span>
+                </div>
+                <h1>
+                    📋 Mtendakazi
+                    <small>Tathmini ya Utendaji 2026</small>
+                </h1>
+            </div>
+            <div class="header-right">
+                <img class="user-photo" id="headerPhoto" src="https://via.placeholder.com/50x50?text=User" alt="Picha" />
+                <span class="user-name" id="headerName">Mtumiaji</span>
+            </div>
         </div>
 
         <input type="hidden" id="inchargePhone" value="" />
 
-        <!-- SEHEMU A: Taarifa za Msingi + Picha -->
+        <!-- SEHEMU A -->
         <div class="section">
             <div class="section-title"><span>1</span> Taarifa za Mtendakazi</div>
             <div class="form-row">
@@ -363,7 +402,6 @@
                     </select>
                 </div>
             </div>
-            <!-- Dropdown ya Utaalamu wa Daktari -->
             <div id="doctorSpecialtyContainer" class="form-group hidden">
                 <label>Utaalamu wa Daktari *</label>
                 <select id="doctorSpecialty">
@@ -376,13 +414,13 @@
             <div class="form-group">
                 <label>Picha yako (hiari)</label>
                 <div class="photo-upload">
-                    <img id="photoPreview" class="preview" src="https://via.placeholder.com/100x100?text=No+Photo" alt="Picha" />
+                    <img id="photoPreview" class="preview" src="https://via.placeholder.com/80x80?text=No+Photo" alt="Picha" />
                     <input type="file" id="photoInput" accept="image/*" />
                 </div>
             </div>
         </div>
 
-        <!-- SEHEMU B: Majukumu -->
+        <!-- SEHEMU B -->
         <div class="section">
             <div class="section-title"><span>2</span> Majukumu Yako</div>
             <div class="form-group">
@@ -410,16 +448,13 @@
             </div>
         </div>
 
-        <!-- SEHEMU C: Malengo -->
+        <!-- SEHEMU C -->
         <div class="section">
             <div class="section-title"><span>3</span> Malengo ya Kimkakati</div>
-            <div class="form-group">
-                <label>Malengo yako ya mwaka 2026</label>
-                <textarea id="goals" placeholder="Eleza malengo yako makuu..."></textarea>
-            </div>
+            <div class="form-group"><textarea id="goals" placeholder="Eleza malengo yako makuu..."></textarea></div>
         </div>
 
-        <!-- SEHEMU D: Ujuzi na Competence -->
+        <!-- SEHEMU D -->
         <div class="section">
             <div class="section-title"><span>4</span> Ujuzi na Competence</div>
             <div class="form-group">
@@ -432,13 +467,10 @@
                     <label><input type="radio" name="skillRating" value="5" /> 5</label>
                 </div>
             </div>
-            <div class="form-group">
-                <label>Maelezo ya ujuzi wako</label>
-                <textarea id="skillsDescription" placeholder="Andika ujuzi wako kwa undani..."></textarea>
-            </div>
+            <div class="form-group"><textarea id="skillsDescription" placeholder="Andika ujuzi wako kwa undani..."></textarea></div>
         </div>
 
-        <!-- SEHEMU E: Mafunzo na Maendeleo -->
+        <!-- SEHEMU E -->
         <div class="section">
             <div class="section-title"><span>5</span> Mafunzo na Maendeleo</div>
             <div class="form-group">
@@ -451,19 +483,13 @@
                     <label><input type="radio" name="trainingRating" value="5" /> 5</label>
                 </div>
             </div>
-            <div class="form-group">
-                <label>Maelezo ya mafunzo uliyopata</label>
-                <textarea id="trainingsDescription" placeholder="Andika mafunzo uliyohudhuria..."></textarea>
-            </div>
+            <div class="form-group"><textarea id="trainingsDescription" placeholder="Andika mafunzo uliyohudhuria..."></textarea></div>
         </div>
 
-        <!-- SEHEMU F: Maoni -->
+        <!-- SEHEMU F -->
         <div class="section">
             <div class="section-title"><span>6</span> Maoni na Mapendekezo</div>
-            <div class="form-group">
-                <label>Maoni yako kuhusu mfumo wa kazi</label>
-                <textarea id="feedback" placeholder="Andika maoni yako..."></textarea>
-            </div>
+            <div class="form-group"><textarea id="feedback" placeholder="Andika maoni yako..."></textarea></div>
         </div>
 
         <!-- SEHEMU G: Sahihi -->
@@ -496,17 +522,17 @@
     </div>
 
     <script>
-        // ============================================
-        // 1. GET USER FROM URL
-        // ============================================
+        // ============================================================
+        //  1. USER & HEADER
+        // ============================================================
         (function getUser() {
             const params = new URLSearchParams(window.location.search);
             const userParam = params.get('user');
             if (userParam) {
                 try {
                     const user = JSON.parse(decodeURIComponent(userParam));
-                    document.getElementById('userDisplay').textContent = '👤 ' + (user.username || '');
-                    if (user.username) document.getElementById('workerName').value = user.username;
+                    document.getElementById('headerName').textContent = user.username || 'Mtumiaji';
+                    document.getElementById('workerName').value = user.username || '';
                     if (user.credential) {
                         const cred = user.credential.trim();
                         if (cred.match(/^[0-9+\-\s()]+$/)) {
@@ -523,9 +549,9 @@
             document.getElementById('signatureDate').valueAsDate = new Date();
         })();
 
-        // ============================================
-        // 2. PHOTO UPLOAD - RESIZE TO 200x200
-        // ============================================
+        // ============================================================
+        //  2. PHOTO UPLOAD & RESIZE
+        // ============================================================
         const photoInput = document.getElementById('photoInput');
         const photoPreview = document.getElementById('photoPreview');
         let photoDataURL = '';
@@ -537,23 +563,19 @@
                     const img = new Image();
                     img.onload = function() {
                         const canvas = document.createElement('canvas');
-                        let width = img.width;
-                        let height = img.height;
-                        if (width > height) {
-                            if (width > maxWidth) {
-                                height = height * (maxWidth / width);
-                                width = maxWidth;
-                            }
+                        let w = img.width,
+                            h = img.height;
+                        if (w > h) {
+                            if (w > maxWidth) { h = h * (maxWidth / w);
+                                w = maxWidth; }
                         } else {
-                            if (height > maxHeight) {
-                                width = width * (maxHeight / height);
-                                height = maxHeight;
-                            }
+                            if (h > maxHeight) { w = w * (maxHeight / h);
+                                h = maxHeight; }
                         }
-                        canvas.width = width;
-                        canvas.height = height;
+                        canvas.width = w;
+                        canvas.height = h;
                         const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, width, height);
+                        ctx.drawImage(img, 0, 0, w, h);
                         resolve(canvas.toDataURL('image/jpeg', quality));
                     };
                     img.src = e.target.result;
@@ -569,15 +591,16 @@
                     const resized = await resizeImage(file, 200, 200, 0.7);
                     photoDataURL = resized;
                     photoPreview.src = resized;
+                    document.getElementById('headerPhoto').src = resized;
                 } catch (err) {
                     console.error('Error resizing image:', err);
                 }
             }
         });
 
-        // ============================================
-        // 3. DUTIES BY PROFESSION
-        // ============================================
+        // ============================================================
+        //  3. DUTIES
+        // ============================================================
         const specialDutiesMap = {
             muuguzi: [
                 'Kufanya uchunguzi wa wagonjwa kila siku',
@@ -683,15 +706,14 @@
             }
         });
 
-        // ============================================
-        // 4. SIGNATURE CANVAS - REDUCED SIZE
-        // ============================================
+        // ============================================================
+        //  4. SIGNATURE (COMPRESSED)
+        // ============================================================
         let canvas = document.getElementById('signatureCanvas');
         let ctx = canvas.getContext('2d');
         let isDrawing = false;
 
-        // We reduce the canvas to 300x100 before saving
-        function resizeSignature() {
+        function resizeCanvas() {
             const rect = canvas.getBoundingClientRect();
             canvas.width = Math.min(rect.width || 400, 400);
             canvas.height = 120;
@@ -700,8 +722,8 @@
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
         }
-        resizeSignature();
-        window.addEventListener('resize', resizeSignature);
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
         function getPos(e) {
             const rect = canvas.getBoundingClientRect();
@@ -741,9 +763,7 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
 
-        // Get signature with reduced quality
         function getSignatureDataURL() {
-            // Create a temporary canvas with smaller size and lower quality
             const tempCanvas = document.createElement('canvas');
             tempCanvas.width = 300;
             tempCanvas.height = 100;
@@ -752,9 +772,9 @@
             return tempCanvas.toDataURL('image/jpeg', 0.5);
         }
 
-        // ============================================
-        // 5. JSONBIN - WITH NEW MASTER KEY
-        // ============================================
+        // ============================================================
+        //  5. JSONBIN
+        // ============================================================
         const JSONBIN_BIN_ID = '6a4b0bc9da38895dfe32cc08';
         const JSONBIN_MASTER_KEY = "$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDot5L9hRGRQfa21/Mw/B0UcS";
 
@@ -765,7 +785,6 @@
                     method: 'GET',
                     headers: { 'X-Master-Key': JSONBIN_MASTER_KEY }
                 });
-
                 if (checkResponse.status === 404) {
                     const createUrl = 'https://api.jsonbin.io/v3/b';
                     const createResponse = await fetch(createUrl, {
@@ -786,7 +805,6 @@
                     const errText = await checkResponse.text();
                     throw new Error(`Kuangalia BIN kulishindwa: ${checkResponse.status} - ${errText}`);
                 }
-
                 const updateResponse = await fetch(url, {
                     method: 'PUT',
                     headers: {
@@ -806,9 +824,9 @@
             }
         }
 
-        // ============================================
-        // 6. FORM DATA
-        // ============================================
+        // ============================================================
+        //  6. FORM DATA
+        // ============================================================
         function getCheckedValues(containerId) {
             const container = document.getElementById(containerId);
             const checkboxes = container.querySelectorAll('input[type="checkbox"]:checked');
@@ -841,7 +859,7 @@
                 feedback: document.getElementById('feedback').value.trim(),
                 signatureName: document.getElementById('signatureName').value.trim(),
                 signatureDate: document.getElementById('signatureDate').value,
-                signatureImage: getSignatureDataURL(), // Using compressed signature
+                signatureImage: getSignatureDataURL(),
                 inchargePhone: document.getElementById('inchargePhone').value.trim(),
                 submittedAt: new Date().toISOString(),
                 role: 'worker'
@@ -850,122 +868,61 @@
 
         function validateForm(data) {
             const required = ['workerName', 'workerPhone', 'workerDepartment', 'workerTitle', 'workerProfession'];
-            for (let field of required) {
-                if (!data[field]) {
-                    return `Tafadhali jaza sehemu ya ${field.replace('worker','').toLowerCase()}.`;
-                }
-            }
-            if (data.workerProfession === 'daktari' && !data.doctorSpecialty) {
-                return 'Tafadhali chagua Utaalamu wa Daktari (Specialist, MD, au Clinical Officer).';
-            }
-            if (!data.inchargePhone) {
-                return 'Namba ya Mganga Mfawidhi haijapatikana. Tafadhali ingia tena.';
-            }
-            if (!data.skillRating) {
-                return 'Tafadhali jipime katika Ujuzi na Competence (1-5).';
-            }
-            if (!data.trainingRating) {
-                return 'Tafadhali jipime katika Mafunzo na Maendeleo (1-5).';
-            }
-            // Check signature is not empty
+            for (let f of required)
+                if (!data[f]) return `Tafadhali jaza sehemu ya ${f.replace('worker','').toLowerCase()}.`;
+            if (data.workerProfession === 'daktari' && !data.doctorSpecialty)
+                return 'Tafadhali chagua Utaalamu wa Daktari.';
+            if (!data.inchargePhone) return 'Namba ya Mganga Mfawidhi haijapatikana.';
+            if (!data.skillRating) return 'Tafadhali jipime katika Ujuzi na Competence (1-5).';
+            if (!data.trainingRating) return 'Tafadhali jipime katika Mafunzo na Maendeleo (1-5).';
             const sigData = canvas.toDataURL('image/png');
-            if (sigData === 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==') {
+            if (sigData === 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==')
                 return 'Tafadhali chora sahihi yako.';
-            }
             return null;
         }
 
-        function showMessage(text, type) {
-            const box = document.getElementById('messageBox');
-            box.textContent = text;
-            box.className = 'message-box ' + type;
-        }
+        function showMessage(t, type) { const box = document.getElementById('messageBox');
+            box.textContent = t;
+            box.className = 'message-box ' + type; }
 
-        function clearMessage() {
-            const box = document.getElementById('messageBox');
+        function clearMessage() { const box = document.getElementById('messageBox');
             box.className = 'message-box';
-            box.textContent = '';
-        }
+            box.textContent = ''; }
 
-        // ============================================
-        // 7. SAVE AND SEND
-        // ============================================
+        // ============================================================
+        //  7. SAVE & SEND
+        // ============================================================
         async function saveAndSend() {
             clearMessage();
             const data = getFormData();
             const error = validateForm(data);
-            if (error) {
-                showMessage(error, 'error');
-                return;
-            }
-
+            if (error) { showMessage(error, 'error'); return; }
             try {
                 await saveToJSONBin(data);
-                showMessage('✅ Data imehifadhiwa kikamilifu! Sasa inatuma WhatsApp...', 'success');
+                showMessage('✅ Data imehifadhiwa! Sasa inatuma WhatsApp...', 'success');
                 await sendWhatsApp(data);
-            } catch (err) {
-                showMessage('❌ Hitilafu: ' + err.message, 'error');
-            }
+            } catch (e) { showMessage('❌ Hitilafu: ' + e.message, 'error'); }
         }
 
-        // ============================================
-        // 8. WHATSAPP
-        // ============================================
         async function sendWhatsApp(data) {
-            if (!data) {
-                data = getFormData();
-                const error = validateForm(data);
-                if (error) {
-                    showMessage(error, 'error');
-                    return;
-                }
-            }
-
+            if (!data) { data = getFormData();
+                const err = validateForm(data); if (err) { showMessage(err, 'error'); return; } }
             let phone = data.inchargePhone.replace(/[\s\-\(\)]/g, '');
             if (!phone.startsWith('255') && phone.startsWith('0')) phone = '255' + phone.substring(1);
             else if (!phone.startsWith('255') && !phone.startsWith('+')) phone = '255' + phone;
             if (phone.startsWith('+')) phone = phone.substring(1);
-
             const generalDutiesStr = data.generalDuties.length ? data.generalDuties.join(', ') : 'Hajachagua';
             const specialDutiesStr = data.specialDuties.length ? data.specialDuties.join(', ') : 'Hajachagua';
             const specialtyInfo = data.workerProfession === 'daktari' && data.doctorSpecialty ? ` (${data.doctorSpecialty})` : '';
-
-            const msg = `*TATHMINI YA MTENDAKAZI - MTWARA 2026*
-            
-👤 Jina: ${data.workerName}
-📞 Simu: ${data.workerPhone}
-📧 Barua Pepe: ${data.workerEmail || 'Hajajazwa'}
-🏢 Idara: ${data.workerDepartment}
-👔 Cheo: ${data.workerTitle}
-🎓 Taaluma: ${data.workerProfession}${specialtyInfo}
-
-*Majukumu ya Kawaida:* ${generalDutiesStr}
-*Majukumu Maalumu:* ${specialDutiesStr}
-*Majukumu Mengine:* ${data.additionalDuties || 'Hakuna'}
-
-*Malengo:* ${data.goals || 'Hajajazwa'}
-
-*Ujuzi na Competence:* ${data.skillRating || 'Hajajazwa'}/5
-Maelezo: ${data.skillsDescription || 'Hakuna'}
-
-*Mafunzo na Maendeleo:* ${data.trainingRating || 'Hajajazwa'}/5
-Maelezo: ${data.trainingsDescription || 'Hakuna'}
-
-*Maoni:* ${data.feedback || 'Hajajazwa'}
-
-📅 Tarehe: ${data.signatureDate || 'Hajajazwa'}
-✍️ Sahihi: ${data.signatureName || 'Hajajazwa'}
-
-*Imetumwa kwa WhatsApp na mfumo wa Tathmini.*`;
-
-            const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
-            window.open(url, '_blank');
+            const msg =
+                `*TATHMINI YA MTENDAKAZI - MTWARA 2026*\n\n👤 Jina: ${data.workerName}\n📞 Simu: ${data.workerPhone}\n📧 Barua Pepe: ${data.workerEmail || 'Hajajazwa'}\n🏢 Idara: ${data.workerDepartment}\n👔 Cheo: ${data.workerTitle}\n🎓 Taaluma: ${data.workerProfession}${specialtyInfo}\n\n*Majukumu ya Kawaida:* ${generalDutiesStr}\n*Majukumu Maalumu:* ${specialDutiesStr}\n*Majukumu Mengine:* ${data.additionalDuties || 'Hakuna'}\n\n*Malengo:* ${data.goals || 'Hajajazwa'}\n\n*Ujuzi na Competence:* ${data.skillRating}/5\nMaelezo: ${data.skillsDescription || 'Hakuna'}\n\n*Mafunzo na Maendeleo:* ${data.trainingRating}/5\nMaelezo: ${data.trainingsDescription || 'Hakuna'}\n\n*Maoni:* ${data.feedback || 'Hajajazwa'}\n\n📅 Tarehe: ${data.signatureDate || 'Hajajazwa'}\n✍️ Sahihi: ${data.signatureName || 'Hajajazwa'}\n\n*Imetumwa kwa WhatsApp na mfumo wa Tathmini.*`;
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
             showMessage('📱 WhatsApp imefunguliwa. Bonyeza SEND.', 'success');
         }
 
-        // ============================================
-        // 9. RESET
-        // ============================================
+        // ============================================================
+        //  8. RESET
+        // ============================================================
         function resetForm() {
             if (confirm('Una hakika unataka kuweka upya fomu yote?')) {
                 document.querySelectorAll('input, textarea, select').forEach(el => {
@@ -980,17 +937,19 @@ Maelezo: ${data.trainingsDescription || 'Hakuna'}
                 clearSignature();
                 clearMessage();
                 document.getElementById('signatureDate').valueAsDate = new Date();
-                document.getElementById('specialDutiesContainer').innerHTML = '<p style="color:#6a8aaa; font-style:italic; grid-column:1/-1;">Chagua taaluma kuona majukumu maalumu.</p>';
+                document.getElementById('specialDutiesContainer').innerHTML =
+                    '<p style="color:#6a8aaa; font-style:italic; grid-column:1/-1;">Chagua taaluma kuona majukumu maalumu.</p>';
                 doctorSpecialtyContainer.classList.add('hidden');
                 doctorSpecialtySelect.value = '';
                 doctorSpecialtySelect.removeAttribute('required');
                 photoDataURL = '';
-                photoPreview.src = 'https://via.placeholder.com/100x100?text=No+Photo';
+                photoPreview.src = 'https://via.placeholder.com/80x80?text=No+Photo';
+                document.getElementById('headerPhoto').src = 'https://via.placeholder.com/50x50?text=User';
                 photoInput.value = '';
             }
         }
 
-        console.log('✅ worker.html loaded with image and signature compression.');
+        console.log('✅ worker.html with SDA logo and user photo.');
     </script>
 </body>
 </html>
