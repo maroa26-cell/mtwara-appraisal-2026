@@ -6,49 +6,250 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Msimamizi - Tathmini</title>
     <style>
-        /* Same styles as worker (nimefupisha) */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #eef4fa; padding: 20px; }
-        .container { max-width: 1000px; margin: 0 auto; background: #ffffff; border-radius: 32px; box-shadow: 0 20px 60px rgba(0, 20, 40, 0.12); padding: 30px 35px; }
-        .header { display: flex; align-items: center; gap: 20px; border-bottom: 3px solid #1a73e8; padding-bottom: 16px; margin-bottom: 28px; flex-wrap: wrap; }
-        .header img { max-height: 70px; width: auto; border-radius: 12px; }
-        .header h1 { color: #0b2b4a; font-size: 28px; margin: 0; flex: 1; }
-        .header h1 small { font-size: 16px; font-weight: 400; color: #4a6a85; display: block; }
-        .section { background: #f8fafe; border-radius: 20px; padding: 22px 26px; margin-bottom: 24px; border: 1px solid #e4ecf5; }
-        .section-title { font-size: 20px; font-weight: 700; color: #0b2b4a; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
-        .section-title span { background: #1a73e8; color: white; width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; margin-bottom: 8px; }
-        .form-group { margin-bottom: 16px; }
-        label { display: block; font-weight: 600; color: #1a3a5a; margin-bottom: 5px; font-size: 14px; }
-        input, textarea { width: 100%; padding: 10px 14px; border: 2px solid #dce5ef; border-radius: 12px; font-size: 14px; background: white; transition: 0.2s; }
-        input:focus, textarea:focus { border-color: #1a73e8; outline: none; box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.12); }
-        textarea { resize: vertical; min-height: 60px; }
-        .full-width { grid-column: 1 / -1; }
-        .signature-area { border: 2px dashed #b0c7db; border-radius: 16px; padding: 20px; text-align: center; background: #f3f8ff; margin-top: 10px; }
-        #signatureCanvas { border: 1px solid #ccc; border-radius: 12px; background: white; touch-action: none; width: 100%; max-width: 450px; height: 150px; }
-        .signature-actions { display: flex; gap: 10px; justify-content: center; margin: 10px 0; flex-wrap: wrap; }
-        .signature-actions button { padding: 6px 20px; border: none; border-radius: 30px; font-size: 13px; font-weight: 600; cursor: pointer; background: #e0e7ef; transition: 0.2s; }
-        .signature-actions button:hover { background: #cbd5e1; }
-        .btn-group { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; }
-        .btn { padding: 12px 30px; border: none; border-radius: 40px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; flex: 1 0 auto; }
-        .btn-primary { background: linear-gradient(135deg, #1a73e8, #0d47a1); color: white; box-shadow: 0 6px 20px rgba(26, 115, 232, 0.3); }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(26, 115, 232, 0.4); }
-        .btn-success { background: linear-gradient(135deg, #0f9d58, #0b7a45); color: white; box-shadow: 0 6px 20px rgba(15, 157, 88, 0.3); }
-        .btn-success:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(15, 157, 88, 0.4); }
-        .btn-warning { background: linear-gradient(135deg, #fbbc04, #e5ac00); color: #1e1e1e; box-shadow: 0 6px 20px rgba(251, 188, 4, 0.3); }
-        .btn-warning:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(251, 188, 4, 0.4); }
-        .btn-outline { background: transparent; border: 2px solid #1a73e8; color: #1a73e8; }
-        .btn-outline:hover { background: #1a73e8; color: white; transform: translateY(-3px); }
-        .message-box { padding: 14px 20px; border-radius: 14px; margin: 15px 0; display: none; font-weight: 500; }
-        .message-box.success { background: #e6f7e6; color: #0b5e2e; border-left: 6px solid #0f9d58; display: block; }
-        .message-box.error { background: #fde8e8; color: #a12727; border-left: 6px solid #d93025; display: block; }
-        .incharge-field { background: #fff8e7; padding: 16px 20px; border-radius: 14px; border-left: 6px solid #fbbc04; margin-bottom: 24px; }
+        /* Same styles as worker - omitted for brevity, but include full styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #eef4fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.12);
+            padding: 30px 35px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 3px solid #1a73e8;
+            padding-bottom: 16px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+        .header img {
+            max-height: 70px;
+            width: auto;
+            border-radius: 12px;
+        }
+        .header h1 {
+            color: #0b2b4a;
+            font-size: 28px;
+            margin: 0;
+            flex: 1;
+        }
+        .header h1 small {
+            font-size: 16px;
+            font-weight: 400;
+            color: #4a6a85;
+            display: block;
+        }
+        .section {
+            background: #f8fafe;
+            border-radius: 20px;
+            padding: 22px 26px;
+            margin-bottom: 24px;
+            border: 1px solid #e4ecf5;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0b2b4a;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title span {
+            background: #1a73e8;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px 24px;
+            margin-bottom: 8px;
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            color: #1a3a5a;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #dce5ef;
+            border-radius: 12px;
+            font-size: 14px;
+            background: white;
+            transition: 0.2s;
+        }
+        input:focus,
+        textarea:focus {
+            border-color: #1a73e8;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.12);
+        }
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        .signature-area {
+            border: 2px dashed #b0c7db;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            background: #f3f8ff;
+            margin-top: 10px;
+        }
+        #signatureCanvas {
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            background: white;
+            touch-action: none;
+            width: 100%;
+            max-width: 450px;
+            height: 150px;
+        }
+        .signature-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+        .signature-actions button {
+            padding: 6px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            background: #e0e7ef;
+            transition: 0.2s;
+        }
+        .signature-actions button:hover {
+            background: #cbd5e1;
+        }
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            flex: 1 0 auto;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #1a73e8, #0d47a1);
+            color: white;
+            box-shadow: 0 6px 20px rgba(26, 115, 232, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(26, 115, 232, 0.4);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #0f9d58, #0b7a45);
+            color: white;
+            box-shadow: 0 6px 20px rgba(15, 157, 88, 0.3);
+        }
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(15, 157, 88, 0.4);
+        }
+        .btn-warning {
+            background: linear-gradient(135deg, #fbbc04, #e5ac00);
+            color: #1e1e1e;
+            box-shadow: 0 6px 20px rgba(251, 188, 4, 0.3);
+        }
+        .btn-warning:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(251, 188, 4, 0.4);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #1a73e8;
+            color: #1a73e8;
+        }
+        .btn-outline:hover {
+            background: #1a73e8;
+            color: white;
+            transform: translateY(-3px);
+        }
+        .message-box {
+            padding: 14px 20px;
+            border-radius: 14px;
+            margin: 15px 0;
+            display: none;
+            font-weight: 500;
+        }
+        .message-box.success {
+            background: #e6f7e6;
+            color: #0b5e2e;
+            border-left: 6px solid #0f9d58;
+            display: block;
+        }
+        .message-box.error {
+            background: #fde8e8;
+            color: #a12727;
+            border-left: 6px solid #d93025;
+            display: block;
+        }
+        .incharge-field {
+            background: #fff8e7;
+            padding: 16px 20px;
+            border-radius: 14px;
+            border-left: 6px solid #fbbc04;
+            margin-bottom: 24px;
+        }
         @media (max-width: 640px) {
-            .container { padding: 16px; }
-            .form-row { grid-template-columns: 1fr; }
-            .btn-group { flex-direction: column; }
-            .btn { flex: 1; }
-            .header { flex-direction: column; align-items: flex-start; }
+            .container {
+                padding: 16px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .btn-group {
+                flex-direction: column;
+            }
+            .btn {
+                flex: 1;
+            }
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
@@ -123,7 +324,7 @@
     </div>
 
     <script>
-        // Same logic as worker but for supervisor
+        // Same as worker but with supervisor fields
         (function init() {
             const params = new URLSearchParams(window.location.search);
             const userParam = params.get('user');
@@ -147,17 +348,17 @@
         let ctx = canvas.getContext('2d');
         let isDrawing = false;
 
-        function resizeCanvas() {
+        function resizeSignature() {
             const rect = canvas.getBoundingClientRect();
-            canvas.width = rect.width || 450;
-            canvas.height = 150;
+            canvas.width = Math.min(rect.width || 400, 400);
+            canvas.height = 120;
             ctx.lineWidth = 2.5;
             ctx.strokeStyle = '#1a3a5a';
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
         }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
+        resizeSignature();
+        window.addEventListener('resize', resizeSignature);
 
         function getPos(e) {
             const rect = canvas.getBoundingClientRect();
@@ -169,14 +370,35 @@
         canvas.addEventListener('mousemove', draw);
         canvas.addEventListener('mouseup', stopDraw);
         canvas.addEventListener('mouseleave', stopDraw);
-        canvas.addEventListener('touchstart', function(e) { e.preventDefault(); startDraw(e); });
-        canvas.addEventListener('touchmove', function(e) { e.preventDefault(); draw(e); });
-        canvas.addEventListener('touchend', function(e) { e.preventDefault(); stopDraw(); });
+        canvas.addEventListener('touchstart', function(e) { e.preventDefault();
+            startDraw(e); });
+        canvas.addEventListener('touchmove', function(e) { e.preventDefault();
+            draw(e); });
+        canvas.addEventListener('touchend', function(e) { e.preventDefault();
+            stopDraw(); });
 
-        function startDraw(e) { isDrawing = true; const pos = getPos(e); ctx.beginPath(); ctx.moveTo(pos.x, pos.y); }
-        function draw(e) { if (!isDrawing) return; const pos = getPos(e); ctx.lineTo(pos.x, pos.y); ctx.stroke(); }
+        function startDraw(e) { isDrawing = true;
+            const pos = getPos(e);
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y); }
+
+        function draw(e) { if (!isDrawing) return;
+            const pos = getPos(e);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke(); }
+
         function stopDraw() { isDrawing = false; }
+
         function clearSignature() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
+
+        function getSignatureDataURL() {
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = 300;
+            tempCanvas.height = 100;
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCtx.drawImage(canvas, 0, 0, 300, 100);
+            return tempCanvas.toDataURL('image/jpeg', 0.5);
+        }
 
         const JSONBIN_BIN_ID = '6a4b0bc9da38895dfe32cc08';
         const JSONBIN_MASTER_KEY = "$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDot5L9hRGRQfa21/Mw/B0UcS";
@@ -236,7 +458,7 @@
                 specificDuties: document.getElementById('specificDuties').value.trim(),
                 signatureName: document.getElementById('signatureName').value.trim(),
                 signatureDate: document.getElementById('signatureDate').value,
-                signatureImage: canvas.toDataURL('image/png'),
+                signatureImage: getSignatureDataURL(),
                 inchargePhone: document.getElementById('inchargePhone').value.trim(),
                 submittedAt: new Date().toISOString(),
                 role: 'supervisor'
@@ -245,15 +467,22 @@
 
         function validateForm(data) {
             const required = ['supervisorName', 'supervisorPhone', 'supervisorDepartment', 'supervisorTitle', 'workerName'];
-            for (let f of required) if (!data[f]) return `Tafadhali jaza sehemu ya ${f.replace('supervisor','').replace('worker','')}.`;
+            for (let f of required)
+                if (!data[f]) return `Tafadhali jaza sehemu ya ${f.replace('supervisor','').replace('worker','')}.`;
             if (!data.inchargePhone) return 'Tafadhali weka namba ya Mganga Mfawidhi.';
             const sigData = canvas.toDataURL('image/png');
-            if (sigData === 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==') return 'Tafadhali chora sahihi yako.';
+            if (sigData === 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==')
+                return 'Tafadhali chora sahihi yako.';
             return null;
         }
 
-        function showMessage(t, type) { const box = document.getElementById('messageBox'); box.textContent = t; box.className = 'message-box ' + type; }
-        function clearMessage() { const box = document.getElementById('messageBox'); box.className = 'message-box'; box.textContent = ''; }
+        function showMessage(t, type) { const box = document.getElementById('messageBox');
+            box.textContent = t;
+            box.className = 'message-box ' + type; }
+
+        function clearMessage() { const box = document.getElementById('messageBox');
+            box.className = 'message-box';
+            box.textContent = ''; }
 
         async function saveAndSend() {
             clearMessage();
@@ -268,12 +497,14 @@
         }
 
         async function sendWhatsApp(data) {
-            if (!data) { data = getFormData(); const err = validateForm(data); if (err) { showMessage(err, 'error'); return; } }
+            if (!data) { data = getFormData();
+                const err = validateForm(data); if (err) { showMessage(err, 'error'); return; } }
             let phone = data.inchargePhone.replace(/[\s\-\(\)]/g, '');
             if (!phone.startsWith('255') && phone.startsWith('0')) phone = '255' + phone.substring(1);
             else if (!phone.startsWith('255') && !phone.startsWith('+')) phone = '255' + phone;
             if (phone.startsWith('+')) phone = phone.substring(1);
-            const msg = `*TATHMINI YA MSIMAMIZI - MTWARA 2026*\n\n👤 Msimamizi: ${data.supervisorName}\n📞 Simu: ${data.supervisorPhone}\n📧 Barua Pepe: ${data.supervisorEmail || 'Hajajazwa'}\n🏢 Idara: ${data.supervisorDepartment}\n👔 Cheo: ${data.supervisorTitle}\n\n*Mtendakazi:* ${data.workerName}\n\n*Nguvu:* ${data.strengths || 'Hajajazwa'}\n*Kuboresha:* ${data.improvements || 'Hajajazwa'}\n*Mapendekezo:* ${data.recommendations || 'Hajajazwa'}\n*Maoni Jumla:* ${data.generalFeedback || 'Hajajazwa'}\n\n*Majukumu Jumla:* ${data.generalDuties || 'Hajajazwa'}\n*Majukumu Maalumu:* ${data.specificDuties || 'Hajajazwa'}\n\n📅 Tarehe: ${data.signatureDate || 'Hajajazwa'}\n✍️ Sahihi: ${data.signatureName || 'Hajajazwa'}\n\n*Imetumwa na mfumo wa Tathmini.*`;
+            const msg =
+                `*TATHMINI YA MSIMAMIZI - MTWARA 2026*\n\n👤 Msimamizi: ${data.supervisorName}\n📞 Simu: ${data.supervisorPhone}\n📧 Barua Pepe: ${data.supervisorEmail || 'Hajajazwa'}\n🏢 Idara: ${data.supervisorDepartment}\n👔 Cheo: ${data.supervisorTitle}\n\n*Mtendakazi:* ${data.workerName}\n\n*Nguvu:* ${data.strengths || 'Hajajazwa'}\n*Kuboresha:* ${data.improvements || 'Hajajazwa'}\n*Mapendekezo:* ${data.recommendations || 'Hajajazwa'}\n*Maoni Jumla:* ${data.generalFeedback || 'Hajajazwa'}\n\n*Majukumu Jumla:* ${data.generalDuties || 'Hajajazwa'}\n*Majukumu Maalumu:* ${data.specificDuties || 'Hajajazwa'}\n\n📅 Tarehe: ${data.signatureDate || 'Hajajazwa'}\n✍️ Sahihi: ${data.signatureName || 'Hajajazwa'}\n\n*Imetumwa na mfumo wa Tathmini.*`;
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
             showMessage('📱 WhatsApp imefunguliwa. Bonyeza SEND.', 'success');
         }
@@ -300,7 +531,7 @@
                 }
             }
         }
-        console.log('✅ supervisor.html loaded with new Master Key.');
+        console.log('✅ supervisor.html loaded with signature compression.');
     </script>
 </body>
 </html>
