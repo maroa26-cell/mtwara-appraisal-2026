@@ -24,6 +24,14 @@
             max-width: 480px;
             width: 100%;
         }
+        .logo {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .logo img {
+            max-height: 70px;
+            width: auto;
+        }
         h1 {
             text-align: center;
             color: #0b3b5c;
@@ -36,9 +44,7 @@
             margin-bottom: 30px;
             font-size: 14px;
         }
-        .form-group {
-            margin-bottom: 20px;
-        }
+        .form-group { margin-bottom: 20px; }
         label {
             display: block;
             font-weight: 600;
@@ -79,26 +85,12 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(26,115,232,0.3);
         }
-        .role-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 40px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-top: 4px;
-        }
-        .role-worker { background: #e3f2fd; color: #0d47a1; }
-        .role-supervisor { background: #fff3e0; color: #bf360c; }
-        .role-incharge { background: #e8f5e9; color: #1b5e20; }
         .extra-field {
             background: #f3f8ff;
             padding: 15px 18px;
             border-radius: 16px;
             border-left: 5px solid #1a73e8;
             margin: 10px 0;
-        }
-        .extra-field label {
-            color: #0b3b5c;
         }
         .error-msg {
             color: #d32f2f;
@@ -121,170 +113,144 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🏥 Tathmini ya Utendaji</h1>
-        <p class="subtitle">Mwaka 2026 – Mkoa wa Mtwara</p>
-
-        <form id="loginForm">
-            <!-- Jina la Mtumiaji -->
-            <div class="form-group">
-                <label>Jina lako kamili</label>
-                <input type="text" id="fullName" placeholder="Mfano: Agatha Tonya" required />
-            </div>
-
-            <!-- Namba ya Simu au Barua Pepe -->
-            <div class="form-group">
-                <label>Namba ya Simu au Barua Pepe</label>
-                <input type="text" id="userCredential" placeholder="0712 345 678 au email@mfano.com" required />
-            </div>
-
-            <!-- Jukumu (Role) -->
-            <div class="form-group">
-                <label>Jukumu lako</label>
-                <select id="roleSelect" required>
-                    <option value="">-- Chagua --</option>
-                    <option value="worker">Mtendakazi</option>
-                    <option value="supervisor">Msimamizi</option>
-                    <option value="incharge">Mganga Mfawidhi</option>
-                </select>
-            </div>
-
-            <!-- Sehemu ya ziada: kwa Worker/Supervisor - weka namba ya Mganga Mfawidhi -->
-            <div id="inchargeNumberField" class="extra-field" style="display:none;">
-                <label>📱 Namba ya Mganga Mfawidhi (mpokeaji wa ripoti)</label>
-                <input type="text" id="inchargePhone" placeholder="0712 345 678" />
-                <small style="color:#555; font-size:12px;">Hii ndio namba ambayo ripoti yako itatumwa kwa WhatsApp.</small>
-            </div>
-
-            <!-- Sehemu ya ziada: kwa Incharge - weka namba yake mwenyewe (inaweza kubadilishwa) -->
-            <div id="inchargeSelfField" class="extra-field" style="display:none;">
-                <label>📱 Namba yako ya simu (Mganga Mfawidhi)</label>
-                <input type="text" id="inchargeSelfPhone" placeholder="0712 345 678" />
-                <small style="color:#555; font-size:12px;">Namba hii itatumiwa kama mpokeaji wa tathmini zote.</small>
-            </div>
-
-            <button type="submit" class="btn-primary">🔑 Ingia</button>
-
-            <div id="errorMsg" class="error-msg"></div>
-            <div id="successMsg" class="success-msg"></div>
-        </form>
-
-        <div class="footer-note">
-            Mfumo wa Tathmini ya Watendaji wa Afya – Mtwara 2026
-        </div>
+<div class="container">
+    <div class="logo">
+        <!-- Badilisha src na URL ya logo yako -->
+        <img src="https://via.placeholder.com/150x70?text=MTWARA+SDA+DISPENSARY" alt="Mtwara SDA Dispensary" />
     </div>
+    <h1>🏥 Tathmini ya Utendaji</h1>
+    <p class="subtitle">Mwaka 2026 – Mkoa wa Mtwara</p>
 
-    <script>
-        (function() {
-            const roleSelect = document.getElementById('roleSelect');
-            const inchargeNumberField = document.getElementById('inchargeNumberField');
-            const inchargeSelfField = document.getElementById('inchargeSelfField');
-            const inchargePhone = document.getElementById('inchargePhone');
-            const inchargeSelfPhone = document.getElementById('inchargeSelfPhone');
+    <form id="loginForm">
+        <div class="form-group">
+            <label>Jina lako kamili</label>
+            <input type="text" id="fullName" placeholder="Mfano: Agatha Tonya" required />
+        </div>
+        <div class="form-group">
+            <label>Namba ya Simu au Barua Pepe</label>
+            <input type="text" id="userCredential" placeholder="0712 345 678 au email@mfano.com" required />
+        </div>
+        <div class="form-group">
+            <label>Jukumu lako</label>
+            <select id="roleSelect" required>
+                <option value="">-- Chagua --</option>
+                <option value="worker">Mtendakazi</option>
+                <option value="supervisor">Msimamizi</option>
+                <option value="incharge">Mganga Mfawidhi</option>
+            </select>
+        </div>
+        <div id="inchargeNumberField" class="extra-field" style="display:none;">
+            <label>📱 Namba ya Mganga Mfawidhi (mpokeaji wa ripoti)</label>
+            <input type="text" id="inchargePhone" placeholder="0712 345 678" />
+            <small style="color:#555; font-size:12px;">Hii ndio namba ambayo ripoti yako itatumwa kwa WhatsApp.</small>
+        </div>
+        <div id="inchargeSelfField" class="extra-field" style="display:none;">
+            <label>📱 Namba yako ya simu (Mganga Mfawidhi)</label>
+            <input type="text" id="inchargeSelfPhone" placeholder="0712 345 678" />
+            <small style="color:#555; font-size:12px;">Namba hii itatumiwa kama mpokeaji wa tathmini zote.</small>
+        </div>
+        <button type="submit" class="btn-primary">🔑 Ingia</button>
+        <div id="errorMsg" class="error-msg"></div>
+        <div id="successMsg" class="success-msg"></div>
+    </form>
+    <div class="footer-note">
+        Mfumo wa Tathmini ya Watendaji wa Afya – Mtwara 2026
+    </div>
+</div>
 
-            // Show/hide extra fields based on role
-            roleSelect.addEventListener('change', function() {
-                const role = this.value;
-                inchargeNumberField.style.display = (role === 'worker' || role === 'supervisor') ? 'block' : 'none';
-                inchargeSelfField.style.display = (role === 'incharge') ? 'block' : 'none';
-                // Clear validation states
-                document.getElementById('errorMsg').style.display = 'none';
-                document.getElementById('successMsg').style.display = 'none';
-            });
+<script>
+    (function() {
+        const roleSelect = document.getElementById('roleSelect');
+        const inchargeNumberField = document.getElementById('inchargeNumberField');
+        const inchargeSelfField = document.getElementById('inchargeSelfField');
+        const inchargePhone = document.getElementById('inchargePhone');
+        const inchargeSelfPhone = document.getElementById('inchargeSelfPhone');
 
-            // Handle login
-            document.getElementById('loginForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const fullName = document.getElementById('fullName').value.trim();
-                const credential = document.getElementById('userCredential').value.trim();
-                const role = roleSelect.value;
+        roleSelect.addEventListener('change', function() {
+            const role = this.value;
+            inchargeNumberField.style.display = (role === 'worker' || role === 'supervisor') ? 'block' : 'none';
+            inchargeSelfField.style.display = (role === 'incharge') ? 'block' : 'none';
+            document.getElementById('errorMsg').style.display = 'none';
+            document.getElementById('successMsg').style.display = 'none';
+        });
 
-                // Validation
-                if (!fullName || !credential || !role) {
-                    showError('Tafadhali jaza sehemu zote muhimu.');
-                    return;
-                }
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fullName = document.getElementById('fullName').value.trim();
+            const credential = document.getElementById('userCredential').value.trim();
+            const role = roleSelect.value;
 
-                // For worker/supervisor, incharge phone is required
-                if ((role === 'worker' || role === 'supervisor') && !inchargePhone.value.trim()) {
-                    showError('Tafadhali weka namba ya Mganga Mfawidhi.');
-                    return;
-                }
-
-                // For incharge, self phone is required
-                if (role === 'incharge' && !inchargeSelfPhone.value.trim()) {
-                    showError('Tafadhali weka namba yako ya simu.');
-                    return;
-                }
-
-                // Build user object
-                const user = {
-                    username: fullName,
-                    role: role,
-                    credential: credential,
-                    // store incharge phone if applicable
-                    inchargePhone: (role === 'worker' || role === 'supervisor') ? inchargePhone.value.trim() : null,
-                    inchargeSelfPhone: (role === 'incharge') ? inchargeSelfPhone.value.trim() : null
-                };
-
-                // For incharge, if self phone set, also treat as inchargePhone for receiving
-                if (role === 'incharge') {
-                    user.inchargePhone = inchargeSelfPhone.value.trim();
-                }
-
-                // Save to localStorage for later use (optional)
-                localStorage.setItem('appraisalUser', JSON.stringify(user));
-
-                // Redirect to appropriate page with user param
-                const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '/');
-                let targetPage = '';
-                if (role === 'worker') targetPage = 'worker.html';
-                else if (role === 'supervisor') targetPage = 'supervisor.html';
-                else if (role === 'incharge') targetPage = 'incharge.html';
-
-                const param = encodeURIComponent(JSON.stringify(user));
-                window.location.href = baseUrl + targetPage + '?user=' + param;
-
-                showSuccess('Ingizo lako limekubaliwa. Unaelekezwa...');
-            });
-
-            function showError(msg) {
-                const el = document.getElementById('errorMsg');
-                el.textContent = msg;
-                el.style.display = 'block';
-                document.getElementById('successMsg').style.display = 'none';
+            if (!fullName || !credential || !role) {
+                showError('Tafadhali jaza sehemu zote muhimu.');
+                return;
+            }
+            if ((role === 'worker' || role === 'supervisor') && !inchargePhone.value.trim()) {
+                showError('Tafadhali weka namba ya Mganga Mfawidhi.');
+                return;
+            }
+            if (role === 'incharge' && !inchargeSelfPhone.value.trim()) {
+                showError('Tafadhali weka namba yako ya simu.');
+                return;
             }
 
-            function showSuccess(msg) {
-                const el = document.getElementById('successMsg');
-                el.textContent = msg;
-                el.style.display = 'block';
-                document.getElementById('errorMsg').style.display = 'none';
+            const user = {
+                username: fullName,
+                role: role,
+                credential: credential,
+                inchargePhone: (role === 'worker' || role === 'supervisor') ? inchargePhone.value.trim() : null,
+                inchargeSelfPhone: (role === 'incharge') ? inchargeSelfPhone.value.trim() : null
+            };
+            if (role === 'incharge') {
+                user.inchargePhone = inchargeSelfPhone.value.trim();
             }
+            localStorage.setItem('appraisalUser', JSON.stringify(user));
 
-            // Check if URL has user param (for testing, can pre-fill)
-            const params = new URLSearchParams(window.location.search);
-            const userParam = params.get('user');
-            if (userParam) {
-                try {
-                    const user = JSON.parse(decodeURIComponent(userParam));
-                    if (user.username) document.getElementById('fullName').value = user.username;
-                    if (user.credential) document.getElementById('userCredential').value = user.credential;
-                    if (user.role) {
-                        roleSelect.value = user.role;
-                        roleSelect.dispatchEvent(new Event('change'));
-                        if (user.inchargePhone) {
-                            if (user.role === 'worker' || user.role === 'supervisor') {
-                                document.getElementById('inchargePhone').value = user.inchargePhone;
-                            }
-                            if (user.role === 'incharge') {
-                                document.getElementById('inchargeSelfPhone').value = user.inchargePhone;
-                            }
+            const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '/');
+            let targetPage = '';
+            if (role === 'worker') targetPage = 'worker.html';
+            else if (role === 'supervisor') targetPage = 'supervisor.html';
+            else if (role === 'incharge') targetPage = 'incharge.html';
+
+            const param = encodeURIComponent(JSON.stringify(user));
+            window.location.href = baseUrl + targetPage + '?user=' + param;
+            showSuccess('Ingizo limekubaliwa. Unaelekezwa...');
+        });
+
+        function showError(msg) {
+            const el = document.getElementById('errorMsg');
+            el.textContent = msg;
+            el.style.display = 'block';
+            document.getElementById('successMsg').style.display = 'none';
+        }
+        function showSuccess(msg) {
+            const el = document.getElementById('successMsg');
+            el.textContent = msg;
+            el.style.display = 'block';
+            document.getElementById('errorMsg').style.display = 'none';
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        const userParam = params.get('user');
+        if (userParam) {
+            try {
+                const user = JSON.parse(decodeURIComponent(userParam));
+                if (user.username) document.getElementById('fullName').value = user.username;
+                if (user.credential) document.getElementById('userCredential').value = user.credential;
+                if (user.role) {
+                    roleSelect.value = user.role;
+                    roleSelect.dispatchEvent(new Event('change'));
+                    if (user.inchargePhone) {
+                        if (user.role === 'worker' || user.role === 'supervisor') {
+                            document.getElementById('inchargePhone').value = user.inchargePhone;
+                        }
+                        if (user.role === 'incharge') {
+                            document.getElementById('inchargeSelfPhone').value = user.inchargePhone;
                         }
                     }
-                } catch(e) {}
-            }
-        })();
-    </script>
+                }
+            } catch(e) {}
+        }
+    })();
+</script>
 </body>
 </html>
