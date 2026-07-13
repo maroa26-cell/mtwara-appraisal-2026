@@ -12,27 +12,37 @@
             padding: 20px;
         }
         .container {
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto;
             background: white;
             border-radius: 24px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.08);
             padding: 30px 35px;
         }
-        h1 {
-            color: #0b3b5c;
-            font-size: 28px;
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
             border-bottom: 3px solid #1a73e8;
             padding-bottom: 12px;
             margin-bottom: 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-wrap: wrap;
         }
-        h1 small {
+        .header img {
+            max-height: 60px;
+            width: auto;
+        }
+        .header h1 {
+            color: #0b3b5c;
+            font-size: 28px;
+            margin: 0;
+            flex: 1;
+        }
+        .header h1 small {
             font-size: 16px;
             font-weight: 400;
             color: #555;
+            display: block;
         }
         .section {
             background: #f9fcff;
@@ -67,9 +77,7 @@
             gap: 16px 20px;
             margin-bottom: 12px;
         }
-        .form-group {
-            margin-bottom: 16px;
-        }
+        .form-group { margin-bottom: 16px; }
         label {
             display: block;
             font-weight: 600;
@@ -91,74 +99,55 @@
             outline: none;
             box-shadow: 0 0 0 3px rgba(26,115,232,0.1);
         }
-        textarea {
-            resize: vertical;
-            min-height: 70px;
-        }
+        textarea { resize: vertical; min-height: 60px; }
         .full-width { grid-column: 1 / -1; }
-        .btn-group {
+
+        /* Checkbox groups */
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 12px;
+            margin-top: 4px;
+        }
+        .checkbox-group label {
             display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-        .btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 40px;
-            font-size: 16px;
-            font-weight: 700;
+            align-items: center;
+            gap: 8px;
+            font-weight: 400;
+            font-size: 14px;
+            color: #1e3a5f;
             cursor: pointer;
-            transition: 0.3s;
-            flex: 1 0 auto;
         }
-        .btn-primary {
-            background: #1a73e8;
-            color: white;
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #1a73e8;
+            cursor: pointer;
         }
-        .btn-primary:hover {
-            background: #1557b0;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(26,115,232,0.3);
+
+        /* Rating radio buttons (1-5) */
+        .rating-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 4px;
         }
-        .btn-success {
-            background: #0f9d58;
-            color: white;
+        .rating-group label {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 400;
+            font-size: 14px;
+            color: #1e3a5f;
+            cursor: pointer;
         }
-        .btn-success:hover {
-            background: #0b7a45;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(15,157,88,0.3);
+        .rating-group input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #1a73e8;
+            cursor: pointer;
         }
-        .btn-outline {
-            background: transparent;
-            border: 2px solid #1a73e8;
-            color: #1a73e8;
-        }
-        .btn-outline:hover {
-            background: #1a73e8;
-            color: white;
-        }
-        .btn-warning {
-            background: #fbbc04;
-            color: #1e1e1e;
-        }
-        .btn-warning:hover {
-            background: #e5ac00;
-            transform: translateY(-2px);
-        }
-        .btn-danger {
-            background: #d93025;
-            color: white;
-        }
-        .btn-danger:hover {
-            background: #b3261e;
-        }
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-        }
+
         .signature-area {
             border: 2px dashed #b0c7db;
             border-radius: 16px;
@@ -190,7 +179,35 @@
             font-size: 13px;
             font-weight: 600;
             cursor: pointer;
+            background: #e0e7ef;
         }
+        .signature-actions button:hover { background: #cbd5e1; }
+
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            flex: 1 0 auto;
+        }
+        .btn-primary { background: #1a73e8; color: white; }
+        .btn-primary:hover { background: #1557b0; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26,115,232,0.3); }
+        .btn-success { background: #0f9d58; color: white; }
+        .btn-success:hover { background: #0b7a45; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(15,157,88,0.3); }
+        .btn-warning { background: #fbbc04; color: #1e1e1e; }
+        .btn-warning:hover { background: #e5ac00; transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 2px solid #1a73e8; color: #1a73e8; }
+        .btn-outline:hover { background: #1a73e8; color: white; }
+
         .message-box {
             padding: 14px 20px;
             border-radius: 12px;
@@ -210,22 +227,28 @@
             border-left: 5px solid #d93025;
             display: block;
         }
+        .hidden { display: none; }
         @media (max-width: 640px) {
             .container { padding: 16px; }
             .form-row { grid-template-columns: 1fr; }
+            .checkbox-group { grid-template-columns: 1fr; }
             .btn-group { flex-direction: column; }
             .btn { flex: 1; }
+            .header { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
 <div class="container" id="app">
-    <h1>
-        📋 Tathmini ya Mtendakazi
-        <small id="userDisplay"></small>
-    </h1>
+    <div class="header">
+        <!-- Badilisha src na URL ya logo yako -->
+        <img src="https://via.placeholder.com/150x70?text=MTWARA+SDA+DISPENSARY" alt="Mtwara SDA Dispensary" />
+        <h1>
+            📋 Tathmini ya Mtendakazi
+            <small id="userDisplay"></small>
+        </h1>
+    </div>
 
-    <!-- User info and incharge phone (hidden) -->
     <input type="hidden" id="inchargePhone" value="" />
 
     <!-- SEHEMU A: Taarifa za Msingi -->
@@ -269,15 +292,39 @@
                 </select>
             </div>
         </div>
+        <!-- Dropdown ya ziada kwa Daktari -->
+        <div id="doctorSpecialtyContainer" class="form-group hidden">
+            <label>Utaalamu wa Daktari</label>
+            <select id="doctorSpecialty">
+                <option value="">-- Chagua --</option>
+                <option value="specialist">Specialist</option>
+                <option value="md">MD</option>
+                <option value="amo">AMO</option>
+                <option value="clinical_officer">Clinical Officer</option>
+            </select>
+        </div>
     </div>
 
-    <!-- SEHEMU B: Majukumu Maalumu (kulingana na Taaluma) -->
+    <!-- SEHEMU B: Majukumu (ya kutick) -->
     <div class="section">
-        <div class="section-title"><span>2</span> Majukumu Maalumu</div>
+        <div class="section-title"><span>2</span> Majukumu Yako</div>
         <div class="form-group">
-            <label>Majukumu yako maalumu kulingana na taaluma</label>
-            <div id="dutiesContainer">
-                <p style="color:#777; font-style:italic;">Chagua taaluma kuona majukumu yanayohusiana.</p>
+            <label>Majukumu ya kawaida (chagua yanayokuhusu)</label>
+            <div class="checkbox-group" id="generalDutiesGroup">
+                <label><input type="checkbox" value="Kuhudumia wagonjwa" /> Kuhudumia wagonjwa</label>
+                <label><input type="checkbox" value="Kutoa dawa na matibabu" /> Kutoa dawa na matibabu</label>
+                <label><input type="checkbox" value="Kushiriki katika doria" /> Kushiriki katika doria</label>
+                <label><input type="checkbox" value="Kuandika ripoti za matibabu" /> Kuandika ripoti za matibabu</label>
+                <label><input type="checkbox" value="Kuelimisha wagonjwa na walezi" /> Kuelimisha wagonjwa na walezi</label>
+                <label><input type="checkbox" value="Kusimamia usafi na usalama" /> Kusimamia usafi na usalama</label>
+                <label><input type="checkbox" value="Kushiriki katika mikutano" /> Kushiriki katika mikutano</label>
+                <label><input type="checkbox" value="Kufanya tafiti ndogo" /> Kufanya tafiti ndogo</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Majukumu Maalumu (kulingana na taaluma yako)</label>
+            <div id="specialDutiesContainer" class="checkbox-group">
+                <p style="color:#777; font-style:italic; grid-column:1/-1;">Chagua taaluma kuona majukumu maalumu.</p>
             </div>
         </div>
         <div class="form-group">
@@ -286,7 +333,7 @@
         </div>
     </div>
 
-    <!-- SEHEMU C: Malengo na Mipango -->
+    <!-- SEHEMU C: Malengo -->
     <div class="section">
         <div class="section-title"><span>3</span> Malengo ya Kimkakati</div>
         <div class="form-group">
@@ -295,25 +342,45 @@
         </div>
     </div>
 
-    <!-- SEHEMU D: Ujuzi na Kompetensi -->
+    <!-- SEHEMU D: Ujuzi na Competence (rating 1-5) -->
     <div class="section">
-        <div class="section-title"><span>4</span> Ujuzi na Kompetensi</div>
+        <div class="section-title"><span>4</span> Ujuzi na Competence</div>
         <div class="form-group">
-            <label>Ujuzi wako (kiufundi, kiuongozi, n.k.)</label>
-            <textarea id="skills" placeholder="Orodhesha ujuzi wako..."></textarea>
+            <label>Jipime katika ujuzi wako (1 = dhaifu, 5 = bora)</label>
+            <div class="rating-group">
+                <label><input type="radio" name="skillRating" value="1" /> 1</label>
+                <label><input type="radio" name="skillRating" value="2" /> 2</label>
+                <label><input type="radio" name="skillRating" value="3" /> 3</label>
+                <label><input type="radio" name="skillRating" value="4" /> 4</label>
+                <label><input type="radio" name="skillRating" value="5" /> 5</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Maelezo ya ujuzi wako</label>
+            <textarea id="skillsDescription" placeholder="Andika ujuzi wako kwa undani..."></textarea>
         </div>
     </div>
 
-    <!-- SEHEMU E: Mafunzo na Maendeleo -->
+    <!-- SEHEMU E: Mafunzo na Maendeleo (rating 1-5) -->
     <div class="section">
         <div class="section-title"><span>5</span> Mafunzo na Maendeleo</div>
         <div class="form-group">
-            <label>Mafunzo uliyopata mwaka huu</label>
-            <textarea id="trainings" placeholder="Andika mafunzo uliyohudhuria..."></textarea>
+            <label>Jipime katika mafunzo uliyopata (1 = kidogo, 5 = mengi sana)</label>
+            <div class="rating-group">
+                <label><input type="radio" name="trainingRating" value="1" /> 1</label>
+                <label><input type="radio" name="trainingRating" value="2" /> 2</label>
+                <label><input type="radio" name="trainingRating" value="3" /> 3</label>
+                <label><input type="radio" name="trainingRating" value="4" /> 4</label>
+                <label><input type="radio" name="trainingRating" value="5" /> 5</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Maelezo ya mafunzo uliyopata</label>
+            <textarea id="trainingsDescription" placeholder="Andika mafunzo uliyohudhuria..."></textarea>
         </div>
     </div>
 
-    <!-- SEHEMU F: Maoni na Mapendekezo -->
+    <!-- SEHEMU F: Maoni -->
     <div class="section">
         <div class="section-title"><span>6</span> Maoni na Mapendekezo</div>
         <div class="form-group">
@@ -339,22 +406,19 @@
             <p style="margin-bottom:10px; font-weight:600;">Chora sahihi yako hapa (kwa kalamu au kidole)</p>
             <canvas id="signatureCanvas"></canvas>
             <div class="signature-actions">
-                <button type="button" class="btn-outline" style="padding:6px 20px;" onclick="clearSignature()">Futa</button>
+                <button type="button" onclick="clearSignature()">Futa</button>
             </div>
         </div>
     </div>
 
-    <!-- Message box -->
     <div id="messageBox" class="message-box"></div>
 
-    <!-- Vitendo -->
     <div class="btn-group">
         <button class="btn btn-primary" onclick="saveAndSend()">💾 Hifadhi na Kutuma</button>
         <button class="btn btn-success" onclick="sendWhatsApp()">📱 Tuma WhatsApp</button>
         <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
         <button class="btn btn-outline" onclick="resetForm()">🔄 Weka Upya</button>
     </div>
-
     <p style="margin-top:20px; font-size:12px; color:#888; text-align:center;">
         Hakikisha umejaza sehemu zote muhimu (*) kabla ya kutuma.
     </p>
@@ -371,10 +435,8 @@
         try {
             const user = JSON.parse(decodeURIComponent(userParam));
             document.getElementById('userDisplay').textContent = '👤 ' + (user.username || '');
-            // Pre-fill name and phone if available
             if (user.username) document.getElementById('workerName').value = user.username;
             if (user.credential) {
-                // if credential looks like phone, put in phone field
                 const cred = user.credential.trim();
                 if (cred.match(/^[0-9+\-\s()]+$/)) {
                     document.getElementById('workerPhone').value = cred;
@@ -382,18 +444,18 @@
                     document.getElementById('workerEmail').value = cred;
                 }
             }
-            // Store incharge phone from login
             if (user.inchargePhone) {
                 document.getElementById('inchargePhone').value = user.inchargePhone;
             }
         } catch(e) {}
     }
+    document.getElementById('signatureDate').valueAsDate = new Date();
 })();
 
 // ============================================
-//  2. DUTIES BY PROFESSION
+//  2. DUTIES BY PROFESSION (special duties)
 // ============================================
-const dutiesByProfession = {
+const specialDutiesMap = {
     muuguzi: [
         'Kufanya uchunguzi wa wagonjwa kila siku',
         'Kutoa dawa na matibabu kwa wagonjwa',
@@ -466,26 +528,40 @@ const dutiesByProfession = {
     ]
 };
 
+// Show/hide doctor specialty dropdown
 const professionSelect = document.getElementById('workerProfession');
-const dutiesContainer = document.getElementById('dutiesContainer');
+const doctorSpecialtyContainer = document.getElementById('doctorSpecialtyContainer');
 
 professionSelect.addEventListener('change', function() {
     const prof = this.value;
-    dutiesContainer.innerHTML = '';
-    if (prof && dutiesByProfession[prof]) {
-        const ul = document.createElement('ul');
-        ul.style.cssText = 'list-style: none; padding: 0; margin: 8px 0;';
-        dutiesByProfession[prof].forEach(duty => {
-            const li = document.createElement('li');
-            li.style.cssText = 'padding: 6px 0 6px 28px; background: url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'16\' height=\'16\' viewBox=\'0 0 24 24\' fill=\'%231a73e8\'%3E%3Cpath d=\'M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z\'/%3E%3C/svg%3E") left center no-repeat; background-size: 18px;';
-            li.textContent = duty;
-            ul.appendChild(li);
-        });
-        dutiesContainer.appendChild(ul);
+    // Show doctor specialty if Daktari selected
+    if (prof === 'daktari') {
+        doctorSpecialtyContainer.classList.remove('hidden');
     } else {
-        dutiesContainer.innerHTML = '<p style="color:#777; font-style:italic;">Chagua taaluma kuona majukumu yanayohusiana.</p>';
+        doctorSpecialtyContainer.classList.add('hidden');
+        document.getElementById('doctorSpecialty').value = '';
     }
+    // Update special duties
+    updateSpecialDuties(prof);
 });
+
+function updateSpecialDuties(profession) {
+    const container = document.getElementById('specialDutiesContainer');
+    container.innerHTML = '';
+    if (profession && specialDutiesMap[profession]) {
+        specialDutiesMap[profession].forEach(duty => {
+            const label = document.createElement('label');
+            const cb = document.createElement('input');
+            cb.type = 'checkbox';
+            cb.value = duty;
+            label.appendChild(cb);
+            label.appendChild(document.createTextNode(' ' + duty));
+            container.appendChild(label);
+        });
+    } else {
+        container.innerHTML = '<p style="color:#777; font-style:italic; grid-column:1/-1;">Chagua taaluma kuona majukumu maalumu.</p>';
+    }
+}
 
 // ============================================
 //  3. SIGNATURE CANVAS
@@ -504,11 +580,12 @@ function resizeCanvas() {
     ctx.lineJoin = 'round';
 }
 resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
 
 function getPos(e) {
     const rect = canvas.getBoundingClientRect();
-    const x = (e.clientX || e.touches[0].clientX) - rect.left;
-    const y = (e.clientY || e.touches[0].clientY) - rect.top;
+    const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+    const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
     return { x, y };
 }
 
@@ -516,7 +593,6 @@ canvas.addEventListener('mousedown', startDraw);
 canvas.addEventListener('mousemove', draw);
 canvas.addEventListener('mouseup', stopDraw);
 canvas.addEventListener('mouseleave', stopDraw);
-
 canvas.addEventListener('touchstart', function(e) { e.preventDefault(); startDraw(e); });
 canvas.addEventListener('touchmove', function(e) { e.preventDefault(); draw(e); });
 canvas.addEventListener('touchend', function(e) { e.preventDefault(); stopDraw(); });
@@ -527,24 +603,19 @@ function startDraw(e) {
     ctx.beginPath();
     ctx.moveTo(pos.x, pos.y);
 }
-
 function draw(e) {
     if (!isDrawing) return;
     const pos = getPos(e);
     ctx.lineTo(pos.x, pos.y);
     ctx.stroke();
 }
-
-function stopDraw() {
-    isDrawing = false;
-}
-
+function stopDraw() { isDrawing = false; }
 function clearSignature() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 // ============================================
-//  4. SAVE DATA TO JSONBIN
+//  4. JSONBIN
 // ============================================
 const JSONBIN_BIN_ID = '6a4b0bc9da38895dfe32cc08';
 const JSONBIN_ACCESS_KEY = '$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K';
@@ -560,11 +631,8 @@ async function saveToJSONBin(data) {
             },
             body: JSON.stringify(data)
         });
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const result = await response.json();
-        return result;
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        return await response.json();
     } catch (error) {
         console.error('JSONBin error:', error);
         throw error;
@@ -574,6 +642,17 @@ async function saveToJSONBin(data) {
 // ============================================
 //  5. COLLECT FORM DATA
 // ============================================
+function getCheckedValues(containerId) {
+    const container = document.getElementById(containerId);
+    const checkboxes = container.querySelectorAll('input[type="checkbox"]:checked');
+    return Array.from(checkboxes).map(cb => cb.value);
+}
+
+function getRadioValue(name) {
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    return el ? el.value : null;
+}
+
 function getFormData() {
     return {
         workerName: document.getElementById('workerName').value.trim(),
@@ -582,10 +661,15 @@ function getFormData() {
         workerDepartment: document.getElementById('workerDepartment').value.trim(),
         workerTitle: document.getElementById('workerTitle').value.trim(),
         workerProfession: document.getElementById('workerProfession').value,
+        doctorSpecialty: document.getElementById('doctorSpecialty').value,
+        generalDuties: getCheckedValues('generalDutiesGroup'),
+        specialDuties: getCheckedValues('specialDutiesContainer'),
         additionalDuties: document.getElementById('additionalDuties').value.trim(),
         goals: document.getElementById('goals').value.trim(),
-        skills: document.getElementById('skills').value.trim(),
-        trainings: document.getElementById('trainings').value.trim(),
+        skillRating: getRadioValue('skillRating'),
+        skillsDescription: document.getElementById('skillsDescription').value.trim(),
+        trainingRating: getRadioValue('trainingRating'),
+        trainingsDescription: document.getElementById('trainingsDescription').value.trim(),
         feedback: document.getElementById('feedback').value.trim(),
         signatureName: document.getElementById('signatureName').value.trim(),
         signatureDate: document.getElementById('signatureDate').value,
@@ -600,30 +684,43 @@ function validateForm(data) {
     const required = ['workerName', 'workerPhone', 'workerDepartment', 'workerTitle', 'workerProfession'];
     for (let field of required) {
         if (!data[field]) {
-            return `Tafadhali jaza sehemu ya ${field.replace('worker', '').toLowerCase()}.`;
+            return `Tafadhali jaza sehemu ya ${field.replace('worker','').toLowerCase()}.`;
         }
+    }
+    if (data.workerProfession === 'daktari' && !data.doctorSpecialty) {
+        return 'Tafadhali chagua utaalamu wa Daktari.';
     }
     if (!data.inchargePhone) {
         return 'Namba ya Mganga Mfawidhi haijapatikana. Tafadhali ingia tena.';
     }
+    if (!data.skillRating) {
+        return 'Tafadhali jipime katika Ujuzi na Competence (1-5).';
+    }
+    if (!data.trainingRating) {
+        return 'Tafadhali jipime katika Mafunzo na Maendeleo (1-5).';
+    }
+    // Check signature not empty
+    const sigData = canvas.toDataURL('image/png');
+    if (sigData === 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==') {
+        return 'Tafadhali chora sahihi yako.';
+    }
     return null;
 }
 
-// ============================================
-//  6. SAVE AND SEND
-// ============================================
 function showMessage(text, type) {
     const box = document.getElementById('messageBox');
     box.textContent = text;
     box.className = 'message-box ' + type;
 }
-
 function clearMessage() {
     const box = document.getElementById('messageBox');
     box.className = 'message-box';
     box.textContent = '';
 }
 
+// ============================================
+//  6. SAVE AND SEND
+// ============================================
 async function saveAndSend() {
     clearMessage();
     const data = getFormData();
@@ -633,19 +730,10 @@ async function saveAndSend() {
         return;
     }
 
-    // Check signature (not empty)
-    const sigData = canvas.toDataURL('image/png');
-    if (sigData === 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==') {
-        showMessage('Tafadhali chora sahihi yako kwenye kitufe cha sahihi.', 'error');
-        return;
-    }
-
     try {
         // Save to JSONBin
-        const saved = await saveToJSONBin(data);
-        console.log('Saved to JSONBin:', saved);
+        await saveToJSONBin(data);
         showMessage('✅ Data imehifadhiwa kikamilifu kwenye JSONBin! Sasa inatuma WhatsApp...', 'success');
-
         // Send WhatsApp
         await sendWhatsApp(data);
     } catch (err) {
@@ -654,10 +742,9 @@ async function saveAndSend() {
 }
 
 // ============================================
-//  7. WHATSAPP SEND
+//  7. WHATSAPP
 // ============================================
 async function sendWhatsApp(data) {
-    // If called without data, get fresh data
     if (!data) {
         data = getFormData();
         const error = validateForm(data);
@@ -665,30 +752,16 @@ async function sendWhatsApp(data) {
             showMessage(error, 'error');
             return;
         }
-        // Also check signature
-        const sigData = canvas.toDataURL('image/png');
-        if (sigData === 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==') {
-            showMessage('Tafadhali chora sahihi yako.', 'error');
-            return;
-        }
     }
 
-    const inchargePhone = data.inchargePhone || document.getElementById('inchargePhone').value.trim();
-    if (!inchargePhone) {
-        showMessage('Namba ya Mganga Mfawidhi haipatikani.', 'error');
-        return;
-    }
-
-    // Format phone: remove spaces, dashes, brackets, plus sign if any
-    let phone = inchargePhone.replace(/[\s\-\(\)]/g, '');
-    if (!phone.startsWith('255') && phone.startsWith('0')) {
-        phone = '255' + phone.substring(1);
-    } else if (!phone.startsWith('255') && !phone.startsWith('+')) {
-        phone = '255' + phone;
-    }
+    let phone = data.inchargePhone.replace(/[\s\-\(\)]/g, '');
+    if (!phone.startsWith('255') && phone.startsWith('0')) phone = '255' + phone.substring(1);
+    else if (!phone.startsWith('255') && !phone.startsWith('+')) phone = '255' + phone;
     if (phone.startsWith('+')) phone = phone.substring(1);
 
-    // Build message
+    const generalDutiesStr = data.generalDuties.length ? data.generalDuties.join(', ') : 'Hajachagua';
+    const specialDutiesStr = data.specialDuties.length ? data.specialDuties.join(', ') : 'Hajachagua';
+
     const msg = `*TATHMINI YA MTENDAKAZI - MTWARA 2026*
     
 👤 Jina: ${data.workerName}
@@ -696,14 +769,20 @@ async function sendWhatsApp(data) {
 📧 Barua Pepe: ${data.workerEmail || 'Hajajazwa'}
 🏢 Idara: ${data.workerDepartment}
 👔 Cheo: ${data.workerTitle}
-🎓 Taaluma: ${data.workerProfession}
+🎓 Taaluma: ${data.workerProfession}${data.doctorSpecialty ? ' ('+data.doctorSpecialty+')' : ''}
 
-*Majukumu Maalumu:*
-${data.additionalDuties || 'Yamechaguliwa kulingana na taaluma.'}
+*Majukumu ya Kawaida:* ${generalDutiesStr}
+*Majukumu Maalumu:* ${specialDutiesStr}
+*Majukumu Mengine:* ${data.additionalDuties || 'Hakuna'}
 
 *Malengo:* ${data.goals || 'Hajajazwa'}
-*Ujuzi:* ${data.skills || 'Hajajazwa'}
-*Mafunzo:* ${data.trainings || 'Hajajazwa'}
+
+*Ujuzi na Competence:* ${data.skillRating || 'Hajajazwa'}/5
+Maelezo: ${data.skillsDescription || 'Hakuna'}
+
+*Mafunzo na Maendeleo:* ${data.trainingRating || 'Hajajazwa'}/5
+Maelezo: ${data.trainingsDescription || 'Hakuna'}
+
 *Maoni:* ${data.feedback || 'Hajajazwa'}
 
 📅 Tarehe: ${data.signatureDate || 'Hajajazwa'}
@@ -713,41 +792,44 @@ ${data.additionalDuties || 'Yamechaguliwa kulingana na taaluma.'}
 
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank');
-
-    showMessage('📱 WhatsApp imefunguliwa. Tafadhali bonyeza SEND ili kukamilisha utumaji.', 'success');
+    showMessage('📱 WhatsApp imefunguliwa. Bonyeza SEND.', 'success');
 }
 
 // ============================================
-//  8. RESET FORM
+//  8. RESET
 // ============================================
 function resetForm() {
     if (confirm('Una hakika unataka kuweka upya fomu yote?')) {
         document.querySelectorAll('input, textarea, select').forEach(el => {
-            if (el.type !== 'hidden') {
+            if (el.type !== 'hidden' && el.type !== 'radio' && el.type !== 'checkbox') {
                 if (el.tagName === 'SELECT') el.selectedIndex = 0;
                 else if (el.type === 'date') el.value = '';
                 else el.value = '';
             }
         });
+        document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+        document.querySelectorAll('input[type="radio"]').forEach(rb => rb.checked = false);
         clearSignature();
-        document.getElementById('dutiesContainer').innerHTML = '<p style="color:#777; font-style:italic;">Chagua taaluma kuona majukumu yanayohusiana.</p>';
         clearMessage();
-        // Reset profession dropdown trigger
-        professionSelect.dispatchEvent(new Event('change'));
+        document.getElementById('signatureDate').valueAsDate = new Date();
+        document.getElementById('specialDutiesContainer').innerHTML = '<p style="color:#777; font-style:italic; grid-column:1/-1;">Chagua taaluma kuona majukumu maalumu.</p>';
+        doctorSpecialtyContainer.classList.add('hidden');
+        document.getElementById('doctorSpecialty').value = '';
     }
 }
 
-// ============================================
-//  9. SET DEFAULT DATE
-// ============================================
-document.getElementById('signatureDate').valueAsDate = new Date();
+// Initial load: trigger profession change to set special duties if profession pre-filled
+window.addEventListener('DOMContentLoaded', function() {
+    const prof = document.getElementById('workerProfession').value;
+    if (prof) {
+        updateSpecialDuties(prof);
+        if (prof === 'daktari') {
+            doctorSpecialtyContainer.classList.remove('hidden');
+        }
+    }
+});
 
-// ============================================
-// 10. AUTO SAVE ON CHANGE? (Optional)
-// ============================================
-// Not implemented to avoid too many requests.
-
-console.log('✅ worker.html loaded successfully.');
+console.log('✅ worker.html loaded.');
 </script>
 </body>
 </html>
