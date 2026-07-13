@@ -1,213 +1,592 @@
 <!DOCTYPE html>
 <html lang="sw">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mganga Mfawidhi</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#2c0a3e,#8e44ad);min-height:100vh;padding:20px;display:flex;justify-content:center;align-items:flex-start}
-    .container{background:#fff;border-radius:28px;padding:30px;max-width:1100px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.2);margin-top:20px}
-    h2{color:#2c0a3e;text-align:center;font-size:26px;margin-bottom:4px}
-    .sub{text-align:center;color:#7f8c8d;font-size:14px;margin-bottom:20px}
-    .logo-area{text-align:center;margin-bottom:14px}.logo-area img{max-height:70px;border-radius:8px}
-    .top-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px}
-    .btn{padding:7px 16px;border:none;border-radius:10px;font-weight:600;font-size:13px;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:5px;text-decoration:none}
-    .btn-primary{background:#8e44ad;color:#fff}.btn-primary:hover{background:#7d3c98;transform:translateY(-2px)}
-    .btn-secondary{background:#95a5a6;color:#fff}.btn-secondary:hover{background:#7f8c8d}
-    .btn-danger{background:#e74c3c;color:#fff}.btn-danger:hover{background:#c0392b}
-    .btn-info{background:#3498db;color:#fff}.btn-info:hover{background:#2e86c1}
-    .btn-warning{background:#f39c12;color:#fff}.btn-warning:hover{background:#d68910}
-    .btn-purple{background:#8e44ad;color:#fff}.btn-purple:hover{background:#7d3c98}
-    .btn-pdf{background:#e74c3c;color:#fff}.btn-pdf:hover{background:#c0392b}
-    .btn-email{background:#D44638;color:#fff}.btn-email:hover{background:#b03a2e}
-    .btn-phone{background:#34B7F1;color:#fff}.btn-phone:hover{background:#1a9fd8}
-    .btn-whatsapp{background:#25D366;color:#fff}.btn-whatsapp:hover{background:#1da851}
-    .section{background:#f8f9fa;border-radius:14px;padding:16px 20px;margin-bottom:16px;border-left:4px solid #8e44ad}
-    .section h3{color:#2c0a3e;font-size:17px;margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-    .section h3 .step{background:#8e44ad;color:#fff;border-radius:50%;width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .form-group{margin-bottom:4px}.form-group.full{grid-column:1/-1}
-    .form-group label{display:block;font-weight:600;color:#2c0a3e;margin-bottom:3px;font-size:13px}
-    .form-group input,.form-group textarea,.form-group select{width:100%;padding:8px 12px;border:2px solid #e0e0e0;border-radius:8px;font-size:14px;transition:.3s;background:#fff}
-    .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:#8e44ad;outline:none;box-shadow:0 0 0 3px rgba(142,68,173,0.15)}
-    .form-group textarea{min-height:60px;resize:vertical}
-    .comms{background:#f8f9fa;padding:10px 16px;border-radius:12px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:16px;border:1px solid #e0e0e0}
-    .comms span{font-weight:600;color:#2c0a3e;margin-right:4px}
-    .status-badge{display:inline-block;padding:3px 12px;border-radius:20px;font-size:12px;font-weight:600}
-    .status-badge.saved{background:#d4edda;color:#155724}
-    .status-badge.pending{background:#fff3cd;color:#856404}
-    .status-badge.submitted{background:#cce5ff;color:#004085}
-    .button-group{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:16px}
-    .button-group .btn{padding:10px 20px;font-size:14px}
-    .signature-area{border:2px solid #8e44ad;border-radius:12px;padding:8px;background:#fff;margin-top:6px}
-    .signature-area canvas{width:100%;height:130px;border-radius:8px;background:#fff;cursor:crosshair;touch-action:none}
-    .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);max-width:400px;width:90%;padding:12px 20px;border-radius:14px;color:#fff;text-align:center;z-index:999;opacity:0;transition:.4s;box-shadow:0 8px 40px rgba(0,0,0,0.2)}
-    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-    .toast.success{background:#27ae60}.toast.error{background:#e74c3c}.toast.info{background:#3498db}
-    .loading{display:inline-block;width:14px;height:14px;border:3px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:6px}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:1000;justify-content:center;align-items:center}
-    .modal-content{background:#fff;border-radius:20px;padding:30px;max-width:450px;width:90%;max-height:90vh;overflow-y:auto}
-    .modal-content h3{color:#2c0a3e;margin-bottom:12px}.modal-content .close{float:right;font-size:24px;cursor:pointer;color:#7f8c8d}
-    .modal-content .radio-group{display:flex;gap:15px;flex-wrap:wrap;margin:10px 0}
-    .modal-content .radio-group label{font-size:14px;cursor:pointer}
-    .modal-content input[type="text"],.modal-content input[type="email"]{width:100%;padding:10px;border:2px solid #e0e0e0;border-radius:8px;font-size:14px;margin:6px 0}
-    .data-tabs{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
-    .data-tabs .tab-btn{padding:5px 14px;border:none;border-radius:20px;cursor:pointer;font-size:12px;background:#ecf0f1;color:#7f8c8d;transition:.3s}
-    .data-tabs .tab-btn.active{background:#8e44ad;color:#fff}
-    .data-tabs .tab-btn:hover{background:#d5d8dc}
-    .data-container{background:#fff;border-radius:12px;padding:8px;border:1px solid #e0e0e0;max-height:300px;overflow-y:auto}
-    .data-item{padding:6px 10px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;font-size:13px}
-    .data-item .badge-role{display:inline-block;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:600;margin-left:4px}
-    .badge-role.worker{background:#27ae60;color:#fff}
-    .badge-role.supervisor{background:#f39c12;color:#fff}
-    .badge-role.incharge{background:#8e44ad;color:#fff}
-    @media(max-width:768px){.form-grid{grid-template-columns:1fr}.top-bar{flex-direction:column;align-items:stretch}.button-group .btn{flex:1}}
-    @media print{.no-print{display:none!important}.container{box-shadow:none!important}body{background:#fff!important}}
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mganga Mfawidhi - Tathmini</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f8fe;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            padding: 30px 35px;
+        }
+        h1 {
+            color: #0b3b5c;
+            font-size: 28px;
+            border-bottom: 3px solid #1a73e8;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        h1 small { font-size: 16px; font-weight: 400; color: #555; }
+        .section {
+            background: #f9fcff;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 25px;
+            border: 1px solid #e3edf7;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0b3b5c;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title span {
+            background: #1a73e8;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 20px;
+            margin-bottom: 12px;
+        }
+        .form-group { margin-bottom: 16px; }
+        label {
+            display: block;
+            font-weight: 600;
+            color: #1e3a5f;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid #cfddee;
+            border-radius: 10px;
+            font-size: 14px;
+            background: white;
+            transition: 0.2s;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #1a73e8;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26,115,232,0.1);
+        }
+        textarea { resize: vertical; min-height: 70px; }
+        .full-width { grid-column: 1 / -1; }
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            flex: 1 0 auto;
+        }
+        .btn-primary { background: #1a73e8; color: white; }
+        .btn-primary:hover { background: #1557b0; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26,115,232,0.3); }
+        .btn-success { background: #0f9d58; color: white; }
+        .btn-success:hover { background: #0b7a45; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(15,157,88,0.3); }
+        .btn-outline { background: transparent; border: 2px solid #1a73e8; color: #1a73e8; }
+        .btn-outline:hover { background: #1a73e8; color: white; }
+        .btn-warning { background: #fbbc04; color: #1e1e1e; }
+        .btn-warning:hover { background: #e5ac00; transform: translateY(-2px); }
+        .signature-area {
+            border: 2px dashed #b0c7db;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            background: #f3f8ff;
+            margin-top: 10px;
+        }
+        #signatureCanvas {
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            background: white;
+            touch-action: none;
+            width: 100%;
+            max-width: 450px;
+            height: 150px;
+        }
+        .signature-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+        .signature-actions button {
+            padding: 6px 18px;
+            border: none;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .message-box {
+            padding: 14px 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: none;
+            font-weight: 500;
+        }
+        .message-box.success {
+            background: #e6f7e6;
+            color: #0b5e2e;
+            border-left: 5px solid #0f9d58;
+            display: block;
+        }
+        .message-box.error {
+            background: #fde8e8;
+            color: #a12727;
+            border-left: 5px solid #d93025;
+            display: block;
+        }
+        .submissions-list {
+            background: #f0f5fa;
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-top: 10px;
+        }
+        .submissions-list li {
+            padding: 6px 0;
+            border-bottom: 1px solid #dce7f2;
+            list-style: none;
+        }
+        .submissions-list li:last-child { border-bottom: none; }
+        .incharge-phone-field {
+            background: #fff8e7;
+            padding: 16px 20px;
+            border-radius: 12px;
+            border-left: 5px solid #fbbc04;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 640px) {
+            .container { padding: 16px; }
+            .form-row { grid-template-columns: 1fr; }
+            .btn-group { flex-direction: column; }
+            .btn { flex: 1; }
+        }
+    </style>
 </head>
 <body>
-  <div class="container" id="printArea">
-    <div class="top-bar no-print">
-      <h2 style="margin:0;">🏥 Mganga Mfawidhi</h2>
-      <div><button class="btn btn-secondary" onclick="location.href='index.html'">🏠 Nyumbani</button><button class="btn btn-pdf" onclick="downloadPDF()">📄 PDF</button><button class="btn btn-info" onclick="window.print()">🖨️ Chapisha</button></div>
-    </div>
-    <div class="logo-area"><img src="SDA_CHURCH_LOGO.webp" alt="Logo"><br><small style="color:#7f8c8d;">Logo ya SDA Church</small></div>
-    <div class="sub" id="greeting">Karibu mganga mfawidhi</div>
-    
-    <!-- MAWASILIANO -->
-    <div class="comms no-print">
-      <span>📞 Mawasiliano:</span>
-      <a href="tel:+255742710697" class="btn btn-phone" style="padding:4px 12px;font-size:12px;">📱 Simu</a>
-      <a href="https://wa.me/255742710697" target="_blank" class="btn btn-whatsapp" style="padding:4px 12px;font-size:12px;">💬 WhatsApp</a>
-      <a href="mailto:mtwara@example.com" class="btn btn-email" style="padding:4px 12px;font-size:12px;">📧 Email</a>
+<div class="container" id="app">
+    <h1>
+        📋 Mganga Mfawidhi - Tathmini
+        <small id="userDisplay"></small>
+    </h1>
+
+    <!-- Namba yake mwenyewe (inaweza kubadilishwa) -->
+    <div class="incharge-phone-field">
+        <label style="font-weight:700; color:#b85c00;">📱 Namba yako ya simu (Mganga Mfawidhi)</label>
+        <input type="text" id="inchargeSelfPhone" placeholder="0712 345 678" style="margin-top:6px;" />
+        <small style="color:#777; display:block; margin-top:4px;">Namba hii itatumiwa kama mpokeaji wa tathmini zote. Badilisha ikiwa unataka kubadilisha namba.</small>
     </div>
 
-    <!-- 1: Tathmini -->
-    <div class="section"><h3><span class="step">1</span> Tathmini yako</h3>
-      <div class="form-grid">
-        <div class="form-group"><label>Jina <span style="color:#e74c3c;">*</span></label><input type="text" id="fullname" placeholder="Dr. Mwinyi"></div>
-        <div class="form-group"><label>Idara <span style="color:#e74c3c;">*</span></label><input type="text" id="department" placeholder="Idara ya Afya"></div>
-        <div class="form-group"><label>Cheo <span style="color:#e74c3c;">*</span></label><input type="text" id="position" placeholder="Mganga Mfawidhi"></div>
-        <div class="form-group"><label>Simu</label><input type="tel" id="phone" placeholder="0712345678"></div>
-        <div class="form-group full"><label>Barua Pepe</label><input type="email" id="email" placeholder="mwinyi@mtwara.go.tz"></div>
-        <div class="form-group"><label>Uongozi (1-5)</label><input type="number" id="step1_leadership" min="1" max="5" placeholder="4"></div>
-        <div class="form-group"><label>Ubora (1-5)</label><input type="number" id="step2_quality" min="1" max="5" placeholder="5"></div>
-        <div class="form-group"><label>Uwajibikaji (1-5)</label><input type="number" id="step3_accountability" min="1" max="5" placeholder="4"></div>
-        <div class="form-group full"><label>Maelezo</label><textarea id="step_notes" placeholder="Maelezo..."></textarea></div>
-        <div class="form-group"><label>Nguvu</label><textarea id="strengths" placeholder="Nguvu zako..."></textarea></div>
-        <div class="form-group"><label>Kuboresha</label><textarea id="weaknesses" placeholder="Maeneo ya kuboresha..."></textarea></div>
-        <div class="form-group full"><label>Maoni Jumla</label><textarea id="overall_comments" rows="2" placeholder="Maoni ya jumla..."></textarea></div>
-      </div>
-    </div>
-
-    <!-- 2: Sahihi -->
-    <div class="section"><h3><span class="step">2</span> ✍️ Sahihi</h3>
-      <div class="form-grid">
-        <div class="form-group full"><label>Jina la Sahihi <span style="color:#e74c3c;">*</span></label><input type="text" id="signature_name" placeholder="Andika jina lako"></div>
-        <div class="form-group"><label>Tarehe <span style="color:#e74c3c;">*</span></label><input type="date" id="signature_date"></div>
-        <div class="form-group full"><label>Chora Sahihi <span style="color:#e74c3c;">*</span></label>
-          <div class="signature-area"><canvas id="signatureCanvas"></canvas>
-            <div class="sig-actions"><button class="btn btn-danger" onclick="clearSignature()" style="padding:4px 12px;font-size:11px;">🗑️ Futa</button></div>
-          </div>
+    <!-- SEHEMU 1: Tathmini yako mwenyewe -->
+    <div class="section">
+        <div class="section-title"><span>1</span> Tathmini yako</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Jina kamili *</label>
+                <input type="text" id="inchargeName" placeholder="Mfano: Dk. Mwanaisha Juma" required />
+            </div>
+            <div class="form-group">
+                <label>Namba ya Simu *</label>
+                <input type="text" id="inchargePhone" placeholder="0712 345 678" required />
+            </div>
+            <div class="form-group">
+                <label>Barua Pepe</label>
+                <input type="email" id="inchargeEmail" placeholder="mwanaisha@mfano.com" />
+            </div>
+            <div class="form-group">
+                <label>Idara / Kitengo *</label>
+                <input type="text" id="inchargeDepartment" placeholder="Mfano: Wodi ya Wazazi" required />
+            </div>
+            <div class="form-group">
+                <label>Cheo *</label>
+                <input type="text" id="inchargeTitle" placeholder="Mfano: Mganga Mfawidhi" required />
+            </div>
         </div>
-        <div class="form-group full"><label>Maelezo (hiari)</label><textarea id="signature_notes" placeholder="Maelezo ya ziada..."></textarea></div>
-      </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Uongozi (1-5)</label>
+                <input type="number" id="leadership" min="1" max="5" placeholder="1-5" />
+            </div>
+            <div class="form-group">
+                <label>Ubora wa Huduma (1-5)</label>
+                <input type="number" id="serviceQuality" min="1" max="5" placeholder="1-5" />
+            </div>
+            <div class="form-group">
+                <label>Uwajibikaji (1-5)</label>
+                <input type="number" id="accountability" min="1" max="5" placeholder="1-5" />
+            </div>
+            <div class="form-group">
+                <label>Maoni yako</label>
+                <textarea id="inchargeFeedback" placeholder="Maoni yako kuhusu mfumo..."></textarea>
+            </div>
+        </div>
     </div>
 
-    <!-- 3: Tathmini Zilizotumwa -->
-    <div class="section"><h3><span class="step">3</span> 📋 Tathmini Zilizotumwa</h3>
-      <div class="data-tabs">
-        <button class="tab-btn active" onclick="loadAllData('all')">📋 Zote</button>
-        <button class="tab-btn" onclick="loadAllData('worker')">👤 Mtendakazi</button>
-        <button class="tab-btn" onclick="loadAllData('supervisor')">👔 Msimamizi</button>
-        <button class="tab-btn" onclick="loadAllData('incharge')">🏥 Yangu</button>
-      </div>
-      <div id="allDataContainer" class="data-container"><p style="color:#7f8c8d;text-align:center;">Bonyeza kituo cha juu</p></div>
+    <!-- SEHEMU 2: Sahihi -->
+    <div class="section">
+        <div class="section-title"><span>2</span> Sahihi</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Jina la mtia sahihi</label>
+                <input type="text" id="signatureName" placeholder="Jina lako kamili" />
+            </div>
+            <div class="form-group">
+                <label>Tarehe</label>
+                <input type="date" id="signatureDate" />
+            </div>
+        </div>
+        <div class="signature-area">
+            <p style="margin-bottom:10px; font-weight:600;">Chora sahihi yako hapa</p>
+            <canvas id="signatureCanvas"></canvas>
+            <div class="signature-actions">
+                <button type="button" class="btn-outline" style="padding:6px 20px;" onclick="clearSignature()">Futa</button>
+            </div>
+        </div>
     </div>
 
-    <!-- Vitufe -->
-    <div class="button-group no-print">
-      <button class="btn btn-primary" onclick="saveAppraisal()" id="saveBtn">💾 Hifadhi</button>
-      <button class="btn btn-info" onclick="openSendModal()" id="submitBtn">📤 Tuma</button>
-      <button class="btn btn-secondary" onclick="loadAppraisal()">📂 Pakia</button>
-      <button class="btn btn-danger" onclick="deleteAppraisal()">🗑️ Futa</button>
-      <button class="btn btn-success" onclick="showOverall()">📊 Jumla</button>
-      <button class="btn btn-purple" onclick="showSpecific()">🎯 Maalumu</button>
-      <button class="btn btn-danger" onclick="logout()">🚪 Toka</button>
+    <!-- SEHEMU 3: Tathmini Zilizotumwa (zilizopo kwenye JSONBin) -->
+    <div class="section">
+        <div class="section-title"><span>3</span> Tathmini Zilizotumwa</div>
+        <div id="submissionsList" class="submissions-list">
+            <p style="color:#777; font-style:italic;">Zinapakia...</p>
+        </div>
+        <button class="btn btn-outline" onclick="loadSubmissions()" style="margin-top:12px;">🔄 Refresh</button>
     </div>
-    <div style="text-align:center;margin-top:10px;"><span id="saveStatus" class="status-badge pending">📝 Hajahifadhiwa</span></div>
-  </div>
 
-  <!-- MODAL -->
-  <div id="sendModal" class="modal no-print">
-    <div class="modal-content">
-      <span class="close" onclick="closeSendModal()">&times;</span>
-      <h3>📤 Chagua Njia ya Kutuma</h3>
-      <p style="color:#7f8c8d;font-size:14px;margin-bottom:12px;">Chagua njia unayotaka kutuma taarifa yako</p>
-      <div class="radio-group">
-        <label><input type="radio" name="sendMethod" value="whatsapp" checked> 💬 WhatsApp</label>
-        <label><input type="radio" name="sendMethod" value="email"> 📧 Barua Pepe</label>
-        <label><input type="radio" name="sendMethod" value="direct"> 📤 Hifadhi tu</label>
-      </div>
-      <div id="recipientField">
-        <label>Namba ya WhatsApp au Barua Pepe ya mpokeaji <span style="color:#e74c3c;">*</span></label>
-        <input type="text" id="modalRecipient" placeholder="Mfano: 255742710697 au mtu@email.com">
-        <small style="color:#7f8c8d;font-size:12px;">Andika namba ya WhatsApp au barua pepe ya mpokeaji</small>
-      </div>
-      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="btn btn-info" onclick="submitWithMethod()" style="flex:1;">📤 Tuma</button>
-        <button class="btn btn-secondary" onclick="closeSendModal()" style="flex:1;">✖️ Ghairi</button>
-      </div>
+    <div id="messageBox" class="message-box"></div>
+
+    <div class="btn-group">
+        <button class="btn btn-primary" onclick="saveAndSend()">💾 Hifadhi na Kutuma</button>
+        <button class="btn btn-success" onclick="sendWhatsApp()">📱 Tuma WhatsApp</button>
+        <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
+        <button class="btn btn-outline" onclick="resetForm()">🔄 Weka Upya</button>
     </div>
-  </div>
+    <p style="margin-top:20px; font-size:12px; color:#888; text-align:center;">Hakikisha umejaza sehemu zote muhimu (*).</p>
+</div>
 
-  <script>
-    const API_KEY="$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K",BIN_ID="6a4b0bc9da38895dfe32cc08";
-    function showToast(m,t){const e=document.getElementById('toast');e.textContent=m;e.className='toast '+t+' show';setTimeout(()=>e.classList.remove('show'),3500)}
-    function getUsername(){const p=new URLSearchParams(location.search).get('user');if(!p)return null;try{return JSON.parse(decodeURIComponent(p)).username}catch(e){return null}}
-    const username=getUsername();if(!username){showToast('❌ Hakuna mtumiaji','error');setTimeout(()=>location.href='index.html',2000)}document.getElementById('greeting').textContent=`Karibu ${username}`;
+<script>
+// ============================================
+//  1. GET USER & SET INCHARGE PHONE
+// ============================================
+(function init() {
+    const params = new URLSearchParams(window.location.search);
+    const userParam = params.get('user');
+    if (userParam) {
+        try {
+            const user = JSON.parse(decodeURIComponent(userParam));
+            document.getElementById('userDisplay').textContent = '👤 ' + (user.username || '');
+            if (user.username) document.getElementById('inchargeName').value = user.username;
+            if (user.credential && user.credential.match(/^[0-9+\-\s()]+$/)) {
+                document.getElementById('inchargePhone').value = user.credential;
+            }
+            // Set self phone from login
+            if (user.inchargePhone) {
+                document.getElementById('inchargeSelfPhone').value = user.inchargePhone;
+            }
+        } catch(e) {}
+    }
+    document.getElementById('signatureDate').valueAsDate = new Date();
+    loadSubmissions();
+})();
 
-    // SIGNATURE
-    let canvas,ctx,isDrawing=!1,hasSignature=!1;
-    function initSignature(){canvas=document.getElementById('signatureCanvas');if(!canvas)return;ctx=canvas.getContext('2d');canvas.width=canvas.parentElement.clientWidth-20;canvas.height=130;ctx.lineWidth=3;ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#2c0a3e';canvas.addEventListener('mousedown',s);canvas.addEventListener('mousemove',d);canvas.addEventListener('mouseup',st);canvas.addEventListener('mouseleave',st);canvas.addEventListener('touchstart',h,{passive:!1});canvas.addEventListener('touchmove',h,{passive:!1});canvas.addEventListener('touchend',te,{passive:!1})}
-    function getPos(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*(canvas.width/r.width),y:(e.clientY-r.top)*(canvas.height/r.height)}}
-    function s(e){isDrawing=!0;hasSignature=!0;const p=getPos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)}
-    function d(e){if(!isDrawing)return;const p=getPos(e);ctx.lineTo(p.x,p.y);ctx.stroke()}
-    function st(){isDrawing=!1}
-    function h(e){e.preventDefault();const t=e.touches[0];const me=new MouseEvent(e.type==='touchstart'?'mousedown':'mousemove',{clientX:t.clientX,clientY:t.clientY});canvas.dispatchEvent(me)}
-    function te(e){e.preventDefault();canvas.dispatchEvent(new MouseEvent('mouseup',{}))}
-    function clearSignature(){ctx.clearRect(0,0,canvas.width,canvas.height);hasSignature=!1;showToast('🗑️ Sahihi imefutwa','info')}
-    function getSignatureData(){return hasSignature?canvas.toDataURL('image/png'):''}
-    function setSignatureData(d){if(!d){clearSignature();return}const img=new Image();img.onload=function(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);hasSignature=!0};img.src=d}
+// ============================================
+//  2. SIGNATURE CANVAS
+// ============================================
+let canvas = document.getElementById('signatureCanvas');
+let ctx = canvas.getContext('2d');
+let isDrawing = false;
 
-    // MODAL
-    function openSendModal(){document.getElementById('sendModal').style.display='flex'}
-    function closeSendModal(){document.getElementById('sendModal').style.display='none'}
-    document.querySelectorAll('input[name="sendMethod"]').forEach(r=>r.addEventListener('change',function(){const f=document.getElementById('recipientField');const inp=document.getElementById('modalRecipient');if(this.value==='direct'){f.style.display='none';inp.value=''}else{f.style.display='block';inp.placeholder=this.value==='whatsapp'?'Namba ya WhatsApp (mfano: 255742710697)':'Barua Pepe ya mpokeaji'}}));
-    document.getElementById('sendModal').addEventListener('click',function(e){if(e.target===this)closeSendModal()});
+function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width || 450;
+    canvas.height = 150;
+    ctx.lineWidth = 2.5;
+    ctx.strokeStyle = '#1e3a5f';
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+}
+resizeCanvas();
 
-    function getFormData(){return{username,role:'incharge',fullname:document.getElementById('fullname').value,department:document.getElementById('department').value,position:document.getElementById('position').value,phone:document.getElementById('phone').value,email:document.getElementById('email').value,step1_leadership:+document.getElementById('step1_leadership').value||0,step2_quality:+document.getElementById('step2_quality').value||0,step3_accountability:+document.getElementById('step3_accountability').value||0,step_notes:document.getElementById('step_notes').value,strengths:document.getElementById('strengths').value,weaknesses:document.getElementById('weaknesses').value,overall_comments:document.getElementById('overall_comments').value,signature_name:document.getElementById('signature_name').value,signature_date:document.getElementById('signature_date').value,signature_data:getSignatureData(),signature_notes:document.getElementById('signature_notes').value,status:'pending',submitted_to:null,timestamp:new Date().toISOString()}}
+function getPos(e) {
+    const rect = canvas.getBoundingClientRect();
+    const x = (e.clientX || e.touches[0].clientX) - rect.left;
+    const y = (e.clientY || e.touches[0].clientY) - rect.top;
+    return { x, y };
+}
 
-    function setFormData(d){['fullname','department','position','phone','email','step1_leadership','step2_quality','step3_accountability','step_notes','strengths','weaknesses','overall_comments','signature_name','signature_date','signature_notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=d[id]||''});if(d.signature_data)setSignatureData(d.signature_data);updateStatus(d.status||'pending')}
+canvas.addEventListener('mousedown', startDraw);
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', stopDraw);
+canvas.addEventListener('mouseleave', stopDraw);
 
-    function updateStatus(s){const map={saved:['saved','💾 Imehifadhiwa'],submitted:['submitted','📤 Imetumwa'],pending:['pending','📝 Hajahifadhiwa']};const c=map[s]||map.pending;const b=document.getElementById('saveStatus');b.className='status-badge '+c[0];b.textContent=c[1]}
+canvas.addEventListener('touchstart', function(e) { e.preventDefault(); startDraw(e); });
+canvas.addEventListener('touchmove', function(e) { e.preventDefault(); draw(e); });
+canvas.addEventListener('touchend', function(e) { e.preventDefault(); stopDraw(); });
 
-    async function saveAppraisal(){const b=document.getElementById('saveBtn');b.disabled=!0;b.innerHTML='<span class="loading"></span> Inahifadhi...';const d=getFormData();d.status='saved';try{const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}});if(!r.ok)throw new Error('Network error');const res=await r.json();const rec=res.record||{};if(!rec.appraisals)rec.appraisals={};if(!rec.appraisals.incharge)rec.appraisals.incharge={};rec.appraisals.incharge[username]=d;const up=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(rec)});if(!up.ok)throw new Error('Imeshindwa kuhifadhi');showToast('✅ Imehifadhiwa!','success');updateStatus('saved')}catch(e){showToast('❌ '+e.message,'error');console.error(e)}b.disabled=!1;b.innerHTML='💾 Hifadhi'}
+function startDraw(e) {
+    isDrawing = true;
+    const pos = getPos(e);
+    ctx.beginPath();
+    ctx.moveTo(pos.x, pos.y);
+}
 
-    async function submitWithMethod(){const method=document.querySelector('input[name="sendMethod"]:checked')?.value||'whatsapp';const recipient=document.getElementById('modalRecipient').value.trim();if(method!=='direct'&&!recipient){showToast('❌ Jaza namba ya WhatsApp au Barua Pepe ya mpokeaji','error');return}closeSendModal();const b=document.getElementById('submitBtn');b.disabled=!0;b.innerHTML='<span class="loading"></span> Inatuma...';const d=getFormData();if(!d.fullname||!d.department||!d.position||!d.signature_name||!d.signature_date||!hasSignature){showToast('❌ Jaza sehemu zote muhimu','error');b.disabled=!1;b.innerHTML='📤 Tuma';return}d.status='submitted';try{const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}});if(!r.ok)throw new Error('Network error');const res=await r.json();const rec=res.record||{};if(!rec.appraisals)rec.appraisals={};if(!rec.appraisals.incharge)rec.appraisals.incharge={};rec.appraisals.incharge[username]=d;const up=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(rec)});if(!up.ok)throw new Error('Imeshindwa kutuma');let msg='✅ Imetumwa!';if(method==='whatsapp'){window.open(`https://wa.me/${recipient}?text=Nimekamilisha%20tathmini%20yangu%20ya%20MTWARA%20PERFORMANCE.%20Tafadhali%20iangalie.`,'_blank');msg='✅ Imetumwa kwa WhatsApp!'}else if(method==='email'){const subj=encodeURIComponent('TATHMINI YA MGANGA MFAWIDHI - MTWARA PERFORMANCE');const body=encodeURIComponent(`TATHMINI YA MGANGA MFAWIDHI\n\nJina: ${d.fullname}\nIdara: ${d.department}\nCheo: ${d.position}\n\nUongozi: ${d.step1_leadership}/5\nUbora: ${d.step2_quality}/5\nUwajibikaji: ${d.step3_accountability}/5\n\nMaoni: ${d.overall_comments||'Hakuna'}\n\nTarehe: ${new Date().toLocaleString()}`);location.href=`mailto:${recipient}?subject=${subj}&body=${body}`;msg='✅ Email imefunguliwa!'}showToast(msg,'success');updateStatus('submitted')}catch(e){showToast('❌ '+e.message,'error');console.error(e)}b.disabled=!1;b.innerHTML='📤 Tuma'}
+function draw(e) {
+    if (!isDrawing) return;
+    const pos = getPos(e);
+    ctx.lineTo(pos.x, pos.y);
+    ctx.stroke();
+}
 
-    async function loadAppraisal(){try{const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}});if(!r.ok)throw new Error('Network error');const res=await r.json();const rec=res.record||{};const d=rec.appraisals?.incharge?.[username];if(!d){updateStatus('pending');return}setFormData(d);showToast('✅ Imepakiwa','success')}catch(e){showToast('❌ '+e.message,'error');console.error(e)}}
-    async function deleteAppraisal(){if(!confirm('Futa tathmini hii?'))return;try{const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}});if(!r.ok)throw new Error('Network error');const res=await r.json();const rec=res.record||{};if(rec.appraisals?.incharge?.[username]){delete rec.appraisals.incharge[username];const up=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(rec)});if(!up.ok)throw new Error('Imeshindwa kufuta');showToast('✅ Imehifadhiwa','success');updateStatus('pending')}else{showToast('❌ Hakuna tathmini','error')}}catch(e){showToast('❌ '+e.message,'error');console.error(e)}}
+function stopDraw() {
+    isDrawing = false;
+}
 
-    function downloadPDF(){showToast('⏳ Inatengeneza PDF...','info');try{window.print();showToast('✅ PDF imefunguliwa! Tumia "Hifadhi kama PDF"','success')}catch(e){showToast('❌ Hitilafu: '+e.message,'error');console.error(e)}}
+function clearSignature() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
 
-    function showOverall(){const d=getFormData();alert(`📊 TATHMINI JUMLA\n\n👤 ${d.fullname||'Hajajazwa'}\n🏢 ${d.department||'Hajajazwa'}\n📋 ${d.position||'Hajajazwa'}\n⭐ Uongozi: ${d.step1_leadership}/5\n⭐ Ubora: ${d.step2_quality}/5\n⭐ Uwajibikaji: ${d.step3_accountability}/5\n✍️ Sahihi: ${d.signature_name||'Hajajazwa'}\n💬 Maoni: ${d.overall_comments||'Hakuna'}`)}
-    function showSpecific(){const d=getFormData();const avg=(+d.step1_leadership+ +d.step2_quality+ +d.step3_accountability)/3;alert(`🎯 TATHMINI MAALUMU\n\n📌 Uongozi: ${d.step1_leadership}/5\n📌 Ubora: ${d.step2_quality}/5\n📌 Uwajibikaji: ${d.step3_accountability}/5\n📊 Wastani: ${avg.toFixed(1)}/5\n📈 Kiwango: ${avg>=4?'🌟 Bora':avg>=3?'✅ Nzuri':avg>=2?'⚠️ Inahitajika Kuboresha':'❌ Dhaifu'}`)}
-    async function loadAllData(role='all'){const c=document.getElementById('allDataContainer');c.innerHTML='<span class="loading"></span> Inapakia...';try{const r=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{headers:{'X-Master-Key':API_KEY}});if(!r.ok)throw new Error('Network error');const res=await r.json();const rec=res.record||{};const app=rec.appraisals||{};document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.querySelector(`.tab-btn[onclick="loadAllData('${role}')"]`)?.classList.add('active');let html='',count=0;const arr=role==='all'?['worker','supervisor','incharge']:[role];const labels={worker:'👤 Mtendakazi',supervisor:'👔 Msimamizi',incharge:'🏥 Mganga Mfawidhi'};const badges={worker:'worker',supervisor:'supervisor',incharge:'incharge'};arr.forEach(r=>{const data=app[r]||{};Object.keys(data).forEach(u=>{const item=data[u];if(r!=='incharge'&&item.submitted_to!=='incharge'&&item.status!=='submitted')return;const icon=item.status==='submitted'?'📤':'💾';html+=`<div class="data-item"><span><strong>${item.fullname||u}</strong> <span class="badge-role ${badges[r]}">${labels[r]}</span></span><span style="font-size:11px;color:#7f8c8d;">${item.department||''} ${icon} ${item.status||'saved'}</span></div>`;count++})});c.innerHTML=count===0?'<p style="color:#7f8c8d;text-align:center;">Hakuna tathmini zilizotumwa.</p>':html}catch(e){c.innerHTML='<p style="color:#e74c3c;">Hitilafu: '+e.message+'</p>';console.error(e)}}
-    function logout(){location.href='index.html'}
-    window.onload=function(){initSignature();loadAppraisal();loadAllData('all')};
-  </script>
+// ============================================
+//  3. JSONBIN
+// ============================================
+const JSONBIN_BIN_ID = '6a4b0bc9da38895dfe32cc08';
+const JSONBIN_ACCESS_KEY = '$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K';
+
+async function saveToJSONBin(data) {
+    const url = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Access-Key': JSONBIN_ACCESS_KEY
+            },
+            body: JSON.stringify(data)
+        });
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        return await response.json();
+    } catch (error) {
+        console.error('JSONBin error:', error);
+        throw error;
+    }
+}
+
+async function loadSubmissions() {
+    const listEl = document.getElementById('submissionsList');
+    listEl.innerHTML = '<p style="color:#777;">Inapakia...</p>';
+    try {
+        const url = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
+        const response = await fetch(url, {
+            headers: { 'X-Access-Key': JSONBIN_ACCESS_KEY }
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const result = await response.json();
+        const data = result.record;
+        // If data is an array, show all; if object, show as one
+        let items = [];
+        if (Array.isArray(data)) {
+            items = data;
+        } else if (data && typeof data === 'object') {
+            // Show the latest submission
+            items = [data];
+        } else {
+            items = [];
+        }
+        if (items.length === 0) {
+            listEl.innerHTML = '<p style="color:#999;">Hakuna tathmini zilizotumwa bado.</p>';
+            return;
+        }
+        let html = '<ul style="list-style:none; padding:0;">';
+        items.slice(-10).reverse().forEach((item, idx) => {
+            const name = item.workerName || item.supervisorName || item.inchargeName || 'Mtumiaji';
+            const role = item.role || 'mtumiaji';
+            const date = item.submittedAt ? new Date(item.submittedAt).toLocaleDateString('sw') : 'tarehe haijulikani';
+            html += `<li style="padding:8px 0; border-bottom:1px solid #dce7f2;">
+                <strong>${name}</strong> (${role}) - <span style="color:#1a73e8;">${date}</span>
+                <br><small style="color:#555;">${item.workerDepartment || item.supervisorDepartment || item.inchargeDepartment || ''}</small>
+            </li>`;
+        });
+        html += '</ul>';
+        listEl.innerHTML = html;
+    } catch (err) {
+        listEl.innerHTML = `<p style="color:#d93025;">❌ Hitilafu: ${err.message}</p>`;
+    }
+}
+
+// ============================================
+//  4. FORM DATA
+// ============================================
+function getFormData() {
+    return {
+        inchargeName: document.getElementById('inchargeName').value.trim(),
+        inchargePhone: document.getElementById('inchargePhone').value.trim(),
+        inchargeEmail: document.getElementById('inchargeEmail').value.trim(),
+        inchargeDepartment: document.getElementById('inchargeDepartment').value.trim(),
+        inchargeTitle: document.getElementById('inchargeTitle').value.trim(),
+        leadership: document.getElementById('leadership').value,
+        serviceQuality: document.getElementById('serviceQuality').value,
+        accountability: document.getElementById('accountability').value,
+        inchargeFeedback: document.getElementById('inchargeFeedback').value.trim(),
+        signatureName: document.getElementById('signatureName').value.trim(),
+        signatureDate: document.getElementById('signatureDate').value,
+        signatureImage: canvas.toDataURL('image/png'),
+        // self phone for receiving (could be same as inchargePhone)
+        inchargeSelfPhone: document.getElementById('inchargeSelfPhone').value.trim() || document.getElementById('inchargePhone').value.trim(),
+        submittedAt: new Date().toISOString(),
+        role: 'incharge'
+    };
+}
+
+function validateForm(data) {
+    const required = ['inchargeName', 'inchargePhone', 'inchargeDepartment', 'inchargeTitle'];
+    for (let field of required) {
+        if (!data[field]) {
+            return `Tafadhali jaza sehemu ya ${field.replace('incharge','').toLowerCase()}.`;
+        }
+    }
+    if (!data.inchargeSelfPhone) {
+        return 'Tafadhali weka namba yako ya simu (Mganga Mfawidhi).';
+    }
+    return null;
+}
+
+function showMessage(text, type) {
+    const box = document.getElementById('messageBox');
+    box.textContent = text;
+    box.className = 'message-box ' + type;
+}
+
+function clearMessage() {
+    const box = document.getElementById('messageBox');
+    box.className = 'message-box';
+    box.textContent = '';
+}
+
+// ============================================
+//  5. SAVE AND SEND
+// ============================================
+async function saveAndSend() {
+    clearMessage();
+    const data = getFormData();
+    const error = validateForm(data);
+    if (error) {
+        showMessage(error, 'error');
+        return;
+    }
+
+    const sigData = canvas.toDataURL('image/png');
+    if (sigData === 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==') {
+        showMessage('Tafadhali chora sahihi yako.', 'error');
+        return;
+    }
+
+    try {
+        await saveToJSONBin(data);
+        showMessage('✅ Data imehifadhiwa kikamilifu! Sasa inatuma WhatsApp...', 'success');
+        await sendWhatsApp(data);
+        loadSubmissions(); // refresh list
+    } catch (err) {
+        showMessage('❌ Hitilafu: ' + err.message, 'error');
+    }
+}
+
+// ============================================
+//  6. WHATSAPP
+// ============================================
+async function sendWhatsApp(data) {
+    if (!data) {
+        data = getFormData();
+        const error = validateForm(data);
+        if (error) { showMessage(error, 'error'); return; }
+        const sigData = canvas.toDataURL('image/png');
+        if (sigData === 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==') {
+            showMessage('Tafadhali chora sahihi yako.', 'error');
+            return;
+        }
+    }
+
+    // Use self phone as receiver (inchargeSelfPhone)
+    let phone = data.inchargeSelfPhone || document.getElementById('inchargeSelfPhone').value.trim() || data.inchargePhone;
+    phone = phone.replace(/[\s\-\(\)]/g, '');
+    if (!phone.startsWith('255') && phone.startsWith('0')) phone = '255' + phone.substring(1);
+    else if (!phone.startsWith('255') && !phone.startsWith('+')) phone = '255' + phone;
+    if (phone.startsWith('+')) phone = phone.substring(1);
+
+    const msg = `*TATHMINI YA MGANGA MFAWIDHI - MTWARA 2026*
+    
+👤 Jina: ${data.inchargeName}
+📞 Simu: ${data.inchargePhone}
+📧 Barua Pepe: ${data.inchargeEmail || 'Hajajazwa'}
+🏢 Idara: ${data.inchargeDepartment}
+👔 Cheo: ${data.inchargeTitle}
+
+*Tathmini:*
+Uongozi: ${data.leadership || 'Hajajazwa'}/5
+Ubora wa Huduma: ${data.serviceQuality || 'Hajajazwa'}/5
+Uwajibikaji: ${data.accountability || 'Hajajazwa'}/5
+
+*Maoni:* ${data.inchargeFeedback || 'Hajajazwa'}
+
+📅 Tarehe: ${data.signatureDate || 'Hajajazwa'}
+✍️ Sahihi: ${data.signatureName || 'Hajajazwa'}
+
+*Imetumwa na mfumo wa Tathmini.*`;
+
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
+    showMessage('📱 WhatsApp imefunguliwa. Bonyeza SEND.', 'success');
+}
+
+function resetForm() {
+    if (confirm('Weka upya fomu?')) {
+        document.querySelectorAll('input, textarea, select').forEach(el => {
+            if (el.type !== 'hidden') {
+                if (el.type === 'date') el.value = '';
+                else if (el.tagName === 'SELECT') el.selectedIndex = 0;
+                else el.value = '';
+            }
+        });
+        clearSignature();
+        clearMessage();
+        document.getElementById('signatureDate').valueAsDate = new Date();
+        // restore self phone from URL
+        const params = new URLSearchParams(window.location.search);
+        const userParam = params.get('user');
+        if (userParam) {
+            try {
+                const user = JSON.parse(decodeURIComponent(userParam));
+                if (user.inchargePhone) document.getElementById('inchargeSelfPhone').value = user.inchargePhone;
+            } catch(e) {}
+        }
+    }
+}
+
+console.log('✅ incharge.html loaded.');
+</script>
 </body>
 </html>
