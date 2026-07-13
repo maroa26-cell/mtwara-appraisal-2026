@@ -5,294 +5,584 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mganga Mfawidhi - Tathmini</title>
     <style>
-        /* Same styles as supervisor */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f8fe; padding: 20px; }
-        .container { max-width: 950px; margin: 0 auto; background: white; border-radius: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.08); padding: 30px 35px; }
-        .header { display: flex; align-items: center; gap: 20px; border-bottom: 3px solid #1a73e8; padding-bottom: 12px; margin-bottom: 25px; flex-wrap: wrap; }
-        .header img { max-height: 60px; width: auto; }
-        .header h1 { color: #0b3b5c; font-size: 28px; margin: 0; flex: 1; }
-        .header h1 small { font-size: 16px; font-weight: 400; color: #555; display: block; }
-        .section { background: #f9fcff; border-radius: 16px; padding: 20px 24px; margin-bottom: 25px; border: 1px solid #e3edf7; }
-        .section-title { font-size: 20px; font-weight: 700; color: #0b3b5c; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
-        .section-title span { background: #1a73e8; color: white; width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px; margin-bottom: 12px; }
-        .form-group { margin-bottom: 16px; }
-        label { display: block; font-weight: 600; color: #1e3a5f; margin-bottom: 4px; font-size: 14px; }
-        input, select, textarea { width: 100%; padding: 10px 14px; border: 1.5px solid #cfddee; border-radius: 10px; font-size: 14px; background: white; transition: 0.2s; }
-        input:focus, select:focus, textarea:focus { border-color: #1a73e8; outline: none; box-shadow: 0 0 0 3px rgba(26,115,232,0.1); }
-        textarea { resize: vertical; min-height: 60px; }
-        .full-width { grid-column: 1 / -1; }
-        .signature-area { border: 2px dashed #b0c7db; border-radius: 16px; padding: 20px; text-align: center; background: #f3f8ff; margin-top: 10px; }
-        #signatureCanvas { border: 1px solid #ccc; border-radius: 12px; background: white; touch-action: none; width: 100%; max-width: 450px; height: 150px; }
-        .signature-actions { display: flex; gap: 10px; justify-content: center; margin: 10px 0; flex-wrap: wrap; }
-        .signature-actions button { padding: 6px 18px; border: none; border-radius: 30px; font-size: 13px; font-weight: 600; cursor: pointer; background: #e0e7ef; }
-        .btn-group { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; }
-        .btn { padding: 12px 30px; border: none; border-radius: 40px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; flex: 1 0 auto; }
-        .btn-primary { background: #1a73e8; color: white; }
-        .btn-primary:hover { background: #1557b0; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26,115,232,0.3); }
-        .btn-success { background: #0f9d58; color: white; }
-        .btn-success:hover { background: #0b7a45; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(15,157,88,0.3); }
-        .btn-warning { background: #fbbc04; color: #1e1e1e; }
-        .btn-warning:hover { background: #e5ac00; transform: translateY(-2px); }
-        .btn-outline { background: transparent; border: 2px solid #1a73e8; color: #1a73e8; }
-        .btn-outline:hover { background: #1a73e8; color: white; }
-        .message-box { padding: 14px 20px; border-radius: 12px; margin: 15px 0; display: none; font-weight: 500; }
-        .message-box.success { background: #e6f7e6; color: #0b5e2e; border-left: 5px solid #0f9d58; display: block; }
-        .message-box.error { background: #fde8e8; color: #a12727; border-left: 5px solid #d93025; display: block; }
-        .incharge-phone-field { background: #fff8e7; padding: 16px 20px; border-radius: 12px; border-left: 5px solid #fbbc04; margin-bottom: 20px; }
-        .submissions-list { background: #f0f5fa; border-radius: 12px; padding: 12px 16px; margin-top: 10px; }
-        .submissions-list ul { list-style: none; padding: 0; }
-        .submissions-list li { padding: 8px 0; border-bottom: 1px solid #dce7f2; }
-        .submissions-list li:last-child { border-bottom: none; }
-        @media (max-width: 640px) { .container { padding: 16px; } .form-row { grid-template-columns: 1fr; } .btn-group { flex-direction: column; } .btn { flex: 1; } .header { flex-direction: column; align-items: flex-start; } }
+        /* Same as supervisor */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #eef4fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.12);
+            padding: 30px 35px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 3px solid #1a73e8;
+            padding-bottom: 16px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+        .header img {
+            max-height: 70px;
+            width: auto;
+            border-radius: 12px;
+        }
+        .header h1 {
+            color: #0b2b4a;
+            font-size: 28px;
+            margin: 0;
+            flex: 1;
+        }
+        .header h1 small {
+            font-size: 16px;
+            font-weight: 400;
+            color: #4a6a85;
+            display: block;
+        }
+        .section {
+            background: #f8fafe;
+            border-radius: 20px;
+            padding: 22px 26px;
+            margin-bottom: 24px;
+            border: 1px solid #e4ecf5;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0b2b4a;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title span {
+            background: #1a73e8;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px 24px;
+            margin-bottom: 8px;
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            color: #1a3a5a;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #dce5ef;
+            border-radius: 12px;
+            font-size: 14px;
+            background: white;
+            transition: 0.2s;
+        }
+        input:focus,
+        textarea:focus {
+            border-color: #1a73e8;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.12);
+        }
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        .signature-area {
+            border: 2px dashed #b0c7db;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            background: #f3f8ff;
+            margin-top: 10px;
+        }
+        #signatureCanvas {
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            background: white;
+            touch-action: none;
+            width: 100%;
+            max-width: 450px;
+            height: 150px;
+        }
+        .signature-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+        .signature-actions button {
+            padding: 6px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            background: #e0e7ef;
+            transition: 0.2s;
+        }
+        .signature-actions button:hover {
+            background: #cbd5e1;
+        }
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            flex: 1 0 auto;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #1a73e8, #0d47a1);
+            color: white;
+            box-shadow: 0 6px 20px rgba(26, 115, 232, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(26, 115, 232, 0.4);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #0f9d58, #0b7a45);
+            color: white;
+            box-shadow: 0 6px 20px rgba(15, 157, 88, 0.3);
+        }
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(15, 157, 88, 0.4);
+        }
+        .btn-warning {
+            background: linear-gradient(135deg, #fbbc04, #e5ac00);
+            color: #1e1e1e;
+            box-shadow: 0 6px 20px rgba(251, 188, 4, 0.3);
+        }
+        .btn-warning:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(251, 188, 4, 0.4);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #1a73e8;
+            color: #1a73e8;
+        }
+        .btn-outline:hover {
+            background: #1a73e8;
+            color: white;
+            transform: translateY(-3px);
+        }
+        .message-box {
+            padding: 14px 20px;
+            border-radius: 14px;
+            margin: 15px 0;
+            display: none;
+            font-weight: 500;
+        }
+        .message-box.success {
+            background: #e6f7e6;
+            color: #0b5e2e;
+            border-left: 6px solid #0f9d58;
+            display: block;
+        }
+        .message-box.error {
+            background: #fde8e8;
+            color: #a12727;
+            border-left: 6px solid #d93025;
+            display: block;
+        }
+        .incharge-phone-field {
+            background: #fff8e7;
+            padding: 16px 20px;
+            border-radius: 14px;
+            border-left: 6px solid #fbbc04;
+            margin-bottom: 24px;
+        }
+        .submissions-list {
+            background: #f0f5fa;
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-top: 10px;
+        }
+        .submissions-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        .submissions-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #dce5ef;
+        }
+        .submissions-list li:last-child {
+            border-bottom: none;
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding: 16px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .btn-group {
+                flex-direction: column;
+            }
+            .btn {
+                flex: 1;
+            }
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <img src="https://via.placeholder.com/150x70?text=MTWARA+SDA+DISPENSARY" alt="Mtwara SDA Dispensary" />
-        <h1>
-            📋 Mganga Mfawidhi - Tathmini
-            <small id="userDisplay"></small>
-        </h1>
-    </div>
-
-    <div class="incharge-phone-field">
-        <label style="font-weight:700; color:#b85c00;">📱 Namba yako ya simu (Mganga Mfawidhi)</label>
-        <input type="text" id="inchargeSelfPhone" placeholder="0712 345 678" style="margin-top:6px;" />
-        <small style="color:#777; display:block; margin-top:4px;">Namba hii itatumiwa kama mpokeaji wa tathmini zote.</small>
-    </div>
-
-    <!-- SEHEMU 1: Tathmini yako -->
-    <div class="section">
-        <div class="section-title"><span>1</span> Tathmini yako</div>
-        <div class="form-row">
-            <div class="form-group"><label>Jina kamili *</label><input type="text" id="inchargeName" placeholder="Mfano: Dk. Mwanaisha Juma" required /></div>
-            <div class="form-group"><label>Namba ya Simu *</label><input type="text" id="inchargePhone" placeholder="0712 345 678" required /></div>
-            <div class="form-group"><label>Barua Pepe</label><input type="email" id="inchargeEmail" placeholder="mwanaisha@mfano.com" /></div>
-            <div class="form-group"><label>Idara / Kitengo *</label><input type="text" id="inchargeDepartment" placeholder="Mfano: Wodi ya Wazazi" required /></div>
-            <div class="form-group"><label>Cheo *</label><input type="text" id="inchargeTitle" placeholder="Mfano: Mganga Mfawidhi" required /></div>
+    <div class="container">
+        <div class="header">
+            <img src="https://via.placeholder.com/200x80?text=MTWARA+SDA" alt="Mtwara SDA Dispensary" />
+            <h1>
+                📋 Mganga Mfawidhi - Tathmini
+                <small id="userDisplay"></small>
+            </h1>
         </div>
-        <div class="form-row">
-            <div class="form-group"><label>Uongozi (1-5)</label><input type="number" id="leadership" min="1" max="5" placeholder="1-5" /></div>
-            <div class="form-group"><label>Ubora wa Huduma (1-5)</label><input type="number" id="serviceQuality" min="1" max="5" placeholder="1-5" /></div>
-            <div class="form-group"><label>Uwajibikaji (1-5)</label><input type="number" id="accountability" min="1" max="5" placeholder="1-5" /></div>
-            <div class="form-group"><label>Maoni yako</label><textarea id="inchargeFeedback" placeholder="Maoni yako kuhusu mfumo..."></textarea></div>
+
+        <div class="incharge-phone-field">
+            <label style="font-weight:700; color:#b85c00;">📱 Namba yako ya simu (Mganga Mfawidhi)</label>
+            <input type="text" id="inchargeSelfPhone" placeholder="0712 345 678" style="margin-top:6px;" />
+            <small style="color:#6a8aaa; display:block; margin-top:4px;">Namba hii itatumiwa kama mpokeaji wa tathmini zote.</small>
         </div>
-    </div>
 
-    <!-- SEHEMU 2: Sahihi -->
-    <div class="section">
-        <div class="section-title"><span>2</span> Sahihi</div>
-        <div class="form-row">
-            <div class="form-group"><label>Jina la mtia sahihi</label><input type="text" id="signatureName" placeholder="Jina lako kamili" /></div>
-            <div class="form-group"><label>Tarehe</label><input type="date" id="signatureDate" /></div>
+        <!-- SEHEMU 1 -->
+        <div class="section">
+            <div class="section-title"><span>1</span> Tathmini yako</div>
+            <div class="form-row">
+                <div class="form-group"><label>Jina kamili *</label><input type="text" id="inchargeName" placeholder="Mfano: Dk. Mwanaisha Juma" required /></div>
+                <div class="form-group"><label>Namba ya Simu *</label><input type="text" id="inchargePhone" placeholder="0712 345 678" required /></div>
+                <div class="form-group"><label>Barua Pepe</label><input type="email" id="inchargeEmail" placeholder="mwanaisha@mfano.com" /></div>
+                <div class="form-group"><label>Idara / Kitengo *</label><input type="text" id="inchargeDepartment" placeholder="Mfano: Wodi ya Wazazi" required /></div>
+                <div class="form-group"><label>Cheo *</label><input type="text" id="inchargeTitle" placeholder="Mfano: Mganga Mfawidhi" required /></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Uongozi (1-5)</label><input type="number" id="leadership" min="1" max="5" placeholder="1-5" /></div>
+                <div class="form-group"><label>Ubora wa Huduma (1-5)</label><input type="number" id="serviceQuality" min="1" max="5" placeholder="1-5" /></div>
+                <div class="form-group"><label>Uwajibikaji (1-5)</label><input type="number" id="accountability" min="1" max="5" placeholder="1-5" /></div>
+                <div class="form-group"><label>Maoni yako</label><textarea id="inchargeFeedback"></textarea></div>
+            </div>
         </div>
-        <div class="signature-area">
-            <p style="margin-bottom:10px; font-weight:600;">Chora sahihi yako hapa</p>
-            <canvas id="signatureCanvas"></canvas>
-            <div class="signature-actions"><button type="button" onclick="clearSignature()">Futa</button></div>
+
+        <!-- SEHEMU 2: Sahihi -->
+        <div class="section">
+            <div class="section-title"><span>2</span> Sahihi</div>
+            <div class="form-row">
+                <div class="form-group"><label>Jina la mtia sahihi</label><input type="text" id="signatureName" /></div>
+                <div class="form-group"><label>Tarehe</label><input type="date" id="signatureDate" /></div>
+            </div>
+            <div class="signature-area">
+                <p style="margin-bottom:10px; font-weight:600;">Chora sahihi yako hapa</p>
+                <canvas id="signatureCanvas"></canvas>
+                <div class="signature-actions"><button type="button" onclick="clearSignature()">Futa</button></div>
+            </div>
         </div>
+
+        <!-- SEHEMU 3: Tathmini Zilizotumwa -->
+        <div class="section">
+            <div class="section-title"><span>3</span> Tathmini Zilizotumwa</div>
+            <div id="submissionsList" class="submissions-list"><p style="color:#6a8aaa;">Zinapakia...</p></div>
+            <button class="btn btn-outline" onclick="loadSubmissions()" style="margin-top:12px;">🔄 Refresh</button>
+        </div>
+
+        <div id="messageBox" class="message-box"></div>
+
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="saveAndSend()">💾 Hifadhi na Kutuma</button>
+            <button class="btn btn-success" onclick="sendWhatsApp()">📱 Tuma WhatsApp</button>
+            <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
+            <button class="btn btn-outline" onclick="resetForm()">🔄 Weka Upya</button>
+        </div>
+        <p style="margin-top:20px; font-size:12px; color:#6a8aaa; text-align:center;">Hakikisha umejaza sehemu zote muhimu (*).</p>
     </div>
 
-    <!-- SEHEMU 3: Tathmini Zilizotumwa -->
-    <div class="section">
-        <div class="section-title"><span>3</span> Tathmini Zilizotumwa</div>
-        <div id="submissionsList" class="submissions-list"><p style="color:#777;">Zinapakia...</p></div>
-        <button class="btn btn-outline" onclick="loadSubmissions()" style="margin-top:12px;">🔄 Refresh</button>
-    </div>
-
-    <div id="messageBox" class="message-box"></div>
-
-    <div class="btn-group">
-        <button class="btn btn-primary" onclick="saveAndSend()">💾 Hifadhi na Kutuma</button>
-        <button class="btn btn-success" onclick="sendWhatsApp()">📱 Tuma WhatsApp</button>
-        <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
-        <button class="btn btn-outline" onclick="resetForm()">🔄 Weka Upya</button>
-    </div>
-    <p style="margin-top:20px; font-size:12px; color:#888; text-align:center;">Hakikisha umejaza sehemu zote muhimu (*).</p>
-</div>
-
-<script>
-(function init() {
-    const params = new URLSearchParams(window.location.search);
-    const userParam = params.get('user');
-    if (userParam) {
-        try {
-            const user = JSON.parse(decodeURIComponent(userParam));
-            document.getElementById('userDisplay').textContent = '👤 ' + (user.username || '');
-            if (user.username) document.getElementById('inchargeName').value = user.username;
-            if (user.credential && user.credential.match(/^[0-9+\-\s()]+$/)) {
-                document.getElementById('inchargePhone').value = user.credential;
+    <script>
+        // ========== USER ==========
+        (function init() {
+            const params = new URLSearchParams(window.location.search);
+            const userParam = params.get('user');
+            if (userParam) {
+                try {
+                    const user = JSON.parse(decodeURIComponent(userParam));
+                    document.getElementById('userDisplay').textContent = '👤 ' + (user.username || '');
+                    if (user.username) document.getElementById('inchargeName').value = user.username;
+                    if (user.credential && user.credential.match(/^[0-9+\-\s()]+$/)) {
+                        document.getElementById('inchargePhone').value = user.credential;
+                    }
+                    if (user.inchargePhone) {
+                        document.getElementById('inchargeSelfPhone').value = user.inchargePhone;
+                    }
+                } catch (e) {}
             }
-            if (user.inchargePhone) {
-                document.getElementById('inchargeSelfPhone').value = user.inchargePhone;
-            }
-        } catch(e) {}
-    }
-    document.getElementById('signatureDate').valueAsDate = new Date();
-    loadSubmissions();
-})();
+            document.getElementById('signatureDate').valueAsDate = new Date();
+            loadSubmissions();
+        })();
 
-// Canvas (same as before)
-let canvas = document.getElementById('signatureCanvas');
-let ctx = canvas.getContext('2d');
-let isDrawing = false;
-function resizeCanvas() {
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width || 450;
-    canvas.height = 150;
-    ctx.lineWidth = 2.5;
-    ctx.strokeStyle = '#1e3a5f';
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-}
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
-function getPos(e) {
-    const rect = canvas.getBoundingClientRect();
-    const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
-    const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
-    return { x, y };
-}
-canvas.addEventListener('mousedown', startDraw);
-canvas.addEventListener('mousemove', draw);
-canvas.addEventListener('mouseup', stopDraw);
-canvas.addEventListener('mouseleave', stopDraw);
-canvas.addEventListener('touchstart', function(e) { e.preventDefault(); startDraw(e); });
-canvas.addEventListener('touchmove', function(e) { e.preventDefault(); draw(e); });
-canvas.addEventListener('touchend', function(e) { e.preventDefault(); stopDraw(); });
-function startDraw(e) { isDrawing = true; const pos = getPos(e); ctx.beginPath(); ctx.moveTo(pos.x, pos.y); }
-function draw(e) { if (!isDrawing) return; const pos = getPos(e); ctx.lineTo(pos.x, pos.y); ctx.stroke(); }
-function stopDraw() { isDrawing = false; }
-function clearSignature() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
+        // ========== SIGNATURE ==========
+        let canvas = document.getElementById('signatureCanvas');
+        let ctx = canvas.getContext('2d');
+        let isDrawing = false;
 
-// JSONBin
-const JSONBIN_BIN_ID = '6a4b0bc9da38895dfe32cc08';
-const JSONBIN_ACCESS_KEY = '$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K';
-async function saveToJSONBin(data) {
-    const url = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
-    try {
-        const response = await fetch(url, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json', 'X-Access-Key': JSONBIN_ACCESS_KEY },
-            body: JSON.stringify(data)
-        });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return await response.json();
-    } catch (e) { throw e; }
-}
-
-async function loadSubmissions() {
-    const listEl = document.getElementById('submissionsList');
-    listEl.innerHTML = '<p style="color:#777;">Inapakia...</p>';
-    try {
-        const url = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
-        const response = await fetch(url, { headers: { 'X-Access-Key': JSONBIN_ACCESS_KEY } });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const result = await response.json();
-        const data = result.record;
-        let items = Array.isArray(data) ? data : (data && typeof data === 'object' ? [data] : []);
-        if (items.length === 0) {
-            listEl.innerHTML = '<p style="color:#999;">Hakuna tathmini zilizotumwa bado.</p>';
-            return;
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width || 450;
+            canvas.height = 150;
+            ctx.lineWidth = 2.5;
+            ctx.strokeStyle = '#1a3a5a';
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
         }
-        let html = '<ul>';
-        items.slice(-10).reverse().forEach(item => {
-            const name = item.workerName || item.supervisorName || item.inchargeName || 'Mtumiaji';
-            const role = item.role || 'mtumiaji';
-            const date = item.submittedAt ? new Date(item.submittedAt).toLocaleDateString('sw') : 'tarehe haijulikani';
-            html += `<li><strong>${name}</strong> (${role}) - <span style="color:#1a73e8;">${date}</span><br><small>${item.workerDepartment || item.supervisorDepartment || item.inchargeDepartment || ''}</small></li>`;
-        });
-        html += '</ul>';
-        listEl.innerHTML = html;
-    } catch (err) {
-        listEl.innerHTML = `<p style="color:#d93025;">❌ Hitilafu: ${err.message}</p>`;
-    }
-}
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
-function getFormData() {
-    return {
-        inchargeName: document.getElementById('inchargeName').value.trim(),
-        inchargePhone: document.getElementById('inchargePhone').value.trim(),
-        inchargeEmail: document.getElementById('inchargeEmail').value.trim(),
-        inchargeDepartment: document.getElementById('inchargeDepartment').value.trim(),
-        inchargeTitle: document.getElementById('inchargeTitle').value.trim(),
-        leadership: document.getElementById('leadership').value,
-        serviceQuality: document.getElementById('serviceQuality').value,
-        accountability: document.getElementById('accountability').value,
-        inchargeFeedback: document.getElementById('inchargeFeedback').value.trim(),
-        signatureName: document.getElementById('signatureName').value.trim(),
-        signatureDate: document.getElementById('signatureDate').value,
-        signatureImage: canvas.toDataURL('image/png'),
-        inchargeSelfPhone: document.getElementById('inchargeSelfPhone').value.trim() || document.getElementById('inchargePhone').value.trim(),
-        submittedAt: new Date().toISOString(),
-        role: 'incharge'
-    };
-}
+        function getPos(e) {
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+            const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+            return { x, y };
+        }
+        canvas.addEventListener('mousedown', startDraw);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDraw);
+        canvas.addEventListener('mouseleave', stopDraw);
+        canvas.addEventListener('touchstart', function(e) { e.preventDefault();
+            startDraw(e); });
+        canvas.addEventListener('touchmove', function(e) { e.preventDefault();
+            draw(e); });
+        canvas.addEventListener('touchend', function(e) { e.preventDefault();
+            stopDraw(); });
 
-function validateForm(data) {
-    const required = ['inchargeName', 'inchargePhone', 'inchargeDepartment', 'inchargeTitle'];
-    for (let f of required) if (!data[f]) return `Tafadhali jaza sehemu ya ${f.replace('incharge','').toLowerCase()}.`;
-    if (!data.inchargeSelfPhone) return 'Tafadhali weka namba yako ya simu.';
-    const sigData = canvas.toDataURL('image/png');
-    if (sigData === 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==') {
-        return 'Tafadhali chora sahihi yako.';
-    }
-    return null;
-}
+        function startDraw(e) { isDrawing = true;
+            const pos = getPos(e);
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y); }
 
-function showMessage(t, type) { const box = document.getElementById('messageBox'); box.textContent = t; box.className = 'message-box ' + type; }
-function clearMessage() { const box = document.getElementById('messageBox'); box.className = 'message-box'; box.textContent = ''; }
+        function draw(e) { if (!isDrawing) return;
+            const pos = getPos(e);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke(); }
 
-async function saveAndSend() {
-    clearMessage();
-    const data = getFormData();
-    const error = validateForm(data);
-    if (error) { showMessage(error, 'error'); return; }
-    try {
-        await saveToJSONBin(data);
-        showMessage('✅ Data imehifadhiwa! Sasa inatuma WhatsApp...', 'success');
-        await sendWhatsApp(data);
-        loadSubmissions();
-    } catch (e) { showMessage('❌ Hitilafu: ' + e.message, 'error'); }
-}
+        function stopDraw() { isDrawing = false; }
 
-async function sendWhatsApp(data) {
-    if (!data) { data = getFormData(); const err = validateForm(data); if (err) { showMessage(err, 'error'); return; } }
-    let phone = data.inchargeSelfPhone.replace(/[\s\-\(\)]/g, '');
-    if (!phone.startsWith('255') && phone.startsWith('0')) phone = '255' + phone.substring(1);
-    else if (!phone.startsWith('255') && !phone.startsWith('+')) phone = '255' + phone;
-    if (phone.startsWith('+')) phone = phone.substring(1);
-    const msg = `*TATHMINI YA MGANGA MFAWIDHI - MTWARA 2026*\n\n👤 Jina: ${data.inchargeName}\n📞 Simu: ${data.inchargePhone}\n📧 Barua Pepe: ${data.inchargeEmail || 'Hajajazwa'}\n🏢 Idara: ${data.inchargeDepartment}\n👔 Cheo: ${data.inchargeTitle}\n\n*Tathmini:*\nUongozi: ${data.leadership || 'Hajajazwa'}/5\nUbora wa Huduma: ${data.serviceQuality || 'Hajajazwa'}/5\nUwajibikaji: ${data.accountability || 'Hajajazwa'}/5\n\n*Maoni:* ${data.inchargeFeedback || 'Hajajazwa'}\n\n📅 Tarehe: ${data.signatureDate || 'Hajajazwa'}\n✍️ Sahihi: ${data.signatureName || 'Hajajazwa'}\n\n*Imetumwa na mfumo wa Tathmini.*`;
-    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
-    showMessage('📱 WhatsApp imefunguliwa. Bonyeza SEND.', 'success');
-}
+        function clearSignature() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
 
-function resetForm() {
-    if (confirm('Weka upya fomu?')) {
-        document.querySelectorAll('input, textarea, select').forEach(el => {
-            if (el.type !== 'hidden' && el.type !== 'checkbox' && el.type !== 'radio') {
-                if (el.tagName === 'SELECT') el.selectedIndex = 0;
-                else if (el.type === 'date') el.value = '';
-                else el.value = '';
-            }
-        });
-        clearSignature();
-        clearMessage();
-        document.getElementById('signatureDate').valueAsDate = new Date();
-        const params = new URLSearchParams(window.location.search);
-        const userParam = params.get('user');
-        if (userParam) {
+        // ========== JSONBIN (FIXED) ==========
+        const JSONBIN_BIN_ID = '6a4b0bc9da38895dfe32cc08';
+        const JSONBIN_MASTER_KEY = '$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K';
+
+        async function saveToJSONBin(data) {
+            const url = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
             try {
-                const user = JSON.parse(decodeURIComponent(userParam));
-                if (user.inchargePhone) document.getElementById('inchargeSelfPhone').value = user.inchargePhone;
-            } catch(e) {}
+                const checkResponse = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'X-Master-Key': JSONBIN_MASTER_KEY,
+                        'X-Access-Key': JSONBIN_MASTER_KEY
+                    }
+                });
+                if (checkResponse.status === 404) {
+                    const createUrl = 'https://api.jsonbin.io/v3/b';
+                    const createResponse = await fetch(createUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Master-Key': JSONBIN_MASTER_KEY,
+                            'X-Access-Key': JSONBIN_MASTER_KEY,
+                            'X-Bin-Name': 'mtwara-appraisal-2026'
+                        },
+                        body: JSON.stringify(data)
+                    });
+                    if (!createResponse.ok) {
+                        const errText = await createResponse.text();
+                        throw new Error(`Kuunda BIN kulishindwa: ${createResponse.status} - ${errText}`);
+                    }
+                    return await createResponse.json();
+                } else if (!checkResponse.ok) {
+                    const errText = await checkResponse.text();
+                    throw new Error(`Kuangalia BIN kulishindwa: ${checkResponse.status} - ${errText}`);
+                }
+                const updateResponse = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_MASTER_KEY,
+                        'X-Access-Key': JSONBIN_MASTER_KEY
+                    },
+                    body: JSON.stringify(data)
+                });
+                if (!updateResponse.ok) {
+                    const errText = await updateResponse.text();
+                    throw new Error(`Kusasisha BIN kulishindwa: ${updateResponse.status} - ${errText}`);
+                }
+                return await updateResponse.json();
+            } catch (error) {
+                console.error('JSONBin error:', error);
+                throw error;
+            }
         }
-    }
-}
-console.log('✅ incharge.html loaded.');
-</script>
+
+        async function loadSubmissions() {
+            const listEl = document.getElementById('submissionsList');
+            listEl.innerHTML = '<p style="color:#6a8aaa;">Inapakia...</p>';
+            try {
+                const url = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
+                const response = await fetch(url, {
+                    headers: { 'X-Master-Key': JSONBIN_MASTER_KEY, 'X-Access-Key': JSONBIN_MASTER_KEY }
+                });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const result = await response.json();
+                const data = result.record;
+                let items = Array.isArray(data) ? data : (data && typeof data === 'object' ? [data] : []);
+                if (items.length === 0) {
+                    listEl.innerHTML = '<p style="color:#999;">Hakuna tathmini zilizotumwa bado.</p>';
+                    return;
+                }
+                let html = '<ul>';
+                items.slice(-10).reverse().forEach(item => {
+                    const name = item.workerName || item.supervisorName || item.inchargeName || 'Mtumiaji';
+                    const role = item.role || 'mtumiaji';
+                    const date = item.submittedAt ? new Date(item.submittedAt).toLocaleDateString('sw') :
+                        'tarehe haijulikani';
+                    html +=
+                        `<li><strong>${name}</strong> (${role}) - <span style="color:#1a73e8;">${date}</span><br><small>${item.workerDepartment || item.supervisorDepartment || item.inchargeDepartment || ''}</small></li>`;
+                });
+                html += '</ul>';
+                listEl.innerHTML = html;
+            } catch (err) {
+                listEl.innerHTML = `<p style="color:#d93025;">❌ Hitilafu: ${err.message}</p>`;
+            }
+        }
+
+        // ========== FORM DATA ==========
+        function getFormData() {
+            return {
+                inchargeName: document.getElementById('inchargeName').value.trim(),
+                inchargePhone: document.getElementById('inchargePhone').value.trim(),
+                inchargeEmail: document.getElementById('inchargeEmail').value.trim(),
+                inchargeDepartment: document.getElementById('inchargeDepartment').value.trim(),
+                inchargeTitle: document.getElementById('inchargeTitle').value.trim(),
+                leadership: document.getElementById('leadership').value,
+                serviceQuality: document.getElementById('serviceQuality').value,
+                accountability: document.getElementById('accountability').value,
+                inchargeFeedback: document.getElementById('inchargeFeedback').value.trim(),
+                signatureName: document.getElementById('signatureName').value.trim(),
+                signatureDate: document.getElementById('signatureDate').value,
+                signatureImage: canvas.toDataURL('image/png'),
+                inchargeSelfPhone: document.getElementById('inchargeSelfPhone').value.trim() || document
+                    .getElementById('inchargePhone').value.trim(),
+                submittedAt: new Date().toISOString(),
+                role: 'incharge'
+            };
+        }
+
+        function validateForm(data) {
+            const required = ['inchargeName', 'inchargePhone', 'inchargeDepartment', 'inchargeTitle'];
+            for (let f of required)
+                if (!data[f]) return `Tafadhali jaza sehemu ya ${f.replace('incharge','').toLowerCase()}.`;
+            if (!data.inchargeSelfPhone) return 'Tafadhali weka namba yako ya simu.';
+            const sigData = canvas.toDataURL('image/png');
+            if (sigData === 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==')
+                return 'Tafadhali chora sahihi yako.';
+            return null;
+        }
+
+        function showMessage(t, type) { const box = document.getElementById('messageBox');
+            box.textContent = t;
+            box.className = 'message-box ' + type; }
+
+        function clearMessage() { const box = document.getElementById('messageBox');
+            box.className = 'message-box';
+            box.textContent = ''; }
+
+        // ========== SAVE & SEND ==========
+        async function saveAndSend() {
+            clearMessage();
+            const data = getFormData();
+            const error = validateForm(data);
+            if (error) { showMessage(error, 'error'); return; }
+            try {
+                await saveToJSONBin(data);
+                showMessage('✅ Data imehifadhiwa! Sasa inatuma WhatsApp...', 'success');
+                await sendWhatsApp(data);
+                loadSubmissions();
+            } catch (e) { showMessage('❌ Hitilafu: ' + e.message, 'error'); }
+        }
+
+        async function sendWhatsApp(data) {
+            if (!data) { data = getFormData();
+                const err = validateForm(data); if (err) { showMessage(err, 'error'); return; } }
+            let phone = data.inchargeSelfPhone.replace(/[\s\-\(\)]/g, '');
+            if (!phone.startsWith('255') && phone.startsWith('0')) phone = '255' + phone.substring(1);
+            else if (!phone.startsWith('255') && !phone.startsWith('+')) phone = '255' + phone;
+            if (phone.startsWith('+')) phone = phone.substring(1);
+            const msg =
+                `*TATHMINI YA MGANGA MFAWIDHI - MTWARA 2026*\n\n👤 Jina: ${data.inchargeName}\n📞 Simu: ${data.inchargePhone}\n📧 Barua Pepe: ${data.inchargeEmail || 'Hajajazwa'}\n🏢 Idara: ${data.inchargeDepartment}\n👔 Cheo: ${data.inchargeTitle}\n\n*Tathmini:*\nUongozi: ${data.leadership || 'Hajajazwa'}/5\nUbora wa Huduma: ${data.serviceQuality || 'Hajajazwa'}/5\nUwajibikaji: ${data.accountability || 'Hajajazwa'}/5\n\n*Maoni:* ${data.inchargeFeedback || 'Hajajazwa'}\n\n📅 Tarehe: ${data.signatureDate || 'Hajajazwa'}\n✍️ Sahihi: ${data.signatureName || 'Hajajazwa'}\n\n*Imetumwa na mfumo wa Tathmini.*`;
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+            showMessage('📱 WhatsApp imefunguliwa. Bonyeza SEND.', 'success');
+        }
+
+        function resetForm() {
+            if (confirm('Weka upya fomu?')) {
+                document.querySelectorAll('input, textarea, select').forEach(el => {
+                    if (el.type !== 'hidden' && el.type !== 'checkbox' && el.type !== 'radio') {
+                        if (el.tagName === 'SELECT') el.selectedIndex = 0;
+                        else if (el.type === 'date') el.value = '';
+                        else el.value = '';
+                    }
+                });
+                clearSignature();
+                clearMessage();
+                document.getElementById('signatureDate').valueAsDate = new Date();
+                const params = new URLSearchParams(window.location.search);
+                const userParam = params.get('user');
+                if (userParam) {
+                    try {
+                        const user = JSON.parse(decodeURIComponent(userParam));
+                        if (user.inchargePhone) document.getElementById('inchargeSelfPhone').value = user.inchargePhone;
+                    } catch (e) {}
+                }
+            }
+        }
+        console.log('✅ incharge.html loaded.');
+    </script>
 </body>
 </html>
