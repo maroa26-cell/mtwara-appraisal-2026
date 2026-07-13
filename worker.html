@@ -6,59 +6,324 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mtendakazi - Tathmini</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #eef4fa; padding: 20px; }
-        .container { max-width: 1000px; margin: 0 auto; background: #ffffff; border-radius: 32px; box-shadow: 0 20px 60px rgba(0, 20, 40, 0.12); padding: 30px 35px; }
-        .header { display: flex; align-items: center; gap: 20px; border-bottom: 3px solid #1a73e8; padding-bottom: 16px; margin-bottom: 28px; flex-wrap: wrap; }
-        .header img { max-height: 70px; width: auto; border-radius: 12px; }
-        .header h1 { color: #0b2b4a; font-size: 28px; margin: 0; flex: 1; }
-        .header h1 small { font-size: 16px; font-weight: 400; color: #4a6a85; display: block; }
-        .section { background: #f8fafe; border-radius: 20px; padding: 22px 26px; margin-bottom: 24px; border: 1px solid #e4ecf5; }
-        .section-title { font-size: 20px; font-weight: 700; color: #0b2b4a; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
-        .section-title span { background: #1a73e8; color: white; width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; margin-bottom: 8px; }
-        .form-group { margin-bottom: 16px; }
-        label { display: block; font-weight: 600; color: #1a3a5a; margin-bottom: 5px; font-size: 14px; }
-        input, select, textarea { width: 100%; padding: 10px 14px; border: 2px solid #dce5ef; border-radius: 12px; font-size: 14px; background: white; transition: 0.2s; }
-        input:focus, select:focus, textarea:focus { border-color: #1a73e8; outline: none; box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.12); }
-        textarea { resize: vertical; min-height: 60px; }
-        .full-width { grid-column: 1 / -1; }
-        .hidden { display: none !important; }
-        .photo-upload { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-        .photo-upload .preview { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #1a73e8; background: #eef4fa; }
-        .photo-upload input[type="file"] { flex: 1; padding: 10px; border: 2px dashed #b0c7db; border-radius: 12px; background: #f8fafe; }
-        .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; margin-top: 4px; }
-        .checkbox-grid label { display: flex; align-items: center; gap: 8px; font-weight: 400; font-size: 14px; color: #1a3a5a; cursor: pointer; }
-        .checkbox-grid input[type="checkbox"] { width: 18px; height: 18px; accent-color: #1a73e8; cursor: pointer; }
-        .rating-group { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 4px; }
-        .rating-group label { display: flex; align-items: center; gap: 4px; font-weight: 400; font-size: 14px; color: #1a3a5a; cursor: pointer; }
-        .rating-group input[type="radio"] { width: 20px; height: 20px; accent-color: #1a73e8; cursor: pointer; }
-        .signature-area { border: 2px dashed #b0c7db; border-radius: 16px; padding: 20px; text-align: center; background: #f3f8ff; margin-top: 10px; }
-        #signatureCanvas { border: 1px solid #ccc; border-radius: 12px; background: white; touch-action: none; width: 100%; max-width: 450px; height: 150px; }
-        .signature-actions { display: flex; gap: 10px; justify-content: center; margin: 10px 0; flex-wrap: wrap; }
-        .signature-actions button { padding: 6px 20px; border: none; border-radius: 30px; font-size: 13px; font-weight: 600; cursor: pointer; background: #e0e7ef; transition: 0.2s; }
-        .signature-actions button:hover { background: #cbd5e1; }
-        .btn-group { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; }
-        .btn { padding: 12px 30px; border: none; border-radius: 40px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; flex: 1 0 auto; }
-        .btn-primary { background: linear-gradient(135deg, #1a73e8, #0d47a1); color: white; box-shadow: 0 6px 20px rgba(26, 115, 232, 0.3); }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(26, 115, 232, 0.4); }
-        .btn-success { background: linear-gradient(135deg, #0f9d58, #0b7a45); color: white; box-shadow: 0 6px 20px rgba(15, 157, 88, 0.3); }
-        .btn-success:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(15, 157, 88, 0.4); }
-        .btn-warning { background: linear-gradient(135deg, #fbbc04, #e5ac00); color: #1e1e1e; box-shadow: 0 6px 20px rgba(251, 188, 4, 0.3); }
-        .btn-warning:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(251, 188, 4, 0.4); }
-        .btn-outline { background: transparent; border: 2px solid #1a73e8; color: #1a73e8; }
-        .btn-outline:hover { background: #1a73e8; color: white; transform: translateY(-3px); }
-        .message-box { padding: 14px 20px; border-radius: 14px; margin: 15px 0; display: none; font-weight: 500; }
-        .message-box.success { background: #e6f7e6; color: #0b5e2e; border-left: 6px solid #0f9d58; display: block; }
-        .message-box.error { background: #fde8e8; color: #a12727; border-left: 6px solid #d93025; display: block; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #eef4fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.12);
+            padding: 30px 35px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 3px solid #1a73e8;
+            padding-bottom: 16px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+        .header img {
+            max-height: 70px;
+            width: auto;
+            border-radius: 12px;
+        }
+        .header h1 {
+            color: #0b2b4a;
+            font-size: 28px;
+            margin: 0;
+            flex: 1;
+        }
+        .header h1 small {
+            font-size: 16px;
+            font-weight: 400;
+            color: #4a6a85;
+            display: block;
+        }
+        .section {
+            background: #f8fafe;
+            border-radius: 20px;
+            padding: 22px 26px;
+            margin-bottom: 24px;
+            border: 1px solid #e4ecf5;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0b2b4a;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title span {
+            background: #1a73e8;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px 24px;
+            margin-bottom: 8px;
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            color: #1a3a5a;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #dce5ef;
+            border-radius: 12px;
+            font-size: 14px;
+            background: white;
+            transition: 0.2s;
+        }
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #1a73e8;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.12);
+        }
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        .hidden {
+            display: none !important;
+        }
+
+        .photo-upload {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .photo-upload .preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #1a73e8;
+            background: #eef4fa;
+        }
+        .photo-upload input[type="file"] {
+            flex: 1;
+            padding: 10px;
+            border: 2px dashed #b0c7db;
+            border-radius: 12px;
+            background: #f8fafe;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 16px;
+            margin-top: 4px;
+        }
+        .checkbox-grid label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 400;
+            font-size: 14px;
+            color: #1a3a5a;
+            cursor: pointer;
+        }
+        .checkbox-grid input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #1a73e8;
+            cursor: pointer;
+        }
+
+        .rating-group {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 4px;
+        }
+        .rating-group label {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 400;
+            font-size: 14px;
+            color: #1a3a5a;
+            cursor: pointer;
+        }
+        .rating-group input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #1a73e8;
+            cursor: pointer;
+        }
+
+        .signature-area {
+            border: 2px dashed #b0c7db;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            background: #f3f8ff;
+            margin-top: 10px;
+        }
+        #signatureCanvas {
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            background: white;
+            touch-action: none;
+            width: 100%;
+            max-width: 450px;
+            height: 150px;
+        }
+        .signature-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+        .signature-actions button {
+            padding: 6px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            background: #e0e7ef;
+            transition: 0.2s;
+        }
+        .signature-actions button:hover {
+            background: #cbd5e1;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            flex: 1 0 auto;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #1a73e8, #0d47a1);
+            color: white;
+            box-shadow: 0 6px 20px rgba(26, 115, 232, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(26, 115, 232, 0.4);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #0f9d58, #0b7a45);
+            color: white;
+            box-shadow: 0 6px 20px rgba(15, 157, 88, 0.3);
+        }
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(15, 157, 88, 0.4);
+        }
+        .btn-warning {
+            background: linear-gradient(135deg, #fbbc04, #e5ac00);
+            color: #1e1e1e;
+            box-shadow: 0 6px 20px rgba(251, 188, 4, 0.3);
+        }
+        .btn-warning:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(251, 188, 4, 0.4);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #1a73e8;
+            color: #1a73e8;
+        }
+        .btn-outline:hover {
+            background: #1a73e8;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .message-box {
+            padding: 14px 20px;
+            border-radius: 14px;
+            margin: 15px 0;
+            display: none;
+            font-weight: 500;
+        }
+        .message-box.success {
+            background: #e6f7e6;
+            color: #0b5e2e;
+            border-left: 6px solid #0f9d58;
+            display: block;
+        }
+        .message-box.error {
+            background: #fde8e8;
+            color: #a12727;
+            border-left: 6px solid #d93025;
+            display: block;
+        }
+
         @media (max-width: 640px) {
-            .container { padding: 16px; }
-            .form-row { grid-template-columns: 1fr; }
-            .checkbox-grid { grid-template-columns: 1fr; }
-            .btn-group { flex-direction: column; }
-            .btn { flex: 1; }
-            .header { flex-direction: column; align-items: flex-start; }
-            .photo-upload { flex-direction: column; align-items: flex-start; }
+            .container {
+                padding: 16px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+            .btn-group {
+                flex-direction: column;
+            }
+            .btn {
+                flex: 1;
+            }
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .photo-upload {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
@@ -259,21 +524,54 @@
         })();
 
         // ============================================
-        // 2. PHOTO UPLOAD
+        // 2. PHOTO UPLOAD - RESIZE TO 200x200
         // ============================================
         const photoInput = document.getElementById('photoInput');
         const photoPreview = document.getElementById('photoPreview');
         let photoDataURL = '';
 
-        photoInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
+        function resizeImage(file, maxWidth, maxHeight, quality) {
+            return new Promise((resolve) => {
                 const reader = new FileReader();
-                reader.onload = function(ev) {
-                    photoDataURL = ev.target.result;
-                    photoPreview.src = photoDataURL;
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+                        if (width > height) {
+                            if (width > maxWidth) {
+                                height = height * (maxWidth / width);
+                                width = maxWidth;
+                            }
+                        } else {
+                            if (height > maxHeight) {
+                                width = width * (maxHeight / height);
+                                height = maxHeight;
+                            }
+                        }
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        resolve(canvas.toDataURL('image/jpeg', quality));
+                    };
+                    img.src = e.target.result;
                 };
                 reader.readAsDataURL(file);
+            });
+        }
+
+        photoInput.addEventListener('change', async function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                try {
+                    const resized = await resizeImage(file, 200, 200, 0.7);
+                    photoDataURL = resized;
+                    photoPreview.src = resized;
+                } catch (err) {
+                    console.error('Error resizing image:', err);
+                }
             }
         });
 
@@ -386,23 +684,24 @@
         });
 
         // ============================================
-        // 4. SIGNATURE CANVAS
+        // 4. SIGNATURE CANVAS - REDUCED SIZE
         // ============================================
         let canvas = document.getElementById('signatureCanvas');
         let ctx = canvas.getContext('2d');
         let isDrawing = false;
 
-        function resizeCanvas() {
+        // We reduce the canvas to 300x100 before saving
+        function resizeSignature() {
             const rect = canvas.getBoundingClientRect();
-            canvas.width = rect.width || 450;
-            canvas.height = 150;
+            canvas.width = Math.min(rect.width || 400, 400);
+            canvas.height = 120;
             ctx.lineWidth = 2.5;
             ctx.strokeStyle = '#1a3a5a';
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
         }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
+        resizeSignature();
+        window.addEventListener('resize', resizeSignature);
 
         function getPos(e) {
             const rect = canvas.getBoundingClientRect();
@@ -415,9 +714,12 @@
         canvas.addEventListener('mousemove', draw);
         canvas.addEventListener('mouseup', stopDraw);
         canvas.addEventListener('mouseleave', stopDraw);
-        canvas.addEventListener('touchstart', function(e) { e.preventDefault(); startDraw(e); });
-        canvas.addEventListener('touchmove', function(e) { e.preventDefault(); draw(e); });
-        canvas.addEventListener('touchend', function(e) { e.preventDefault(); stopDraw(); });
+        canvas.addEventListener('touchstart', function(e) { e.preventDefault();
+            startDraw(e); });
+        canvas.addEventListener('touchmove', function(e) { e.preventDefault();
+            draw(e); });
+        canvas.addEventListener('touchend', function(e) { e.preventDefault();
+            stopDraw(); });
 
         function startDraw(e) {
             isDrawing = true;
@@ -439,26 +741,32 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
 
+        // Get signature with reduced quality
+        function getSignatureDataURL() {
+            // Create a temporary canvas with smaller size and lower quality
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = 300;
+            tempCanvas.height = 100;
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCtx.drawImage(canvas, 0, 0, 300, 100);
+            return tempCanvas.toDataURL('image/jpeg', 0.5);
+        }
+
         // ============================================
         // 5. JSONBIN - WITH NEW MASTER KEY
         // ============================================
         const JSONBIN_BIN_ID = '6a4b0bc9da38895dfe32cc08';
-        // MASTER KEY MPYA ULIYONIPA
         const JSONBIN_MASTER_KEY = "$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDot5L9hRGRQfa21/Mw/B0UcS";
 
         async function saveToJSONBin(data) {
             const url = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
             try {
-                // 1. Jaribu kuangalia kama BIN ipo
                 const checkResponse = await fetch(url, {
                     method: 'GET',
-                    headers: {
-                        'X-Master-Key': JSONBIN_MASTER_KEY
-                    }
+                    headers: { 'X-Master-Key': JSONBIN_MASTER_KEY }
                 });
 
                 if (checkResponse.status === 404) {
-                    // 2. BIN haipo - tunaunda mpya
                     const createUrl = 'https://api.jsonbin.io/v3/b';
                     const createResponse = await fetch(createUrl, {
                         method: 'POST',
@@ -479,7 +787,6 @@
                     throw new Error(`Kuangalia BIN kulishindwa: ${checkResponse.status} - ${errText}`);
                 }
 
-                // 3. BIN ipo - sasa tunasasisha kwa PUT
                 const updateResponse = await fetch(url, {
                     method: 'PUT',
                     headers: {
@@ -534,7 +841,7 @@
                 feedback: document.getElementById('feedback').value.trim(),
                 signatureName: document.getElementById('signatureName').value.trim(),
                 signatureDate: document.getElementById('signatureDate').value,
-                signatureImage: canvas.toDataURL('image/png'),
+                signatureImage: getSignatureDataURL(), // Using compressed signature
                 inchargePhone: document.getElementById('inchargePhone').value.trim(),
                 submittedAt: new Date().toISOString(),
                 role: 'worker'
@@ -560,6 +867,7 @@
             if (!data.trainingRating) {
                 return 'Tafadhali jipime katika Mafunzo na Maendeleo (1-5).';
             }
+            // Check signature is not empty
             const sigData = canvas.toDataURL('image/png');
             if (sigData === 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==') {
                 return 'Tafadhali chora sahihi yako.';
@@ -682,7 +990,7 @@ Maelezo: ${data.trainingsDescription || 'Hakuna'}
             }
         }
 
-        console.log('✅ worker.html loaded with new Master Key.');
+        console.log('✅ worker.html loaded with image and signature compression.');
     </script>
 </body>
 </html>
