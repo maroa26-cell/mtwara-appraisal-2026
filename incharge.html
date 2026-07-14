@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -24,7 +23,6 @@
             box-shadow: 0 20px 60px rgba(0, 20, 40, 0.10);
             padding: 30px 35px;
         }
-
         .header {
             display: flex;
             align-items: center;
@@ -676,8 +674,9 @@
                         <option value="">-- Chagua kwanza aina --</option>
                     </select>
                 </div>
-                <div class="form-group" style="display:flex; align-items:flex-end;">
+                <div class="form-group" style="display:flex; align-items:flex-end; gap:8px; flex-wrap:wrap;">
                     <button class="view-form-btn" onclick="viewSelectedUser()">👁️ Tazama Fomu</button>
+                    <button class="view-form-btn" onclick="loadUserNames()" style="background:#1a73e8; color:white;">🔄 Refresh</button>
                 </div>
             </div>
 
@@ -693,7 +692,7 @@
             <div id="inchargeEvalContainer" class="incharge-eval" style="display:none;">
                 <h4 style="color:#0b2b4a; margin-bottom:12px;">✍️ Tathmini ya Mganga Mfawidhi</h4>
 
-                <!-- Majukumu ya Jumla (kwa wote) -->
+                <!-- Majukumu ya Jumla -->
                 <div class="form-group">
                     <label>📌 Majukumu ya Jumla (Tiki yanayostahili)</label>
                     <div class="checkbox-grid" id="generalDutiesChecklist">
@@ -708,7 +707,7 @@
                     </div>
                 </div>
 
-                <!-- Majukumu Maalumu (kwa wote) -->
+                <!-- Majukumu Maalumu -->
                 <div class="form-group">
                     <label>🎯 Majukumu Maalumu (Tiki yanayostahili)</label>
                     <div class="checkbox-grid" id="specificDutiesChecklist">
@@ -862,8 +861,8 @@
                 } catch (e) {}
             }
             refreshDashboard();
-            // Load initial dropdowns
-            loadUserNames();
+            // Load initial dropdowns (with a small delay to ensure everything is ready)
+            setTimeout(loadUserNames, 500);
         })();
 
         // ============================================================
@@ -891,11 +890,12 @@
         }
 
         // ============================================================
-        // 3. LOAD USER NAMES BASED ON SELECTED TYPE
+        // 3. LOAD USER NAMES (FIXED)
         // ============================================================
         async function loadUserNames() {
             const userType = document.getElementById('userTypeSelect').value;
             const userSelect = document.getElementById('userSelect');
+            // Reset dropdown
             userSelect.innerHTML = '<option value="">-- Chagua --</option>';
 
             if (!userType) {
@@ -906,46 +906,65 @@
                 return;
             }
 
-            const items = await fetchAllData();
-            const users = [];
-            const seen = new Set();
+            try {
+                const items = await fetchAllData();
+                console.log('Data fetched:', items); // Debug
 
-            if (userType === 'worker') {
-                items.forEach(item => {
-                    if (item.role === 'worker' && item.workerName) {
-                        const name = item.workerName.trim();
-                        if (name && !seen.has(name)) {
-                            seen.add(name);
-                            users.push({ name, role: 'worker', data: item });
+                const users = [];
+                const seen = new Set();
+
+                if (userType === 'worker') {
+                    items.forEach(item => {
+                        if (item.role === 'worker' && item.workerName) {
+                            const name = item.workerName.trim();
+                            if (name && !seen.has(name)) {
+                                seen.add(name);
+                                users.push({ name, role: 'worker' });
+                            }
                         }
-                    }
-                });
-            } else if (userType === 'supervisor') {
-                items.forEach(item => {
-                    if (item.role === 'supervisor' && item.supervisorName) {
-                        const name = item.supervisorName.trim();
-                        if (name && !seen.has(name)) {
-                            seen.add(name);
-                            users.push({ name, role: 'supervisor', data: item });
+                    });
+                } else if (userType === 'supervisor') {
+                    items.forEach(item => {
+                        if (item.role === 'supervisor' && item.supervisorName) {
+                            const name = item.supervisorName.trim();
+                            if (name && !seen.has(name)) {
+                                seen.add(name);
+                                users.push({ name, role: 'supervisor' });
+                            }
                         }
-                    }
+                    });
+                }
+
+                if (users.length === 0) {
+                    userSelect.innerHTML = '<option value="">-- Hakuna watumiaji wa aina hii --</option>';
+                    showMessage(`Hakuna ${userType === 'worker' ? 'watendakazi' : 'wasimamizi'} waliotuma tathmini bado.`, 'error');
+                    // Hide evaluation
+                    document.getElementById('submittedFormDisplay').classList.remove('active');
+                    document.getElementById('inchargeEvalContainer').style.display = 'none';
+                    return;
+                }
+
+                users.forEach(u => {
+                    const opt = document.createElement('option');
+                    opt.value = u.name + '|' + u.role;
+                    opt.textContent = u.name;
+                    userSelect.appendChild(opt);
                 });
+
+                // Reset display
+                document.getElementById('submittedFormDisplay').classList.remove('active');
+                document.getElementById('inchargeEvalContainer').style.display = 'none';
+                document.getElementById('kpiDutiesGroup').style.display = 'none';
+                document.getElementById('kpiRatingGroup').style.display = 'none';
+                document.getElementById('leadershipDutiesGroup').style.display = 'none';
+                document.getElementById('leadershipRatingGroup').style.display = 'none';
+
+                showMessage(`Watumiaji ${users.length} wamepatikana. Chagua mmoja.`, 'success');
+            } catch (e) {
+                console.error('Error loading users:', e);
+                userSelect.innerHTML = '<option value="">-- Hitilafu ya kupata data --</option>';
+                showMessage('Hitilafu: ' + e.message, 'error');
             }
-
-            users.forEach(u => {
-                const opt = document.createElement('option');
-                opt.value = u.name + '|' + u.role;
-                opt.textContent = u.name;
-                userSelect.appendChild(opt);
-            });
-
-            // Reset display
-            document.getElementById('submittedFormDisplay').classList.remove('active');
-            document.getElementById('inchargeEvalContainer').style.display = 'none';
-            document.getElementById('kpiDutiesGroup').style.display = 'none';
-            document.getElementById('kpiRatingGroup').style.display = 'none';
-            document.getElementById('leadershipDutiesGroup').style.display = 'none';
-            document.getElementById('leadershipRatingGroup').style.display = 'none';
         }
 
         // ============================================================
@@ -1374,7 +1393,7 @@
         }
 
         setInterval(refreshDashboard, 30000);
-        console.log('✅ incharge.html fully functional with two dropdowns, full evaluation, and dashboard.');
+        console.log('✅ incharge.html loaded with fixes for dropdown loading.');
     </script>
 </body>
 </html>
