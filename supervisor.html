@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Msimamizi - Tathmini</title>
     <style>
-        /* ===== GLOBAL ===== */
+        /* Same as previous – nimefupisha kuwa muhimu */
         * {
             margin: 0;
             padding: 0;
@@ -24,8 +24,6 @@
             box-shadow: 0 20px 60px rgba(0, 20, 40, 0.10);
             padding: 30px 35px;
         }
-
-        /* ===== HEADER ===== */
         .header {
             display: flex;
             align-items: center;
@@ -73,11 +71,9 @@
             font-weight: 600;
             color: #0b2b4a;
         }
-
-        /* ===== DASHBOARD CARDS ===== */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 16px;
             margin-bottom: 28px;
         }
@@ -108,8 +104,6 @@
             display: block;
             margin-bottom: 4px;
         }
-
-        /* ===== CHART ===== */
         .chart-section {
             background: #f8fafe;
             border-radius: 20px;
@@ -156,8 +150,6 @@
             color: #0b2b4a;
             margin-bottom: 4px;
         }
-
-        /* ===== TABLE ===== */
         .table-section {
             background: #f8fafe;
             border-radius: 20px;
@@ -189,19 +181,6 @@
             padding: 10px 12px;
             border-bottom: 1px solid #e4ecf5;
         }
-        .status-badge {
-            display: inline-block;
-            padding: 2px 12px;
-            border-radius: 40px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        .status-badge.success {
-            background: #e6f7e6;
-            color: #0b5e2e;
-        }
-
-        /* ===== FORM ===== */
         .section {
             background: #f8fafe;
             border-radius: 20px;
@@ -268,8 +247,6 @@
         .full-width {
             grid-column: 1 / -1;
         }
-
-        /* ===== SIGNATURE ===== */
         .signature-area {
             border: 2px dashed #b0c7db;
             border-radius: 16px;
@@ -307,8 +284,6 @@
         .signature-actions button:hover {
             background: #cbd5e1;
         }
-
-        /* ===== BUTTONS ===== */
         .btn-group {
             display: flex;
             gap: 16px;
@@ -352,6 +327,15 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 28px rgba(217, 48, 37, 0.4);
         }
+        .btn-email {
+            background: linear-gradient(135deg, #ea4335, #c5221f);
+            color: white;
+            box-shadow: 0 6px 20px rgba(234, 67, 53, 0.3);
+        }
+        .btn-email:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(234, 67, 53, 0.4);
+        }
         .btn-warning {
             background: linear-gradient(135deg, #fbbc04, #e5ac00);
             color: #1e1e1e;
@@ -371,7 +355,6 @@
             color: white;
             transform: translateY(-3px);
         }
-
         .incharge-field {
             background: #fff8e7;
             padding: 16px 20px;
@@ -379,8 +362,6 @@
             border-left: 6px solid #fbbc04;
             margin-bottom: 24px;
         }
-
-        /* ===== MESSAGE & MODAL ===== */
         .message-box {
             padding: 14px 20px;
             border-radius: 14px;
@@ -400,7 +381,6 @@
             border-left: 6px solid #d93025;
             display: block;
         }
-
         .modal-overlay {
             display: none;
             position: fixed;
@@ -443,8 +423,6 @@
             padding: 12px 40px;
             font-size: 16px;
         }
-
-        /* ===== PRINT ===== */
         @media print {
             body {
                 background: white;
@@ -469,7 +447,6 @@
                 break-inside: avoid;
             }
         }
-
         @media (max-width: 640px) {
             .container {
                 padding: 16px;
@@ -505,7 +482,6 @@
 </head>
 <body>
     <div class="container" id="app">
-        <!-- HEADER -->
         <div class="header">
             <div class="header-left">
                 <img class="logo" src="SDA_CHURCH_LOGO.webp" alt="Mtwara SDA Dispensary" />
@@ -520,7 +496,7 @@
             </div>
         </div>
 
-        <!-- DASHBOARD -->
+        <!-- STATS CARDS -->
         <div class="stats-grid" id="statsGrid">
             <div class="stat-card">
                 <span class="icon">📋</span>
@@ -542,9 +518,14 @@
                 <div class="number" id="deptCount">0</div>
                 <div class="label">Idara Zilizojaza</div>
             </div>
+            <div class="stat-card">
+                <span class="icon">📅</span>
+                <div class="number" id="monthCount">0</div>
+                <div class="label">Tathmini Mwezi Huu</div>
+            </div>
         </div>
 
-        <!-- CHART -->
+        <!-- CHART: Tathmini kwa Idara -->
         <div class="chart-section" id="chartSection">
             <h3>📊 Tathmini kwa Idara</h3>
             <div class="chart-bars" id="chartBars">
@@ -552,7 +533,34 @@
             </div>
         </div>
 
-        <!-- TABLE -->
+        <!-- CHART: Rating kwa Idara (wastani) -->
+        <div class="chart-section" id="chartRatingDept">
+            <h3>⭐ Wastani wa Rating kwa Idara</h3>
+            <div class="chart-bars" id="ratingBars">
+                <p style="color:#6a8aaa;">Inapakia...</p>
+            </div>
+        </div>
+
+        <!-- RIPOTI ZA KILA MWEZI -->
+        <div class="chart-section" id="monthlyReport">
+            <h3>📅 Ripoti ya Kila Mwezi - Tathmini</h3>
+            <div style="overflow-x:auto;">
+                <table id="monthlyTable" style="width:100%; font-size:13px;">
+                    <thead>
+                        <tr>
+                            <th>Mwezi</th>
+                            <th>Idadi ya Tathmini</th>
+                            <th>Wastani wa Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody id="monthlyBody">
+                        <tr><td colspan="3" style="text-align:center; color:#6a8aaa;">Inapakia...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TABLE OF WORKERS -->
         <div class="table-section" id="tableSection">
             <h3>📋 Watendakazi Waliojaza Tathmini</h3>
             <div class="table-wrap">
@@ -630,13 +638,13 @@
             <button class="btn btn-primary" onclick="saveAndSend()">💾 Hifadhi na Kutuma</button>
             <button class="btn btn-success" onclick="sendWhatsApp()">📱 Tuma WhatsApp</button>
             <button class="btn btn-pdf" onclick="generatePDF()">📄 Pakua PDF</button>
+            <button class="btn btn-email" onclick="sendEmail()">📧 Tuma Barua Pepe</button>
             <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
             <button class="btn btn-outline" onclick="resetForm()">🔄 Weka Upya</button>
         </div>
         <p style="margin-top:20px; font-size:12px; color:#6a8aaa; text-align:center;">Hakikisha umejaza sehemu zote muhimu (*).</p>
     </div>
 
-    <!-- CONFIRMATION MODAL -->
     <div class="modal-overlay" id="confirmModal">
         <div class="modal-box">
             <div class="icon">✅</div>
@@ -695,12 +703,13 @@
         }
 
         // ============================================================
-        //  3. DASHBOARD
+        //  3. DASHBOARD & REPORTS
         // ============================================================
         async function refreshDashboard() {
             const items = await fetchAllData();
             const workers = items.filter(i => i.role === 'worker');
 
+            // Basic stats
             document.getElementById('totalCount').textContent = items.length;
             const ratings = workers.filter(i => i.skillRating && !isNaN(i.skillRating)).map(i => parseFloat(i.skillRating));
             const avg = ratings.length ? (ratings.reduce((a, b) => a + b, 0) / ratings.length) : 0;
@@ -710,6 +719,18 @@
             const depts = new Set(workers.map(w => w.workerDepartment).filter(Boolean));
             document.getElementById('deptCount').textContent = depts.size;
 
+            // Monthly report
+            const now = new Date();
+            const monthNow = now.getMonth();
+            const yearNow = now.getFullYear();
+            const thisMonthWorkers = workers.filter(w => {
+                if (!w.submittedAt) return false;
+                const d = new Date(w.submittedAt);
+                return d.getMonth() === monthNow && d.getFullYear() === yearNow;
+            });
+            document.getElementById('monthCount').textContent = thisMonthWorkers.length;
+
+            // Chart: by department
             const deptCounts = {};
             workers.forEach(w => {
                 const dept = w.workerDepartment || 'Hajajazwa';
@@ -737,10 +758,74 @@
                 });
             }
 
-            const tbody = document.getElementById('tableBody');
+            // Chart: average rating per department
+            const deptRatings = {};
+            workers.forEach(w => {
+                if (!w.skillRating) return;
+                const dept = w.workerDepartment || 'Hajajazwa';
+                if (!deptRatings[dept]) deptRatings[dept] = { sum: 0, count: 0 };
+                deptRatings[dept].sum += parseFloat(w.skillRating);
+                deptRatings[dept].count++;
+            });
+            const ratingLabels = Object.keys(deptRatings);
+            const ratingValues = ratingLabels.map(d => (deptRatings[d].sum / deptRatings[d].count));
+            const maxRating = Math.max(...ratingValues, 1);
+            const ratingContainer = document.getElementById('ratingBars');
+            ratingContainer.innerHTML = '';
+            if (ratingLabels.length === 0) {
+                ratingContainer.innerHTML = '<p style="color:#6a8aaa;">Hakuna data ya rating.</p>';
+            } else {
+                ratingLabels.forEach((label, idx) => {
+                    const val = ratingValues[idx];
+                    const pct = (val / maxRating) * 100;
+                    const barDiv = document.createElement('div');
+                    barDiv.className = 'chart-bar';
+                    barDiv.innerHTML = `
+                        <div class="bar-value">${val.toFixed(1)}</div>
+                        <div class="bar" style="height:${Math.max(pct, 4)}%; background:linear-gradient(180deg,#0f9d58,#0b7a45);"></div>
+                        <div class="bar-label">${label}</div>
+                    `;
+                    ratingContainer.appendChild(barDiv);
+                });
+            }
+
+            // Monthly report table
+            const monthlyData = {};
+            workers.forEach(w => {
+                if (!w.submittedAt) return;
+                const d = new Date(w.submittedAt);
+                const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+                if (!monthlyData[key]) monthlyData[key] = { count: 0, sumRating: 0, ratingCount: 0 };
+                monthlyData[key].count++;
+                if (w.skillRating) {
+                    monthlyData[key].sumRating += parseFloat(w.skillRating);
+                    monthlyData[key].ratingCount++;
+                }
+            });
+            const months = Object.keys(monthlyData).sort();
+            const tbody = document.getElementById('monthlyBody');
             tbody.innerHTML = '';
+            if (months.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#6a8aaa;">Hakuna data.</td></tr>';
+            } else {
+                months.forEach(m => {
+                    const data = monthlyData[m];
+                    const avgRating = data.ratingCount ? (data.sumRating / data.ratingCount).toFixed(1) : '-';
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td><strong>${m}</strong></td>
+                        <td>${data.count}</td>
+                        <td>${avgRating}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            // Table of workers
+            const tbody2 = document.getElementById('tableBody');
+            tbody2.innerHTML = '';
             if (workers.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#6a8aaa;">Hakuna watendakazi waliojaza tathmini bado.</td></tr>';
+                tbody2.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#6a8aaa;">Hakuna watendakazi waliojaza tathmini bado.</td></tr>';
             } else {
                 const sorted = workers.slice().reverse();
                 sorted.forEach(w => {
@@ -752,13 +837,13 @@
                         <td>${w.skillRating || '-'}/5</td>
                         <td>${w.submittedAt ? new Date(w.submittedAt).toLocaleDateString('sw') : '-'}</td>
                     `;
-                    tbody.appendChild(tr);
+                    tbody2.appendChild(tr);
                 });
             }
         }
 
         // ============================================================
-        //  4. SIGNATURE
+        //  4. SIGNATURE (same as before)
         // ============================================================
         let canvas = document.getElementById('signatureCanvas');
         let ctx = canvas.getContext('2d');
@@ -817,7 +902,7 @@
         }
 
         // ============================================================
-        //  5. SAVE DATA
+        //  5. SAVE FUNCTIONS
         // ============================================================
         async function saveToJSONBin(data) {
             const url = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
@@ -892,9 +977,6 @@
             box.className = 'message-box';
             box.textContent = ''; }
 
-        // ============================================================
-        //  6. SAVE & SEND
-        // ============================================================
         async function saveAndSend() {
             clearMessage();
             const data = getFormData();
@@ -928,6 +1010,15 @@
 
         function generatePDF() { window.print(); }
 
+        function sendEmail() {
+            const data = getFormData();
+            const subject = `TATHMINI YA MSIMAMIZI - ${data.supervisorName}`;
+            const body =
+                `Msimamizi: ${data.supervisorName}\nSimu: ${data.supervisorPhone}\nIdara: ${data.supervisorDepartment}\nCheo: ${data.supervisorTitle}\n\nMtendakazi: ${data.workerName}\n\nNguvu: ${data.strengths || 'Hakuna'}\nKuboresha: ${data.improvements || 'Hakuna'}\nMapendekezo: ${data.recommendations || 'Hakuna'}\nMaoni: ${data.generalFeedback || 'Hakuna'}\n\nTarehe: ${data.signatureDate || 'Hajajazwa'}`;
+            window.location.href =
+                `mailto:${data.supervisorEmail || 'admin@mtwara-sda.org'}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
         function resetForm() {
             if (confirm('Weka upya fomu?')) {
                 document.querySelectorAll('input, textarea').forEach(el => {
@@ -952,7 +1043,7 @@
         }
 
         setInterval(refreshDashboard, 30000);
-        console.log('✅ supervisor.html with Dashboard, PDF, Confirmation.');
+        console.log('✅ supervisor.html with monthly reports and email.');
     </script>
 </body>
 </html>
