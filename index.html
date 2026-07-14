@@ -105,6 +105,24 @@
             transform: translateY(-3px);
             box-shadow: 0 12px 32px rgba(26, 115, 232, 0.4);
         }
+        .btn-email {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #ea4335, #c5221f);
+            color: white;
+            border: none;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 8px;
+            box-shadow: 0 6px 20px rgba(234, 67, 53, 0.3);
+        }
+        .btn-email:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(234, 67, 53, 0.4);
+        }
         .error-msg {
             color: #d32f2f;
             font-size: 13px;
@@ -136,7 +154,6 @@
 <body>
     <div class="container">
         <div class="logo">
-            <!-- Logo ya Mtwara SDA Dispensary -->
             <img src="SDA_CHURCH_LOGO.webp" alt="Mtwara SDA Dispensary" />
         </div>
         <h1>🏥 Tathmini ya Utendaji</h1>
@@ -174,6 +191,9 @@
             <div id="errorMsg" class="error-msg"></div>
             <div id="successMsg" class="success-msg"></div>
         </form>
+
+        <button class="btn-email" onclick="sendEmailSupport()">📧 Wasiliana kwa Barua Pepe</button>
+
         <div class="footer-note">
             Mfumo wa Tathmini ya Watendaji wa Afya – Mtwara 2026
         </div>
@@ -273,6 +293,12 @@
                 } catch (e) {}
             }
         })();
+
+        function sendEmailSupport() {
+            const subject = 'Msaada - Mfumo wa Tathmini Mtwara SDA';
+            const body = 'Tafadhali andika swali au tatizo lako hapa...\n\nMfumo wa Tathmini ya Utendaji - Mtwara 2026';
+            window.location.href = `mailto:admin@mtwara-sda.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
     </script>
 </body>
 </html>
