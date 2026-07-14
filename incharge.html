@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mganga Mfawidhi - Dashboard</title>
     <style>
-        /* ===== GLOBAL ===== */
+        /* Same as supervisor – nimefupisha */
         * {
             margin: 0;
             padding: 0;
@@ -25,8 +25,6 @@
             box-shadow: 0 20px 60px rgba(0, 20, 40, 0.10);
             padding: 30px 35px;
         }
-
-        /* ===== HEADER ===== */
         .header {
             display: flex;
             align-items: center;
@@ -74,11 +72,9 @@
             font-weight: 600;
             color: #0b2b4a;
         }
-
-        /* ===== DASHBOARD CARDS ===== */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 16px;
             margin-bottom: 28px;
         }
@@ -109,8 +105,6 @@
             display: block;
             margin-bottom: 4px;
         }
-
-        /* ===== CHART ===== */
         .chart-section {
             background: #f8fafe;
             border-radius: 20px;
@@ -157,8 +151,6 @@
             color: #0b2b4a;
             margin-bottom: 4px;
         }
-
-        /* ===== TABLE ===== */
         .table-section {
             background: #f8fafe;
             border-radius: 20px;
@@ -205,8 +197,6 @@
             background: #e3f2fd;
             color: #0d47a1;
         }
-
-        /* ===== EVALUATION FORM ===== */
         .eval-section {
             background: #f8fafe;
             border-radius: 20px;
@@ -295,11 +285,6 @@
             font-size: 14px;
             text-align: center;
         }
-        .duty-rating input[type="number"]:focus {
-            border-color: #1a73e8;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.12);
-        }
         .duty-item {
             background: #ffffff;
             border-radius: 12px;
@@ -311,8 +296,6 @@
             font-weight: 500;
             color: #0b2b4a;
         }
-
-        /* ===== BUTTONS ===== */
         .btn-group {
             display: flex;
             gap: 16px;
@@ -356,6 +339,15 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 28px rgba(217, 48, 37, 0.4);
         }
+        .btn-email {
+            background: linear-gradient(135deg, #ea4335, #c5221f);
+            color: white;
+            box-shadow: 0 6px 20px rgba(234, 67, 53, 0.3);
+        }
+        .btn-email:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(234, 67, 53, 0.4);
+        }
         .btn-warning {
             background: linear-gradient(135deg, #fbbc04, #e5ac00);
             color: #1e1e1e;
@@ -375,7 +367,6 @@
             color: white;
             transform: translateY(-3px);
         }
-
         .incharge-phone-field {
             background: #fff8e7;
             padding: 16px 20px;
@@ -383,8 +374,6 @@
             border-left: 6px solid #fbbc04;
             margin-bottom: 24px;
         }
-
-        /* ===== MESSAGE & MODAL ===== */
         .message-box {
             padding: 14px 20px;
             border-radius: 14px;
@@ -404,7 +393,6 @@
             border-left: 6px solid #d93025;
             display: block;
         }
-
         .modal-overlay {
             display: none;
             position: fixed;
@@ -447,8 +435,27 @@
             padding: 12px 40px;
             font-size: 16px;
         }
-
-        /* ===== PRINT ===== */
+        .recent-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e4ecf5;
+            font-size: 14px;
+        }
+        .recent-item:last-child {
+            border-bottom: none;
+        }
+        .recent-item .name {
+            font-weight: 600;
+            color: #0b2b4a;
+        }
+        .recent-item .role {
+            color: #4a6a85;
+        }
+        .recent-item .date {
+            color: #6a8aaa;
+            font-size: 12px;
+        }
         @media print {
             body {
                 background: white;
@@ -476,7 +483,6 @@
                 break-inside: avoid;
             }
         }
-
         @media (max-width: 640px) {
             .container {
                 padding: 16px;
@@ -512,7 +518,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- HEADER -->
         <div class="header">
             <div class="header-left">
                 <img class="logo" src="SDA_CHURCH_LOGO.webp" alt="Mtwara SDA Dispensary" />
@@ -527,7 +532,6 @@
             </div>
         </div>
 
-        <!-- Namba ya simu -->
         <div class="incharge-phone-field">
             <label style="font-weight:700; color:#b85c00;">📱 Namba yako ya simu (Mganga Mfawidhi)</label>
             <input type="text" id="inchargeSelfPhone" placeholder="0712 345 678" style="margin-top:6px;" />
@@ -561,9 +565,14 @@
                 <div class="number" id="evalCount">0</div>
                 <div class="label">Tathmini za Mganga Mfawidhi</div>
             </div>
+            <div class="stat-card">
+                <span class="icon">📅</span>
+                <div class="number" id="monthCount">0</div>
+                <div class="label">Tathmini Mwezi Huu</div>
+            </div>
         </div>
 
-        <!-- CHART -->
+        <!-- CHART: Tathmini kwa Jukumu -->
         <div class="chart-section" id="chartSection">
             <h3>📊 Tathmini kwa Jukumu</h3>
             <div class="chart-bars" id="chartBars">
@@ -571,12 +580,30 @@
             </div>
         </div>
 
-        <!-- ===== SEHEMU MPYA: TATHMINI YA MTENDAKAZI ===== -->
+        <!-- RIPOTI ZA KILA MWEZI -->
+        <div class="chart-section" id="monthlyReport">
+            <h3>📅 Ripoti ya Kila Mwezi - Tathmini</h3>
+            <div style="overflow-x:auto;">
+                <table id="monthlyTable" style="width:100%; font-size:13px;">
+                    <thead>
+                        <tr>
+                            <th>Mwezi</th>
+                            <th>Idadi ya Tathmini</th>
+                            <th>Wastani wa Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody id="monthlyBody">
+                        <tr><td colspan="3" style="text-align:center; color:#6a8aaa;">Inapakia...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ===== SEHEMU YA TATHMINI YA MTENDAKAZI (ILIVYOREKEBISHWA) ===== -->
         <div class="eval-section" id="evalSection">
             <div class="section-title"><span>📝</span> Tathmini ya Mtendakazi na Majukumu Maalumu</div>
             <p style="color:#4a6a85; margin-bottom:16px;">Chagua mtendakazi, kisha upe rating kwa kila jukumu na uandike maoni yako.</p>
 
-            <!-- Kuchagua Mtendakazi -->
             <div class="form-row">
                 <div class="form-group">
                     <label>Chagua Mtendakazi *</label>
@@ -590,18 +617,15 @@
                 </div>
             </div>
 
-            <!-- Taarifa za Mtendakazi aliyechaguliwa -->
             <div id="workerInfo" style="background:#eef4fa; padding:12px 16px; border-radius:12px; margin-bottom:16px; display:none;">
                 <p><strong>Idara:</strong> <span id="displayDept">-</span> &nbsp;|&nbsp; <strong>Cheo:</strong> <span id="displayTitle">-</span> &nbsp;|&nbsp; <strong>Taaluma:</strong> <span id="displayProf">-</span></p>
             </div>
 
-            <!-- Majukumu Maalumu -->
             <div id="dutiesContainer" style="display:none;">
                 <label style="font-weight:600; color:#1a3a5a; margin-bottom:8px; display:block;">Majukumu Maalumu (Panga kila jukumu 1-5)</label>
                 <div id="dutyList"></div>
             </div>
 
-            <!-- Tathmini Jumla -->
             <div style="margin-top:16px;" id="overallContainer" style="display:none;">
                 <div class="form-row">
                     <div class="form-group">
@@ -620,7 +644,7 @@
             </div>
         </div>
 
-        <!-- TABLE -->
+        <!-- TABLE: Tathmini zote -->
         <div class="table-section" id="tableSection">
             <h3>📋 Orodha ya Tathmini Zote</h3>
             <div class="table-wrap">
@@ -642,7 +666,7 @@
         </div>
 
         <!-- RECENT -->
-        <div class="recent-section" style="background:#f8fafe; border-radius:20px; padding:20px 24px; margin-bottom:28px; border:1px solid #e4ecf5;">
+        <div class="chart-section" style="background:#f8fafe; border-radius:20px; padding:20px 24px; margin-bottom:28px; border:1px solid #e4ecf5;">
             <h3 style="font-size:18px; color:#0b2b4a; margin-bottom:16px;">🕒 Tathmini za Hivi Karibuni</h3>
             <div id="recentList">
                 <p style="color:#6a8aaa;">Inapakia...</p>
@@ -654,6 +678,7 @@
         <div class="btn-group">
             <button class="btn btn-success" onclick="sendWhatsApp()">📱 Tuma WhatsApp (Namba yako)</button>
             <button class="btn btn-pdf" onclick="generatePDF()">📄 Pakua PDF</button>
+            <button class="btn btn-email" onclick="sendEmail()">📧 Tuma Barua Pepe</button>
             <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
             <button class="btn btn-outline" onclick="refreshDashboard()">🔄 Refresh Dashboard</button>
         </div>
@@ -662,7 +687,6 @@
         </p>
     </div>
 
-    <!-- CONFIRMATION MODAL -->
     <div class="modal-overlay" id="confirmModal">
         <div class="modal-box">
             <div class="icon">✅</div>
@@ -718,7 +742,7 @@
         }
 
         // ============================================================
-        //  3. LOAD WORKER DROPDOWN
+        //  3. LOAD WORKER DROPDOWN (FIXED)
         // ============================================================
         async function loadWorkerDropdown() {
             const items = await fetchAllData();
@@ -749,7 +773,7 @@
         }
 
         // ============================================================
-        //  4. LOAD WORKER DETAILS & DUTIES
+        //  4. LOAD WORKER DETAILS
         // ============================================================
         async function loadWorkerDetails(name) {
             const items = await fetchAllData();
@@ -893,7 +917,7 @@
         }
 
         // ============================================================
-        //  6. RENDER DASHBOARD
+        //  6. RENDER DASHBOARD WITH ALL DATA
         // ============================================================
         async function refreshDashboard() {
             const items = await fetchAllData();
@@ -912,6 +936,18 @@
             document.getElementById('avgRating').textContent = avg.toFixed(1);
             document.getElementById('evalCount').textContent = evals;
 
+            // Monthly count
+            const now = new Date();
+            const monthNow = now.getMonth();
+            const yearNow = now.getFullYear();
+            const thisMonthItems = items.filter(i => {
+                if (!i.submittedAt) return false;
+                const d = new Date(i.submittedAt);
+                return d.getMonth() === monthNow && d.getFullYear() === yearNow;
+            });
+            document.getElementById('monthCount').textContent = thisMonthItems.length;
+
+            // Chart: by role
             const roleCounts = {};
             items.forEach(i => {
                 const r = i.role || 'unknown';
@@ -946,10 +982,43 @@
                 });
             }
 
-            const tbody = document.getElementById('tableBody');
+            // Monthly report table
+            const monthlyData = {};
+            items.forEach(i => {
+                if (!i.submittedAt) return;
+                const d = new Date(i.submittedAt);
+                const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+                if (!monthlyData[key]) monthlyData[key] = { count: 0, sumRating: 0, ratingCount: 0 };
+                monthlyData[key].count++;
+                if (i.role === 'worker' && i.skillRating) {
+                    monthlyData[key].sumRating += parseFloat(i.skillRating);
+                    monthlyData[key].ratingCount++;
+                }
+            });
+            const months = Object.keys(monthlyData).sort();
+            const tbody = document.getElementById('monthlyBody');
             tbody.innerHTML = '';
+            if (months.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#6a8aaa;">Hakuna data.</td></tr>';
+            } else {
+                months.forEach(m => {
+                    const data = monthlyData[m];
+                    const avgRating = data.ratingCount ? (data.sumRating / data.ratingCount).toFixed(1) : '-';
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td><strong>${m}</strong></td>
+                        <td>${data.count}</td>
+                        <td>${avgRating}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            // Table: all items
+            const tbody2 = document.getElementById('tableBody');
+            tbody2.innerHTML = '';
             if (items.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#6a8aaa;">Hakuna tathmini zilizotumwa bado.</td></tr>';
+                tbody2.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#6a8aaa;">Hakuna tathmini zilizotumwa bado.</td></tr>';
             } else {
                 const sorted = [...items].reverse();
                 sorted.forEach(item => {
@@ -974,10 +1043,11 @@
                         <td>${date}</td>
                         <td><span class="status-badge ${statusClass}">${status}</span></td>
                     `;
-                    tbody.appendChild(tr);
+                    tbody2.appendChild(tr);
                 });
             }
 
+            // Recent
             const recentList = document.getElementById('recentList');
             recentList.innerHTML = '';
             const recentItems = items.slice(-5).reverse();
@@ -994,11 +1064,10 @@
                     const date = item.submittedAt ? new Date(item.submittedAt).toLocaleString('sw') : '-';
                     const div = document.createElement('div');
                     div.className = 'recent-item';
-                    div.style.cssText = 'display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #e4ecf5; font-size:14px;';
                     div.innerHTML = `
-                        <span class="name" style="font-weight:600; color:#0b2b4a;">${name}</span>
-                        <span class="role" style="color:#4a6a85;">${role}</span>
-                        <span class="date" style="color:#6a8aaa; font-size:12px;">${date}</span>
+                        <span class="name">${name}</span>
+                        <span class="role">${role}</span>
+                        <span class="date">${date}</span>
                     `;
                     recentList.appendChild(div);
                 });
@@ -1006,7 +1075,7 @@
         }
 
         // ============================================================
-        //  7. WHATSAPP & PDF
+        //  7. WHATSAPP, PDF, EMAIL
         // ============================================================
         async function sendWhatsApp() {
             const phone = document.getElementById('inchargeSelfPhone').value.trim();
@@ -1026,8 +1095,14 @@
             showMessage('📱 WhatsApp imefunguliwa.', 'success');
         }
 
-        function generatePDF() {
-            window.print();
+        function generatePDF() { window.print(); }
+
+        function sendEmail() {
+            const subject = 'Ripoti ya Tathmini - Mtwara SDA Dispensary';
+            const body =
+                `Ripoti ya tathmini ya utendaji.\n\nTarehe: ${new Date().toLocaleDateString('sw')}\nImetumwa na Mganga Mfawidhi: ${document.getElementById('headerName').textContent}\n\nTafadhali angalia dashboard kwa taarifa za kina.`;
+            window.location.href =
+                `mailto:admin@mtwara-sda.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         }
 
         function showMessage(t, type) {
@@ -1037,7 +1112,7 @@
         }
 
         setInterval(refreshDashboard, 30000);
-        console.log('✅ incharge.html with PDF, Confirmation, and worker evaluation.');
+        console.log('✅ incharge.html fixed: dropdown loads, all evaluations shown, monthly reports added.');
     </script>
 </body>
 </html>
