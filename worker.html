@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mtendakazi - Tathmini</title>
     <style>
+        /* ===== GLOBAL ===== */
         * {
             margin: 0;
             padding: 0;
@@ -24,6 +25,8 @@
             box-shadow: 0 20px 60px rgba(0, 20, 40, 0.10);
             padding: 30px 35px;
         }
+
+        /* ===== HEADER ===== */
         .header {
             display: flex;
             align-items: center;
@@ -39,27 +42,14 @@
             align-items: center;
             gap: 16px;
         }
-        .header-left .logo-text {
-            font-size: 20px;
-            font-weight: 800;
-            color: #0b2b4a;
-            letter-spacing: 1px;
-            line-height: 1.2;
-        }
-        .header-left .logo-text span {
-            color: #1a73e8;
-        }
-        .header-left .logo-sub {
-            font-size: 10px;
-            color: #4a6a85;
-            letter-spacing: 1.5px;
-            font-weight: 600;
-            display: block;
+        .header-left img.logo {
+            max-height: 60px;
+            width: auto;
+            border-radius: 8px;
         }
         .header-left h1 {
             color: #0b2b4a;
             font-size: 24px;
-            margin-left: 8px;
         }
         .header-left h1 small {
             display: block;
@@ -84,6 +74,8 @@
             font-weight: 600;
             color: #0b2b4a;
         }
+
+        /* ===== SECTIONS ===== */
         .section {
             background: #f8fafe;
             border-radius: 20px;
@@ -111,6 +103,8 @@
             justify-content: center;
             font-size: 15px;
         }
+
+        /* ===== FORM ELEMENTS ===== */
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -155,6 +149,8 @@
         .hidden {
             display: none !important;
         }
+
+        /* ===== PHOTO UPLOAD ===== */
         .photo-upload {
             display: flex;
             align-items: center;
@@ -176,6 +172,8 @@
             border-radius: 12px;
             background: #f8fafe;
         }
+
+        /* ===== CHECKBOX & RATING ===== */
         .checkbox-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -218,6 +216,8 @@
             accent-color: #1a73e8;
             cursor: pointer;
         }
+
+        /* ===== SIGNATURE ===== */
         .signature-area {
             border: 2px dashed #b0c7db;
             border-radius: 16px;
@@ -255,6 +255,8 @@
         .signature-actions button:hover {
             background: #cbd5e1;
         }
+
+        /* ===== BUTTONS ===== */
         .btn-group {
             display: flex;
             gap: 16px;
@@ -289,6 +291,15 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 28px rgba(15, 157, 88, 0.4);
         }
+        .btn-pdf {
+            background: linear-gradient(135deg, #d93025, #b71c1c);
+            color: white;
+            box-shadow: 0 6px 20px rgba(217, 48, 37, 0.3);
+        }
+        .btn-pdf:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(217, 48, 37, 0.4);
+        }
         .btn-warning {
             background: linear-gradient(135deg, #fbbc04, #e5ac00);
             color: #1e1e1e;
@@ -308,6 +319,8 @@
             color: white;
             transform: translateY(-3px);
         }
+
+        /* ===== MESSAGE ===== */
         .message-box {
             padding: 14px 20px;
             border-radius: 14px;
@@ -327,6 +340,82 @@
             border-left: 6px solid #d93025;
             display: block;
         }
+
+        /* ===== CONFIRMATION MODAL ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-box {
+            background: white;
+            border-radius: 24px;
+            padding: 30px 35px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .modal-box .icon {
+            font-size: 64px;
+            margin-bottom: 10px;
+        }
+        .modal-box h2 {
+            color: #0b2b4a;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .modal-box p {
+            color: #4a6a85;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+        .modal-box .btn-primary {
+            padding: 12px 40px;
+            font-size: 16px;
+        }
+
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+                padding: 20px;
+            }
+            .btn-group,
+            .signature-actions,
+            .photo-upload input[type="file"],
+            #messageBox,
+            .modal-overlay {
+                display: none !important;
+            }
+            .header {
+                border-bottom: 2px solid #0b2b4a;
+            }
+            .section {
+                border: 1px solid #ccc;
+                break-inside: avoid;
+            }
+            #signatureCanvas {
+                border: 1px solid #000;
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 640px) {
             .container {
                 padding: 16px;
@@ -355,31 +444,32 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
+            .modal-box {
+                padding: 24px 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="app">
+        <!-- ===== HEADER ===== -->
         <div class="header">
             <div class="header-left">
-                <div>
-                    <div class="logo-text">🕊️ <span>Adventist</span> Health</div>
-                    <span class="logo-sub">Ministries • Mtwara 2026</span>
-                </div>
+                <img class="logo" src="SDA_CHURCH_LOGO.webp" alt="Mtwara SDA Dispensary" />
                 <h1>
                     📋 Mtendakazi
                     <small>Tathmini ya Utendaji 2026</small>
                 </h1>
             </div>
             <div class="header-right">
-                <img class="user-photo" id="headerPhoto" src="https://via.placeholder.com/50x50?text=User" alt="Picha" />
+                <img class="user-photo" id="headerPhoto" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Ccircle cx='25' cy='25' r='25' fill='%23eef4fa'/%3E%3Ctext x='25' y='30' text-anchor='middle' font-family='Arial' font-size='20' fill='%231a3a5a'%3E👤%3C/text%3E%3C/svg%3E" alt="Picha" />
                 <span class="user-name" id="headerName">Mtumiaji</span>
             </div>
         </div>
 
         <input type="hidden" id="inchargePhone" value="" />
 
-        <!-- SEHEMU A -->
+        <!-- SEHEMU A: Taarifa za Msingi -->
         <div class="section">
             <div class="section-title"><span>1</span> Taarifa za Mtendakazi</div>
             <div class="form-row">
@@ -414,13 +504,13 @@
             <div class="form-group">
                 <label>Picha yako (hiari)</label>
                 <div class="photo-upload">
-                    <img id="photoPreview" class="preview" src="https://via.placeholder.com/80x80?text=No+Photo" alt="Picha" />
+                    <img id="photoPreview" class="preview" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23eef4fa'/%3E%3Ctext x='40' y='48' text-anchor='middle' font-family='Arial' font-size='28' fill='%231a3a5a'%3E📷%3C/text%3E%3C/svg%3E" alt="Picha" />
                     <input type="file" id="photoInput" accept="image/*" />
                 </div>
             </div>
         </div>
 
-        <!-- SEHEMU B -->
+        <!-- SEHEMU B: Majukumu -->
         <div class="section">
             <div class="section-title"><span>2</span> Majukumu Yako</div>
             <div class="form-group">
@@ -448,13 +538,13 @@
             </div>
         </div>
 
-        <!-- SEHEMU C -->
+        <!-- SEHEMU C: Malengo -->
         <div class="section">
             <div class="section-title"><span>3</span> Malengo ya Kimkakati</div>
             <div class="form-group"><textarea id="goals" placeholder="Eleza malengo yako makuu..."></textarea></div>
         </div>
 
-        <!-- SEHEMU D -->
+        <!-- SEHEMU D: Ujuzi na Competence -->
         <div class="section">
             <div class="section-title"><span>4</span> Ujuzi na Competence</div>
             <div class="form-group">
@@ -470,7 +560,7 @@
             <div class="form-group"><textarea id="skillsDescription" placeholder="Andika ujuzi wako kwa undani..."></textarea></div>
         </div>
 
-        <!-- SEHEMU E -->
+        <!-- SEHEMU E: Mafunzo na Maendeleo -->
         <div class="section">
             <div class="section-title"><span>5</span> Mafunzo na Maendeleo</div>
             <div class="form-group">
@@ -486,7 +576,7 @@
             <div class="form-group"><textarea id="trainingsDescription" placeholder="Andika mafunzo uliyohudhuria..."></textarea></div>
         </div>
 
-        <!-- SEHEMU F -->
+        <!-- SEHEMU F: Maoni -->
         <div class="section">
             <div class="section-title"><span>6</span> Maoni na Mapendekezo</div>
             <div class="form-group"><textarea id="feedback" placeholder="Andika maoni yako..."></textarea></div>
@@ -513,6 +603,7 @@
         <div class="btn-group">
             <button class="btn btn-primary" onclick="saveAndSend()">💾 Hifadhi na Kutuma</button>
             <button class="btn btn-success" onclick="sendWhatsApp()">📱 Tuma WhatsApp</button>
+            <button class="btn btn-pdf" onclick="generatePDF()">📄 Pakua PDF</button>
             <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
             <button class="btn btn-outline" onclick="resetForm()">🔄 Weka Upya</button>
         </div>
@@ -521,9 +612,19 @@
         </p>
     </div>
 
+    <!-- ===== CONFIRMATION MODAL ===== -->
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal-box">
+            <div class="icon">✅</div>
+            <h2>Tathmini Imetumwa!</h2>
+            <p>Data yako imehifadhiwa kikamilifu. Ujumbe wa kukubaliana umetumwa kwa WhatsApp.</p>
+            <button class="btn btn-primary" onclick="closeModal()">Sawa</button>
+        </div>
+    </div>
+
     <script>
         // ============================================================
-        //  1. USER & HEADER
+        //  1. GET USER & SET HEADER
         // ============================================================
         (function getUser() {
             const params = new URLSearchParams(window.location.search);
@@ -599,7 +700,7 @@
         });
 
         // ============================================================
-        //  3. DUTIES
+        //  3. DUTIES BY PROFESSION
         // ============================================================
         const specialDutiesMap = {
             muuguzi: [
@@ -707,7 +808,7 @@
         });
 
         // ============================================================
-        //  4. SIGNATURE (COMPRESSED)
+        //  4. SIGNATURE CANVAS (COMPRESSED)
         // ============================================================
         let canvas = document.getElementById('signatureCanvas');
         let ctx = canvas.getContext('2d');
@@ -785,33 +886,19 @@
                     method: 'GET',
                     headers: { 'X-Master-Key': JSONBIN_MASTER_KEY }
                 });
-                if (checkResponse.status === 404) {
-                    const createUrl = 'https://api.jsonbin.io/v3/b';
-                    const createResponse = await fetch(createUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-Master-Key': JSONBIN_MASTER_KEY,
-                            'X-Bin-Name': 'mtwara-appraisal-2026'
-                        },
-                        body: JSON.stringify(data)
-                    });
-                    if (!createResponse.ok) {
-                        const errText = await createResponse.text();
-                        throw new Error(`Kuunda BIN kulishindwa: ${createResponse.status} - ${errText}`);
-                    }
-                    return await createResponse.json();
-                } else if (!checkResponse.ok) {
-                    const errText = await checkResponse.text();
-                    throw new Error(`Kuangalia BIN kulishindwa: ${checkResponse.status} - ${errText}`);
+                let existing = [];
+                if (checkResponse.ok) {
+                    const result = await checkResponse.json();
+                    existing = Array.isArray(result.record) ? result.record : (result.record ? [result.record] : []);
                 }
+                existing.push(data);
                 const updateResponse = await fetch(url, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-Master-Key': JSONBIN_MASTER_KEY
                     },
-                    body: JSON.stringify(data)
+                    body: JSON.stringify(existing)
                 });
                 if (!updateResponse.ok) {
                     const errText = await updateResponse.text();
@@ -881,16 +968,20 @@
             return null;
         }
 
-        function showMessage(t, type) { const box = document.getElementById('messageBox');
+        function showMessage(t, type) {
+            const box = document.getElementById('messageBox');
             box.textContent = t;
-            box.className = 'message-box ' + type; }
+            box.className = 'message-box ' + type;
+        }
 
-        function clearMessage() { const box = document.getElementById('messageBox');
+        function clearMessage() {
+            const box = document.getElementById('messageBox');
             box.className = 'message-box';
-            box.textContent = ''; }
+            box.textContent = '';
+        }
 
         // ============================================================
-        //  7. SAVE & SEND
+        //  7. SAVE & SEND + CONFIRMATION
         // ============================================================
         async function saveAndSend() {
             clearMessage();
@@ -901,16 +992,30 @@
                 await saveToJSONBin(data);
                 showMessage('✅ Data imehifadhiwa! Sasa inatuma WhatsApp...', 'success');
                 await sendWhatsApp(data);
-            } catch (e) { showMessage('❌ Hitilafu: ' + e.message, 'error'); }
+                document.getElementById('confirmModal').classList.add('active');
+            } catch (e) {
+                showMessage('❌ Hitilafu: ' + e.message, 'error');
+            }
         }
 
+        function closeModal() {
+            document.getElementById('confirmModal').classList.remove('active');
+        }
+
+        // ============================================================
+        //  8. WHATSAPP + CONFIRMATION MESSAGE
+        // ============================================================
         async function sendWhatsApp(data) {
-            if (!data) { data = getFormData();
-                const err = validateForm(data); if (err) { showMessage(err, 'error'); return; } }
+            if (!data) {
+                data = getFormData();
+                const err = validateForm(data);
+                if (err) { showMessage(err, 'error'); return; }
+            }
             let phone = data.inchargePhone.replace(/[\s\-\(\)]/g, '');
             if (!phone.startsWith('255') && phone.startsWith('0')) phone = '255' + phone.substring(1);
             else if (!phone.startsWith('255') && !phone.startsWith('+')) phone = '255' + phone;
             if (phone.startsWith('+')) phone = phone.substring(1);
+
             const generalDutiesStr = data.generalDuties.length ? data.generalDuties.join(', ') : 'Hajachagua';
             const specialDutiesStr = data.specialDuties.length ? data.specialDuties.join(', ') : 'Hajachagua';
             const specialtyInfo = data.workerProfession === 'daktari' && data.doctorSpecialty ? ` (${data.doctorSpecialty})` : '';
@@ -921,7 +1026,14 @@
         }
 
         // ============================================================
-        //  8. RESET
+        //  9. PDF GENERATION
+        // ============================================================
+        function generatePDF() {
+            window.print();
+        }
+
+        // ============================================================
+        //  10. RESET
         // ============================================================
         function resetForm() {
             if (confirm('Una hakika unataka kuweka upya fomu yote?')) {
@@ -943,13 +1055,16 @@
                 doctorSpecialtySelect.value = '';
                 doctorSpecialtySelect.removeAttribute('required');
                 photoDataURL = '';
-                photoPreview.src = 'https://via.placeholder.com/80x80?text=No+Photo';
-                document.getElementById('headerPhoto').src = 'https://via.placeholder.com/50x50?text=User';
+                photoPreview.src =
+                    'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22 viewBox=%220 0 80 80%22%3E%3Crect width=%2280%22 height=%2280%22 fill=%22%23eef4fa%22/%3E%3Ctext x=%2240%22 y=%2248%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2228%22 fill=%22%231a3a5a%22%3E📷%3C/text%3E%3C/svg%3E';
+                document.getElementById('headerPhoto').src =
+                    'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2250%22 height=%2250%22 viewBox=%220 0 50 50%22%3E%3Ccircle cx=%2225%22 cy=%2225%22 r=%2225%22 fill=%22%23eef4fa%22/%3E%3Ctext x=%2225%22 y=%2230%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%231a3a5a%22%3E👤%3C/text%3E%3C/svg%3E';
                 photoInput.value = '';
+                closeModal();
             }
         }
 
-        console.log('✅ worker.html with SDA logo and user photo.');
+        console.log('✅ worker.html with PDF, Confirmation, and compressed data.');
     </script>
 </body>
 </html>
