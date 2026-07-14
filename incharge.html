@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -23,6 +24,7 @@
             box-shadow: 0 20px 60px rgba(0, 20, 40, 0.10);
             padding: 30px 35px;
         }
+
         .header {
             display: flex;
             align-items: center;
@@ -308,13 +310,13 @@
             border-top: 2px dashed #b0c7db;
             padding-top: 16px;
         }
-        .incharge-eval .checkbox-group {
+        .incharge-eval .checkbox-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 6px 16px;
             margin-top: 4px;
         }
-        .incharge-eval .checkbox-group label {
+        .incharge-eval .checkbox-grid label {
             display: flex;
             align-items: center;
             gap: 8px;
@@ -323,11 +325,39 @@
             color: #1a3a5a;
             cursor: pointer;
         }
-        .incharge-eval .checkbox-group input[type="checkbox"] {
+        .incharge-eval .checkbox-grid input[type="checkbox"] {
             width: 18px;
             height: 18px;
             accent-color: #1a73e8;
             cursor: pointer;
+        }
+        .rating-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin: 4px 0 8px;
+        }
+        .rating-row label {
+            font-weight: 400;
+            font-size: 14px;
+            color: #1a3a5a;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .rating-row input[type="number"] {
+            width: 60px;
+            padding: 4px 8px;
+            border: 2px solid #dce5ef;
+            border-radius: 8px;
+            font-size: 14px;
+            text-align: center;
+        }
+        .rating-row input[type="number"]:focus {
+            border-color: #1a73e8;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.12);
         }
 
         .btn-group {
@@ -548,7 +578,7 @@
             .submitted-form .form-field strong {
                 width: 120px;
             }
-            .incharge-eval .checkbox-group {
+            .incharge-eval .checkbox-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -607,7 +637,7 @@
             </div>
         </div>
 
-        <!-- GRAPH: Success/Performance Chart -->
+        <!-- PERFORMANCE GRAPH -->
         <div class="chart-section" id="performanceChart">
             <h3>📈 Mafanikio kwa Watumiaji Waliotathminiwa</h3>
             <div class="chart-bars" id="perfBars">
@@ -615,7 +645,7 @@
             </div>
         </div>
 
-        <!-- CHART: By Role -->
+        <!-- CHART BY ROLE -->
         <div class="chart-section" id="chartSection">
             <h3>📊 Tathmini kwa Jukumu</h3>
             <div class="chart-bars" id="chartBars">
@@ -628,7 +658,7 @@
         <!-- ============================================================ -->
         <div class="eval-section" id="evalSection">
             <div class="section-title"><span>📝</span> Tathmini ya Mtendakazi / Msimamizi</div>
-            <p style="color:#4a6a85; margin-bottom:16px;">Chagua mtumiaji, tazama fomu yake, kisha jaza tathmini yako kwa ku-tiki majukumu na kuweka rating.</p>
+            <p style="color:#4a6a85; margin-bottom:16px;">Chagua mtumiaji, tazama fomu yake, kisha jaza tathmini yako kwa ku-tiki majukumu na kuweka alama.</p>
 
             <div class="form-row">
                 <div class="form-group">
@@ -650,13 +680,29 @@
                 </div>
             </div>
 
-            <!-- Incharge evaluation section (with checkboxes) -->
+            <!-- Incharge evaluation section (with checkboxes and ratings) -->
             <div id="inchargeEvalContainer" class="incharge-eval" style="display:none;">
                 <h4 style="color:#0b2b4a; margin-bottom:12px;">✍️ Tathmini ya Mganga Mfawidhi</h4>
 
+                <!-- Majukumu ya Jumla -->
                 <div class="form-group">
-                    <label>Majukumu ya Mtumiaji (Tiki yanayostahili)</label>
-                    <div class="checkbox-group" id="inchargeDutiesChecklist">
+                    <label>📌 Majukumu ya Jumla (Tiki yanayostahili)</label>
+                    <div class="checkbox-grid" id="generalDutiesChecklist">
+                        <label><input type="checkbox" value="Kuhudumia wagonjwa" /> Kuhudumia wagonjwa</label>
+                        <label><input type="checkbox" value="Kutoa dawa na matibabu" /> Kutoa dawa na matibabu</label>
+                        <label><input type="checkbox" value="Kushiriki katika doria" /> Kushiriki katika doria</label>
+                        <label><input type="checkbox" value="Kuandika ripoti" /> Kuandika ripoti</label>
+                        <label><input type="checkbox" value="Kuelimisha wagonjwa" /> Kuelimisha wagonjwa</label>
+                        <label><input type="checkbox" value="Kusimamia usafi" /> Kusimamia usafi</label>
+                        <label><input type="checkbox" value="Kushiriki mikutano" /> Kushiriki mikutano</label>
+                        <label><input type="checkbox" value="Kufanya tafiti" /> Kufanya tafiti</label>
+                    </div>
+                </div>
+
+                <!-- Majukumu Maalumu -->
+                <div class="form-group">
+                    <label>🎯 Majukumu Maalumu (Tiki yanayostahili)</label>
+                    <div class="checkbox-grid" id="specificDutiesChecklist">
                         <label><input type="checkbox" value="Uongozi bora" /> Uongozi bora</label>
                         <label><input type="checkbox" value="Ubora wa huduma" /> Ubora wa huduma</label>
                         <label><input type="checkbox" value="Uwajibikaji" /> Uwajibikaji</label>
@@ -670,15 +716,46 @@
                     </div>
                 </div>
 
+                <!-- Majukumu ya Kiuongozi (kwa wasimamizi tu) -->
+                <div class="form-group" id="leadershipDutiesGroup" style="display:none;">
+                    <label>🌟 Majukumu ya Kiuongozi (Kwa Wasimamizi - Tiki yanayostahili)</label>
+                    <div class="checkbox-grid" id="leadershipDutiesChecklist">
+                        <label><input type="checkbox" value="Kuongoza timu" /> Kuongoza timu</label>
+                        <label><input type="checkbox" value="Kufanya maamuzi" /> Kufanya maamuzi</label>
+                        <label><input type="checkbox" value="Kusimamia wafanyakazi" /> Kusimamia wafanyakazi</label>
+                        <label><input type="checkbox" value="Kupanga na kupanga bajeti" /> Kupanga na kupanga bajeti</label>
+                        <label><input type="checkbox" value="Kutoa mrejesho" /> Kutoa mrejesho</label>
+                        <label><input type="checkbox" value="Kusimamia utekelezaji" /> Kusimamia utekelezaji</label>
+                        <label><input type="checkbox" value="Kuelimisha wafanyakazi" /> Kuelimisha wafanyakazi</label>
+                        <label><input type="checkbox" value="Kusimamia ubora" /> Kusimamia ubora</label>
+                    </div>
+                </div>
+
+                <!-- Rating za kila sehemu -->
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Rating Jumla (1-5) *</label>
-                        <input type="number" id="inchargeOverallRating" min="1" max="5" placeholder="1-5" />
+                        <label>⭐ Alama za Majukumu Jumla (1-5)</label>
+                        <input type="number" id="generalRating" min="1" max="5" placeholder="1-5" />
                     </div>
                     <div class="form-group">
-                        <label>Maoni ya Mganga Mfawidhi</label>
-                        <textarea id="inchargeComments" placeholder="Andika maoni yako..."></textarea>
+                        <label>⭐ Alama za Majukumu Maalumu (1-5)</label>
+                        <input type="number" id="specificRating" min="1" max="5" placeholder="1-5" />
                     </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group" id="leadershipRatingGroup" style="display:none;">
+                        <label>⭐ Alama za Majukumu ya Kiuongozi (1-5)</label>
+                        <input type="number" id="leadershipRating" min="1" max="5" placeholder="1-5" />
+                    </div>
+                    <div class="form-group">
+                        <label>⭐ Rating Jumla (1-5) *</label>
+                        <input type="number" id="overallRating" min="1" max="5" placeholder="1-5" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>📝 Maoni ya Mganga Mfawidhi</label>
+                    <textarea id="evalComments" placeholder="Andika maoni yako kuhusu mtumiaji huyu..."></textarea>
                 </div>
 
                 <div class="btn-group">
@@ -818,10 +895,12 @@
             // Reset
             document.getElementById('submittedFormDisplay').classList.remove('active');
             document.getElementById('inchargeEvalContainer').style.display = 'none';
+            document.getElementById('leadershipDutiesGroup').style.display = 'none';
+            document.getElementById('leadershipRatingGroup').style.display = 'none';
         }
 
         // ============================================================
-        // 4. VIEW SUBMITTED FORM
+        // 4. VIEW SUBMITTED FORM (FIXED)
         // ============================================================
         async function viewSelectedUser() {
             const val = document.getElementById('userSelect').value;
@@ -881,23 +960,54 @@
             document.getElementById('submittedFormDisplay').classList.add('active');
             document.getElementById('inchargeEvalContainer').style.display = 'block';
 
+            // Show leadership duties only if supervisor
+            if (role === 'supervisor') {
+                document.getElementById('leadershipDutiesGroup').style.display = 'block';
+                document.getElementById('leadershipRatingGroup').style.display = 'block';
+            } else {
+                document.getElementById('leadershipDutiesGroup').style.display = 'none';
+                document.getElementById('leadershipRatingGroup').style.display = 'none';
+                // Reset leadership fields
+                document.querySelectorAll('#leadershipDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
+                document.getElementById('leadershipRating').value = '';
+            }
+
             // Pre-fill if already evaluated by this incharge
             const existingEvals = items.filter(i => i.role === 'incharge_evaluation' && i.targetName === name && i.targetRole ===
                 role);
             if (existingEvals.length > 0) {
                 const last = existingEvals[existingEvals.length - 1];
-                // Check duties
-                const duties = last.duties || [];
-                document.querySelectorAll('#inchargeDutiesChecklist input[type="checkbox"]').forEach(cb => {
-                    cb.checked = duties.includes(cb.value);
+                // General duties
+                const genDuties = last.generalDuties || [];
+                document.querySelectorAll('#generalDutiesChecklist input[type="checkbox"]').forEach(cb => {
+                    cb.checked = genDuties.includes(cb.value);
                 });
-                document.getElementById('inchargeOverallRating').value = last.overallRating || '';
-                document.getElementById('inchargeComments').value = last.comments || '';
+                // Specific duties
+                const specDuties = last.specificDuties || [];
+                document.querySelectorAll('#specificDutiesChecklist input[type="checkbox"]').forEach(cb => {
+                    cb.checked = specDuties.includes(cb.value);
+                });
+                // Leadership duties
+                const leadDuties = last.leadershipDuties || [];
+                document.querySelectorAll('#leadershipDutiesChecklist input[type="checkbox"]').forEach(cb => {
+                    cb.checked = leadDuties.includes(cb.value);
+                });
+                // Ratings
+                document.getElementById('generalRating').value = last.generalRating || '';
+                document.getElementById('specificRating').value = last.specificRating || '';
+                document.getElementById('leadershipRating').value = last.leadershipRating || '';
+                document.getElementById('overallRating').value = last.overallRating || '';
+                document.getElementById('evalComments').value = last.comments || '';
             } else {
                 // Reset
-                document.querySelectorAll('#inchargeDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
-                document.getElementById('inchargeOverallRating').value = '';
-                document.getElementById('inchargeComments').value = '';
+                document.querySelectorAll('#generalDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
+                document.querySelectorAll('#specificDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
+                document.querySelectorAll('#leadershipDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
+                document.getElementById('generalRating').value = '';
+                document.getElementById('specificRating').value = '';
+                document.getElementById('leadershipRating').value = '';
+                document.getElementById('overallRating').value = '';
+                document.getElementById('evalComments').value = '';
             }
 
             // Store target info
@@ -919,23 +1029,32 @@
             }
 
             // Get checked duties
-            const checked = [];
-            document.querySelectorAll('#inchargeDutiesChecklist input[type="checkbox"]:checked').forEach(cb => {
-                checked.push(cb.value);
-            });
+            const getChecked = (containerId) => {
+                const checked = [];
+                document.querySelectorAll(`#${containerId} input[type="checkbox"]:checked`).forEach(cb => {
+                    checked.push(cb.value);
+                });
+                return checked;
+            };
+            const generalDuties = getChecked('generalDutiesChecklist');
+            const specificDuties = getChecked('specificDutiesChecklist');
+            const leadershipDuties = getChecked('leadershipDutiesChecklist');
 
-            const overallRating = document.getElementById('inchargeOverallRating').value.trim();
+            // Get ratings
+            const generalRating = document.getElementById('generalRating').value.trim();
+            const specificRating = document.getElementById('specificRating').value.trim();
+            const leadershipRating = document.getElementById('leadershipRating').value.trim();
+            const overallRating = document.getElementById('overallRating').value.trim();
+
             if (!overallRating) {
                 showMessage('Tafadhali weka rating jumla (1-5).', 'error');
                 return;
             }
-            const ratingNum = parseInt(overallRating);
-            if (ratingNum < 1 || ratingNum > 5) {
-                showMessage('Rating lazima iwe kati ya 1 na 5.', 'error');
+            const overallNum = parseInt(overallRating);
+            if (overallNum < 1 || overallNum > 5) {
+                showMessage('Rating jumla lazima iwe kati ya 1 na 5.', 'error');
                 return;
             }
-
-            const comments = document.getElementById('inchargeComments').value.trim();
 
             const evalRecord = {
                 role: 'incharge_evaluation',
@@ -943,9 +1062,14 @@
                 targetRole: targetRole,
                 evaluator: document.getElementById('headerName').textContent || 'Mganga Mfawidhi',
                 evaluatorPhone: document.getElementById('inchargeSelfPhone').value.trim() || '',
-                duties: checked,
-                overallRating: ratingNum,
-                comments: comments,
+                generalDuties: generalDuties,
+                specificDuties: specificDuties,
+                leadershipDuties: leadershipDuties,
+                generalRating: generalRating ? parseInt(generalRating) : null,
+                specificRating: specificRating ? parseInt(specificRating) : null,
+                leadershipRating: leadershipRating ? parseInt(leadershipRating) : null,
+                overallRating: overallNum,
+                comments: document.getElementById('evalComments').value.trim(),
                 submittedAt: new Date().toISOString()
             };
 
@@ -968,7 +1092,7 @@
                 showMessage('✅ Tathmini ya Mganga Mfawidhi imehifadhiwa!', 'success');
                 document.getElementById('confirmModal').classList.add('active');
                 refreshDashboard();
-                // Update the form display to reflect new eval
+                // Refresh the form display
                 viewSelectedUser();
             } catch (e) {
                 showMessage('❌ Hitilafu: ' + e.message, 'error');
@@ -976,9 +1100,14 @@
         }
 
         function clearInchargeEval() {
-            document.querySelectorAll('#inchargeDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
-            document.getElementById('inchargeOverallRating').value = '';
-            document.getElementById('inchargeComments').value = '';
+            document.querySelectorAll('#generalDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
+            document.querySelectorAll('#specificDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
+            document.querySelectorAll('#leadershipDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
+            document.getElementById('generalRating').value = '';
+            document.getElementById('specificRating').value = '';
+            document.getElementById('leadershipRating').value = '';
+            document.getElementById('overallRating').value = '';
+            document.getElementById('evalComments').value = '';
             showMessage('Fomu ya tathmini imesafishwa.', 'success');
         }
 
@@ -1007,7 +1136,7 @@
             document.getElementById('avgRating').textContent = avg.toFixed(1);
             document.getElementById('evalCount').textContent = evals;
 
-            // Performance graph: average rating per user evaluated by incharge
+            // Performance graph
             const perfData = {};
             const inchargeEvals = items.filter(i => i.role === 'incharge_evaluation');
             inchargeEvals.forEach(e => {
@@ -1170,7 +1299,7 @@
         }
 
         setInterval(refreshDashboard, 30000);
-        console.log('✅ incharge.html fixed: dropdown, view form, checkboxes, performance graph.');
+        console.log('✅ incharge.html with full evaluation (general, specific, leadership duties) and ratings.');
     </script>
 </body>
 </html>
