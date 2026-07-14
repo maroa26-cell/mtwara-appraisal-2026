@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -6,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mganga Mfawidhi - Dashboard</title>
     <style>
-        /* Same as supervisor – nimefupisha */
         * {
             margin: 0;
             padding: 0;
@@ -72,9 +70,10 @@
             font-weight: 600;
             color: #0b2b4a;
         }
+
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 16px;
             margin-bottom: 28px;
         }
@@ -105,6 +104,7 @@
             display: block;
             margin-bottom: 4px;
         }
+
         .chart-section {
             background: #f8fafe;
             border-radius: 20px;
@@ -151,6 +151,7 @@
             color: #0b2b4a;
             margin-bottom: 4px;
         }
+
         .table-section {
             background: #f8fafe;
             border-radius: 20px;
@@ -197,6 +198,7 @@
             background: #e3f2fd;
             color: #0d47a1;
         }
+
         .eval-section {
             background: #f8fafe;
             border-radius: 20px;
@@ -262,40 +264,72 @@
             resize: vertical;
             min-height: 60px;
         }
-        .duty-rating {
+        .view-form-btn {
+            background: #fbbc04;
+            color: #1e1e1e;
+            border: none;
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 6px;
+        }
+        .view-form-btn:hover {
+            background: #e5ac00;
+            transform: scale(1.02);
+        }
+
+        .submitted-form {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin-top: 16px;
+            border: 2px solid #1a73e8;
+            display: none;
+        }
+        .submitted-form.active {
+            display: block;
+        }
+        .submitted-form .form-field {
+            margin-bottom: 10px;
+        }
+        .submitted-form .form-field strong {
+            display: inline-block;
+            width: 180px;
+            color: #0b2b4a;
+        }
+        .submitted-form .form-field span {
+            color: #1a3a5a;
+        }
+
+        .incharge-eval {
+            margin-top: 20px;
+            border-top: 2px dashed #b0c7db;
+            padding-top: 16px;
+        }
+        .incharge-eval .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 16px;
+            margin-top: 4px;
+        }
+        .incharge-eval .checkbox-group label {
             display: flex;
             align-items: center;
-            gap: 16px;
-            margin: 4px 0 8px;
-            flex-wrap: wrap;
-        }
-        .duty-rating label {
+            gap: 8px;
             font-weight: 400;
             font-size: 14px;
             color: #1a3a5a;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            cursor: pointer;
         }
-        .duty-rating input[type="number"] {
-            width: 60px;
-            padding: 4px 8px;
-            border: 2px solid #dce5ef;
-            border-radius: 8px;
-            font-size: 14px;
-            text-align: center;
+        .incharge-eval .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #1a73e8;
+            cursor: pointer;
         }
-        .duty-item {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 10px 14px;
-            margin-bottom: 8px;
-            border: 1px solid #e4ecf5;
-        }
-        .duty-item .duty-name {
-            font-weight: 500;
-            color: #0b2b4a;
-        }
+
         .btn-group {
             display: flex;
             gap: 16px;
@@ -367,6 +401,7 @@
             color: white;
             transform: translateY(-3px);
         }
+
         .incharge-phone-field {
             background: #fff8e7;
             padding: 16px 20px;
@@ -374,6 +409,7 @@
             border-left: 6px solid #fbbc04;
             margin-bottom: 24px;
         }
+
         .message-box {
             padding: 14px 20px;
             border-radius: 14px;
@@ -393,6 +429,7 @@
             border-left: 6px solid #d93025;
             display: block;
         }
+
         .modal-overlay {
             display: none;
             position: fixed;
@@ -435,6 +472,7 @@
             padding: 12px 40px;
             font-size: 16px;
         }
+
         .recent-item {
             display: flex;
             justify-content: space-between;
@@ -456,6 +494,7 @@
             color: #6a8aaa;
             font-size: 12px;
         }
+
         @media print {
             body {
                 background: white;
@@ -467,22 +506,15 @@
                 padding: 20px;
             }
             .btn-group,
-            #messageBox,
+            .message-box,
             .modal-overlay {
                 display: none !important;
             }
             .header {
                 border-bottom: 2px solid #0b2b4a;
             }
-            .section,
-            .eval-section,
-            .chart-section,
-            .table-section,
-            .stats-grid {
-                border: 1px solid #ccc;
-                break-inside: avoid;
-            }
         }
+
         @media (max-width: 640px) {
             .container {
                 padding: 16px;
@@ -513,11 +545,18 @@
             .modal-box {
                 padding: 24px 20px;
             }
+            .submitted-form .form-field strong {
+                width: 120px;
+            }
+            .incharge-eval .checkbox-group {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- HEADER -->
         <div class="header">
             <div class="header-left">
                 <img class="logo" src="SDA_CHURCH_LOGO.webp" alt="Mtwara SDA Dispensary" />
@@ -532,6 +571,7 @@
             </div>
         </div>
 
+        <!-- Namba ya simu -->
         <div class="incharge-phone-field">
             <label style="font-weight:700; color:#b85c00;">📱 Namba yako ya simu (Mganga Mfawidhi)</label>
             <input type="text" id="inchargeSelfPhone" placeholder="0712 345 678" style="margin-top:6px;" />
@@ -558,21 +598,24 @@
             <div class="stat-card">
                 <span class="icon">⭐</span>
                 <div class="number" id="avgRating">0.0</div>
-                <div class="label">Wastani wa Rating (Mtendakazi)</div>
+                <div class="label">Wastani wa Rating</div>
             </div>
             <div class="stat-card">
                 <span class="icon">✅</span>
                 <div class="number" id="evalCount">0</div>
                 <div class="label">Tathmini za Mganga Mfawidhi</div>
             </div>
-            <div class="stat-card">
-                <span class="icon">📅</span>
-                <div class="number" id="monthCount">0</div>
-                <div class="label">Tathmini Mwezi Huu</div>
+        </div>
+
+        <!-- GRAPH: Success/Performance Chart -->
+        <div class="chart-section" id="performanceChart">
+            <h3>📈 Mafanikio kwa Watumiaji Waliotathminiwa</h3>
+            <div class="chart-bars" id="perfBars">
+                <p style="color:#6a8aaa;">Inapakia...</p>
             </div>
         </div>
 
-        <!-- CHART: Tathmini kwa Jukumu -->
+        <!-- CHART: By Role -->
         <div class="chart-section" id="chartSection">
             <h3>📊 Tathmini kwa Jukumu</h3>
             <div class="chart-bars" id="chartBars">
@@ -580,71 +623,72 @@
             </div>
         </div>
 
-        <!-- RIPOTI ZA KILA MWEZI -->
-        <div class="chart-section" id="monthlyReport">
-            <h3>📅 Ripoti ya Kila Mwezi - Tathmini</h3>
-            <div style="overflow-x:auto;">
-                <table id="monthlyTable" style="width:100%; font-size:13px;">
-                    <thead>
-                        <tr>
-                            <th>Mwezi</th>
-                            <th>Idadi ya Tathmini</th>
-                            <th>Wastani wa Rating</th>
-                        </tr>
-                    </thead>
-                    <tbody id="monthlyBody">
-                        <tr><td colspan="3" style="text-align:center; color:#6a8aaa;">Inapakia...</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- ===== SEHEMU YA TATHMINI YA MTENDAKAZI (ILIVYOREKEBISHWA) ===== -->
+        <!-- ============================================================ -->
+        <!-- SEHEMU: CHAGUA MTU, TAZAMA FOMU, TATHMINI -->
+        <!-- ============================================================ -->
         <div class="eval-section" id="evalSection">
-            <div class="section-title"><span>📝</span> Tathmini ya Mtendakazi na Majukumu Maalumu</div>
-            <p style="color:#4a6a85; margin-bottom:16px;">Chagua mtendakazi, kisha upe rating kwa kila jukumu na uandike maoni yako.</p>
+            <div class="section-title"><span>📝</span> Tathmini ya Mtendakazi / Msimamizi</div>
+            <p style="color:#4a6a85; margin-bottom:16px;">Chagua mtumiaji, tazama fomu yake, kisha jaza tathmini yako kwa ku-tiki majukumu na kuweka rating.</p>
 
             <div class="form-row">
                 <div class="form-group">
-                    <label>Chagua Mtendakazi *</label>
-                    <select id="workerSelect">
+                    <label>Chagua Mtumiaji *</label>
+                    <select id="userSelect">
                         <option value="">-- Chagua --</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label>Tarehe ya Tathmini</label>
-                    <input type="date" id="evalDate" />
+                <div class="form-group" style="display:flex; align-items:flex-end;">
+                    <button class="view-form-btn" onclick="viewSelectedUser()">👁️ Tazama Fomu</button>
                 </div>
             </div>
 
-            <div id="workerInfo" style="background:#eef4fa; padding:12px 16px; border-radius:12px; margin-bottom:16px; display:none;">
-                <p><strong>Idara:</strong> <span id="displayDept">-</span> &nbsp;|&nbsp; <strong>Cheo:</strong> <span id="displayTitle">-</span> &nbsp;|&nbsp; <strong>Taaluma:</strong> <span id="displayProf">-</span></p>
+            <!-- Display of submitted form -->
+            <div id="submittedFormDisplay" class="submitted-form">
+                <h4 style="color:#0b2b4a; margin-bottom:12px;">📄 Fomu Iliyotumwa</h4>
+                <div id="formContent">
+                    <p style="color:#6a8aaa;">Bonyeza "Tazama Fomu" kuona maelezo.</p>
+                </div>
             </div>
 
-            <div id="dutiesContainer" style="display:none;">
-                <label style="font-weight:600; color:#1a3a5a; margin-bottom:8px; display:block;">Majukumu Maalumu (Panga kila jukumu 1-5)</label>
-                <div id="dutyList"></div>
-            </div>
+            <!-- Incharge evaluation section (with checkboxes) -->
+            <div id="inchargeEvalContainer" class="incharge-eval" style="display:none;">
+                <h4 style="color:#0b2b4a; margin-bottom:12px;">✍️ Tathmini ya Mganga Mfawidhi</h4>
 
-            <div style="margin-top:16px;" id="overallContainer" style="display:none;">
+                <div class="form-group">
+                    <label>Majukumu ya Mtumiaji (Tiki yanayostahili)</label>
+                    <div class="checkbox-group" id="inchargeDutiesChecklist">
+                        <label><input type="checkbox" value="Uongozi bora" /> Uongozi bora</label>
+                        <label><input type="checkbox" value="Ubora wa huduma" /> Ubora wa huduma</label>
+                        <label><input type="checkbox" value="Uwajibikaji" /> Uwajibikaji</label>
+                        <label><input type="checkbox" value="Timu" /> Timu</label>
+                        <label><input type="checkbox" value="Mawasiliano" /> Mawasiliano</label>
+                        <label><input type="checkbox" value="Ushirikiano" /> Ushirikiano</label>
+                        <label><input type="checkbox" value="Ubunifu" /> Ubunifu</label>
+                        <label><input type="checkbox" value="Uaminifu" /> Uaminifu</label>
+                        <label><input type="checkbox" value="Kujitolea" /> Kujitolea</label>
+                        <label><input type="checkbox" value="Ustadi wa kitaalamu" /> Ustadi wa kitaalamu</label>
+                    </div>
+                </div>
+
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Tathmini Jumla ya Mtendakazi (1-5) *</label>
-                        <input type="number" id="overallRating" min="1" max="5" placeholder="1-5" />
+                        <label>Rating Jumla (1-5) *</label>
+                        <input type="number" id="inchargeOverallRating" min="1" max="5" placeholder="1-5" />
                     </div>
                     <div class="form-group">
                         <label>Maoni ya Mganga Mfawidhi</label>
-                        <textarea id="evalComments" placeholder="Andika maoni yako kuhusu mtendakazi..."></textarea>
+                        <textarea id="inchargeComments" placeholder="Andika maoni yako..."></textarea>
                     </div>
                 </div>
+
                 <div class="btn-group">
-                    <button class="btn btn-primary" onclick="submitEvaluation()">💾 Hifadhi Tathmini</button>
-                    <button class="btn btn-outline" onclick="resetEvaluationForm()">🔄 Weka Upya</button>
+                    <button class="btn btn-primary" onclick="saveInchargeEval()">💾 Hifadhi Tathmini</button>
+                    <button class="btn btn-outline" onclick="clearInchargeEval()">🔄 Weka Upya</button>
                 </div>
             </div>
         </div>
 
-        <!-- TABLE: Tathmini zote -->
+        <!-- TABLE: All evaluations -->
         <div class="table-section" id="tableSection">
             <h3>📋 Orodha ya Tathmini Zote</h3>
             <div class="table-wrap">
@@ -676,29 +720,30 @@
         <div id="messageBox" class="message-box"></div>
 
         <div class="btn-group">
-            <button class="btn btn-success" onclick="sendWhatsApp()">📱 Tuma WhatsApp (Namba yako)</button>
+            <button class="btn btn-success" onclick="sendWhatsApp()">📱 Tuma WhatsApp</button>
             <button class="btn btn-pdf" onclick="generatePDF()">📄 Pakua PDF</button>
             <button class="btn btn-email" onclick="sendEmail()">📧 Tuma Barua Pepe</button>
             <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
-            <button class="btn btn-outline" onclick="refreshDashboard()">🔄 Refresh Dashboard</button>
+            <button class="btn btn-outline" onclick="refreshDashboard()">🔄 Refresh</button>
         </div>
         <p style="margin-top:20px; font-size:12px; color:#6a8aaa; text-align:center;">
-            Dashboard inaonyesha tathmini zote zilizotumwa kwenye mfumo.
+            Dashboard inaonyesha tathmini zote.
         </p>
     </div>
 
+    <!-- CONFIRMATION MODAL -->
     <div class="modal-overlay" id="confirmModal">
         <div class="modal-box">
             <div class="icon">✅</div>
             <h2>Tathmini Imetumwa!</h2>
-            <p>Data yako imehifadhiwa kikamilifu. Ujumbe wa kukubaliana umetumwa kwa WhatsApp.</p>
+            <p>Data yako imehifadhiwa kikamilifu.</p>
             <button class="btn btn-primary" onclick="closeModal()">Sawa</button>
         </div>
     </div>
 
     <script>
         // ============================================================
-        //  1. USER & HEADER
+        // 1. USER & HEADER
         // ============================================================
         (function init() {
             const params = new URLSearchParams(window.location.search);
@@ -712,13 +757,12 @@
                     }
                 } catch (e) {}
             }
-            document.getElementById('evalDate').valueAsDate = new Date();
             refreshDashboard();
-            loadWorkerDropdown();
+            loadUserDropdown();
         })();
 
         // ============================================================
-        //  2. FETCH DATA
+        // 2. FETCH DATA
         // ============================================================
         const JSONBIN_BIN_ID = '6a4b0bc9da38895dfe32cc08';
         const JSONBIN_MASTER_KEY = "$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDot5L9hRGRQfa21/Mw/B0UcS";
@@ -742,135 +786,165 @@
         }
 
         // ============================================================
-        //  3. LOAD WORKER DROPDOWN (FIXED)
+        // 3. LOAD USER DROPDOWN (workers + supervisors)
         // ============================================================
-        async function loadWorkerDropdown() {
+        async function loadUserDropdown() {
             const items = await fetchAllData();
-            const workers = items.filter(i => i.role === 'worker' && i.workerName);
-            const select = document.getElementById('workerSelect');
-            select.innerHTML = '<option value="">-- Chagua --</option>';
-            const names = new Set();
-            workers.forEach(w => {
-                const name = w.workerName.trim();
-                if (name && !names.has(name)) {
-                    names.add(name);
-                    const opt = document.createElement('option');
-                    opt.value = name;
-                    opt.textContent = name;
-                    select.appendChild(opt);
-                }
-            });
-            select.addEventListener('change', function() {
-                const name = this.value;
-                if (name) {
-                    loadWorkerDetails(name);
-                } else {
-                    document.getElementById('workerInfo').style.display = 'none';
-                    document.getElementById('dutiesContainer').style.display = 'none';
-                    document.getElementById('overallContainer').style.display = 'none';
-                }
-            });
-        }
-
-        // ============================================================
-        //  4. LOAD WORKER DETAILS
-        // ============================================================
-        async function loadWorkerDetails(name) {
-            const items = await fetchAllData();
-            const worker = items.find(i => i.role === 'worker' && i.workerName === name);
-            if (!worker) {
-                showMessage('Mtendakazi huyu hajapatikana.', 'error');
-                return;
-            }
-
-            document.getElementById('workerInfo').style.display = 'block';
-            document.getElementById('displayDept').textContent = worker.workerDepartment || '-';
-            document.getElementById('displayTitle').textContent = worker.workerTitle || '-';
-            document.getElementById('displayProf').textContent = worker.workerProfession || '-';
-
-            const duties = worker.specialDuties || [];
-            const container = document.getElementById('dutyList');
-            container.innerHTML = '';
-            if (duties.length === 0) {
-                container.innerHTML = '<p style="color:#6a8aaa;">Mtendakazi huyu hana majukumu maalumu yaliyorekodiwa.</p>';
-            } else {
-                duties.forEach((duty, index) => {
-                    const div = document.createElement('div');
-                    div.className = 'duty-item';
-                    div.innerHTML = `
-                        <span class="duty-name">${index+1}. ${duty}</span>
-                        <div class="duty-rating">
-                            <label>Rating (1-5): <input type="number" class="duty-rating-input" data-duty="${duty}" min="1" max="5" placeholder="1-5" /></label>
-                        </div>
-                    `;
-                    container.appendChild(div);
-                });
-            }
-
-            document.getElementById('overallContainer').style.display = 'block';
-            document.getElementById('overallRating').value = '';
-            document.getElementById('evalComments').value = '';
-            if (!document.getElementById('evalDate').value) {
-                document.getElementById('evalDate').valueAsDate = new Date();
-            }
-            document.getElementById('dutiesContainer').style.display = 'block';
-        }
-
-        // ============================================================
-        //  5. SUBMIT EVALUATION
-        // ============================================================
-        async function submitEvaluation() {
-            const workerName = document.getElementById('workerSelect').value;
-            if (!workerName) {
-                showMessage('Tafadhali chagua mtendakazi.', 'error');
-                return;
-            }
-
-            const dutyInputs = document.querySelectorAll('.duty-rating-input');
-            const dutyRatings = {};
-            let allFilled = true;
-            dutyInputs.forEach(input => {
-                const duty = input.dataset.duty;
-                const val = input.value.trim();
-                if (val === '') {
-                    allFilled = false;
-                } else {
-                    const num = parseInt(val);
-                    if (num < 1 || num > 5) {
-                        allFilled = false;
-                    } else {
-                        dutyRatings[duty] = num;
+            const users = [];
+            const seen = new Set();
+            items.forEach(item => {
+                if (item.role === 'worker' && item.workerName) {
+                    const name = item.workerName.trim();
+                    if (name && !seen.has(name)) {
+                        seen.add(name);
+                        users.push({ name, role: 'worker', data: item });
+                    }
+                } else if (item.role === 'supervisor' && item.supervisorName) {
+                    const name = item.supervisorName.trim();
+                    if (name && !seen.has(name)) {
+                        seen.add(name);
+                        users.push({ name, role: 'supervisor', data: item });
                     }
                 }
             });
+            const select = document.getElementById('userSelect');
+            select.innerHTML = '<option value="">-- Chagua --</option>';
+            users.forEach(u => {
+                const opt = document.createElement('option');
+                opt.value = u.name + '|' + u.role;
+                opt.textContent = u.name + ' (' + u.role + ')';
+                select.appendChild(opt);
+            });
+            // Reset
+            document.getElementById('submittedFormDisplay').classList.remove('active');
+            document.getElementById('inchargeEvalContainer').style.display = 'none';
+        }
 
-            if (!allFilled) {
-                showMessage('Tafadhali jaza rating (1-5) kwa kila jukumu maalumu.', 'error');
+        // ============================================================
+        // 4. VIEW SUBMITTED FORM
+        // ============================================================
+        async function viewSelectedUser() {
+            const val = document.getElementById('userSelect').value;
+            if (!val) {
+                showMessage('Tafadhali chagua mtumiaji.', 'error');
+                return;
+            }
+            const [name, role] = val.split('|');
+            const items = await fetchAllData();
+            let userData = null;
+            if (role === 'worker') {
+                userData = items.find(i => i.role === 'worker' && i.workerName === name);
+            } else if (role === 'supervisor') {
+                userData = items.find(i => i.role === 'supervisor' && i.supervisorName === name);
+            }
+            if (!userData) {
+                showMessage('Data ya mtumiaji huyu haipatikani.', 'error');
                 return;
             }
 
-            const overall = document.getElementById('overallRating').value.trim();
-            if (!overall) {
-                showMessage('Tafadhali weka tathmini jumla (1-5).', 'error');
-                return;
+            // Build HTML
+            let html = '';
+            if (role === 'worker') {
+                html = `
+                    <div class="form-field"><strong>Jina:</strong> <span>${userData.workerName || '-'}</span></div>
+                    <div class="form-field"><strong>Simu:</strong> <span>${userData.workerPhone || '-'}</span></div>
+                    <div class="form-field"><strong>Barua Pepe:</strong> <span>${userData.workerEmail || '-'}</span></div>
+                    <div class="form-field"><strong>Idara:</strong> <span>${userData.workerDepartment || '-'}</span></div>
+                    <div class="form-field"><strong>Cheo:</strong> <span>${userData.workerTitle || '-'}</span></div>
+                    <div class="form-field"><strong>Taaluma:</strong> <span>${userData.workerProfession || '-'} ${userData.doctorSpecialty ? '('+userData.doctorSpecialty+')' : ''}</span></div>
+                    <div class="form-field"><strong>Majukumu ya Kawaida:</strong> <span>${(userData.generalDuties || []).join(', ') || '-'}</span></div>
+                    <div class="form-field"><strong>Majukumu Maalumu:</strong> <span>${(userData.specialDuties || []).join(', ') || '-'}</span></div>
+                    <div class="form-field"><strong>Malengo:</strong> <span>${userData.goals || '-'}</span></div>
+                    <div class="form-field"><strong>Ujuzi na Competence:</strong> <span>${userData.skillRating || '-'}/5</span></div>
+                    <div class="form-field"><strong>Mafunzo na Maendeleo:</strong> <span>${userData.trainingRating || '-'}/5</span></div>
+                    <div class="form-field"><strong>Maoni:</strong> <span>${userData.feedback || '-'}</span></div>
+                    <div class="form-field"><strong>Tarehe:</strong> <span>${userData.submittedAt ? new Date(userData.submittedAt).toLocaleDateString('sw') : '-'}</span></div>
+                `;
+            } else if (role === 'supervisor') {
+                html = `
+                    <div class="form-field"><strong>Msimamizi:</strong> <span>${userData.supervisorName || '-'}</span></div>
+                    <div class="form-field"><strong>Simu:</strong> <span>${userData.supervisorPhone || '-'}</span></div>
+                    <div class="form-field"><strong>Idara:</strong> <span>${userData.supervisorDepartment || '-'}</span></div>
+                    <div class="form-field"><strong>Cheo:</strong> <span>${userData.supervisorTitle || '-'}</span></div>
+                    <div class="form-field"><strong>Mtendakazi:</strong> <span>${userData.workerName || '-'}</span></div>
+                    <div class="form-field"><strong>Nguvu:</strong> <span>${userData.strengths || '-'}</span></div>
+                    <div class="form-field"><strong>Kuboresha:</strong> <span>${userData.improvements || '-'}</span></div>
+                    <div class="form-field"><strong>Mapendekezo:</strong> <span>${userData.recommendations || '-'}</span></div>
+                    <div class="form-field"><strong>Maoni Jumla:</strong> <span>${userData.generalFeedback || '-'}</span></div>
+                    <div class="form-field"><strong>Majukumu Jumla:</strong> <span>${userData.generalDuties || '-'}</span></div>
+                    <div class="form-field"><strong>Majukumu Maalumu:</strong> <span>${userData.specificDuties || '-'}</span></div>
+                    <div class="form-field"><strong>Tarehe:</strong> <span>${userData.submittedAt ? new Date(userData.submittedAt).toLocaleDateString('sw') : '-'}</span></div>
+                `;
             }
-            const overallNum = parseInt(overall);
-            if (overallNum < 1 || overallNum > 5) {
-                showMessage('Tathmini jumla lazima iwe kati ya 1 na 5.', 'error');
+
+            document.getElementById('formContent').innerHTML = html;
+            document.getElementById('submittedFormDisplay').classList.add('active');
+            document.getElementById('inchargeEvalContainer').style.display = 'block';
+
+            // Pre-fill if already evaluated by this incharge
+            const existingEvals = items.filter(i => i.role === 'incharge_evaluation' && i.targetName === name && i.targetRole ===
+                role);
+            if (existingEvals.length > 0) {
+                const last = existingEvals[existingEvals.length - 1];
+                // Check duties
+                const duties = last.duties || [];
+                document.querySelectorAll('#inchargeDutiesChecklist input[type="checkbox"]').forEach(cb => {
+                    cb.checked = duties.includes(cb.value);
+                });
+                document.getElementById('inchargeOverallRating').value = last.overallRating || '';
+                document.getElementById('inchargeComments').value = last.comments || '';
+            } else {
+                // Reset
+                document.querySelectorAll('#inchargeDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
+                document.getElementById('inchargeOverallRating').value = '';
+                document.getElementById('inchargeComments').value = '';
+            }
+
+            // Store target info
+            document.getElementById('userSelect').dataset.targetName = name;
+            document.getElementById('userSelect').dataset.targetRole = role;
+
+            showMessage('Fomu imeonyeshwa. Jaza tathmini yako.', 'success');
+        }
+
+        // ============================================================
+        // 5. SAVE INCHARGE EVALUATION
+        // ============================================================
+        async function saveInchargeEval() {
+            const targetName = document.getElementById('userSelect').dataset.targetName;
+            const targetRole = document.getElementById('userSelect').dataset.targetRole;
+            if (!targetName || !targetRole) {
+                showMessage('Tafadhali chagua mtumiaji na bonyeza "Tazama Fomu" kwanza.', 'error');
                 return;
             }
 
-            const comments = document.getElementById('evalComments').value.trim();
-            const evalDate = document.getElementById('evalDate').value || new Date().toISOString().split('T')[0];
+            // Get checked duties
+            const checked = [];
+            document.querySelectorAll('#inchargeDutiesChecklist input[type="checkbox"]:checked').forEach(cb => {
+                checked.push(cb.value);
+            });
+
+            const overallRating = document.getElementById('inchargeOverallRating').value.trim();
+            if (!overallRating) {
+                showMessage('Tafadhali weka rating jumla (1-5).', 'error');
+                return;
+            }
+            const ratingNum = parseInt(overallRating);
+            if (ratingNum < 1 || ratingNum > 5) {
+                showMessage('Rating lazima iwe kati ya 1 na 5.', 'error');
+                return;
+            }
+
+            const comments = document.getElementById('inchargeComments').value.trim();
 
             const evalRecord = {
                 role: 'incharge_evaluation',
-                workerName: workerName,
+                targetName: targetName,
+                targetRole: targetRole,
                 evaluator: document.getElementById('headerName').textContent || 'Mganga Mfawidhi',
                 evaluatorPhone: document.getElementById('inchargeSelfPhone').value.trim() || '',
-                date: evalDate,
-                dutyRatings: dutyRatings,
-                overallRating: overallNum,
+                duties: checked,
+                overallRating: ratingNum,
                 comments: comments,
                 submittedAt: new Date().toISOString()
             };
@@ -891,25 +965,21 @@
                     const errText = await response.text();
                     throw new Error(`Kusasisha BIN kulishindwa: ${response.status} - ${errText}`);
                 }
-                showMessage('✅ Tathmini ya mtendakazi imehifadhiwa!', 'success');
+                showMessage('✅ Tathmini ya Mganga Mfawidhi imehifadhiwa!', 'success');
                 document.getElementById('confirmModal').classList.add('active');
                 refreshDashboard();
-                resetEvaluationForm();
-                loadWorkerDropdown();
+                // Update the form display to reflect new eval
+                viewSelectedUser();
             } catch (e) {
                 showMessage('❌ Hitilafu: ' + e.message, 'error');
             }
         }
 
-        function resetEvaluationForm() {
-            document.getElementById('workerSelect').value = '';
-            document.getElementById('workerInfo').style.display = 'none';
-            document.getElementById('dutiesContainer').style.display = 'none';
-            document.getElementById('overallContainer').style.display = 'none';
-            document.getElementById('overallRating').value = '';
-            document.getElementById('evalComments').value = '';
-            document.getElementById('evalDate').valueAsDate = new Date();
-            document.getElementById('dutyList').innerHTML = '';
+        function clearInchargeEval() {
+            document.querySelectorAll('#inchargeDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
+            document.getElementById('inchargeOverallRating').value = '';
+            document.getElementById('inchargeComments').value = '';
+            showMessage('Fomu ya tathmini imesafishwa.', 'success');
         }
 
         function closeModal() {
@@ -917,11 +987,12 @@
         }
 
         // ============================================================
-        //  6. RENDER DASHBOARD WITH ALL DATA
+        // 6. RENDER DASHBOARD + PERFORMANCE GRAPH
         // ============================================================
         async function refreshDashboard() {
             const items = await fetchAllData();
 
+            // Stats
             const total = items.length;
             const workers = items.filter(i => i.role === 'worker').length;
             const supervisors = items.filter(i => i.role === 'supervisor').length;
@@ -936,18 +1007,38 @@
             document.getElementById('avgRating').textContent = avg.toFixed(1);
             document.getElementById('evalCount').textContent = evals;
 
-            // Monthly count
-            const now = new Date();
-            const monthNow = now.getMonth();
-            const yearNow = now.getFullYear();
-            const thisMonthItems = items.filter(i => {
-                if (!i.submittedAt) return false;
-                const d = new Date(i.submittedAt);
-                return d.getMonth() === monthNow && d.getFullYear() === yearNow;
+            // Performance graph: average rating per user evaluated by incharge
+            const perfData = {};
+            const inchargeEvals = items.filter(i => i.role === 'incharge_evaluation');
+            inchargeEvals.forEach(e => {
+                const key = e.targetName + ' (' + e.targetRole + ')';
+                if (!perfData[key]) perfData[key] = { sum: 0, count: 0 };
+                perfData[key].sum += e.overallRating || 0;
+                perfData[key].count++;
             });
-            document.getElementById('monthCount').textContent = thisMonthItems.length;
+            const perfLabels = Object.keys(perfData);
+            const perfValues = perfLabels.map(k => (perfData[k].sum / perfData[k].count));
+            const maxPerf = Math.max(...perfValues, 1);
+            const perfContainer = document.getElementById('perfBars');
+            perfContainer.innerHTML = '';
+            if (perfLabels.length === 0) {
+                perfContainer.innerHTML = '<p style="color:#6a8aaa;">Hakuna tathmini za Mganga Mfawidhi bado.</p>';
+            } else {
+                perfLabels.forEach((label, idx) => {
+                    const val = perfValues[idx];
+                    const pct = (val / maxPerf) * 100;
+                    const barDiv = document.createElement('div');
+                    barDiv.className = 'chart-bar';
+                    barDiv.innerHTML = `
+                        <div class="bar-value">${val.toFixed(1)}</div>
+                        <div class="bar" style="height:${Math.max(pct, 4)}%; background:linear-gradient(180deg,#0f9d58,#0b7a45);"></div>
+                        <div class="bar-label" style="font-size:11px;">${label}</div>
+                    `;
+                    perfContainer.appendChild(barDiv);
+                });
+            }
 
-            // Chart: by role
+            // Chart by role
             const roleCounts = {};
             items.forEach(i => {
                 const r = i.role || 'unknown';
@@ -959,7 +1050,6 @@
                 if (key === 'incharge_evaluation') label = 'Mganga Mfawidhi (Tathmini)';
                 chartData[label] = (chartData[label] || 0) + roleCounts[key];
             });
-
             const chartLabels = Object.keys(chartData);
             const chartValues = Object.values(chartData);
             const maxVal = Math.max(...chartValues, 1);
@@ -982,43 +1072,11 @@
                 });
             }
 
-            // Monthly report table
-            const monthlyData = {};
-            items.forEach(i => {
-                if (!i.submittedAt) return;
-                const d = new Date(i.submittedAt);
-                const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
-                if (!monthlyData[key]) monthlyData[key] = { count: 0, sumRating: 0, ratingCount: 0 };
-                monthlyData[key].count++;
-                if (i.role === 'worker' && i.skillRating) {
-                    monthlyData[key].sumRating += parseFloat(i.skillRating);
-                    monthlyData[key].ratingCount++;
-                }
-            });
-            const months = Object.keys(monthlyData).sort();
-            const tbody = document.getElementById('monthlyBody');
+            // Table
+            const tbody = document.getElementById('tableBody');
             tbody.innerHTML = '';
-            if (months.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#6a8aaa;">Hakuna data.</td></tr>';
-            } else {
-                months.forEach(m => {
-                    const data = monthlyData[m];
-                    const avgRating = data.ratingCount ? (data.sumRating / data.ratingCount).toFixed(1) : '-';
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td><strong>${m}</strong></td>
-                        <td>${data.count}</td>
-                        <td>${avgRating}</td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-            }
-
-            // Table: all items
-            const tbody2 = document.getElementById('tableBody');
-            tbody2.innerHTML = '';
             if (items.length === 0) {
-                tbody2.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#6a8aaa;">Hakuna tathmini zilizotumwa bado.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#6a8aaa;">Hakuna tathmini zilizotumwa bado.</td></tr>';
             } else {
                 const sorted = [...items].reverse();
                 sorted.forEach(item => {
@@ -1033,7 +1091,7 @@
                         dept = '-';
                         status = 'Imetathminiwa';
                         statusClass = 'evaluated';
-                        name = '📝 ' + item.workerName + ' (imepimwa na ' + (item.evaluator || 'Mganga Mfawidhi') + ')';
+                        name = '📝 ' + item.targetName + ' (imepimwa na ' + (item.evaluator || 'Mganga Mfawidhi') + ')';
                     }
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
@@ -1043,7 +1101,7 @@
                         <td>${date}</td>
                         <td><span class="status-badge ${statusClass}">${status}</span></td>
                     `;
-                    tbody2.appendChild(tr);
+                    tbody.appendChild(tr);
                 });
             }
 
@@ -1059,7 +1117,7 @@
                     let role = item.role || 'mtumiaji';
                     if (item.role === 'incharge_evaluation') {
                         role = 'Tathmini ya Mganga Mfawidhi';
-                        name = '📝 ' + item.workerName + ' (imepimwa)';
+                        name = '📝 ' + item.targetName + ' (imepimwa)';
                     }
                     const date = item.submittedAt ? new Date(item.submittedAt).toLocaleString('sw') : '-';
                     const div = document.createElement('div');
@@ -1075,7 +1133,7 @@
         }
 
         // ============================================================
-        //  7. WHATSAPP, PDF, EMAIL
+        // 7. WHATSAPP, PDF, EMAIL
         // ============================================================
         async function sendWhatsApp() {
             const phone = document.getElementById('inchargeSelfPhone').value.trim();
@@ -1112,7 +1170,7 @@
         }
 
         setInterval(refreshDashboard, 30000);
-        console.log('✅ incharge.html fixed: dropdown loads, all evaluations shown, monthly reports added.');
+        console.log('✅ incharge.html fixed: dropdown, view form, checkboxes, performance graph.');
     </script>
 </body>
 </html>
