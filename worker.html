@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -6,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mtendakazi - Tathmini</title>
     <style>
-        /* ===== GLOBAL ===== */
+        /* Same as previous worker.html – nimefupisha kwa kuwa tayari umeiona */
         * {
             margin: 0;
             padding: 0;
@@ -25,8 +24,6 @@
             box-shadow: 0 20px 60px rgba(0, 20, 40, 0.10);
             padding: 30px 35px;
         }
-
-        /* ===== HEADER ===== */
         .header {
             display: flex;
             align-items: center;
@@ -74,8 +71,6 @@
             font-weight: 600;
             color: #0b2b4a;
         }
-
-        /* ===== SECTIONS ===== */
         .section {
             background: #f8fafe;
             border-radius: 20px;
@@ -103,8 +98,6 @@
             justify-content: center;
             font-size: 15px;
         }
-
-        /* ===== FORM ELEMENTS ===== */
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -149,8 +142,6 @@
         .hidden {
             display: none !important;
         }
-
-        /* ===== PHOTO UPLOAD ===== */
         .photo-upload {
             display: flex;
             align-items: center;
@@ -172,8 +163,6 @@
             border-radius: 12px;
             background: #f8fafe;
         }
-
-        /* ===== CHECKBOX & RATING ===== */
         .checkbox-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -216,8 +205,6 @@
             accent-color: #1a73e8;
             cursor: pointer;
         }
-
-        /* ===== SIGNATURE ===== */
         .signature-area {
             border: 2px dashed #b0c7db;
             border-radius: 16px;
@@ -255,8 +242,6 @@
         .signature-actions button:hover {
             background: #cbd5e1;
         }
-
-        /* ===== BUTTONS ===== */
         .btn-group {
             display: flex;
             gap: 16px;
@@ -300,6 +285,15 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 28px rgba(217, 48, 37, 0.4);
         }
+        .btn-email {
+            background: linear-gradient(135deg, #ea4335, #c5221f);
+            color: white;
+            box-shadow: 0 6px 20px rgba(234, 67, 53, 0.3);
+        }
+        .btn-email:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(234, 67, 53, 0.4);
+        }
         .btn-warning {
             background: linear-gradient(135deg, #fbbc04, #e5ac00);
             color: #1e1e1e;
@@ -319,8 +313,6 @@
             color: white;
             transform: translateY(-3px);
         }
-
-        /* ===== MESSAGE ===== */
         .message-box {
             padding: 14px 20px;
             border-radius: 14px;
@@ -340,8 +332,6 @@
             border-left: 6px solid #d93025;
             display: block;
         }
-
-        /* ===== CONFIRMATION MODAL ===== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -384,8 +374,6 @@
             padding: 12px 40px;
             font-size: 16px;
         }
-
-        /* ===== PRINT STYLES ===== */
         @media print {
             body {
                 background: white;
@@ -414,8 +402,6 @@
                 border: 1px solid #000;
             }
         }
-
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 640px) {
             .container {
                 padding: 16px;
@@ -452,7 +438,6 @@
 </head>
 <body>
     <div class="container" id="app">
-        <!-- ===== HEADER ===== -->
         <div class="header">
             <div class="header-left">
                 <img class="logo" src="SDA_CHURCH_LOGO.webp" alt="Mtwara SDA Dispensary" />
@@ -469,7 +454,6 @@
 
         <input type="hidden" id="inchargePhone" value="" />
 
-        <!-- SEHEMU A: Taarifa za Msingi -->
         <div class="section">
             <div class="section-title"><span>1</span> Taarifa za Mtendakazi</div>
             <div class="form-row">
@@ -510,7 +494,6 @@
             </div>
         </div>
 
-        <!-- SEHEMU B: Majukumu -->
         <div class="section">
             <div class="section-title"><span>2</span> Majukumu Yako</div>
             <div class="form-group">
@@ -538,13 +521,11 @@
             </div>
         </div>
 
-        <!-- SEHEMU C: Malengo -->
         <div class="section">
             <div class="section-title"><span>3</span> Malengo ya Kimkakati</div>
             <div class="form-group"><textarea id="goals" placeholder="Eleza malengo yako makuu..."></textarea></div>
         </div>
 
-        <!-- SEHEMU D: Ujuzi na Competence -->
         <div class="section">
             <div class="section-title"><span>4</span> Ujuzi na Competence</div>
             <div class="form-group">
@@ -560,7 +541,6 @@
             <div class="form-group"><textarea id="skillsDescription" placeholder="Andika ujuzi wako kwa undani..."></textarea></div>
         </div>
 
-        <!-- SEHEMU E: Mafunzo na Maendeleo -->
         <div class="section">
             <div class="section-title"><span>5</span> Mafunzo na Maendeleo</div>
             <div class="form-group">
@@ -576,13 +556,11 @@
             <div class="form-group"><textarea id="trainingsDescription" placeholder="Andika mafunzo uliyohudhuria..."></textarea></div>
         </div>
 
-        <!-- SEHEMU F: Maoni -->
         <div class="section">
             <div class="section-title"><span>6</span> Maoni na Mapendekezo</div>
             <div class="form-group"><textarea id="feedback" placeholder="Andika maoni yako..."></textarea></div>
         </div>
 
-        <!-- SEHEMU G: Sahihi -->
         <div class="section">
             <div class="section-title"><span>7</span> Sahihi</div>
             <div class="form-row">
@@ -604,6 +582,7 @@
             <button class="btn btn-primary" onclick="saveAndSend()">💾 Hifadhi na Kutuma</button>
             <button class="btn btn-success" onclick="sendWhatsApp()">📱 Tuma WhatsApp</button>
             <button class="btn btn-pdf" onclick="generatePDF()">📄 Pakua PDF</button>
+            <button class="btn btn-email" onclick="sendEmail()">📧 Tuma Barua Pepe</button>
             <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
             <button class="btn btn-outline" onclick="resetForm()">🔄 Weka Upya</button>
         </div>
@@ -612,7 +591,6 @@
         </p>
     </div>
 
-    <!-- ===== CONFIRMATION MODAL ===== -->
     <div class="modal-overlay" id="confirmModal">
         <div class="modal-box">
             <div class="icon">✅</div>
@@ -623,9 +601,12 @@
     </div>
 
     <script>
-        // ============================================================
-        //  1. GET USER & SET HEADER
-        // ============================================================
+        /* ============================================================
+           SIMU HAPA – MISINGI YA WORKER (kama ilivyokuwa awali)
+           Nimefupisha kwa kuwa tayari umeiona, lakini nitaweka muhimu:
+           - Kila kitu kimehifadhiwa, na nimeongeza kazi ya sendEmail()
+           ============================================================ */
+
         (function getUser() {
             const params = new URLSearchParams(window.location.search);
             const userParam = params.get('user');
@@ -650,9 +631,6 @@
             document.getElementById('signatureDate').valueAsDate = new Date();
         })();
 
-        // ============================================================
-        //  2. PHOTO UPLOAD & RESIZE
-        // ============================================================
         const photoInput = document.getElementById('photoInput');
         const photoPreview = document.getElementById('photoPreview');
         let photoDataURL = '';
@@ -699,9 +677,6 @@
             }
         });
 
-        // ============================================================
-        //  3. DUTIES BY PROFESSION
-        // ============================================================
         const specialDutiesMap = {
             muuguzi: [
                 'Kufanya uchunguzi wa wagonjwa kila siku',
@@ -807,9 +782,6 @@
             }
         });
 
-        // ============================================================
-        //  4. SIGNATURE CANVAS (COMPRESSED)
-        // ============================================================
         let canvas = document.getElementById('signatureCanvas');
         let ctx = canvas.getContext('2d');
         let isDrawing = false;
@@ -873,9 +845,6 @@
             return tempCanvas.toDataURL('image/jpeg', 0.5);
         }
 
-        // ============================================================
-        //  5. JSONBIN
-        // ============================================================
         const JSONBIN_BIN_ID = '6a4b0bc9da38895dfe32cc08';
         const JSONBIN_MASTER_KEY = "$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDot5L9hRGRQfa21/Mw/B0UcS";
 
@@ -911,9 +880,6 @@
             }
         }
 
-        // ============================================================
-        //  6. FORM DATA
-        // ============================================================
         function getCheckedValues(containerId) {
             const container = document.getElementById(containerId);
             const checkboxes = container.querySelectorAll('input[type="checkbox"]:checked');
@@ -980,9 +946,6 @@
             box.textContent = '';
         }
 
-        // ============================================================
-        //  7. SAVE & SEND + CONFIRMATION
-        // ============================================================
         async function saveAndSend() {
             clearMessage();
             const data = getFormData();
@@ -1002,9 +965,6 @@
             document.getElementById('confirmModal').classList.remove('active');
         }
 
-        // ============================================================
-        //  8. WHATSAPP + CONFIRMATION MESSAGE
-        // ============================================================
         async function sendWhatsApp(data) {
             if (!data) {
                 data = getFormData();
@@ -1025,16 +985,19 @@
             showMessage('📱 WhatsApp imefunguliwa. Bonyeza SEND.', 'success');
         }
 
-        // ============================================================
-        //  9. PDF GENERATION
-        // ============================================================
         function generatePDF() {
             window.print();
         }
 
-        // ============================================================
-        //  10. RESET
-        // ============================================================
+        function sendEmail() {
+            const data = getFormData();
+            const subject = `TATHMINI YA MTENDAKAZI - ${data.workerName}`;
+            const body =
+                `Jina: ${data.workerName}\nSimu: ${data.workerPhone}\nBarua Pepe: ${data.workerEmail || 'Hajajazwa'}\nIdara: ${data.workerDepartment}\nCheo: ${data.workerTitle}\nTaaluma: ${data.workerProfession}\n\nMalengo: ${data.goals || 'Hakuna'}\nUjuzi na Competence: ${data.skillRating}/5\nMafunzo na Maendeleo: ${data.trainingRating}/5\nMaoni: ${data.feedback || 'Hakuna'}\nTarehe: ${data.signatureDate || 'Hajajazwa'}`;
+            window.location.href =
+                `mailto:${data.workerEmail || 'admin@mtwara-sda.org'}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
         function resetForm() {
             if (confirm('Una hakika unataka kuweka upya fomu yote?')) {
                 document.querySelectorAll('input, textarea, select').forEach(el => {
@@ -1064,7 +1027,7 @@
             }
         }
 
-        console.log('✅ worker.html with PDF, Confirmation, and compressed data.');
+        console.log('✅ worker.html with email button.');
     </script>
 </body>
 </html>
