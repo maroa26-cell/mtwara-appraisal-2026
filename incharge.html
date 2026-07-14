@@ -628,7 +628,7 @@
             <div class="stat-card">
                 <span class="icon">⭐</span>
                 <div class="number" id="avgRating">0.0</div>
-                <div class="label">Wastani wa Rating</div>
+                <div class="label">Wastani wa Rating (Mtendakazi)</div>
             </div>
             <div class="stat-card">
                 <span class="icon">✅</span>
@@ -654,17 +654,26 @@
         </div>
 
         <!-- ============================================================ -->
-        <!-- SEHEMU: CHAGUA MTU, TAZAMA FOMU, TATHMINI -->
+        <!-- SEHEMU YA TATHMINI: CHAGUA AINA, CHAGUA MTU, TAZAMA FOMU, TATHMINI -->
         <!-- ============================================================ -->
         <div class="eval-section" id="evalSection">
             <div class="section-title"><span>📝</span> Tathmini ya Mtendakazi / Msimamizi</div>
-            <p style="color:#4a6a85; margin-bottom:16px;">Chagua mtumiaji, tazama fomu yake, kisha jaza tathmini yako kwa ku-tiki majukumu na kuweka alama.</p>
+            <p style="color:#4a6a85; margin-bottom:16px;">Chagua aina ya mtumiaji, kisha chagua mtumiaji maalum, tazama fomu yake, kisha jaza tathmini yako.</p>
 
+            <!-- Dropdown 1: Aina ya mtumiaji -->
             <div class="form-row">
+                <div class="form-group">
+                    <label>Aina ya Mtumiaji *</label>
+                    <select id="userTypeSelect" onchange="loadUserNames()">
+                        <option value="">-- Chagua Aina --</option>
+                        <option value="worker">Mtendakazi</option>
+                        <option value="supervisor">Msimamizi</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label>Chagua Mtumiaji *</label>
                     <select id="userSelect">
-                        <option value="">-- Chagua --</option>
+                        <option value="">-- Chagua kwanza aina --</option>
                     </select>
                 </div>
                 <div class="form-group" style="display:flex; align-items:flex-end;">
@@ -680,11 +689,11 @@
                 </div>
             </div>
 
-            <!-- Incharge evaluation section (with checkboxes and ratings) -->
+            <!-- Incharge evaluation section -->
             <div id="inchargeEvalContainer" class="incharge-eval" style="display:none;">
                 <h4 style="color:#0b2b4a; margin-bottom:12px;">✍️ Tathmini ya Mganga Mfawidhi</h4>
 
-                <!-- Majukumu ya Jumla -->
+                <!-- Majukumu ya Jumla (kwa wote) -->
                 <div class="form-group">
                     <label>📌 Majukumu ya Jumla (Tiki yanayostahili)</label>
                     <div class="checkbox-grid" id="generalDutiesChecklist">
@@ -699,7 +708,7 @@
                     </div>
                 </div>
 
-                <!-- Majukumu Maalumu -->
+                <!-- Majukumu Maalumu (kwa wote) -->
                 <div class="form-group">
                     <label>🎯 Majukumu Maalumu (Tiki yanayostahili)</label>
                     <div class="checkbox-grid" id="specificDutiesChecklist">
@@ -716,9 +725,22 @@
                     </div>
                 </div>
 
-                <!-- Majukumu ya Kiuongozi (kwa wasimamizi tu) -->
+                <!-- KPI (kwa watendakazi) -->
+                <div class="form-group" id="kpiDutiesGroup" style="display:none;">
+                    <label>📊 KPI (Key Performance Indicators) - Tiki yanayostahili</label>
+                    <div class="checkbox-grid" id="kpiDutiesChecklist">
+                        <label><input type="checkbox" value="Kufikia malengo" /> Kufikia malengo</label>
+                        <label><input type="checkbox" value="Ubora wa matokeo" /> Ubora wa matokeo</label>
+                        <label><input type="checkbox" value="Ufanisi wa gharama" /> Ufanisi wa gharama</label>
+                        <label><input type="checkbox" value="Kuridhika kwa wagonjwa" /> Kuridhika kwa wagonjwa</label>
+                        <label><input type="checkbox" value="Utekelezaji wa mipango" /> Utekelezaji wa mipango</label>
+                        <label><input type="checkbox" value="Uwazi na uwajibikaji" /> Uwazi na uwajibikaji</label>
+                    </div>
+                </div>
+
+                <!-- Majukumu ya Kiusimamizi (kwa wasimamizi) -->
                 <div class="form-group" id="leadershipDutiesGroup" style="display:none;">
-                    <label>🌟 Majukumu ya Kiuongozi (Kwa Wasimamizi - Tiki yanayostahili)</label>
+                    <label>🌟 Majukumu ya Kiusimamizi (Tiki yanayostahili)</label>
                     <div class="checkbox-grid" id="leadershipDutiesChecklist">
                         <label><input type="checkbox" value="Kuongoza timu" /> Kuongoza timu</label>
                         <label><input type="checkbox" value="Kufanya maamuzi" /> Kufanya maamuzi</label>
@@ -731,7 +753,7 @@
                     </div>
                 </div>
 
-                <!-- Rating za kila sehemu -->
+                <!-- Ratings -->
                 <div class="form-row">
                     <div class="form-group">
                         <label>⭐ Alama za Majukumu Jumla (1-5)</label>
@@ -743,19 +765,24 @@
                     </div>
                 </div>
                 <div class="form-row">
+                    <div class="form-group" id="kpiRatingGroup" style="display:none;">
+                        <label>⭐ Alama za KPI (1-5)</label>
+                        <input type="number" id="kpiRating" min="1" max="5" placeholder="1-5" />
+                    </div>
                     <div class="form-group" id="leadershipRatingGroup" style="display:none;">
-                        <label>⭐ Alama za Majukumu ya Kiuongozi (1-5)</label>
+                        <label>⭐ Alama za Majukumu ya Kiusimamizi (1-5)</label>
                         <input type="number" id="leadershipRating" min="1" max="5" placeholder="1-5" />
                     </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group">
                         <label>⭐ Rating Jumla (1-5) *</label>
                         <input type="number" id="overallRating" min="1" max="5" placeholder="1-5" />
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label>📝 Maoni ya Mganga Mfawidhi</label>
-                    <textarea id="evalComments" placeholder="Andika maoni yako kuhusu mtumiaji huyu..."></textarea>
+                    <div class="form-group">
+                        <label>📝 Maoni ya Mganga Mfawidhi</label>
+                        <textarea id="evalComments" placeholder="Andika maoni yako..."></textarea>
+                    </div>
                 </div>
 
                 <div class="btn-group">
@@ -835,7 +862,8 @@
                 } catch (e) {}
             }
             refreshDashboard();
-            loadUserDropdown();
+            // Load initial dropdowns
+            loadUserNames();
         })();
 
         // ============================================================
@@ -863,47 +891,73 @@
         }
 
         // ============================================================
-        // 3. LOAD USER DROPDOWN (workers + supervisors)
+        // 3. LOAD USER NAMES BASED ON SELECTED TYPE
         // ============================================================
-        async function loadUserDropdown() {
+        async function loadUserNames() {
+            const userType = document.getElementById('userTypeSelect').value;
+            const userSelect = document.getElementById('userSelect');
+            userSelect.innerHTML = '<option value="">-- Chagua --</option>';
+
+            if (!userType) {
+                userSelect.innerHTML = '<option value="">-- Chagua kwanza aina --</option>';
+                // Hide evaluation section
+                document.getElementById('submittedFormDisplay').classList.remove('active');
+                document.getElementById('inchargeEvalContainer').style.display = 'none';
+                return;
+            }
+
             const items = await fetchAllData();
             const users = [];
             const seen = new Set();
-            items.forEach(item => {
-                if (item.role === 'worker' && item.workerName) {
-                    const name = item.workerName.trim();
-                    if (name && !seen.has(name)) {
-                        seen.add(name);
-                        users.push({ name, role: 'worker', data: item });
+
+            if (userType === 'worker') {
+                items.forEach(item => {
+                    if (item.role === 'worker' && item.workerName) {
+                        const name = item.workerName.trim();
+                        if (name && !seen.has(name)) {
+                            seen.add(name);
+                            users.push({ name, role: 'worker', data: item });
+                        }
                     }
-                } else if (item.role === 'supervisor' && item.supervisorName) {
-                    const name = item.supervisorName.trim();
-                    if (name && !seen.has(name)) {
-                        seen.add(name);
-                        users.push({ name, role: 'supervisor', data: item });
+                });
+            } else if (userType === 'supervisor') {
+                items.forEach(item => {
+                    if (item.role === 'supervisor' && item.supervisorName) {
+                        const name = item.supervisorName.trim();
+                        if (name && !seen.has(name)) {
+                            seen.add(name);
+                            users.push({ name, role: 'supervisor', data: item });
+                        }
                     }
-                }
-            });
-            const select = document.getElementById('userSelect');
-            select.innerHTML = '<option value="">-- Chagua --</option>';
+                });
+            }
+
             users.forEach(u => {
                 const opt = document.createElement('option');
                 opt.value = u.name + '|' + u.role;
-                opt.textContent = u.name + ' (' + u.role + ')';
-                select.appendChild(opt);
+                opt.textContent = u.name;
+                userSelect.appendChild(opt);
             });
-            // Reset
+
+            // Reset display
             document.getElementById('submittedFormDisplay').classList.remove('active');
             document.getElementById('inchargeEvalContainer').style.display = 'none';
+            document.getElementById('kpiDutiesGroup').style.display = 'none';
+            document.getElementById('kpiRatingGroup').style.display = 'none';
             document.getElementById('leadershipDutiesGroup').style.display = 'none';
             document.getElementById('leadershipRatingGroup').style.display = 'none';
         }
 
         // ============================================================
-        // 4. VIEW SUBMITTED FORM (FIXED)
+        // 4. VIEW SUBMITTED FORM
         // ============================================================
         async function viewSelectedUser() {
+            const userType = document.getElementById('userTypeSelect').value;
             const val = document.getElementById('userSelect').value;
+            if (!userType) {
+                showMessage('Tafadhali chagua aina ya mtumiaji kwanza.', 'error');
+                return;
+            }
             if (!val) {
                 showMessage('Tafadhali chagua mtumiaji.', 'error');
                 return;
@@ -921,7 +975,7 @@
                 return;
             }
 
-            // Build HTML
+            // Build HTML for submitted form
             let html = '';
             if (role === 'worker') {
                 html = `
@@ -960,16 +1014,23 @@
             document.getElementById('submittedFormDisplay').classList.add('active');
             document.getElementById('inchargeEvalContainer').style.display = 'block';
 
-            // Show leadership duties only if supervisor
-            if (role === 'supervisor') {
-                document.getElementById('leadershipDutiesGroup').style.display = 'block';
-                document.getElementById('leadershipRatingGroup').style.display = 'block';
-            } else {
+            // Show/hide role-specific sections
+            if (role === 'worker') {
+                document.getElementById('kpiDutiesGroup').style.display = 'block';
+                document.getElementById('kpiRatingGroup').style.display = 'block';
                 document.getElementById('leadershipDutiesGroup').style.display = 'none';
                 document.getElementById('leadershipRatingGroup').style.display = 'none';
                 // Reset leadership fields
                 document.querySelectorAll('#leadershipDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
                 document.getElementById('leadershipRating').value = '';
+            } else if (role === 'supervisor') {
+                document.getElementById('kpiDutiesGroup').style.display = 'none';
+                document.getElementById('kpiRatingGroup').style.display = 'none';
+                document.getElementById('leadershipDutiesGroup').style.display = 'block';
+                document.getElementById('leadershipRatingGroup').style.display = 'block';
+                // Reset KPI fields
+                document.querySelectorAll('#kpiDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
+                document.getElementById('kpiRating').value = '';
             }
 
             // Pre-fill if already evaluated by this incharge
@@ -987,6 +1048,11 @@
                 document.querySelectorAll('#specificDutiesChecklist input[type="checkbox"]').forEach(cb => {
                     cb.checked = specDuties.includes(cb.value);
                 });
+                // KPI duties
+                const kpiDuties = last.kpiDuties || [];
+                document.querySelectorAll('#kpiDutiesChecklist input[type="checkbox"]').forEach(cb => {
+                    cb.checked = kpiDuties.includes(cb.value);
+                });
                 // Leadership duties
                 const leadDuties = last.leadershipDuties || [];
                 document.querySelectorAll('#leadershipDutiesChecklist input[type="checkbox"]').forEach(cb => {
@@ -995,16 +1061,19 @@
                 // Ratings
                 document.getElementById('generalRating').value = last.generalRating || '';
                 document.getElementById('specificRating').value = last.specificRating || '';
+                document.getElementById('kpiRating').value = last.kpiRating || '';
                 document.getElementById('leadershipRating').value = last.leadershipRating || '';
                 document.getElementById('overallRating').value = last.overallRating || '';
                 document.getElementById('evalComments').value = last.comments || '';
             } else {
-                // Reset
+                // Reset all checkboxes and ratings
                 document.querySelectorAll('#generalDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
                 document.querySelectorAll('#specificDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
+                document.querySelectorAll('#kpiDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
                 document.querySelectorAll('#leadershipDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
                 document.getElementById('generalRating').value = '';
                 document.getElementById('specificRating').value = '';
+                document.getElementById('kpiRating').value = '';
                 document.getElementById('leadershipRating').value = '';
                 document.getElementById('overallRating').value = '';
                 document.getElementById('evalComments').value = '';
@@ -1038,11 +1107,13 @@
             };
             const generalDuties = getChecked('generalDutiesChecklist');
             const specificDuties = getChecked('specificDutiesChecklist');
+            const kpiDuties = getChecked('kpiDutiesChecklist');
             const leadershipDuties = getChecked('leadershipDutiesChecklist');
 
             // Get ratings
             const generalRating = document.getElementById('generalRating').value.trim();
             const specificRating = document.getElementById('specificRating').value.trim();
+            const kpiRating = document.getElementById('kpiRating').value.trim();
             const leadershipRating = document.getElementById('leadershipRating').value.trim();
             const overallRating = document.getElementById('overallRating').value.trim();
 
@@ -1064,9 +1135,11 @@
                 evaluatorPhone: document.getElementById('inchargeSelfPhone').value.trim() || '',
                 generalDuties: generalDuties,
                 specificDuties: specificDuties,
+                kpiDuties: kpiDuties,
                 leadershipDuties: leadershipDuties,
                 generalRating: generalRating ? parseInt(generalRating) : null,
                 specificRating: specificRating ? parseInt(specificRating) : null,
+                kpiRating: kpiRating ? parseInt(kpiRating) : null,
                 leadershipRating: leadershipRating ? parseInt(leadershipRating) : null,
                 overallRating: overallNum,
                 comments: document.getElementById('evalComments').value.trim(),
@@ -1102,9 +1175,11 @@
         function clearInchargeEval() {
             document.querySelectorAll('#generalDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
             document.querySelectorAll('#specificDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
+            document.querySelectorAll('#kpiDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
             document.querySelectorAll('#leadershipDutiesChecklist input[type="checkbox"]').forEach(cb => cb.checked = false);
             document.getElementById('generalRating').value = '';
             document.getElementById('specificRating').value = '';
+            document.getElementById('kpiRating').value = '';
             document.getElementById('leadershipRating').value = '';
             document.getElementById('overallRating').value = '';
             document.getElementById('evalComments').value = '';
@@ -1116,7 +1191,7 @@
         }
 
         // ============================================================
-        // 6. RENDER DASHBOARD + PERFORMANCE GRAPH
+        // 6. RENDER DASHBOARD
         // ============================================================
         async function refreshDashboard() {
             const items = await fetchAllData();
@@ -1299,7 +1374,7 @@
         }
 
         setInterval(refreshDashboard, 30000);
-        console.log('✅ incharge.html with full evaluation (general, specific, leadership duties) and ratings.');
+        console.log('✅ incharge.html fully functional with two dropdowns, full evaluation, and dashboard.');
     </script>
 </body>
 </html>
