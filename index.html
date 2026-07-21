@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tathmini 2026 - Mtwara</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
     <style>
         /* ===== MSINGI ===== */
         * {
@@ -350,7 +351,6 @@
             outline: none;
             box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.15);
         }
-        /* ===== SIGNATURE - ILIYOREKEBISHWA ===== */
         .signature-wrapper {
             background: #fff;
             border-radius: 16px;
@@ -380,6 +380,7 @@
             font-weight: 500;
             color: #0f9d58;
         }
+
         @media (max-width: 700px) {
             .form-row {
                 grid-template-columns: 1fr;
@@ -400,9 +401,6 @@
             }
             .role-selector select {
                 width: 100%;
-            }
-            .signature-wrapper canvas {
-                height: 120px !important;
             }
         }
         @media print {
@@ -479,7 +477,12 @@
                 </div>
                 <div id="workerDoctorSpecialtyContainer" class="form-group hidden">
                     <label>Utaalamu wa Daktari *</label>
-                    <select id="workerDoctorSpecialty"><option value="">-- Chagua --</option><option value="Specialist">Specialist</option><option value="MD">MD</option><option value="Clinical Officer">Clinical Officer</option></select>
+                    <select id="workerDoctorSpecialty">
+                        <option value="">-- Chagua --</option>
+                        <option value="Specialist">Specialist</option>
+                        <option value="MD">MD</option>
+                        <option value="Clinical Officer">Clinical Officer</option>
+                    </select>
                 </div>
             </div>
 
@@ -491,7 +494,9 @@
                     <div class="checkbox-grid" id="workerGeneralDuties">
                         <label><input type="checkbox" value="Kuhudumia wagonjwa" /> Kuhudumia wagonjwa</label>
                         <label><input type="checkbox" value="Kutoa dawa na matibabu" /> Kutoa dawa na matibabu</label>
-                        <label><input type="checkbox" value="Kushiriki katika doria" /> Kushiriki katika doria</label>
+                        <!-- Neno "kushiriki katika doria" limeondolewa -->
+                        <label><input type="checkbox" value="Kuwahi kazini dakika 10 kabla ya zamu kuanzia" /> Kuwahi kazini dakika 10 kabla ya zamu kuanzia</label>
+                        <label><input type="checkbox" value="Kuhakikisha eneo lako la kazi liko safi na lina mpangilio mzuri" /> Kuhakikisha eneo lako la kazi liko safi na lina mpangilio mzuri</label>
                         <label><input type="checkbox" value="Kuandika ripoti za matibabu" /> Kuandika ripoti za matibabu</label>
                         <label><input type="checkbox" value="Kuelimisha wagonjwa na walezi" /> Kuelimisha wagonjwa na walezi</label>
                         <label><input type="checkbox" value="Kusimamia usafi na usalama" /> Kusimamia usafi na usalama</label>
@@ -546,6 +551,7 @@
                     <div class="form-group"><label>Jina la mtia sahihi</label><input type="text" id="workerSignatureName" placeholder="Jina lako kamili" /></div>
                     <div class="form-group"><label>Tarehe</label><input type="date" id="workerSignatureDate" /></div>
                 </div>
+
                 <!-- SEHEMU YA SAHIHI ILIYOREKEBISHWA -->
                 <div class="signature-wrapper">
                     <p style="margin-bottom:10px;font-weight:600;">✍️ Chora sahihi yako hapa (kwa kalamu au kidole)</p>
@@ -579,7 +585,7 @@
         </div>
 
         <!-- ========================================================== -->
-        <!-- FOMU YA MSIMAMIZI (SUPERVISOR)                              -->
+        <!-- FOMU YA MSIMAMIZI (SUPERVISOR) - IMEFUPISHWA KWA MAZINGIRA   -->
         <!-- ========================================================== -->
         <div id="supervisorSection" class="hidden">
             <div class="section">
@@ -600,7 +606,8 @@
                     <div class="checkbox-grid" id="supGeneralDuties">
                         <label><input type="checkbox" value="Kuhudumia wagonjwa" /> Kuhudumia wagonjwa</label>
                         <label><input type="checkbox" value="Kutoa dawa na matibabu" /> Kutoa dawa na matibabu</label>
-                        <label><input type="checkbox" value="Kushiriki katika doria" /> Kushiriki katika doria</label>
+                        <label><input type="checkbox" value="Kuwahi kazini dakika 10 kabla ya zamu kuanzia" /> Kuwahi kazini dakika 10 kabla ya zamu kuanzia</label>
+                        <label><input type="checkbox" value="Kuhakikisha eneo lako la kazi liko safi na lina mpangilio mzuri" /> Kuhakikisha eneo lako la kazi liko safi na lina mpangilio mzuri</label>
                         <label><input type="checkbox" value="Kuandika ripoti za matibabu" /> Kuandika ripoti za matibabu</label>
                         <label><input type="checkbox" value="Kuelimisha wagonjwa na walezi" /> Kuelimisha wagonjwa na walezi</label>
                         <label><input type="checkbox" value="Kusimamia usafi na usalama" /> Kusimamia usafi na usalama</label>
@@ -661,7 +668,7 @@
         </div>
 
         <!-- ========================================================== -->
-        <!-- FOMU YA INCHARGE                                            -->
+        <!-- FOMU YA INCHARGE - IMEFUPISHWA KWA MAZINGIRA                -->
         <!-- ========================================================== -->
         <div id="inchargeSection" class="hidden">
             <div class="section">
@@ -685,7 +692,8 @@
                     <div class="checkbox-grid" id="incGeneralDuties">
                         <label><input type="checkbox" value="Kuhudumia wagonjwa" /> Kuhudumia wagonjwa</label>
                         <label><input type="checkbox" value="Kutoa dawa na matibabu" /> Kutoa dawa na matibabu</label>
-                        <label><input type="checkbox" value="Kushiriki katika doria" /> Kushiriki katika doria</label>
+                        <label><input type="checkbox" value="Kuwahi kazini dakika 10 kabla ya zamu kuanzia" /> Kuwahi kazini dakika 10 kabla ya zamu kuanzia</label>
+                        <label><input type="checkbox" value="Kuhakikisha eneo lako la kazi liko safi na lina mpangilio mzuri" /> Kuhakikisha eneo lako la kazi liko safi na lina mpangilio mzuri</label>
                         <label><input type="checkbox" value="Kuandika ripoti za matibabu" /> Kuandika ripoti za matibabu</label>
                         <label><input type="checkbox" value="Kuelimisha wagonjwa na walezi" /> Kuelimisha wagonjwa na walezi</label>
                         <label><input type="checkbox" value="Kusimamia usafi na usalama" /> Kusimamia usafi na usalama</label>
@@ -795,23 +803,19 @@
         // ================================================================
         function switchRole(role) {
             currentRole = role;
-            // Hide all sections
             document.getElementById('workerSection').classList.add('hidden');
             document.getElementById('supervisorSection').classList.add('hidden');
             document.getElementById('inchargeSection').classList.add('hidden');
 
-            // Show selected
             if (role === 'worker') {
                 document.getElementById('workerSection').classList.remove('hidden');
                 document.getElementById('roleBadge').textContent = '👤 Mtendakazi';
                 updateWorkerContactDisplay();
-                // Init worker signature
                 initWorkerSignature();
             } else if (role === 'supervisor') {
                 document.getElementById('supervisorSection').classList.remove('hidden');
                 document.getElementById('roleBadge').textContent = '👔 Msimamizi';
                 document.getElementById('supDate').valueAsDate = new Date();
-                // Load worker data if available
                 loadSupervisorData();
             } else if (role === 'incharge') {
                 document.getElementById('inchargeSection').classList.remove('hidden');
@@ -866,7 +870,6 @@
 
         document.getElementById('workerProfession').addEventListener('change', function() {
             const prof = this.value;
-            // Doctor specialty
             const container = document.getElementById('workerDoctorSpecialtyContainer');
             if (prof === 'daktari') {
                 container.classList.remove('hidden');
@@ -876,7 +879,6 @@
                 document.getElementById('workerDoctorSpecialty').removeAttribute('required');
                 document.getElementById('workerDoctorSpecialty').value = '';
             }
-            // Special duties
             const container2 = document.getElementById('workerSpecialDuties');
             container2.innerHTML = '';
             if (prof && workerSpecialDutiesMap[prof]) {
@@ -909,7 +911,6 @@
             workerCtx = workerCanvas.getContext('2d');
             resizeWorkerCanvas();
 
-            // Events
             workerCanvas.addEventListener('mousedown', startWorkerDraw);
             workerCanvas.addEventListener('mousemove', drawWorker);
             workerCanvas.addEventListener('mouseup', stopWorkerDraw);
@@ -933,7 +934,6 @@
 
         function resizeWorkerCanvas() {
             if (!workerCanvas) return;
-            // Weka ukubwa wa canvas kulingana na container
             const containerWidth = workerCanvas.parentElement.clientWidth - 20;
             const width = Math.min(containerWidth, 500);
             const height = 150;
@@ -941,12 +941,10 @@
             workerCanvas.height = height;
             workerCanvas.style.width = width + 'px';
             workerCanvas.style.height = height + 'px';
-            if (workerCtx) {
-                workerCtx.lineWidth = 2.5;
-                workerCtx.strokeStyle = '#1a3a5a';
-                workerCtx.lineCap = 'round';
-                workerCtx.lineJoin = 'round';
-            }
+            workerCtx.lineWidth = 2.5;
+            workerCtx.strokeStyle = '#1a3a5a';
+            workerCtx.lineCap = 'round';
+            workerCtx.lineJoin = 'round';
         }
 
         function getWorkerPos(e) {
@@ -993,7 +991,6 @@
                 showWorkerMessage('Hitilafu ya sahihi.', 'error');
                 return;
             }
-            // Angalia kama canvas ni tupu
             const imageData = workerCtx.getImageData(0, 0, workerCanvas.width, workerCanvas.height);
             const pixels = imageData.data;
             let empty = true;
@@ -1021,7 +1018,9 @@
             return tempCanvas.toDataURL('image/jpeg', 0.7);
         }
 
-        // Worker - Collect, Validate, Save
+        // ================================================================
+        // WORKER - COLLECT, VALIDATE, SAVE (ILIYOREKEBISHWA)
+        // ================================================================
         function collectWorkerData() {
             const name = document.getElementById('workerName').value.trim();
             const phone = document.getElementById('workerPhone').value.trim();
@@ -1042,6 +1041,7 @@
             const feedback = document.getElementById('workerFeedback').value.trim();
             const signatureName = document.getElementById('workerSignatureName').value.trim();
             const signatureDate = document.getElementById('workerSignatureDate').value;
+
             return {
                 name,
                 phone,
@@ -1093,45 +1093,76 @@
         async function saveWorker() {
             const data = collectWorkerData();
             if (!validateWorkerData(data)) return;
+
             const btn = document.querySelector('#workerSection .btn-success');
             const orig = btn.innerHTML;
             btn.innerHTML = '⏳ Inahifadhi...';
             btn.disabled = true;
+
             try {
-                await saveToJSONBin(data);
-                showWorkerMessage('✅ Data imehifadhiwa!', 'success');
-                showModal('Data yako imehifadhiwa.');
-            } catch (e) {
-                showWorkerMessage('❌ Hitilafu wakati wa kuhifadhi.', 'error');
+                // First try to get existing data
+                let existing = await getFromJSONBin();
+                if (!existing) existing = {};
+
+                // Merge data (preserve other roles' data)
+                const merged = { ...existing, ...data };
+
+                // Save to JSONBin
+                await saveToJSONBin(merged);
+                showWorkerMessage('✅ Data imehifadhiwa kikamilifu!', 'success');
+                showModal('Data yako imehifadhiwa kikamilifu.');
+
+                // Send WhatsApp automatically to incharge if phone exists
+                const inchargePhone = document.getElementById('incWorkerPhone')?.value?.trim() || '';
+                if (inchargePhone) {
+                    let clean = inchargePhone.replace(/\s/g, '');
+                    if (!clean.startsWith('+')) {
+                        if (clean.startsWith('0')) clean = '+255' + clean.substring(1);
+                        else clean = '+255' + clean;
+                    }
+                    const msg =
+                    `Tathmini ya ${data.name} imehifadhiwa. Tafadhali ingia mfumo kuiona.`;
+                    window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
+                }
+
+            } catch (error) {
+                console.error('Save error:', error);
+                showWorkerMessage('❌ Hitilafu: ' + (error.message || 'Jaribu tena.'), 'error');
             } finally {
                 btn.innerHTML = orig;
                 btn.disabled = false;
             }
         }
 
+        // ================================================================
+        // WORKER - WHATSAPP, SMS, RESET
+        // ================================================================
         function sendWorkerWhatsApp() {
             const phone = document.getElementById('workerPhone').value.trim();
             const name = document.getElementById('workerName').value.trim() || 'Mtendakazi';
-            if (!phone) { showWorkerMessage('Jaza namba ya simu.', 'error'); return; }
+            if (!phone) { showWorkerMessage('Jaza namba ya simu kwanza.', 'error'); return; }
             let clean = phone.replace(/\s/g, '');
             if (!clean.startsWith('+')) {
                 if (clean.startsWith('0')) clean = '+255' + clean.substring(1);
                 else clean = '+255' + clean;
             }
-            const msg = `Habari ${name}, tathmini yako imehifadhiwa.`;
+            // Sasa tunatuma ujumbe wa maandishi tu (hakuna document)
+            const msg =
+                `Habari ${name},\n\nTathmini yako ya Utendaji 2026 imehifadhiwa kikamilifu.\n\nAsante kwa ushirikiano wako.`;
             window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
-            showWorkerMessage('WhatsApp imefunguliwa.', 'success');
+            showWorkerMessage('WhatsApp imefunguliwa. Tuma ujumbe.', 'success');
         }
 
         function sendWorkerSMS() {
             const phone = document.getElementById('workerPhone').value.trim();
-            if (!phone) { showWorkerMessage('Jaza namba ya simu.', 'error'); return; }
-            window.open(`sms:${phone}?body=${encodeURIComponent('Tathmini yako imehifadhiwa.')}`, '_blank');
+            if (!phone) { showWorkerMessage('Jaza namba ya simu kwanza.', 'error'); return; }
+            const msg = 'Tathmini yako imehifadhiwa. Asante.';
+            window.open(`sms:${phone}?body=${encodeURIComponent(msg)}`, '_blank');
             showWorkerMessage('SMS imefunguliwa.', 'success');
         }
 
         function resetWorkerForm() {
-            if (!confirm('Weka upya fomu?')) return;
+            if (!confirm('Weka upya fomu yote?')) return;
             document.querySelectorAll('#workerSection input, #workerSection textarea, #workerSection select').forEach(el => {
                 if (el.type !== 'file' && el.type !== 'radio' && el.type !== 'checkbox') el.value = '';
                 if (el.type === 'radio' || el.type === 'checkbox') el.checked = false;
@@ -1142,7 +1173,7 @@
         }
 
         // ================================================================
-        //  SUPERVISOR (MSIMAMIZI) - FUNCTIONS
+        //  SUPERVISOR (MSIMAMIZI) - FUNCTIONS (ZILIZOREKEBISHWA)
         // ================================================================
         const supSpecialDutiesMap = { ...workerSpecialDutiesMap };
 
@@ -1260,7 +1291,7 @@
                 if (clean.startsWith('0')) clean = '+255' + clean.substring(1);
                 else clean = '+255' + clean;
             }
-            const msg = `Habari ${name}, tathmini ya msimamizi imekamilika.`;
+            const msg = `Habari ${name},\n\nTathmini ya msimamizi imekamilika. Tafadhali angalia maelezo.\n\nAsante.`;
             window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
             showSupervisorMessage('WhatsApp imefunguliwa.', 'success');
         }
@@ -1273,7 +1304,7 @@
         }
 
         // ================================================================
-        //  INCHARGE - FUNCTIONS
+        //  INCHARGE - FUNCTIONS (ZILIZOREKEBISHWA)
         // ================================================================
         const incSpecialDutiesMap = { ...workerSpecialDutiesMap };
 
@@ -1328,7 +1359,6 @@
                 if (data.additionalDuties) {
                     document.getElementById('incAdditionalDuties').value = data.additionalDuties;
                 }
-                // Auto-load chart
                 if (data.name) {
                     loadInchargeChart();
                 }
@@ -1473,7 +1503,7 @@
                 if (clean.startsWith('0')) clean = '+255' + clean.substring(1);
                 else clean = '+255' + clean;
             }
-            const msg = `Habari ${name}, tathmini imekamilika.`;
+            const msg = `Habari ${name},\n\nTathmini imekamilika. Tafadhali angalia maelezo.\n\nAsante.`;
             window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
             showInchargeMessage('WhatsApp imefunguliwa.', 'success');
         }
@@ -1491,27 +1521,47 @@
         }
 
         // ================================================================
-        //  JSONBin HELPERS
+        //  JSONBin HELPERS (ZILIZOREKEBISHWA)
         // ================================================================
         async function saveToJSONBin(data) {
-            const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_MASTER_KEY },
-                body: JSON.stringify(data)
-            });
-            if (!response.ok) throw new Error('JSONBin save failed');
-            return await response.json();
+            try {
+                const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_MASTER_KEY
+                    },
+                    body: JSON.stringify(data)
+                });
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`HTTP ${response.status}: ${errorText}`);
+                }
+                return await response.json();
+            } catch (error) {
+                console.error('Save to JSONBin error:', error);
+                throw error;
+            }
         }
 
         async function getFromJSONBin() {
             try {
                 const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
-                    headers: { 'X-Master-Key': JSONBIN_MASTER_KEY }
+                    headers: {
+                        'X-Master-Key': JSONBIN_MASTER_KEY
+                    }
                 });
-                if (!response.ok) throw new Error('JSONBin fetch failed');
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        // Bin haipo - return null
+                        return null;
+                    }
+                    throw new Error(`HTTP ${response.status}`);
+                }
                 const result = await response.json();
                 return result.record;
-            } catch (e) {
+            } catch (error) {
+                console.error('Fetch from JSONBin error:', error);
                 return null;
             }
         }
@@ -1582,11 +1632,10 @@
                 document.getElementById('roleSelect').value = roleParam;
                 switchRole(roleParam);
             } else {
-                // Default: worker
                 document.getElementById('roleSelect').value = 'worker';
                 switchRole('worker');
             }
-            // If user param exists, fill worker fields
+
             const userParam = params.get('user');
             if (userParam) {
                 try {
@@ -1611,17 +1660,21 @@
                         document.getElementById('incSupervisorPhoneDisplay').textContent = user.supervisorPhone;
                     }
                     updateWorkerContactDisplay();
-                } catch (e) {}
+                } catch (e) {
+                    console.warn('User param parsing error:', e);
+                }
             }
-            // Ensure date fields
+
+            // Set dates
             document.getElementById('workerSignatureDate').valueAsDate = new Date();
             document.getElementById('supDate').valueAsDate = new Date();
             document.getElementById('incDate').valueAsDate = new Date();
-            // Init worker signature
-            initWorkerSignature();
-        })();
 
-        console.log('✅ Mfumo wa Tathmini 2026 umepakia.');
+            // Init worker signature
+            setTimeout(initWorkerSignature, 100);
+
+            console.log('✅ Mfumo wa Tathmini 2026 umepakia.');
+        })();
     </script>
 </body>
 </html>
