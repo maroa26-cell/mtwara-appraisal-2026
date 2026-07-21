@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -606,7 +607,7 @@
         </div>
 
         <!-- ========================================================== -->
-        <!-- FOMU YA MSIMAMIZI (SUPERVISOR)                               -->
+        <!-- FOMU YA MSIMAMIZI (SUPERVISOR) - HAKUNA HIFADHI            -->
         <!-- ========================================================== -->
         <div id="supervisorSection" class="hidden">
             <div class="section">
@@ -662,17 +663,7 @@
                 </div>
             </div>
 
-            <!-- Tathmini ya Msimamizi -->
-            <div class="section">
-                <div class="section-title"><span>⭐</span> Tathmini ya Msimamizi</div>
-                <div class="form-row">
-                    <div class="form-group"><label>Alama ya utendaji (1-10) *</label><input type="number" id="supScore" min="1" max="10" step="0.5" placeholder="Mfano: 8.5" required /></div>
-                </div>
-                <div class="form-group"><label>Maoni ya Msimamizi</label><textarea id="supComments" placeholder="Andika maoni yako..."></textarea></div>
-                <div class="form-group"><label>Tarehe</label><input type="date" id="supDate" /></div>
-                <button class="btn btn-success" onclick="saveSupervisor()">💾 Hifadhi Tathmini</button>
-            </div>
-
+            <!-- Mawasiliano -->
             <div class="section no-print" style="background:#eef4fa;border-color:#b0c7db;">
                 <div class="section-title" style="font-size:17px;">📞 Mawasiliano</div>
                 <div class="contact-grid">
@@ -693,7 +684,7 @@
         </div>
 
         <!-- ========================================================== -->
-        <!-- FOMU YA INCHARGE                                            -->
+        <!-- FOMU YA INCHARGE - HAKUNA HIFADHI                           -->
         <!-- ========================================================== -->
         <div id="inchargeSection" class="hidden">
             <div class="section">
@@ -759,17 +750,7 @@
                 <p id="incChartSummary" style="margin-top:10px;color:#1a3a5a;font-weight:500;"></p>
             </div>
 
-            <!-- Tathmini ya Incharge -->
-            <div class="section">
-                <div class="section-title"><span>⭐</span> Tathmini ya Incharge</div>
-                <div class="form-row">
-                    <div class="form-group"><label>Alama ya jumla (1-10) *</label><input type="number" id="incOverallScore" min="1" max="10" step="0.5" placeholder="Mfano: 8.5" required /></div>
-                </div>
-                <div class="form-group"><label>Maoni ya Incharge</label><textarea id="incComments" placeholder="Andika maoni yako..."></textarea></div>
-                <div class="form-group"><label>Tarehe</label><input type="date" id="incDate" /></div>
-                <button class="btn btn-success" onclick="saveIncharge()">💾 Hifadhi Tathmini</button>
-            </div>
-
+            <!-- Mawasiliano -->
             <div class="section no-print" style="background:#eef4fa;border-color:#b0c7db;">
                 <div class="section-title" style="font-size:17px;">📞 Mawasiliano</div>
                 <div class="contact-grid">
@@ -818,13 +799,11 @@
 
     <script>
         // ================================================================
-        //  CONFIG - Weka BIN ID na Master Key yako hapa
+        //  CONFIG & GLOBALS - ACCESS KEY MPYA
         // ================================================================
-        // TUMIA BIN ID NA MASTER KEY MPYA
-        const JSONBIN_BIN_ID = '6a4b0bc9da38895dfe32cc08'; // Hii ni Bin ID ya zamani - badilisha na yako mpya
-        const JSONBIN_MASTER_KEY = '$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K'; // Access Key yako mpya
-
-        const PASSWORD = 'mtwara2026'; // Neno la siri
+        const JSONBIN_BIN_ID = '6a4b0bc9da38895dfe32cc08';
+        const JSONBIN_MASTER_KEY = '$2a$10$rUvNZ9tdi7eSAx3NnkCSne8i5ZFvyuRvlwBLfcC.YngWYhP1hcM8O';
+        const PASSWORD = 'mtwara2026';
 
         let currentRole = '';
         let workerSignatureSaved = false;
@@ -882,12 +861,10 @@
             } else if (role === 'supervisor') {
                 document.getElementById('supervisorSection').classList.remove('hidden');
                 document.getElementById('roleBadge').textContent = '👔 Msimamizi';
-                document.getElementById('supDate').valueAsDate = new Date();
                 loadSupervisorData();
             } else if (role === 'incharge') {
                 document.getElementById('inchargeSection').classList.remove('hidden');
                 document.getElementById('roleBadge').textContent = '👨‍⚕️ Incharge';
-                document.getElementById('incDate').valueAsDate = new Date();
                 loadInchargeData();
             } else {
                 document.getElementById('roleBadge').textContent = '👤 Chagua Role';
@@ -895,7 +872,7 @@
         }
 
         // ================================================================
-        //  WORKER (MTENDAKAZI) - FUNCTIONS
+        //  WORKER (MTENDAKAZI)
         // ================================================================
         function updateWorkerContactDisplay() {
             const phone = document.getElementById('workerPhone').value || '-';
@@ -1146,6 +1123,7 @@
                 await saveToJSONBin(merged);
                 showWorkerMessage('✅ Data imehifadhiwa!', 'success');
                 showModal('Data yako imehifadhiwa.');
+                // WhatsApp
                 const phone = data.phone;
                 if (phone) {
                     let clean = phone.replace(/\s/g, '');
@@ -1158,7 +1136,6 @@
                     window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
                 }
             } catch (e) {
-                console.error('Save error:', e);
                 showWorkerMessage('❌ Hitilafu: ' + (e.message || 'Jaribu tena.'), 'error');
             } finally {
                 btn.innerHTML = orig;
@@ -1200,7 +1177,7 @@
         }
 
         // ================================================================
-        //  SUPERVISOR (MSIMAMIZI) - FUNCTIONS
+        //  SUPERVISOR (MSIMAMIZI)
         // ================================================================
         const supSpecialDutiesMap = { ...workerSpecialDutiesMap };
 
@@ -1260,64 +1237,6 @@
             setTimeout(() => { box.style.display = 'none'; }, 8000);
         }
 
-        async function saveSupervisor() {
-            const name = document.getElementById('supWorkerName').value.trim();
-            const title = document.getElementById('supWorkerTitle').value.trim();
-            const dept = document.getElementById('supWorkerDept').value.trim();
-            const phone = document.getElementById('supWorkerPhone').value.trim();
-            const score = document.getElementById('supScore').value.trim();
-            const comments = document.getElementById('supComments').value.trim();
-            const date = document.getElementById('supDate').value;
-            const generalDuties = [];
-            document.querySelectorAll('#supGeneralDuties input:checked').forEach(cb => generalDuties.push(cb.value));
-            const specialDuties = [];
-            document.querySelectorAll('#supSpecialDuties input:checked').forEach(cb => specialDuties.push(cb.value));
-            const additionalDuties = document.getElementById('supAdditionalDuties').value.trim();
-            const profession = document.getElementById('supProfession').value;
-
-            if (!name) { showSupervisorMessage('Jaza jina la mtumishi.', 'error'); return; }
-            if (!score || isNaN(score) || score < 1 || score > 10) {
-                showSupervisorMessage('Weka alama ya utendaji (1-10).', 'error');
-                return;
-            }
-
-            let existing = await getFromJSONBin();
-            if (!existing) existing = {};
-
-            existing.supervisorAssessment = {
-                workerName: name,
-                workerTitle: title,
-                workerDept: dept,
-                workerPhone: phone,
-                profession: profession,
-                generalDuties: generalDuties,
-                specialDuties: specialDuties,
-                additionalDuties: additionalDuties,
-                score: parseFloat(score),
-                comments: comments,
-                date: date || new Date().toISOString().split('T')[0],
-                assessedBy: 'Msimamizi',
-                timestamp: new Date().toISOString()
-            };
-            existing.name = name;
-            existing.title = title;
-            existing.department = dept;
-            existing.phone = phone;
-            existing.profession = profession;
-            existing.generalDuties = generalDuties;
-            existing.specialDuties = specialDuties;
-            existing.additionalDuties = additionalDuties;
-
-            try {
-                await saveToJSONBin(existing);
-                showSupervisorMessage('✅ Tathmini imehifadhiwa!', 'success');
-                showModal('Tathmini ya Msimamizi imehifadhiwa.');
-            } catch (e) {
-                console.error('Save error:', e);
-                showSupervisorMessage('❌ Hitilafu: ' + (e.message || 'Jaribu tena.'), 'error');
-            }
-        }
-
         function sendSupWhatsApp() {
             const phone = document.getElementById('supWorkerPhone').value.trim();
             const name = document.getElementById('supWorkerName').value.trim() || 'Mtumishi';
@@ -1341,7 +1260,7 @@
         }
 
         // ================================================================
-        //  INCHARGE - FUNCTIONS
+        //  INCHARGE
         // ================================================================
         const incSpecialDutiesMap = { ...workerSpecialDutiesMap };
 
@@ -1459,66 +1378,6 @@
             setTimeout(() => { box.style.display = 'none'; }, 8000);
         }
 
-        async function saveIncharge() {
-            const name = document.getElementById('incWorkerName').value.trim();
-            const overall = document.getElementById('incOverallScore').value.trim();
-            const comments = document.getElementById('incComments').value.trim();
-            const date = document.getElementById('incDate').value;
-
-            if (!name) { showInchargeMessage('Jaza jina la mtumishi.', 'error'); return; }
-            if (!overall || isNaN(overall) || overall < 1 || overall > 10) {
-                showInchargeMessage('Weka alama ya jumla (1-10).', 'error');
-                return;
-            }
-
-            let existing = await getFromJSONBin();
-            if (!existing) existing = {};
-
-            const generalDuties = [];
-            document.querySelectorAll('#incGeneralDuties input:checked').forEach(cb => generalDuties.push(cb.value));
-            const specialDuties = [];
-            document.querySelectorAll('#incSpecialDuties input:checked').forEach(cb => specialDuties.push(cb.value));
-            const additionalDuties = document.getElementById('incAdditionalDuties').value.trim();
-            const profession = document.getElementById('incProfession').value;
-
-            existing.inchargeAssessment = {
-                workerName: name,
-                workerTitle: document.getElementById('incWorkerTitle').value.trim(),
-                workerDept: document.getElementById('incWorkerDept').value.trim(),
-                workerPhone: document.getElementById('incWorkerPhone').value.trim(),
-                supervisorName: document.getElementById('incSupervisorName').value.trim(),
-                supervisorPhone: document.getElementById('incSupervisorPhone').value.trim(),
-                profession: profession,
-                generalDuties: generalDuties,
-                specialDuties: specialDuties,
-                additionalDuties: additionalDuties,
-                overallScore: parseFloat(overall),
-                comments: comments,
-                date: date || new Date().toISOString().split('T')[0],
-                assessedBy: 'Incharge',
-                timestamp: new Date().toISOString()
-            };
-            existing.name = name;
-            existing.title = document.getElementById('incWorkerTitle').value.trim();
-            existing.department = document.getElementById('incWorkerDept').value.trim();
-            existing.phone = document.getElementById('incWorkerPhone').value.trim();
-            existing.supervisorName = document.getElementById('incSupervisorName').value.trim();
-            existing.supervisorPhone = document.getElementById('incSupervisorPhone').value.trim();
-            existing.profession = profession;
-            existing.generalDuties = generalDuties;
-            existing.specialDuties = specialDuties;
-            existing.additionalDuties = additionalDuties;
-
-            try {
-                await saveToJSONBin(existing);
-                showInchargeMessage('✅ Tathmini ya Incharge imehifadhiwa!', 'success');
-                showModal('Tathmini ya Incharge imehifadhiwa.');
-            } catch (e) {
-                console.error('Save error:', e);
-                showInchargeMessage('❌ Hitilafu: ' + (e.message || 'Jaribu tena.'), 'error');
-            }
-        }
-
         function sendIncWhatsApp(target) {
             let phone, name;
             if (target === 'worker') {
@@ -1553,7 +1412,7 @@
         }
 
         // ================================================================
-        //  JSONBin HELPERS - ILIYOREKEBISHWA
+        //  JSONBin HELPERS
         // ================================================================
         async function saveToJSONBin(data) {
             try {
@@ -1594,7 +1453,7 @@
         }
 
         // ================================================================
-        //  DATA MANAGEMENT & PDF
+        //  DATA MANAGEMENT
         // ================================================================
         function downloadData() {
             getFromJSONBin().then(data => {
@@ -1630,7 +1489,17 @@
         }
 
         function generatePDF() {
-            showInchargeMessage('Fungua Chapisha na uchague "Hifadhi kama PDF".', 'info');
+            const activeSection = document.querySelector(
+                '#workerSection:not(.hidden), #supervisorSection:not(.hidden), #inchargeSection:not(.hidden)');
+            if (activeSection) {
+                const msgBox = activeSection.querySelector('.message-box');
+                if (msgBox) {
+                    msgBox.textContent = 'Fungua Chapisha na uchague "Hifadhi kama PDF".';
+                    msgBox.className = 'message-box info';
+                    msgBox.style.display = 'block';
+                    setTimeout(() => { msgBox.style.display = 'none'; }, 5000);
+                }
+            }
             window.print();
         }
 
@@ -1663,10 +1532,7 @@
             } else {
                 document.getElementById('roleSelect').value = '';
             }
-
             document.getElementById('workerSignatureDate').valueAsDate = new Date();
-            document.getElementById('supDate').valueAsDate = new Date();
-            document.getElementById('incDate').valueAsDate = new Date();
 
             const userParam = params.get('user');
             if (userParam) {
@@ -1694,7 +1560,7 @@
             }
 
             setTimeout(initWorkerSignature, 200);
-            console.log('✅ Mfumo wa Tathmini 2026 umepakia.');
+            console.log('✅ Mfumo wa Tathmini 2026 umepakia. ACCESS KEY imerekebishwa.');
         })();
     </script>
 </body>
