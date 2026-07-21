@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -607,7 +606,7 @@
         </div>
 
         <!-- ========================================================== -->
-        <!-- FOMU YA MSIMAMIZI (SUPERVISOR) - HAKUNA HIFADHI            -->
+        <!-- FOMU YA MSIMAMIZI (SUPERVISOR) - HAKUNA HIFADHI             -->
         <!-- ========================================================== -->
         <div id="supervisorSection" class="hidden">
             <div class="section">
@@ -684,7 +683,7 @@
         </div>
 
         <!-- ========================================================== -->
-        <!-- FOMU YA INCHARGE - HAKUNA HIFADHI                           -->
+        <!-- FOMU YA INCHARGE - HAKUNA HIFADHI TATHMINI                    -->
         <!-- ========================================================== -->
         <div id="inchargeSection" class="hidden">
             <div class="section">
@@ -799,10 +798,11 @@
 
     <script>
         // ================================================================
-        //  CONFIG & GLOBALS - ACCESS KEY MPYA
+        //  CONFIG - IMEREKEBISHWA NA ACCESS KEY MPYA
         // ================================================================
         const JSONBIN_BIN_ID = '6a4b0bc9da38895dfe32cc08';
-        const JSONBIN_MASTER_KEY = '$2a$10$rUvNZ9tdi7eSAx3NnkCSne8i5ZFvyuRvlwBLfcC.YngWYhP1hcM8O';
+        // HII NDIO ACCESS KEY MPYA ULIONIPA
+        const JSONBIN_ACCESS_KEY = '$2a$10$rUvNZ9tdi7eSAx3NnkCSne8i5ZFvyuRvlwBLfcC.YngWYhP1hcM8O';
         const PASSWORD = 'mtwara2026';
 
         let currentRole = '';
@@ -828,7 +828,7 @@
                 document.getElementById('passwordModal').classList.remove('active');
                 switchRole(selectedRole);
             } else {
-                document.getElementById('passwordError').textContent = '❌ Neno la siri si sahihi. Jaribu tena.';
+                document.getElementById('passwordError').textContent = '❌ Neno la siri si sahihi.';
                 document.getElementById('passwordInput').value = '';
                 document.getElementById('passwordInput').focus();
             }
@@ -872,7 +872,7 @@
         }
 
         // ================================================================
-        //  WORKER (MTENDAKAZI)
+        //  WORKER (MTENDAKAZI) - FUNCTIONS
         // ================================================================
         function updateWorkerContactDisplay() {
             const phone = document.getElementById('workerPhone').value || '-';
@@ -1109,6 +1109,9 @@
             setTimeout(() => { box.style.display = 'none'; }, 8000);
         }
 
+        // ================================================================
+        //  SAVE WORKER - INATUMIA ACCESS KEY MPYA
+        // ================================================================
         async function saveWorker() {
             const data = collectWorkerData();
             if (!validateWorkerData(data)) return;
@@ -1412,7 +1415,7 @@
         }
 
         // ================================================================
-        //  JSONBin HELPERS
+        //  JSONBin HELPERS - INATUMIA ACCESS KEY KATIKA HEADER
         // ================================================================
         async function saveToJSONBin(data) {
             try {
@@ -1420,7 +1423,8 @@
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-Master-Key': JSONBIN_MASTER_KEY
+                        // TUMIA X-Master-Key (ndiyo inayotambuliwa na JSONBin)
+                        'X-Master-Key': JSONBIN_ACCESS_KEY
                     },
                     body: JSON.stringify(data)
                 });
@@ -1438,7 +1442,9 @@
         async function getFromJSONBin() {
             try {
                 const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
-                    headers: { 'X-Master-Key': JSONBIN_MASTER_KEY }
+                    headers: {
+                        'X-Master-Key': JSONBIN_ACCESS_KEY
+                    }
                 });
                 if (!response.ok) {
                     if (response.status === 404) return null;
@@ -1453,7 +1459,7 @@
         }
 
         // ================================================================
-        //  DATA MANAGEMENT
+        //  DATA MANAGEMENT & PDF
         // ================================================================
         function downloadData() {
             getFromJSONBin().then(data => {
@@ -1489,6 +1495,7 @@
         }
 
         function generatePDF() {
+            // Inaweza kutumika kote
             const activeSection = document.querySelector(
                 '#workerSection:not(.hidden), #supervisorSection:not(.hidden), #inchargeSection:not(.hidden)');
             if (activeSection) {
@@ -1560,7 +1567,7 @@
             }
 
             setTimeout(initWorkerSignature, 200);
-            console.log('✅ Mfumo wa Tathmini 2026 umepakia. ACCESS KEY imerekebishwa.');
+            console.log('✅ Mfumo wa Tathmini 2026 umepakia. ACCESS KEY imewekwa.');
         })();
     </script>
 </body>
