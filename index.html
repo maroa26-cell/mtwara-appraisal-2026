@@ -818,10 +818,12 @@
 
     <script>
         // ================================================================
-        //  CONFIG & GLOBALS
+        //  CONFIG - Weka BIN ID na Master Key yako hapa
         // ================================================================
-        const JSONBIN_BIN_ID = '6a4b0bc9da38895dfe32cc08';
-        const JSONBIN_MASTER_KEY = '$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDo';
+        // TUMIA BIN ID NA MASTER KEY MPYA
+        const JSONBIN_BIN_ID = '6a4b0bc9da38895dfe32cc08'; // Hii ni Bin ID ya zamani - badilisha na yako mpya
+        const JSONBIN_MASTER_KEY = '$2a$10$3fwo6GCFzD2eBj8Tyjv5ie/7zZ6s5udPp40kvojq/ZpYPH47Q.C8K'; // Access Key yako mpya
+
         const PASSWORD = 'mtwara2026'; // Neno la siri
 
         let currentRole = '';
@@ -859,7 +861,6 @@
             selectedRole = '';
         }
 
-        // Enter key kwenye password
         document.getElementById('passwordInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') verifyPassword();
         });
@@ -894,7 +895,7 @@
         }
 
         // ================================================================
-        //  WORKER (MTENDAKAZI) - FUNCTIONS (ZIMESIMAMISHWA)
+        //  WORKER (MTENDAKAZI) - FUNCTIONS
         // ================================================================
         function updateWorkerContactDisplay() {
             const phone = document.getElementById('workerPhone').value || '-';
@@ -1145,7 +1146,6 @@
                 await saveToJSONBin(merged);
                 showWorkerMessage('✅ Data imehifadhiwa!', 'success');
                 showModal('Data yako imehifadhiwa.');
-                // WhatsApp
                 const phone = data.phone;
                 if (phone) {
                     let clean = phone.replace(/\s/g, '');
@@ -1158,6 +1158,7 @@
                     window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
                 }
             } catch (e) {
+                console.error('Save error:', e);
                 showWorkerMessage('❌ Hitilafu: ' + (e.message || 'Jaribu tena.'), 'error');
             } finally {
                 btn.innerHTML = orig;
@@ -1283,7 +1284,6 @@
             let existing = await getFromJSONBin();
             if (!existing) existing = {};
 
-            // Hifadhi data ya mtumishi na tathmini ya msimamizi
             existing.supervisorAssessment = {
                 workerName: name,
                 workerTitle: title,
@@ -1299,7 +1299,6 @@
                 assessedBy: 'Msimamizi',
                 timestamp: new Date().toISOString()
             };
-            // Pia weka data ya msingi ya mtumishi
             existing.name = name;
             existing.title = title;
             existing.department = dept;
@@ -1314,6 +1313,7 @@
                 showSupervisorMessage('✅ Tathmini imehifadhiwa!', 'success');
                 showModal('Tathmini ya Msimamizi imehifadhiwa.');
             } catch (e) {
+                console.error('Save error:', e);
                 showSupervisorMessage('❌ Hitilafu: ' + (e.message || 'Jaribu tena.'), 'error');
             }
         }
@@ -1341,7 +1341,7 @@
         }
 
         // ================================================================
-        //  INCHARGE - FUNCTIONS (ZILIZOREKEBISHWA)
+        //  INCHARGE - FUNCTIONS
         // ================================================================
         const incSpecialDutiesMap = { ...workerSpecialDutiesMap };
 
@@ -1498,7 +1498,6 @@
                 assessedBy: 'Incharge',
                 timestamp: new Date().toISOString()
             };
-            // Weka data msingi
             existing.name = name;
             existing.title = document.getElementById('incWorkerTitle').value.trim();
             existing.department = document.getElementById('incWorkerDept').value.trim();
@@ -1515,6 +1514,7 @@
                 showInchargeMessage('✅ Tathmini ya Incharge imehifadhiwa!', 'success');
                 showModal('Tathmini ya Incharge imehifadhiwa.');
             } catch (e) {
+                console.error('Save error:', e);
                 showInchargeMessage('❌ Hitilafu: ' + (e.message || 'Jaribu tena.'), 'error');
             }
         }
@@ -1553,7 +1553,7 @@
         }
 
         // ================================================================
-        //  JSONBin HELPERS (ZILIZOREKEBISHWA)
+        //  JSONBin HELPERS - ILIYOREKEBISHWA
         // ================================================================
         async function saveToJSONBin(data) {
             try {
@@ -1657,19 +1657,17 @@
             const roleParam = params.get('role');
             if (roleParam && ['worker', 'supervisor', 'incharge'].includes(roleParam)) {
                 document.getElementById('roleSelect').value = roleParam;
-                // Ongeza password modal moja kwa moja
                 selectedRole = roleParam;
                 document.getElementById('passwordModal').classList.add('active');
                 document.getElementById('passwordInput').focus();
             } else {
                 document.getElementById('roleSelect').value = '';
             }
-            // Set dates
+
             document.getElementById('workerSignatureDate').valueAsDate = new Date();
             document.getElementById('supDate').valueAsDate = new Date();
             document.getElementById('incDate').valueAsDate = new Date();
 
-            // User param (kujaza data)
             const userParam = params.get('user');
             if (userParam) {
                 try {
