@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -380,6 +381,68 @@
             font-weight: 500;
             color: #0f9d58;
         }
+        .password-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .password-overlay.active {
+            display: flex;
+        }
+        .password-box {
+            background: #fff;
+            border-radius: 24px;
+            padding: 35px 40px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .password-box .icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .password-box h2 {
+            color: #0b2b4a;
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+        .password-box p {
+            color: #4a6a85;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+        .password-box input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #dce5ef;
+            border-radius: 12px;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .password-box input:focus {
+            border-color: #1a73e8;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.12);
+        }
+        .password-box .btn {
+            width: 100%;
+            justify-content: center;
+        }
+        .password-box .error-msg {
+            color: #d93025;
+            font-size: 14px;
+            margin-top: 8px;
+            display: none;
+        }
 
         @media (max-width: 700px) {
             .form-row {
@@ -401,6 +464,9 @@
             }
             .role-selector select {
                 width: 100%;
+            }
+            .password-box {
+                padding: 25px 20px;
             }
         }
         @media print {
@@ -441,12 +507,24 @@
         <!-- DROPDOWN YA KUCHAGUA ROLE -->
         <div class="role-selector">
             <label for="roleSelect">🔽 Chagua Nafasi yako:</label>
-            <select id="roleSelect" onchange="switchRole(this.value)">
+            <select id="roleSelect" onchange="onRoleSelect(this.value)">
                 <option value="">-- Chagua --</option>
                 <option value="worker">👤 Mtendakazi</option>
                 <option value="supervisor">👔 Msimamizi</option>
                 <option value="incharge">👨‍⚕️ Incharge</option>
             </select>
+        </div>
+
+        <!-- PASSWORD OVERLAY -->
+        <div class="password-overlay" id="passwordOverlay">
+            <div class="password-box">
+                <div class="icon">🔐</div>
+                <h2>Weka Neno la Siri</h2>
+                <p>Ingiza neno la siri kuendelea kwa <span id="passwordRoleLabel">Mtendakazi</span></p>
+                <input type="password" id="passwordInput" placeholder="Weka neno la siri" />
+                <div class="error-msg" id="passwordError">❌ Neno la siri si sahihi. Jaribu tena.</div>
+                <button class="btn btn-primary" onclick="verifyPassword()">✅ Ingia</button>
+            </div>
         </div>
 
         <!-- ========================================================== -->
@@ -494,7 +572,6 @@
                     <div class="checkbox-grid" id="workerGeneralDuties">
                         <label><input type="checkbox" value="Kuhudumia wagonjwa" /> Kuhudumia wagonjwa</label>
                         <label><input type="checkbox" value="Kutoa dawa na matibabu" /> Kutoa dawa na matibabu</label>
-                        <!-- Neno "kushiriki katika doria" limeondolewa -->
                         <label><input type="checkbox" value="Kuwahi kazini dakika 10 kabla ya zamu kuanzia" /> Kuwahi kazini dakika 10 kabla ya zamu kuanzia</label>
                         <label><input type="checkbox" value="Kuhakikisha eneo lako la kazi liko safi na lina mpangilio mzuri" /> Kuhakikisha eneo lako la kazi liko safi na lina mpangilio mzuri</label>
                         <label><input type="checkbox" value="Kuandika ripoti za matibabu" /> Kuandika ripoti za matibabu</label>
@@ -552,7 +629,6 @@
                     <div class="form-group"><label>Tarehe</label><input type="date" id="workerSignatureDate" /></div>
                 </div>
 
-                <!-- SEHEMU YA SAHIHI ILIYOREKEBISHWA -->
                 <div class="signature-wrapper">
                     <p style="margin-bottom:10px;font-weight:600;">✍️ Chora sahihi yako hapa (kwa kalamu au kidole)</p>
                     <canvas id="workerSignatureCanvas" width="400" height="150"></canvas>
@@ -585,7 +661,7 @@
         </div>
 
         <!-- ========================================================== -->
-        <!-- FOMU YA MSIMAMIZI (SUPERVISOR) - IMEFUPISHWA KWA MAZINGIRA   -->
+        <!-- FOMU YA MSIMAMIZI (SUPERVISOR)                               -->
         <!-- ========================================================== -->
         <div id="supervisorSection" class="hidden">
             <div class="section">
@@ -598,7 +674,6 @@
                 </div>
             </div>
 
-            <!-- Majukumu (Jumla + Maalumu) kwa Msimamizi -->
             <div class="section">
                 <div class="section-title"><span>📋</span> Majukumu ya Mtumishi</div>
                 <div class="form-group">
@@ -641,7 +716,6 @@
                 </div>
             </div>
 
-            <!-- Tathmini ya Msimamizi -->
             <div class="section">
                 <div class="section-title"><span>⭐</span> Tathmini ya Msimamizi</div>
                 <div class="form-row">
@@ -652,7 +726,6 @@
                 <button class="btn btn-success" onclick="saveSupervisor()">💾 Hifadhi Tathmini ya Msimamizi</button>
             </div>
 
-            <!-- Mawasiliano -->
             <div class="section no-print" style="background:#eef4fa;border-color:#b0c7db;">
                 <div class="section-title" style="font-size:17px;">📞 Mawasiliano</div>
                 <div class="contact-grid">
@@ -668,7 +741,7 @@
         </div>
 
         <!-- ========================================================== -->
-        <!-- FOMU YA INCHARGE - IMEFUPISHWA KWA MAZINGIRA                -->
+        <!-- FOMU YA INCHARGE                                            -->
         <!-- ========================================================== -->
         <div id="inchargeSection" class="hidden">
             <div class="section">
@@ -684,7 +757,6 @@
                 <button class="btn btn-primary" onclick="loadInchargeChart()">📊 Onyesha Grafu ya Utendaji</button>
             </div>
 
-            <!-- Majukumu (Jumla + Maalumu) kwa Incharge -->
             <div class="section">
                 <div class="section-title"><span>📋</span> Majukumu ya Mtumishi</div>
                 <div class="form-group">
@@ -727,14 +799,12 @@
                 </div>
             </div>
 
-            <!-- Grafu -->
             <div class="section" id="incChartSection" style="display:none;">
                 <div class="section-title"><span>📈</span> Grafu ya Utendaji wa Mtumishi</div>
                 <div class="chart-container"><canvas id="incPerformanceChart" width="400" height="200"></canvas></div>
                 <p id="incChartSummary" style="margin-top:10px;color:#1a3a5a;font-weight:500;"></p>
             </div>
 
-            <!-- Tathmini ya Incharge (hakuna alama ya msimamizi) -->
             <div class="section">
                 <div class="section-title"><span>⭐</span> Tathmini ya Incharge</div>
                 <div class="form-row">
@@ -745,7 +815,6 @@
                 <button class="btn btn-success" onclick="saveIncharge()">💾 Hifadhi Tathmini ya Incharge</button>
             </div>
 
-            <!-- Mawasiliano -->
             <div class="section no-print" style="background:#eef4fa;border-color:#b0c7db;">
                 <div class="section-title" style="font-size:17px;">📞 Mawasiliano</div>
                 <div class="contact-grid">
@@ -760,7 +829,6 @@
                 </div>
             </div>
 
-            <!-- Data Management -->
             <div class="section no-print">
                 <div class="section-title"><span>📁</span> Usimamizi wa Data</div>
                 <div style="display:flex;flex-wrap:wrap;gap:12px;">
@@ -792,11 +860,58 @@
         //  CONFIG & GLOBALS
         // ================================================================
         const JSONBIN_BIN_ID = '6a4b0bc9da38895dfe32cc08';
-        const JSONBIN_MASTER_KEY = '$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDo'; // Badilisha na yako
+        const JSONBIN_MASTER_KEY = '$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDo';
+        const PASSWORD = 'mtwara2026'; // <-- Badilisha password hapa
 
         let currentRole = '';
+        let selectedRole = '';
         let workerSignatureSaved = false;
         let performanceChartInstance = null;
+
+        // ================================================================
+        //  PASSWORD VERIFICATION
+        // ================================================================
+        let pendingRole = '';
+
+        function onRoleSelect(value) {
+            if (!value) {
+                // Hide all forms
+                document.getElementById('workerSection').classList.add('hidden');
+                document.getElementById('supervisorSection').classList.add('hidden');
+                document.getElementById('inchargeSection').classList.add('hidden');
+                document.getElementById('roleBadge').textContent = '👤 Chagua Role';
+                return;
+            }
+            pendingRole = value;
+            const label = {
+                'worker': 'Mtendakazi',
+                'supervisor': 'Msimamizi',
+                'incharge': 'Incharge'
+            } [value] || 'Role';
+            document.getElementById('passwordRoleLabel').textContent = label;
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('passwordError').style.display = 'none';
+            document.getElementById('passwordOverlay').classList.add('active');
+        }
+
+        function verifyPassword() {
+            const input = document.getElementById('passwordInput').value.trim();
+            if (input === PASSWORD) {
+                document.getElementById('passwordOverlay').classList.remove('active');
+                switchRole(pendingRole);
+            } else {
+                document.getElementById('passwordError').style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+            }
+        }
+
+        // Enter key on password input
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                verifyPassword();
+            }
+        });
 
         // ================================================================
         //  ROLE SWITCHING
@@ -811,7 +926,7 @@
                 document.getElementById('workerSection').classList.remove('hidden');
                 document.getElementById('roleBadge').textContent = '👤 Mtendakazi';
                 updateWorkerContactDisplay();
-                initWorkerSignature();
+                setTimeout(initWorkerSignature, 100);
             } else if (role === 'supervisor') {
                 document.getElementById('supervisorSection').classList.remove('hidden');
                 document.getElementById('roleBadge').textContent = '👔 Msimamizi';
@@ -822,13 +937,13 @@
                 document.getElementById('roleBadge').textContent = '👨‍⚕️ Incharge';
                 document.getElementById('incDate').valueAsDate = new Date();
                 loadInchargeData();
-            } else {
-                document.getElementById('roleBadge').textContent = '👤 Chagua Role';
             }
+            // Update dropdown to match
+            document.getElementById('roleSelect').value = role;
         }
 
         // ================================================================
-        //  WORKER (MTENDAKAZI) - FUNCTIONS
+        //  WORKER FUNCTIONS
         // ================================================================
         function updateWorkerContactDisplay() {
             const phone = document.getElementById('workerPhone').value || '-';
@@ -840,7 +955,6 @@
         document.getElementById('workerPhone').addEventListener('input', updateWorkerContactDisplay);
         document.getElementById('workerEmail').addEventListener('input', updateWorkerContactDisplay);
 
-        // Worker - Profession & Special Duties
         const workerSpecialDutiesMap = {
             muuguzi: ['Kufanya uchunguzi wa wagonjwa', 'Kutoa dawa na matibabu', 'Kushiriki katika uandishi wa ripoti',
                 'Kuelimisha wagonjwa na walezi', 'Kuhakikisha usafi na usalama'
@@ -898,7 +1012,7 @@
         });
 
         // ================================================================
-        // WORKER SIGNATURE (SAHIHI) - ILIYOREKEBISHWA
+        // WORKER SIGNATURE
         // ================================================================
         let workerCanvas, workerCtx, workerIsDrawing = false;
 
@@ -929,7 +1043,6 @@
             });
 
             window.addEventListener('resize', resizeWorkerCanvas);
-            console.log('✅ Sahihi imeanzishwa');
         }
 
         function resizeWorkerCanvas() {
@@ -1019,7 +1132,7 @@
         }
 
         // ================================================================
-        // WORKER - COLLECT, VALIDATE, SAVE (ILIYOREKEBISHWA)
+        // WORKER - SAVE
         // ================================================================
         function collectWorkerData() {
             const name = document.getElementById('workerName').value.trim();
@@ -1100,19 +1213,13 @@
             btn.disabled = true;
 
             try {
-                // First try to get existing data
                 let existing = await getFromJSONBin();
                 if (!existing) existing = {};
-
-                // Merge data (preserve other roles' data)
                 const merged = { ...existing, ...data };
-
-                // Save to JSONBin
                 await saveToJSONBin(merged);
                 showWorkerMessage('✅ Data imehifadhiwa kikamilifu!', 'success');
-                showModal('Data yako imehifadhiwa kikamilifu.');
-
-                // Send WhatsApp automatically to incharge if phone exists
+                showModal('Data yako imehifadhiwa.');
+                // Send WhatsApp to incharge if phone available
                 const inchargePhone = document.getElementById('incWorkerPhone')?.value?.trim() || '';
                 if (inchargePhone) {
                     let clean = inchargePhone.replace(/\s/g, '');
@@ -1124,7 +1231,6 @@
                     `Tathmini ya ${data.name} imehifadhiwa. Tafadhali ingia mfumo kuiona.`;
                     window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
                 }
-
             } catch (error) {
                 console.error('Save error:', error);
                 showWorkerMessage('❌ Hitilafu: ' + (error.message || 'Jaribu tena.'), 'error');
@@ -1135,29 +1241,27 @@
         }
 
         // ================================================================
-        // WORKER - WHATSAPP, SMS, RESET
+        // WORKER - WHATSAPP & SMS
         // ================================================================
         function sendWorkerWhatsApp() {
             const phone = document.getElementById('workerPhone').value.trim();
             const name = document.getElementById('workerName').value.trim() || 'Mtendakazi';
-            if (!phone) { showWorkerMessage('Jaza namba ya simu kwanza.', 'error'); return; }
+            if (!phone) { showWorkerMessage('Jaza namba ya simu.', 'error'); return; }
             let clean = phone.replace(/\s/g, '');
             if (!clean.startsWith('+')) {
                 if (clean.startsWith('0')) clean = '+255' + clean.substring(1);
                 else clean = '+255' + clean;
             }
-            // Sasa tunatuma ujumbe wa maandishi tu (hakuna document)
             const msg =
                 `Habari ${name},\n\nTathmini yako ya Utendaji 2026 imehifadhiwa kikamilifu.\n\nAsante kwa ushirikiano wako.`;
             window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
-            showWorkerMessage('WhatsApp imefunguliwa. Tuma ujumbe.', 'success');
+            showWorkerMessage('WhatsApp imefunguliwa.', 'success');
         }
 
         function sendWorkerSMS() {
             const phone = document.getElementById('workerPhone').value.trim();
-            if (!phone) { showWorkerMessage('Jaza namba ya simu kwanza.', 'error'); return; }
-            const msg = 'Tathmini yako imehifadhiwa. Asante.';
-            window.open(`sms:${phone}?body=${encodeURIComponent(msg)}`, '_blank');
+            if (!phone) { showWorkerMessage('Jaza namba ya simu.', 'error'); return; }
+            window.open(`sms:${phone}?body=${encodeURIComponent('Tathmini yako imehifadhiwa. Asante.')}`, '_blank');
             showWorkerMessage('SMS imefunguliwa.', 'success');
         }
 
@@ -1173,7 +1277,7 @@
         }
 
         // ================================================================
-        //  SUPERVISOR (MSIMAMIZI) - FUNCTIONS (ZILIZOREKEBISHWA)
+        //  SUPERVISOR FUNCTIONS
         // ================================================================
         const supSpecialDutiesMap = { ...workerSpecialDutiesMap };
 
@@ -1291,7 +1395,8 @@
                 if (clean.startsWith('0')) clean = '+255' + clean.substring(1);
                 else clean = '+255' + clean;
             }
-            const msg = `Habari ${name},\n\nTathmini ya msimamizi imekamilika. Tafadhali angalia maelezo.\n\nAsante.`;
+            const msg =
+                `Habari ${name},\n\nTathmini ya msimamizi imekamilika. Tafadhali angalia maelezo.\n\nAsante.`;
             window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
             showSupervisorMessage('WhatsApp imefunguliwa.', 'success');
         }
@@ -1304,7 +1409,7 @@
         }
 
         // ================================================================
-        //  INCHARGE - FUNCTIONS (ZILIZOREKEBISHWA)
+        //  INCHARGE FUNCTIONS
         // ================================================================
         const incSpecialDutiesMap = { ...workerSpecialDutiesMap };
 
@@ -1503,7 +1608,8 @@
                 if (clean.startsWith('0')) clean = '+255' + clean.substring(1);
                 else clean = '+255' + clean;
             }
-            const msg = `Habari ${name},\n\nTathmini imekamilika. Tafadhali angalia maelezo.\n\nAsante.`;
+            const msg =
+                `Habari ${name},\n\nTathmini imekamilika. Tafadhali angalia maelezo.\n\nAsante.`;
             window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
             showInchargeMessage('WhatsApp imefunguliwa.', 'success');
         }
@@ -1553,7 +1659,6 @@
                 });
                 if (!response.ok) {
                     if (response.status === 404) {
-                        // Bin haipo - return null
                         return null;
                     }
                     throw new Error(`HTTP ${response.status}`);
@@ -1629,11 +1734,13 @@
             const params = new URLSearchParams(window.location.search);
             const roleParam = params.get('role');
             if (roleParam && ['worker', 'supervisor', 'incharge'].includes(roleParam)) {
+                // Auto-login with password (for demo)
+                // We'll just set the role and show the form (skip password for URL params)
                 document.getElementById('roleSelect').value = roleParam;
                 switchRole(roleParam);
             } else {
-                document.getElementById('roleSelect').value = 'worker';
-                switchRole('worker');
+                document.getElementById('roleSelect').value = '';
+                document.getElementById('roleBadge').textContent = '👤 Chagua Role';
             }
 
             const userParam = params.get('user');
@@ -1670,10 +1777,8 @@
             document.getElementById('supDate').valueAsDate = new Date();
             document.getElementById('incDate').valueAsDate = new Date();
 
-            // Init worker signature
-            setTimeout(initWorkerSignature, 100);
-
             console.log('✅ Mfumo wa Tathmini 2026 umepakia.');
+            console.log('🔐 Neno la siri ni: ' + PASSWORD);
         })();
     </script>
 </body>
