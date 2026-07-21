@@ -324,7 +324,7 @@
             background: #eef4fa;
             padding: 20px 26px;
             border-radius: 20px;
-            margin-bottom: 28px;
+            margin-bottom: 20px;
             border: 2px solid #dce5ef;
             display: flex;
             align-items: center;
@@ -351,6 +351,33 @@
         .role-selector select:focus {
             outline: none;
             box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.15);
+        }
+        .password-section {
+            background: #fff5e6;
+            padding: 16px 20px;
+            border-radius: 16px;
+            border: 2px solid #fbbc04;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .password-section label {
+            font-weight: 700;
+            color: #b37400;
+            margin-bottom: 0;
+        }
+        .password-section input {
+            width: auto;
+            min-width: 180px;
+            padding: 8px 16px;
+            border-radius: 30px;
+            border: 2px solid #fbbc04;
+            background: #fff;
+        }
+        .password-section .btn {
+            padding: 8px 20px;
         }
         .signature-wrapper {
             background: #fff;
@@ -381,67 +408,8 @@
             font-weight: 500;
             color: #0f9d58;
         }
-        .password-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-        .password-overlay.active {
-            display: flex;
-        }
-        .password-box {
-            background: #fff;
-            border-radius: 24px;
-            padding: 35px 40px;
-            max-width: 420px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-        .password-box .icon {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-        .password-box h2 {
-            color: #0b2b4a;
-            font-size: 22px;
-            margin-bottom: 8px;
-        }
-        .password-box p {
-            color: #4a6a85;
-            font-size: 15px;
-            margin-bottom: 20px;
-        }
-        .password-box input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #dce5ef;
-            border-radius: 12px;
-            font-size: 16px;
-            text-align: center;
-            margin-bottom: 16px;
-        }
-        .password-box input:focus {
-            border-color: #1a73e8;
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.12);
-        }
-        .password-box .btn {
-            width: 100%;
-            justify-content: center;
-        }
-        .password-box .error-msg {
-            color: #d93025;
-            font-size: 14px;
-            margin-top: 8px;
-            display: none;
+        .lock-icon {
+            font-size: 20px;
         }
 
         @media (max-width: 700px) {
@@ -465,8 +433,12 @@
             .role-selector select {
                 width: 100%;
             }
-            .password-box {
-                padding: 25px 20px;
+            .password-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .password-section input {
+                width: 100%;
             }
         }
         @media print {
@@ -507,7 +479,7 @@
         <!-- DROPDOWN YA KUCHAGUA ROLE -->
         <div class="role-selector">
             <label for="roleSelect">🔽 Chagua Nafasi yako:</label>
-            <select id="roleSelect" onchange="onRoleSelect(this.value)">
+            <select id="roleSelect" onchange="onRoleChange(this.value)">
                 <option value="">-- Chagua --</option>
                 <option value="worker">👤 Mtendakazi</option>
                 <option value="supervisor">👔 Msimamizi</option>
@@ -515,16 +487,13 @@
             </select>
         </div>
 
-        <!-- PASSWORD OVERLAY -->
-        <div class="password-overlay" id="passwordOverlay">
-            <div class="password-box">
-                <div class="icon">🔐</div>
-                <h2>Weka Neno la Siri</h2>
-                <p>Ingiza neno la siri kuendelea kwa <span id="passwordRoleLabel">Mtendakazi</span></p>
-                <input type="password" id="passwordInput" placeholder="Weka neno la siri" />
-                <div class="error-msg" id="passwordError">❌ Neno la siri si sahihi. Jaribu tena.</div>
-                <button class="btn btn-primary" onclick="verifyPassword()">✅ Ingia</button>
-            </div>
+        <!-- SEHEMU YA NENO LA SIRI (PASSWORD) -->
+        <div id="passwordSection" class="password-section hidden">
+            <span class="lock-icon">🔒</span>
+            <label for="passwordInput">Weka Neno la Siri:</label>
+            <input type="password" id="passwordInput" placeholder="Neno la siri..." />
+            <button class="btn btn-primary" onclick="verifyPassword()">✔️ Ingia</button>
+            <span id="passwordError" style="color:#d93025;font-weight:500;display:none;">❌ Neno la siri si sahihi!</span>
         </div>
 
         <!-- ========================================================== -->
@@ -628,7 +597,6 @@
                     <div class="form-group"><label>Jina la mtia sahihi</label><input type="text" id="workerSignatureName" placeholder="Jina lako kamili" /></div>
                     <div class="form-group"><label>Tarehe</label><input type="date" id="workerSignatureDate" /></div>
                 </div>
-
                 <div class="signature-wrapper">
                     <p style="margin-bottom:10px;font-weight:600;">✍️ Chora sahihi yako hapa (kwa kalamu au kidole)</p>
                     <canvas id="workerSignatureCanvas" width="400" height="150"></canvas>
@@ -661,7 +629,7 @@
         </div>
 
         <!-- ========================================================== -->
-        <!-- FOMU YA MSIMAMIZI (SUPERVISOR)                               -->
+        <!-- FOMU YA MSIMAMIZI (SUPERVISOR)                              -->
         <!-- ========================================================== -->
         <div id="supervisorSection" class="hidden">
             <div class="section">
@@ -860,53 +828,59 @@
         //  CONFIG & GLOBALS
         // ================================================================
         const JSONBIN_BIN_ID = '6a4b0bc9da38895dfe32cc08';
-        const JSONBIN_MASTER_KEY = '$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDo';
-        const PASSWORD = 'mtwara2026'; // <-- Badilisha password hapa
+        const JSONBIN_MASTER_KEY = '$2a$10$ZKtthmAuyPRRhOzmTuLwJerAsf4VoDo'; // Badilisha na yako
 
+        const PASSWORD = 'mtwara2026'; // Neno la siri
         let currentRole = '';
-        let selectedRole = '';
         let workerSignatureSaved = false;
         let performanceChartInstance = null;
+        let isPasswordVerified = false;
 
         // ================================================================
-        //  PASSWORD VERIFICATION
+        //  ROLE CHANGE - ONAKANISHA SEHEMU YA PASSWORD
         // ================================================================
-        let pendingRole = '';
-
-        function onRoleSelect(value) {
-            if (!value) {
-                // Hide all forms
+        function onRoleChange(role) {
+            const passwordSection = document.getElementById('passwordSection');
+            if (role && role !== '') {
+                passwordSection.classList.remove('hidden');
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordError').style.display = 'none';
+                isPasswordVerified = false;
+                // Ficha fomu zote mpaka password ihifadhiwe
+                document.getElementById('workerSection').classList.add('hidden');
+                document.getElementById('supervisorSection').classList.add('hidden');
+                document.getElementById('inchargeSection').classList.add('hidden');
+                document.getElementById('roleBadge').textContent = '🔒 Ingiza Neno la Siri';
+            } else {
+                passwordSection.classList.add('hidden');
+                // Hide all sections
                 document.getElementById('workerSection').classList.add('hidden');
                 document.getElementById('supervisorSection').classList.add('hidden');
                 document.getElementById('inchargeSection').classList.add('hidden');
                 document.getElementById('roleBadge').textContent = '👤 Chagua Role';
-                return;
             }
-            pendingRole = value;
-            const label = {
-                'worker': 'Mtendakazi',
-                'supervisor': 'Msimamizi',
-                'incharge': 'Incharge'
-            } [value] || 'Role';
-            document.getElementById('passwordRoleLabel').textContent = label;
-            document.getElementById('passwordInput').value = '';
-            document.getElementById('passwordError').style.display = 'none';
-            document.getElementById('passwordOverlay').classList.add('active');
         }
 
+        // ================================================================
+        //  VERIFY PASSWORD
+        // ================================================================
         function verifyPassword() {
             const input = document.getElementById('passwordInput').value.trim();
+            const errorEl = document.getElementById('passwordError');
             if (input === PASSWORD) {
-                document.getElementById('passwordOverlay').classList.remove('active');
-                switchRole(pendingRole);
+                isPasswordVerified = true;
+                errorEl.style.display = 'none';
+                const role = document.getElementById('roleSelect').value;
+                if (role) {
+                    switchRole(role);
+                }
             } else {
-                document.getElementById('passwordError').style.display = 'block';
-                document.getElementById('passwordInput').value = '';
-                document.getElementById('passwordInput').focus();
+                errorEl.style.display = 'block';
+                isPasswordVerified = false;
             }
         }
 
-        // Enter key on password input
+        // Allow Enter key on password field
         document.getElementById('passwordInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 verifyPassword();
@@ -914,9 +888,13 @@
         });
 
         // ================================================================
-        //  ROLE SWITCHING
+        //  ROLE SWITCHING (INAITWA BAADA YA PASSWORD KUANGALIWA)
         // ================================================================
         function switchRole(role) {
+            if (!isPasswordVerified) {
+                // Ikiwa password haijathibitishwa, usionyeshe fomu
+                return;
+            }
             currentRole = role;
             document.getElementById('workerSection').classList.add('hidden');
             document.getElementById('supervisorSection').classList.add('hidden');
@@ -926,7 +904,7 @@
                 document.getElementById('workerSection').classList.remove('hidden');
                 document.getElementById('roleBadge').textContent = '👤 Mtendakazi';
                 updateWorkerContactDisplay();
-                setTimeout(initWorkerSignature, 100);
+                initWorkerSignature();
             } else if (role === 'supervisor') {
                 document.getElementById('supervisorSection').classList.remove('hidden');
                 document.getElementById('roleBadge').textContent = '👔 Msimamizi';
@@ -938,12 +916,10 @@
                 document.getElementById('incDate').valueAsDate = new Date();
                 loadInchargeData();
             }
-            // Update dropdown to match
-            document.getElementById('roleSelect').value = role;
         }
 
         // ================================================================
-        //  WORKER FUNCTIONS
+        //  WORKER (MTENDAKAZI) - FUNCTIONS
         // ================================================================
         function updateWorkerContactDisplay() {
             const phone = document.getElementById('workerPhone').value || '-';
@@ -1012,7 +988,7 @@
         });
 
         // ================================================================
-        // WORKER SIGNATURE
+        // WORKER SIGNATURE (SAHIHI) - ILIYOREKEBISHWA
         // ================================================================
         let workerCanvas, workerCtx, workerIsDrawing = false;
 
@@ -1043,6 +1019,7 @@
             });
 
             window.addEventListener('resize', resizeWorkerCanvas);
+            console.log('✅ Sahihi imeanzishwa');
         }
 
         function resizeWorkerCanvas() {
@@ -1132,7 +1109,7 @@
         }
 
         // ================================================================
-        // WORKER - SAVE
+        // WORKER - COLLECT, VALIDATE, SAVE
         // ================================================================
         function collectWorkerData() {
             const name = document.getElementById('workerName').value.trim();
@@ -1203,6 +1180,9 @@
             setTimeout(() => { box.style.display = 'none'; }, 8000);
         }
 
+        // ================================================================
+        //  SAVE WORKER - USING LOCALSTORAGE + JSONBin
+        // ================================================================
         async function saveWorker() {
             const data = collectWorkerData();
             if (!validateWorkerData(data)) return;
@@ -1213,13 +1193,30 @@
             btn.disabled = true;
 
             try {
-                let existing = await getFromJSONBin();
-                if (!existing) existing = {};
+                // 1. Jaribu kuhifadhi kwenye localStorage kwanza (backup)
+                const localKey = 'tathmini_data';
+                let existingLocal = localStorage.getItem(localKey);
+                let existing = existingLocal ? JSON.parse(existingLocal) : {};
+
+                // Merge data
                 const merged = { ...existing, ...data };
-                await saveToJSONBin(merged);
-                showWorkerMessage('✅ Data imehifadhiwa kikamilifu!', 'success');
-                showModal('Data yako imehifadhiwa.');
-                // Send WhatsApp to incharge if phone available
+
+                // Hifadhi kwenye localStorage
+                localStorage.setItem(localKey, JSON.stringify(merged));
+
+                // 2. Jaribu kuhifadhi kwenye JSONBin
+                try {
+                    await saveToJSONBin(merged);
+                    showWorkerMessage('✅ Data imehifadhiwa kikamilifu! (JSONBin)', 'success');
+                } catch (jsonError) {
+                    // Ikiwa JSONBin inashindwa, tumia localStorage tu
+                    console.warn('JSONBin error, using localStorage only:', jsonError);
+                    showWorkerMessage('✅ Data imehifadhiwa kwenye kifaa chako (offline mode).', 'success');
+                }
+
+                showModal('Data yako imehifadhiwa kikamilifu.');
+
+                // Tuma WhatsApp kwa incharge kama namba ipo
                 const inchargePhone = document.getElementById('incWorkerPhone')?.value?.trim() || '';
                 if (inchargePhone) {
                     let clean = inchargePhone.replace(/\s/g, '');
@@ -1228,9 +1225,13 @@
                         else clean = '+255' + clean;
                     }
                     const msg =
-                    `Tathmini ya ${data.name} imehifadhiwa. Tafadhali ingia mfumo kuiona.`;
-                    window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
+                        `Tathmini ya ${data.name} imehifadhiwa. Tafadhali ingia mfumo kuiona.`;
+                    // Fungua WhatsApp (hatutaki kuzuia)
+                    setTimeout(() => {
+                        window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
+                    }, 500);
                 }
+
             } catch (error) {
                 console.error('Save error:', error);
                 showWorkerMessage('❌ Hitilafu: ' + (error.message || 'Jaribu tena.'), 'error');
@@ -1241,12 +1242,12 @@
         }
 
         // ================================================================
-        // WORKER - WHATSAPP & SMS
+        //  WHATSAPP - SASA INATUMA UJUMBE WA MAANDISHI TU
         // ================================================================
         function sendWorkerWhatsApp() {
             const phone = document.getElementById('workerPhone').value.trim();
             const name = document.getElementById('workerName').value.trim() || 'Mtendakazi';
-            if (!phone) { showWorkerMessage('Jaza namba ya simu.', 'error'); return; }
+            if (!phone) { showWorkerMessage('Jaza namba ya simu kwanza.', 'error'); return; }
             let clean = phone.replace(/\s/g, '');
             if (!clean.startsWith('+')) {
                 if (clean.startsWith('0')) clean = '+255' + clean.substring(1);
@@ -1255,13 +1256,14 @@
             const msg =
                 `Habari ${name},\n\nTathmini yako ya Utendaji 2026 imehifadhiwa kikamilifu.\n\nAsante kwa ushirikiano wako.`;
             window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
-            showWorkerMessage('WhatsApp imefunguliwa.', 'success');
+            showWorkerMessage('WhatsApp imefunguliwa. Tuma ujumbe.', 'success');
         }
 
         function sendWorkerSMS() {
             const phone = document.getElementById('workerPhone').value.trim();
-            if (!phone) { showWorkerMessage('Jaza namba ya simu.', 'error'); return; }
-            window.open(`sms:${phone}?body=${encodeURIComponent('Tathmini yako imehifadhiwa. Asante.')}`, '_blank');
+            if (!phone) { showWorkerMessage('Jaza namba ya simu kwanza.', 'error'); return; }
+            const msg = 'Tathmini yako imehifadhiwa. Asante.';
+            window.open(`sms:${phone}?body=${encodeURIComponent(msg)}`, '_blank');
             showWorkerMessage('SMS imefunguliwa.', 'success');
         }
 
@@ -1277,7 +1279,7 @@
         }
 
         // ================================================================
-        //  SUPERVISOR FUNCTIONS
+        //  SUPERVISOR (MSIMAMIZI) - FUNCTIONS
         // ================================================================
         const supSpecialDutiesMap = { ...workerSpecialDutiesMap };
 
@@ -1409,7 +1411,7 @@
         }
 
         // ================================================================
-        //  INCHARGE FUNCTIONS
+        //  INCHARGE - FUNCTIONS
         // ================================================================
         const incSpecialDutiesMap = { ...workerSpecialDutiesMap };
 
@@ -1667,6 +1669,11 @@
                 return result.record;
             } catch (error) {
                 console.error('Fetch from JSONBin error:', error);
+                // Jaribu localStorage
+                const localData = localStorage.getItem('tathmini_data');
+                if (localData) {
+                    return JSON.parse(localData);
+                }
                 return null;
             }
         }
@@ -1696,6 +1703,8 @@
                 try {
                     const data = JSON.parse(e.target.result);
                     await saveToJSONBin(data);
+                    // Also save to localStorage
+                    localStorage.setItem('tathmini_data', JSON.stringify(data));
                     document.getElementById('uploadStatus').textContent = '✅ Data imeongezwa!';
                     showInchargeMessage('Upload imefanikiwa!', 'success');
                     loadInchargeData();
@@ -1734,13 +1743,13 @@
             const params = new URLSearchParams(window.location.search);
             const roleParam = params.get('role');
             if (roleParam && ['worker', 'supervisor', 'incharge'].includes(roleParam)) {
-                // Auto-login with password (for demo)
-                // We'll just set the role and show the form (skip password for URL params)
                 document.getElementById('roleSelect').value = roleParam;
-                switchRole(roleParam);
+                // Ongeza password automatically kwa ajili ya urahisi
+                document.getElementById('passwordInput').value = PASSWORD;
+                // Verify password automatically
+                verifyPassword();
             } else {
                 document.getElementById('roleSelect').value = '';
-                document.getElementById('roleBadge').textContent = '👤 Chagua Role';
             }
 
             const userParam = params.get('user');
@@ -1777,8 +1786,11 @@
             document.getElementById('supDate').valueAsDate = new Date();
             document.getElementById('incDate').valueAsDate = new Date();
 
+            // Init worker signature
+            setTimeout(initWorkerSignature, 100);
+
             console.log('✅ Mfumo wa Tathmini 2026 umepakia.');
-            console.log('🔐 Neno la siri ni: ' + PASSWORD);
+            console.log('🔑 Neno la siri ni: ' + PASSWORD);
         })();
     </script>
 </body>
