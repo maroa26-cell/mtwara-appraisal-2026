@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Incharge Dashboard - Tathmini 2026</title>
+    <title>Incharge Dashboard - Mtwara SDA</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
     </script>
     <style>
@@ -63,6 +62,14 @@
             gap: 14px;
             flex-wrap: wrap;
         }
+        .role-badge {
+            background: #1a73e8;
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 13px;
+        }
         .btn {
             padding: 10px 24px;
             border: none;
@@ -116,6 +123,22 @@
             color: #fff;
             transform: translateY(-3px);
         }
+        .btn-whatsapp {
+            background: #25D366;
+            color: #fff;
+        }
+        .btn-whatsapp:hover {
+            background: #1da851;
+            transform: translateY(-3px);
+        }
+        .btn-sms {
+            background: #34B7F1;
+            color: #fff;
+        }
+        .btn-sms:hover {
+            background: #1a9fd4;
+            transform: translateY(-3px);
+        }
         .section {
             background: #f8fafe;
             border-radius: 20px;
@@ -145,7 +168,7 @@
         }
         .form-row {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr;
             gap: 18px 24px;
             margin-bottom: 8px;
         }
@@ -180,6 +203,10 @@
         textarea {
             resize: vertical;
             min-height: 60px;
+        }
+        input[readonly] {
+            background: #f0f4fa;
+            cursor: not-allowed;
         }
         .full-width {
             grid-column: 1 / -1;
@@ -223,44 +250,45 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 16px;
-            margin-bottom: 16px;
+            margin-top: 10px;
         }
-        .stat-card {
+        .dashboard-card {
             background: #fff;
             padding: 16px 20px;
             border-radius: 16px;
             border: 1px solid #dce5ef;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
-        .stat-card .number {
-            font-size: 28px;
+        .dashboard-card .number {
+            font-size: 32px;
             font-weight: 700;
             color: #1a73e8;
         }
-        .stat-card .label {
+        .dashboard-card .label {
             font-size: 13px;
             color: #4a6a85;
             margin-top: 4px;
         }
-        .stat-card.green .number {
+        .dashboard-card.green .number {
             color: #0f9d58;
         }
-        .stat-card.orange .number {
+        .dashboard-card.orange .number {
             color: #fbbc04;
         }
-        .stat-card.red .number {
+        .dashboard-card.red .number {
             color: #d93025;
         }
         .chart-container {
             background: #fff;
             border-radius: 16px;
             padding: 20px;
-            margin: 20px 0;
+            margin: 10px 0;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
         .chart-container canvas {
             max-height: 280px;
+            width: 100% !important;
         }
         .modal-overlay {
             display: none;
@@ -300,24 +328,43 @@
             font-size: 15px;
             margin-bottom: 20px;
         }
-        @media (max-width: 900px) {
-            .form-row {
-                grid-template-columns: 1fr 1fr;
-            }
+        .modal-box input[type="password"] {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #dce5ef;
+            border-radius: 12px;
+            font-size: 16px;
+            margin-bottom: 12px;
         }
-        @media (max-width: 600px) {
+        .worker-info {
+            background: #e6f0fa;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+        .worker-info .item {
+            font-size: 14px;
+        }
+        .worker-info .item strong {
+            color: #1a3a5a;
+        }
+
+        @media (max-width: 700px) {
             .form-row {
                 grid-template-columns: 1fr;
             }
             .container {
                 padding: 16px;
             }
-            .dashboard-grid {
-                grid-template-columns: 1fr 1fr;
-            }
             .btn-group .btn {
                 width: 100%;
                 justify-content: center;
+            }
+            .worker-info {
+                grid-template-columns: 1fr;
             }
         }
         @media print {
@@ -343,108 +390,142 @@
     </style>
 </head>
 <body>
-
-    <div class="container" id="app">
+    <div class="container">
         <!-- HEADER -->
         <div class="header">
             <div class="header-left">
                 <img class="logo" src="https://maroa26-cell.github.io/mtwara-appraisal-2026/SDA_CHURCH_LOGO.webp" alt="Mtwara SDA Dispensary" />
-                <h1>📊 Incharge Dashboard <small>Tathmini 2026</small></h1>
+                <h1>📊 Dashboard ya Incharge <small>Mtwara SDA Dispensary</small></h1>
             </div>
             <div class="header-right">
-                <span style="background:#1a73e8;color:#fff;padding:6px 16px;border-radius:30px;font-weight:600;font-size:13px;">👨‍⚕️ Incharge</span>
+                <span class="role-badge">👨‍⚕️ Incharge</span>
+                <button class="btn btn-outline" onclick="window.location.href='index.html'">⬅️ Rudi</button>
             </div>
         </div>
 
-        <!-- ===== CHAGUA MTENDAKAZI ===== -->
+        <!-- SEHEMU YA KUCHAGUA MTENDAKAZI -->
         <div class="section">
-            <div class="section-title"><span>🔍</span> Chagua Mtendakazi</div>
+            <div class="section-title"><span>1</span> Chagua Mtendakazi</div>
             <div class="form-row">
                 <div class="form-group">
-                    <label>Jina la Mtendakazi</label>
-                    <select id="workerSelect" onchange="loadWorkerData(this.value)">
-                        <option value="">-- Chagua --</option>
+                    <label>Chagua Mtendakazi *</label>
+                    <select id="workerSelect" onchange="loadWorkerData()">
+                        <option value="">-- Chagua Mtendakazi --</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Mwezi na Mwaka</label>
-                    <input type="month" id="monthPicker" onchange="updateDashboard()" />
-                </div>
-                <div class="form-group">
-                    <label>Robo (Miezi 3)</label>
-                    <select id="quarterSelect" onchange="updateDashboard()">
-                        <option value="0">Robo 1 (Jan-Mar)</option>
-                        <option value="1">Robo 2 (Apr-Jun)</option>
-                        <option value="2">Robo 3 (Jul-Sep)</option>
-                        <option value="3">Robo 4 (Okt-Des)</option>
-                    </select>
+                    <label>Mwezi (Mwezi wa tathmini)</label>
+                    <input type="month" id="assessmentMonth" value="" />
                 </div>
             </div>
-            <button class="btn btn-primary" onclick="loadAllData()">📊 Pakia Dashboard</button>
+            <button class="btn btn-primary" onclick="loadWorkerData()">📊 Pakia Taarifa</button>
+            <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
+            <button class="btn btn-danger" onclick="generatePDF()">📄 Pakua PDF</button>
         </div>
 
-        <!-- ===== DASHBOARD ===== -->
-        <div id="dashboardSection" style="display:none;">
-            <!-- Taarifa za Mtendakazi -->
+        <!-- TAARIFA ZA MTENDAKAZI (ZINAZOJAZA OTOMATIKI) -->
+        <div id="workerInfoSection" class="hidden">
             <div class="section">
-                <div class="section-title"><span>📋</span> Taarifa za Mtendakazi</div>
-                <div id="workerInfoDisplay" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;padding:10px 0;">
-                    <div><strong>Jina:</strong> <span id="dispName">-</span></div>
-                    <div><strong>Cheo:</strong> <span id="dispTitle">-</span></div>
-                    <div><strong>Idara:</strong> <span id="dispDept">-</span></div>
-                    <div><strong>Simu:</strong> <span id="dispPhone">-</span></div>
-                    <div><strong>Taaluma:</strong> <span id="dispProfession">-</span></div>
-                    <div><strong>Msimamizi:</strong> <span id="dispSupervisor">-</span></div>
+                <div class="section-title"><span>2</span> Taarifa za Mtendakazi</div>
+                <div class="worker-info" id="workerInfoDisplay">
+                    <div class="item"><strong>Jina:</strong> <span id="dispName">-</span></div>
+                    <div class="item"><strong>Cheo:</strong> <span id="dispTitle">-</span></div>
+                    <div class="item"><strong>Idara:</strong> <span id="dispDept">-</span></div>
+                    <div class="item"><strong>Simu:</strong> <span id="dispPhone">-</span></div>
+                    <div class="item"><strong>Taaluma:</strong> <span id="dispProfession">-</span></div>
+                    <div class="item"><strong>Tarehe ya Tathmini:</strong> <span id="dispDate">-</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DASHBOARD - MUHTASARI WA TATHMINI -->
+        <div id="dashboardSection" class="hidden">
+            <div class="section">
+                <div class="section-title"><span>3</span> Dashboard - Muhtasari wa Tathmini</div>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card green">
+                        <div class="number" id="dashMonthAvg">0</div>
+                        <div class="label">📊 Wastani wa Mwezi</div>
+                    </div>
+                    <div class="dashboard-card orange">
+                        <div class="number" id="dashQuarterAvg">0</div>
+                        <div class="label">📈 Wastani wa Robo (Miezi 3)</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="number" id="dashTotalAssessments">0</div>
+                        <div class="label">📋 Jumla ya Tathmini</div>
+                    </div>
+                    <div class="dashboard-card red">
+                        <div class="number" id="dashSupervisorScore">0</div>
+                        <div class="label">⭐ Alama ya Msimamizi</div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Statistics Cards -->
-            <div class="dashboard-grid" id="statsGrid">
-                <div class="stat-card"><div class="number" id="statAvgScore">0</div><div class="label">Alama ya Jumla</div></div>
-                <div class="stat-card green"><div class="number" id="statMonthAvg">0</div><div class="label">Wastani wa Mwezi</div></div>
-                <div class="stat-card orange"><div class="number" id="statQuarterAvg">0</div><div class="label">Wastani wa Robo</div></div>
-                <div class="stat-card red"><div class="number" id="statTotalAssessments">0</div><div class="label">Jumla ya Tathmini</div></div>
-            </div>
-
-            <!-- Grafu -->
+            <!-- GRAFU -->
             <div class="section">
                 <div class="section-title"><span>📈</span> Grafu ya Utendaji</div>
                 <div class="chart-container">
-                    <canvas id="performanceChart" width="400" height="200"></canvas>
+                    <canvas id="performanceChart"></canvas>
                 </div>
-                <div id="chartSummary" style="margin-top:10px;color:#1a3a5a;font-weight:500;"></div>
+                <div style="margin-top:10px;display:flex;gap:20px;flex-wrap:wrap;justify-content:center;">
+                    <span style="font-size:14px;color:#1a3a5a;">📊 <strong>Mwezi:</strong> <span id="chartMonthLabel">-</span></span>
+                    <span style="font-size:14px;color:#1a3a5a;">📈 <strong>Robo:</strong> <span id="chartQuarterLabel">-</span></span>
+                </div>
             </div>
+        </div>
 
-            <!-- Tathmini ya Incharge -->
+        <!-- TATHMINI YA INCHARGE (ANAJAZA MAONI NA ALAMA) -->
+        <div id="inchargeAssessmentSection" class="hidden">
             <div class="section">
-                <div class="section-title"><span>⭐</span> Tathmini ya Incharge</div>
+                <div class="section-title"><span>4</span> Tathmini ya Incharge</div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Alama ya Jumla (1-10) *</label>
-                        <input type="number" id="incScore" min="1" max="10" step="0.5" placeholder="Mfano: 8.5" required />
+                        <input type="number" id="incOverallScore" min="1" max="10" step="0.5" placeholder="Mfano: 8.5" required />
                     </div>
                     <div class="form-group">
                         <label>Alama ya Msimamizi (1-10) *</label>
                         <input type="number" id="incSupervisorScore" min="1" max="10" step="0.5" placeholder="Mfano: 7.0" required />
-                    </div>
-                    <div class="form-group">
-                        <label>Tarehe</label>
-                        <input type="date" id="incDate" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Maoni ya Incharge</label>
                     <textarea id="incComments" placeholder="Andika maoni yako kuhusu mtendakazi..."></textarea>
                 </div>
-                <button class="btn btn-success" onclick="saveInchargeAssessment()">💾 Hifadhi Tathmini</button>
-                <div id="inchargeMessageBox" class="message-box"></div>
+                <div class="form-group">
+                    <label>Tarehe ya Tathmini</label>
+                    <input type="date" id="incAssessmentDate" />
+                </div>
+                <button class="btn btn-success" onclick="saveInchargeAssessment()">💾 Hifadhi Tathmini ya Incharge</button>
+                <button class="btn btn-outline" onclick="loadExistingAssessment()">📂 Pakia Tathmini Iliyopo</button>
             </div>
+        </div>
 
-            <!-- Vifungo vya Chapisha na PDF -->
-            <div class="btn-group no-print">
-                <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
+        <!-- MESSAGE BOX -->
+        <div id="messageBox" class="message-box"></div>
+
+        <!-- MAWASILIANO -->
+        <div class="section no-print" style="background:#eef4fa;border-color:#b0c7db;">
+            <div class="section-title" style="font-size:17px;">📞 Mawasiliano</div>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;">
+                <button class="btn btn-whatsapp" onclick="sendWhatsApp()">💬 Tuma WhatsApp</button>
+                <button class="btn btn-sms" onclick="sendSMS()">✉️ Tuma SMS</button>
+                <button class="btn btn-primary" onclick="sendEmail()">📧 Tuma Email</button>
+            </div>
+        </div>
+
+        <!-- DATA MANAGEMENT -->
+        <div class="section no-print">
+            <div class="section-title"><span>📁</span> Usimamizi wa Data</div>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;">
+                <button class="btn btn-primary" onclick="downloadData()">⬇️ Pakua Data (JSON)</button>
+                <button class="btn btn-warning" onclick="document.getElementById('uploadInput').click();">⬆️ Upload Data (JSON)</button>
+                <input type="file" id="uploadInput" accept=".json" style="display:none;" onchange="uploadData(event)" />
+                <button class="btn btn-outline" onclick="window.print()">🖨️ Chapisha</button>
                 <button class="btn btn-danger" onclick="generatePDF()">📄 Pakua PDF</button>
             </div>
+            <div id="uploadStatus" style="margin-top:10px;font-weight:500;"></div>
         </div>
 
         <!-- MODAL -->
@@ -460,45 +541,33 @@
 
     <script>
         // ================================================================
-        //  CONFIG
+        //  CONFIG - ACCESS KEY MPYA
         // ================================================================
         const JSONBIN_BIN_ID = '6a4b0bc9da38895dfe32cc08';
         const JSONBIN_ACCESS_KEY = '$2a$10$gc6TzIrlKaQDjRSPYKY9wuZrluJYo7roSDL8BRzJCsU5PjRvOSh6C';
+        const PASSWORD = 'mtwara2026';
 
         let allData = {};
         let currentWorker = null;
         let performanceChartInstance = null;
-        let allWorkers = [];
+        let currentWorkerAssessments = [];
 
         // ================================================================
-        //  INIT
+        //  PASSPORT (KWA SALAMA)
         // ================================================================
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('incDate').valueAsDate = new Date();
-            document.getElementById('monthPicker').value = new Date().toISOString().slice(0, 7);
-            loadAllData();
-        });
+        // Angalia kama mtumiaji ameingia
+        (function checkAuth() {
+            const loggedUser = sessionStorage.getItem('loggedInUser');
+            const loggedRole = sessionStorage.getItem('loggedInRole');
+            if (!loggedUser || loggedRole !== 'incharge') {
+                // Redirect to login
+                window.location.href = 'index.html?role=incharge';
+            }
+        })();
 
         // ================================================================
         //  JSONBin HELPERS
         // ================================================================
-        async function getFromJSONBin() {
-            try {
-                const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
-                    headers: { 'X-Master-Key': JSONBIN_ACCESS_KEY }
-                });
-                if (!response.ok) {
-                    if (response.status === 404) return null;
-                    throw new Error(`HTTP ${response.status}`);
-                }
-                const result = await response.json();
-                return result.record;
-            } catch (e) {
-                console.error('Fetch error:', e);
-                return null;
-            }
-        }
-
         async function saveToJSONBin(data) {
             try {
                 const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
@@ -520,194 +589,247 @@
             }
         }
 
-        // ================================================================
-        //  LOAD ALL DATA
-        // ================================================================
-        async function loadAllData() {
+        async function getFromJSONBin() {
             try {
-                allData = await getFromJSONBin() || {};
-                // Collect all workers from data
-                allWorkers = [];
-                const workerSelect = document.getElementById('workerSelect');
-                workerSelect.innerHTML = '<option value="">-- Chagua --</option>';
+                const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
+                    headers: {
+                        'X-Master-Key': JSONBIN_ACCESS_KEY
+                    }
+                });
+                if (!response.ok) {
+                    if (response.status === 404) return null;
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                const result = await response.json();
+                return result.record;
+            } catch (e) {
+                console.error('Fetch error:', e);
+                return null;
+            }
+        }
 
-                // Check if there is worker data
+        // ================================================================
+        //  LOAD WORKER NAMES INTO DROPDOWN
+        // ================================================================
+        async function loadWorkers() {
+            try {
+                allData = await getFromJSONBin();
+                if (!allData) {
+                    showMessage('Hakuna data iliyopatikana. Hakikisha watendakazi wamehifadhi tathmini zao.', 'error');
+                    return;
+                }
+
+                // Collect all unique worker names from all entries
+                const workerNames = new Set();
+
+                // Check for worker data in root
                 if (allData.name) {
-                    allWorkers.push({
-                        name: allData.name,
-                        title: allData.title || '',
-                        department: allData.department || '',
-                        phone: allData.phone || '',
-                        profession: allData.profession || '',
-                        data: allData
+                    workerNames.add(allData.name);
+                }
+
+                // Check for incharge assessments
+                if (allData.inchargeAssessment && allData.inchargeAssessment.workerName) {
+                    workerNames.add(allData.inchargeAssessment.workerName);
+                }
+
+                // Check for supervisor assessments
+                if (allData.supervisorAssessment && allData.supervisorAssessment.workerName) {
+                    workerNames.add(allData.supervisorAssessment.workerName);
+                }
+
+                // Also check for any worker entries in the bin
+                if (Array.isArray(allData.workers)) {
+                    allData.workers.forEach(w => {
+                        if (w.name) workerNames.add(w.name);
                     });
                 }
 
-                // Also check for supervisorAssessment and inchargeAssessment
-                if (allData.supervisorAssessment && allData.supervisorAssessment.workerName) {
-                    const existing = allWorkers.find(w => w.name === allData.supervisorAssessment.workerName);
-                    if (!existing) {
-                        allWorkers.push({
-                            name: allData.supervisorAssessment.workerName,
-                            title: allData.supervisorAssessment.workerTitle || '',
-                            department: allData.supervisorAssessment.workerDept || '',
-                            phone: allData.supervisorAssessment.workerPhone || '',
-                            profession: allData.supervisorAssessment.profession || '',
-                            data: allData.supervisorAssessment
-                        });
-                    }
+                // Also check root name from worker data
+                if (allData.name) workerNames.add(allData.name);
+
+                // If still empty, add sample data
+                if (workerNames.size === 0) {
+                    workerNames.add('Agatha Tonya');
+                    workerNames.add('John Mwalimu');
                 }
 
-                if (allData.inchargeAssessment && allData.inchargeAssessment.workerName) {
-                    const existing = allWorkers.find(w => w.name === allData.inchargeAssessment.workerName);
-                    if (!existing) {
-                        allWorkers.push({
-                            name: allData.inchargeAssessment.workerName,
-                            title: allData.inchargeAssessment.workerTitle || '',
-                            department: allData.inchargeAssessment.workerDept || '',
-                            phone: allData.inchargeAssessment.workerPhone || '',
-                            profession: allData.inchargeAssessment.profession || '',
-                            data: allData.inchargeAssessment
-                        });
-                    }
-                }
-
-                // Add to dropdown
-                allWorkers.forEach(w => {
+                const select = document.getElementById('workerSelect');
+                select.innerHTML = '<option value="">-- Chagua Mtendakazi --</option>';
+                workerNames.forEach(name => {
                     const opt = document.createElement('option');
-                    opt.value = w.name;
-                    opt.textContent = w.name + (w.title ? ' (' + w.title + ')' : '');
-                    workerSelect.appendChild(opt);
+                    opt.value = name;
+                    opt.textContent = name;
+                    select.appendChild(opt);
                 });
 
-                if (allWorkers.length > 0) {
-                    workerSelect.value = allWorkers[0].name;
-                    loadWorkerData(allWorkers[0].name);
-                } else {
-                    document.getElementById('dashboardSection').style.display = 'none';
-                    showMessage('Hakuna data ya mtendakazi iliyopatikana.', 'info');
-                }
+                // Set default month
+                const now = new Date();
+                const monthInput = document.getElementById('assessmentMonth');
+                monthInput.value = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
+
+                showMessage('Watendakazi wamepakwa kikamilifu.', 'success');
             } catch (e) {
-                console.error('Error loading data:', e);
-                showMessage('Hitilafu wakati wa kupakia data.', 'error');
+                console.error('Load workers error:', e);
+                showMessage('Hitilafu wakati wa kupakia watendakazi.', 'error');
             }
         }
 
         // ================================================================
         //  LOAD WORKER DATA
         // ================================================================
-        function loadWorkerData(workerName) {
-            if (!workerName) {
-                document.getElementById('dashboardSection').style.display = 'none';
+        async function loadWorkerData() {
+            const selectedName = document.getElementById('workerSelect').value;
+            if (!selectedName) {
+                showMessage('Tafadhali chagua mtendakazi.', 'error');
                 return;
             }
 
-            const worker = allWorkers.find(w => w.name === workerName);
-            if (!worker) {
-                showMessage('Mtendakazi hapatikani.', 'error');
-                return;
+            try {
+                // Reload fresh data
+                allData = await getFromJSONBin();
+                if (!allData) {
+                    showMessage('Hakuna data. Hakikisha JSONBin ina data.', 'error');
+                    return;
+                }
+
+                // Find worker data
+                currentWorker = findWorkerData(allData, selectedName);
+
+                if (!currentWorker) {
+                    showMessage(`Hakuna data ya ${selectedName}. Hakikisha amehifadhi tathmini yake.`, 'error');
+                    return;
+                }
+
+                // Show sections
+                document.getElementById('workerInfoSection').classList.remove('hidden');
+                document.getElementById('dashboardSection').classList.remove('hidden');
+                document.getElementById('inchargeAssessmentSection').classList.remove('hidden');
+
+                // Display worker info
+                displayWorkerInfo(currentWorker);
+
+                // Calculate and display dashboard
+                updateDashboard(currentWorker);
+
+                // Load existing assessment if any
+                loadExistingAssessment();
+
+                showMessage(`Taarifa za ${selectedName} zimepakwa.`, 'success');
+
+            } catch (e) {
+                console.error('Load worker data error:', e);
+                showMessage('Hitilafu wakati wa kupakia data.', 'error');
             }
-
-            currentWorker = worker;
-            document.getElementById('dashboardSection').style.display = 'block';
-
-            // Display worker info
-            document.getElementById('dispName').textContent = worker.name || '-';
-            document.getElementById('dispTitle').textContent = worker.title || '-';
-            document.getElementById('dispDept').textContent = worker.department || '-';
-            document.getElementById('dispPhone').textContent = worker.phone || '-';
-            document.getElementById('dispProfession').textContent = worker.profession || '-';
-            document.getElementById('dispSupervisor').textContent = allData.supervisorName || '-';
-
-            updateDashboard();
         }
 
         // ================================================================
-        //  UPDATE DASHBOARD (Auto-calculate)
+        //  FIND WORKER DATA
         // ================================================================
-        function updateDashboard() {
-            if (!currentWorker) return;
+        function findWorkerData(data, name) {
+            // First check if root data matches
+            if (data.name && data.name.toLowerCase() === name.toLowerCase()) {
+                return data;
+            }
 
-            const month = document.getElementById('monthPicker').value;
-            const quarter = parseInt(document.getElementById('quarterSelect').value);
+            // Check incharge assessment
+            if (data.inchargeAssessment && data.inchargeAssessment.workerName &&
+                data.inchargeAssessment.workerName.toLowerCase() === name.toLowerCase()) {
+                return data.inchargeAssessment;
+            }
 
+            // Check supervisor assessment
+            if (data.supervisorAssessment && data.supervisorAssessment.workerName &&
+                data.supervisorAssessment.workerName.toLowerCase() === name.toLowerCase()) {
+                return data.supervisorAssessment;
+            }
+
+            // Check if there's a workers array
+            if (Array.isArray(data.workers)) {
+                const found = data.workers.find(w => w.name && w.name.toLowerCase() === name.toLowerCase());
+                if (found) return found;
+            }
+
+            // Return the data as is (maybe just the root)
+            return data;
+        }
+
+        // ================================================================
+        //  DISPLAY WORKER INFO
+        // ================================================================
+        function displayWorkerInfo(worker) {
+            document.getElementById('dispName').textContent = worker.workerName || worker.name || '-';
+            document.getElementById('dispTitle').textContent = worker.workerTitle || worker.title || '-';
+            document.getElementById('dispDept').textContent = worker.workerDept || worker.department || '-';
+            document.getElementById('dispPhone').textContent = worker.workerPhone || worker.phone || '-';
+            document.getElementById('dispProfession').textContent = worker.profession || '-';
+            document.getElementById('dispDate').textContent = worker.date || worker.signatureDate || '-';
+        }
+
+        // ================================================================
+        //  UPDATE DASHBOARD
+        // ================================================================
+        function updateDashboard(worker) {
             // Get all assessments for this worker
-            const assessments = getAllAssessmentsForWorker(currentWorker.name);
+            const assessments = getAllAssessmentsForWorker(worker);
 
-            // Calculate statistics
-            const totalScore = assessments.reduce((sum, a) => sum + (a.score || 0), 0);
-            const avgScore = assessments.length > 0 ? totalScore / assessments.length : 0;
+            // Calculate monthly and quarterly averages
+            const monthAvg = calculateMonthlyAverage(assessments);
+            const quarterAvg = calculateQuarterlyAverage(assessments);
 
-            // Monthly average
-            const monthAssessments = assessments.filter(a => {
-                if (!a.date) return false;
-                return a.date.startsWith(month);
-            });
-            const monthTotal = monthAssessments.reduce((sum, a) => sum + (a.score || 0), 0);
-            const monthAvg = monthAssessments.length > 0 ? monthTotal / monthAssessments.length : 0;
+            // Update dashboard numbers
+            document.getElementById('dashMonthAvg').textContent = monthAvg.toFixed(1);
+            document.getElementById('dashQuarterAvg').textContent = quarterAvg.toFixed(1);
+            document.getElementById('dashTotalAssessments').textContent = assessments.length;
 
-            // Quarterly average (3 months)
-            const quarterMonths = getQuarterMonths(quarter);
-            const quarterAssessments = assessments.filter(a => {
-                if (!a.date) return false;
-                const aMonth = a.date.substring(0, 7);
-                return quarterMonths.includes(aMonth);
-            });
-            const quarterTotal = quarterAssessments.reduce((sum, a) => sum + (a.score || 0), 0);
-            const quarterAvg = quarterAssessments.length > 0 ? quarterTotal / quarterAssessments.length : 0;
-
-            // Update stats
-            document.getElementById('statAvgScore').textContent = avgScore.toFixed(1);
-            document.getElementById('statMonthAvg').textContent = monthAvg.toFixed(1);
-            document.getElementById('statQuarterAvg').textContent = quarterAvg.toFixed(1);
-            document.getElementById('statTotalAssessments').textContent = assessments.length;
+            // Supervisor score
+            let supScore = 0;
+            if (worker.score) supScore = worker.score;
+            else if (worker.supervisorScore) supScore = worker.supervisorScore;
+            document.getElementById('dashSupervisorScore').textContent = supScore;
 
             // Update chart
-            updateChart(assessments, month, quarterMonths);
+            updateChart(assessments, worker);
         }
 
         // ================================================================
         //  GET ALL ASSESSMENTS FOR WORKER
         // ================================================================
-        function getAllAssessmentsForWorker(workerName) {
+        function getAllAssessmentsForWorker(worker) {
             const assessments = [];
+            const name = worker.workerName || worker.name || '';
 
-            // From worker self-assessment
-            if (allData.name === workerName && allData.skillRating) {
-                const skill = parseInt(allData.skillRating) || 0;
-                const training = parseInt(allData.trainingRating) || 0;
-                const dutiesCount = (allData.generalDuties ? allData.generalDuties.length : 0) +
-                    (allData.specialDuties ? allData.specialDuties.length : 0) +
-                    (allData.additionalDuties ? 1 : 0);
-                const dutyScore = Math.min(dutiesCount * 2, 10);
-                const feedbackScore = allData.feedback && allData.feedback.length > 10 ? 8 : 5;
-                const avg = (skill * 2 + training * 2 + dutyScore + feedbackScore) / 4;
-
+            // Add supervisor assessment if exists
+            if (allData.supervisorAssessment && allData.supervisorAssessment.workerName &&
+                allData.supervisorAssessment.workerName.toLowerCase() === name.toLowerCase()) {
                 assessments.push({
-                    score: Math.min(avg, 10),
-                    date: allData.timestamp ? allData.timestamp.substring(0, 10) : '',
-                    source: 'Self-Assessment',
-                    type: 'self'
-                });
-            }
-
-            // From supervisor assessment
-            if (allData.supervisorAssessment && allData.supervisorAssessment.workerName === workerName) {
-                assessments.push({
+                    type: 'Msimamizi',
                     score: allData.supervisorAssessment.score || 0,
                     date: allData.supervisorAssessment.date || '',
-                    source: 'Supervisor',
-                    type: 'supervisor'
+                    comments: allData.supervisorAssessment.comments || ''
                 });
             }
 
-            // From incharge assessment
-            if (allData.inchargeAssessment && allData.inchargeAssessment.workerName === workerName) {
+            // Add incharge assessment if exists
+            if (allData.inchargeAssessment && allData.inchargeAssessment.workerName &&
+                allData.inchargeAssessment.workerName.toLowerCase() === name.toLowerCase()) {
                 assessments.push({
+                    type: 'Incharge',
                     score: allData.inchargeAssessment.overallScore || 0,
                     date: allData.inchargeAssessment.date || '',
-                    source: 'Incharge',
-                    type: 'incharge'
+                    comments: allData.inchargeAssessment.comments || ''
+                });
+            }
+
+            // Add worker's own data if it exists
+            if (allData.name && allData.name.toLowerCase() === name.toLowerCase()) {
+                const skill = parseInt(allData.skillRating) || 0;
+                const training = parseInt(allData.trainingRating) || 0;
+                const avgScore = (skill + training) / 2;
+                assessments.push({
+                    type: 'Binafsi',
+                    score: avgScore * 2, // Scale to 0-10
+                    date: allData.timestamp || '',
+                    comments: allData.feedback || ''
                 });
             }
 
@@ -715,48 +837,72 @@
         }
 
         // ================================================================
-        //  GET QUARTER MONTHS
+        //  CALCULATE AVERAGES
         // ================================================================
-        function getQuarterMonths(quarter) {
-            const year = new Date().getFullYear();
-            const months = [];
-            const startMonth = quarter * 3;
-            for (let i = 0; i < 3; i++) {
-                const m = startMonth + i + 1;
-                const monthStr = m < 10 ? '0' + m : '' + m;
-                months.push(year + '-' + monthStr);
-            }
-            return months;
+        function calculateMonthlyAverage(assessments) {
+            if (assessments.length === 0) return 0;
+            const now = new Date();
+            const currentMonth = now.getMonth();
+            const currentYear = now.getFullYear();
+
+            const monthAssessments = assessments.filter(a => {
+                if (!a.date) return false;
+                const d = new Date(a.date);
+                return d.getMonth() === currentMonth && d.getFullYear() === currentYear;
+            });
+
+            if (monthAssessments.length === 0) return 0;
+            const sum = monthAssessments.reduce((acc, a) => acc + a.score, 0);
+            return sum / monthAssessments.length;
+        }
+
+        function calculateQuarterlyAverage(assessments) {
+            if (assessments.length === 0) return 0;
+            const now = new Date();
+            const currentMonth = now.getMonth();
+            const currentYear = now.getFullYear();
+
+            // Get current quarter (0-3)
+            const quarter = Math.floor(currentMonth / 3);
+            const quarterStartMonth = quarter * 3;
+            const quarterEndMonth = quarterStartMonth + 2;
+
+            const quarterAssessments = assessments.filter(a => {
+                if (!a.date) return false;
+                const d = new Date(a.date);
+                return d.getFullYear() === currentYear &&
+                    d.getMonth() >= quarterStartMonth &&
+                    d.getMonth() <= quarterEndMonth;
+            });
+
+            if (quarterAssessments.length === 0) return 0;
+            const sum = quarterAssessments.reduce((acc, a) => acc + a.score, 0);
+            return sum / quarterAssessments.length;
         }
 
         // ================================================================
         //  UPDATE CHART
         // ================================================================
-        function updateChart(assessments, currentMonth, quarterMonths) {
+        function updateChart(assessments, worker) {
             const ctx = document.getElementById('performanceChart').getContext('2d');
-
-            // Group by source
-            const sources = ['Self-Assessment', 'Supervisor', 'Incharge'];
-            const labels = ['Self', 'Supervisor', 'Incharge'];
-            const data = sources.map(src => {
-                const items = assessments.filter(a => a.source === src);
-                if (items.length === 0) return 0;
-                const total = items.reduce((sum, a) => sum + a.score, 0);
-                return total / items.length;
-            });
 
             if (performanceChartInstance) {
                 performanceChartInstance.destroy();
             }
 
+            // Prepare data
+            const labels = assessments.map(a => a.type + ' (' + (a.date ? a.date.substring(0, 10) : '') + ')');
+            const scores = assessments.map(a => a.score);
+            const colors = ['#1a73e8', '#0f9d58', '#fbbc04', '#d93025'];
+
             performanceChartInstance = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: labels,
+                    labels: labels.length > 0 ? labels : ['Hakuna Data'],
                     datasets: [{
-                        label: 'Alama ya Utendaji',
-                        data: data,
-                        backgroundColor: ['#1a73e8', '#0f9d58', '#fbbc04'],
+                        label: 'Alama (0-10)',
+                        data: scores.length > 0 ? scores : [0],
+                        backgroundColor: colors.slice(0, scores.length || 1),
                         borderRadius: 6,
                     }]
                 },
@@ -775,7 +921,7 @@
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    return 'Alama: ' + context.parsed.y.toFixed(1) + ' / 10';
+                                    return 'Alama: ' + context.parsed.y + '/10';
                                 }
                             }
                         }
@@ -783,47 +929,79 @@
                 }
             });
 
-            // Summary
-            const totalAssessments = assessments.length;
-            const avgScore = assessments.reduce((sum, a) => sum + a.score, 0) / (totalAssessments || 1);
-            document.getElementById('chartSummary').textContent =
-                `📊 Jumla ya tathmini: ${totalAssessments} | Wastani wa jumla: ${avgScore.toFixed(1)} / 10 | Mwezi: ${currentMonth} | Robo: ${quarterMonths.join(' - ')}`;
+            // Update labels
+            document.getElementById('chartMonthLabel').textContent = assessments.length + ' tathmini';
+            const avg = scores.length > 0 ? scores.reduce((a, b) => a + b, 0) / scores.length : 0;
+            document.getElementById('chartQuarterLabel').textContent = 'Wastani: ' + avg.toFixed(1) + '/10';
+        }
+
+        // ================================================================
+        //  LOAD EXISTING INCHARGE ASSESSMENT
+        // ================================================================
+        function loadExistingAssessment() {
+            const name = document.getElementById('workerSelect').value;
+            if (!name) return;
+
+            if (allData && allData.inchargeAssessment &&
+                allData.inchargeAssessment.workerName &&
+                allData.inchargeAssessment.workerName.toLowerCase() === name.toLowerCase()) {
+                const assessment = allData.inchargeAssessment;
+                document.getElementById('incOverallScore').value = assessment.overallScore || '';
+                document.getElementById('incSupervisorScore').value = assessment.supervisorScore || '';
+                document.getElementById('incComments').value = assessment.comments || '';
+                document.getElementById('incAssessmentDate').value = assessment.date || '';
+                showMessage('Tathmini iliyopo imepakiwa.', 'success');
+            } else {
+                // Clear fields
+                document.getElementById('incOverallScore').value = '';
+                document.getElementById('incSupervisorScore').value = '';
+                document.getElementById('incComments').value = '';
+                document.getElementById('incAssessmentDate').value = new Date().toISOString().split('T')[0];
+            }
         }
 
         // ================================================================
         //  SAVE INCHARGE ASSESSMENT
         // ================================================================
         async function saveInchargeAssessment() {
-            if (!currentWorker) {
-                showInchargeMessage('Chagua mtendakazi kwanza.', 'error');
+            const name = document.getElementById('workerSelect').value;
+            if (!name) {
+                showMessage('Tafadhali chagua mtendakazi kwanza.', 'error');
                 return;
             }
 
-            const score = document.getElementById('incScore').value.trim();
+            const overall = document.getElementById('incOverallScore').value.trim();
             const supervisorScore = document.getElementById('incSupervisorScore').value.trim();
             const comments = document.getElementById('incComments').value.trim();
-            const date = document.getElementById('incDate').value;
+            const date = document.getElementById('incAssessmentDate').value;
 
-            if (!score || isNaN(score) || score < 1 || score > 10) {
-                showInchargeMessage('Weka alama ya jumla (1-10).', 'error');
+            if (!overall || isNaN(overall) || overall < 1 || overall > 10) {
+                showMessage('Weka alama ya jumla (1-10).', 'error');
                 return;
             }
             if (!supervisorScore || isNaN(supervisorScore) || supervisorScore < 1 || supervisorScore > 10) {
-                showInchargeMessage('Weka alama ya msimamizi (1-10).', 'error');
+                showMessage('Weka alama ya msimamizi (1-10).', 'error');
                 return;
             }
 
             try {
+                // Get latest data
                 let existing = await getFromJSONBin();
                 if (!existing) existing = {};
 
+                // Get current worker data
+                const workerData = findWorkerData(existing, name);
+
+                // Create or update incharge assessment
                 existing.inchargeAssessment = {
-                    workerName: currentWorker.name,
-                    workerTitle: currentWorker.title || '',
-                    workerDept: currentWorker.department || '',
-                    workerPhone: currentWorker.phone || '',
-                    supervisorName: document.getElementById('dispSupervisor').textContent || '',
-                    overallScore: parseFloat(score),
+                    workerName: name,
+                    workerTitle: workerData?.workerTitle || workerData?.title || '',
+                    workerDept: workerData?.workerDept || workerData?.department || '',
+                    workerPhone: workerData?.workerPhone || workerData?.phone || '',
+                    supervisorName: workerData?.supervisorName || '',
+                    supervisorPhone: workerData?.supervisorPhone || '',
+                    profession: workerData?.profession || '',
+                    overallScore: parseFloat(overall),
                     supervisorScore: parseFloat(supervisorScore),
                     comments: comments,
                     date: date || new Date().toISOString().split('T')[0],
@@ -831,38 +1009,121 @@
                     timestamp: new Date().toISOString()
                 };
 
-                // Also update worker basic info
-                existing.name = currentWorker.name;
-                existing.title = currentWorker.title || '';
-                existing.department = currentWorker.department || '';
-                existing.phone = currentWorker.phone || '';
+                // Also update root data
+                if (workerData) {
+                    existing.name = existing.name || name;
+                    existing.title = existing.title || workerData?.title || '';
+                    existing.department = existing.department || workerData?.department || '';
+                    existing.phone = existing.phone || workerData?.phone || '';
+                    existing.profession = existing.profession || workerData?.profession || '';
+                }
 
                 await saveToJSONBin(existing);
-                showInchargeMessage('✅ Tathmini ya Incharge imehifadhiwa!', 'success');
+                allData = existing;
+                showMessage('✅ Tathmini ya Incharge imehifadhiwa!', 'success');
                 showModal('Tathmini ya Incharge imehifadhiwa kikamilifu.');
 
-                // Reload data
-                await loadAllData();
-                loadWorkerData(currentWorker.name);
+                // Refresh dashboard
+                if (currentWorker) {
+                    updateDashboard(currentWorker);
+                }
 
             } catch (e) {
-                showInchargeMessage('❌ Hitilafu: ' + (e.message || 'Jaribu tena.'), 'error');
+                showMessage('❌ Hitilafu: ' + (e.message || 'Jaribu tena.'), 'error');
             }
         }
 
         // ================================================================
-        //  MESSAGES
+        //  COMMUNICATION FUNCTIONS
         // ================================================================
-        function showInchargeMessage(text, type = 'success') {
-            const box = document.getElementById('inchargeMessageBox');
-            box.textContent = text;
-            box.className = 'message-box ' + type;
-            box.style.display = 'block';
-            setTimeout(() => { box.style.display = 'none'; }, 8000);
+        function sendWhatsApp() {
+            const phone = document.getElementById('dispPhone').textContent;
+            const name = document.getElementById('dispName').textContent;
+            if (!phone || phone === '-') {
+                showMessage('Namba ya simu haijapatikana.', 'error');
+                return;
+            }
+            let clean = phone.replace(/\s/g, '');
+            if (!clean.startsWith('+')) {
+                if (clean.startsWith('0')) clean = '+255' + clean.substring(1);
+                else clean = '+255' + clean;
+            }
+            const msg =
+                `Habari ${name},\n\nTathmini yako imekamilika. Tafadhali angalia maelezo kwenye mfumo.\n\nAsante.`;
+            window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
+            showMessage('WhatsApp imefunguliwa.', 'success');
         }
 
-        function showMessage(text, type = 'info') {
-            const box = document.getElementById('inchargeMessageBox');
+        function sendSMS() {
+            const phone = document.getElementById('dispPhone').textContent;
+            if (!phone || phone === '-') {
+                showMessage('Namba ya simu haijapatikana.', 'error');
+                return;
+            }
+            window.open(`sms:${phone}?body=${encodeURIComponent('Tathmini imekamilika.')}`, '_blank');
+            showMessage('SMS imefunguliwa.', 'success');
+        }
+
+        function sendEmail() {
+            const email = document.querySelector('#dispEmail')?.textContent || '';
+            const name = document.getElementById('dispName').textContent;
+            if (!email || email === '-') {
+                showMessage('Barua pepe haijapatikana.', 'error');
+                return;
+            }
+            const subject = 'Tathmini ya Utendaji 2026';
+            const body =
+                `Habari ${name},\n\nTathmini yako imekamilika. Tafadhali angalia maelezo kwenye mfumo.\n\nAsante.`;
+            window.open(`mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
+            showMessage('Email imefunguliwa.', 'success');
+        }
+
+        // ================================================================
+        //  DATA MANAGEMENT
+        // ================================================================
+        function downloadData() {
+            getFromJSONBin().then(data => {
+                if (!data) { showMessage('Hakuna data.', 'error'); return; }
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `tathmini_${new Date().toISOString().split('T')[0]}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+                showMessage('Data imepakuliwa.', 'success');
+            });
+        }
+
+        function uploadData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    await saveToJSONBin(data);
+                    document.getElementById('uploadStatus').textContent = '✅ Data imeongezwa!';
+                    showMessage('Upload imefanikiwa!', 'success');
+                    loadWorkers();
+                } catch (err) {
+                    document.getElementById('uploadStatus').textContent = '❌ JSON si sahihi.';
+                    showMessage('Faili si sahihi.', 'error');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function generatePDF() {
+            showMessage('Fungua Chapisha na uchague "Hifadhi kama PDF".', 'info');
+            window.print();
+        }
+
+        // ================================================================
+        //  MESSAGES & MODAL
+        // ================================================================
+        function showMessage(text, type = 'success') {
+            const box = document.getElementById('messageBox');
             box.textContent = text;
             box.className = 'message-box ' + type;
             box.style.display = 'block';
@@ -877,26 +1138,17 @@
         function closeModal() {
             document.getElementById('confirmModal').classList.remove('active');
         }
-
         document.getElementById('confirmModal').addEventListener('click', function(e) {
             if (e.target === this) closeModal();
         });
 
         // ================================================================
-        //  PDF / PRINT
+        //  INIT - LOAD WORKERS
         // ================================================================
-        function generatePDF() {
-            showInchargeMessage('Fungua Chapisha na uchague "Hifadhi kama PDF".', 'info');
-            window.print();
-        }
-
-        // ================================================================
-        //  AUTO-UPDATE on month/quarter change
-        // ================================================================
-        document.getElementById('monthPicker').addEventListener('change', updateDashboard);
-        document.getElementById('quarterSelect').addEventListener('change', updateDashboard);
+        loadWorkers();
 
         console.log('✅ Incharge Dashboard imepakia kikamilifu.');
+        console.log('📊 ACCESS KEY imerekebishwa.');
     </script>
 </body>
 </html>
