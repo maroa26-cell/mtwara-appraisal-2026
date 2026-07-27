@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -6,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tathmini 2026 - Mtwara SDA</title>
     <style>
+        /* ===== MSINGI ===== */
         * {
             margin: 0;
             padding: 0;
@@ -498,6 +498,9 @@
                 border: 1px solid #ccc;
                 break-inside: avoid;
             }
+            .signature-wrapper canvas {
+                height: 100px !important;
+            }
         }
     </style>
 </head>
@@ -621,7 +624,6 @@
                         <option value="Clinical Officer">Clinical Officer</option>
                     </select>
                 </div>
-                <!-- Picha -->
                 <div class="form-group full-width">
                     <label>Picha yako (hiari)</label>
                     <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
@@ -742,7 +744,7 @@
                 <button class="btn btn-success" onclick="saveWorkerLocal()">💾 Hifadhi</button>
                 <button class="btn btn-whatsapp" onclick="sendWorkerWhatsApp()">📱 Tuma WhatsApp</button>
                 <button class="btn btn-sms" onclick="sendWorkerSMS()">✉️ Tuma SMS</button>
-                <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
+                <button class="btn btn-warning" onclick="printPage()">🖨️ Chapisha</button>
                 <button class="btn btn-danger" onclick="generatePDF()">📄 Pakua PDF</button>
                 <button class="btn btn-outline" onclick="resetWorkerForm()">🔄 Weka Upya</button>
             </div>
@@ -773,6 +775,65 @@
                 </div>
             </div>
 
+            <!-- Majukumu ya Jumla -->
+            <div class="section">
+                <div class="section-title"><span>📋</span> Majukumu ya Jumla (Msimamizi)</div>
+                <div class="form-group">
+                    <div id="supGeneralDuties"></div>
+                    <div class="summary-box">
+                        <span>✅ Vyema: <span class="good-count" id="supGeneralGood">0</span></span>
+                        <span>❌ Mkasi: <span class="bad-count" id="supGeneralBad">0</span></span>
+                        <span>📊 Jumla: <span class="total-count" id="supGeneralScore">0</span> / <span id="supGeneralTotal">0</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Majukumu Maalumu -->
+            <div class="section">
+                <div class="section-title"><span>📋</span> Majukumu Maalumu (Msimamizi)</div>
+                <div class="form-group">
+                    <label>Taaluma ya mtendakazi</label>
+                    <select id="supProfession" onchange="updateSupSpecialDuties(this.value)">
+                        <option value="">-- Chagua Taaluma --</option>
+                        <option value="muuguzi">Muuguzi</option>
+                        <option value="daktari">Daktari</option>
+                        <option value="mfamasia">Mfamasia</option>
+                        <option value="mkemia">Mkemia wa Maabara</option>
+                        <option value="mradiologist">Mtaalamu wa Radiology</option>
+                        <option value="physiotherapist">Mtaalamu wa Tiba Kimwili</option>
+                        <option value="nutritionist">Mtaalamu wa Lishe</option>
+                        <option value="health_administrator">Msimamizi wa Afya</option>
+                        <option value="other">Nyingine</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <div id="supSpecialDuties"></div>
+                    <div class="summary-box">
+                        <span>✅ Vyema: <span class="good-count" id="supSpecialGood">0</span></span>
+                        <span>❌ Mkasi: <span class="bad-count" id="supSpecialBad">0</span></span>
+                        <span>📊 Jumla: <span class="total-count" id="supSpecialScore">0</span> / <span id="supSpecialTotal">0</span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Majukumu mengine</label>
+                    <textarea id="supAdditionalDuties" placeholder="Andika majukumu mengine..."></textarea>
+                </div>
+            </div>
+
+            <!-- Majukumu ya Kimaadili -->
+            <div class="section">
+                <div class="section-title"><span>⭐</span> Majukumu ya Kimaadili (Msimamizi)</div>
+                <div class="form-group">
+                    <div id="supEthicalDuties"></div>
+                    <div class="summary-box">
+                        <span>✅ Vyema: <span class="good-count" id="supEthicalGood">0</span></span>
+                        <span>❌ Mkasi: <span class="bad-count" id="supEthicalBad">0</span></span>
+                        <span>📊 Jumla: <span class="total-count" id="supEthicalScore">0</span> / <span id="supEthicalTotal">0</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tathmini ya Msimamizi -->
             <div class="section">
                 <div class="section-title"><span>⭐</span> Tathmini ya Msimamizi</div>
                 <div class="form-row">
@@ -787,13 +848,13 @@
             <div class="btn-group no-print">
                 <button class="btn btn-whatsapp" onclick="sendSupWhatsApp()">📱 WhatsApp</button>
                 <button class="btn btn-sms" onclick="sendSupSMS()">✉️ SMS</button>
-                <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
-                <button class="btn btn-danger" onclick="generatePDF()">📄 PDF</button>
+                <button class="btn btn-warning" onclick="printPage()">🖨️ Chapisha</button>
+                <button class="btn btn-danger" onclick="generatePDF()">📄 Pakua PDF</button>
             </div>
         </div>
 
         <!-- ========================================================== -->
-        <!-- FOMU YA INCHARGE - MAJUKUMU YOTE YANAONEKANA                  -->
+        <!-- FOMU YA INCHARGE (Dashboard)                                -->
         <!-- ========================================================== -->
         <div id="inchargeSection" class="hidden">
             <h2 style="color:#0b2b4a;margin-bottom:20px;">📊 Dashboard ya Incharge</h2>
@@ -813,7 +874,7 @@
 
             <!-- Majukumu ya Jumla -->
             <div class="section">
-                <div class="section-title"><span>📋</span> Majukumu ya Jumla</div>
+                <div class="section-title"><span>📋</span> Majukumu ya Jumla (Incharge)</div>
                 <div id="incGeneralDutiesDisplay"><p style="color:#6a8aaa;">Hakuna data.</p></div>
                 <div class="summary-box">
                     <span>✅ Vyema: <span class="good-count" id="incGeneralGood">0</span></span>
@@ -824,7 +885,7 @@
 
             <!-- Majukumu Maalumu -->
             <div class="section">
-                <div class="section-title"><span>📋</span> Majukumu Maalumu</div>
+                <div class="section-title"><span>📋</span> Majukumu Maalumu (Incharge)</div>
                 <div id="incSpecialDutiesDisplay"><p style="color:#6a8aaa;">Hakuna data.</p></div>
                 <div class="summary-box">
                     <span>✅ Vyema: <span class="good-count" id="incSpecialGood">0</span></span>
@@ -835,7 +896,7 @@
 
             <!-- Majukumu ya Kimaadili -->
             <div class="section">
-                <div class="section-title"><span>⭐</span> Majukumu ya Kimaadili</div>
+                <div class="section-title"><span>⭐</span> Majukumu ya Kimaadili (Incharge)</div>
                 <div id="incEthicalDutiesDisplay"><p style="color:#6a8aaa;">Hakuna data.</p></div>
                 <div class="summary-box">
                     <span>✅ Vyema: <span class="good-count" id="incEthicalGood">0</span></span>
@@ -859,8 +920,8 @@
             <div class="btn-group no-print">
                 <button class="btn btn-whatsapp" onclick="sendIncWhatsApp()">📱 WhatsApp</button>
                 <button class="btn btn-sms" onclick="sendIncSMS()">✉️ SMS</button>
-                <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
-                <button class="btn btn-danger" onclick="generatePDF()">📄 PDF</button>
+                <button class="btn btn-warning" onclick="printPage()">🖨️ Chapisha</button>
+                <button class="btn btn-danger" onclick="generatePDF()">📄 Pakua PDF</button>
             </div>
         </div>
     </div>
@@ -1236,18 +1297,6 @@
                 }
             }
 
-            // Update button active state
-            const container = statusEl ? statusEl.closest('.duty-item') : null;
-            if (container) {
-                const btns = container.querySelectorAll('.duty-btns button');
-                btns.forEach(btn => {
-                    btn.classList.remove('active');
-                    if (btn.dataset.value === value) {
-                        btn.classList.add('active');
-                    }
-                });
-            }
-
             updateTotals(prefix, goodId, badId, scoreId, totalId);
         }
 
@@ -1574,7 +1623,25 @@
         // ================================================================
         function initSupervisor() {
             setupClock('supClockIn', 'supClockOut', 'supHoursWorked');
+
+            renderDuties('supGeneralDuties', generalDutiesList, 'sup_general',
+                'supGeneralGood', 'supGeneralBad', 'supGeneralScore', 'supGeneralTotal');
+
+            renderDuties('supEthicalDuties', ethicalDuties, 'sup_ethical',
+                'supEthicalGood', 'supEthicalBad', 'supEthicalScore', 'supEthicalTotal');
+
+            // Special duties - trigger on profession change
+            document.getElementById('supProfession').addEventListener('change', function() {
+                updateSupSpecialDuties(this.value);
+            });
+
             loadSupervisorData();
+        }
+
+        function updateSupSpecialDuties(prof) {
+            const duties = specialDutiesMap[prof] || [];
+            renderDuties('supSpecialDuties', duties, 'sup_special',
+                'supSpecialGood', 'supSpecialBad', 'supSpecialScore', 'supSpecialTotal');
         }
 
         function loadSupervisorData() {
@@ -1593,6 +1660,26 @@
                 document.getElementById('supScore').value = data.score || '';
                 document.getElementById('supComments').value = data.comments || '';
                 document.getElementById('supDate').value = data.date || '';
+                document.getElementById('supProfession').value = data.profession || '';
+
+                if (data.generalDuties) {
+                    dutyRatings['sup_general'] = data.generalDuties;
+                    updateTotals('sup_general', 'supGeneralGood', 'supGeneralBad', 'supGeneralScore', 'supGeneralTotal');
+                    restoreDutyStatus('sup_general');
+                }
+                if (data.specialDuties) {
+                    dutyRatings['sup_special'] = data.specialDuties;
+                    updateTotals('sup_special', 'supSpecialGood', 'supSpecialBad', 'supSpecialScore', 'supSpecialTotal');
+                    restoreDutyStatus('sup_special');
+                }
+                if (data.ethicalDuties) {
+                    dutyRatings['sup_ethical'] = data.ethicalDuties;
+                    updateTotals('sup_ethical', 'supEthicalGood', 'supEthicalBad', 'supEthicalScore', 'supEthicalTotal');
+                    restoreDutyStatus('sup_ethical');
+                }
+                if (data.additionalDuties) {
+                    document.getElementById('supAdditionalDuties').value = data.additionalDuties;
+                }
                 showSupervisorMessage('Data imepakiwa.', 'success');
             }
         }
@@ -1616,6 +1703,11 @@
             const clockIn = document.getElementById('supClockIn').value;
             const clockOut = document.getElementById('supClockOut').value;
             const hoursWorked = document.getElementById('supHoursWorked').value.replace(' saa', '');
+            const profession = document.getElementById('supProfession').value;
+            const additionalDuties = document.getElementById('supAdditionalDuties').value.trim();
+            const generalDuties = getDutyData('sup_general');
+            const specialDuties = getDutyData('sup_special');
+            const ethicalDuties = getDutyData('sup_ethical');
 
             if (!name) { showSupervisorMessage('Jaza jina la mtendakazi.', 'error'); return; }
             if (!score || isNaN(score) || score < 1 || score > 10) {
@@ -1634,6 +1726,11 @@
                 clockIn: clockIn,
                 clockOut: clockOut,
                 hoursWorked: hoursWorked,
+                profession: profession,
+                generalDuties: generalDuties,
+                specialDuties: specialDuties,
+                additionalDuties: additionalDuties,
+                ethicalDuties: ethicalDuties,
                 score: parseFloat(score),
                 comments: comments,
                 date: date || today,
@@ -1667,7 +1764,7 @@
         }
 
         // ================================================================
-        //  INCHARGE - MAJUKUMU YOTE YANAONEKANA
+        //  INCHARGE
         // ================================================================
         function initIncharge() {
             loadStaffList();
@@ -1690,18 +1787,7 @@
                 document.getElementById('incGeneralDutiesDisplay').innerHTML = '<p style="color:#6a8aaa;">Hakuna data.</p>';
                 document.getElementById('incSpecialDutiesDisplay').innerHTML = '<p style="color:#6a8aaa;">Hakuna data.</p>';
                 document.getElementById('incEthicalDutiesDisplay').innerHTML = '<p style="color:#6a8aaa;">Hakuna data.</p>';
-                document.getElementById('incGeneralGood').textContent = '0';
-                document.getElementById('incGeneralBad').textContent = '0';
-                document.getElementById('incGeneralScore').textContent = '0';
-                document.getElementById('incGeneralTotal').textContent = '0';
-                document.getElementById('incSpecialGood').textContent = '0';
-                document.getElementById('incSpecialBad').textContent = '0';
-                document.getElementById('incSpecialScore').textContent = '0';
-                document.getElementById('incSpecialTotal').textContent = '0';
-                document.getElementById('incEthicalGood').textContent = '0';
-                document.getElementById('incEthicalBad').textContent = '0';
-                document.getElementById('incEthicalScore').textContent = '0';
-                document.getElementById('incEthicalTotal').textContent = '0';
+                resetIncTotals();
                 return;
             }
 
@@ -1812,6 +1898,21 @@
             showInchargeMessage(`✅ Data ya ${workerName} imepakiwa.`, 'success');
         }
 
+        function resetIncTotals() {
+            document.getElementById('incGeneralGood').textContent = '0';
+            document.getElementById('incGeneralBad').textContent = '0';
+            document.getElementById('incGeneralScore').textContent = '0';
+            document.getElementById('incGeneralTotal').textContent = '0';
+            document.getElementById('incSpecialGood').textContent = '0';
+            document.getElementById('incSpecialBad').textContent = '0';
+            document.getElementById('incSpecialScore').textContent = '0';
+            document.getElementById('incSpecialTotal').textContent = '0';
+            document.getElementById('incEthicalGood').textContent = '0';
+            document.getElementById('incEthicalBad').textContent = '0';
+            document.getElementById('incEthicalScore').textContent = '0';
+            document.getElementById('incEthicalTotal').textContent = '0';
+        }
+
         function showInchargeMessage(text, type = 'success') {
             const box = document.getElementById('inchargeMessageBox');
             box.textContent = text;
@@ -1877,10 +1978,14 @@
         }
 
         // ================================================================
-        //  PDF & CHAPISHA
+        //  PDF - KWA WOTE
         // ================================================================
         function generatePDF() {
-            showMessage('Fungua Chapisha na uchague "Hifadhi kama PDF".', 'info');
+            showModal('Fungua Chapisha na uchague "Hifadhi kama PDF".');
+            window.print();
+        }
+
+        function printPage() {
             window.print();
         }
 
