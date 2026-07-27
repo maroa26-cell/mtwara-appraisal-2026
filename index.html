@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -739,7 +738,8 @@
             <div id="workerMessageBox" class="message-box"></div>
 
             <div class="btn-group no-print">
-                <button class="btn btn-success" onclick="saveWorker()">💾 Hifadhi na Kutuma</button>
+                <!-- Kitufe cha "Hifadhi na Kutuma" kimeondolewa -->
+                <button class="btn btn-success" onclick="saveWorkerData()">💾 Hifadhi</button>
                 <button class="btn btn-whatsapp" onclick="sendWorkerWhatsApp()">📱 Tuma WhatsApp</button>
                 <button class="btn btn-sms" onclick="sendWorkerSMS()">✉️ Tuma SMS</button>
                 <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
@@ -863,12 +863,12 @@
         </div>
 
         <!-- ========================================================== -->
-        <!-- FOMU YA INCHARGE (Dashboard) - Inaonekana kwa Incharge tu   -->
+        <!-- FOMU YA INCHARGE (Dashboard)                                 -->
         <!-- ========================================================== -->
         <div id="inchargeSection" class="hidden">
             <h2 style="color:#0b2b4a;margin-bottom:20px;">📊 Dashboard ya Incharge</h2>
 
-            <!-- ORODHA YA WATENDAKAZI KWA IDARA -->
+            <!-- ORODHA YA WATENDAKAZI -->
             <div class="section">
                 <div class="section-title"><span>👥</span> Orodha ya Watendakazi</div>
                 <div class="form-group">
@@ -998,10 +998,10 @@
 
     <script>
         // ================================================================
-        //  CONFIG
+        //  CONFIG - ACCESS KEY MPYA
         // ================================================================
         const JSONBIN_BIN_ID = '6a4b0bc9da38895dfe32cc08';
-        const JSONBIN_ACCESS_KEY = '$2a$10$gc6TzIrlKaQDjRSPYKY9wuZrluJYo7roSDL8BRzJCsU5PjRvOSh6C';
+        const JSONBIN_ACCESS_KEY = '$2a$10$lWxy3KQpahdTJlxjNcdzh.t5TgvPb4GqncJyOqtSnV/D/clJ26Kue';
         const PASSWORD = 'mtwara2026';
 
         // NAMBA ZA SIMU ZA WATENDAKAZI
@@ -1210,13 +1210,15 @@
                 updateWorkerContactDisplay();
                 initWorkerSignature();
                 setupWorkerClock();
+                setupWorkerProfession();
+                setupPhotoUpload('workerPhotoInput', 'workerPhotoPreview', 'workerPhotoData');
+                // Render duties
                 renderDutyList('workerGeneralDutiesContainer', generalDutiesList, 'worker_general',
                     'workerGeneralGood', 'workerGeneralBad', 'workerGeneralScore', 'workerGeneralTotal');
                 renderEthicalDuties('workerEthicalContainer', 'worker_ethical',
                     'workerEthicalGood', 'workerEthicalBad', 'workerEthicalScore', 'workerEthicalTotal');
-                // Special duties ina render baada ya taaluma kuchaguliwa
-                setupWorkerProfession();
-                setupPhotoUpload('workerPhotoInput', 'workerPhotoPreview', 'workerPhotoData');
+                // Load existing data
+                loadWorkerData();
             } else if (role === 'supervisor') {
                 document.getElementById('supervisorSection').classList.remove('hidden');
                 document.getElementById('roleBadge').textContent = '👔 Msimamizi';
@@ -1231,8 +1233,8 @@
                 document.getElementById('inchargeSection').classList.remove('hidden');
                 document.getElementById('roleBadge').textContent = '👨‍⚕️ Incharge';
                 document.getElementById('incDate').valueAsDate = new Date();
-                loadInchargeData();
                 loadStaffList();
+                loadInchargeData();
             } else {
                 document.getElementById('roleBadge').textContent = '👤 Chagua Role';
             }
@@ -1264,7 +1266,7 @@
                     const inMinutes = parseInt(inTime[0]) * 60 + parseInt(inTime[1]);
                     const outMinutes = parseInt(outTime[0]) * 60 + parseInt(outTime[1]);
                     let diff = outMinutes - inMinutes;
-                    if (diff < 0) diff += 1440; // Siku inayofuata
+                    if (diff < 0) diff += 1440;
                     const hours = diff / 60;
                     hoursDisplay.value = hours.toFixed(1) + ' saa';
                 } else {
@@ -1390,10 +1392,14 @@
                 else if (ratings[key] === 'bad') bad++;
                 total++;
             }
-            document.getElementById(totalGoodId).textContent = good;
-            document.getElementById(totalBadId).textContent = bad;
-            document.getElementById(totalScoreId).textContent = good;
-            document.getElementById(totalMaxId).textContent = total;
+            const goodEl = document.getElementById(totalGoodId);
+            const badEl = document.getElementById(totalBadId);
+            const scoreEl = document.getElementById(totalScoreId);
+            const maxEl = document.getElementById(totalMaxId);
+            if (goodEl) goodEl.textContent = good;
+            if (badEl) badEl.textContent = bad;
+            if (scoreEl) scoreEl.textContent = good;
+            if (maxEl) maxEl.textContent = total;
         }
 
         function getDutyData(prefix) {
@@ -1588,7 +1594,66 @@
         }
 
         // ================================================================
-        //  WORKER - SAVE
+        //  WORKER - LOAD DATA
+        // ================================================================
+        async function loadWorkerData() {
+            const data = await getFromJSONBin();
+            if (!data) return;
+
+            // Load worker data if exists
+            if (data.name) {
+                document.getElementById('workerName').value = data.name || '';
+                document.getElementById('workerPhone').value = data.phone || '';
+                document.getElementById('workerEmail').value = data.email || '';
+                document.getElementById('workerDepartment').value = data.department || '';
+                document.getElementById('workerTitle').value = data.title || '';
+                document.getElementById('workerProfession').value = data.profession || '';
+                if (data.profession === 'daktari') {
+                    document.getElementById('workerDoctorSpecialtyContainer').classList.remove('hidden');
+                    document.getElementById('workerDoctorSpecialty').value = data.doctorSpecialty || '';
+                }
+                if (data.clockIn) document.getElementById('workerClockIn').value = data.clockIn;
+                if (data.clockOut) document.getElementById('workerClockOut').value = data.clockOut;
+                if (data.hoursWorked) document.getElementById('workerHoursWorked').value = data.hoursWorked + ' saa';
+                if (data.additionalDuties) document.getElementById('workerAdditionalDuties').value = data.additionalDuties;
+                if (data.goals) document.getElementById('workerGoals').value = data.goals;
+                if (data.skillsDesc) document.getElementById('workerSkillsDesc').value = data.skillsDesc;
+                if (data.feedback) document.getElementById('workerFeedback').value = data.feedback;
+                if (data.signatureName) document.getElementById('workerSignatureName').value = data.signatureName;
+                if (data.signatureDate) document.getElementById('workerSignatureDate').value = data.signatureDate;
+                if (data.skillRating) {
+                    document.querySelector(`input[name="workerSkillRating"][value="${data.skillRating}"]`).checked = true;
+                }
+                if (data.trainingRating) {
+                    document.querySelector(`input[name="workerTrainingRating"][value="${data.trainingRating}"]`).checked =
+                    true;
+                }
+                // Load ratings
+                if (data.generalDutiesRatings) {
+                    window.dutyRatings['worker_general'] = data.generalDutiesRatings;
+                    updateDutyTotals('worker_general', 'workerGeneralGood', 'workerGeneralBad', 'workerGeneralScore',
+                        'workerGeneralTotal');
+                }
+                if (data.specialDutiesRatings) {
+                    window.dutyRatings['worker_special'] = data.specialDutiesRatings;
+                    updateDutyTotals('worker_special', 'workerSpecialGood', 'workerSpecialBad', 'workerSpecialScore',
+                        'workerSpecialTotal');
+                }
+                if (data.ethicalDuties) {
+                    window.dutyRatings['worker_ethical'] = data.ethicalDuties;
+                    updateDutyTotals('worker_ethical', 'workerEthicalGood', 'workerEthicalBad', 'workerEthicalScore',
+                        'workerEthicalTotal');
+                }
+                if (data.photoData) {
+                    document.getElementById('workerPhotoPreview').src = data.photoData;
+                    window.workerPhotoData = data.photoData;
+                }
+                showWorkerMessage('Data yako imepakiwa.', 'success');
+            }
+        }
+
+        // ================================================================
+        //  WORKER - SAVE DATA
         // ================================================================
         function collectWorkerData() {
             const name = document.getElementById('workerName').value.trim();
@@ -1666,7 +1731,7 @@
             setTimeout(() => { box.style.display = 'none'; }, 8000);
         }
 
-        async function saveWorker() {
+        async function saveWorkerData() {
             const data = collectWorkerData();
             if (!validateWorkerData(data)) return;
             const btn = document.querySelector('#workerSection .btn-success');
@@ -1676,30 +1741,16 @@
             try {
                 let existing = await getFromJSONBin();
                 if (!existing) existing = {};
-                // Hifadhi data kwa siku maalum
+                // Hifadhi kwa siku
                 const dateKey = data.date;
                 if (!existing.workerDailyData) existing.workerDailyData = {};
                 if (!existing.workerDailyData[data.name]) existing.workerDailyData[data.name] = {};
                 existing.workerDailyData[data.name][dateKey] = data;
-
-                // Pia hifadhi kwenye data kuu
+                // Hifadhi kwenye data kuu
                 const merged = { ...existing, ...data };
                 await saveToJSONBin(merged);
                 showWorkerMessage('✅ Data imehifadhiwa!', 'success');
-                showModal('Data yako imehifadhiwa.');
-
-                // WhatsApp
-                const phone = data.phone;
-                if (phone) {
-                    let clean = phone.replace(/\s/g, '');
-                    if (!clean.startsWith('+')) {
-                        if (clean.startsWith('0')) clean = '+255' + clean.substring(1);
-                        else clean = '+255' + clean;
-                    }
-                    const msg =
-                        `Habari ${data.name},\n\nRipoti yako ya Tathmini 2026 ya tarehe ${data.date} imekamilika.\nMuda wa kuingia: ${data.clockIn}\nMuda wa kutoka: ${data.clockOut}\nSaa za kazi: ${data.hoursWorked}\n\nAsante kwa ushirikiano.`;
-                    window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
-                }
+                showModal('Data yako imehifadhiwa kikamilifu.');
             } catch (e) {
                 showWorkerMessage('❌ Hitilafu: ' + (e.message || 'Jaribu tena.'), 'error');
             } finally {
@@ -1717,8 +1768,11 @@
                 if (clean.startsWith('0')) clean = '+255' + clean.substring(1);
                 else clean = '+255' + clean;
             }
+            const clockIn = document.getElementById('workerClockIn').value || '-';
+            const clockOut = document.getElementById('workerClockOut').value || '-';
+            const hours = document.getElementById('workerHoursWorked').value || '-';
             const msg =
-                `Habari ${name},\n\nRipoti yako ya Tathmini 2026 imekamilika. Tafadhali angalia maelezo.\n\nAsante.`;
+                `Habari ${name},\n\nRipoti ya Tathmini 2026 imekamilika.\n📅 Tarehe: ${new Date().toISOString().split('T')[0]}\n🕐 Muda wa kuingia: ${clockIn}\n🕐 Muda wa kutoka: ${clockOut}\n⏱ Saa za kazi: ${hours}\n\nAsante kwa ushirikiano.`;
             window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
             showWorkerMessage('WhatsApp imefunguliwa.', 'success');
         }
@@ -1726,7 +1780,8 @@
         function sendWorkerSMS() {
             const phone = document.getElementById('workerPhone').value.trim();
             if (!phone) { showWorkerMessage('Jaza namba ya simu.', 'error'); return; }
-            window.open(`sms:${phone}?body=${encodeURIComponent('Ripoti yako imekamilika.')}`, '_blank');
+            const msg = 'Ripoti yako ya Tathmini 2026 imekamilika. Asante.';
+            window.open(`sms:${phone}?body=${encodeURIComponent(msg)}`, '_blank');
             showWorkerMessage('SMS imefunguliwa.', 'success');
         }
 
@@ -1738,6 +1793,9 @@
             });
             clearWorkerSignature();
             document.getElementById('workerSignatureDate').valueAsDate = new Date();
+            document.getElementById('workerPhotoPreview').src =
+                "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23eef4fa'/%3E%3Ctext x='40' y='48' text-anchor='middle' font-family='Arial' font-size='28' fill='%231a3a5a'%3E📷%3C/text%3E%3C/svg%3E";
+            window.workerPhotoData = '';
             showWorkerMessage('Fomu imewekwa upya.', 'success');
         }
 
@@ -1785,7 +1843,6 @@
                     document.getElementById('supProfession').value = data.profession;
                     updateSupSpecialDuties(data.profession);
                 }
-                // Load ratings if exist
                 if (data.generalDutiesRatings) {
                     window.dutyRatings['sup_general'] = data.generalDutiesRatings;
                     updateDutyTotals('sup_general', 'supGeneralGood', 'supGeneralBad', 'supGeneralScore', 'supGeneralTotal');
@@ -1806,6 +1863,9 @@
                 }
                 if (data.clockOut) {
                     document.getElementById('supClockOut').value = data.clockOut;
+                }
+                if (data.hoursWorked) {
+                    document.getElementById('supHoursWorked').value = data.hoursWorked + ' saa';
                 }
                 showSupervisorMessage('Data ya mtendakazi imepakiwa.', 'success');
             }
@@ -1905,14 +1965,12 @@
             const select = document.getElementById('incWorkerSelect');
             select.innerHTML = '<option value="">-- Chagua Mtendakazi --</option>';
 
-            // Ongeza watendakazi kutoka kwenye orodha ya STAFF_CONTACTS
             for (const [name, info] of Object.entries(STAFF_CONTACTS)) {
                 const option = document.createElement('option');
                 option.value = name;
                 option.textContent = `${name} (${info.department})`;
                 select.appendChild(option);
 
-                // Ongeza kwenye orodha ya majina
                 const div = document.createElement('div');
                 div.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:4px 0;border-bottom:1px solid #eef4fa;';
                 const deptSpan = document.createElement('span');
@@ -1926,7 +1984,7 @@
                 container.appendChild(div);
             }
 
-            // Ongeza sehemu ya kuongeza mtendakazi mpya
+            // Ongeza mtendakazi mpya
             const addDiv = document.createElement('div');
             addDiv.style.cssText =
                 'margin-top:12px;padding:12px;background:#eef4fa;border-radius:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;';
@@ -1954,10 +2012,8 @@
             const name = document.getElementById('newStaffName').value.trim();
             const dept = document.getElementById('newStaffDept').value;
             const phone = document.getElementById('newStaffPhone').value.trim();
-
-            if (!name) { showInchargeMessage('Jaza jina la mtendakazi.', 'error'); return; }
+            if (!name) { showInchargeMessage('Jaza jina.', 'error'); return; }
             if (!phone) { showInchargeMessage('Jaza namba ya simu.', 'error'); return; }
-
             STAFF_CONTACTS[name] = { phone: phone, department: dept };
             loadStaffList();
             showInchargeMessage(`✅ ${name} ameongezwa!`, 'success');
@@ -1967,11 +2023,13 @@
 
         async function loadWorkerForIncharge(workerName) {
             if (!workerName) {
-                document.getElementById('incWorkerInfo').innerHTML = '<p style="color:#6a8aaa;">Chagua mtendakazi kutoka kwenye dropdown.</p>';
+                document.getElementById('incWorkerInfo').innerHTML = '<p style="color:#6a8aaa;">Chagua mtendakazi.</p>';
                 document.getElementById('incClockInfo').innerHTML = '<p style="color:#6a8aaa;">Hakuna data ya muda.</p>';
-                document.getElementById('incGeneralDutiesDisplay').innerHTML = '<p style="color:#6a8aaa;">Hakuna majukumu yaliyorekodiwa.</p>';
-                document.getElementById('incSpecialDutiesDisplay').innerHTML = '<p style="color:#6a8aaa;">Hakuna majukumu maalumu.</p>';
-                document.getElementById('incEthicalDisplay').innerHTML = '<p style="color:#6a8aaa;">Hakuna maadili yaliyorekodiwa.</p>';
+                document.getElementById('incGeneralDutiesDisplay').innerHTML =
+                    '<p style="color:#6a8aaa;">Hakuna majukumu.</p>';
+                document.getElementById('incSpecialDutiesDisplay').innerHTML =
+                '<p style="color:#6a8aaa;">Hakuna majukumu maalumu.</p>';
+                document.getElementById('incEthicalDisplay').innerHTML = '<p style="color:#6a8aaa;">Hakuna maadili.</p>';
                 document.getElementById('incChartSection').style.display = 'none';
                 document.getElementById('incWorkerPhoneDisplay').textContent = '-';
                 document.getElementById('incSupervisorPhoneDisplay').textContent = '-';
@@ -1984,31 +2042,28 @@
                 return;
             }
 
-            // Tafuta data ya mtendakazi
             const workerInfo = STAFF_CONTACTS[workerName] || {};
             const phone = workerInfo.phone || '-';
-
-            // Onyesha taarifa
             document.getElementById('incWorkerPhoneDisplay').textContent = phone;
 
             // Tafuta data ya siku za hivi karibuni
             const today = new Date().toISOString().split('T')[0];
-            const workerDailyData = data.workerDailyData && data.workerDailyData[workerName] ? data.workerDailyData[workerName] :
-            {};
+            const workerDailyData = data.workerDailyData && data.workerDailyData[workerName] ? data.workerDailyData[
+                workerName] : {};
+            const todayData = workerDailyData[today] || {};
 
-            // Onyesha taarifa za mtendakazi
+            // Taarifa
             let infoHtml = `
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
                     <div><strong>Jina:</strong> ${workerName}</div>
                     <div><strong>Idara:</strong> ${workerInfo.department || '-'}</div>
                     <div><strong>Namba ya Simu:</strong> ${phone}</div>
-                    <div><strong>Cheo:</strong> ${data.title || '-'}</div>
+                    <div><strong>Cheo:</strong> ${todayData.title || data.title || '-'}</div>
                 </div>
             `;
             document.getElementById('incWorkerInfo').innerHTML = infoHtml;
 
-            // Onyesha muda wa kuingia/kutoka kwa siku ya leo
-            const todayData = workerDailyData[today] || {};
+            // Clock
             let clockHtml = '';
             if (todayData.clockIn || todayData.clockOut) {
                 clockHtml = `
@@ -2023,12 +2078,8 @@
             }
             document.getElementById('incClockInfo').innerHTML = clockHtml;
 
-            // Onyesha majukumu
-            const generalRatings = todayData.generalDutiesRatings || {};
-            const specialRatings = todayData.specialDutiesRatings || {};
-            const ethicalRatings = todayData.ethicalDuties || {};
-
             // General duties
+            const generalRatings = todayData.generalDutiesRatings || {};
             let generalHtml = '';
             let generalGood = 0,
                 generalBad = 0,
@@ -2058,7 +2109,8 @@
             let specialGood = 0,
                 specialBad = 0,
                 specialTotal = 0;
-            const specialDuties = specialDutiesMap[data.profession] || [];
+            const specialDuties = specialDutiesMap[todayData.profession || data.profession] || [];
+            const specialRatings = todayData.specialDutiesRatings || {};
             specialDuties.forEach((duty, index) => {
                 const rating = specialRatings[index];
                 if (rating) {
@@ -2080,6 +2132,7 @@
             document.getElementById('incSpecialTotal').textContent = specialTotal || specialDuties.length;
 
             // Ethical duties
+            const ethicalRatings = todayData.ethicalDuties || {};
             let ethicalHtml = '';
             let ethicalGood = 0,
                 ethicalBad = 0,
@@ -2105,18 +2158,10 @@
             document.getElementById('incEthicalTotal').textContent = ethicalTotal || ethicalDuties.length;
 
             // Grafu
-            loadInchargeChart(workerName);
+            loadInchargeChart(workerName, todayData);
         }
 
-        async function loadInchargeChart(workerName) {
-            const data = await getFromJSONBin();
-            if (!data) return;
-
-            const today = new Date().toISOString().split('T')[0];
-            const workerDailyData = data.workerDailyData && data.workerDailyData[workerName] ? data.workerDailyData[workerName] :
-            {};
-            const todayData = workerDailyData[today] || {};
-
+        async function loadInchargeChart(workerName, todayData) {
             const generalRatings = todayData.generalDutiesRatings || {};
             const specialRatings = todayData.specialDutiesRatings || {};
             const ethicalRatings = todayData.ethicalDuties || {};
@@ -2157,9 +2202,12 @@
                     datasets: [{
                         label: 'Alama (%)',
                         data: [
-                            generalTotal > 0 ? (generalGood / (generalGood + generalBad)) * 100 : 0,
-                            (specialGood + specialBad) > 0 ? (specialGood / (specialGood + specialBad)) * 100 : 0,
-                            (ethicalGood + ethicalBad) > 0 ? (ethicalGood / (ethicalGood + ethicalBad)) * 100 : 0,
+                            (generalGood + generalBad) > 0 ? (generalGood / (generalGood + generalBad)) * 100 :
+                            0,
+                            (specialGood + specialBad) > 0 ? (specialGood / (specialGood + specialBad)) *
+                            100 : 0,
+                            (ethicalGood + ethicalBad) > 0 ? (ethicalGood / (ethicalGood + ethicalBad)) *
+                            100 : 0,
                             score
                         ],
                         backgroundColor: ['#1a73e8', '#0f9d58', '#fbbc04', '#d93025'],
@@ -2234,7 +2282,6 @@
                 phone = STAFF_CONTACTS[name]?.phone || '';
                 recipient = name;
             } else {
-                // Supervisor - tumia namba ya Incharge au msimamizi
                 phone = INCHARGE_PHONE;
                 recipient = 'Msimamizi';
             }
@@ -2269,8 +2316,7 @@
 
         async function loadInchargeData() {
             const data = await getFromJSONBin();
-            if (data && data.name) {
-                // Jaza taarifa za mtendakazi kwa dropdown
+            if (data) {
                 loadStaffList();
             }
         }
@@ -2391,8 +2437,13 @@
             if (roleParam && ['worker', 'supervisor', 'incharge'].includes(roleParam)) {
                 document.getElementById('roleSelect').value = roleParam;
                 selectedRole = roleParam;
-                document.getElementById('passwordModal').classList.add('active');
-                document.getElementById('passwordInput').focus();
+                // Ongeza modal ya password ikiwa haijasajiliwa
+                let users = JSON.parse(localStorage.getItem('appUsers')) || {};
+                if (Object.keys(users).length > 0) {
+                    openLoginModal(roleParam);
+                } else {
+                    openSignupModal(roleParam);
+                }
             } else {
                 document.getElementById('roleSelect').value = '';
             }
