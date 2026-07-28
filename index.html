@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -70,21 +69,6 @@
             border-radius: 30px;
             font-weight: 600;
             font-size: 13px;
-        }
-        .btn-logout {
-            background: #d93025;
-            color: #fff;
-            padding: 6px 16px;
-            border: none;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-logout:hover {
-            background: #b3261e;
-            transform: scale(1.05);
         }
         .btn {
             padding: 10px 24px;
@@ -435,10 +419,6 @@
             .role-selector select {
                 width: 100%;
             }
-            .header-right {
-                flex-direction: column;
-                align-items: flex-start;
-            }
         }
         @media print {
             body {
@@ -478,12 +458,11 @@
             </div>
             <div class="header-right">
                 <span class="role-badge" id="roleBadge">👤 Chagua Role</span>
-                <button class="btn-logout" id="logoutBtn" onclick="logout()" style="display:none;">🚪 Kutoka</button>
             </div>
         </div>
 
         <!-- DROPDOWN YA KUCHAGUA ROLE -->
-        <div class="role-selector" id="roleSelector">
+        <div class="role-selector">
             <label for="roleSelect">🔽 Chagua Nafasi yako:</label>
             <select id="roleSelect" onchange="onRoleSelected(this.value)">
                 <option value="">-- Chagua --</option>
@@ -566,6 +545,7 @@
                             <option value="mradiologist">Mtaalamu wa Radiology</option>
                             <option value="physiotherapist">Mtaalamu wa Tiba Kimwili</option>
                             <option value="nutritionist">Mtaalamu wa Lishe</option>
+                            <option value="mhasibu">Mhasibu</option> <!-- IMONGEZWA -->
                             <option value="health_administrator">Msimamizi wa Afya</option>
                         </select>
                     </div>
@@ -690,13 +670,14 @@
             <div id="workerMessageBox" class="message-box"></div>
 
             <div class="btn-group no-print">
-                <!-- Kitufe cha "Tuma" (badala ya "Hifadhi na Kutuma") -->
-                <button class="btn btn-success" onclick="sendWorker()">📤 Tuma</button>
+                <!-- "Hifadhi na Kutuma" imeondolewa, badala yake "Hifadhi" pekee -->
+                <button class="btn btn-success" onclick="saveWorker()">💾 Hifadhi</button>
                 <button class="btn btn-whatsapp" onclick="sendWorkerWhatsApp()">📱 Tuma WhatsApp</button>
                 <button class="btn btn-sms" onclick="sendWorkerSMS()">✉️ Tuma SMS</button>
                 <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
                 <button class="btn btn-danger" onclick="generatePDF()">📄 Pakua PDF</button>
                 <button class="btn btn-outline" onclick="resetWorkerForm()">🔄 Weka Upya</button>
+                <button class="btn btn-outline" onclick="logoutUser()" style="border-color:#d93025;color:#d93025;">🚪 Kutoka</button>
             </div>
         </div>
 
@@ -741,6 +722,7 @@
                         <option value="mradiologist">Mtaalamu wa Radiology</option>
                         <option value="physiotherapist">Mtaalamu wa Tiba Kimwili</option>
                         <option value="nutritionist">Mtaalamu wa Lishe</option>
+                        <option value="mhasibu">Mhasibu</option> <!-- IMONGEZWA -->
                         <option value="health_administrator">Msimamizi wa Afya</option>
                     </select>
                     <div id="supSpecialDutiesContainer"></div>
@@ -796,6 +778,7 @@
             <div class="btn-group no-print">
                 <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
                 <button class="btn btn-danger" onclick="generatePDF()">📄 Pakua PDF</button>
+                <button class="btn btn-outline" onclick="logoutUser()" style="border-color:#d93025;color:#d93025;">🚪 Kutoka</button>
             </div>
         </div>
 
@@ -843,6 +826,7 @@
                         <option value="mradiologist">Mtaalamu wa Radiology</option>
                         <option value="physiotherapist">Mtaalamu wa Tiba Kimwili</option>
                         <option value="nutritionist">Mtaalamu wa Lishe</option>
+                        <option value="mhasibu">Mhasibu</option> <!-- IMONGEZWA -->
                         <option value="health_administrator">Msimamizi wa Afya</option>
                     </select>
                     <div id="incSpecialDutiesContainer"></div>
@@ -917,6 +901,12 @@
             </div>
 
             <div id="inchargeMessageBox" class="message-box"></div>
+
+            <div class="btn-group no-print">
+                <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
+                <button class="btn btn-danger" onclick="generatePDF()">📄 Pakua PDF</button>
+                <button class="btn btn-outline" onclick="logoutUser()" style="border-color:#d93025;color:#d93025;">🚪 Kutoka</button>
+            </div>
         </div>
 
         <!-- MODAL YA MAFANIKIO -->
@@ -947,36 +937,20 @@
         let incPhotoData = '';
 
         // ================================================================
-        //  LOGOUT (KUTOKA)
-        // ================================================================
-        function logout() {
-            if (confirm('Je, una uhakika unataka kutoka?')) {
-                sessionStorage.removeItem('loggedInUser');
-                sessionStorage.removeItem('loggedInRole');
-                document.getElementById('roleSelect').value = '';
-                document.getElementById('logoutBtn').style.display = 'none';
-                // Ficha sehemu zote
-                document.getElementById('workerSection').classList.add('hidden');
-                document.getElementById('supervisorSection').classList.add('hidden');
-                document.getElementById('inchargeSection').classList.add('hidden');
-                document.getElementById('roleBadge').textContent = '👤 Chagua Role';
-                showModal('Umefanikiwa kutoka. Asante!');
-            }
-        }
-
-        // ================================================================
         //  PASSWORD MODAL (DEFAULT)
         // ================================================================
         function onRoleSelected(role) {
             if (!role) return;
             selectedRole = role;
 
+            // Angalia kama mtumiaji ameshaingia
             const loggedUser = sessionStorage.getItem('loggedInUser');
             if (loggedUser) {
                 switchRole(role);
                 return;
             }
 
+            // Angalia kama kuna watumiaji waliosajiliwa
             let users = JSON.parse(localStorage.getItem('appUsers')) || {};
             if (Object.keys(users).length > 0) {
                 openLoginModal(role);
@@ -1059,6 +1033,7 @@
             };
             localStorage.setItem('appUsers', JSON.stringify(users));
 
+            // Jaribu kuhifadhi kwenye JSONBin
             try {
                 let existing = await getFromJSONBin();
                 if (!existing) existing = {};
@@ -1097,9 +1072,21 @@
             document.getElementById('loginModal').classList.remove('active');
             sessionStorage.setItem('loggedInUser', username);
             sessionStorage.setItem('loggedInRole', users[username].role);
-            document.getElementById('logoutBtn').style.display = 'inline-block';
             switchRole(users[username].role);
             showModal(`Karibu ${username}!`);
+        }
+
+        // ================================================================
+        //  KUTOKA (LOGOUT)
+        // ================================================================
+        function logoutUser() {
+            if (confirm('Una uhakika unataka kutoka?')) {
+                sessionStorage.removeItem('loggedInUser');
+                sessionStorage.removeItem('loggedInRole');
+                document.getElementById('roleSelect').value = '';
+                switchRole('');
+                showModal('Umefanikiwa kutoka. Tutaonana tena!');
+            }
         }
 
         // ================================================================
@@ -1117,10 +1104,12 @@
                 updateWorkerContactDisplay();
                 initWorkerSignature();
                 setupPhotoUpload('workerPhotoInput', 'workerPhotoPreview', 'workerPhotoData');
+                // Render duties
                 renderDutyList('workerGeneralDutiesContainer', generalDutiesList, 'worker_general',
                     'workerGeneralGood', 'workerGeneralBad', 'workerGeneralScore', 'workerGeneralTotal');
                 renderEthicalDuties('workerEthicalContainer', 'worker_ethical',
                     'workerEthicalGood', 'workerEthicalBad', 'workerEthicalScore', 'workerEthicalTotal');
+                // Load data
                 loadWorkerData();
             } else if (role === 'supervisor') {
                 document.getElementById('supervisorSection').classList.remove('hidden');
@@ -1159,6 +1148,7 @@
                     const reader = new FileReader();
                     reader.onload = function(ev) {
                         preview.src = ev.target.result;
+                        // Hifadhi kwenye variable ya data
                         if (dataKey === 'workerPhotoData') workerPhotoData = ev.target.result;
                         else if (dataKey === 'supPhotoData') supPhotoData = ev.target.result;
                         else if (dataKey === 'incPhotoData') incPhotoData = ev.target.result;
@@ -1169,12 +1159,14 @@
         }
 
         // ================================================================
-        //  MAJUKUMU YA JUMLA (Vyema / Mkasi)
+        //  MAJUKUMU YA JUMLA (Vyema / Mkasi) - IMEREKEBISHWA
         // ================================================================
         const generalDutiesList = [
             'Kuhudumia wagonjwa',
             'Kutoa dawa na matibabu',
-            'Kuwahi kazini dakika 10 kabla ya zamu kuanzia',
+            // "Kuwahi kazini dakika 10 kabla ya zamu kuanzia" imeondolewa na kubadilishwa na:
+            'Muda alioingia (k.m. 07:30)',
+            'Muda aliotoka (k.m. 15:30)',
             'Kuhakikisha eneo lako la kazi liko safi na lina mpangilio mzuri',
             'Kuandika ripoti za matibabu',
             'Kuelimisha wagonjwa na walezi',
@@ -1183,6 +1175,9 @@
             'Kufanya tafiti ndogo'
         ];
 
+        // ================================================================
+        //  MAJUKUMU MAALUMU (Kulingana na Taaluma) - IMONGEZWA MHASIBU
+        // ================================================================
         const specialDutiesMap = {
             muuguzi: ['Kufanya uchunguzi wa wagonjwa', 'Kutoa dawa na matibabu', 'Kushiriki katika uandishi wa ripoti',
                 'Kuelimisha wagonjwa na walezi', 'Kuhakikisha usafi na usalama'
@@ -1205,11 +1200,17 @@
             nutritionist: ['Kufanya tathmini ya lishe', 'Kutoa ushauri wa lishe bora', 'Kushiriki katika mpango wa chakula',
                 'Kuelimisha jamii', 'Kufanya tafiti za lishe'
             ],
+            mhasibu: ['Kusimamia kumbukumbu za fedha', 'Kufanya usawa wa akaunti', 'Kuweka kumbukumbu za kifedha',
+                'Kutoa taarifa za kifedha', 'Kushiriki katika upangaji wa bajeti'
+            ],
             health_administrator: ['Kusimamia shughuli za afya', 'Kuratibu programu', 'Kushiriki katika upangaji na bajeti',
                 'Kuhakikisha ubora wa huduma', 'Kufanya tafiti za afya'
             ]
         };
 
+        // ================================================================
+        //  MAJUKUMU YA KIMAADILI
+        // ================================================================
         const ethicalDuties = [
             'Ushirikiano miongoni mwa wafanyakazi',
             'Kujituma katika kazi kwa hofu ya MUNGU',
@@ -1230,12 +1231,12 @@
             'Kuuliza au kueleza hisia zako kwa uwazi kwa mhusika badala ya kunung\'unika'
         ];
 
-        if (!window.dutyRatings) window.dutyRatings = {};
-        if (!window.ethicalRatings) window.ethicalRatings = {};
-
         // ================================================================
         //  RENDER FUNCTIONS
         // ================================================================
+        if (!window.dutyRatings) window.dutyRatings = {};
+        if (!window.ethicalRatings) window.ethicalRatings = {};
+
         function renderDutyList(containerId, duties, prefix, totalGoodId, totalBadId, totalScoreId, totalMaxId) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -1439,7 +1440,7 @@
         }
 
         // ================================================================
-        //  WORKER - DATA COLLECTION & SEND (Tuma pekee)
+        //  WORKER - DATA COLLECTION & SAVE
         // ================================================================
         function updateWorkerContactDisplay() {
             const phone = document.getElementById('workerPhone').value || '-';
@@ -1451,6 +1452,7 @@
         document.getElementById('workerPhone').addEventListener('input', updateWorkerContactDisplay);
         document.getElementById('workerEmail').addEventListener('input', updateWorkerContactDisplay);
 
+        // Worker Profession change
         document.getElementById('workerProfession').addEventListener('change', function() {
             const prof = this.value;
             document.getElementById('workerSpecialProfessionDisplay').textContent = prof || '-';
@@ -1463,6 +1465,7 @@
                 document.getElementById('workerDoctorSpecialty').removeAttribute('required');
                 document.getElementById('workerDoctorSpecialty').value = '';
             }
+            // Special duties
             if (prof && specialDutiesMap[prof]) {
                 renderDutyList('workerSpecialDutiesContainer', specialDutiesMap[prof], 'worker_special',
                     'workerSpecialGood', 'workerSpecialBad', 'workerSpecialScore', 'workerSpecialTotal');
@@ -1617,10 +1620,12 @@
                     document.querySelector(`input[name="workerTrainingRating"][value="${data.trainingRating}"]`).checked =
                     true;
                 }
+                // Load duty ratings
                 if (data.generalDutiesRatings) {
                     window.dutyRatings['worker_general'] = data.generalDutiesRatings;
                     updateDutyTotals('worker_general', 'workerGeneralGood', 'workerGeneralBad', 'workerGeneralScore',
                         'workerGeneralTotal');
+                    // Update status displays
                     for (let key in data.generalDutiesRatings) {
                         const statusEl = document.getElementById(`worker_general_duty_status_${key}`);
                         if (statusEl) {
@@ -1719,21 +1724,20 @@
             setTimeout(() => { box.style.display = 'none'; }, 8000);
         }
 
-        // KITUFE CHA "TUMA" (KINACHOZUIA KUANDIKA KWA JSONBin)
-        async function sendWorker() {
+        async function saveWorker() {
             const data = collectWorkerData();
             if (!validateWorkerData(data)) return;
             const btn = document.querySelector('#workerSection .btn-success');
             const orig = btn.innerHTML;
-            btn.innerHTML = '⏳ Inatuma...';
+            btn.innerHTML = '⏳ Inahifadhi...';
             btn.disabled = true;
             try {
                 let existing = await getFromJSONBin();
                 if (!existing) existing = {};
                 const merged = { ...existing, ...data };
                 await saveToJSONBin(merged);
-                showWorkerMessage('✅ Data imetumwa kikamilifu!', 'success');
-                showModal('Data yako imetumwa kikamilifu.');
+                showWorkerMessage('✅ Data imehifadhiwa!', 'success');
+                showModal('Data yako imehifadhiwa.');
                 // WhatsApp
                 const phone = data.phone;
                 if (phone) {
@@ -1743,7 +1747,7 @@
                         else clean = '+255' + clean;
                     }
                     const msg =
-                        `Habari ${data.name},\n\nRipoti yako ya Tathmini 2026 imetumwa. Asante kwa ushirikiano.`;
+                        `Habari ${data.name},\n\nRipoti yako ya Tathmini 2026 imekamilika. Asante kwa ushirikiano.`;
                     window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
                 }
             } catch (e) {
@@ -1754,25 +1758,38 @@
             }
         }
 
+        // ================================================================
+        //  WORKER - WHATSAPP (IMEREKEBISHWA)
+        // ================================================================
         function sendWorkerWhatsApp() {
             const phone = document.getElementById('workerPhone').value.trim();
             const name = document.getElementById('workerName').value.trim() || 'Mtendakazi';
-            if (!phone) { showWorkerMessage('Jaza namba ya simu.', 'error'); return; }
+            if (!phone) {
+                showWorkerMessage('Jaza namba ya simu kwanza.', 'error');
+                return;
+            }
+            // Safisha namba
             let clean = phone.replace(/\s/g, '');
             if (!clean.startsWith('+')) {
-                if (clean.startsWith('0')) clean = '+255' + clean.substring(1);
-                else clean = '+255' + clean;
+                if (clean.startsWith('0')) {
+                    clean = '+255' + clean.substring(1);
+                } else {
+                    clean = '+255' + clean;
+                }
             }
+            // Ujumbe wa WhatsApp
             const msg =
-                `Habari ${name},\n\nRipoti yako ya Tathmini 2026 imetumwa. Tafadhali angalia maelezo.\n\nAsante.`;
-            window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
+                `Habari ${name},\n\nRipoti yako ya Tathmini 2026 imekamilika. Tafadhali angalia maelezo.\n\nAsante.`;
+            // Fungua WhatsApp
+            const url = `https://wa.me/${clean}?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
             showWorkerMessage('WhatsApp imefunguliwa.', 'success');
         }
 
         function sendWorkerSMS() {
             const phone = document.getElementById('workerPhone').value.trim();
             if (!phone) { showWorkerMessage('Jaza namba ya simu.', 'error'); return; }
-            window.open(`sms:${phone}?body=${encodeURIComponent('Ripoti yako imetumwa.')}`, '_blank');
+            window.open(`sms:${phone}?body=${encodeURIComponent('Ripoti yako imekamilika.')}`, '_blank');
             showWorkerMessage('SMS imefunguliwa.', 'success');
         }
 
@@ -1826,6 +1843,7 @@
                     document.getElementById('supProfession').value = data.profession;
                     updateSupSpecialDuties(data.profession);
                 }
+                // Load duty ratings
                 if (data.generalDutiesRatings) {
                     window.dutyRatings['sup_general'] = data.generalDutiesRatings;
                     updateDutyTotals('sup_general', 'supGeneralGood', 'supGeneralBad', 'supGeneralScore',
@@ -1960,6 +1978,7 @@
                     document.getElementById('incProfession').value = data.profession;
                     updateIncSpecialDuties(data.profession);
                 }
+                // Load duty ratings
                 if (data.generalDutiesRatings) {
                     window.dutyRatings['inc_general'] = data.generalDutiesRatings;
                     updateDutyTotals('inc_general', 'incGeneralGood', 'incGeneralBad', 'incGeneralScore',
@@ -2249,7 +2268,6 @@
                 selectedRole = roleParam;
                 const loggedUser = sessionStorage.getItem('loggedInUser');
                 if (loggedUser) {
-                    document.getElementById('logoutBtn').style.display = 'inline-block';
                     switchRole(roleParam);
                 } else {
                     let users = JSON.parse(localStorage.getItem('appUsers')) || {};
@@ -2261,17 +2279,6 @@
                 }
             } else {
                 document.getElementById('roleSelect').value = '';
-                // Angalia kama mtumiaji ameshaingia
-                const loggedUser = sessionStorage.getItem('loggedInUser');
-                if (loggedUser) {
-                    // Ikiwa ameingia lakini hakuna role kwenye URL, tunamweka kwenye role yake
-                    const role = sessionStorage.getItem('loggedInRole');
-                    if (role) {
-                        document.getElementById('roleSelect').value = role;
-                        document.getElementById('logoutBtn').style.display = 'inline-block';
-                        switchRole(role);
-                    }
-                }
             }
 
             document.getElementById('workerSignatureDate').valueAsDate = new Date();
@@ -2304,7 +2311,7 @@
             }
 
             setTimeout(initWorkerSignature, 200);
-            console.log('✅ Mfumo wa Tathmini 2026 umepakia. Kitufe cha "Tuma" na "Kutoka" vimeongezwa.');
+            console.log('✅ Mfumo wa Tathmini 2026 umepakia. Mabadiliko yamefanywa.');
         })();
     </script>
 </body>
