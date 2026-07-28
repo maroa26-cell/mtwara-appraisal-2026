@@ -139,6 +139,14 @@
             background: #1a9fd4;
             transform: translateY(-3px);
         }
+        .btn-logout {
+            background: #d93025;
+            color: #fff;
+        }
+        .btn-logout:hover {
+            background: #b3261e;
+            transform: translateY(-3px);
+        }
         .section {
             background: #f8fafe;
             border-radius: 20px;
@@ -397,6 +405,15 @@
             border: 3px solid #1a73e8;
             background: #eef4fa;
         }
+        .time-input-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .time-input-group .form-group {
+            flex: 1;
+            min-width: 140px;
+        }
 
         @media (max-width: 700px) {
             .form-row {
@@ -418,6 +435,12 @@
             }
             .role-selector select {
                 width: 100%;
+            }
+            .time-input-group {
+                flex-direction: column;
+            }
+            .time-input-group .form-group {
+                min-width: 100%;
             }
         }
         @media print {
@@ -458,11 +481,12 @@
             </div>
             <div class="header-right">
                 <span class="role-badge" id="roleBadge">👤 Chagua Role</span>
+                <button class="btn btn-logout no-print" id="logoutBtn" onclick="logoutUser()" style="display:none;">🚪 Toka</button>
             </div>
         </div>
 
         <!-- DROPDOWN YA KUCHAGUA ROLE -->
-        <div class="role-selector">
+        <div class="role-selector" id="roleSelector">
             <label for="roleSelect">🔽 Chagua Nafasi yako:</label>
             <select id="roleSelect" onchange="onRoleSelected(this.value)">
                 <option value="">-- Chagua --</option>
@@ -545,8 +569,8 @@
                             <option value="mradiologist">Mtaalamu wa Radiology</option>
                             <option value="physiotherapist">Mtaalamu wa Tiba Kimwili</option>
                             <option value="nutritionist">Mtaalamu wa Lishe</option>
-                            <option value="mhasibu">Mhasibu</option> <!-- IMONGEZWA -->
                             <option value="health_administrator">Msimamizi wa Afya</option>
+                            <option value="mhasibu">Mhasibu</option>
                         </select>
                     </div>
                 </div>
@@ -612,6 +636,21 @@
                 </div>
             </div>
 
+            <!-- Muda wa Kuingia na Kutoka -->
+            <div class="section">
+                <div class="section-title"><span>⏰</span> Muda wa Kuingia na Kutoka</div>
+                <div class="time-input-group">
+                    <div class="form-group">
+                        <label>Muda alioingia</label>
+                        <input type="time" id="workerTimeIn" />
+                    </div>
+                    <div class="form-group">
+                        <label>Muda aliotoka</label>
+                        <input type="time" id="workerTimeOut" />
+                    </div>
+                </div>
+            </div>
+
             <div class="section">
                 <div class="section-title"><span>4</span> Malengo & Ujuzi</div>
                 <div class="form-group"><label>Malengo ya Kimkakati</label><textarea id="workerGoals" placeholder="Eleza malengo yako..."></textarea></div>
@@ -670,14 +709,13 @@
             <div id="workerMessageBox" class="message-box"></div>
 
             <div class="btn-group no-print">
-                <!-- "Hifadhi na Kutuma" imeondolewa, badala yake "Hifadhi" pekee -->
                 <button class="btn btn-success" onclick="saveWorker()">💾 Hifadhi</button>
+                <button class="btn btn-primary" onclick="sendWorker()">📤 Tuma</button>
                 <button class="btn btn-whatsapp" onclick="sendWorkerWhatsApp()">📱 Tuma WhatsApp</button>
                 <button class="btn btn-sms" onclick="sendWorkerSMS()">✉️ Tuma SMS</button>
                 <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
                 <button class="btn btn-danger" onclick="generatePDF()">📄 Pakua PDF</button>
                 <button class="btn btn-outline" onclick="resetWorkerForm()">🔄 Weka Upya</button>
-                <button class="btn btn-outline" onclick="logoutUser()" style="border-color:#d93025;color:#d93025;">🚪 Kutoka</button>
             </div>
         </div>
 
@@ -722,8 +760,8 @@
                         <option value="mradiologist">Mtaalamu wa Radiology</option>
                         <option value="physiotherapist">Mtaalamu wa Tiba Kimwili</option>
                         <option value="nutritionist">Mtaalamu wa Lishe</option>
-                        <option value="mhasibu">Mhasibu</option> <!-- IMONGEZWA -->
                         <option value="health_administrator">Msimamizi wa Afya</option>
+                        <option value="mhasibu">Mhasibu</option>
                     </select>
                     <div id="supSpecialDutiesContainer"></div>
                     <div style="margin-top:10px;padding:10px;background:#eef4fa;border-radius:10px;display:flex;gap:20px;flex-wrap:wrap;">
@@ -778,7 +816,6 @@
             <div class="btn-group no-print">
                 <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
                 <button class="btn btn-danger" onclick="generatePDF()">📄 Pakua PDF</button>
-                <button class="btn btn-outline" onclick="logoutUser()" style="border-color:#d93025;color:#d93025;">🚪 Kutoka</button>
             </div>
         </div>
 
@@ -826,8 +863,8 @@
                         <option value="mradiologist">Mtaalamu wa Radiology</option>
                         <option value="physiotherapist">Mtaalamu wa Tiba Kimwili</option>
                         <option value="nutritionist">Mtaalamu wa Lishe</option>
-                        <option value="mhasibu">Mhasibu</option> <!-- IMONGEZWA -->
                         <option value="health_administrator">Msimamizi wa Afya</option>
+                        <option value="mhasibu">Mhasibu</option>
                     </select>
                     <div id="incSpecialDutiesContainer"></div>
                     <div style="margin-top:10px;padding:10px;background:#eef4fa;border-radius:10px;display:flex;gap:20px;flex-wrap:wrap;">
@@ -901,12 +938,6 @@
             </div>
 
             <div id="inchargeMessageBox" class="message-box"></div>
-
-            <div class="btn-group no-print">
-                <button class="btn btn-warning" onclick="window.print()">🖨️ Chapisha</button>
-                <button class="btn btn-danger" onclick="generatePDF()">📄 Pakua PDF</button>
-                <button class="btn btn-outline" onclick="logoutUser()" style="border-color:#d93025;color:#d93025;">🚪 Kutoka</button>
-            </div>
         </div>
 
         <!-- MODAL YA MAFANIKIO -->
@@ -937,20 +968,36 @@
         let incPhotoData = '';
 
         // ================================================================
+        //  LOGOUT (TOKA)
+        // ================================================================
+        function logoutUser() {
+            if (confirm('Je, una uhakika unataka kutoka?')) {
+                sessionStorage.removeItem('loggedInUser');
+                sessionStorage.removeItem('loggedInRole');
+                document.getElementById('logoutBtn').style.display = 'none';
+                document.getElementById('roleSelector').style.display = 'flex';
+                document.getElementById('workerSection').classList.add('hidden');
+                document.getElementById('supervisorSection').classList.add('hidden');
+                document.getElementById('inchargeSection').classList.add('hidden');
+                document.getElementById('roleBadge').textContent = '👤 Chagua Role';
+                document.getElementById('roleSelect').value = '';
+                showModal('Umefanikiwa kutoka. Asante!');
+            }
+        }
+
+        // ================================================================
         //  PASSWORD MODAL (DEFAULT)
         // ================================================================
         function onRoleSelected(role) {
             if (!role) return;
             selectedRole = role;
 
-            // Angalia kama mtumiaji ameshaingia
             const loggedUser = sessionStorage.getItem('loggedInUser');
             if (loggedUser) {
                 switchRole(role);
                 return;
             }
 
-            // Angalia kama kuna watumiaji waliosajiliwa
             let users = JSON.parse(localStorage.getItem('appUsers')) || {};
             if (Object.keys(users).length > 0) {
                 openLoginModal(role);
@@ -1033,7 +1080,6 @@
             };
             localStorage.setItem('appUsers', JSON.stringify(users));
 
-            // Jaribu kuhifadhi kwenye JSONBin
             try {
                 let existing = await getFromJSONBin();
                 if (!existing) existing = {};
@@ -1072,21 +1118,10 @@
             document.getElementById('loginModal').classList.remove('active');
             sessionStorage.setItem('loggedInUser', username);
             sessionStorage.setItem('loggedInRole', users[username].role);
+            document.getElementById('logoutBtn').style.display = 'inline-flex';
+            document.getElementById('roleSelector').style.display = 'none';
             switchRole(users[username].role);
             showModal(`Karibu ${username}!`);
-        }
-
-        // ================================================================
-        //  KUTOKA (LOGOUT)
-        // ================================================================
-        function logoutUser() {
-            if (confirm('Una uhakika unataka kutoka?')) {
-                sessionStorage.removeItem('loggedInUser');
-                sessionStorage.removeItem('loggedInRole');
-                document.getElementById('roleSelect').value = '';
-                switchRole('');
-                showModal('Umefanikiwa kutoka. Tutaonana tena!');
-            }
         }
 
         // ================================================================
@@ -1104,12 +1139,10 @@
                 updateWorkerContactDisplay();
                 initWorkerSignature();
                 setupPhotoUpload('workerPhotoInput', 'workerPhotoPreview', 'workerPhotoData');
-                // Render duties
                 renderDutyList('workerGeneralDutiesContainer', generalDutiesList, 'worker_general',
                     'workerGeneralGood', 'workerGeneralBad', 'workerGeneralScore', 'workerGeneralTotal');
                 renderEthicalDuties('workerEthicalContainer', 'worker_ethical',
                     'workerEthicalGood', 'workerEthicalBad', 'workerEthicalScore', 'workerEthicalTotal');
-                // Load data
                 loadWorkerData();
             } else if (role === 'supervisor') {
                 document.getElementById('supervisorSection').classList.remove('hidden');
@@ -1148,7 +1181,6 @@
                     const reader = new FileReader();
                     reader.onload = function(ev) {
                         preview.src = ev.target.result;
-                        // Hifadhi kwenye variable ya data
                         if (dataKey === 'workerPhotoData') workerPhotoData = ev.target.result;
                         else if (dataKey === 'supPhotoData') supPhotoData = ev.target.result;
                         else if (dataKey === 'incPhotoData') incPhotoData = ev.target.result;
@@ -1159,14 +1191,12 @@
         }
 
         // ================================================================
-        //  MAJUKUMU YA JUMLA (Vyema / Mkasi) - IMEREKEBISHWA
+        //  MAJUKUMU YA JUMLA (Vyema / Mkasi)
         // ================================================================
         const generalDutiesList = [
             'Kuhudumia wagonjwa',
             'Kutoa dawa na matibabu',
-            // "Kuwahi kazini dakika 10 kabla ya zamu kuanzia" imeondolewa na kubadilishwa na:
-            'Muda alioingia (k.m. 07:30)',
-            'Muda aliotoka (k.m. 15:30)',
+            'Kuwahi kazini dakika 10 kabla ya zamu kuanzia',
             'Kuhakikisha eneo lako la kazi liko safi na lina mpangilio mzuri',
             'Kuandika ripoti za matibabu',
             'Kuelimisha wagonjwa na walezi',
@@ -1176,7 +1206,7 @@
         ];
 
         // ================================================================
-        //  MAJUKUMU MAALUMU (Kulingana na Taaluma) - IMONGEZWA MHASIBU
+        //  MAJUKUMU MAALUMU (Kulingana na Taaluma)
         // ================================================================
         const specialDutiesMap = {
             muuguzi: ['Kufanya uchunguzi wa wagonjwa', 'Kutoa dawa na matibabu', 'Kushiriki katika uandishi wa ripoti',
@@ -1200,11 +1230,11 @@
             nutritionist: ['Kufanya tathmini ya lishe', 'Kutoa ushauri wa lishe bora', 'Kushiriki katika mpango wa chakula',
                 'Kuelimisha jamii', 'Kufanya tafiti za lishe'
             ],
-            mhasibu: ['Kusimamia kumbukumbu za fedha', 'Kufanya usawa wa akaunti', 'Kuweka kumbukumbu za kifedha',
-                'Kutoa taarifa za kifedha', 'Kushiriki katika upangaji wa bajeti'
-            ],
             health_administrator: ['Kusimamia shughuli za afya', 'Kuratibu programu', 'Kushiriki katika upangaji na bajeti',
                 'Kuhakikisha ubora wa huduma', 'Kufanya tafiti za afya'
+            ],
+            mhasibu: ['Kusimamia fedha za taasisi', 'Kufanya rekodi za kifedha', 'Kujiandaa na bajeti',
+                'Kufanya mapitio ya hesabu', 'Kutoa taarifa za kifedha kwa wakati'
             ]
         };
 
@@ -1246,7 +1276,8 @@
 
             duties.forEach((duty, index) => {
                 const div = document.createElement('div');
-                div.style.cssText = 'display:flex;align-items:center;gap:12px;padding:6px 0;border-bottom:1px solid #f0f4fa;flex-wrap:wrap;';
+                div.style.cssText =
+                    'display:flex;align-items:center;gap:12px;padding:6px 0;border-bottom:1px solid #f0f4fa;flex-wrap:wrap;';
 
                 const label = document.createElement('span');
                 label.textContent = duty;
@@ -1263,7 +1294,7 @@
                 goodBtn.dataset.value = 'good';
                 goodBtn.dataset.index = index;
                 goodBtn.onclick = function() { setDutyRating(prefix, index, 'good', totalGoodId, totalBadId,
-                    totalScoreId, totalMaxId); };
+                        totalScoreId, totalMaxId); };
 
                 const badBtn = document.createElement('button');
                 badBtn.type = 'button';
@@ -1273,7 +1304,7 @@
                 badBtn.dataset.value = 'bad';
                 badBtn.dataset.index = index;
                 badBtn.onclick = function() { setDutyRating(prefix, index, 'bad', totalGoodId, totalBadId,
-                    totalScoreId, totalMaxId); };
+                        totalScoreId, totalMaxId); };
 
                 const status = document.createElement('span');
                 status.id = `${prefix}_duty_status_${index}`;
@@ -1347,7 +1378,8 @@
 
             ethicalDuties.forEach((duty, index) => {
                 const div = document.createElement('div');
-                div.style.cssText = 'display:flex;align-items:center;gap:12px;padding:6px 0;border-bottom:1px solid #f0f4fa;flex-wrap:wrap;';
+                div.style.cssText =
+                    'display:flex;align-items:center;gap:12px;padding:6px 0;border-bottom:1px solid #f0f4fa;flex-wrap:wrap;';
 
                 const label = document.createElement('span');
                 label.textContent = duty;
@@ -1364,7 +1396,7 @@
                 goodBtn.dataset.value = 'good';
                 goodBtn.dataset.index = index;
                 goodBtn.onclick = function() { setEthicalRating(prefix, index, 'good', totalGoodId, totalBadId,
-                    totalScoreId, totalMaxId); };
+                        totalScoreId, totalMaxId); };
 
                 const badBtn = document.createElement('button');
                 badBtn.type = 'button';
@@ -1374,7 +1406,7 @@
                 badBtn.dataset.value = 'bad';
                 badBtn.dataset.index = index;
                 badBtn.onclick = function() { setEthicalRating(prefix, index, 'bad', totalGoodId, totalBadId,
-                    totalScoreId, totalMaxId); };
+                        totalScoreId, totalMaxId); };
 
                 const status = document.createElement('span');
                 status.id = `${prefix}_ethical_status_${index}`;
@@ -1440,7 +1472,7 @@
         }
 
         // ================================================================
-        //  WORKER - DATA COLLECTION & SAVE
+        //  WORKER - DATA COLLECTION & SAVE & SEND
         // ================================================================
         function updateWorkerContactDisplay() {
             const phone = document.getElementById('workerPhone').value || '-';
@@ -1452,7 +1484,6 @@
         document.getElementById('workerPhone').addEventListener('input', updateWorkerContactDisplay);
         document.getElementById('workerEmail').addEventListener('input', updateWorkerContactDisplay);
 
-        // Worker Profession change
         document.getElementById('workerProfession').addEventListener('change', function() {
             const prof = this.value;
             document.getElementById('workerSpecialProfessionDisplay').textContent = prof || '-';
@@ -1465,7 +1496,6 @@
                 document.getElementById('workerDoctorSpecialty').removeAttribute('required');
                 document.getElementById('workerDoctorSpecialty').value = '';
             }
-            // Special duties
             if (prof && specialDutiesMap[prof]) {
                 renderDutyList('workerSpecialDutiesContainer', specialDutiesMap[prof], 'worker_special',
                     'workerSpecialGood', 'workerSpecialBad', 'workerSpecialScore', 'workerSpecialTotal');
@@ -1618,14 +1648,18 @@
                 }
                 if (data.trainingRating) {
                     document.querySelector(`input[name="workerTrainingRating"][value="${data.trainingRating}"]`).checked =
-                    true;
+                        true;
                 }
-                // Load duty ratings
+                if (data.timeIn) {
+                    document.getElementById('workerTimeIn').value = data.timeIn;
+                }
+                if (data.timeOut) {
+                    document.getElementById('workerTimeOut').value = data.timeOut;
+                }
                 if (data.generalDutiesRatings) {
                     window.dutyRatings['worker_general'] = data.generalDutiesRatings;
                     updateDutyTotals('worker_general', 'workerGeneralGood', 'workerGeneralBad', 'workerGeneralScore',
                         'workerGeneralTotal');
-                    // Update status displays
                     for (let key in data.generalDutiesRatings) {
                         const statusEl = document.getElementById(`worker_general_duty_status_${key}`);
                         if (statusEl) {
@@ -1673,6 +1707,8 @@
             const feedback = document.getElementById('workerFeedback').value.trim();
             const signatureName = document.getElementById('workerSignatureName').value.trim();
             const signatureDate = document.getElementById('workerSignatureDate').value;
+            const timeIn = document.getElementById('workerTimeIn').value;
+            const timeOut = document.getElementById('workerTimeOut').value;
 
             return {
                 name,
@@ -1695,6 +1731,8 @@
                 signatureData: workerSignatureSaved ? getWorkerSignatureDataURL() : '',
                 ethicalDuties: window.ethicalRatings['worker_ethical'] || {},
                 photoData: workerPhotoData || '',
+                timeIn: timeIn || '',
+                timeOut: timeOut || '',
                 timestamp: new Date().toISOString(),
                 role: 'worker'
             };
@@ -1724,6 +1762,7 @@
             setTimeout(() => { box.style.display = 'none'; }, 8000);
         }
 
+        // SAVE WORKER
         async function saveWorker() {
             const data = collectWorkerData();
             if (!validateWorkerData(data)) return;
@@ -1737,17 +1776,41 @@
                 const merged = { ...existing, ...data };
                 await saveToJSONBin(merged);
                 showWorkerMessage('✅ Data imehifadhiwa!', 'success');
-                showModal('Data yako imehifadhiwa.');
-                // WhatsApp
-                const phone = data.phone;
-                if (phone) {
-                    let clean = phone.replace(/\s/g, '');
+                showModal('Data yako imehifadhiwa kikamilifu.');
+            } catch (e) {
+                showWorkerMessage('❌ Hitilafu: ' + (e.message || 'Jaribu tena.'), 'error');
+            } finally {
+                btn.innerHTML = orig;
+                btn.disabled = false;
+            }
+        }
+
+        // SEND WORKER (TUMA)
+        async function sendWorker() {
+            const data = collectWorkerData();
+            if (!validateWorkerData(data)) return;
+            const btn = document.querySelector('#workerSection .btn-primary');
+            const orig = btn.innerHTML;
+            btn.innerHTML = '⏳ Inatuma...';
+            btn.disabled = true;
+            try {
+                let existing = await getFromJSONBin();
+                if (!existing) existing = {};
+                const merged = { ...existing, ...data };
+                await saveToJSONBin(merged);
+                showWorkerMessage('✅ Tathmini imetumwa!', 'success');
+                showModal('Tathmini yako imetumwa kikamilifu!');
+
+                // Tuma WhatsApp kwa Incharge
+                const inchargePhone = document.getElementById('incWorkerPhone')?.value?.trim() || '';
+                if (inchargePhone) {
+                    let clean = inchargePhone.replace(/\s/g, '');
                     if (!clean.startsWith('+')) {
                         if (clean.startsWith('0')) clean = '+255' + clean.substring(1);
                         else clean = '+255' + clean;
                     }
                     const msg =
-                        `Habari ${data.name},\n\nRipoti yako ya Tathmini 2026 imekamilika. Asante kwa ushirikiano.`;
+                        `Tathmini ya ${data.name} imetumwa. Tafadhali ingia mfumo kuiona.`;
                     window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
                 }
             } catch (e) {
@@ -1758,31 +1821,19 @@
             }
         }
 
-        // ================================================================
-        //  WORKER - WHATSAPP (IMEREKEBISHWA)
-        // ================================================================
+        // WORKER WHATSAPP, SMS, RESET
         function sendWorkerWhatsApp() {
             const phone = document.getElementById('workerPhone').value.trim();
             const name = document.getElementById('workerName').value.trim() || 'Mtendakazi';
-            if (!phone) {
-                showWorkerMessage('Jaza namba ya simu kwanza.', 'error');
-                return;
-            }
-            // Safisha namba
+            if (!phone) { showWorkerMessage('Jaza namba ya simu.', 'error'); return; }
             let clean = phone.replace(/\s/g, '');
             if (!clean.startsWith('+')) {
-                if (clean.startsWith('0')) {
-                    clean = '+255' + clean.substring(1);
-                } else {
-                    clean = '+255' + clean;
-                }
+                if (clean.startsWith('0')) clean = '+255' + clean.substring(1);
+                else clean = '+255' + clean;
             }
-            // Ujumbe wa WhatsApp
             const msg =
                 `Habari ${name},\n\nRipoti yako ya Tathmini 2026 imekamilika. Tafadhali angalia maelezo.\n\nAsante.`;
-            // Fungua WhatsApp
-            const url = `https://wa.me/${clean}?text=${encodeURIComponent(msg)}`;
-            window.open(url, '_blank');
+            window.open(`https://wa.me/${clean}?text=${encodeURIComponent(msg)}`, '_blank');
             showWorkerMessage('WhatsApp imefunguliwa.', 'success');
         }
 
@@ -1807,6 +1858,8 @@
             window.dutyRatings['worker_general'] = {};
             window.dutyRatings['worker_special'] = {};
             window.ethicalRatings['worker_ethical'] = {};
+            document.getElementById('workerTimeIn').value = '';
+            document.getElementById('workerTimeOut').value = '';
             renderDutyList('workerGeneralDutiesContainer', generalDutiesList, 'worker_general',
                 'workerGeneralGood', 'workerGeneralBad', 'workerGeneralScore', 'workerGeneralTotal');
             renderEthicalDuties('workerEthicalContainer', 'worker_ethical',
@@ -1843,7 +1896,6 @@
                     document.getElementById('supProfession').value = data.profession;
                     updateSupSpecialDuties(data.profession);
                 }
-                // Load duty ratings
                 if (data.generalDutiesRatings) {
                     window.dutyRatings['sup_general'] = data.generalDutiesRatings;
                     updateDutyTotals('sup_general', 'supGeneralGood', 'supGeneralBad', 'supGeneralScore',
@@ -1978,7 +2030,6 @@
                     document.getElementById('incProfession').value = data.profession;
                     updateIncSpecialDuties(data.profession);
                 }
-                // Load duty ratings
                 if (data.generalDutiesRatings) {
                     window.dutyRatings['inc_general'] = data.generalDutiesRatings;
                     updateDutyTotals('inc_general', 'incGeneralGood', 'incGeneralBad', 'incGeneralScore',
@@ -2216,7 +2267,7 @@
         }
 
         // ================================================================
-        //  PDF - GENERATE (IMEREKEBISHWA)
+        //  PDF - GENERATE
         // ================================================================
         function generatePDF() {
             if (typeof window.print === 'function') {
@@ -2240,6 +2291,7 @@
                 alert('Browser yako haitumii window.print(). Tafadhali tumia njia nyingine.');
             }
         }
+
         window.generatePDF = generatePDF;
 
         // ================================================================
@@ -2268,6 +2320,8 @@
                 selectedRole = roleParam;
                 const loggedUser = sessionStorage.getItem('loggedInUser');
                 if (loggedUser) {
+                    document.getElementById('logoutBtn').style.display = 'inline-flex';
+                    document.getElementById('roleSelector').style.display = 'none';
                     switchRole(roleParam);
                 } else {
                     let users = JSON.parse(localStorage.getItem('appUsers')) || {};
